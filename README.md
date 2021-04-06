@@ -2,6 +2,6 @@
 ## Team 28
 
 ### Team Members:
-- Student1 99105389
+- Student1 99105388
 - Student2 99101427
 - Student3 99105645
