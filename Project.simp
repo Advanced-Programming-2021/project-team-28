@@ -21,10 +21,6 @@
         <item-type type-id="relationship" type="UmlAssociation" />
         <value>2</value>
       </counter>
-      <counter>
-        <item-type type-id="" type="AbstractElementGroup" />
-        <value>37</value>
-      </counter>
     </entity-ids>
     <diagrams>
       <counter>
@@ -35,11 +31,11 @@
     <fields>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.AttributeField</type>
-        <value>15</value>
+        <value>21</value>
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.OperationField</type>
-        <value>16</value>
+        <value>19</value>
       </counter>
     </fields>
   </counters>
@@ -90,7 +86,7 @@
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false">
+      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="0,90">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -162,16 +158,19 @@
           <item id="di575389833304456004" cid="C007" type="class" name="Deck" style-class="" visibility="package" change-tracking-state="added" creation-date="04/11/2021 19:59:02">
             <style class="default" />
             <attributes>
-              <attribute id="a30c4797466964777b07b07f16f7f9bef890" cid="ELEM008" name="numofCards" type="Integer" type-id="Uml.Integer" visibility="private">
-                <style class="default" />
-              </attribute>
-              <attribute id="a4e40f8af7d81453d82989501e04e8ad1258" cid="ELEM009" name="isMainDeck" type="Integer" type-id="Uml.Integer" visibility="private">
-                <style class="default" />
-              </attribute>
               <attribute id="a98cd8b9b8d9f4cc8b5aa67e7f6697cd1610" cid="ELEM011" name="deckName" type="String" type-id="Uml.String" visibility="private">
                 <style class="default" />
               </attribute>
-              <attribute id="a1783a67e7feb4c3faab0650ac266df7741" cid="ELEM012" name="allCards" type="ArrayList &lt;Card&gt;" type-id="ArrayList &lt;Card&gt;" visibility="private">
+              <attribute id="a30c4797466964777b07b07f16f7f9bef890" cid="ELEM008" name="numofMainDeckCards" type="Integer" type-id="Uml.Integer" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="a59b0b0e9907d4d3bbd3c38f4fbcf9ac6167" cid="ELEM020" name="numOfSideDeckCards" type="Integer" type-id="Uml.Integer" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="a1783a67e7feb4c3faab0650ac266df7741" cid="ELEM012" name="allCardsInMainDeck" type="ArrayList &lt;Card&gt;" type-id="ArrayList &lt;Card&gt;" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="aff473195d9d147ab905521288fdad3df759" cid="ELEM019" name="allCardsInSideDeck" type="ArrayList &lt;Card&gt;" type-id="ArrayList &lt;Card&gt;" visibility="private">
                 <style class="default" />
               </attribute>
             </attributes>
@@ -189,13 +188,19 @@
                   <parameter id="p3ba9b4f0d56a4e8195ac8f3c4aec9dae" name="user" type="User" type-id="User" />
                 </parameters>
               </operation>
-              <operation id="o598cbdf8c24d465589cf1ed6cb888a23697" cid="ELEM015" name="removeDeck" type="void" type-id="void" visibility="public">
+              <operation id="o598cbdf8c24d465589cf1ed6cb888a23697" cid="ELEM015" name="sortDeck" type="void" type-id="void" visibility="private">
+                <style class="default" />
+              </operation>
+              <operation id="o5484b27e10144c299a5d270cec8ca5c249" cid="ELEM018" name="removeDeck" type="void" type-id="void" visibility="public">
                 <style class="default" />
                 <parameters>
-                  <parameter id="pbcab0a8aacb84d009af23e1d95f8f211" name="deckName" type="String" type-id="Uml.String" />
+                  <parameter id="pea654d58acec44f189ee3dbad23dbf4b" name="deckName" type="String" type-id="Uml.String" />
                 </parameters>
               </operation>
             </operations>
+            <source-codes>
+              <source-code language="ActionScript" />
+            </source-codes>
           </item>
           <item id="di372252256330697407" cid="C008" type="class" name="Card" style-class="" visibility="package" change-tracking-state="added" creation-date="04/11/2021 19:59:05">
             <style class="default" />
