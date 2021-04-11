@@ -23,7 +23,7 @@
       </counter>
       <counter>
         <item-type type-id="" type="AbstractElementGroup" />
-        <value>5</value>
+        <value>7</value>
       </counter>
     </entity-ids>
     <diagrams>
@@ -196,7 +196,17 @@
               <operation id="o598cbdf8c24d465589cf1ed6cb888a23697" cid="ELEM015" name="sortDeck" type="void" type-id="void" visibility="private">
                 <style class="default" />
               </operation>
-              <operation id="o5484b27e10144c299a5d270cec8ca5c249" cid="ELEM018" name="removeDeck" type="void" type-id="void" visibility="public" static="true">
+              <operation id="oc09a11340c4b4fdaa29fc51a3865ea0d57" cid="ELEM024" name="createDeck" type="String" type-id="Uml.String" visibility="public" static="true">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p4cad2a5bbeba4921b2731e65ca246dbf" name="user" type="User" type-id="User" />
+                  <parameter id="pf257aba7cf974298b11f01409992a537" name="deckName" type="String" type-id="Uml.String" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="o5484b27e10144c299a5d270cec8ca5c249" cid="ELEM018" name="removeDeck" type="String" type-id="Uml.String" visibility="public" static="true">
                 <style class="default" />
                 <parameters>
                   <parameter id="pea654d58acec44f189ee3dbad23dbf4b" name="deckName" type="String" type-id="Uml.String" />
@@ -205,7 +215,7 @@
                   <source-code language="ActionScript" />
                 </source-codes>
               </operation>
-              <operation id="o88fa4e7d9f354d1f85db3dd06cdd34d919" cid="ELEM021" name="activateDeck" type="void" type-id="void" visibility="public" static="true">
+              <operation id="o88fa4e7d9f354d1f85db3dd06cdd34d919" cid="ELEM021" name="activateDeck" type="String" type-id="Uml.String" visibility="public" static="true">
                 <style class="default" />
                 <parameters>
                   <parameter id="p63d7091490734ba9bfd944f34348f4d2" name="user" type="User" type-id="User" />
@@ -220,16 +230,6 @@
                 <parameters>
                   <parameter id="pb5616e3aee6d4d3d9824a6b8d65b44f9" name="user" type="User" type-id="User" />
                   <parameter id="pe3c8749d9f2e4e2087dc23d2f6b327c2" name="deckName" type="String" type-id="Uml.String" />
-                </parameters>
-                <source-codes>
-                  <source-code language="ActionScript" />
-                </source-codes>
-              </operation>
-              <operation id="oc09a11340c4b4fdaa29fc51a3865ea0d57" cid="ELEM024" name="createDeck" type="String" type-id="Uml.String" visibility="public" static="true">
-                <style class="default" />
-                <parameters>
-                  <parameter id="p4cad2a5bbeba4921b2731e65ca246dbf" name="user" type="User" type-id="User" />
-                  <parameter id="pf257aba7cf974298b11f01409992a537" name="deckName" type="String" type-id="Uml.String" />
                 </parameters>
                 <source-codes>
                   <source-code language="ActionScript" />
