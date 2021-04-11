@@ -23,7 +23,7 @@
       </counter>
       <counter>
         <item-type type-id="" type="AbstractElementGroup" />
-        <value>7</value>
+        <value>18</value>
       </counter>
     </entity-ids>
     <diagrams>
@@ -39,7 +39,7 @@
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.OperationField</type>
-        <value>27</value>
+        <value>36</value>
       </counter>
     </fields>
   </counters>
@@ -91,7 +91,7 @@
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="0,48">
+      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="0,189">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -127,6 +127,12 @@
                 <parameters>
                   <parameter id="p75ab466d3c0c4295a2b0a9208e9ed9a7" name="username" type="String" type-id="Uml.String" />
                 </parameters>
+              </operation>
+              <operation id="oc67d5d162d834701b22aea21c2625a41750" cid="ELEM032" name="decksToString" type="String" type-id="Uml.String" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o691333c8bcab4707af34385d4435dcba691" cid="ELEM035" name="showCards" type="String" type-id="Uml.String" visibility="public">
+                <style class="default" />
               </operation>
             </operations>
             <source-codes>
@@ -187,14 +193,34 @@
                   <parameter id="p59d62b7a06fb44bf88b9672178b712cd" name="deckCreator" type="User" type-id="User" />
                 </parameters>
               </operation>
-              <operation id="o1a7c98adf84849a1b8ff973cce953789722" cid="ELEM013" name="addDeckToUserDecks" type="void" type-id="void" visibility="private">
+              <operation id="o1a7c98adf84849a1b8ff973cce953789722" cid="ELEM013" name="addDeckToUserDecks" type="void" type-id="void" visibility="public">
                 <style class="default" />
                 <parameters>
                   <parameter id="p3ba9b4f0d56a4e8195ac8f3c4aec9dae" name="user" type="User" type-id="User" />
                 </parameters>
               </operation>
-              <operation id="o598cbdf8c24d465589cf1ed6cb888a23697" cid="ELEM015" name="sortDeck" type="void" type-id="void" visibility="private">
+              <operation id="o598cbdf8c24d465589cf1ed6cb888a23697" cid="ELEM015" name="sortDeck" type="void" type-id="void" visibility="public">
                 <style class="default" />
+              </operation>
+              <operation id="o731df867cbb842a194bc4cc129e5a7b3575" cid="ELEM025" name="getDeckByDeckName" type="Deck" type-id="Class:di575389833304456004" visibility="public" static="true">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pb2b24c9636704460943ae5eae05d8a36" name="deckName" type="String" type-id="Uml.String" />
+                  <parameter id="p5115ccdb645e41948a954094148cfdc4" name="user" type="User" type-id="User" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="o6c86b1709a5e4ce6b6a9477b895e3354398" cid="ELEM022" name="doesUserHaveThisDeck" type="Boolean" type-id="Uml.Boolean" visibility="public" static="true">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pb5616e3aee6d4d3d9824a6b8d65b44f9" name="user" type="User" type-id="User" />
+                  <parameter id="pe3c8749d9f2e4e2087dc23d2f6b327c2" name="deckName" type="String" type-id="Uml.String" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
               </operation>
               <operation id="oc09a11340c4b4fdaa29fc51a3865ea0d57" cid="ELEM024" name="createDeck" type="String" type-id="Uml.String" visibility="public" static="true">
                 <style class="default" />
@@ -225,30 +251,41 @@
                   <source-code language="ActionScript" />
                 </source-codes>
               </operation>
-              <operation id="o6c86b1709a5e4ce6b6a9477b895e3354398" cid="ELEM022" name="doesUserHaveThisDeck" type="Boolean" type-id="Uml.Boolean" visibility="public" static="true">
+              <operation id="o240e11b0eb6e4e8ab908c13742965e4c82" cid="ELEM028" name="addCardToDeck" type="String" type-id="Uml.String" visibility="public" static="true">
                 <style class="default" />
                 <parameters>
-                  <parameter id="pb5616e3aee6d4d3d9824a6b8d65b44f9" name="user" type="User" type-id="User" />
-                  <parameter id="pe3c8749d9f2e4e2087dc23d2f6b327c2" name="deckName" type="String" type-id="Uml.String" />
+                  <parameter id="pdda1fc8ba8074e1ba63ea8a7e5c87036" name="cardName" type="String" type-id="Uml.String" />
+                  <parameter id="pf7f10fd6576c4a6cbf6ac7c4a91f3f39" name="deckName" type="String" type-id="Uml.String" />
+                  <parameter id="pd293f31c9802483195670918f05bd2c3" name="user" type="User" type-id="User" />
                 </parameters>
-                <source-codes>
-                  <source-code language="ActionScript" />
-                </source-codes>
               </operation>
-              <operation id="o731df867cbb842a194bc4cc129e5a7b3575" cid="ELEM025" name="getDeckByDeckName" type="Deck" type-id="Class:di575389833304456004" visibility="public" static="true">
+              <operation id="o18643c78d727418597557fc865739a2e661" cid="ELEM029" name="removeCardFromDeck" type="String" type-id="Uml.String" visibility="public" static="true">
                 <style class="default" />
                 <parameters>
-                  <parameter id="pb2b24c9636704460943ae5eae05d8a36" name="deckName" type="String" type-id="Uml.String" />
-                  <parameter id="p5115ccdb645e41948a954094148cfdc4" name="user" type="User" type-id="User" />
+                  <parameter id="p01c0de2e35ea47fb905aa184bb915046" name="cardName" type="String" type-id="Uml.String" />
+                  <parameter id="pfdddd9afc09d4b96b049fc5ec1836399" name="deckName" type="String" type-id="Uml.String" />
+                  <parameter id="pc2150561a4344e3d87a388ce8e6be04e" name="user" type="User" type-id="User" />
                 </parameters>
-                <source-codes>
-                  <source-code language="ActionScript" />
-                </source-codes>
+              </operation>
+              <operation id="o266f7c3391c0471d82070bcb72e5f1ee655" cid="ELEM033" name="showDeck" type="String" type-id="Uml.String" visibility="public" static="true">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p20446e068d774304b089497bc8819c38" name="deckName" type="String" type-id="Uml.String" />
+                </parameters>
               </operation>
               <operation id="o5327923cd97a4de8969639bcb1969d71869" cid="ELEM023" name="isMainDeckFull" type="Boolean" type-id="Uml.Boolean" visibility="public">
                 <style class="default" />
               </operation>
               <operation id="o8801e66cbaba4d41a6b29b6429c9223e684" cid="ELEM026" name="isSideDeckFull" type="Boolean" type-id="Uml.Boolean" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o4c485667e5d24a02903028df96662224211" cid="ELEM027" name="doesDeckHaveThreeCardsFromThisTypeOfCard" type="Boolean" type-id="Uml.Boolean" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pacb678699b1548d28920ef5ab397f62e" name="cardName" type="String" type-id="Uml.String" />
+                </parameters>
+              </operation>
+              <operation id="od1889f6dcf8840a0af50872cf06c697573" cid="ELEM034" name="toString" type="String" type-id="Uml.String" visibility="public">
                 <style class="default" />
               </operation>
             </operations>
@@ -274,11 +311,11 @@
             <class />
           </item>
           <item id="di575389833304456004" iid="68fd9b2f2f904625b46b8519358f21f9" creation-date="04/11/2021 19:59:02" order-index="3" type="entity">
-            <layout ax="958" ay="43" awidth="371" aheight="412" x="958" y="43" width="371" height="412" />
+            <layout ax="958" ay="43" awidth="371" aheight="487" x="958" y="43" width="371" height="487" />
             <class />
           </item>
           <item id="di372252256330697407" iid="50a7cdc259cc4efc92c8ef0c83425baa" creation-date="04/11/2021 19:59:05" order-index="4" type="entity">
-            <layout ax="1015" ay="492" awidth="266" aheight="318" x="1015" y="492" width="266" height="318" />
+            <layout ax="1010.5" ay="576" awidth="266" aheight="318" x="1010.5" y="576" width="266" height="318" />
             <class />
           </item>
         </layer>
