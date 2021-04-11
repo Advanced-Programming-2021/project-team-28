@@ -9,13 +9,13 @@
     <entity-names>
       <counter>
         <item-type type-id="class" type="UmlClass" />
-        <value>3</value>
+        <value>8</value>
       </counter>
     </entity-names>
     <entity-ids>
       <counter>
         <item-type type-id="class" type="UmlClass" />
-        <value>4</value>
+        <value>9</value>
       </counter>
       <counter>
         <item-type type-id="relationship" type="UmlAssociation" />
@@ -23,7 +23,7 @@
       </counter>
       <counter>
         <item-type type-id="" type="AbstractElementGroup" />
-        <value>7</value>
+        <value>29</value>
       </counter>
     </entity-ids>
     <diagrams>
@@ -87,7 +87,7 @@
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="0,4">
+      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="0,316">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -99,7 +99,7 @@
           </authors>
           <description />
           <creation-date>04/09/2021 22:17:30</creation-date>
-          <change-date>04/10/2021 01:15:14</change-date>
+          <change-date>04/11/2021 19:59:05</change-date>
           <revision-count>0</revision-count>
           <version />
         </meta>
@@ -147,10 +147,41 @@
           <item id="di385031777111547678" cid="C003" type="class" name="Class3" style-class="" visibility="package" change-tracking-state="added" creation-date="04/10/2021 01:15:10">
             <style class="default" />
           </item>
+          <item id="di243293463810741917" cid="C004" type="class" name="View" style-class="" visibility="package" change-tracking-state="added" creation-date="04/11/2021 19:57:16">
+            <style class="default" />
+          </item>
+          <item id="di559718919588659503" cid="C005" type="class" name="Controller" style-class="" visibility="package" change-tracking-state="added" creation-date="04/11/2021 19:57:45">
+            <style class="default" />
+          </item>
+          <item id="di247653569756305176" cid="C006" type="class" name="Class6" style-class="" visibility="package" change-tracking-state="added" creation-date="04/11/2021 19:57:52">
+            <style class="default" />
+          </item>
+          <item id="di575389833304456004" cid="C007" type="class" name="Deck" style-class="" visibility="package" change-tracking-state="added" creation-date="04/11/2021 19:59:02">
+            <style class="default" />
+          </item>
+          <item id="di372252256330697407" cid="C008" type="class" name="Card" style-class="" visibility="package" change-tracking-state="added" creation-date="04/11/2021 19:59:05">
+            <style class="default" />
+          </item>
         </abstract-items>
         <layer name="Default" visible="true" enabled="true" locked="false">
           <item id="di217671348652249565" iid="b6a32d74ea7645ea9953f7f5cb3bcf97" creation-date="04/09/2021 22:17:50" order-index="0" type="entity">
             <layout ax="513" ay="133" awidth="371" aheight="306" x="513" y="133" width="371" height="306" />
+            <class />
+          </item>
+          <item id="di243293463810741917" iid="a5283eb62923489d8e2181d4cd36cacc" creation-date="04/11/2021 19:57:16" order-index="1" type="entity">
+            <layout ax="98" ay="137" awidth="284" aheight="302" x="98" y="137" width="284" height="302" />
+            <class />
+          </item>
+          <item id="di559718919588659503" iid="c51e7ed476844cefab8dda8ba73e4b5a" creation-date="04/11/2021 19:57:45" order-index="2" type="entity">
+            <layout ax="98" ay="492" awidth="284" aheight="306" x="98" y="492" width="284" height="306" />
+            <class />
+          </item>
+          <item id="di575389833304456004" iid="68fd9b2f2f904625b46b8519358f21f9" creation-date="04/11/2021 19:59:02" order-index="3" type="entity">
+            <layout ax="1015" ay="137" awidth="266" aheight="302" x="1015" y="137" width="266" height="302" />
+            <class />
+          </item>
+          <item id="di372252256330697407" iid="50a7cdc259cc4efc92c8ef0c83425baa" creation-date="04/11/2021 19:59:05" order-index="4" type="entity">
+            <layout ax="1015" ay="492" awidth="266" aheight="318" x="1015" y="492" width="266" height="318" />
             <class />
           </item>
         </layer>
