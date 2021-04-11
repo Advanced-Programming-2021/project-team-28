@@ -23,7 +23,7 @@
       </counter>
       <counter>
         <item-type type-id="" type="AbstractElementGroup" />
-        <value>18</value>
+        <value>24</value>
       </counter>
     </entity-ids>
     <diagrams>
@@ -39,7 +39,7 @@
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.OperationField</type>
-        <value>36</value>
+        <value>47</value>
       </counter>
     </fields>
   </counters>
@@ -91,7 +91,7 @@
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="0,189">
+      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="0,263">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -288,6 +288,48 @@
               <operation id="od1889f6dcf8840a0af50872cf06c697573" cid="ELEM034" name="toString" type="String" type-id="Uml.String" visibility="public">
                 <style class="default" />
               </operation>
+              <operation id="od338bb97c46a44b98ae37bbe2748ef85307" cid="ELEM036" name="getDeckName" type="String" type-id="Uml.String" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o3c3133f988b14d0ea76ef4ae1170e117578" cid="ELEM037" name="setDeckName" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p1135410f39ac4afb8912e17c8cc9a70c" name="deckName" type="String" type-id="Uml.String" />
+                </parameters>
+              </operation>
+              <operation id="off9c1f462d8a42138e3c05905bd8e1e4692" cid="ELEM038" name="getNumOfMainCards" type="Integer" type-id="Uml.Integer" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="of89d8d1ed35e4bb4810c5829916600fc964" cid="ELEM039" name="increaseNumOfMainCards" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p40ef67083ce547328cbffa751012bcea" name="numOfAddedCards" type="Integer" type-id="Uml.Integer" />
+                </parameters>
+              </operation>
+              <operation id="o670ca3abc34242398552dcb8f290dcb1962" cid="ELEM042" name="decreaseNumOfMainCards" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pc384c0c8f225400cb7e8b32e51cc6922" name="numOfRemovedCards" type="Integer" type-id="Uml.Integer" />
+                </parameters>
+              </operation>
+              <operation id="of392de046a35411e934f93379a9af17b809" cid="ELEM043" name="getNumOfSideCards" type="Integer" type-id="Uml.Integer" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="oa1ae2464d6b0467fb8b94f8a61acc91d462" cid="ELEM044" name="increaseNumOfSideCards" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p5030da8e3bd142efaac540bff063f86a" name="numOfAddedCards" type="Integer" type-id="Uml.Integer" />
+                </parameters>
+              </operation>
+              <operation id="oba28fe2b250d4b7eb2eb6a969962e25a977" cid="ELEM045" name="decreaseNumOfSideCards" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p411e7eb0706e43ad9ad56c791e7e8f85" name="numOfRemovedCards" type="Integer" type-id="Uml.Integer" />
+                </parameters>
+              </operation>
+              <operation id="o3f82a97f88d34c10a78c3ff44a4d7039775" cid="ELEM046" name="isDeckValid" type="Boolean" type-id="Uml.Boolean" visibility="public">
+                <style class="default" />
+              </operation>
             </operations>
             <source-codes>
               <source-code language="ActionScript" />
@@ -311,11 +353,11 @@
             <class />
           </item>
           <item id="di575389833304456004" iid="68fd9b2f2f904625b46b8519358f21f9" creation-date="04/11/2021 19:59:02" order-index="3" type="entity">
-            <layout ax="958" ay="43" awidth="371" aheight="487" x="958" y="43" width="371" height="487" />
+            <layout ax="958" ay="43" awidth="371" aheight="696" x="958" y="43" width="371" height="696" />
             <class />
           </item>
           <item id="di372252256330697407" iid="50a7cdc259cc4efc92c8ef0c83425baa" creation-date="04/11/2021 19:59:05" order-index="4" type="entity">
-            <layout ax="1010.5" ay="576" awidth="266" aheight="318" x="1010.5" y="576" width="266" height="318" />
+            <layout ax="555.5" ay="492" awidth="266" aheight="318" x="555.5" y="492" width="266" height="318" />
             <class />
           </item>
         </layer>
