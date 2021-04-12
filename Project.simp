@@ -9,21 +9,21 @@
     <entity-names>
       <counter>
         <item-type type-id="class" type="UmlClass" />
-        <value>8</value>
+        <value>9</value>
       </counter>
     </entity-names>
     <entity-ids>
       <counter>
         <item-type type-id="class" type="UmlClass" />
-        <value>9</value>
+        <value>10</value>
       </counter>
       <counter>
         <item-type type-id="relationship" type="UmlAssociation" />
-        <value>2</value>
+        <value>3</value>
       </counter>
       <counter>
         <item-type type-id="" type="AbstractElementGroup" />
-        <value>28</value>
+        <value>35</value>
       </counter>
     </entity-ids>
     <diagrams>
@@ -35,11 +35,11 @@
     <fields>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.AttributeField</type>
-        <value>68</value>
+        <value>80</value>
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.OperationField</type>
-        <value>71</value>
+        <value>82</value>
       </counter>
     </fields>
   </counters>
@@ -74,6 +74,7 @@
       <type id="Class:di575389833304456004" tid="" name="Deck" description="" nullable="false" class-ref="di575389833304456004" />
       <type id="ArrayList &lt;Deck&gt;" tid="" name="ArrayList &lt;Deck&gt;" description="" nullable="false" />
       <type id="ArrayList &lt;User&gt;" tid="" name="ArrayList &lt;User&gt;" description="" nullable="false" />
+      <type id="Srting" tid="" name="Srting" description="" nullable="false" />
     </custom-types>
   </types>
   <filters />
@@ -93,7 +94,7 @@
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-3,245">
+      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="682,365">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -105,7 +106,7 @@
           </authors>
           <description />
           <creation-date>04/09/2021 22:17:30</creation-date>
-          <change-date>04/11/2021 19:59:05</change-date>
+          <change-date>04/12/2021 09:57:42</change-date>
           <revision-count>0</revision-count>
           <version />
         </meta>
@@ -132,6 +133,9 @@
                 <style class="default" />
               </attribute>
               <attribute id="a105753693576474fa34ec50ce08088ed649" cid="ELEM067" name="activeDeck" type="Deck" type-id="Class:di575389833304456004" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="a506ec3a14a99431ebd753f5e6c93f095862" cid="ELEM079" name="cards" type="ArrayList &lt;Card&gt;" type-id="ArrayList &lt;Card&gt;" visibility="private">
                 <style class="default" />
               </attribute>
               <attribute id="a665b04480fdf4676a5ef4ea83ebad925688" cid="ELEM056" name="users" type="ArrayList &lt;User&gt;" type-id="ArrayList &lt;User&gt;" visibility="private" static="true">
@@ -210,7 +214,7 @@
                   <parameter id="p826b9e7841a342ba9d26716087015ca4" name="nickname" type="String" type-id="Uml.String" />
                 </parameters>
               </operation>
-              <operation id="o9140c41a8c8d446ab4b414f5358a77d8950" cid="ELEM058" name="chekPassword" type="Boolean" type-id="Uml.Boolean" visibility="public">
+              <operation id="o9140c41a8c8d446ab4b414f5358a77d8950" cid="ELEM058" name="checkPassword" type="Boolean" type-id="Uml.Boolean" visibility="public">
                 <style class="default" />
                 <parameters>
                   <parameter id="pfcecaab6daf1446c94d793bc76f5a111" name="password" type="String" type-id="Uml.String" />
@@ -328,56 +332,68 @@
                   <source-code language="ActionScript" />
                 </source-codes>
               </operation>
-              <operation id="oc09a11340c4b4fdaa29fc51a3865ea0d57" cid="ELEM024" name="createDeck" type="String" type-id="Uml.String" visibility="public" static="true">
+              <operation id="oc09a11340c4b4fdaa29fc51a3865ea0d57" cid="ELEM024" name="createDeck" type="void" type-id="void" visibility="public" static="true">
                 <style class="default" />
                 <parameters>
                   <parameter id="p4cad2a5bbeba4921b2731e65ca246dbf" name="user" type="User" type-id="User" />
-                  <parameter id="pf257aba7cf974298b11f01409992a537" name="deckName" type="String" type-id="Uml.String" />
+                  <parameter id="pbb8a1cc03c04480ba70691328e69c106" name="deckName" type="String" type-id="Uml.String" />
                 </parameters>
                 <source-codes>
                   <source-code language="ActionScript" />
                 </source-codes>
               </operation>
-              <operation id="o5484b27e10144c299a5d270cec8ca5c249" cid="ELEM018" name="removeDeck" type="String" type-id="Uml.String" visibility="public" static="true">
+              <operation id="o2ce96cfff63a4490bdc9c572f51289e0818" cid="ELEM081" name="decksArrayListToString" type="String" type-id="Uml.String" visibility="public" static="true">
                 <style class="default" />
                 <parameters>
-                  <parameter id="pea654d58acec44f189ee3dbad23dbf4b" name="deckName" type="String" type-id="Uml.String" />
+                  <parameter id="p8d5be4abcb2a497bacf391db09fc3967" name="decks" type="ArrayList &lt;Deck&gt;" type-id="ArrayList &lt;Deck&gt;" />
+                </parameters>
+              </operation>
+              <operation id="o5484b27e10144c299a5d270cec8ca5c249" cid="ELEM018" name="removeDeck" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pea654d58acec44f189ee3dbad23dbf4b" name="user" type="User" type-id="User" />
                 </parameters>
                 <source-codes>
                   <source-code language="ActionScript" />
                 </source-codes>
               </operation>
-              <operation id="o88fa4e7d9f354d1f85db3dd06cdd34d919" cid="ELEM021" name="activateDeck" type="String" type-id="Uml.String" visibility="public" static="true">
+              <operation id="o88fa4e7d9f354d1f85db3dd06cdd34d919" cid="ELEM021" name="activateDeck" type="void" type-id="void" visibility="public">
                 <style class="default" />
                 <parameters>
                   <parameter id="p63d7091490734ba9bfd944f34348f4d2" name="user" type="User" type-id="User" />
-                  <parameter id="p60a5231690bd4d7a8367cf53e0ba8b3a" name="deckName" type="String" type-id="Uml.String" />
                 </parameters>
                 <source-codes>
                   <source-code language="ActionScript" />
                 </source-codes>
               </operation>
-              <operation id="o240e11b0eb6e4e8ab908c13742965e4c82" cid="ELEM028" name="addCardToDeck" type="String" type-id="Uml.String" visibility="public" static="true">
+              <operation id="o240e11b0eb6e4e8ab908c13742965e4c82" cid="ELEM028" name="addCardToDeck" type="void" type-id="void" visibility="public">
                 <style class="default" />
                 <parameters>
                   <parameter id="pdda1fc8ba8074e1ba63ea8a7e5c87036" name="cardName" type="String" type-id="Uml.String" />
-                  <parameter id="pf7f10fd6576c4a6cbf6ac7c4a91f3f39" name="deckName" type="String" type-id="Uml.String" />
                   <parameter id="pd293f31c9802483195670918f05bd2c3" name="user" type="User" type-id="User" />
+                  <parameter id="p64f6b9ee88634fc7a86f60058c3ba1c1" name="isForSideDeck" type="Boolean" type-id="Uml.Boolean" />
                 </parameters>
               </operation>
-              <operation id="o18643c78d727418597557fc865739a2e661" cid="ELEM029" name="removeCardFromDeck" type="String" type-id="Uml.String" visibility="public" static="true">
+              <operation id="o18643c78d727418597557fc865739a2e661" cid="ELEM029" name="removeCardFromDeck" type="void" type-id="void" visibility="public">
                 <style class="default" />
                 <parameters>
                   <parameter id="p01c0de2e35ea47fb905aa184bb915046" name="cardName" type="String" type-id="Uml.String" />
-                  <parameter id="pfdddd9afc09d4b96b049fc5ec1836399" name="deckName" type="String" type-id="Uml.String" />
                   <parameter id="pc2150561a4344e3d87a388ce8e6be04e" name="user" type="User" type-id="User" />
+                  <parameter id="pac55a249f1ea4041be6ea546299a6543" name="isFromSideDeck" type="Boolean" type-id="Uml.Boolean" />
                 </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
               </operation>
-              <operation id="o266f7c3391c0471d82070bcb72e5f1ee655" cid="ELEM033" name="showDeck" type="String" type-id="Uml.String" visibility="public" static="true">
+              <operation id="o266f7c3391c0471d82070bcb72e5f1ee655" cid="ELEM033" name="showDeck" type="String" type-id="Uml.String" visibility="public">
                 <style class="default" />
                 <parameters>
                   <parameter id="p20446e068d774304b089497bc8819c38" name="deckName" type="String" type-id="Uml.String" />
+                  <parameter id="p7055ff6a4acf4d1d8c72a8b550ec367c" name="isSideDeck" type="Boolean" type-id="Uml.Boolean" />
                 </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
               </operation>
               <operation id="o5327923cd97a4de8969639bcb1969d71869" cid="ELEM023" name="isMainDeckFull" type="Boolean" type-id="Uml.Boolean" visibility="public">
                 <style class="default" />
@@ -443,11 +459,96 @@
           </item>
           <item id="di372252256330697407" cid="C008" type="class" name="Card" style-class="" visibility="package" change-tracking-state="added" creation-date="04/11/2021 19:59:05">
             <style class="default" />
+            <operations>
+              <operation id="o87b64e0fc81643579f1be2f3c6467e62326" cid="ELEM080" name="cardsArrayListToString" type="String" type-id="Uml.String" visibility="public" static="true">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p3d2932ea921f4d758c1f3c631d9b2d40" name="cards" type="ArrayList &lt;Card&gt;" type-id="ArrayList &lt;Card&gt;" />
+                </parameters>
+              </operation>
+            </operations>
+          </item>
+          <item id="di920771701274813870" cid="C009" type="class" name="DeckMenuController" style-class="" visibility="package" change-tracking-state="added" creation-date="04/12/2021 09:56:35">
+            <style class="default" />
+            <operations>
+              <operation id="o394fee2cda6845c391dc6e9a85ac2232932" cid="ELEM071" name="run" type="String" type-id="Uml.String" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p8af59adb0a53462491d51ec8f491f4aa" name="user" type="User" type-id="User" />
+                  <parameter id="pc28c5f276d5847478f8484f1838957e5" name="command" type="String" type-id="Uml.String" />
+                </parameters>
+              </operation>
+              <operation id="o030c5e5fee7742a68c69ef278f742ee6773" cid="ELEM072" name="checkCreateDeckCommand" type="String" type-id="Uml.String" visibility="private">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p7c747058af694c8aa32ae49a537e40ea" name="user" type="User" type-id="User" />
+                  <parameter id="p01069b5979b343c39e2d056865f34e0c" name="deckName" type="String" type-id="Uml.String" />
+                </parameters>
+              </operation>
+              <operation id="o084111087e7e4725a759d33375d6cc4c532" cid="ELEM073" name="checkDeleteDeckCommand" type="String" type-id="Uml.String" visibility="private">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p9ceb895ebe17409e869419fa5b1c60c4" name="user" type="User" type-id="User" />
+                  <parameter id="pf407c7bd295b494db19002f1cda62a47" name="deckName" type="String" type-id="Uml.String" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="o1f748c30af4f42feb454c7d8751d9f95611" cid="ELEM074" name="checkActivateDeckCommand" type="String" type-id="Uml.String" visibility="private">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p253f7965e618417582d0cf928bd6f58a" name="user" type="User" type-id="User" />
+                  <parameter id="p0ad315d5538b4e5791f7875c5c938e1b" name="deckName" type="String" type-id="Uml.String" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="obab6cffb00f6405c9e5d7e79e460555b444" cid="ELEM075" name="checkAddCardCommand" type="String" type-id="Uml.String" visibility="private">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p0e964782d9024d78b0bc60c9d2032e4f" name="user" type="User" type-id="User" />
+                  <parameter id="p23dc009c4f074a37a920f0806d6632c7" name="deckName" type="String" type-id="Uml.String" />
+                  <parameter id="p8c72c95b5e39414f9370a60ec268fb42" name="cardName" type="String" type-id="Uml.String" />
+                  <parameter id="p64be57ba4cfd495cb3f7383218189cb6" name="isForSideDeck" type="Boolean" type-id="Uml.Boolean" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="odc183731b57b4aeaaa71ec045c1c14e4432" cid="ELEM076" name="checkRemoveCardCommand" type="String" type-id="Uml.String" visibility="private">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p111c1892d4e943c2819b4d28209d1510" name="user" type="User" type-id="User" />
+                  <parameter id="p9861621566724fd1a75bbaaed3ed7733" name="deckName" type="String" type-id="Uml.String" />
+                  <parameter id="p6d366b3cfd3641569d86ec355a95deaf" name="cardName" type="String" type-id="Uml.String" />
+                  <parameter id="p504a9b3a6c614b2f8cf6bbfc6882fd93" name="isFromSideDeck" type="Boolean" type-id="Uml.Boolean" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="o6423fd7f7b1f449f844d65d65ef4e95237" cid="ELEM077" name="checkShowDeckCommand" type="String" type-id="Uml.String" visibility="private">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p0cd37cc615d049d9858c546d673c8ca3" name="user" type="User" type-id="User" />
+                  <parameter id="p08c688069fd845b08cd7791fc67eaeb5" name="deckName" type="String" type-id="Uml.String" />
+                  <parameter id="p5c10acf186f5436dbad7bcecfc892d8e" name="isSideDeck" type="Boolean" type-id="Uml.Boolean" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+            </operations>
+            <source-codes>
+              <source-code language="ActionScript" />
+            </source-codes>
           </item>
         </abstract-items>
         <layer name="Default" visible="true" enabled="true" locked="false">
           <item id="di217671348652249565" iid="b6a32d74ea7645ea9953f7f5cb3bcf97" creation-date="04/09/2021 22:17:50" order-index="0" type="entity">
-            <layout ax="485.9324" ay="-60.66589" awidth="371" aheight="522" x="485.9324" y="-60.66589" width="371" height="522" />
+            <layout ax="485.9324" ay="-60.66589" awidth="371" aheight="539" x="485.9324" y="-60.66589" width="371" height="539" />
             <class />
           </item>
           <item id="di243293463810741917" iid="a5283eb62923489d8e2181d4cd36cacc" creation-date="04/11/2021 19:57:16" order-index="1" type="entity">
@@ -459,11 +560,15 @@
             <class />
           </item>
           <item id="di575389833304456004" iid="68fd9b2f2f904625b46b8519358f21f9" creation-date="04/11/2021 19:59:02" order-index="3" type="entity">
-            <layout ax="954.8837" ay="47.50021" awidth="371" aheight="696" x="954.8837" y="47.50021" width="371" height="696" />
+            <layout ax="1522.884" ay="109.7027" awidth="371" aheight="727" x="1522.884" y="109.7027" width="371" height="727" />
             <class />
           </item>
           <item id="di372252256330697407" iid="50a7cdc259cc4efc92c8ef0c83425baa" creation-date="04/11/2021 19:59:05" order-index="4" type="entity">
-            <layout ax="559.3509" ay="487.7027" awidth="266" aheight="318" x="559.3509" y="487.7027" width="266" height="318" />
+            <layout ax="538.4324" ay="576.7027" awidth="266" aheight="318" x="538.4324" y="576.7027" width="266" height="318" />
+            <class />
+          </item>
+          <item id="di920771701274813870" iid="dfd6e5c2fc8c4d1e815c5d12b0009d57" creation-date="04/12/2021 09:56:35" order-index="5" type="entity">
+            <layout ax="945" ay="120.3341" awidth="459" aheight="370.7346" x="945" y="120.3341" width="459" height="370.7346" />
             <class />
           </item>
         </layer>
