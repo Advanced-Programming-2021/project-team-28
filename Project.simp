@@ -35,7 +35,7 @@
       </counter>
       <counter>
         <item-type type-id="" type="AbstractElementGroup" />
-        <value>2</value>
+        <value>10</value>
       </counter>
     </entity-ids>
     <diagrams>
@@ -47,11 +47,11 @@
     <fields>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.AttributeField</type>
-        <value>147</value>
+        <value>152</value>
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.OperationField</type>
-        <value>146</value>
+        <value>156</value>
       </counter>
     </fields>
   </counters>
@@ -141,7 +141,7 @@ also another static methode :
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-51,48" zoom="0.2">
+      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-180,654" zoom="0.7">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -504,8 +504,19 @@ also another static methode :
               <source-code language="ActionScript" />
             </source-codes>
           </item>
-          <item id="di372252256330697407" cid="C008" type="class" name="Card" style-class="" visibility="package" change-tracking-state="added" creation-date="04/11/2021 19:59:05">
+          <item id="di372252256330697407" cid="C008" type="class" name="Card" style-class="" is-abstract="true" visibility="package" change-tracking-state="added" creation-date="04/11/2021 19:59:05">
             <style class="default" />
+            <attributes>
+              <attribute id="a441147d161ce4feabcb7e6cb1e35fc36718" cid="ELEM147" name="name" type="String" type-id="Uml.String" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="ab9d2dd5314fd46ffa62d343d52346c02544" cid="ELEM148" name="number" type="String" type-id="Uml.String" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="a478c31820bb7439f9a0a769a3993d5a4730" cid="ELEM149" name="description" type="String" type-id="Uml.String" visibility="private">
+                <style class="default" />
+              </attribute>
+            </attributes>
             <operations>
               <operation id="o87b64e0fc81643579f1be2f3c6467e62326" cid="ELEM080" name="cardsArrayListToString" type="String" type-id="Uml.String" visibility="public" static="true">
                 <style class="default" />
@@ -513,7 +524,37 @@ also another static methode :
                   <parameter id="p3d2932ea921f4d758c1f3c631d9b2d40" name="cards" type="ArrayList &lt;Card&gt;" type-id="ArrayList &lt;Card&gt;" />
                 </parameters>
               </operation>
+              <operation id="o36ec5846f59340ae8410fc302843181a892" cid="ELEM146" name="getName" type="String" type-id="Uml.String" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o0aa00718eba24c4c90fbf58ae0e4bff6905" cid="ELEM150" name="setName" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p4c7d7dce3bfe4528926920175730b036" name="name" type="String" type-id="Uml.String" />
+                </parameters>
+              </operation>
+              <operation id="o78255c345b3847c0b7d39540fa8e54f5847" cid="ELEM152" name="getNumber" type="String" type-id="Uml.String" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o2db4bf97a2504771bf87863b13fadfaa799" cid="ELEM153" name="setNumber" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p73f95ba9dd914a88baeb4e4ad4ecfd65" name="number" type="String" type-id="Uml.String" />
+                </parameters>
+              </operation>
+              <operation id="oe8733e6a1e264dae921da516864ebfd7644" cid="ELEM154" name="getDescription" type="String" type-id="Uml.String" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o9f051825c5d5422caac83def9cc8ceaa877" cid="ELEM155" name="setDescription" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p44d2a6e1a25b44aca901434f8bc6af09" name="description" type="String" type-id="Uml.String" />
+                </parameters>
+              </operation>
             </operations>
+            <source-codes>
+              <source-code language="ActionScript" />
+            </source-codes>
           </item>
           <item id="di920771701274813870" cid="C009" type="class" name="DeckMenuController" style-class="" visibility="package" change-tracking-state="added" creation-date="04/12/2021 09:56:35">
             <style class="default" />
@@ -934,7 +975,7 @@ to assign a particular Deck to a particular User?</comment>
             <class />
           </item>
           <item id="di372252256330697407" iid="50a7cdc259cc4efc92c8ef0c83425baa" creation-date="04/11/2021 19:59:05" order-index="4" type="entity">
-            <layout ax="-102.5676" ay="942.7026" awidth="266" aheight="318" x="-102.5676" y="942.7026" width="266" height="318" />
+            <layout ax="-102.5676" ay="942.7026" awidth="514" aheight="477.0001" x="-102.5676" y="942.7026" width="514" height="477.0001" />
             <class />
           </item>
           <item id="di920771701274813870" iid="dfd6e5c2fc8c4d1e815c5d12b0009d57" creation-date="04/12/2021 09:56:35" order-index="5" type="entity">
