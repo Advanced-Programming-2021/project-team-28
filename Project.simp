@@ -9,7 +9,7 @@
     <entity-names>
       <counter>
         <item-type type-id="class" type="UmlClass" />
-        <value>23</value>
+        <value>24</value>
       </counter>
       <counter>
         <item-type stereotype="enumeration" type-id="enumeration" type="UmlEnumeration" />
@@ -19,11 +19,11 @@
     <entity-ids>
       <counter>
         <item-type type-id="class" type="UmlClass" />
-        <value>24</value>
+        <value>25</value>
       </counter>
       <counter>
         <item-type type-id="relationship" type="UmlAssociation" />
-        <value>8</value>
+        <value>12</value>
       </counter>
       <counter>
         <item-type type-id="generalization" type="UmlGeneralization" />
@@ -39,7 +39,7 @@
       </counter>
       <counter>
         <item-type type-id="" type="AbstractElementGroup" />
-        <value>29</value>
+        <value>53</value>
       </counter>
       <counter>
         <item-type type-id="enumeration" type="UmlEnumeration" />
@@ -104,6 +104,7 @@
       <type id="boolean" tid="" name="boolean" description="" nullable="false" />
       <type id="Class:di350123535766603288" tid="" name="SpellCard" description="" nullable="false" class-ref="di350123535766603288" />
       <type id="Class:di164860838859236586" tid="" name="Spell" description="" nullable="false" class-ref="di164860838859236586" />
+      <type id="Player" tid="" name="Player" description="" nullable="false" />
       <type id="Class:di561708448588461325" tid="" name="SpellType" description="" nullable="false" class-ref="di561708448588461325" />
     </custom-types>
   </types>
@@ -177,7 +178,7 @@ also another static methode :
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-180,1214" zoom="0.7">
+      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-51,47" zoom="0.2">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -189,7 +190,7 @@ also another static methode :
           </authors>
           <description />
           <creation-date>04/09/2021 22:17:30</creation-date>
-          <change-date>04/15/2021 13:45:44</change-date>
+          <change-date>04/15/2021 14:27:00</change-date>
           <revision-count>0</revision-count>
           <version />
         </meta>
@@ -1022,11 +1023,20 @@ to assign a particular Deck to a particular User?</comment>
               </attribute>
             </attributes>
             <operations>
-              <operation id="o27cd941772a14bf1a34607eb2e613b2c743" cid="ELEM185" name="canBeActivated" type="" type-id="" visibility="public">
+              <operation id="o27cd941772a14bf1a34607eb2e613b2c743" cid="ELEM185" name="canBeActivated" type="Boolean" type-id="Uml.Boolean" visibility="public" abstract="true">
                 <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
               </operation>
-              <operation id="o702eeccd19324cd290370bf1e2bbcf85982" cid="ELEM186" name="activateSpell" type="" type-id="" visibility="public">
+              <operation id="o702eeccd19324cd290370bf1e2bbcf85982" cid="ELEM186" name="activateSpell" type="void" type-id="void" visibility="public" abstract="true">
                 <style class="default" />
+                <parameters>
+                  <parameter id="pe64dabfece1c45b8b2e19f1d7920048a" name="rivalPlayer" type="Player" type-id="Player" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
               </operation>
               <operation id="oebbc391f697c451885f580a858ee87a8938" cid="ELEM190" name="getSpeed" type="Integer" type-id="Uml.Integer" visibility="public">
                 <style class="default" />
@@ -1076,6 +1086,37 @@ to assign a particular Deck to a particular User?</comment>
                 <style class="default" />
               </enumeration-item>
             </enumeration-items>
+          </item>
+          <item id="di384817287667699758" cid="REL008" type="relationship" name="" style-class="" visibility="package" change-tracking-state="added" creation-date="04/15/2021 13:54:16" from="di164860838859236586" to="di561708448588461325">
+            <style class="default" />
+            <relation from="di164860838859236586" to="di561708448588461325">
+              <start-role id="" name="" navigability="" association-type="composition" visibility="private" />
+              <end-role id="" name="" navigability="" association-type="association" visibility="private" />
+            </relation>
+          </item>
+          <item id="di604687135202022462" cid="REL009" type="relationship" name="" style-class="" visibility="package" change-tracking-state="added" creation-date="04/15/2021 13:54:21" from="di164860838859236586">
+            <style class="default" />
+            <relation from="di164860838859236586" to="">
+              <start-role id="" name="" navigability="" association-type="composition" visibility="private" />
+              <end-role id="" name="" navigability="" association-type="association" visibility="private" />
+            </relation>
+          </item>
+          <item id="di889662351675943078" cid="REL010" type="relationship" name="" style-class="" visibility="package" change-tracking-state="added" creation-date="04/15/2021 13:54:47" from="di880785083262262074" to="di164860838859236586">
+            <style class="default" />
+            <relation from="di880785083262262074" to="di164860838859236586">
+              <start-role id="" name="" navigability="" association-type="composition" visibility="private" />
+              <end-role id="" name="" navigability="" association-type="association" visibility="private" />
+            </relation>
+          </item>
+          <item id="di930894158615834171" cid="REL011" type="relationship" name="" style-class="" visibility="package" change-tracking-state="added" creation-date="04/15/2021 13:54:51">
+            <style class="default" />
+            <relation from="" to="">
+              <start-role id="" name="" navigability="" association-type="composition" visibility="private" />
+              <end-role id="" name="" navigability="" association-type="association" visibility="private" />
+            </relation>
+          </item>
+          <item id="di823238897774276930" cid="C024" type="class" name="Player" style-class="" visibility="package" change-tracking-state="added" creation-date="04/15/2021 14:27:00">
+            <style class="default" />
           </item>
         </abstract-items>
         <layer name="Default" visible="true" enabled="true" locked="false">
@@ -1270,6 +1311,28 @@ to assign a particular Deck to a particular User?</comment>
           <item id="di561708448588461325" iid="6f9add9ea07a40d5a3e6bb54ff8c0074" creation-date="04/15/2021 13:45:44" order-index="34" type="entity">
             <layout ax="470" ay="2175.069" awidth="160" aheight="160" x="470" y="2175.069" width="160" height="160" />
             <enumeration />
+          </item>
+          <item id="di384817287667699758" iid="3a9052a8aa7347b7829a12ad2163e2e9" creation-date="04/15/2021 13:54:16" order-index="35" type="relation">
+            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="364" y1="2091" x2="470" y2="2184" start-border-pos="0.532303259406291" end-border-pos="0.985503005981445" name-position="0,0">
+              <points>
+                <point x="364" y="2091" />
+                <point x="470" y="2184" />
+              </points>
+            </layout>
+            <relation from="di164860838859236586" from-iid="d428fdfb557949cf85af60de5ceb4d75" to="di561708448588461325" to-iid="6f9add9ea07a40d5a3e6bb54ff8c0074" />
+          </item>
+          <item id="di889662351675943078" iid="edacbc5291fb473285bd0e65dc45d160" creation-date="04/15/2021 13:54:47" order-index="36" type="relation">
+            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="114" y1="1775" x2="199" y2="1906" start-border-pos="0.532119287763323" end-border-pos="0.0723457873707086" name-position="0,0">
+              <points>
+                <point x="114" y="1775" />
+                <point x="199" y="1906" />
+              </points>
+            </layout>
+            <relation from="di880785083262262074" from-iid="947201fd1f4f4a7098adef433b99afba" to="di164860838859236586" to-iid="d428fdfb557949cf85af60de5ceb4d75" />
+          </item>
+          <item id="di823238897774276930" iid="60f44ce4ff3b4b53a717c1f209ae3a6a" creation-date="04/15/2021 14:27:00" order-index="37" type="entity">
+            <layout ax="868" ay="2298.069" awidth="140" aheight="160" x="868" y="2298.069" width="140" height="160" />
+            <class />
           </item>
         </layer>
       </diagram>
