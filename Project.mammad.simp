@@ -38,12 +38,12 @@
         <value>5</value>
       </counter>
       <counter>
-        <item-type type-id="" type="AbstractElementGroup" />
-        <value>53</value>
-      </counter>
-      <counter>
         <item-type type-id="enumeration" type="UmlEnumeration" />
         <value>2</value>
+      </counter>
+      <counter>
+        <item-type type-id="" type="AbstractElementGroup" />
+        <value>18</value>
       </counter>
     </entity-ids>
     <diagrams>
@@ -55,11 +55,11 @@
     <fields>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.AttributeField</type>
-        <value>190</value>
+        <value>219</value>
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.OperationField</type>
-        <value>194</value>
+        <value>228</value>
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.EnumerationItemField</type>
@@ -106,6 +106,10 @@
       <type id="Class:di164860838859236586" tid="" name="Spell" description="" nullable="false" class-ref="di164860838859236586" />
       <type id="Player" tid="" name="Player" description="" nullable="false" />
       <type id="Class:di561708448588461325" tid="" name="SpellType" description="" nullable="false" class-ref="di561708448588461325" />
+      <type id="HashMap&lt;Card, Integer&gt;" tid="" name="HashMap&lt;Card, Integer&gt;" description="" nullable="false" />
+      <type id="HashMap&lt;MonsterCard, Integer&gt;" tid="" name="HashMap&lt;MonsterCard, Integer&gt;" description="" nullable="false" />
+      <type id="Class:di372252256330697407" tid="" name="Card" description="" nullable="false" class-ref="di372252256330697407" />
+      <type id="Class:di972588915479128009" tid="" name="MonsterCard" description="" nullable="false" class-ref="di972588915479128009" />
     </custom-types>
   </types>
   <filters />
@@ -178,7 +182,7 @@ also another static methode :
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-51,47" zoom="0.2">
+      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="504,2078" zoom="0.8">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -1117,6 +1121,142 @@ to assign a particular Deck to a particular User?</comment>
           </item>
           <item id="di823238897774276930" cid="C024" type="class" name="Player" style-class="" visibility="package" change-tracking-state="added" creation-date="04/15/2021 14:27:00">
             <style class="default" />
+            <attributes>
+              <attribute id="a562709cb3d4049f4bede94b76183d923460" cid="ELEM194" name="user" type="User" type-id="User" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="a913d3efc8ee94802a5052b9773009d10311" cid="ELEM195" name="lifePoint" type="Integer" type-id="Uml.Integer" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="a36b22287f3b544c7832129dad6ed202b377" cid="ELEM196" name="duelMap" type="String" type-id="Uml.String" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="a1dbe1f95dfdf4299b91f5797fbcb2d21997" cid="ELEM197" name="monsterCardsInZone" type="HashMap&lt;MonsterCard, Integer&gt;" type-id="HashMap&lt;MonsterCard, Integer&gt;" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="a23050e087807438d841c8e3bf11e78f6595" cid="ELEM198" name="spellOrTrapCardsInZone" type="HashMap&lt;Card, Integer&gt;" type-id="HashMap&lt;Card, Integer&gt;" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="a5bfe21515f5e4d49b3677e6550736b0a497" cid="ELEM216" name="cardsInHand" type="ArrayList &lt;Card&gt;" type-id="ArrayList &lt;Card&gt;" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="a126a32061f8743de9551f97b4bca4ab2248" cid="ELEM217" name="cardsInGraveYard" type="ArrayList &lt;Card&gt;" type-id="ArrayList &lt;Card&gt;" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="afe79cfa6f4db48258cf3349b7e1f80c1200" cid="ELEM218" name="cardsInDuelDeck" type="ArrayList &lt;Card&gt;" type-id="ArrayList &lt;Card&gt;" visibility="private">
+                <style class="default" />
+              </attribute>
+            </attributes>
+            <operations>
+              <operation id="oa5c41c1bfe90436cba438d27a2919773461" cid="ELEM201" name="Player" type="&lt;&lt;constructor&gt;&gt;" type-id="&lt;&lt;constructor&gt;&gt;" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p363617a31a9847dc8ab4a9395890f68a" name="user" type="User" type-id="User" />
+                </parameters>
+              </operation>
+              <operation id="oe4c68d4657f24566a076dc1aad88e7ae278" cid="ELEM199" name="getUser" type="User" type-id="User" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="oa5fa1c0d06f1432d96b735419eade7b4519" cid="ELEM203" name="setUser" type="void" type-id="void" visibility="private">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p8ebcb6eff7ec4924b9e9d15e93440770" name="user" type="User" type-id="User" />
+                </parameters>
+              </operation>
+              <operation id="o6f1cb941d5eb407b85a7e6e7961c4a88396" cid="ELEM204" name="getLifePoint" type="Integer" type-id="Uml.Integer" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="oef0fd76e31f343dba3cf987d4ecf73ec83" cid="ELEM205" name="decreaseLifePoint" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p555188ad15eb4a60960c900e2f926ed5" name="amount" type="Integer" type-id="Uml.Integer" />
+                </parameters>
+              </operation>
+              <operation id="oa2e13eec45d5401d8203ca584cee43c0971" cid="ELEM206" name="increaseLifePoint" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p0e46ec1067b84b53a2c4b4b302bc8a90" name="amount" type="Integer" type-id="Uml.Integer" />
+                </parameters>
+              </operation>
+              <operation id="o135ac051a76f4a2a94e5cb49f80392e6907" cid="ELEM207" name="getDuelMap" type="String" type-id="Uml.String" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o13ea6dd665884c7cb5c79eabda9edb68611" cid="ELEM208" name="changeDuelMap" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p7a38749f114640c5b540cb4c086c5be7" name="card" type="Card" type-id="Class:di372252256330697407" />
+                  <parameter id="p7806030657204a0184c17dd1cbd8c3de" name="location" type="Integer" type-id="Uml.Integer" />
+                </parameters>
+              </operation>
+              <operation id="o94f131bf451e4d8e880b9c902ea68461299" cid="ELEM209" name="getMonsterCardsInZone" type="HashMap&lt;MonsterCard, Integer&gt;" type-id="HashMap&lt;MonsterCard, Integer&gt;" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o72704df830ec4f728d1e51628f6ecc72706" cid="ELEM211" name="getSpellOrTrapCardsInZone" type="HashMap&lt;Card, Integer&gt;" type-id="HashMap&lt;Card, Integer&gt;" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="oe5b075c6abb5489b8866e865ca480ea6834" cid="ELEM210" name="addCardToCardsInZone" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pa2dcdc048dd24442904b0573dc10bfb7" name="card" type="Card" type-id="Class:di372252256330697407" />
+                  <parameter id="p6d45e58a6a04453daecf96aee710e3b6" name="location" type="Integer" type-id="Uml.Integer" />
+                </parameters>
+              </operation>
+              <operation id="o57da8c6a7ccd4e4cb520268758140173479" cid="ELEM212" name="removeCardFromCardsInZone" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p6be1f9ac40c24b71ac4097328e54cfe2" name="card" type="Card" type-id="Class:di372252256330697407" />
+                  <parameter id="p52da383f337c49ba96cdd032b3cefea4" name="location" type="Integer" type-id="Uml.Integer" />
+                </parameters>
+              </operation>
+              <operation id="o8511e057d3e24fe0b3ed24d57c5c71b0105" cid="ELEM215" name="getCardsInHand" type="ArrayList &lt;Card&gt;" type-id="ArrayList &lt;Card&gt;" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o8cead11eccae41bcb7a7be77d407b764996" cid="ELEM221" name="addCardToHand" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pe74482ae185f4674a2513a52b4d32727" name="card" type="Card" type-id="Class:di372252256330697407" />
+                </parameters>
+              </operation>
+              <operation id="o79eed5b27e63457b8744233305eb5839337" cid="ELEM224" name="removeCardFromHand" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p9ebb89dc8f6d43cdab619be7c44c64d9" name="card" type="Card" type-id="Class:di372252256330697407" />
+                </parameters>
+              </operation>
+              <operation id="o6f83d7ff29c745c09884f145fc139efc520" cid="ELEM219" name="getCardsInGraveYard" type="ArrayList &lt;Card&gt;" type-id="ArrayList &lt;Card&gt;" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o853042d4113647078525c594ee4471f3727" cid="ELEM222" name="addCardToGraveYard" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p817a4194c06445e68f002ca8779dc22b" name="card" type="Card" type-id="Class:di372252256330697407" />
+                </parameters>
+              </operation>
+              <operation id="oe9bfb70d0bf14fbcb6ba867bf3dc0a21516" cid="ELEM225" name="removeCardFromGraveYard" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p32c5fc44bd4044698f370d457ad4e62d" name="card" type="Card" type-id="Class:di372252256330697407" />
+                </parameters>
+              </operation>
+              <operation id="o7720ce17d97645d6b946d9d263cda557958" cid="ELEM220" name="getCardsInDuelDeck" type="ArrayList &lt;Card&gt;" type-id="ArrayList &lt;Card&gt;" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o255abafe24c4421c8a34342ba41aa306195" cid="ELEM227" name="setDuelDeckByCopyingUserDeckAtTheBeginingOfTheGame" type="" type-id="" visibility="private">
+                <style class="default" />
+              </operation>
+              <operation id="o45a4f2530b744b96a1be020d66ec7d2c72" cid="ELEM223" name="addCardToDuelDeck" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p6ae150cea0184797b25a3740d55034ed" name="card" type="Card" type-id="Class:di372252256330697407" />
+                </parameters>
+              </operation>
+              <operation id="o19c1819effb741dc8ece421959ad9107678" cid="ELEM226" name="removeCardFromDuelDeck" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p4bbeffaaad894cd3b1f862fa0b168a40" name="card" type="Card" type-id="Class:di372252256330697407" />
+                </parameters>
+              </operation>
+            </operations>
           </item>
         </abstract-items>
         <layer name="Default" visible="true" enabled="true" locked="false">
@@ -1331,7 +1471,7 @@ to assign a particular Deck to a particular User?</comment>
             <relation from="di880785083262262074" from-iid="947201fd1f4f4a7098adef433b99afba" to="di164860838859236586" to-iid="d428fdfb557949cf85af60de5ceb4d75" />
           </item>
           <item id="di823238897774276930" iid="60f44ce4ff3b4b53a717c1f209ae3a6a" creation-date="04/15/2021 14:27:00" order-index="37" type="entity">
-            <layout ax="868" ay="2298.069" awidth="140" aheight="160" x="868" y="2298.069" width="140" height="160" />
+            <layout ax="704.884" ay="2208.069" awidth="514" aheight="592" x="704.884" y="2208.069" width="514" height="592" />
             <class />
           </item>
         </layer>
