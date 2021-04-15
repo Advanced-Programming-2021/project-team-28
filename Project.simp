@@ -9,49 +9,49 @@
     <entity-names>
       <counter>
         <item-type type-id="class" type="UmlClass" />
-        <value>19</value>
+        <value>20</value>
       </counter>
     </entity-names>
     <entity-ids>
       <counter>
         <item-type type-id="class" type="UmlClass" />
-        <value>20</value>
+        <value>21</value>
       </counter>
       <counter>
         <item-type type-id="relationship" type="UmlAssociation" />
-        <value>7</value>
-      </counter>
-      <counter>
-        <item-type type-id="generalization" type="UmlGeneralization" />
-        <value>14</value>
-      </counter>
-      <counter>
-        <item-type type-id="comment" type="UmlComment" />
         <value>8</value>
       </counter>
       <counter>
+        <item-type type-id="generalization" type="UmlGeneralization" />
+        <value>15</value>
+      </counter>
+      <counter>
+        <item-type type-id="comment" type="UmlComment" />
+        <value>10</value>
+      </counter>
+      <counter>
         <item-type type-id="comment-connector" type="UmlCommentConnector" />
-        <value>3</value>
+        <value>5</value>
       </counter>
       <counter>
         <item-type type-id="" type="AbstractElementGroup" />
-        <value>10</value>
+        <value>42</value>
       </counter>
     </entity-ids>
     <diagrams>
       <counter>
         <type>SoftwareIdeasModeler.Core.Diagrams.UmlDiagrams.UmlClassDiagram</type>
-        <value>1</value>
+        <value>2</value>
       </counter>
     </diagrams>
     <fields>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.AttributeField</type>
-        <value>152</value>
+        <value>168</value>
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.OperationField</type>
-        <value>156</value>
+        <value>181</value>
       </counter>
     </fields>
   </counters>
@@ -89,6 +89,7 @@
       <type id="Srting" tid="" name="Srting" description="" nullable="false" />
       <type id="Matcher" tid="" name="Matcher" description="" nullable="false" />
       <type id="viod" tid="" name="viod" description="" nullable="false" />
+      <type id="boolean" tid="" name="boolean" description="" nullable="false" />
     </custom-types>
   </types>
   <filters />
@@ -126,6 +127,23 @@ also another static methode :
         </operation>
       </operations>
     </item>
+    <item id="di184793736226741479" cid="CMT008" type="comment" name="Comment" style-class="" visibility="package" creation-date="04/15/2021 12:09:45">
+      <style class="default" />
+      <comment>در مورد گذاشتن  ایز سامند خیلی مطمئن نیستم
+</comment>
+    </item>
+    <item id="di125558553570506342" cid="CN003" type="comment-connector" name="" style-class="" visibility="package" creation-date="04/15/2021 12:09:45" from="di184793736226741479" to="di972588915479128009">
+      <style class="default" />
+    </item>
+    <item id="di505529513346092047" cid="CMT009" type="comment" name="Comment" style-class="" visibility="package" creation-date="04/15/2021 12:27:13">
+      <style class="default" />
+      <comment>این نوت برای خودمه
+:)))
+اگه ایز سامند تایید شد براش ستر و گتر بزن</comment>
+    </item>
+    <item id="di937477920626780008" cid="CN004" type="comment-connector" name="" style-class="" visibility="package" creation-date="04/15/2021 12:27:13" from="di505529513346092047" to="di972588915479128009">
+      <style class="default" />
+    </item>
   </items>
   <models>
     <model id="pb51b285caf164abcba9785b8f4233974_824928865" name="Model 1" namespace="" order-index="1">
@@ -141,7 +159,7 @@ also another static methode :
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-180,654" zoom="0.7">
+      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-115,805" zoom="0.7">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -1137,6 +1155,221 @@ to assign a particular Deck to a particular User?</comment>
               </points>
             </layout>
             <relation from="di482396805166815463" from-iid="8c02bcc6ba7643b1a53efe1d757691d5" to="di217671348652249565" to-iid="b6a32d74ea7645ea9953f7f5cb3bcf97" />
+          </item>
+        </layer>
+      </diagram>
+      <diagram type="uml-class" id="pba982e15f1e74bf2bb46a5585ebbf2d5_833691393" name="ClassDiagram2" order-index="2" overview-order-index="0" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="79,-86" zoom="0.9">
+        <style>
+          <background-color index="1" color="#FFFFFFFF" />
+          <background-color index="2" color="#FFFFFFFF" />
+          <background-type type="solid" />
+        </style>
+        <meta>
+          <authors>
+            <author> </author>
+          </authors>
+          <description />
+          <creation-date>04/15/2021 12:01:12</creation-date>
+          <change-date>04/15/2021 12:27:13</change-date>
+          <revision-count>0</revision-count>
+          <version />
+        </meta>
+        <abstract-items>
+          <item id="di610294252440657288" cid="C008" type="class" name="Card" style-class="" is-abstract="true" visibility="package" change-tracking-state="added" creation-date="04/11/2021 19:59:05">
+            <style class="default" />
+            <attributes>
+              <attribute id="a441147d161ce4feabcb7e6cb1e35fc36718" cid="ELEM147" name="name" type="String" type-id="Uml.String" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="ab9d2dd5314fd46ffa62d343d52346c02544" cid="ELEM148" name="number" type="String" type-id="Uml.String" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="a478c31820bb7439f9a0a769a3993d5a4730" cid="ELEM149" name="description" type="String" type-id="Uml.String" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="ac2355f3fbfe740259e8407cf8d0111d7623" cid="ELEM156" name="allCards" type="ArrayList &lt;Card&gt;" type-id="ArrayList &lt;Card&gt;" visibility="private">
+                <style class="default" />
+              </attribute>
+            </attributes>
+            <operations>
+              <operation id="o00d5e4dd7ce448bea24500e440857ea9396" cid="ELEM159" name="Card" type="&lt;&lt;constructor&gt;&gt;" type-id="&lt;&lt;constructor&gt;&gt;" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pd3f4e8bd081444f9b3123b1016d521a8" name="name" type="String" type-id="Uml.String" />
+                  <parameter id="pd694efd7692d44519b66bc84e010de00" name="number" type="String" type-id="Uml.String" />
+                  <parameter id="p84e2a9ea29c04f159476a87ab3be0114" name="description" type="String" type-id="Uml.String" />
+                </parameters>
+              </operation>
+              <operation id="o87b64e0fc81643579f1be2f3c6467e62326" cid="ELEM080" name="cardsArrayListToString" type="String" type-id="Uml.String" visibility="public" static="true">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p3d2932ea921f4d758c1f3c631d9b2d40" name="cards" type="ArrayList &lt;Card&gt;" type-id="ArrayList &lt;Card&gt;" />
+                </parameters>
+              </operation>
+              <operation id="o36ec5846f59340ae8410fc302843181a892" cid="ELEM146" name="getName" type="String" type-id="Uml.String" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o0aa00718eba24c4c90fbf58ae0e4bff6905" cid="ELEM150" name="setName" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p4c7d7dce3bfe4528926920175730b036" name="name" type="String" type-id="Uml.String" />
+                </parameters>
+              </operation>
+              <operation id="o78255c345b3847c0b7d39540fa8e54f5847" cid="ELEM152" name="getNumber" type="String" type-id="Uml.String" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o2db4bf97a2504771bf87863b13fadfaa799" cid="ELEM153" name="setNumber" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p73f95ba9dd914a88baeb4e4ad4ecfd65" name="number" type="String" type-id="Uml.String" />
+                </parameters>
+              </operation>
+              <operation id="oe8733e6a1e264dae921da516864ebfd7644" cid="ELEM154" name="getDescription" type="String" type-id="Uml.String" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o9f051825c5d5422caac83def9cc8ceaa877" cid="ELEM155" name="setDescription" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p44d2a6e1a25b44aca901434f8bc6af09" name="description" type="String" type-id="Uml.String" />
+                </parameters>
+              </operation>
+            </operations>
+            <source-codes>
+              <source-code language="ActionScript" />
+            </source-codes>
+          </item>
+          <item id="di972588915479128009" cid="C020" type="class" name="MonsterCard" style-class="" visibility="package" change-tracking-state="added" creation-date="04/15/2021 12:04:11">
+            <style class="default" />
+            <attributes>
+              <attribute id="ade46112779734b2c97faa5b86c064346497" cid="ELEM157" name="attackPoint" type="Integer" type-id="Uml.Integer" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="ad8553d651bd14423a9763400a624d053148" cid="ELEM158" name="defencePoint" type="Integer" type-id="Uml.Integer" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="ac47aab73c64e48cb9abad65c9269ed18679" cid="ELEM160" name="isSummoned" type="boolean" type-id="boolean" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="a4017a0b102d641c6b919ff5d06a2d584851" cid="ELEM161" name="isOnSetPosition" type="boolean" type-id="boolean" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="ac7988d45b14c4fb6bd7c2d20761c94c938" cid="ELEM162" name="isFlipped" type="boolean" type-id="boolean" visibility="private">
+                <style class="default" />
+              </attribute>
+            </attributes>
+            <operations>
+              <operation id="o3599575723104ab0a04a8f89506fda29504" cid="ELEM168" name="MonsterCard" type="&lt;&lt;constructor&gt;&gt;" type-id="&lt;&lt;constructor&gt;&gt;" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pcaccdda30df64e93b132a30fbb2b1ba2" name="attackPoint" type="Integer" type-id="Uml.Integer" />
+                  <parameter id="pd47f5fa9de584ad5b56ba299dee820b4" name="defencePoint" type="Integer" type-id="Uml.Integer" />
+                </parameters>
+              </operation>
+              <operation id="ofdf869b3aa2a4d84b00e3d9bef080597291" cid="ELEM169" name="setAttackPoint" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p873c36ae3d404f6fb0691e01647d3516" name="attackPoint" type="Integer" type-id="Uml.Integer" />
+                </parameters>
+              </operation>
+              <operation id="o5514888d416e49559fb4e37aae7b3088806" cid="ELEM170" name="setDefencePoint" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pbba4ace50aef4fe0be72467fac7c2eae" name="DefencePoint" type="Integer" type-id="Uml.Integer" />
+                </parameters>
+              </operation>
+              <operation id="o54e86834ee9b4e26b73acc640bf8e20c901" cid="ELEM175" name="setIsOnSetPosition" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p362b78dd57e64530ae1f063e0a45461d" name="isOnSetPosition" type="boolean" type-id="boolean" />
+                </parameters>
+              </operation>
+              <operation id="o2d9d46bdec0344219a23b92ca388bbff73" cid="ELEM176" name="setIsFlipped" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p56d7398bdbc94ae49b80a7ca8a85b303" name="isFlipped" type="boolean" type-id="boolean" />
+                </parameters>
+              </operation>
+              <operation id="o896392d741aa4f83ba82a6bf0dec59d1538" cid="ELEM171" name="getAttackPoint" type="Integer" type-id="Uml.Integer" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="ofe50f993687e470c99225898e01001cb944" cid="ELEM172" name="getDefencePoint" type="Integer" type-id="Uml.Integer" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="oc3ce9ab7aea44428bcbcec7094719e08229" cid="ELEM177" name="getIsOnSetPosition" type="boolean" type-id="boolean" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o744dbbb7cfd04afb931c27c11dc0dc68370" cid="ELEM178" name="getIsFlipped" type="boolean" type-id="boolean" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="oba9a4d634cb74d6e921befc8f88835ad642" cid="ELEM173" name="changeBattlePosition" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pae50dbadaad440f3b164b80464bd7fe5" name="isOnSetPosition" type="boolean" type-id="boolean" />
+                  <parameter id="p71c94fc1472e41bb960a4a672d38e194" name="isFlipped" type="boolean" type-id="boolean" />
+                </parameters>
+              </operation>
+              <operation id="o9fac58c39c48447d81604dc0e49455da117" cid="ELEM174" name="showBattlePosition" type="boolean" type-id="boolean" multiplicity="2" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o96104a06a4b84850a608c19be03cff8b100" cid="ELEM179" name="changeAttackPoint" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p2c662dccf1864bccb0f95232f77e41ae" name="attackPoint" type="Integer" type-id="Uml.Integer" />
+                </parameters>
+              </operation>
+              <operation id="ofdb79a8d61504995bc20b96c863333f5778" cid="ELEM180" name="changeDefencePoint" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pdaaf217c5bb64fbc8f478c3660efcc1d" name="defencePoint" type="Integer" type-id="Uml.Integer" />
+                </parameters>
+              </operation>
+            </operations>
+          </item>
+          <item id="di896194335594589178" cid="GNR014" type="generalization" name="" style-class="" visibility="package" change-tracking-state="added" creation-date="04/15/2021 12:15:51" from="di972588915479128009" to="di610294252440657288">
+            <style class="default" />
+          </item>
+        </abstract-items>
+        <layer name="Default" visible="true" enabled="true" locked="false">
+          <item id="di610294252440657288" iid="2e7183cd18f6462ab60938147ce0292f" creation-date="04/11/2021 19:59:05" order-index="4" type="entity">
+            <layout ax="429.4324" ay="26.70258" awidth="514" aheight="477" x="429.4324" y="26.70258" width="514" height="477" />
+            <class />
+          </item>
+          <item id="di972588915479128009" iid="824a1cdea3034feeaaf1d2d263019498" creation-date="04/15/2021 12:04:11" order-index="5" type="entity">
+            <layout ax="407.4324" ay="630" awidth="558" aheight="397" x="407.4324" y="630" width="558" height="397" />
+            <class />
+          </item>
+          <item id="di184793736226741479" iid="0ac53148510f420bbc0eaca1bf1d9520" creation-date="04/15/2021 12:09:45" order-index="6" type="entity">
+            <layout ax="169.4324" ay="591" awidth="140" aheight="100" x="169.4324" y="591" width="140" height="100" />
+          </item>
+          <item id="di125558553570506342" iid="011f307e3447457d8f6a593f3cf5604b" creation-date="04/15/2021 12:09:45" order-index="7" type="comment-connector">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="309" y1="670" x2="407" y2="711" start-border-pos="0.448210296630859" end-border-pos="0.948814949400779" name-position="0,0">
+              <points>
+                <point x="309" y="670" />
+                <point x="407" y="711" />
+              </points>
+            </layout>
+            <relation from="di184793736226741479" from-iid="0ac53148510f420bbc0eaca1bf1d9520" to="di972588915479128009" to-iid="824a1cdea3034feeaaf1d2d263019498" />
+          </item>
+          <item id="di896194335594589178" iid="883237c6747044a88450922fc4ff9024" creation-date="04/15/2021 12:15:51" order-index="8" type="relation">
+            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" auto-path="" x1="686" y1="630" x2="686" y2="504" start-border-pos="0.12476552437805" end-border-pos="0.62521029817455" name-position="0,0">
+              <points>
+                <point x="686" y="630" />
+                <point x="686" y="504" />
+              </points>
+            </layout>
+            <relation from="di972588915479128009" from-iid="824a1cdea3034feeaaf1d2d263019498" to="di610294252440657288" to-iid="2e7183cd18f6462ab60938147ce0292f" />
+          </item>
+          <item id="di505529513346092047" iid="5e74eea2076b4139bf784fe3aef62c20" creation-date="04/15/2021 12:27:13" order-index="9" type="entity">
+            <layout ax="179.4324" ay="863" awidth="140" aheight="100" x="179.4324" y="863" width="140" height="100" />
+          </item>
+          <item id="di937477920626780008" iid="cdd22683b08f482db74f23828b2deb94" creation-date="04/15/2021 12:27:13" order-index="10" type="comment-connector">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="319" y1="899" x2="407" y2="882" start-border-pos="0.340961151123047" end-border-pos="0.841141208293156" name-position="0,0">
+              <points>
+                <point x="319" y="899" />
+                <point x="407" y="882" />
+              </points>
+            </layout>
+            <relation from="di505529513346092047" from-iid="5e74eea2076b4139bf784fe3aef62c20" to="di972588915479128009" to-iid="824a1cdea3034feeaaf1d2d263019498" />
           </item>
         </layer>
       </diagram>
