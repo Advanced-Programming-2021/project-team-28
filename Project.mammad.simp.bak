@@ -50,18 +50,18 @@
         <value>5</value>
       </counter>
       <counter>
-        <item-type type-id="" type="AbstractElementGroup" />
-        <value>153</value>
-      </counter>
-      <counter>
         <item-type type-id="package" type="UmlPackage" />
         <value>2</value>
+      </counter>
+      <counter>
+        <item-type type-id="" type="AbstractElementGroup" />
+        <value>10</value>
       </counter>
     </entity-ids>
     <diagrams>
       <counter>
         <type>SoftwareIdeasModeler.Core.Diagrams.UmlDiagrams.UmlClassDiagram</type>
-        <value>2</value>
+        <value>3</value>
       </counter>
     </diagrams>
     <fields>
@@ -132,6 +132,7 @@
       <type id="card" tid="" name="card" description="" nullable="false" />
       <type id="integer" tid="" name="integer" description="" nullable="false" />
       <type id="Class:di433766882882649382" tid="" name="CardType" description="" nullable="false" class-ref="di433766882882649382" />
+      <type id="DuelMap" tid="" name="DuelMap" description="" nullable="false" />
     </custom-types>
   </types>
   <filters />
@@ -204,7 +205,7 @@ also another static methode :
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-1215,4767" zoom="1.2">
+      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-382,676" zoom="0.3">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -1565,7 +1566,7 @@ to assign a particular Deck to a particular User?</comment>
               <operation id="oc5ced6f22cd240dfb8d20c3e94e08fec654" cid="ELEM304" name="getIsAnyMonsterSummond" type="boolean" type-id="boolean" visibility="public">
                 <style class="default" />
               </operation>
-              <operation id="oa0847745672e4451b042189abd1137ac241" cid="ELEM305" name="activateeffect" type="" type-id="" visibility="public">
+              <operation id="oa0847745672e4451b042189abd1137ac241" cid="ELEM305" name="activateEffect" type="" type-id="" visibility="public">
                 <style class="default" />
               </operation>
             </operations>
@@ -1704,7 +1705,7 @@ to assign a particular Deck to a particular User?</comment>
             <relation from="di615222011658369847" from-iid="4200c52b2784434cb9b433e7fb1cd192" to="di488863079127283805" to-iid="8d147a262d844ca1a3bfa5b7313d6d66" />
           </item>
           <item id="di556156164205265075" iid="8099592178d6422ab1586f7395507c26" creation-date="04/13/2021 08:55:55" order-index="16" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="true" lock-to-fields="false" auto-path="" x1="1555" y1="736" x2="1452" y2="571" start-border-pos="0.0817901785052479" end-border-pos="0.578828826546669" name-position="0,0">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="true" lock-to-fields="false" auto-path="" x1="1555" y1="736" x2="1452" y2="571" start-border-pos="0.08179012059713" end-border-pos="0.578828826546669" name-position="0,0">
               <points>
                 <point x="1555" y="736" />
                 <point x="1452" y="571" />
@@ -1731,7 +1732,7 @@ to assign a particular Deck to a particular User?</comment>
             <relation from="di669183290208955409" from-iid="1d07d54c697e4a71beaf0e5d2905ebc6" to="di940584286399250707" to-iid="55bc380888024a79babccdcf5c945264" />
           </item>
           <item id="di533131665824075223" iid="066ab5584ca1421daf4d897ffe312f5c" creation-date="04/13/2021 08:57:54" order-index="20" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="1490" y1="1556" x2="1613" y2="1028" start-border-pos="0.142513053450651" end-border-pos="0.640791427930799" name-position="0,0">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="1490" y1="1556" x2="1613" y2="1028" start-border-pos="0.142512931135709" end-border-pos="0.640791485838917" name-position="0,0">
               <points>
                 <point x="1490" y="1556" />
                 <point x="1613" y="1028" />
@@ -1783,7 +1784,7 @@ to assign a particular Deck to a particular User?</comment>
             <relation from="di474215860894683056" from-iid="db895edd589b45b48615ad20c79ddcaf" to="di217671348652249565" to-iid="b6a32d74ea7645ea9953f7f5cb3bcf97" />
           </item>
           <item id="di959170311903005386" iid="a7f3ef15139942aebe1f606daf6ef443" creation-date="04/13/2021 09:24:43" order-index="26" type="relation">
-            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="3055" y1="2209" x2="3033" y2="1843" start-border-pos="0.117802414938668" end-border-pos="0.620214715254934" name-position="0,0">
+            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="3055" y1="2209" x2="3033" y2="1843" start-border-pos="0.117802496427528" end-border-pos="0.62021484375" name-position="0,0">
               <points>
                 <point x="3055" y="2209" />
                 <point x="3033" y="1843" />
@@ -1792,7 +1793,7 @@ to assign a particular Deck to a particular User?</comment>
             <relation from="di575389833304456004" from-iid="68fd9b2f2f904625b46b8519358f21f9" to="di191461786364578450" to-iid="d2618544a4e84f65a7d034ebba545c1e" />
           </item>
           <item id="di602084818628614891" iid="cc085f864b3d4d4dac4ec1961fd38d1b" creation-date="04/13/2021 09:24:59" order-index="27" type="relation">
-            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="3451" y1="2525" x2="3880" y2="2470" start-border-pos="0.358585908619541" end-border-pos="0.849538936985969" name-position="0,0">
+            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="3451" y1="2525" x2="3880" y2="2470" start-border-pos="0.358585992574364" end-border-pos="0.849539266252016" name-position="0,0">
               <points>
                 <point x="3451" y="2525" />
                 <point x="3880" y="2470" />
@@ -1810,7 +1811,7 @@ to assign a particular Deck to a particular User?</comment>
             <layout ax="813.7968" ay="1626.148" awidth="375.9517" aheight="302" x="813.7968" y="1626.148" width="375.9517" height="302" />
           </item>
           <item id="di627883915849838563" iid="a23a6f788e3d4d459681a9ace118c4db" creation-date="04/13/2021 10:04:42" order-index="31" type="relation">
-            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="true" lock-to-fields="false" auto-path="" x1="2292" y1="1855" x2="1766" y2="2300" start-border-pos="0.739098468809637" end-border-pos="0.25" name-position="0,0">
+            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="true" lock-to-fields="false" auto-path="" x1="2292" y1="1855" x2="1766" y2="2300" start-border-pos="0.739098313503896" end-border-pos="0.25" name-position="0,0">
               <points>
                 <point x="2292" y="1855" />
                 <point x="1766" y="2300" />
@@ -1831,7 +1832,7 @@ to assign a particular Deck to a particular User?</comment>
             <enumeration />
           </item>
           <item id="di384817287667699758" iid="3a9052a8aa7347b7829a12ad2163e2e9" creation-date="04/15/2021 13:54:16" order-index="35" type="relation">
-            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="364" y1="2092" x2="470" y2="2186" start-border-pos="0.533181284514951" end-border-pos="0.9856689453125" name-position="0,0">
+            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="364" y1="2092" x2="470" y2="2186" start-border-pos="0.533181311379016" end-border-pos="0.985668563842773" name-position="0,0">
               <points>
                 <point x="364" y="2092" />
                 <point x="470" y="2186" />
@@ -1840,7 +1841,7 @@ to assign a particular Deck to a particular User?</comment>
             <relation from="di164860838859236586" from-iid="d428fdfb557949cf85af60de5ceb4d75" to="di561708448588461325" to-iid="6f9add9ea07a40d5a3e6bb54ff8c0074" />
           </item>
           <item id="di889662351675943078" iid="edacbc5291fb473285bd0e65dc45d160" creation-date="04/15/2021 13:54:47" order-index="36" type="relation">
-            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="114" y1="1776" x2="199" y2="1907" start-border-pos="0.532947404044015" end-border-pos="0.0717090552961323" name-position="0,0">
+            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="114" y1="1776" x2="199" y2="1907" start-border-pos="0.532947404044015" end-border-pos="0.0717090217160507" name-position="0,0">
               <points>
                 <point x="114" y="1776" />
                 <point x="199" y="1907" />
@@ -2122,6 +2123,234 @@ to assign a particular Deck to a particular User?</comment>
               </points>
             </layout>
             <relation from="di505529513346092047" from-iid="5e74eea2076b4139bf784fe3aef62c20" to="di972588915479128009" to-iid="824a1cdea3034feeaaf1d2d263019498" />
+          </item>
+        </layer>
+      </diagram>
+      <diagram type="uml-class" id="p1f46f851fb3f4d79931a22784f3c5eda_773112302" name="View" order-index="3" overview-order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false">
+        <style>
+          <background-color index="1" color="#FFFFFFFF" />
+          <background-color index="2" color="#FFFFFFFF" />
+          <background-type type="solid" />
+        </style>
+        <meta>
+          <authors>
+            <author> </author>
+          </authors>
+          <description />
+          <creation-date>04/16/2021 21:23:41</creation-date>
+          <change-date>04/16/2021 21:23:47</change-date>
+          <revision-count>0</revision-count>
+          <version />
+        </meta>
+        <abstract-items>
+          <item id="di256386934757699650" cid="C001" type="class" name="DuelView" style-class="" visibility="package" change-tracking-state="added" creation-date="04/16/2021 20:07:38">
+            <style class="default" />
+            <operations>
+              <operation id="o3db4e41c97cb4325a430e004cf836967288" cid="ELEM001" name="invalidSelection" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o033e8c2b43834d17a34e2750d2e96049941" cid="ELEM002" name="cardSelected" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o62307b280ce74d45a3d3cf46af44d02078" cid="ELEM003" name="noCardInPosition" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o3bb699e118834530ac083ee3e8ccc0eb375" cid="ELEM004" name="noCardDeselected" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="oabe3c462e61540f0883315250cdf88a3518" cid="ELEM005" name="addCardToHand" type="" type-id="" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p9af9bccec2f5496f9910f90fdc3b3781" name="cardName" type="String" type-id="Uml.String" />
+                </parameters>
+              </operation>
+              <operation id="obbf071dc875740438e2f0cb8dadab5f0675" cid="ELEM006" name="turnChanged" type="" type-id="" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p653814cfdd624a6ba4be95ed76b24d92" name="nextPlayerNickName" type="String" type-id="Uml.String" />
+                </parameters>
+              </operation>
+              <operation id="oce040d3a21b54c179bd291de6155ffae835" cid="ELEM007" name="noCardSelected" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o2f93148dc3134653889b923e0f2a4ecd58" cid="ELEM008" name="canNotSummon" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o5ded598ce5de448db63f4efcf20e0f0e227" cid="ELEM009" name="actionNotAllowedInPhase" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="oe211154f718c4c9a83825f5373bb62e5564" cid="ELEM010" name="monsterCardZoneIsFull" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o196f1178e0024917ac7038764c4eeac0699" cid="ELEM011" name="alreadySummonedOrSet" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o10aa1dc731af44e48a2c4a7cebfb6386862" cid="ELEM012" name="summonedSuccessFully" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o6a82966d60794de985254433b9aecfca681" cid="ELEM013" name="notEnoughCardsForTribute" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o3a8bcb37f32241f78d8754bba425303e885" cid="ELEM014" name="noMonstersOnAddress" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="od0821fc5d4454defa849be7157db7f7814" cid="ELEM015" name="noMonstersOnOneOfAddresses" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o961e547bb0f74be2ac1788864f271ada431" cid="ELEM016" name="summonedSuccessfully" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="odda4beb7a6b14d4d9089a5b2d751b118574" cid="ELEM017" name="canNotSet" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="oa32dabb8154a44a594652053b7a79ebc752" cid="ELEM018" name="setSuccessfully" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="ob163918012e34ecc8d68a50c70a4b37b914" cid="ELEM019" name="canNotChangeCardPosition" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o94c291e53558411fac0b0678551d452b64" cid="ELEM020" name="alreadyInWantedPosition" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o5136bcf146b14095afd4b4da74a059ad765" cid="ELEM021" name="alreadyChangedInTurn" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o66f45f0f7a21492dbe6a05a5ec107ca7824" cid="ELEM022" name="monsterPositionChanged" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o859753d902ae40329bb95255d8c9ce342" cid="ELEM023" name="canNotFlipSummon" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="od867e37e4aa94c2ab22bd57305b2e745197" cid="ELEM024" name="flipSummonedSuccessfully" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="odb752b93380f49b3b9606103320d11b1361" cid="ELEM025" name="canNotAattackWithCard" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o6d4bd9caab1e4c088083d2f73f3107ae517" cid="ELEM026" name="cardAlreadyAttacked" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="oad0ef3516efe4c2d8632cf4f6cd68dab871" cid="ELEM027" name="noCardToAttack" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="oddce71017e9944b9abc56442046ca8ec49" cid="ELEM028" name="opponentOffensiveMonsterDestroyed" type="" type-id="" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pfa08d10854c8471eabcf8385078c6745" name="damage" type="Integer" type-id="Uml.Integer" />
+                </parameters>
+              </operation>
+              <operation id="o0b97153e35134e329aa327bac2e8dce6190" cid="ELEM029" name="bothCardsDestroyedInAttackingToOffensiveMonster" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="od9f76f3326bc48c4843e7918b7eb287c395" cid="ELEM030" name="yourCardDestroyedByAttackingToOffensiveMonster" type="Integer" type-id="Uml.Integer" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p5d546791b6e7488ea8591307e88c8d20" name="damage" type="Integer" type-id="Uml.Integer" />
+                </parameters>
+              </operation>
+              <operation id="ofe3f36312f274b2ca805d8168833e595996" cid="ELEM031" name="defensePositionMonsterDestroyed" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="ob48e301d56fe4a0188302b353bd16896186" cid="ELEM032" name="noCardDestroyedInAttackingToDefensiveOccupiedCard" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o49eff26bf6104a389771194e81da01de369" cid="ELEM033" name="noCardDestroyedAndYouReceivedDamage" type="" type-id="" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p2095ef2605ea474180cba04c48985cca" name="damage" type="Integer" type-id="Uml.Integer" />
+                </parameters>
+              </operation>
+              <operation id="oacfccdc40091483ea3def724125672f9533" cid="ELEM034" name="noCardDestroyedInAttackingToDefensiveHiddenCard" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o9445906b1316481caab812cb131c116f715" cid="ELEM035" name="receivedDamageInDirectAttack" type="" type-id="" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p445f900f9ce14e12b8d12677c7d50a39" name="damage" type="Integer" type-id="Uml.Integer" />
+                </parameters>
+              </operation>
+              <operation id="o6564620fb1f649039fabe315a36770fe886" cid="ELEM036" name="activateEffectIsForSpellCards" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o1719f068e15944d19c98c8784a733e7e21" cid="ELEM037" name="canNotActivateInThisTurn" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o19a7e2ce21e549c2937ec241a8e5e190219" cid="ELEM038" name="alreadyActivatedThisCard" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="obe002c03f80b49ad81f14dcbe216bf35185" cid="ELEM039" name="spellCardZoneIsFull" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="obf45466d447245e18a7209aa3ff58800349" cid="ELEM040" name="preparationsAreNotDoneForSpell" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o0ba170ce4d8f455cacdfbb357a5ae6e4526" cid="ELEM041" name="spellActivated" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o85639b718fdb4279903c6c430dfea2c279" cid="ELEM042" name="showBoardAndChangeTurnAlertAfterSpell" type="" type-id="" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p4c07c50cc3674806a49704f00c303f37" name="player" type="Player" type-id="Player" />
+                  <parameter id="pcc947e0c182d45349f598cef385e00e0" name="turn" type="Turn" type-id="Turn" />
+                  <parameter id="p81944fd11f9843efa7985e50e0e0e750" name="duelMap" type="DuelMap" type-id="DuelMap" />
+                </parameters>
+              </operation>
+              <operation id="of4cf498903ac4d03b749b50f5b86692a938" cid="ELEM043" name="doYouWantToActiveSpellOrTrap" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="od88cf9b76d68455e8a88ad1fbb87f2ce180" cid="ELEM044" name="notYourTurnToPlayThisKindOfMoves" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o24e9c4e80c494931a2fe9bd4e9f612db75" cid="ELEM045" name="spellOrTrapActivated" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o99dc2d94e13a47309848b965bbc19924305" cid="ELEM046" name="noWayToRitualSummon" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="oe4db6a9f731b4799897eb38ca00a948c456" cid="ELEM047" name="shouldRitualSummonNow" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o8c3d0143b4f545eaa444adf4091ecb67761" cid="ELEM048" name="selectedMonstersDoesNotMatchWithRitual" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o1899ff01718d41568601df47e86dc04c168" cid="ELEM049" name="noWayToSpecialSummon" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o38b1e6226fad4baa89f1f0a0dcbd440b868" cid="ELEM050" name="shouldSpecialSummonNow" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o5f3ee2608e694534a3a9208cd3af5d9b54" cid="ELEM051" name="showGraveYard" type="" type-id="" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pbb53dddb73a44194ae23ca047319f2ff" name="graveYardArrayListToString" type="String" type-id="Uml.String" />
+                </parameters>
+              </operation>
+              <operation id="of000bdf2934846c79a7dc448be06247c267" cid="ELEM052" name="graveYardEmpty" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="od15cca19ae6b47778883561c9ac16ae5456" cid="ELEM053" name="userWonTheGame" type="" type-id="" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pf4b05d78780048ceb77460aaa7ee9c63" name="username" type="String" type-id="Uml.String" />
+                  <parameter id="p7a770c42cb1744fea7588fcd430563ab" name="firstScore" type="Integer" type-id="Uml.Integer" />
+                  <parameter id="paaa79f9ba92d4c1a8ae0562d120ab100" name="secondScore" type="Integer" type-id="Uml.Integer" />
+                </parameters>
+              </operation>
+              <operation id="o4f008a93a3134109ad3d0d16f8928f4e23" cid="ELEM054" name="userWonWholeGame" type="" type-id="" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p85f7c09119de4e31b98f39bd3a87c3cb" name="username" type="String" type-id="Uml.String" />
+                  <parameter id="p7d6899f0052f4efd92d98776a69b767f" name="firstScore" type="Integer" type-id="Uml.Integer" />
+                  <parameter id="p95158fc8f0804c28bd5c073cc3f37bf0" name="secondScore" type="Integer" type-id="Uml.Integer" />
+                </parameters>
+              </operation>
+            </operations>
+          </item>
+        </abstract-items>
+        <layer name="Default" visible="true" enabled="true" locked="false">
+          <item id="di256386934757699650" iid="e8ab55fc859541ab9434032e1f481a55" creation-date="04/16/2021 20:07:38" order-index="0" type="entity">
+            <layout ax="272" ay="164" awidth="518" aheight="1260" x="272" y="164" width="518" height="1260" />
+            <class />
           </item>
         </layer>
       </diagram>

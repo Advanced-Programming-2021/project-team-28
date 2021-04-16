@@ -43,7 +43,7 @@
       </counter>
       <counter>
         <item-type type-id="" type="AbstractElementGroup" />
-        <value>79</value>
+        <value>77</value>
       </counter>
     </entity-ids>
     <diagrams>
@@ -1173,7 +1173,7 @@ to assign a particular Deck to a particular User?</comment>
           </item>
         </layer>
       </diagram>
-      <diagram type="uml-class" id="pba982e15f1e74bf2bb46a5585ebbf2d5_833691393" name="ClassDiagram2" order-index="2" overview-order-index="0" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-128,257" zoom="0.8">
+      <diagram type="uml-class" id="pba982e15f1e74bf2bb46a5585ebbf2d5_833691393" name="ClassDiagram2" order-index="2" overview-order-index="0" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="70,977" zoom="0.8">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -1586,7 +1586,7 @@ to assign a particular Deck to a particular User?</comment>
           </item>
         </layer>
       </diagram>
-      <diagram type="uml-class" id="p1740e63fe9014b0a87d025e490167ded_841074780" name="ClassDiagram3" order-index="3" overview-order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="811,1455" zoom="0.7">
+      <diagram type="uml-class" id="p1740e63fe9014b0a87d025e490167ded_841074780" name="ClassDiagram3" order-index="3" overview-order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="177,1260" zoom="0.6">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -1598,7 +1598,7 @@ to assign a particular Deck to a particular User?</comment>
           </authors>
           <description />
           <creation-date>04/16/2021 21:30:49</creation-date>
-          <change-date>04/16/2021 23:21:55</change-date>
+          <change-date>04/16/2021 23:15:15</change-date>
           <revision-count>0</revision-count>
           <version />
         </meta>
@@ -2327,6 +2327,33 @@ to assign a particular Deck to a particular User?</comment>
               </operation>
             </operations>
           </item>
+          <item id="di873371224540518215" cid="C029" type="class" name="DrawPhase" style-class="" visibility="package" change-tracking-state="added" creation-date="04/16/2021 14:30:37">
+            <style class="default" />
+            <attributes>
+              <attribute id="a7d13d6e638614724a9e91a194ac03fe6399" cid="ELEM276" name="turnsPlayed" type="Integer" type-id="Uml.Integer" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="ae1c28af6728d4bf59de97144416d270a81" cid="ELEM279" name="isAbleToDrawCard" type="boolean" type-id="boolean" visibility="private">
+                <style class="default" />
+              </attribute>
+            </attributes>
+            <operations>
+              <operation id="o40e0e3420f3f4fefa25e1e79f62603e1960" cid="ELEM270" name="addCardToHands" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p06d5426fe28c47a193a2cfb95b0dd9e9" name="turn" type="Turn" type-id="Turn" />
+                  <parameter id="pb413e5fa292f4cef869766c508763930" name="turnsPlayed" type="Integer" type-id="Uml.Integer" />
+                </parameters>
+              </operation>
+              <operation id="o0d8ee2e2050a45519b797f4b884967f2586" cid="ELEM277" name="isAbleToDrawCard" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p645118495e0f41a4865bc19d17428d25" name="player1" type="Player" type-id="Player" />
+                  <parameter id="p87f563d3aa4c4b9f9d8e7549ea60d0a3" name="player2" type="Player" type-id="Player" />
+                </parameters>
+              </operation>
+            </operations>
+          </item>
           <item id="di942716565959620677" cid="C032" type="class" name="Phase" style-class="" is-abstract="true" visibility="package" change-tracking-state="added" creation-date="04/16/2021 15:13:40">
             <style class="default" />
             <attributes>
@@ -2418,6 +2445,10 @@ to assign a particular Deck to a particular User?</comment>
             <layout ax="626.8602" ay="1722.401" awidth="527" aheight="349" x="626.8602" y="1722.401" width="527" height="349" />
             <class />
           </item>
+          <item id="di873371224540518215" iid="2d75d08e757c41fb879bc2de5ad19ee5" creation-date="04/16/2021 14:30:37" order-index="46" type="entity">
+            <layout ax="87.86023" ay="1239.731" awidth="510.5748" aheight="259" x="87.86023" y="1239.731" width="510.5748" height="259" />
+            <class />
+          </item>
           <item id="di942716565959620677" iid="4ecf3553bc064e26b933a41497491bc6" creation-date="04/16/2021 15:13:40" order-index="48" type="entity">
             <layout ax="682.5291" ay="1241.061" awidth="415" aheight="160" x="682.5291" y="1241.061" width="415" height="160" />
             <class />
@@ -2428,6 +2459,10 @@ to assign a particular Deck to a particular User?</comment>
           </item>
           <item id="di848297221764517282" iid="ac5517ded9be410d97a80694c6b40334" creation-date="04/16/2021 21:53:51" order-index="50" type="entity">
             <layout ax="626.8602" ay="2444" awidth="527" aheight="185" x="626.8602" y="2444" width="527" height="185" />
+            <class />
+          </item>
+          <item id="di632476756895226401" iid="492180d8451743188db7e073b3e2ced0" creation-date="04/16/2021 21:53:54" order-index="51" type="entity">
+            <layout ax="428" ay="1551.316" awidth="140" aheight="160" x="428" y="1551.316" width="140" height="160" />
             <class />
           </item>
           <item id="di698240600938868552" iid="7685b18b053247ce815d268b17572b5e" creation-date="04/16/2021 21:56:27" order-index="52" type="entity">
