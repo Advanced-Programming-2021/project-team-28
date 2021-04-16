@@ -51,7 +51,7 @@
       </counter>
       <counter>
         <item-type type-id="" type="AbstractElementGroup" />
-        <value>136</value>
+        <value>153</value>
       </counter>
       <counter>
         <item-type type-id="package" type="UmlPackage" />
@@ -67,11 +67,11 @@
     <fields>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.AttributeField</type>
-        <value>299</value>
+        <value>304</value>
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.OperationField</type>
-        <value>300</value>
+        <value>306</value>
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.EnumerationItemField</type>
@@ -204,7 +204,7 @@ also another static methode :
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-955,3799">
+      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-1215,4767" zoom="1.2">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -1501,6 +1501,14 @@ to assign a particular Deck to a particular User?</comment>
           </item>
           <item id="di679513902207649579" cid="C030" type="class" name="MainPhase1" style-class="" visibility="package" change-tracking-state="added" creation-date="04/16/2021 15:12:09">
             <style class="default" />
+            <attributes>
+              <attribute id="a85f3251ba3364f9ebb83e927d8c46c69586" cid="ELEM302" name="isAnyCardSummond" type="boolean" type-id="boolean" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="a6d1690949c9c427daa900e750b551758560" cid="ELEM303" name="selectedCard" type="Card" type-id="Class:di372252256330697407" visibility="private">
+                <style class="default" />
+              </attribute>
+            </attributes>
             <operations>
               <operation id="ode48621998d440f98a1613840b3a656d697" cid="ELEM292" name="setCard" type="void" type-id="void" visibility="public">
                 <style class="default" />
@@ -1536,13 +1544,28 @@ to assign a particular Deck to a particular User?</comment>
                   <parameter id="p3b12609d89b945f2ba603076e36c2335" name="card" type="Card" type-id="Class:di372252256330697407" />
                 </parameters>
               </operation>
-              <operation id="o9951b807dd0a4761a7552c2c6569745f425" cid="ELEM297" name="flipSummon" type="" type-id="" visibility="public">
+              <operation id="o9951b807dd0a4761a7552c2c6569745f425" cid="ELEM297" name="flipSummon" type="void" type-id="void" visibility="public">
                 <style class="default" />
                 <parameters>
                   <parameter id="pe894de5b305340ec9e0afc9a3fa003a5" name="location" type="integer" type-id="integer" />
                 </parameters>
               </operation>
-              <operation id="oa8eea9ace7894a608e8913b179f9a1a9164" cid="ELEM299" name="NewOperation7" type="" type-id="" visibility="public">
+              <operation id="oa8eea9ace7894a608e8913b179f9a1a9164" cid="ELEM299" name="changePositin" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pf2ea0203ef1b46f9b83a1d2e49e069b4" name="location" type="integer" type-id="integer" />
+                </parameters>
+              </operation>
+              <operation id="o1298eb674c194899aabc8c4df27fd023421" cid="ELEM301" name="activateSpell" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pc9b0babc36b2406fbcd65b836746aba3" name="location" type="integer" type-id="integer" />
+                </parameters>
+              </operation>
+              <operation id="oc5ced6f22cd240dfb8d20c3e94e08fec654" cid="ELEM304" name="getIsAnyMonsterSummond" type="boolean" type-id="boolean" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="oa0847745672e4451b042189abd1137ac241" cid="ELEM305" name="activateeffect" type="" type-id="" visibility="public">
                 <style class="default" />
               </operation>
             </operations>
@@ -1870,7 +1893,7 @@ to assign a particular Deck to a particular User?</comment>
             <class />
           </item>
           <item id="di679513902207649579" iid="c9ad525d332043bd9c5a6eb00b4fb2df" creation-date="04/16/2021 15:12:09" order-index="47" type="entity">
-            <layout ax="-660.6731" ay="3366.096" awidth="527" aheight="199" x="-660.6731" y="3366.096" width="527" height="199" />
+            <layout ax="-660.6731" ay="3366.096" awidth="527" aheight="264" x="-660.6731" y="3366.096" width="527" height="264" />
             <class />
           </item>
           <item id="di873371224540518215" iid="bbcb9bcab85141a88ef212f515ef1f42" creation-date="04/16/2021 14:30:37" order-index="46" type="entity">

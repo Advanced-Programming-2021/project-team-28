@@ -50,12 +50,12 @@
         <value>5</value>
       </counter>
       <counter>
-        <item-type type-id="" type="AbstractElementGroup" />
-        <value>136</value>
-      </counter>
-      <counter>
         <item-type type-id="package" type="UmlPackage" />
         <value>2</value>
+      </counter>
+      <counter>
+        <item-type type-id="" type="AbstractElementGroup" />
+        <value>3</value>
       </counter>
     </entity-ids>
     <diagrams>
@@ -67,11 +67,11 @@
     <fields>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.AttributeField</type>
-        <value>301</value>
+        <value>304</value>
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.OperationField</type>
-        <value>302</value>
+        <value>306</value>
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.EnumerationItemField</type>
@@ -204,7 +204,7 @@ also another static methode :
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-1082,3799">
+      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-1216,4767" zoom="1.2">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -1501,6 +1501,14 @@ to assign a particular Deck to a particular User?</comment>
           </item>
           <item id="di679513902207649579" cid="C030" type="class" name="MainPhase1" style-class="" visibility="package" change-tracking-state="added" creation-date="04/16/2021 15:12:09">
             <style class="default" />
+            <attributes>
+              <attribute id="a85f3251ba3364f9ebb83e927d8c46c69586" cid="ELEM302" name="isAnyCardSummond" type="boolean" type-id="boolean" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="a6d1690949c9c427daa900e750b551758560" cid="ELEM303" name="selectedCard" type="Card" type-id="Class:di372252256330697407" visibility="private">
+                <style class="default" />
+              </attribute>
+            </attributes>
             <operations>
               <operation id="ode48621998d440f98a1613840b3a656d697" cid="ELEM292" name="setCard" type="void" type-id="void" visibility="public">
                 <style class="default" />
@@ -1553,6 +1561,12 @@ to assign a particular Deck to a particular User?</comment>
                 <parameters>
                   <parameter id="pc9b0babc36b2406fbcd65b836746aba3" name="location" type="integer" type-id="integer" />
                 </parameters>
+              </operation>
+              <operation id="oc5ced6f22cd240dfb8d20c3e94e08fec654" cid="ELEM304" name="getIsAnyMonsterSummond" type="boolean" type-id="boolean" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="oa0847745672e4451b042189abd1137ac241" cid="ELEM305" name="activateEffect" type="" type-id="" visibility="public">
+                <style class="default" />
               </operation>
             </operations>
           </item>
@@ -1690,7 +1704,7 @@ to assign a particular Deck to a particular User?</comment>
             <relation from="di615222011658369847" from-iid="4200c52b2784434cb9b433e7fb1cd192" to="di488863079127283805" to-iid="8d147a262d844ca1a3bfa5b7313d6d66" />
           </item>
           <item id="di556156164205265075" iid="8099592178d6422ab1586f7395507c26" creation-date="04/13/2021 08:55:55" order-index="16" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="true" lock-to-fields="false" auto-path="" x1="1555" y1="736" x2="1452" y2="571" start-border-pos="0.0817901785052479" end-border-pos="0.578828826546669" name-position="0,0">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="true" lock-to-fields="false" auto-path="" x1="1555" y1="736" x2="1452" y2="571" start-border-pos="0.08179012059713" end-border-pos="0.578828826546669" name-position="0,0">
               <points>
                 <point x="1555" y="736" />
                 <point x="1452" y="571" />
@@ -1717,7 +1731,7 @@ to assign a particular Deck to a particular User?</comment>
             <relation from="di669183290208955409" from-iid="1d07d54c697e4a71beaf0e5d2905ebc6" to="di940584286399250707" to-iid="55bc380888024a79babccdcf5c945264" />
           </item>
           <item id="di533131665824075223" iid="066ab5584ca1421daf4d897ffe312f5c" creation-date="04/13/2021 08:57:54" order-index="20" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="1490" y1="1556" x2="1613" y2="1028" start-border-pos="0.142513053450651" end-border-pos="0.640791427930799" name-position="0,0">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="1490" y1="1556" x2="1613" y2="1028" start-border-pos="0.142512931135709" end-border-pos="0.640791485838917" name-position="0,0">
               <points>
                 <point x="1490" y="1556" />
                 <point x="1613" y="1028" />
@@ -1769,7 +1783,7 @@ to assign a particular Deck to a particular User?</comment>
             <relation from="di474215860894683056" from-iid="db895edd589b45b48615ad20c79ddcaf" to="di217671348652249565" to-iid="b6a32d74ea7645ea9953f7f5cb3bcf97" />
           </item>
           <item id="di959170311903005386" iid="a7f3ef15139942aebe1f606daf6ef443" creation-date="04/13/2021 09:24:43" order-index="26" type="relation">
-            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="3055" y1="2209" x2="3033" y2="1843" start-border-pos="0.117802414938668" end-border-pos="0.620214715254934" name-position="0,0">
+            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="3055" y1="2209" x2="3033" y2="1843" start-border-pos="0.117802496427528" end-border-pos="0.62021484375" name-position="0,0">
               <points>
                 <point x="3055" y="2209" />
                 <point x="3033" y="1843" />
@@ -1778,7 +1792,7 @@ to assign a particular Deck to a particular User?</comment>
             <relation from="di575389833304456004" from-iid="68fd9b2f2f904625b46b8519358f21f9" to="di191461786364578450" to-iid="d2618544a4e84f65a7d034ebba545c1e" />
           </item>
           <item id="di602084818628614891" iid="cc085f864b3d4d4dac4ec1961fd38d1b" creation-date="04/13/2021 09:24:59" order-index="27" type="relation">
-            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="3451" y1="2525" x2="3880" y2="2470" start-border-pos="0.358585908619541" end-border-pos="0.849538936985969" name-position="0,0">
+            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="3451" y1="2525" x2="3880" y2="2470" start-border-pos="0.358585992574364" end-border-pos="0.849539266252016" name-position="0,0">
               <points>
                 <point x="3451" y="2525" />
                 <point x="3880" y="2470" />
@@ -1796,7 +1810,7 @@ to assign a particular Deck to a particular User?</comment>
             <layout ax="813.7968" ay="1626.148" awidth="375.9517" aheight="302" x="813.7968" y="1626.148" width="375.9517" height="302" />
           </item>
           <item id="di627883915849838563" iid="a23a6f788e3d4d459681a9ace118c4db" creation-date="04/13/2021 10:04:42" order-index="31" type="relation">
-            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="true" lock-to-fields="false" auto-path="" x1="2292" y1="1855" x2="1766" y2="2300" start-border-pos="0.739098468809637" end-border-pos="0.25" name-position="0,0">
+            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="true" lock-to-fields="false" auto-path="" x1="2292" y1="1855" x2="1766" y2="2300" start-border-pos="0.739098313503896" end-border-pos="0.25" name-position="0,0">
               <points>
                 <point x="2292" y="1855" />
                 <point x="1766" y="2300" />
@@ -1817,7 +1831,7 @@ to assign a particular Deck to a particular User?</comment>
             <enumeration />
           </item>
           <item id="di384817287667699758" iid="3a9052a8aa7347b7829a12ad2163e2e9" creation-date="04/15/2021 13:54:16" order-index="35" type="relation">
-            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="364" y1="2092" x2="470" y2="2186" start-border-pos="0.533181284514951" end-border-pos="0.9856689453125" name-position="0,0">
+            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="364" y1="2092" x2="470" y2="2186" start-border-pos="0.533181311379016" end-border-pos="0.985668563842773" name-position="0,0">
               <points>
                 <point x="364" y="2092" />
                 <point x="470" y="2186" />
@@ -1826,7 +1840,7 @@ to assign a particular Deck to a particular User?</comment>
             <relation from="di164860838859236586" from-iid="d428fdfb557949cf85af60de5ceb4d75" to="di561708448588461325" to-iid="6f9add9ea07a40d5a3e6bb54ff8c0074" />
           </item>
           <item id="di889662351675943078" iid="edacbc5291fb473285bd0e65dc45d160" creation-date="04/15/2021 13:54:47" order-index="36" type="relation">
-            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="114" y1="1776" x2="199" y2="1907" start-border-pos="0.532947404044015" end-border-pos="0.0717090552961323" name-position="0,0">
+            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="114" y1="1776" x2="199" y2="1907" start-border-pos="0.532947404044015" end-border-pos="0.0717090217160507" name-position="0,0">
               <points>
                 <point x="114" y="1776" />
                 <point x="199" y="1907" />
@@ -1879,7 +1893,7 @@ to assign a particular Deck to a particular User?</comment>
             <class />
           </item>
           <item id="di679513902207649579" iid="c9ad525d332043bd9c5a6eb00b4fb2df" creation-date="04/16/2021 15:12:09" order-index="47" type="entity">
-            <layout ax="-660.6731" ay="3366.096" awidth="527" aheight="199" x="-660.6731" y="3366.096" width="527" height="199" />
+            <layout ax="-660.6731" ay="3366.096" awidth="527" aheight="264" x="-660.6731" y="3366.096" width="527" height="264" />
             <class />
           </item>
           <item id="di873371224540518215" iid="bbcb9bcab85141a88ef212f515ef1f42" creation-date="04/16/2021 14:30:37" order-index="46" type="entity">
