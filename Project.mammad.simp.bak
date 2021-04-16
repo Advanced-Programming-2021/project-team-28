@@ -31,7 +31,7 @@
       </counter>
       <counter>
         <item-type type-id="comment" type="UmlComment" />
-        <value>11</value>
+        <value>10</value>
       </counter>
       <counter>
         <item-type type-id="comment-connector" type="UmlCommentConnector" />
@@ -43,7 +43,7 @@
       </counter>
       <counter>
         <item-type type-id="" type="AbstractElementGroup" />
-        <value>85</value>
+        <value>75</value>
       </counter>
     </entity-ids>
     <diagrams>
@@ -55,11 +55,11 @@
     <fields>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.AttributeField</type>
-        <value>260</value>
+        <value>253</value>
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.OperationField</type>
-        <value>257</value>
+        <value>255</value>
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.EnumerationItemField</type>
@@ -188,7 +188,7 @@ also another static methode :
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="867,3339" zoom="1.2">
+      <diagram type="uml-class" id="pc621ac1be73143a08a3b29ed2145555a_259566071" name="ClassDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="504,2078" zoom="0.8">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -200,7 +200,7 @@ also another static methode :
           </authors>
           <description />
           <creation-date>04/09/2021 22:17:30</creation-date>
-          <change-date>04/16/2021 13:32:51</change-date>
+          <change-date>04/16/2021 13:17:21</change-date>
           <revision-count>0</revision-count>
           <version />
         </meta>
@@ -1134,6 +1134,9 @@ to assign a particular Deck to a particular User?</comment>
               <attribute id="a913d3efc8ee94802a5052b9773009d10311" cid="ELEM195" name="lifePoint" type="Integer" type-id="Uml.Integer" visibility="private">
                 <style class="default" />
               </attribute>
+              <attribute id="a36b22287f3b544c7832129dad6ed202b377" cid="ELEM196" name="duelMap" type="Map" type-id="Map" visibility="private">
+                <style class="default" />
+              </attribute>
               <attribute id="a1dbe1f95dfdf4299b91f5797fbcb2d21997" cid="ELEM197" name="monsterCardsInZone" type="HashMap&lt;Integer, MonsterCard&gt;" type-id="HashMap&lt;Integer, MonsterCard&gt;" visibility="private">
                 <style class="default" />
               </attribute>
@@ -1150,15 +1153,6 @@ to assign a particular Deck to a particular User?</comment>
                 <style class="default" />
               </attribute>
               <attribute id="a12a580c2dd9d45fabffe2e180620e278807" cid="ELEM243" name="numberOfRoundsWon" type="Integer" type-id="Uml.Integer" visibility="private">
-                <style class="default" />
-              </attribute>
-              <attribute id="a83decddd69894a7ba6abce9a0c4b6c16617" cid="ELEM257" name="activeDeck" type="ArrayList &lt;Card&gt;" type-id="ArrayList &lt;Card&gt;" visibility="private">
-                <style class="default" />
-              </attribute>
-              <attribute id="a50fd8c116e294b77b7523f13c0926010477" cid="ELEM258" name="playingDeck" type="ArrayList &lt;Card&gt;" type-id="ArrayList &lt;Card&gt;" visibility="private">
-                <style class="default" />
-              </attribute>
-              <attribute id="af48f4ea9075c497eae5c08874b769408800" cid="ELEM259" name="sideDeck" type="ArrayList &lt;Card&gt;" type-id="ArrayList &lt;Card&gt;" visibility="private">
                 <style class="default" />
               </attribute>
             </attributes>
@@ -1192,6 +1186,9 @@ to assign a particular Deck to a particular User?</comment>
                 <parameters>
                   <parameter id="p0e46ec1067b84b53a2c4b4b302bc8a90" name="amount" type="Integer" type-id="Uml.Integer" />
                 </parameters>
+              </operation>
+              <operation id="o135ac051a76f4a2a94e5cb49f80392e6907" cid="ELEM207" name="getDuelMap" type="Map" type-id="Map" visibility="public">
+                <style class="default" />
               </operation>
               <operation id="o94f131bf451e4d8e880b9c902ea68461299" cid="ELEM209" name="getMonsterCardsInZone" type="HashMap&lt;Integer, MonsterCard&gt;" type-id="HashMap&lt;Integer, MonsterCard&gt;" visibility="public">
                 <style class="default" />
@@ -1331,9 +1328,6 @@ to assign a particular Deck to a particular User?</comment>
               <attribute id="a176dd324190d4726bcedc0441ce439d228" cid="ELEM242" name="numberOfRounds" type="NumberOfRounds" type-id="NumberOfRounds" visibility="private">
                 <style class="default" />
               </attribute>
-              <attribute id="a36e3823379cf468fa24dad1def50a147825" cid="ELEM255" name="duelMap" type="Map" type-id="Map" visibility="private">
-                <style class="default" />
-              </attribute>
             </attributes>
             <operations>
               <operation id="oeacc1c572a0d46f9a571c860503986e8561" cid="ELEM237" name="Game" type="&lt;&lt;constructor&gt;&gt;" type-id="&lt;&lt;constructor&gt;&gt;" visibility="public">
@@ -1353,9 +1347,6 @@ to assign a particular Deck to a particular User?</comment>
                 <parameters>
                   <parameter id="pbe59634feeb846e9b249a9713cb2fd91" name="" type="" type-id="" />
                 </parameters>
-              </operation>
-              <operation id="oeac64f6043a248aca9b11f2266ce7a94166" cid="ELEM256" name="getDuelMap" type="Map" type-id="Map" visibility="public">
-                <style class="default" />
               </operation>
             </operations>
           </item>
@@ -1401,10 +1392,6 @@ to assign a particular Deck to a particular User?</comment>
               <start-role id="" name="" navigability="" association-type="composition" visibility="private" />
               <end-role id="" name="" navigability="" association-type="association" visibility="private" />
             </relation>
-          </item>
-          <item id="di161178144284800637" cid="CMT010" type="comment" name="" style-class="" visibility="package" change-tracking-state="added" creation-date="04/16/2021 13:32:51">
-            <style class="default" />
-            <comment>getter and setter for activeDeck playingDeck sideDeck</comment>
           </item>
         </abstract-items>
         <layer name="Default" visible="true" enabled="true" locked="false">
@@ -1651,12 +1638,9 @@ to assign a particular Deck to a particular User?</comment>
             </layout>
             <relation from="di417469194690071456" from-iid="8d919759c3bb42519155ca22a8512085" to="di248366896613365089" to-iid="f539a4cab8184bf4980a98da651801fe" />
           </item>
-          <item id="di161178144284800637" iid="5600819814524fa083a91dfe73a631d9" creation-date="04/16/2021 13:32:51" order-index="44" type="entity">
-            <layout ax="600" ay="2351" awidth="107.5133" aheight="79" x="600" y="2351" width="107.5133" height="79" />
-          </item>
         </layer>
       </diagram>
-      <diagram type="uml-class" id="pba982e15f1e74bf2bb46a5585ebbf2d5_833691393" name="ClassDiagram2" order-index="2" overview-order-index="0" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="79,-66" zoom="0.9">
+      <diagram type="uml-class" id="pba982e15f1e74bf2bb46a5585ebbf2d5_833691393" name="ClassDiagram2" order-index="2" overview-order-index="0" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="79,277" zoom="0.9">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
