@@ -1,5 +1,7 @@
-import javax.jws.soap.SOAPBinding;
+package model;
+
 import java.util.ArrayList;
+
 
 public class User {
     private String username;
