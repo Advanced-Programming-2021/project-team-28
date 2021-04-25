@@ -10,6 +10,7 @@ public class ProfileMenuController {
 
     User user;
     ProfileMenuView view = new ProfileMenuView(this);
+    Matcher matcher ;
 
     ProfileMenuController (User user){
         this.user = user;
@@ -20,10 +21,20 @@ public class ProfileMenuController {
     }
 
     public void processCommand(String command){
-        if(command.equals("profile change nickname")){
-            Matcher matcher = getCommandMatcher(command , "profile change nickname (.+)" );
+        if(command.startsWith("profile change nickname")){
+            matcher = getCommandMatcher(command , "profile change nickname (.+)" );
             changeNickName(matcher.group(1));
         }
+        else if (command.startsWith("profile change password")){
+            matcher = getCommandMatcher(command , "^profile change password current (.+) new (.+)$");
+            if(matcher != null)
+                changePassword(matcher.group(1) , matcher.group(2));
+            else {
+                matcher = getCommandMatcher(command ,"^profile change password new (.+) current (.+)$" );
+                changePassword(matcher.group(2) , matcher.group(1));
+            }
+        }
+
     }
 
 
@@ -39,8 +50,22 @@ public class ProfileMenuController {
     }
 
     private void changeNickName (String nickname){
-        if (User.checkNicknameValidity(nickname))
+        if (User.checkNicknameValidity(nickname)) {
             user.setNickname(nickname);
+            view.nicknameChanged();
+        }
             else view.nicknameExists(nickname);
+    }
+
+    private void changePassword (String current , String alternate){
+        if(user.getPassword().equals(current)) {
+            if(current.equals(alternate)) {
+                view.passwordIsTheSame();
+                return;
+            }
+            user.setPassword(alternate);
+            view.passwordChanged();
+        }
+        else view.wrongPassword();
     }
 }

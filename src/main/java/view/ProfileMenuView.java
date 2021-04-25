@@ -27,4 +27,20 @@ public class ProfileMenuView {
     public void nicknameExists(String nickname) {
         System.out.println("user with nickname " + nickname + " already exists");
     }
+
+    public void nicknameChanged(){
+        System.out.println("nickname Changed successfully!");
+    }
+
+    public void passwordChanged(){
+        System.out.println("password Changed successfully!");
+    }
+
+    public void wrongPassword(){
+        System.out.println("current password is invalid");
+    }
+
+    public void passwordIsTheSame(){
+        System.out.println("please enter a new password");
+    }
 }
