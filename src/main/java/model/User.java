@@ -9,14 +9,13 @@ public class User {
     private String nickname;
 
 
-    private Integer score;
-    private Integer balance;
+    private int score;
+    private int balance;
 
 
-    private ArrayList <Deck> decks;
+    private ArrayList <Deck> decks = new ArrayList<>();
     private Deck activeDeck;
-    private ArrayList <Card> nonUsedCards;
-
+    private ArrayList <Card> nonUsedCards = new ArrayList<>();
 
     private static ArrayList <User> users = new ArrayList<>();
 
@@ -100,7 +99,7 @@ public class User {
 
     public static User getUserByNickName (String nickname) {
         for (int i = 0; i < users.size(); i++) {
-            if ( users.get(i).getUsername().equals(nickname)) return users.get(i);
+            if ( users.get(i).getNickname().equals(nickname)) return users.get(i);
         }
         return null;
     }
