@@ -21,7 +21,6 @@ public class MainMenuView {
 
 
     public  void run () {
-        command = scanner.nextLine();
         while (true) {
             command = scanner.nextLine();
             command = command.trim();
