@@ -1,6 +1,10 @@
+import view.LoginMenuView;
+
+
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(" I have to be p01it3");
+        LoginMenuView loginMenuView = new LoginMenuView();
+        loginMenuView.run();
     }
 }
