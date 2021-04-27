@@ -1,5 +1,7 @@
 package model;
 
+import java.util.regex.Matcher;
+
 public class MonsterCard extends Card {
     private int attackPoint;
     private int defencePoint;
@@ -9,9 +11,19 @@ public class MonsterCard extends Card {
     private int level;
     private Attribute attribute;
     private boolean hasBattledInBattlePhase;
+    private MonsterPower specialPower;
 
-    public MonsterCard(String name, String number, String description) {
+    public MonsterCard(String name, String number, String description , int attackPoint , int defencePoint , MonsterPower specialPower , int level , Attribute attribute) {
         super(name, number, description);
+        setAttackPoint(attackPoint);
+        setDefencePoint(defencePoint);
+        setSpecialPower(specialPower);
+        setLevel(level);
+        setAttribute(attribute);
+    }
+
+    public MonsterPower getSpecialPower() {
+        return specialPower;
     }
 
     public int getAttackPoint() {
@@ -77,4 +89,18 @@ public class MonsterCard extends Card {
     public void setOnSetPosition(boolean onSetPosition) {
         isOnSetPosition = onSetPosition;
     }
+
+    public void setSpecialPower(MonsterPower specialPower) {
+        this.specialPower = specialPower;
+    }
+
+    public void setAttackPoint(int attackPoint) {
+        this.attackPoint = attackPoint;
+    }
+
+    public void setDefencePoint(int defencePoint) {
+        this.defencePoint = defencePoint;
+    }
+
+
 }

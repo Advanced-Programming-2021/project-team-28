@@ -42,7 +42,7 @@ public class ProfileMenuController {
 
 
 
-    private static Matcher getCommandMatcher(String command , String regex){
+    public static Matcher getCommandMatcher(String command , String regex){
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(command);
         if (matcher.find())

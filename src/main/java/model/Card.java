@@ -7,11 +7,13 @@ public abstract class Card {
     protected String name;
     protected String number;
     protected String description;
+    public static ArrayList<Card> cards = new ArrayList<>();
 
     public Card(String name, String number, String description) {
         setName(name);
         setDescription(description);
         setNumber(number);
+        cards.add(this);
     }
 
     public static String cardsArrayListToString(ArrayList<Card> cards) {
