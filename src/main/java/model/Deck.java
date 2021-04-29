@@ -85,13 +85,11 @@ public class Deck {
     }
 
     public boolean isMainDeckFull() {
-        if (this.allCardsInMainDeck.size() == 60) return true;
-        else return false;
+        return this.allCardsInMainDeck.size() == 60;
     }
 
     public boolean isSideDeckFull() {
-        if (this.allCardsInSideDeck.size() == 15) return true;
-        else return false;
+        return this.allCardsInSideDeck.size() == 15;
     }
 
     public boolean doesDeckHaveThreeCardsFromThisTypeOfCard(String cardName) {

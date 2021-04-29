@@ -39,7 +39,7 @@ public class LoginMenuController {
     }
 
     private void controlLoginUserCommand(String username, String password) {
-        if(User.checkUsernameValidity(username) || !User.getUserByUsername(username).getPassword().equals(password)){
+        if(User.isUsernameAvailable(username) || !User.getUserByUsername(username).getPassword().equals(password)){
             loginMenuView.usernameAndPasswordDidNotMatch();
         } else {
             loginMenuView.userLoggedIn();
@@ -48,9 +48,9 @@ public class LoginMenuController {
     }
 
     private void controlCreateUserCommand(String username, String password, String nickname) {
-        if(!User.checkUsernameValidity(username)){
+        if(!User.isUsernameAvailable(username)){
             loginMenuView.usernameExists(username);
-        } else if(!User.checkNicknameValidity(nickname)){
+        } else if(!User.isNicknameAvailable(nickname)){
             loginMenuView.nicknameExists(nickname);
         } else {
             new User(username, password, nickname);

@@ -109,13 +109,13 @@ public class User {
         return getUserByUsername(username).getPassword().equals( password );
     }
 
-    public static boolean checkNicknameValidity ( String nickname){
+    public static boolean isNicknameAvailable(String nickname){
        if(getUserByNickName(nickname) == null ) return true;
        else
            return false;
     }
 
-    public static boolean checkUsernameValidity ( String username) {
+    public static boolean isUsernameAvailable(String username) {
         if (getUserByUsername(username) == null) return true;
         else
             return false;

@@ -52,7 +52,7 @@ public class ProfileMenuController {
     }
 
     private void changeNickName (String nickname){
-        if (User.checkNicknameValidity(nickname)) {
+        if (User.isNicknameAvailable(nickname)) {
             user.setNickname(nickname);
             view.nicknameChanged();
         }
