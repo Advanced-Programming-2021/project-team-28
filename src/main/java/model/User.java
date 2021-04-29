@@ -142,11 +142,13 @@ public class User {
     public String decksArrayListToString (){
         StringBuilder decksArrayListToStringBuilder = new StringBuilder();
         decksArrayListToStringBuilder.append("Decks:\nActive Deck:\n");
-        decksArrayListToStringBuilder.append(activeDeck.toString());
+        if(hasActiveDeck()){
+            decksArrayListToStringBuilder.append(activeDeck.toString());
+        }
         sortDecksArrayList();
         decksArrayListToStringBuilder.append("Other decks:\n");
         for (int i=0; i<decks.size(); i++){
-            if(!decks.get(i).equals(activeDeck)){
+            if(!hasActiveDeck() || !decks.get(i).getDeckName().equals(activeDeck.getDeckName())){
                 decksArrayListToStringBuilder.append(decks.get(i).toString());
             }
         }
@@ -161,5 +163,9 @@ public class User {
                 }
             }
         }
+    }
+
+    private boolean hasActiveDeck(){
+        return !(activeDeck == null);
     }
 }
