@@ -2,7 +2,6 @@ package controller;
 
 import model.User;
 import view.LoginMenuView;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,7 +43,7 @@ public class LoginMenuController {
             loginMenuView.usernameAndPasswordDidNotMatch();
         } else {
             loginMenuView.userLoggedIn();
-
+            new MainMenuController(User.getUserByUsername(username)).run();
         }
     }
 
@@ -70,7 +69,7 @@ public class LoginMenuController {
         Pattern patternForCreateUser6 = Pattern.compile("^user create --nickname (\\S+) --nickname (\\S+) --password (\\S+)$");
         Pattern patternForLoginUser1 = Pattern.compile("^user login --username (\\S+) --password (\\S+)$");
         Pattern patternForLoginUser2 = Pattern.compile("^user login --password (\\S+) --username (\\S+)$");
-        Pattern patternForEnterAnotherMenu = Pattern.compile("sfsdf");
+        Pattern patternForEnterAnotherMenu = Pattern.compile("^menu enter (Duel|Scoreboard|Deck|Import/Export|Shop|Profile)$");
         Matcher[] commandMatchers = new Matcher[11];
         commandMatchers[0] = patternForExit.matcher(command);
         commandMatchers[1] = patternForShowCurrentMenu.matcher(command);
