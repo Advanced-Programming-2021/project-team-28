@@ -20,38 +20,38 @@ public class Deck {
         deckToStringBuilder.append(deckName);
         deckToStringBuilder.append("\n");
         if (isSideDeck) {
+            deckToStringBuilder.append("Side deck:\n");
             deckToStringBuilder.append(Card.cardsArrayListToString(allCardsInSideDeck));
         } else {
+            deckToStringBuilder.append("Main deck:\n");
             deckToStringBuilder.append(Card.cardsArrayListToString(allCardsInMainDeck));
         }
         return deckToStringBuilder.toString();
     }
 
-    public void addCardToDeck(String cardName, boolean isForSideDeck) {
+    public void addCardToDeck(String cardName, boolean isToSideDeck) {
         for (int i = 0; i < user.getAllCards().size(); i++) {
             if (user.getAllCards().get(i).getName().equals(cardName) &&
-                    !isThisCardInDeck(user.getAllCards().get(i), isForSideDeck)) {
-                if (isForSideDeck) {
+                    !isThisCardInDeck(user.getAllCards().get(i))) {
+                if (isToSideDeck) {
                     allCardsInSideDeck.add(user.getAllCards().get(i));
                 } else {
                     allCardsInMainDeck.add(user.getAllCards().get(i));
                 }
+                return;
             }
         }
     }
 
-    private boolean isThisCardInDeck(Card card, boolean isSideDeck) {
-        if (isSideDeck) {
-            for (Card cardsInDeck : allCardsInSideDeck) {
-                if (cardsInDeck.equals(card)) {
-                    return true;
-                }
+    private boolean isThisCardInDeck(Card card) {
+        for (Card cardsInDeck : allCardsInSideDeck) {
+            if (cardsInDeck.equals(card)) {
+                return true;
             }
-        } else {
-            for (Card cardsInDeck : allCardsInMainDeck) {
-                if (cardsInDeck.equals(card)) {
-                    return true;
-                }
+        }
+        for (Card cardsInDeck : allCardsInMainDeck) {
+            if (cardsInDeck.equals(card)) {
+                return true;
             }
         }
         return false;
@@ -103,8 +103,7 @@ public class Deck {
             if (card.getName().equals(cardName)) ++numberOfThisCard;
         }
 
-        if (numberOfThisCard >= 3) return true;
-        else return false;
+        return numberOfThisCard >= 3;
     }
 
     public String toString() {
@@ -135,7 +134,32 @@ public class Deck {
         return this.allCardsInSideDeck.size();
     }
 
+    public ArrayList<Card> getAllCardsInMainDeck() {
+        return allCardsInMainDeck;
+    }
+
+    public ArrayList<Card> getAllCardsInSideDeck() {
+        return allCardsInSideDeck;
+    }
+
     public boolean isDeckValid() {
         return (allCardsInMainDeck.size() >= 40 && allCardsInMainDeck.size() <= 60 && allCardsInSideDeck.size() <= 15);
+    }
+
+    public boolean isThisCardInSideOrMainDeck (String cardName, boolean isInSideDeck){
+        if(isInSideDeck){
+            for (Card card : allCardsInSideDeck){
+                if(card.getName().equals(cardName)){
+                    return true;
+                }
+            }
+        } else {
+            for (Card card : allCardsInMainDeck){
+                if(card.getName().equals(cardName)){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

@@ -147,9 +147,9 @@ public class User {
         }
         sortDecksArrayList();
         decksArrayListToStringBuilder.append("Other decks:\n");
-        for (int i=0; i<decks.size(); i++){
-            if(!hasActiveDeck() || !decks.get(i).getDeckName().equals(activeDeck.getDeckName())){
-                decksArrayListToStringBuilder.append(decks.get(i).toString());
+        for (Deck deck : decks) {
+            if (!hasActiveDeck() || !deck.getDeckName().equals(activeDeck.getDeckName())) {
+                decksArrayListToStringBuilder.append(deck.toString());
             }
         }
         return decksArrayListToStringBuilder.toString();
@@ -167,5 +167,36 @@ public class User {
 
     private boolean hasActiveDeck(){
         return !(activeDeck == null);
+    }
+
+    public int numOfCardsWithThisName (String cardName){
+        int numOfCardsWithThisName = 0;
+        for (Card card : allCards){
+            if(card.getName().equals(cardName)){
+                numOfCardsWithThisName++;
+            }
+        }
+        return numOfCardsWithThisName;
+    }
+
+    public boolean isAmountOfThisCardEnough (Deck deck, String cardName){
+        int numOfThisTypeOfCardUserHave = 0;
+        int numOfThisTypeOfCardInDeck = 0;
+        for (Card card : allCards){
+            if(card.getName().equals(cardName)){
+                numOfThisTypeOfCardUserHave++;
+            }
+        }
+        for (Card card : deck.getAllCardsInMainDeck()){
+            if(card.getName().equals(cardName)){
+                numOfThisTypeOfCardInDeck++;
+            }
+        }
+        for (Card card : deck.getAllCardsInSideDeck()){
+            if(card.getName().equals(cardName)){
+                numOfThisTypeOfCardInDeck++;
+            }
+        }
+        return (numOfThisTypeOfCardUserHave > numOfThisTypeOfCardInDeck);
     }
 }
