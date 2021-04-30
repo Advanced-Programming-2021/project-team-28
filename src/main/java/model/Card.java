@@ -53,7 +53,7 @@ public abstract class Card {
     private static void sortCards(ArrayList<Card> cards) {
         for (int i = 0; i < cards.size(); i++) {
             for (int j = 0; j < cards.size() - 1; j++) {
-                if (cards.get(j).getName().compareTo(cards.get(j + 1).getName()) > 0) {
+                if (Utilities.compareAlphabetical(cards.get(j).getName(), cards.get(j+1).getName()) > 0) {
                     Collections.swap(cards, j, j + 1);
                 }
             }

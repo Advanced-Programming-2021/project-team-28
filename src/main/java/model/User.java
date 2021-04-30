@@ -158,7 +158,7 @@ public class User {
     private void sortDecksArrayList (){
         for (int i=0; i<decks.size(); i++){
             for (int j=0; j<decks.size() - 1; j++){
-                if(decks.get(j).getDeckName().compareTo(decks.get(j+1).getDeckName()) > 0){
+                if(Utilities.compareAlphabetical(decks.get(j).getDeckName(), decks.get(j+1).getDeckName()) > 0){
                     Collections.swap(decks, j, j+1);
                 }
             }
