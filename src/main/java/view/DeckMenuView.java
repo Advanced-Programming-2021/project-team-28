@@ -73,7 +73,7 @@ public class DeckMenuView {
     }
 
     public void cardRemovedFromDeck (){
-        System.out.println("card removed from deck successfully\n");
+        System.out.println("card removed from deck successfully");
     }
 
     public void impossibleMenuNavigation() {

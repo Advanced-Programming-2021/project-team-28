@@ -28,20 +28,20 @@ public class MainMenuController {
             return;
         } else if (command.equals("scoreboard show")) {
             //TODO : complete the functions
-        } else if (command.startsWith("menu enter")) {
+        } else if (command.startsWith("menu enter ")) {
             Matcher matcher = getCommandMatcher(command, "^menu enter (.+)");
             if (matcher.group(1).equals("Duel")) {
 
             }
             if (matcher.group(1).equals("Deck")) {
-                new DeckMenuController(this.user).run();
+                new DeckMenuController(user).run();
             }
             if (matcher.group(1).equals("Profile")) {
                 ProfileMenuController profile = new ProfileMenuController(this.user);
                 profile.run();
             }
             if (matcher.group(1).equals("Shop")) {
-
+                new ShopController(user).run();
             }
             if (matcher.group(1).equals("Import/Export")) {
 

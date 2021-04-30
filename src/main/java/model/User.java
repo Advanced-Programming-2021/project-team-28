@@ -180,13 +180,8 @@ public class User {
     }
 
     public boolean isAmountOfThisCardEnough (Deck deck, String cardName){
-        int numOfThisTypeOfCardUserHave = 0;
+        int numOfThisTypeOfCardUserHave = numOfCardsWithThisName(cardName);
         int numOfThisTypeOfCardInDeck = 0;
-        for (Card card : allCards){
-            if(card.getName().equals(cardName)){
-                numOfThisTypeOfCardUserHave++;
-            }
-        }
         for (Card card : deck.getAllCardsInMainDeck()){
             if(card.getName().equals(cardName)){
                 numOfThisTypeOfCardInDeck++;

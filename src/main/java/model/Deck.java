@@ -109,10 +109,10 @@ public class Deck {
     public String toString() {
         String deckInfo;
         if (isDeckValid()) {
-            deckInfo = this.deckName + ": main deck " + this.allCardsInMainDeck.size() + ", side deck\n" +
+            deckInfo = this.deckName + ": main deck " + this.allCardsInMainDeck.size() + ", side deck " +
                     this.allCardsInSideDeck.size() + ", " + "valid\n";
         } else {
-            deckInfo = this.deckName + ": main deck " + this.allCardsInMainDeck.size() + ", side deck\n" +
+            deckInfo = this.deckName + ": main deck " + this.allCardsInMainDeck.size() + ", side deck " +
                     this.allCardsInSideDeck.size() + ", " + "invalid\n";
         }
         return deckInfo;
