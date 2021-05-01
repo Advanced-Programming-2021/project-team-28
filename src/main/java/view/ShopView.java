@@ -110,6 +110,7 @@ public class ShopView {
         System.out.println("Wattkid " + ": " + MonstersDescriptions.wattkid);
         System.out.println("Yami " + ": " + SpellsDescription.yami);
         System.out.println("Yomi Ship " + ": " + MonstersDescriptions.yomiShip);
+        System.out.println("");
     }
 
 }
