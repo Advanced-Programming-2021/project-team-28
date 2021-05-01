@@ -48,6 +48,6 @@ public class LoginMenuView {
     }
 
     public void userLoggedIn(){
-        System.out.println("user logged in successfully!\n");
+        System.out.println("user logged in successfully!");
     }
 }

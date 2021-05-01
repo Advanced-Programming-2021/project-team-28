@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class User {
@@ -15,7 +16,7 @@ public class User {
 
     private ArrayList <Deck> decks = new ArrayList<>();
     private Deck activeDeck;
-    private ArrayList <Card> nonUsedCards = new ArrayList<>();
+    private ArrayList <Card> allCards = new ArrayList<>();
 
     private static ArrayList <User> users = new ArrayList<>();
 
@@ -50,12 +51,12 @@ public class User {
         this.balance += balance;
     }
 
-    public void addToDecks( Deck deck){
+    public void addToDecks (Deck deck){
         decks.add(deck);
     }
 
     public void addToCards (Card card){
-        nonUsedCards.add(card);
+        allCards.add(card);
     }
 
     public String getUsername() {
@@ -86,8 +87,8 @@ public class User {
         return activeDeck;
     }
 
-    public ArrayList<Card> getNonUsedCards() {
-        return nonUsedCards;
+    public ArrayList<Card> getAllCards() {
+        return allCards;
     }
 
     public static User getUserByUsername (String username) {
@@ -108,16 +109,89 @@ public class User {
         return getUserByUsername(username).getPassword().equals( password );
     }
 
-    public static boolean checkNicknameValidity ( String nickname){
+    public static boolean isNicknameAvailable(String nickname){
        if(getUserByNickName(nickname) == null ) return true;
        else
            return false;
     }
 
-    public static boolean checkUsernameValidity ( String username) {
+    public static boolean isUsernameAvailable(String username) {
         if (getUserByUsername(username) == null) return true;
         else
             return false;
     }
-    //useless comment
+
+    public Deck getDeckByDeckName (String deckName){
+        for (Deck deck : decks){
+            if(deck.getDeckName().equals(deckName)){
+                return deck;
+            }
+        }
+        return null;
+    }
+
+    public boolean doesUserHaveThisDeck (String deckName){
+        for (Deck deck : decks){
+            if(deck.getDeckName().equals(deckName)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String decksArrayListToString (){
+        StringBuilder decksArrayListToStringBuilder = new StringBuilder();
+        decksArrayListToStringBuilder.append("Decks:\nActive Deck:\n");
+        if(hasActiveDeck()){
+            decksArrayListToStringBuilder.append(activeDeck.toString());
+        }
+        sortDecksArrayList();
+        decksArrayListToStringBuilder.append("Other decks:\n");
+        for (Deck deck : decks) {
+            if (!hasActiveDeck() || !deck.getDeckName().equals(activeDeck.getDeckName())) {
+                decksArrayListToStringBuilder.append(deck.toString());
+            }
+        }
+        return decksArrayListToStringBuilder.toString();
+    }
+
+    private void sortDecksArrayList (){
+        for (int i=0; i<decks.size(); i++){
+            for (int j=0; j<decks.size() - 1; j++){
+                if(Utilities.compareAlphabetical(decks.get(j).getDeckName(), decks.get(j+1).getDeckName()) > 0){
+                    Collections.swap(decks, j, j+1);
+                }
+            }
+        }
+    }
+
+    private boolean hasActiveDeck(){
+        return !(activeDeck == null);
+    }
+
+    public int numOfCardsWithThisName (String cardName){
+        int numOfCardsWithThisName = 0;
+        for (Card card : allCards){
+            if(card.getName().equals(cardName)){
+                numOfCardsWithThisName++;
+            }
+        }
+        return numOfCardsWithThisName;
+    }
+
+    public boolean isAmountOfThisCardEnough (Deck deck, String cardName){
+        int numOfThisTypeOfCardUserHave = numOfCardsWithThisName(cardName);
+        int numOfThisTypeOfCardInDeck = 0;
+        for (Card card : deck.getAllCardsInMainDeck()){
+            if(card.getName().equals(cardName)){
+                numOfThisTypeOfCardInDeck++;
+            }
+        }
+        for (Card card : deck.getAllCardsInSideDeck()){
+            if(card.getName().equals(cardName)){
+                numOfThisTypeOfCardInDeck++;
+            }
+        }
+        return (numOfThisTypeOfCardUserHave > numOfThisTypeOfCardInDeck);
+    }
 }

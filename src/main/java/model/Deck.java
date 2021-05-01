@@ -3,98 +3,94 @@ package model;
 import java.util.*;
 
 public class Deck {
-    //attributes
-    private User user;
+
+    private String creatorUsername;
     private String deckName;
-    private boolean validity;
-    private int numberOfMainDeckCards;
-    private int numberOfSideDeckCards;
-    private ArrayList<Card> allCardsInMainDeck;
-    private ArrayList<Card> allCardsInSideDeck;
+    private ArrayList<Card> allCardsInMainDeck = new ArrayList<>();
+    private ArrayList<Card> allCardsInSideDeck = new ArrayList<>();
 
-    public Deck(User userWhoCreateTheDeck, String deckName) {
-        this.user = userWhoCreateTheDeck;
-        this.deckName = deckName;
-        this.validity = false;
-        this.user.addToDecks(this);
+    public Deck(String deckName, String creatorUsername) {
+        this.creatorUsername = creatorUsername;
+        setDeckName(deckName);
+        User.getUserByUsername(creatorUsername).addToDecks(this);
     }
 
-//    public boolean doesUserHaveThisDeck(User user, String deckName) {
-//
-//    }
-
-//    public void createDeck(User user, String deckName) {
-//
-//    }
-
-//    public String decksArrayListToString(ArrayList<Deck> decks) {
-//
-//    }
-//    public void sortDeck() {
-//
-//    }
-
-
-    public void addDeckToUserDecks() {
-
-        this.user.addToDecks(this);
-
-    }
-
-
-    public Deck getDeckByDeckName(String deckName) {
-        for (Deck deck : this.user.getDecks()) {
-            if (deck.deckName.equals(deckName)) return deck;
+    public String showDeck(boolean isSideDeck) {
+        StringBuilder deckToStringBuilder = new StringBuilder("Deck: ");
+        deckToStringBuilder.append(deckName);
+        deckToStringBuilder.append("\n");
+        if (isSideDeck) {
+            deckToStringBuilder.append("Side deck:\n");
+            deckToStringBuilder.append(Card.cardsArrayListToString(allCardsInSideDeck));
+        } else {
+            deckToStringBuilder.append("Main deck:\n");
+            deckToStringBuilder.append(Card.cardsArrayListToString(allCardsInMainDeck));
         }
-
-        return null;
+        return deckToStringBuilder.toString();
     }
 
-
-
-    public void removeDeck() {
-        this.user.getDecks().remove(this);
+    public void addCardToDeck(String cardName, boolean isToSideDeck) {
+        User user = User.getUserByUsername(creatorUsername);
+        for (int i = 0; i < user.getAllCards().size(); i++) {
+            if (user.getAllCards().get(i).getName().equals(cardName) &&
+                    !isThisCardInDeck(user.getAllCards().get(i))) {
+                if (isToSideDeck) {
+                    allCardsInSideDeck.add(user.getAllCards().get(i));
+                } else {
+                    allCardsInMainDeck.add(user.getAllCards().get(i));
+                }
+                return;
+            }
+        }
     }
 
-    public void activateDeck() {
-        this.user.setActiveDeck(this);
-    }
+    private boolean isThisCardInDeck(Card card) {
+        for (Card cardsInDeck : allCardsInSideDeck) {
+            if (cardsInDeck.equals(card)) {
+                return true;
+            }
+        }
+        for (Card cardsInDeck : allCardsInMainDeck) {
+            if (cardsInDeck.equals(card)) {
+                return true;
+            }
+        }
+        return false;
 
-    public void addCardToDeck(Card card, String cardName, boolean isForSideDeck) {
-        if (isForSideDeck) this.allCardsInSideDeck.add(card);
     }
 
     public void removeCardFromDeck(String cardName, boolean isFromSideDeck) {
         if (isFromSideDeck) {
-            for (Card card : this.allCardsInSideDeck) {
-                if (card.getName().equals(cardName)) this.allCardsInSideDeck.remove(card);
+            for (Card card : allCardsInSideDeck) {
+                if (card.getName().equals(cardName)) {
+                    allCardsInSideDeck.remove(card);
+                    return;
+                }
             }
         } else {
-            for (Card card: this.allCardsInMainDeck) {
-                if (card.getName().equals(cardName)) this.allCardsInMainDeck.remove(card);
+            for (Card card : allCardsInMainDeck) {
+                if (card.getName().equals(cardName)) {
+                    allCardsInMainDeck.remove(card);
+                    return;
+                }
             }
         }
     }
 
-//    public String showDeck(String deckName, boolean isSideDeck) {
-//        String deckInfo = "Deck: " + this.deckName +"\n" +
-//                "Side/Main deck:\n" +
-//                "Monsters:\n" +
-//                "<card name>: <card description>\n" +
-//                "Spell and Traps:\n" +
-//                "<card name>: <card description>";
-//
-//        return deckInfo;
-//    }
+    public void removeDeck() {
+        User.getUserByUsername(creatorUsername).getDecks().remove(this);
+    }
+
+    public void activateDeck() {
+        User.getUserByUsername(creatorUsername).setActiveDeck(this);
+    }
 
     public boolean isMainDeckFull() {
-        if (this.numberOfMainDeckCards == 60) return true;
-        else return false;
+        return this.allCardsInMainDeck.size() == 60;
     }
 
     public boolean isSideDeckFull() {
-        if (this.numberOfSideDeckCards == 15) return true;
-        else return false;
+        return this.allCardsInSideDeck.size() == 15;
     }
 
     public boolean doesDeckHaveThreeCardsFromThisTypeOfCard(String cardName) {
@@ -108,19 +104,17 @@ public class Deck {
             if (card.getName().equals(cardName)) ++numberOfThisCard;
         }
 
-        if (numberOfThisCard == 3) return true;
-        else return false;
+        return numberOfThisCard >= 3;
     }
 
     public String toString() {
         String deckInfo;
-        if (validity) {
-
-            deckInfo = this.deckName + ": main deck " + this.numberOfMainDeckCards + ", side deck\n" +
-                    this.numberOfSideDeckCards + ", " + "valid";
+        if (isDeckValid()) {
+            deckInfo = this.deckName + ": main deck " + this.allCardsInMainDeck.size() + ", side deck " +
+                    this.allCardsInSideDeck.size() + ", " + "valid\n";
         } else {
-            deckInfo = this.deckName + ": main deck " + this.numberOfMainDeckCards + ", side deck\n" +
-                    this.numberOfSideDeckCards + ", " + "invalid";
+            deckInfo = this.deckName + ": main deck " + this.allCardsInMainDeck.size() + ", side deck " +
+                    this.allCardsInSideDeck.size() + ", " + "invalid\n";
         }
         return deckInfo;
     }
@@ -129,35 +123,44 @@ public class Deck {
         return this.deckName;
     }
 
-    public void setDeckName(String deckName) {
+    private void setDeckName(String deckName) {
         this.deckName = deckName;
     }
 
     public int getNumOfMainCards() {
-        return numberOfMainDeckCards;
-    }
-
-    public void increaseNumOfMainCards(int numOfAddedCards) {
-        this.numberOfMainDeckCards += numOfAddedCards;
-    }
-
-    public void decreaseNumOfMainCards(int numOfRemovedCards) {
-        this.numberOfMainDeckCards -= numOfRemovedCards;
+        return allCardsInMainDeck.size();
     }
 
     public int getNumOfSideCards() {
-        return this.numberOfSideDeckCards;
+        return this.allCardsInSideDeck.size();
     }
 
-    public void increaseNumOfSideCards(int numOfAddedCards) {
-        this.numberOfSideDeckCards += numOfAddedCards;
+    public ArrayList<Card> getAllCardsInMainDeck() {
+        return allCardsInMainDeck;
     }
 
-    public void decreaseNumOfSideCards(int numOfRemovedCards) {
-        this.numberOfSideDeckCards -= numOfRemovedCards;
+    public ArrayList<Card> getAllCardsInSideDeck() {
+        return allCardsInSideDeck;
     }
 
     public boolean isDeckValid() {
-        return this.validity;
+        return (allCardsInMainDeck.size() >= 40 && allCardsInMainDeck.size() <= 60 && allCardsInSideDeck.size() <= 15);
+    }
+
+    public boolean isThisCardInSideOrMainDeck (String cardName, boolean isInSideDeck){
+        if(isInSideDeck){
+            for (Card card : allCardsInSideDeck){
+                if(card.getName().equals(cardName)){
+                    return true;
+                }
+            }
+        } else {
+            for (Card card : allCardsInMainDeck){
+                if(card.getName().equals(cardName)){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

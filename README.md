@@ -3,5 +3,5 @@
 
 ### Team Members:
 - Mohammad Mahdi Heydari Nasab 99105389
-- MohammadHossein HaajiHosseini Student2 99101427
+- MohammadHossein HaajiHosseini 99101427
 - Alireza Foroodnia 99105645

@@ -11,8 +11,16 @@ public class ShopController {
     User user;
     ShopView view = new ShopView(this);
 
+    public ShopController(User user){
+        this.user = user;
+    }
+
+    public void run() {
+        this.view.run();
+    }
+
     public void processCommand(String command){
-        if(command.startsWith("shop buy")){
+        if(command.startsWith("shop buy ")){
             Matcher matcher = getCommandMatcher(command , "^shop buy (.+)$");
             sellCard(matcher.group(1));
         }
