@@ -4,15 +4,15 @@ import java.util.*;
 
 public class Deck {
 
-    private User user;
+    private String creatorUsername;
     private String deckName;
     private ArrayList<Card> allCardsInMainDeck = new ArrayList<>();
     private ArrayList<Card> allCardsInSideDeck = new ArrayList<>();
 
-    public Deck(User userWhoCreateTheDeck, String deckName) {
-        this.user = userWhoCreateTheDeck;
+    public Deck(String deckName, String creatorUsername) {
+        this.creatorUsername = creatorUsername;
         setDeckName(deckName);
-        this.user.addToDecks(this);
+        User.getUserByUsername(creatorUsername).addToDecks(this);
     }
 
     public String showDeck(boolean isSideDeck) {
@@ -30,6 +30,7 @@ public class Deck {
     }
 
     public void addCardToDeck(String cardName, boolean isToSideDeck) {
+        User user = User.getUserByUsername(creatorUsername);
         for (int i = 0; i < user.getAllCards().size(); i++) {
             if (user.getAllCards().get(i).getName().equals(cardName) &&
                     !isThisCardInDeck(user.getAllCards().get(i))) {
@@ -77,11 +78,11 @@ public class Deck {
     }
 
     public void removeDeck() {
-        this.user.getDecks().remove(this);
+        User.getUserByUsername(creatorUsername).getDecks().remove(this);
     }
 
     public void activateDeck() {
-        this.user.setActiveDeck(this);
+        User.getUserByUsername(creatorUsername).setActiveDeck(this);
     }
 
     public boolean isMainDeckFull() {

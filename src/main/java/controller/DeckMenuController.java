@@ -95,7 +95,7 @@ public class DeckMenuController {
         if (user.doesUserHaveThisDeck(deckName)) {
             view.thisDeckAlreadyExists(deckName);
         } else {
-            new Deck(user, deckName);
+            new Deck(deckName, user.getUsername());
             view.deckCreated();
         }
     }
