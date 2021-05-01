@@ -1,6 +1,7 @@
 package view;
 
 import controller.ShopController;
+import model.Card;
 import model.MonstersDescriptions;
 import model.SpellsDescription;
 import model.TrapsDescription;
@@ -31,6 +32,10 @@ public class ShopView {
 
     public void cardNotFound(){
         System.out.println("there is no card with this name");
+    }
+
+    public void showCard(Card card){
+        System.out.println(card);
     }
 
     public void showAllCards(){

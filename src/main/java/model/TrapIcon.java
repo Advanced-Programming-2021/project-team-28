@@ -1,7 +1,17 @@
 package model;
 
 public enum TrapIcon {
-    NORMAL,
-    COUNTER,
-    CONTINUOUS,
+    NORMAL("Normal"),
+    COUNTER("Counter"),
+    CONTINUOUS("Continuous");
+
+    private String name;
+
+    private TrapIcon(String name){
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

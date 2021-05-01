@@ -10,6 +10,14 @@ public class TrapCard extends Card{
 
     }
 
+    @Override
+    public String toString() {
+        return "Name : " + this.name + "\n"
+                + "Trap" + "\n"
+                + "Type : " + this.icon.getName() + "\n"
+                + "Description : " + this.description ;
+    }
+
     public TrapIcon getIcon() {
         return icon;
     }

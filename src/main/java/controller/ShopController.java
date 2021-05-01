@@ -27,6 +27,10 @@ public class ShopController {
         else if(command.equals("shop show all")){
             showAllCards();
         }
+        else if(command.startsWith("card show")){
+            Matcher matcher = getCommandMatcher(command , "^card show (.*)");
+            showCard(matcher.group(1));
+        }
     }
 
     public static Matcher getCommandMatcher(String command , String regex){
@@ -37,6 +41,13 @@ public class ShopController {
         else
             return null;
     }
+
+    public void showCard(String name){
+        if(Card.getCardByName(Card.allCards , name) != null)
+            view.showCard(Card.getCardByName(Card.allCards , name));
+        else view.cardNotFound();
+    }
+
 
     private void sellCard(String cardName){
         if(cardName.equals("Command knight")){
@@ -337,6 +348,7 @@ public class ShopController {
                 SpellCard card = new SpellCard(cardName, "", SpellsDescription.terrafoming , SpellIcon.NORMAL , SpellEffect.TERRAFORMING);
                 user.addToCards(card);
             }
+
         }
         else if(cardName.equals("Pot of Greed")){
             if(receiveMoneyFromCustomer(2500)) {

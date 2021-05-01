@@ -1,11 +1,20 @@
 package model;
 
 public enum SpellIcon {
-    NORMAL,
-    CONTINUOUS,
-    QUICK_PLAY,
-    FIELD,
-    EQUIP,
-    RITUAL,
+    NORMAL("Normal"),
+    CONTINUOUS("Continuous"),
+    QUICK_PLAY("Quick-play"),
+    FIELD("Field"),
+    EQUIP("Equip"),
+    RITUAL("Ritual");
 
+    private String name;
+
+    private SpellIcon (String name){
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

@@ -22,6 +22,15 @@ public class MonsterCard extends Card {
         setAttribute(attribute);
     }
 
+    @Override
+    public String toString() {
+        return "Name : " + this.name + "\n"
+                + "Level : " + this.level + "\n"
+                + "ATK : " + this.attackPoint + "\n"
+                + "DEF : " + this.defencePoint + "\n"
+                + "Description : " + this.description;
+    }
+
     public MonsterPower getSpecialPower() {
         return specialPower;
     }

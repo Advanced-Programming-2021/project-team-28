@@ -7,13 +7,12 @@ public abstract class Card {
     protected String name;
     protected String number;
     protected String description;
-    public static ArrayList<Card> cards = new ArrayList<>();
+    public static ArrayList<Card> allCards = new ArrayList<>();
 
     public Card(String name, String number, String description) {
         setName(name);
         setDescription(description);
         setNumber(number);
-        cards.add(this);
     }
 
     public static String cardsArrayListToString(ArrayList<Card> cards) {
@@ -82,5 +81,13 @@ public abstract class Card {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public static Card getCardByName(ArrayList<Card> cards , String name){
+        for (int i = 0; i < cards.size(); i++) {
+            if(cards.get(i).getName().equals(name))
+                return cards.get(i);
+        }
+        return null;
     }
 }

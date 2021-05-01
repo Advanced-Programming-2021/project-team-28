@@ -9,6 +9,14 @@ public class SpellCard extends Card{
         setIcon(icon);
     }
 
+    @Override
+    public String toString() {
+        return "Name : " + this.name + "\n"
+                + "Spell" + "\n"
+                + "Type : " + this.icon.getName() + "\n"
+                + "Description : " + this.description ;
+    }
+
     public SpellEffect getEffect() {
         return effect;
     }
