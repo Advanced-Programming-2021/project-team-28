@@ -34,13 +34,15 @@ public class ProfileMenuController {
                 changePassword(matcher.group(2) , matcher.group(1));
             }
         }
+        else if(command.equals("menu show-current"))
+            view.showMenu();
 
     }
 
 
 
 
-    private static Matcher getCommandMatcher(String command , String regex){
+    public static Matcher getCommandMatcher(String command , String regex){
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(command);
         if (matcher.find())

@@ -43,4 +43,8 @@ public class ProfileMenuView {
     public void passwordIsTheSame(){
         System.out.println("please enter a new password");
     }
+
+    public void showMenu(){
+        System.out.println("Profile Menu");
+    }
 }
