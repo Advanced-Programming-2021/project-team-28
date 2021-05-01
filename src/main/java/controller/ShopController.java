@@ -318,6 +318,216 @@ public class ShopController {
                 user.addToCards(card);
             }
         }
+        else if(cardName.equals("Monster Reborn")){
+            if(receiveMoneyFromCustomer(2500)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.monsterReborn , SpellIcon.NORMAL , SpellEffect.MONSTER_REBORN);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Terraforming")){
+            if(receiveMoneyFromCustomer(2500)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.terrafoming , SpellIcon.NORMAL , SpellEffect.TERRAFORMING);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Pot of Greed")){
+            if(receiveMoneyFromCustomer(2500)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.potOfGreed , SpellIcon.NORMAL, SpellEffect.POT_OF_GREED);
+                user.addToCards(card);
+            }
+        }
+            else if(cardName.equals("Raigeki")){
+            if(receiveMoneyFromCustomer(2500)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.raigeki , SpellIcon.NORMAL , SpellEffect.RAIGEKI);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("change of Heart")){
+            if(receiveMoneyFromCustomer(2500)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.changeOfHearts , SpellIcon.NORMAL , SpellEffect.CHANGEOFHEART);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Sword of Revealing Light")){
+            if(receiveMoneyFromCustomer(2500)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.swordOfRevealingLight , SpellIcon.NORMAL , SpellEffect.SWORDS_OF_REVEALING_LIGHT);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Harpie's Feather Duster")){
+            if(receiveMoneyFromCustomer(2500)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.harpies , SpellIcon.NORMAL , SpellEffect.HARPIES_FEATHER_DUSTER);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Dark Hole")){
+            if(receiveMoneyFromCustomer(2500)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.darkHole , SpellIcon.NORMAL , SpellEffect.DARK_HOLE);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Supply Squad")){
+            if(receiveMoneyFromCustomer(4000)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.supplySquad , SpellIcon.CONTINUOUS , SpellEffect.SUPPLY_SQUAD);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Spell Absorption")){
+            if(receiveMoneyFromCustomer(4000)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.spellAbsorption , SpellIcon.CONTINUOUS , SpellEffect.SPELL_ABSORPTION);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Messenger of Peace")){
+            if(receiveMoneyFromCustomer(4000)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.messengerOfPeace , SpellIcon.CONTINUOUS , SpellEffect.MESSENGER_OF_PEACE);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Twin Twister")){
+            if(receiveMoneyFromCustomer(3500)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.twinTwister , SpellIcon.QUICK_PLAY , SpellEffect.TWIN_TWISTERS);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Mystical Space Typhoon")){
+            if(receiveMoneyFromCustomer(3500)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.mysticalSpaceTyphoon , SpellIcon.QUICK_PLAY , SpellEffect.MYSTICAL_SPACE_TYPHOON);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Ring of Defence")){
+            if(receiveMoneyFromCustomer(3500)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.ringOfDefence , SpellIcon.QUICK_PLAY , SpellEffect.RING_OF_DEFENCE);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Yami")){
+            if(receiveMoneyFromCustomer(4300)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.yami , SpellIcon.FIELD , SpellEffect.YAMI);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Forest")){
+            if(receiveMoneyFromCustomer(4300)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.forest , SpellIcon.FIELD , SpellEffect.FOREST);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Closed Forest")){
+            if(receiveMoneyFromCustomer(4300)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.closedForest , SpellIcon.FIELD , SpellEffect.CLOSED_FOREST);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Umiiruka")){
+            if(receiveMoneyFromCustomer(4300)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.umiiruka , SpellIcon.FIELD , SpellEffect.UMIIRUKA);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Sword of Destruction")){
+            if(receiveMoneyFromCustomer(4300)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.swordOfDestruction , SpellIcon.EQUIP , SpellEffect.SWORD_OF_DARK_DESTRUCTION);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Black Pendant")){
+            if(receiveMoneyFromCustomer(4300)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.blackPendant , SpellIcon.EQUIP , SpellEffect.BLACK_PENDANT);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("United We Stand")){
+            if(receiveMoneyFromCustomer(4300)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.unitedWeStand , SpellIcon.EQUIP , SpellEffect.UNITED_WE_STAND);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Magnum Shield")){
+            if(receiveMoneyFromCustomer(4300)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.magnumShield , SpellIcon.EQUIP , SpellEffect.MAGNUM_SHIELD);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Advanced Ritual Art")){
+            if(receiveMoneyFromCustomer(3000)) {
+                SpellCard card = new SpellCard(cardName, "", SpellsDescription.advancedRitualArt , SpellIcon.RITUAL , SpellEffect.ADVANCED_RITUAL_ART);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Trap Hole")){
+            if(receiveMoneyFromCustomer(2000)) {
+                TrapCard card = new TrapCard(cardName, "", TrapsDescription.trapHole , TrapIcon.NORMAL , TrapEffect.TRAP_HOLE);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Mirror Force")){
+            if(receiveMoneyFromCustomer(2000)) {
+                TrapCard card = new TrapCard(cardName, "", TrapsDescription.mirrorForce , TrapIcon.NORMAL , TrapEffect.MIRROR_FORCE);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Magic Cylinder")){
+            if(receiveMoneyFromCustomer(2000)) {
+                TrapCard card = new TrapCard(cardName, "", TrapsDescription.magicCylinder , TrapIcon.NORMAL , TrapEffect.MAGIC_CYLINDER);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Mind Crush")){
+            if(receiveMoneyFromCustomer(2000)) {
+                TrapCard card = new TrapCard(cardName, "", TrapsDescription.mindCrush , TrapIcon.NORMAL , TrapEffect.MIND_CRUSH);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Torrential Tribute")){
+            if(receiveMoneyFromCustomer(2000)) {
+                TrapCard card = new TrapCard(cardName, "", TrapsDescription.torrentialTribute , TrapIcon.NORMAL , TrapEffect.TORRENTIAL_TRIBUTE);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Time Seal")){
+            if(receiveMoneyFromCustomer(2000)) {
+                TrapCard card = new TrapCard(cardName, "", TrapsDescription.timeSeal , TrapIcon.NORMAL , TrapEffect.TIME_SEAL);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Negate Attack")){
+            if(receiveMoneyFromCustomer(3000)) {
+                TrapCard card = new TrapCard(cardName, "", TrapsDescription.negateAttack , TrapIcon.COUNTER , TrapEffect.NEGATE_ATTACK);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Solemn Warning")){
+            if(receiveMoneyFromCustomer(3000)) {
+                TrapCard card = new TrapCard(cardName, "", TrapsDescription.solemnWarning , TrapIcon.COUNTER , TrapEffect.SOLEMN_WARNING);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Magic Jamamer")){
+            if(receiveMoneyFromCustomer(3000)) {
+                TrapCard card = new TrapCard(cardName, "", TrapsDescription.magicJamamer , TrapIcon.COUNTER , TrapEffect.MAGIC_JAMAMER);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Call of The Haunted")){
+            if(receiveMoneyFromCustomer(3500)) {
+                TrapCard card = new TrapCard(cardName, "", TrapsDescription.callOfTheHaunted , TrapIcon.CONTINUOUS , TrapEffect.CALL_OF_THE_HAUNTED);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Vanity's Emptiness")){
+            if(receiveMoneyFromCustomer(3500)) {
+                TrapCard card = new TrapCard(cardName, "", TrapsDescription.vanitiesEmptiness , TrapIcon.CONTINUOUS , TrapEffect.VANITYS_EMPTINESS);
+                user.addToCards(card);
+            }
+        }
+        else if(cardName.equals("Wall of Revealing Light")){
+            if(receiveMoneyFromCustomer(3500)) {
+                TrapCard card = new TrapCard(cardName, "", TrapsDescription.wallOfRevealingLight , TrapIcon.CONTINUOUS , TrapEffect.WALL_OF_REVEALING_LIGHT);
+                user.addToCards(card);
+            }
+        }
         else view.cardNotFound();
     }
 
