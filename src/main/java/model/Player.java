@@ -7,13 +7,13 @@ public class Player {
     private User user;
     private int lifePoint;
     private int numberOfRoundsWon;
-    private Card fieldZoneCard;
     private ArrayList<Card> mainDuelDeck = new ArrayList<>();
     private ArrayList<Card> sideDuelDeck = new ArrayList<>();
     private HashMap<Integer, MonsterCard> monsterCardsInZone = new HashMap<>();
     private HashMap<Integer, Card> spellOrTrapCardsInZone = new HashMap<>();
     private ArrayList<Card> cardsInHand = new ArrayList<>();
     private ArrayList<Card> cardsInGraveyard = new ArrayList<>();
+    private Card fieldZoneCard;
 
     public Player(User user) throws CloneNotSupportedException {
         setUser(user);
