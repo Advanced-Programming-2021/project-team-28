@@ -22,6 +22,13 @@ public abstract class Card {
         cards.add(this);
     }
 
+    public Card(){
+
+    }
+
+    public abstract Object clone();
+
+
     public static String cardsArrayListToString(ArrayList<Card> cards) {
         ArrayList<Card> monsterCards = new ArrayList<>();
         ArrayList<Card> spellAndTrapCards = new ArrayList<>();
