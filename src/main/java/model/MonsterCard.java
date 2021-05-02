@@ -21,6 +21,10 @@ public class MonsterCard extends Card {
         setAttribute(attribute);
     }
 
+    public MonsterCard(){
+
+    }
+
     public MonsterPower getSpecialPower() {
         return specialPower;
     }
@@ -101,5 +105,21 @@ public class MonsterCard extends Card {
         this.defencePoint = defencePoint;
     }
 
-
+    @Override
+    public Object clone() {
+        MonsterCard cloneMonsterCard = new MonsterCard();
+        cloneMonsterCard.number = this.number;
+        cloneMonsterCard.description = this.description;
+        cloneMonsterCard.name = this.name;
+        cloneMonsterCard.attackPoint = this.attackPoint;
+        cloneMonsterCard.defencePoint = this.defencePoint;
+        cloneMonsterCard.attribute = this.attribute;
+        cloneMonsterCard.hasBattledInBattlePhase = this.hasBattledInBattlePhase;
+        cloneMonsterCard.isFlipped = this.isFlipped;
+        cloneMonsterCard.isOnSetPosition = this.isOnSetPosition;
+        cloneMonsterCard.isSummoned = this.isSummoned;
+        cloneMonsterCard.level = this.level;
+        cloneMonsterCard.specialPower = this.specialPower;
+        return cloneMonsterCard;
+    }
 }
