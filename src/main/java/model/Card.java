@@ -1,12 +1,18 @@
 package model;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
 public abstract class Card {
+    @Expose
     protected String name;
+    @Expose
     protected String number;
+    @Expose
     protected String description;
+    @Expose(serialize = false, deserialize = false)
     public static ArrayList<Card> cards = new ArrayList<>();
 
     public Card(String name, String number, String description) {

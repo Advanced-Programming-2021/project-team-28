@@ -1,12 +1,17 @@
 package model;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.*;
 
 public class Deck {
-
+    @Expose
     private String creatorUsername;
+    @Expose
     private String deckName;
+    @Expose
     private ArrayList<Card> allCardsInMainDeck = new ArrayList<>();
+    @Expose
     private ArrayList<Card> allCardsInSideDeck = new ArrayList<>();
 
     public Deck(String deckName, String creatorUsername) {
