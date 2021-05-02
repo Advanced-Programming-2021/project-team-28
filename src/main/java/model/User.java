@@ -165,7 +165,7 @@ public class User {
         }
     }
 
-    private boolean hasActiveDeck(){
+    public boolean hasActiveDeck(){
         return !(activeDeck == null);
     }
 

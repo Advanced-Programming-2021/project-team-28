@@ -38,6 +38,9 @@ public class MainMenuView {
     public void showMenu (){
         System.out.println("Main Menu");
     }
-    //TODO : complete the function
-    //public void showScoreBoard();
+
+    public void showError(String error){
+        System.out.println(error);
+    }
+
 }
