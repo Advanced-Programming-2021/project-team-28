@@ -8,6 +8,9 @@ public class SpellCard extends Card{
         setEffect(effect);
         setIcon(icon);
     }
+    public SpellCard(){
+
+    }
 
     @Override
     public String toString() {
@@ -31,5 +34,16 @@ public class SpellCard extends Card{
 
     public void setIcon(SpellIcon icon) {
         this.icon = icon;
+    }
+
+    @Override
+    public Object clone() {
+        SpellCard cloneSpellCard = new SpellCard();
+        cloneSpellCard.name = this.name;
+        cloneSpellCard.description = this.description;
+        cloneSpellCard.number = this.number;
+        cloneSpellCard.icon = this.icon;
+        cloneSpellCard.effect = this.effect;
+        return cloneSpellCard;
     }
 }

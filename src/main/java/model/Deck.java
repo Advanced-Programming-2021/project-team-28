@@ -1,16 +1,21 @@
 package model;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.*;
 
 public class Deck {
-
+    @Expose
     private String creatorUsername;
+    @Expose
     private String deckName;
+    @Expose
     private ArrayList<Card> allCardsInMainDeck = new ArrayList<>();
+    @Expose
     private ArrayList<Card> allCardsInSideDeck = new ArrayList<>();
 
     public Deck(String deckName, String creatorUsername) {
-        this.creatorUsername = creatorUsername;
+        setCreatorUsername(creatorUsername);
         setDeckName(deckName);
         User.getUserByUsername(creatorUsername).addToDecks(this);
     }
@@ -117,6 +122,14 @@ public class Deck {
                     this.allCardsInSideDeck.size() + ", " + "invalid\n";
         }
         return deckInfo;
+    }
+
+    public String getCreatorUsername() {
+        return creatorUsername;
+    }
+
+    public void setCreatorUsername(String creatorUsername) {
+        this.creatorUsername = creatorUsername;
     }
 
     public String getDeckName() {

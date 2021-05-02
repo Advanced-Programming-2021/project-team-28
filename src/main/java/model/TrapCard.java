@@ -10,6 +10,10 @@ public class TrapCard extends Card{
 
     }
 
+    public TrapCard(){
+
+    }
+
     @Override
     public String toString() {
         return "Name : " + this.name + "\n"
@@ -17,6 +21,7 @@ public class TrapCard extends Card{
                 + "Type : " + this.icon.getName() + "\n"
                 + "Description : " + this.description ;
     }
+
 
     public TrapIcon getIcon() {
         return icon;
@@ -32,5 +37,16 @@ public class TrapCard extends Card{
 
     public void setEffect(TrapEffect effect) {
         this.effect = effect;
+    }
+
+    @Override
+    public Object clone() {
+        TrapCard cloneTrapCard = new TrapCard();
+        cloneTrapCard.number = this.number;
+        cloneTrapCard.description = this.description;
+        cloneTrapCard.name = this.name;
+        cloneTrapCard.icon = this.icon;
+        cloneTrapCard.effect = this.effect;
+        return cloneTrapCard;
     }
 }

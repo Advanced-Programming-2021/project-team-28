@@ -1,11 +1,16 @@
 package model;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
 public abstract class Card {
+    @Expose
     protected String name;
+    @Expose
     protected String number;
+    @Expose
     protected String description;
     public static ArrayList<Card> allCards = new ArrayList<>();
 
@@ -14,6 +19,13 @@ public abstract class Card {
         setDescription(description);
         setNumber(number);
     }
+
+    public Card(){
+
+    }
+
+    public abstract Object clone();
+
 
     public static String cardsArrayListToString(ArrayList<Card> cards) {
         ArrayList<Card> monsterCards = new ArrayList<>();

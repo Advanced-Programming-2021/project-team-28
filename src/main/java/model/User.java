@@ -1,23 +1,40 @@
 package model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 
 public class User {
+    @Expose
     private String username;
+    @Expose
     private String password;
+    @Expose
     private String nickname;
 
-
+    @Expose
     private int score;
+    @Expose
     private int balance;
 
-
+    @Expose
     private ArrayList <Deck> decks = new ArrayList<>();
+    @Expose
     private Deck activeDeck;
+    @Expose
     private ArrayList <Card> allCards = new ArrayList<>();
-
+    @Expose
     private static ArrayList <User> users = new ArrayList<>();
 
     public User (String username , String password , String nickname){
@@ -193,5 +210,27 @@ public class User {
             }
         }
         return (numOfThisTypeOfCardUserHave > numOfThisTypeOfCardInDeck);
+    }
+
+    private void serialize() {
+        try (Writer writer = new FileWriter("UserOutput.json")) {
+            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+            gson.toJson(User.users, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void deserialize()  {
+        Gson gson = new Gson();
+        Reader reader = null;
+        try {
+            reader = Files.newBufferedReader(Paths.get("UserOutput.json"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        User[] users = gson.fromJson(reader,User[].class);
+        ArrayList<User> usersArray = new ArrayList<User>(Arrays.asList(users));
+        User.users = usersArray;
     }
 }
