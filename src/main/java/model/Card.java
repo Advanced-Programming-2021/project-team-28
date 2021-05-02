@@ -24,7 +24,7 @@ public abstract class Card {
 
     }
 
-    public abstract Object clone();
+    public abstract Object clone() throws CloneNotSupportedException;
 
 
     public static String cardsArrayListToString(ArrayList<Card> cards) {

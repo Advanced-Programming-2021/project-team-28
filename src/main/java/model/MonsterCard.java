@@ -1,19 +1,17 @@
 package model;
 
-import java.util.regex.Matcher;
-import Enums.Attribute;
-import Enums.MonsterPower;
+import Enums.*;
 
 public class MonsterCard extends Card {
     private int attackPoint;
     private int defencePoint;
     private boolean isSummoned;
-    private boolean isOnSetPosition;
     private boolean isFlipped;
     private int level;
     private Attribute attribute;
     private boolean hasBattledInBattlePhase;
     private MonsterPower specialPower;
+    private MonsterCardPosition position;
 
     public MonsterCard(String name, String number, String description , int attackPoint , int defencePoint , MonsterPower specialPower , int level , Attribute attribute) {
         super(name, number, description);
@@ -22,6 +20,7 @@ public class MonsterCard extends Card {
         setSpecialPower(specialPower);
         setLevel(level);
         setAttribute(attribute);
+        setPosition(MonsterCardPosition.NOT_IN_PLAY_ZONE);
     }
     public MonsterCard(){
 
@@ -76,6 +75,16 @@ public class MonsterCard extends Card {
         this.hasBattledInBattlePhase = hasBattledInBattlePhase;
     }
 
+
+    public MonsterCardPosition getPosition() {
+        return position;
+    }
+
+    public void setPosition(MonsterCardPosition position) {
+        this.position = position;
+    }
+
+
     public Attribute getAttribute() {
         return attribute;
     }
@@ -94,14 +103,6 @@ public class MonsterCard extends Card {
 
     public void setFlipped(boolean flipped) {
         isFlipped = flipped;
-    }
-
-    public boolean isOnSetPosition() {
-        return isOnSetPosition;
-    }
-
-    public void setOnSetPosition(boolean onSetPosition) {
-        isOnSetPosition = onSetPosition;
     }
 
     public void setSpecialPower(MonsterPower specialPower) {
@@ -127,10 +128,10 @@ public class MonsterCard extends Card {
         cloneMonsterCard.attribute = this.attribute;
         cloneMonsterCard.hasBattledInBattlePhase = this.hasBattledInBattlePhase;
         cloneMonsterCard.isFlipped = this.isFlipped;
-        cloneMonsterCard.isOnSetPosition = this.isOnSetPosition;
         cloneMonsterCard.isSummoned = this.isSummoned;
         cloneMonsterCard.level = this.level;
         cloneMonsterCard.specialPower = this.specialPower;
+        cloneMonsterCard.position = this.position;
         return cloneMonsterCard;
     }
 }

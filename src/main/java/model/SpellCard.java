@@ -2,15 +2,20 @@ package model;
 
 import Enums.SpellEffect;
 import Enums.SpellIcon;
+import Enums.SpellOrTrapCardPosition;
 
 public class SpellCard extends Card{
     private SpellEffect effect;
     private SpellIcon icon;
+    private SpellOrTrapCardPosition position;
+
     public SpellCard (String name , String number , String description , SpellIcon icon , SpellEffect effect){
         super(name, number, description);
         setEffect(effect);
         setIcon(icon);
+        setPosition(SpellOrTrapCardPosition.NOT_IN_PLAY_ZONE);
     }
+
     public SpellCard(){
 
     }
@@ -21,6 +26,14 @@ public class SpellCard extends Card{
                 + "Spell" + "\n"
                 + "Type : " + this.icon.getName() + "\n"
                 + "Description : " + this.description ;
+    }
+
+    public SpellOrTrapCardPosition getPosition() {
+        return position;
+    }
+
+    public void setPosition(SpellOrTrapCardPosition position) {
+        this.position = position;
     }
 
     public SpellEffect getEffect() {
@@ -47,6 +60,7 @@ public class SpellCard extends Card{
         cloneSpellCard.number = this.number;
         cloneSpellCard.icon = this.icon;
         cloneSpellCard.effect = this.effect;
+        cloneSpellCard.position = this.position;
         return cloneSpellCard;
     }
 }

@@ -1,16 +1,20 @@
 package model;
 
+import Enums.SpellOrTrapCardPosition;
 import Enums.TrapEffect;
 import Enums.TrapIcon;
 
-public class TrapCard extends Card{
+public class TrapCard extends Card implements Cloneable{
+
     private TrapIcon icon;
     private TrapEffect effect;
+    private SpellOrTrapCardPosition position;
+
     public TrapCard (String name, String number, String description , TrapIcon icon , TrapEffect effect){
         super(name, number, description);
         setIcon(icon);
         setEffect(effect);
-
+        setPosition(SpellOrTrapCardPosition.NOT_IN_PLAY_ZONE);
     }
 
     public TrapCard(){
@@ -25,6 +29,13 @@ public class TrapCard extends Card{
                 + "Description : " + this.description ;
     }
 
+    public SpellOrTrapCardPosition getPosition() {
+        return position;
+    }
+
+    public void setPosition(SpellOrTrapCardPosition position) {
+        this.position = position;
+    }
 
     public TrapIcon getIcon() {
         return icon;
@@ -50,6 +61,7 @@ public class TrapCard extends Card{
         cloneTrapCard.name = this.name;
         cloneTrapCard.icon = this.icon;
         cloneTrapCard.effect = this.effect;
+        cloneTrapCard.position = this.position;
         return cloneTrapCard;
     }
 }

@@ -40,4 +40,8 @@ public class Round {
             turn = Turn.FIRST_PLAYER;
         }
     }
+
+//    public String getMapToString (){
+//
+//    }
 }

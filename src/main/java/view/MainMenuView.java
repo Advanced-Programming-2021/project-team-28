@@ -20,7 +20,7 @@ public class MainMenuView {
 
 
 
-    public  void run () {
+    public  void run () throws CloneNotSupportedException {
         while (true) {
             command = scanner.nextLine();
             command = command.trim();

@@ -9,7 +9,7 @@ public class Game {
     Player player2;
     NumberOfRounds numberOfRounds;
 
-    public Game(User user1 , User user2 , NumberOfRounds numberOfRounds){
+    public Game(User user1 , User user2 , NumberOfRounds numberOfRounds) throws CloneNotSupportedException {
         this.player1 = new Player(user1);
         this.player2 = new Player(user2);
         this.numberOfRounds = numberOfRounds;

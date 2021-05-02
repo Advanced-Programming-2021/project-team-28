@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class LoginMenuController {
     LoginMenuView loginMenuView = new LoginMenuView();
 
-    public MenuEnum run(String command) {
+    public MenuEnum run(String command) throws CloneNotSupportedException {
         Matcher[] commandMatchers = getCommandMatchers(command);
         if (commandMatchers[0].find()) {
             return MenuEnum.BACK;
@@ -39,7 +39,7 @@ public class LoginMenuController {
         return MenuEnum.CONTINUE;
     }
 
-    private void controlLoginUserCommand(String username, String password) {
+    private void controlLoginUserCommand(String username, String password) throws CloneNotSupportedException {
         if(User.isUsernameAvailable(username) || !User.getUserByUsername(username).getPassword().equals(password)){
             loginMenuView.usernameAndPasswordDidNotMatch();
         } else {
