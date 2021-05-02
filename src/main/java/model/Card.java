@@ -12,14 +12,13 @@ public abstract class Card {
     protected String number;
     @Expose
     protected String description;
-    @Expose(serialize = false, deserialize = false)
-    public static ArrayList<Card> cards = new ArrayList<>();
+
 
     public Card(String name, String number, String description) {
         setName(name);
         setDescription(description);
         setNumber(number);
-        cards.add(this);
+
     }
 
     public Card(){
