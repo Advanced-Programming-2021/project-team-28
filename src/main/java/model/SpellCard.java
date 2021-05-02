@@ -1,5 +1,8 @@
 package model;
 
+import Enums.SpellEffect;
+import Enums.SpellIcon;
+
 public class SpellCard extends Card{
     private SpellEffect effect;
     private SpellIcon icon;

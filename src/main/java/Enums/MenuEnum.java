@@ -1,4 +1,4 @@
-package controller;
+package Enums;
 
 public enum MenuEnum {
     BACK,

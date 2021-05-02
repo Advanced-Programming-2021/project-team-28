@@ -1,5 +1,7 @@
 package model;
 
+import Enums.Turn;
+
 public class Round {
     private Player firstPlayer;
     private Player secondPlayer;

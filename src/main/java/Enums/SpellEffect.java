@@ -1,4 +1,4 @@
-package model;
+package Enums;
 
 public enum SpellEffect {
     MONSTER_REBORN,

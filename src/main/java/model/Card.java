@@ -59,6 +59,7 @@ public abstract class Card {
                 spellAndTrapCards.add(card);
             }
         }
+
     }
 
     private static void sortCards(ArrayList<Card> cards) {

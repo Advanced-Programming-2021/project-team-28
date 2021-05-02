@@ -1,4 +1,4 @@
-package model;
+package Enums;
 
 public enum MonsterPower {
     NONE,

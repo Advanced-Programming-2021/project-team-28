@@ -1,4 +1,4 @@
-package model;
+package Enums;
 
 public enum NumberOfRounds {
     ONE_ROUND_MATCH,

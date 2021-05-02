@@ -1,6 +1,7 @@
 package model;
 
-import java.util.regex.Matcher;
+import Enums.Attribute;
+import Enums.MonsterPower;
 
 public class MonsterCard extends Card {
     private int attackPoint;

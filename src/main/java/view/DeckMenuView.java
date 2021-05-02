@@ -1,7 +1,7 @@
 package view;
 
 import controller.DeckMenuController;
-import controller.MenuEnum;
+import Enums.MenuEnum;
 
 import java.util.Scanner;
 

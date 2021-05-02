@@ -1,7 +1,7 @@
 package controller;
 
 import model.Game;
-import model.NumberOfRounds;
+import Enums.NumberOfRounds;
 import model.User;
 import view.MainMenuView;
 
@@ -48,9 +48,10 @@ public class MainMenuController {
             }
         }
         else if(command.startsWith("duel")){
-            Matcher matcher = getCommandMatcher(command , "^deul --new --second-player (.+) --rounds (.+)$");
+            Matcher matcher = getCommandMatcher(command , "^duel --new --second-player (.+) --rounds (.+)$");
             if(validateMatch(matcher) != NumberOfRounds.OTHERS){
-                Game game = new Game();
+                Game game = new Game(user , User.getUserByUsername(matcher.group(2)) , validateMatch(matcher));
+                game.run();
             }
         }
     }

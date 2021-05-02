@@ -1,5 +1,6 @@
 package controller;
 
+import Enums.MenuEnum;
 import model.User;
 import view.LoginMenuView;
 import java.util.regex.Matcher;

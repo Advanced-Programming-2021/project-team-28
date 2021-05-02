@@ -1,5 +1,8 @@
 package model;
 
+import Enums.TrapEffect;
+import Enums.TrapIcon;
+
 public class TrapCard extends Card{
     private TrapIcon icon;
     private TrapEffect effect;

@@ -1,5 +1,7 @@
 package model;
 
+import Enums.*;
+
 public class AllCardsInitiator {
     public static void fillAllCards() {
         Card.allCards.add(new MonsterCard("Command knight", "", MonstersDescriptions.commandKnight, 1000, 1000,
