@@ -5,8 +5,8 @@ import java.util.HashMap;
 
 public class Player {
     private User user;
-    private int lifePoint;
-    private int numberOfRoundsWon;
+    private int lifePoint = 8000;
+    private int numberOfRoundsWon = 0;
     private ArrayList<Card> mainDuelDeck = new ArrayList<>();
     private ArrayList<Card> sideDuelDeck = new ArrayList<>();
     private HashMap<Integer, MonsterCard> monsterCardsInZone = new HashMap<>();

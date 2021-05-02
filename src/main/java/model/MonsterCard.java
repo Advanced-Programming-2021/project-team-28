@@ -1,7 +1,5 @@
 package model;
 
-import java.util.regex.Matcher;
-
 public class MonsterCard extends Card {
     private int attackPoint;
     private int defencePoint;
