@@ -10,7 +10,9 @@ public class LoginMenuController {
     LoginMenuView loginMenuView = new LoginMenuView(this);
 
     public void run() throws CloneNotSupportedException {
+        User.deserialize();
         this.loginMenuView.run();
+        User.serialize();
     }
 
     public MenuEnum processCommand(String command) throws CloneNotSupportedException {
