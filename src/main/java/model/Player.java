@@ -23,6 +23,7 @@ public class Player {
         setUser(user);
         setMainAndSideDuelDeckAndRemainingCards();
         shuffleRemainingCards();
+        setCardsInHand();
     }
 
     public User getUser() {
@@ -187,6 +188,10 @@ public class Player {
 
     public void setFieldZoneCard(Card fieldZoneCard) {
         this.fieldZoneCard = fieldZoneCard;
+    }
+
+    public boolean hasFieldSpellCardInZone (){
+        return !(fieldZoneCard == null);
     }
 }
 
