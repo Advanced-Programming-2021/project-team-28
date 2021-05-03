@@ -28,9 +28,6 @@ public class MainMenuController {
         if (command.equals("menu show-current")) {
             view.showMenu();
             return;
-        } else if (command.equals("scoreboard show")) {
-            //TODO : complete the functions
-
         } else if (command.startsWith("menu enter ")) {
             Matcher matcher = getCommandMatcher(command, "^menu enter (.+)");
             if (matcher.group(1).equals("Deck")) {
@@ -45,6 +42,9 @@ public class MainMenuController {
             }
             if (matcher.group(1).equals("Import/Export")) {
 
+            }
+            if(matcher.group(1).equals("Scoreboard")){
+                new ScoreboardController().run();
             }
         }
         else if(command.startsWith("duel")){

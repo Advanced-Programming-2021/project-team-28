@@ -13,7 +13,6 @@ public class LoginMenuView {
     }
 
     public void run() throws CloneNotSupportedException {
-        LoginMenuController controller = new LoginMenuController();
         Scanner scanner = new Scanner(System.in);
         String command;
         while(true){
