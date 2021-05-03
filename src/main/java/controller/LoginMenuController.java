@@ -7,9 +7,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LoginMenuController {
-    LoginMenuView loginMenuView = new LoginMenuView();
+    LoginMenuView loginMenuView = new LoginMenuView(this);
 
-    public MenuEnum run(String command) throws CloneNotSupportedException {
+    public void run() throws CloneNotSupportedException {
+        this.loginMenuView.run();
+    }
+
+    public MenuEnum processCommand(String command) throws CloneNotSupportedException {
         Matcher[] commandMatchers = getCommandMatchers(command);
         if (commandMatchers[0].find()) {
             return MenuEnum.BACK;

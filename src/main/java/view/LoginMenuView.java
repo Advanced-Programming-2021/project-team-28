@@ -7,6 +7,10 @@ import java.util.Scanner;
 
 public class LoginMenuView {
 
+    LoginMenuController controller;
+    public LoginMenuView(LoginMenuController controller){
+        this.controller = controller;
+    }
 
     public void run() throws CloneNotSupportedException {
         LoginMenuController controller = new LoginMenuController();
@@ -14,7 +18,7 @@ public class LoginMenuView {
         String command;
         while(true){
             command = scanner.nextLine();
-            if(controller.run(command).equals(MenuEnum.BACK)){
+            if(controller.processCommand(command).equals(MenuEnum.BACK)){
                 return;
             }
         }

@@ -17,9 +17,6 @@ public class MainMenuView {
 
     private  String command;
 
-
-
-
     public  void run () throws CloneNotSupportedException {
         while (true) {
             command = scanner.nextLine();
