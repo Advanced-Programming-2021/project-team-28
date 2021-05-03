@@ -1,7 +1,17 @@
 package Enums;
 
 public enum SpellOrTrapCardPosition {
-    OCCUPIED,
-    HIDDEN,
-    NOT_IN_PLAY_ZONE
+    OCCUPIED("\tO"),
+    HIDDEN("\tH"),
+    NOT_IN_PLAY_ZONE("\tE");
+
+    private String positionInMap;
+
+    SpellOrTrapCardPosition(String positionInMap){
+        this.positionInMap = positionInMap;
+    }
+
+    public String getPositionInMap(){
+        return positionInMap;
+    }
 }

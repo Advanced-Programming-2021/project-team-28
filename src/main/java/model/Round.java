@@ -49,9 +49,7 @@ public class Round {
         Player rivalPlayer = turn == Turn.FIRST_PLAYER ? secondPlayer : firstPlayer;
         Player playerAtTurn = turn == Turn.FIRST_PLAYER ? firstPlayer : secondPlayer;
         StringBuilder mapToStringBuilder = new StringBuilder();
-        mapToStringBuilder.append(rivalPlayer.getUser().getNickname());
-        mapToStringBuilder.append(" : ");
-        mapToStringBuilder.append(rivalPlayer.getLifePoint());
+        appendNicknameAndLifePoint(rivalPlayer, mapToStringBuilder);
         mapToStringBuilder.append("\n");
         mapToStringBuilder.append("\tc".repeat(rivalPlayer.getCardsInHand().size()));
         mapToStringBuilder.append("\n");
@@ -60,14 +58,9 @@ public class Round {
         HashMap<Integer, Card> rivalPlayerSpellsInZone = rivalPlayer.getSpellOrTrapCardsInZone();
         HashMap<Integer, MonsterCard> rivalPlayerMonstersInZone = rivalPlayer.getMonsterCardsInZone();
         appendRivalPlayerZone(mapToStringBuilder, rivalPlayerSpellsInZone, rivalPlayerMonstersInZone);
-        mapToStringBuilder.append(rivalPlayer.getCardsInGraveyard().size());
-        mapToStringBuilder.append("\t\t\t\t\t\t");
-        mapToStringBuilder.append(rivalPlayer.hasFieldSpellCardInZone() ? "O" : "E");
+        appendRivalGraveyardAndFieldZone(rivalPlayer, mapToStringBuilder);
         mapToStringBuilder.append("\n\n--------------------------\n\n");
-        mapToStringBuilder.append(playerAtTurn.hasFieldSpellCardInZone() ? "O" : "E");
-        mapToStringBuilder.append("\t\t\t\t\t\t");
-        mapToStringBuilder.append(playerAtTurn.getCardsInGraveyard().size());
-        mapToStringBuilder.append("\n");
+        appendPlayerAtTurnGraveYardAndFieldZone(playerAtTurn, mapToStringBuilder);
         HashMap<Integer, MonsterCard> playerAtTurnMonstersInZone = playerAtTurn.getMonsterCardsInZone();
         HashMap<Integer, Card> playerAtTurnSpellsInZone = playerAtTurn.getSpellOrTrapCardsInZone();
         appendPlayerAtTurnZone(mapToStringBuilder, playerAtTurnSpellsInZone, playerAtTurnMonstersInZone);
@@ -76,10 +69,27 @@ public class Round {
         mapToStringBuilder.append("\n");
         mapToStringBuilder.append("c\t".repeat(playerAtTurn.getCardsInHand().size()));
         mapToStringBuilder.append("\n");
-        mapToStringBuilder.append(playerAtTurn.getUser().getNickname());
-        mapToStringBuilder.append(" : ");
-        mapToStringBuilder.append(playerAtTurn.getLifePoint());
+        appendNicknameAndLifePoint(playerAtTurn, mapToStringBuilder);
         return mapToStringBuilder.toString();
+    }
+
+    private void appendNicknameAndLifePoint(Player rivalPlayer, StringBuilder mapToStringBuilder) {
+        mapToStringBuilder.append(rivalPlayer.getUser().getNickname());
+        mapToStringBuilder.append(" : ");
+        mapToStringBuilder.append(rivalPlayer.getLifePoint());
+    }
+
+    private void appendPlayerAtTurnGraveYardAndFieldZone(Player playerAtTurn, StringBuilder mapToStringBuilder) {
+        mapToStringBuilder.append(playerAtTurn.hasFieldSpellCardInZone() ? "O" : "E");
+        mapToStringBuilder.append("\t\t\t\t\t\t");
+        mapToStringBuilder.append(playerAtTurn.getCardsInGraveyard().size());
+        mapToStringBuilder.append("\n");
+    }
+
+    private void appendRivalGraveyardAndFieldZone(Player rivalPlayer, StringBuilder mapToStringBuilder) {
+        mapToStringBuilder.append(rivalPlayer.getCardsInGraveyard().size());
+        mapToStringBuilder.append("\t\t\t\t\t\t");
+        mapToStringBuilder.append(rivalPlayer.hasFieldSpellCardInZone() ? "O" : "E");
     }
 
     private void appendRivalPlayerZone(StringBuilder mapToStringBuilder, HashMap<Integer, Card> rivalPlayerSpellCardsInZone,
@@ -117,12 +127,12 @@ public class Round {
     private String getSpellCardInPositionToString(HashMap<Integer, Card> playerSpellsInZone, int location) {
         if (!playerSpellsInZone.containsKey(location)) {
             return "\tE";
-        } else if (playerSpellsInZone.get(location) instanceof SpellCard &&
-                ((SpellCard) playerSpellsInZone.get(location)).getPosition() == SpellOrTrapCardPosition.HIDDEN) {
-            return "\tH";
-        } else if (playerSpellsInZone.get(location) instanceof TrapCard &&
-                ((TrapCard) playerSpellsInZone.get(location)).getPosition() == SpellOrTrapCardPosition.HIDDEN) {
-            return "\tH";
+        } else if (playerSpellsInZone.get(location) instanceof SpellCard) {
+            SpellCard spellCard = (SpellCard) playerSpellsInZone.get(location);
+            return spellCard.getPosition().getPositionInMap();
+        } else if (playerSpellsInZone.get(location) instanceof TrapCard) {
+            TrapCard trapCard = (TrapCard) playerSpellsInZone.get(location);
+            return trapCard.getPosition().getPositionInMap();
         } else {
             return "\tE";
         }
@@ -131,14 +141,8 @@ public class Round {
     private String getMonsterCardPositionToString(HashMap<Integer, MonsterCard> playerMonstersInZone, int location) {
         if (!playerMonstersInZone.containsKey(location)) {
             return "\tE";
-        } else if (playerMonstersInZone.get(location).getPosition() == MonsterCardPosition.DEFENSIVE_HIDDEN) {
-            return "\tDH";
-        } else if (playerMonstersInZone.get(location).getPosition() == MonsterCardPosition.DEFENSIVE_OCCUPIED) {
-            return "\tDO";
-        } else if (playerMonstersInZone.get(location).getPosition() == MonsterCardPosition.OFFENSIVE_OCCUPIED) {
-            return "\tOO";
         } else {
-            return "\tE";
+            return playerMonstersInZone.get(location).getPosition().getPositionInMap();
         }
     }
 }
