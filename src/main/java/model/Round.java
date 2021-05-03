@@ -50,11 +50,7 @@ public class Round {
         Player playerAtTurn = turn == Turn.FIRST_PLAYER ? firstPlayer : secondPlayer;
         StringBuilder mapToStringBuilder = new StringBuilder();
         appendNicknameAndLifePoint(rivalPlayer, mapToStringBuilder);
-        mapToStringBuilder.append("\n");
-        mapToStringBuilder.append("\tc".repeat(rivalPlayer.getCardsInHand().size()));
-        mapToStringBuilder.append("\n");
-        mapToStringBuilder.append(rivalPlayer.getRemainingPlayerCardsInGame().size());
-        mapToStringBuilder.append("\n");
+        appendRivalOutOfZoneCards(rivalPlayer, mapToStringBuilder);
         HashMap<Integer, Card> rivalPlayerSpellsInZone = rivalPlayer.getSpellOrTrapCardsInZone();
         HashMap<Integer, MonsterCard> rivalPlayerMonstersInZone = rivalPlayer.getMonsterCardsInZone();
         appendRivalPlayerZone(mapToStringBuilder, rivalPlayerSpellsInZone, rivalPlayerMonstersInZone);
@@ -64,13 +60,25 @@ public class Round {
         HashMap<Integer, MonsterCard> playerAtTurnMonstersInZone = playerAtTurn.getMonsterCardsInZone();
         HashMap<Integer, Card> playerAtTurnSpellsInZone = playerAtTurn.getSpellOrTrapCardsInZone();
         appendPlayerAtTurnZone(mapToStringBuilder, playerAtTurnSpellsInZone, playerAtTurnMonstersInZone);
+        appendPlayerAtTurnOutOfZoneCards(playerAtTurn, mapToStringBuilder);
+        appendNicknameAndLifePoint(playerAtTurn, mapToStringBuilder);
+        return mapToStringBuilder.toString();
+    }
+
+    private void appendPlayerAtTurnOutOfZoneCards(Player playerAtTurn, StringBuilder mapToStringBuilder) {
         mapToStringBuilder.append("\t\t\t\t\t\t");
         mapToStringBuilder.append(playerAtTurn.getRemainingPlayerCardsInGame().size());
         mapToStringBuilder.append("\n");
         mapToStringBuilder.append("c\t".repeat(playerAtTurn.getCardsInHand().size()));
         mapToStringBuilder.append("\n");
-        appendNicknameAndLifePoint(playerAtTurn, mapToStringBuilder);
-        return mapToStringBuilder.toString();
+    }
+
+    private void appendRivalOutOfZoneCards(Player rivalPlayer, StringBuilder mapToStringBuilder) {
+        mapToStringBuilder.append("\n");
+        mapToStringBuilder.append("\tc".repeat(rivalPlayer.getCardsInHand().size()));
+        mapToStringBuilder.append("\n");
+        mapToStringBuilder.append(rivalPlayer.getRemainingPlayerCardsInGame().size());
+        mapToStringBuilder.append("\n");
     }
 
     private void appendNicknameAndLifePoint(Player rivalPlayer, StringBuilder mapToStringBuilder) {
