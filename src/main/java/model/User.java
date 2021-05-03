@@ -212,7 +212,7 @@ public class User {
         return (numOfThisTypeOfCardUserHave > numOfThisTypeOfCardInDeck);
     }
 
-    private void serialize() {
+    public static void serialize() {
         try (Writer writer = new FileWriter("UserOutput.json")) {
             Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
             gson.toJson(User.users, writer);
@@ -221,7 +221,7 @@ public class User {
         }
     }
 
-    private void deserialize()  {
+    public static void deserialize()  {
         Gson gson = new Gson();
         Reader reader = null;
         try {
