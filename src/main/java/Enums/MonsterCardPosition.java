@@ -1,8 +1,18 @@
 package Enums;
 
 public enum MonsterCardPosition {
-    DEFENSIVE_HIDDEN,
-    DEFENSIVE_OCCUPIED,
-    OFFENSIVE_OCCUPIED,
-    NOT_IN_PLAY_ZONE
+    DEFENSIVE_HIDDEN("\tDH"),
+    DEFENSIVE_OCCUPIED("\tDO"),
+    OFFENSIVE_OCCUPIED("\tOO"),
+    NOT_IN_PLAY_ZONE("\tE");
+
+    private String positionInMap;
+
+    MonsterCardPosition(String positionInMap){
+        this.positionInMap = positionInMap;
+    }
+
+    public String getPositionInMap(){
+        return positionInMap;
+    }
 }

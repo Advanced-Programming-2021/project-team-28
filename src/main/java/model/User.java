@@ -60,11 +60,11 @@ public class User {
         this.activeDeck = activeDeck;
     }
 
-    public void changeScore(Integer score) {
+    public void changeScore(int score) {
         this.score += score;
     }
 
-    public void changeBalance(Integer balance) {
+    public void changeBalance(int balance) {
         this.balance += balance;
     }
 
@@ -88,12 +88,16 @@ public class User {
         return nickname;
     }
 
-    public Integer getScore() {
+    public int getScore() {
         return score;
     }
 
-    public Integer getBalance() {
+    public int getBalance() {
         return balance;
+    }
+
+    public static ArrayList<User> getUsers() {
+        return users;
     }
 
     public ArrayList<Deck> getDecks() {

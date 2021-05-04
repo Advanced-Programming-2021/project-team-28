@@ -24,7 +24,7 @@ public class MainMenuView {
             if (command.equals("user logout"))
             {
                 System.out.println("user logged out successfully");
-                break;
+                return;
             }
             controller.processCommand(command);
         }

@@ -1,6 +1,4 @@
 import controller.LoginMenuController;
-import view.LoginMenuView;
-
 
 public class Main {
 

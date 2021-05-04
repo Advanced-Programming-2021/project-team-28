@@ -68,14 +68,14 @@ public class LoginMenuController {
     private Matcher[] getCommandMatchers(String command) {
         Pattern patternForExit = Pattern.compile("^menu exit$");
         Pattern patternForShowCurrentMenu = Pattern.compile("^menu show-current$");
-        Pattern patternForCreateUser1 = Pattern.compile("^user create --username (\\S+) --password (\\S+) --nickname (\\S+)$");
-        Pattern patternForCreateUser2 = Pattern.compile("^user create --username (\\S+) --nickname (\\S+) --password (\\S+)$");
-        Pattern patternForCreateUser3 = Pattern.compile("^user create --password (\\S+) --username (\\S+) --nickname (\\S+)$");
-        Pattern patternForCreateUser4 = Pattern.compile("^user create --password (\\S+) --nickname (\\S+) --username (\\S+)$");
-        Pattern patternForCreateUser5 = Pattern.compile("^user create --nickname (\\S+) --password (\\S+) --username (\\S+)$");
-        Pattern patternForCreateUser6 = Pattern.compile("^user create --nickname (\\S+) --nickname (\\S+) --password (\\S+)$");
-        Pattern patternForLoginUser1 = Pattern.compile("^user login --username (\\S+) --password (\\S+)$");
-        Pattern patternForLoginUser2 = Pattern.compile("^user login --password (\\S+) --username (\\S+)$");
+        Pattern patternForCreateUser1 = Pattern.compile("^user create --username (.+?) --password (.+?) --nickname (.+?)$");
+        Pattern patternForCreateUser2 = Pattern.compile("^user create --username (.+?) --nickname (.+?) --password (.+?)$");
+        Pattern patternForCreateUser3 = Pattern.compile("^user create --password (.+?) --username (.+?) --nickname (.+?)$");
+        Pattern patternForCreateUser4 = Pattern.compile("^user create --password (.+?) --nickname (.+?) --username (.+?)$");
+        Pattern patternForCreateUser5 = Pattern.compile("^user create --nickname (.+?) --password (.+?) --username (.+?)$");
+        Pattern patternForCreateUser6 = Pattern.compile("^user create --nickname (.+?) --nickname (.+?) --password (.+?)$");
+        Pattern patternForLoginUser1 = Pattern.compile("^user login --username (.+?) --password (.+?)$");
+        Pattern patternForLoginUser2 = Pattern.compile("^user login --password (.+?) --username (.+?)$");
         Pattern patternForEnterAnotherMenu = Pattern.compile("^menu enter (Duel|Scoreboard|Deck|Import/Export|Shop|Profile)$");
         Matcher[] commandMatchers = new Matcher[11];
         commandMatchers[0] = patternForExit.matcher(command);
