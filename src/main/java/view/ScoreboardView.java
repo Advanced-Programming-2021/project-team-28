@@ -1,6 +1,6 @@
 package view;
 
-import Enums.MenuEnum;
+import enums.MenuEnum;
 import controller.ScoreboardController;
 
 import java.util.Scanner;

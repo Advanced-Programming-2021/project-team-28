@@ -1,6 +1,6 @@
 package model;
 
-import Enums.*;
+import enums.*;
 
 public class AllCardsInitiator {
     public static void fillAllCards() {

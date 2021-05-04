@@ -1,6 +1,6 @@
 package model;
 
-import Enums.Turn;
+import enums.Turn;
 
 public class BattlePhase extends Phase{
     public BattlePhase(Player firstPlayer, Player secondPlayer, Turn turn) {

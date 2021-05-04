@@ -1,6 +1,6 @@
 package model;
 
-import Enums.*;
+import enums.*;
 
 public class MonsterCard extends Card {
     private int attackPoint;

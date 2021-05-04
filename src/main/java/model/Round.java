@@ -1,8 +1,6 @@
 package model;
 
-import Enums.MonsterCardPosition;
-import Enums.SpellOrTrapCardPosition;
-import Enums.Turn;
+import enums.Turn;
 
 import java.util.HashMap;
 
@@ -137,13 +135,17 @@ public class Round {
         mapToStringBuilder.append("\t\t\t\t\t\t");
         mapToStringBuilder.append(playerAtTurn.getRemainingPlayerCardsInGame().size());
         mapToStringBuilder.append("\n");
-        mapToStringBuilder.append("c\t".repeat(playerAtTurn.getCardsInHand().size()));
+        for (int i=0; i<playerAtTurn.getCardsInHand().size(); i++){
+            mapToStringBuilder.append("c\t");
+        }
         mapToStringBuilder.append("\n");
     }
 
     private void appendRivalOutOfZoneCards(Player rivalPlayer, StringBuilder mapToStringBuilder) {
         mapToStringBuilder.append("\n");
-        mapToStringBuilder.append("\tc".repeat(rivalPlayer.getCardsInHand().size()));
+        for (int i=0; i<rivalPlayer.getCardsInHand().size(); i++){
+            mapToStringBuilder.append("\tc");
+        }
         mapToStringBuilder.append("\n");
         mapToStringBuilder.append(rivalPlayer.getRemainingPlayerCardsInGame().size());
         mapToStringBuilder.append("\n");

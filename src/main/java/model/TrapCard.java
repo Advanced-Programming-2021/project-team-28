@@ -1,8 +1,8 @@
 package model;
 
-import Enums.SpellOrTrapCardPosition;
-import Enums.TrapEffect;
-import Enums.TrapIcon;
+import enums.SpellOrTrapCardPosition;
+import enums.TrapEffect;
+import enums.TrapIcon;
 
 public class TrapCard extends Card implements Cloneable{
 

@@ -1,6 +1,6 @@
 package controller;
 
-import Enums.*;
+import enums.*;
 import model.*;
 import view.ShopView;
 

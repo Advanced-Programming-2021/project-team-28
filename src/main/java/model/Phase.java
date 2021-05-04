@@ -1,6 +1,6 @@
 package model;
 
-import Enums.Turn;
+import enums.Turn;
 
 abstract class Phase {
     protected Player firstPlayer;

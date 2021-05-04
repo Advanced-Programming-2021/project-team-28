@@ -1,6 +1,6 @@
 package controller;
 
-import Enums.MenuEnum;
+import enums.MenuEnum;
 import model.Scoreboard;
 import model.User;
 import view.ScoreboardView;

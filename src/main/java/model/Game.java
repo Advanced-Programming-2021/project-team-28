@@ -1,8 +1,7 @@
 package model;
 
-import Enums.NumberOfRounds;
-import Enums.Turn;
-import view.GameView;
+import enums.NumberOfRounds;
+import enums.Turn;
 
 public class Game {
     Player player1;
