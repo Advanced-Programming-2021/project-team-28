@@ -74,6 +74,10 @@ public class Player {
         this.user = user;
     }
 
+    public void setLifePoint(int lifePoint) {
+        this.lifePoint = lifePoint;
+    }
+
     private void setMainAndSideDuelDeckAndRemainingCards() throws CloneNotSupportedException {
         for (Card card : user.getActiveDeck().getAllCardsInMainDeck()){
             if(card instanceof MonsterCard){
@@ -192,6 +196,19 @@ public class Player {
 
     public boolean hasFieldSpellCardInZone (){
         return !(fieldZoneCard == null);
+    }
+
+    public String graveyardToString (){
+        StringBuilder graveyardToStringBuilder = new StringBuilder();
+        for(int i=cardsInGraveyard.size() - 1; i>=0; i--){
+            graveyardToStringBuilder.append(4-i);
+            graveyardToStringBuilder.append(". ");
+            graveyardToStringBuilder.append(cardsInGraveyard.get(i).getName());
+            graveyardToStringBuilder.append(" : ");
+            graveyardToStringBuilder.append(cardsInGraveyard.get(i).getDescription());
+            graveyardToStringBuilder.append("\n");
+        }
+        return graveyardToStringBuilder.toString();
     }
 }
 

@@ -2,7 +2,7 @@ package model;
 
 import enums.Turn;
 
-abstract class Phase {
+public abstract class Phase {
     protected Player firstPlayer;
     protected Player secondPlayer;
     protected Turn turn;
@@ -12,5 +12,26 @@ abstract class Phase {
         this.secondPlayer = secondPlayer;
         this.turn = turn;
     }
+
+    public Turn getTurn() {
+        return turn;
+    }
+
+    public Player getFirstPlayer() {
+        return firstPlayer;
+    }
+
+    public Player getSecondPlayer() {
+        return secondPlayer;
+    }
+
+    public Player getPlayerByTurn (){
+        if(turn == Turn.FIRST_PLAYER){
+            return firstPlayer;
+        } else {
+            return secondPlayer;
+        }
+    }
+
     public void run(){}
 }
