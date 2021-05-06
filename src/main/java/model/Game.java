@@ -17,15 +17,15 @@ public class Game {
     public void run(){
         if(this.numberOfRounds == NumberOfRounds.ONE_ROUND_MATCH){
             Round round = new Round(player1 , player2 , Turn.FIRST_PLAYER);
-            //round.run();
+            round.run();
             if(player1.getNumberOfRoundsWon() == 1){;}
             else{;}
         }
         else if(this.numberOfRounds == NumberOfRounds.THREE_ROUND_MATCH){
             Round round1 = new Round(player1 , player2 , Turn.FIRST_PLAYER);
-            //round1.run();
+            round1.run();
             Round round2 = new Round(player1 , player2 , Turn.FIRST_PLAYER);
-            //round2.run();
+            round2.run();
             if(player1.getNumberOfRoundsWon() == 2){;}
             else if(player2.getNumberOfRoundsWon() == 2){;}
             Round round3 = new Round(player1 , player2 , Turn.FIRST_PLAYER);

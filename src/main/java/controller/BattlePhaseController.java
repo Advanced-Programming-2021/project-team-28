@@ -1,73 +1,84 @@
 package controller;
 
 import model.BattlePhase;
+import model.MonsterCard;
+import model.Player;
+import view.BattlePhaseView;
 
-public class BattlePhaseController extends PhaseController{
+public class BattlePhaseController extends PhaseController {
 
-    public BattlePhaseController (BattlePhase battlePhase){
+    private BattlePhaseView battleView = new BattlePhaseView(this);
+    public BattlePhaseController(BattlePhase battlePhase) {
         super(battlePhase);
     }
-    protected void controlSummonCommand(){
+
+    protected void controlSummonCommand() {
+        Player player = phase.getPlayerByTurn();
+        if (!player.hasSelectedCard()) {
+            battleView.noCardSelectedYet();
+        } else if (!player.isSelectedCardFromHand() || !(player.getSelectedCard() instanceof MonsterCard)) {
+            battleView.canNotSummonCard();
+        } else{
+            battleView.actionNotAllowedInThisPhase();
+        }
+    }
+
+    protected void controlSetCommand() {
+        Player player = phase.getPlayerByTurn();
+        if (!player.hasSelectedCard()) {
+            battleView.noCardSelectedYet();
+        } else if(!player.isSelectedCardFromHand()){
+            battleView.canNotSetCard();
+        } else {
+            battleView.canNotDoThisActionInThisPhase();
+        }
+    }
+
+    protected void controlSetPositionAttackCommand() {
+        controlSetPositionAttackOrDefenseOrFlipSummonCommand();
+    }
+
+    protected void controlSetPositionDefenseCommand() {
+        controlSetPositionAttackOrDefenseOrFlipSummonCommand();
+    }
+
+    protected void controlFlipSummonCommand() {
+        controlSetPositionAttackOrDefenseOrFlipSummonCommand();
+    }
+
+    private void controlSetPositionAttackOrDefenseOrFlipSummonCommand() {
+        Player player = phase.getPlayerByTurn();
+        if (!player.hasSelectedCard()) {
+            battleView.noCardSelectedYet();
+        } else if (!player.isSelectedCardFromMonsterCardZone()) {
+            battleView.canNotChangeCardPosition();
+        } else {
+            battleView.canNotDoThisActionInThisPhase();
+        }
+    }
+
+    protected void controlAttackDirectCommand() {
+        Player player = phase.getPlayerByTurn();
+        Player rivalPlayer = phase.getRivalPlayerByTurn();
+        if(!player.hasSelectedCard()){
+            battleView.noCardSelectedYet();
+        } else if(!player.isSelectedCardFromMonsterCardZone()){
+            battleView.canNotAttackWithThisCard();
+        } else if(player.getSelectedCard() instanceof MonsterCard && ((MonsterCard) player.getSelectedCard()).hasBattledInBattlePhase()){
+            battleView.thisCardAlreadyAttacked();
+        } else if(rivalPlayer.getMonsterCardsInZone().size() > 0){
+            battleView.canNotAttackDirectly();
+        } else if(phase instanceof BattlePhase){
+            int damage = ((BattlePhase) phase).attackDirect();
+            battleView.attackDirectResult(damage);
+        }
+    }
+
+    protected void controlActivateEffectCommand() {
 
     }
 
-    protected void controlSetCommand(){
-
-    }
-
-    protected void controlSetPositionAttackCommand(){
-
-    }
-
-    protected void controlSetPositionDefenseCommand(){
-
-    }
-
-    protected void controlFlipSummonCommand(){
-
-    }
-
-    protected void controlAttackDirectCommand(){
-
-    }
-
-    protected void controlActivateEffectCommand(){
-
-    }
-
-    protected void controlAttackToCardCommand(int location){
-
-    }
-
-    protected void controlSelectOwnMonsterCommand(int location){
-
-    }
-
-    protected void controlSelectOwnSpellCommand(int location){
-
-    }
-
-    protected void controlSelectRivalMonsterCommand(int location){
-
-    }
-
-    protected void controlSelectRivalSpellCommand(int location){
-
-    }
-
-    protected void controlSelectOwnFieldZoneSpellCommand(){
-
-    }
-
-    protected void controlSelectRivalFieldZoneSpellCommand(){
-
-    }
-
-    protected void controlSelectFromOwnHand(){
-
-    }
-
-    protected void controlDeselectCommand(){
+    protected void controlAttackToCardCommand(int location) {
 
     }
 }

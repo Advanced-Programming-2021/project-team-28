@@ -33,5 +33,12 @@ public abstract class Phase {
         }
     }
 
-    public void run(){}
+    public Player getRivalPlayerByTurn(){
+        if(turn == Turn.FIRST_PLAYER){
+            return secondPlayer;
+        } else {
+            return firstPlayer;
+        }
+    }
+
 }

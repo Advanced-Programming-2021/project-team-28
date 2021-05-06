@@ -9,8 +9,8 @@ import java.util.regex.Pattern;
 
 public abstract class PhaseController {
 
-    Phase phase;
-    private PhaseView view = new PhaseView(this);
+    protected Phase phase;
+    protected PhaseView view = new PhaseView(this);
 
     public PhaseController(Phase phase) {
         this.phase = phase;
@@ -44,7 +44,7 @@ public abstract class PhaseController {
         } else if (command.equals("activate effect")) {
             controlActivateEffectCommand();
         } else if (command.equals("show graveyard")) {
-            view.print(phase.getPlayerByTurn().graveyardToString());
+            view.printString(phase.getPlayerByTurn().graveyardToString());
         } else if (matcherForAttackToCard.find()) {
             controlAttackToCardCommand(Integer.parseInt(matcherForAttackToCard.group(1)));
         } else if (command.startsWith("select ")) {
@@ -75,6 +75,9 @@ public abstract class PhaseController {
         } else {
             view.invalidCommand();
         }
+        if(phase.getFirstPlayer().getLifePoint() <= 0 || phase.getSecondPlayer().getLifePoint() <= 0){
+            return MenuEnum.BACK;
+        }
         return MenuEnum.CONTINUE;
     }
 
@@ -94,21 +97,37 @@ public abstract class PhaseController {
 
     protected abstract void controlAttackToCardCommand(int location);
 
-    protected abstract void controlSelectOwnMonsterCommand(int location);
+    protected void controlSelectOwnMonsterCommand(int location){
+        //TODO MAMMAD
+    }
 
-    protected abstract void controlSelectOwnSpellCommand(int location);
+    protected void controlSelectOwnSpellCommand(int location){
+        //TODO MAMMAD
+    }
 
-    protected abstract void controlSelectRivalMonsterCommand(int location);
+    protected void controlSelectRivalMonsterCommand(int location){
+        //TODO MAMMAD
+    }
 
-    protected abstract void controlSelectRivalSpellCommand(int location);
+    protected void controlSelectRivalSpellCommand(int location){
+        //TODO MAMMAD
+    }
 
-    protected abstract void controlSelectOwnFieldZoneSpellCommand();
+    protected void controlSelectOwnFieldZoneSpellCommand(){
+        //TODO MAMMAD
+    }
 
-    protected abstract void controlSelectRivalFieldZoneSpellCommand();
+    protected void controlSelectRivalFieldZoneSpellCommand(){
+        //TODO MAMMAD
+    }
 
-    protected abstract void controlSelectFromOwnHand();
+    protected void controlSelectFromOwnHand(){
+        //TODO MAMMAD
+    }
 
-    protected abstract void controlDeselectCommand();
+    protected void controlDeselectCommand(){
+        //TODO MAMMAD
+    }
 
 
     public Matcher[] getSelectCommandMatchers(String command) {

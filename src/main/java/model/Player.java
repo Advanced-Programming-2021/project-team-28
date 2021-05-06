@@ -1,9 +1,6 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 
 public class Player {
     private User user;
@@ -17,7 +14,8 @@ public class Player {
     private ArrayList<Card> cardsInHand = new ArrayList<>();
     private ArrayList<Card> cardsInGraveyard = new ArrayList<>();
     private Card fieldZoneCard;
-    Random random = new Random();
+    private Card selectedCard;
+    private Random random = new Random();
 
     public Player(User user) throws CloneNotSupportedException {
         setUser(user);
@@ -70,12 +68,24 @@ public class Player {
         this.lifePoint -= lifePoint;
     }
 
+    public void setLifePoint(int lifePoint) {
+        this.lifePoint = lifePoint;
+    }
+
     private void setUser(User user){
         this.user = user;
     }
 
-    public void setLifePoint(int lifePoint) {
-        this.lifePoint = lifePoint;
+    public Card getSelectedCard() {
+        return selectedCard;
+    }
+
+    public void setSelectedCard(Card selectedCard) {
+        this.selectedCard = selectedCard;
+    }
+
+    public boolean hasSelectedCard(){
+        return selectedCard != null;
     }
 
     private void setMainAndSideDuelDeckAndRemainingCards() throws CloneNotSupportedException {
@@ -209,6 +219,30 @@ public class Player {
             graveyardToStringBuilder.append("\n");
         }
         return graveyardToStringBuilder.toString();
+    }
+
+    public boolean isSelectedCardFromHand(){
+        if(!hasSelectedCard()){
+            return false;
+        }
+        for(Card card : cardsInHand){
+            if(card.equals(selectedCard)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isSelectedCardFromMonsterCardZone(){
+        if(!hasSelectedCard()){
+            return false;
+        }
+        for (Map.Entry<Integer, MonsterCard> e : monsterCardsInZone.entrySet()){
+            if(e.getValue().equals(selectedCard)){
+                return true;
+            }
+        }
+        return false;
     }
 }
 
