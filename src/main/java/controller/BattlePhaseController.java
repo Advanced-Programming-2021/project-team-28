@@ -67,12 +67,14 @@ public class BattlePhaseController extends PhaseController {
             battleView.noCardSelectedYet();
         } else if (!player.isSelectedCardFromMonsterCardZone()) {
             battleView.canNotAttackWithThisCard();
-        } else if(player.getSelectedCard() instanceof MonsterCard && ((MonsterCard) player.getSelectedCard()).getPosition() != MonsterCardPosition.OFFENSIVE_OCCUPIED){
+        } else if (player.getSelectedCard() instanceof MonsterCard && ((MonsterCard) player.getSelectedCard()).getPosition() != MonsterCardPosition.OFFENSIVE_OCCUPIED) {
             battleView.canNotAttackWithThisCard();
         } else if (player.getSelectedCard() instanceof MonsterCard && ((MonsterCard) player.getSelectedCard()).hasBattledInBattlePhase()) {
             battleView.thisCardAlreadyAttacked();
         } else if (rivalPlayer.getMonsterCardsInZone().size() > 0) {
             battleView.canNotAttackDirectly();
+        } else if (phase.getTurnsPlayed() < 2) {
+            battleView.youCanNotAttackInYourFirstTurn();
         } else if (phase instanceof BattlePhase) {
             int damage = ((BattlePhase) phase).attackDirect();
             battleView.attackDirectResult(damage);
@@ -100,8 +102,10 @@ public class BattlePhaseController extends PhaseController {
             battleView.canNotAttackWithThisCard();
         } else if (player.getSelectedCard() instanceof MonsterCard && ((MonsterCard) player.getSelectedCard()).hasBattledInBattlePhase()) {
             battleView.thisCardAlreadyAttacked();
-        } else if (!rivalPlayer.doesHaveMonsterCardInThisLocation(location)){
+        } else if (!rivalPlayer.doesHaveMonsterCardInThisLocation(location)) {
             battleView.thereIsNoCardToAttackHere();
+        } else if (phase.getTurnsPlayed() < 2) {
+            battleView.youCanNotAttackInYourFirstTurn();
         } else {
             battleView.printString(((BattlePhase) phase).attackToCardAndReturnAttackReport(location));
             battleView.printString(phase.getMapToString());

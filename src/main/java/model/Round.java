@@ -37,7 +37,6 @@ public class Round {
             if (isSomeOneWon() || isDrawHappened) break;
             ++turnsPlayed;
             changeTurn();
-
         }
     }
 
