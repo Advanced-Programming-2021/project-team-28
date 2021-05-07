@@ -22,17 +22,17 @@ public class Round {
 
     public void run() {
         while (true) {
-            DrawPhase drawPhase = new DrawPhase(firstPlayer, secondPlayer, turn);
+            DrawPhase drawPhase = new DrawPhase(firstPlayer, secondPlayer, turn, turnsPlayed);
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;
-            MainPhase1 mainPhase1 = new MainPhase1(firstPlayer, secondPlayer, turn);
+            MainPhase1 mainPhase1 = new MainPhase1(firstPlayer, secondPlayer, turn,turnsPlayed);
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;
-            BattlePhase battlePhase = new BattlePhase(firstPlayer, secondPlayer, turn);
+            BattlePhase battlePhase = new BattlePhase(firstPlayer, secondPlayer, turn, turnsPlayed);
             new BattlePhaseController(battlePhase).run();
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;
-            MainPhase2 mainPhase2 = new MainPhase2(firstPlayer, secondPlayer, turn);
+            MainPhase2 mainPhase2 = new MainPhase2(firstPlayer, secondPlayer, turn, turnsPlayed);
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;
             ++turnsPlayed;

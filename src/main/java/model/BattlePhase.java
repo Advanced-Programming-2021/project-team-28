@@ -4,8 +4,8 @@ import enums.MonsterCardPosition;
 import enums.Turn;
 
 public class BattlePhase extends Phase{
-    public BattlePhase(Player firstPlayer, Player secondPlayer, Turn turn) {
-        super(firstPlayer, secondPlayer, turn);
+    public BattlePhase(Player firstPlayer, Player secondPlayer, Turn turn, int turnsPlayed) {
+        super(firstPlayer, secondPlayer, turn, turnsPlayed);
     }
 
     public int attackDirect(){
