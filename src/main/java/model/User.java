@@ -26,7 +26,7 @@ public class User {
     @Expose
     private int score;
     @Expose
-    private int balance;
+    private int balance = 100000;
 
     @Expose
     private ArrayList <Deck> decks = new ArrayList<>();

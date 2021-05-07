@@ -1,7 +1,9 @@
 package controller;
 
 import enums.MenuEnum;
-import model.Phase;
+import enums.MonsterCardPosition;
+import enums.SpellOrTrapCardPosition;
+import model.*;
 import view.PhaseView;
 
 import java.util.regex.Matcher;
@@ -23,8 +25,9 @@ public abstract class PhaseController {
     public MenuEnum processCommand(String command) {
         Matcher matcherForAttackToCard = Pattern.compile("^attack (\\d+)$").matcher(command);
         if (command.equals("next phase")) {
+            view.printString(phase.getMapToString());
             return MenuEnum.BACK;
-        } else if (command.equals("surrender")){
+        } else if (command.equals("surrender")) {
             phase.getPlayerByTurn().setLifePoint(0);
             return MenuEnum.BACK;
         } else if (command.equals("menu show-current")) {
@@ -66,18 +69,21 @@ public abstract class PhaseController {
             } else if (selectCommandMatchers[7].find() || selectCommandMatchers[8].find()) {
                 controlSelectRivalFieldZoneSpellCommand();
             } else if (selectCommandMatchers[9].find()) {
-                controlSelectFromOwnHand();
+                controlSelectFromOwnHand(Integer.parseInt(selectCommandMatchers[9].group(1)));
             } else if (selectCommandMatchers[10].find()) {
                 controlDeselectCommand();
-            } else {
+            } else if (selectCommandMatchers[11].find()) {
+                controlShowCardSelectedCommand();
+            }else {
                 view.invalidSelection();
             }
         } else {
             view.invalidCommand();
         }
-        if(phase.getFirstPlayer().getLifePoint() <= 0 || phase.getSecondPlayer().getLifePoint() <= 0){
+        if (phase.getFirstPlayer().getLifePoint() <= 0 || phase.getSecondPlayer().getLifePoint() <= 0) {
             return MenuEnum.BACK;
         }
+        view.printString(phase.getMapToString());
         return MenuEnum.CONTINUE;
     }
 
@@ -97,38 +103,104 @@ public abstract class PhaseController {
 
     protected abstract void controlAttackToCardCommand(int location);
 
-    protected void controlSelectOwnMonsterCommand(int location){
-        //TODO MAMMAD
+    protected void controlSelectOwnMonsterCommand(int location) {
+        if (phase.getPlayerByTurn().doesHaveMonsterCardInThisLocation(location)) {
+            phase.getPlayerByTurn().setSelectedCard(phase.getPlayerByTurn().getMonsterCardsInZone().get(location));
+            phase.getPlayerByTurn().setSelectedCardVisible(true);
+            view.cardSelected();
+        } else {
+            view.noCardFoundInPosition();
+        }
     }
 
-    protected void controlSelectOwnSpellCommand(int location){
-        //TODO MAMMAD
+    protected void controlSelectOwnSpellCommand(int location) {
+        if (phase.getPlayerByTurn().doesHaveSpellOrTrapCardInThisPosition(location)) {
+            phase.getPlayerByTurn().setSelectedCard(phase.getPlayerByTurn().getSpellOrTrapCardsInZone().get(location));
+            phase.getPlayerByTurn().setSelectedCardVisible(true);
+            view.cardSelected();
+        } else {
+            view.noCardFoundInPosition();
+        }
     }
 
-    protected void controlSelectRivalMonsterCommand(int location){
-        //TODO MAMMAD
+    protected void controlSelectRivalMonsterCommand(int location) {
+        if (phase.getRivalPlayerByTurn().doesHaveMonsterCardInThisLocation(location)) {
+            MonsterCard cardToSelect = phase.getRivalPlayerByTurn().getMonsterCardsInZone().get(location);
+            phase.getPlayerByTurn().setSelectedCard(cardToSelect);
+            phase.getPlayerByTurn().setSelectedCardVisible(cardToSelect.getPosition() != MonsterCardPosition.DEFENSIVE_HIDDEN);
+            view.cardSelected();
+        } else {
+            view.noCardFoundInPosition();
+        }
     }
 
-    protected void controlSelectRivalSpellCommand(int location){
-        //TODO MAMMAD
+    protected void controlSelectRivalSpellCommand(int location) {
+        if (phase.getRivalPlayerByTurn().doesHaveSpellOrTrapCardInThisPosition(location)) {
+            Card cardToSelect = phase.getRivalPlayerByTurn().getSpellOrTrapCardsInZone().get(location);
+            phase.getPlayerByTurn().setSelectedCard(cardToSelect);
+            if (cardToSelect instanceof TrapCard && ((TrapCard) cardToSelect).getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
+                phase.getPlayerByTurn().setSelectedCardVisible(true);
+            } else if (cardToSelect instanceof SpellCard && ((SpellCard) cardToSelect).getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
+                phase.getPlayerByTurn().setSelectedCardVisible(true);
+            } else {
+                phase.getPlayerByTurn().setSelectedCardVisible(false);
+            }
+            view.cardSelected();
+        } else {
+            view.noCardFoundInPosition();
+        }
     }
 
-    protected void controlSelectOwnFieldZoneSpellCommand(){
-        //TODO MAMMAD
+    protected void controlSelectOwnFieldZoneSpellCommand() {
+        if (!phase.getPlayerByTurn().hasFieldSpellCardInZone()) {
+            view.noCardFoundInPosition();
+        } else {
+            phase.getPlayerByTurn().setSelectedCard(phase.getPlayerByTurn().getFieldZoneCard());
+            phase.getPlayerByTurn().setSelectedCardVisible(true);
+            view.cardSelected();
+        }
     }
 
-    protected void controlSelectRivalFieldZoneSpellCommand(){
-        //TODO MAMMAD
+    protected void controlSelectRivalFieldZoneSpellCommand() {
+        if (!phase.getRivalPlayerByTurn().hasFieldSpellCardInZone()) {
+            view.noCardFoundInPosition();
+        } else {
+            phase.getPlayerByTurn().setSelectedCard(phase.getRivalPlayerByTurn().getFieldZoneCard());
+            phase.getPlayerByTurn().setSelectedCardVisible(true);
+            view.cardSelected();
+        }
     }
 
-    protected void controlSelectFromOwnHand(){
-        //TODO MAMMAD
+    protected void controlSelectFromOwnHand(int location) {
+        if (location > phase.getPlayerByTurn().getCardsInHand().size()) {
+            view.invalidSelection();
+        } else {
+            phase.getPlayerByTurn().setSelectedCard(phase.getPlayerByTurn().getCardsInHand().get(location - 1));
+            phase.getPlayerByTurn().setSelectedCardVisible(true);
+            view.cardSelected();
+        }
     }
 
-    protected void controlDeselectCommand(){
-        //TODO MAMMAD
+    protected void controlDeselectCommand() {
+        if (phase.getPlayerByTurn().hasSelectedCard()) {
+            phase.getPlayerByTurn().setSelectedCard(null);
+            phase.getPlayerByTurn().setSelectedCardVisible(false);
+            view.cardDeselected();
+        } else {
+            view.noCardSelectedYet();
+        }
     }
 
+    protected void controlShowCardSelectedCommand(){
+        Player player = phase.getPlayerByTurn();
+        if(!player.hasSelectedCard()){
+            view.noCardSelectedYet();
+        } else if (!player.isSelectedCardVisible()){
+            view.cardIsNotVisible();
+        } else {
+            view.printString(player.getSelectedCard().toString());
+        }
+    }
 
     public Matcher[] getSelectCommandMatchers(String command) {
         Pattern patternForSelectOwnMonsterInZone = Pattern.compile("^select --monster (\\d+)$");
@@ -140,9 +212,10 @@ public abstract class PhaseController {
         Pattern patternForSelectOwnFieldZoneSpell = Pattern.compile("^select --field$");
         Pattern patternForSelectRivalFieldZoneSpell1 = Pattern.compile("^select --field --opponent$");
         Pattern patternForSelectRivalFieldZoneSpell2 = Pattern.compile("^select --opponent --field$");
-        Pattern patternForSelectFromOwnHand = Pattern.compile("^select --hand$");
+        Pattern patternForSelectFromOwnHand = Pattern.compile("^select --hand (\\d+)$");
         Pattern patternForDeselect = Pattern.compile("^select -d$");
-        Matcher[] selectCommandMatchers = new Matcher[11];
+        Pattern patternForShowCardSelected = Pattern.compile("^card show --selected$");
+        Matcher[] selectCommandMatchers = new Matcher[12];
         selectCommandMatchers[0] = patternForSelectOwnMonsterInZone.matcher(command);
         selectCommandMatchers[1] = patternForSelectOwnSpellInZone.matcher(command);
         selectCommandMatchers[2] = patternForSelectRivalMonsterInZone1.matcher(command);
@@ -154,6 +227,7 @@ public abstract class PhaseController {
         selectCommandMatchers[8] = patternForSelectRivalFieldZoneSpell2.matcher(command);
         selectCommandMatchers[9] = patternForSelectFromOwnHand.matcher(command);
         selectCommandMatchers[10] = patternForDeselect.matcher(command);
+        selectCommandMatchers[11] = patternForShowCardSelected.matcher(command);
         return selectCommandMatchers;
     }
 }

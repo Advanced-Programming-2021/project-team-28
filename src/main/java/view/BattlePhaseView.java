@@ -22,4 +22,12 @@ public class BattlePhaseView extends PhaseView {
     public void attackDirectResult(int damage){
         System.out.println("your opponent receives " + damage + " battle damage");
     }
+
+    public void canNotActivateOnThisTurn(){
+        System.out.println("you can’t activate an effect on this turn");
+    }
+
+    public void thereIsNoCardToAttackHere(){
+        System.out.println("there is no card to attack here");
+    }
 }

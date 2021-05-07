@@ -26,6 +26,10 @@ public abstract class Card {
 
     public abstract Object clone() throws CloneNotSupportedException;
 
+    public String toString(){
+        return getName() + ": " + getDescription();
+    }
+
 
     public static String cardsArrayListToString(ArrayList<Card> cards) {
         ArrayList<Card> monsterCards = new ArrayList<>();

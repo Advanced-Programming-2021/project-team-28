@@ -3,11 +3,13 @@ package controller;
 import model.BattlePhase;
 import model.MonsterCard;
 import model.Player;
+import model.SpellCard;
 import view.BattlePhaseView;
 
 public class BattlePhaseController extends PhaseController {
 
     private BattlePhaseView battleView = new BattlePhaseView(this);
+
     public BattlePhaseController(BattlePhase battlePhase) {
         super(battlePhase);
     }
@@ -18,7 +20,7 @@ public class BattlePhaseController extends PhaseController {
             battleView.noCardSelectedYet();
         } else if (!player.isSelectedCardFromHand() || !(player.getSelectedCard() instanceof MonsterCard)) {
             battleView.canNotSummonCard();
-        } else{
+        } else {
             battleView.actionNotAllowedInThisPhase();
         }
     }
@@ -27,7 +29,7 @@ public class BattlePhaseController extends PhaseController {
         Player player = phase.getPlayerByTurn();
         if (!player.hasSelectedCard()) {
             battleView.noCardSelectedYet();
-        } else if(!player.isSelectedCardFromHand()){
+        } else if (!player.isSelectedCardFromHand()) {
             battleView.canNotSetCard();
         } else {
             battleView.canNotDoThisActionInThisPhase();
@@ -60,25 +62,44 @@ public class BattlePhaseController extends PhaseController {
     protected void controlAttackDirectCommand() {
         Player player = phase.getPlayerByTurn();
         Player rivalPlayer = phase.getRivalPlayerByTurn();
-        if(!player.hasSelectedCard()){
+        if (!player.hasSelectedCard()) {
             battleView.noCardSelectedYet();
-        } else if(!player.isSelectedCardFromMonsterCardZone()){
+        } else if (!player.isSelectedCardFromMonsterCardZone()) {
             battleView.canNotAttackWithThisCard();
-        } else if(player.getSelectedCard() instanceof MonsterCard && ((MonsterCard) player.getSelectedCard()).hasBattledInBattlePhase()){
+        } else if (player.getSelectedCard() instanceof MonsterCard && ((MonsterCard) player.getSelectedCard()).hasBattledInBattlePhase()) {
             battleView.thisCardAlreadyAttacked();
-        } else if(rivalPlayer.getMonsterCardsInZone().size() > 0){
+        } else if (rivalPlayer.getMonsterCardsInZone().size() > 0) {
             battleView.canNotAttackDirectly();
-        } else if(phase instanceof BattlePhase){
+        } else if (phase instanceof BattlePhase) {
             int damage = ((BattlePhase) phase).attackDirect();
             battleView.attackDirectResult(damage);
         }
     }
 
     protected void controlActivateEffectCommand() {
-
+        Player player = phase.getPlayerByTurn();
+        if (!player.hasSelectedCard()) {
+            battleView.noCardSelectedYet();
+        } else if (!(player.getSelectedCard() instanceof SpellCard)) {
+            battleView.activateEffectIsForSpellCards();
+        } else {
+            battleView.canNotActivateOnThisTurn();
+        }
     }
 
     protected void controlAttackToCardCommand(int location) {
-
+        Player player = phase.getPlayerByTurn();
+        Player rivalPlayer = phase.getRivalPlayerByTurn();
+        if (!player.hasSelectedCard()) {
+            battleView.noCardSelectedYet();
+        } else if (!player.isSelectedCardFromMonsterCardZone()) {
+            battleView.canNotChangeCardPosition();
+        } else if (player.getSelectedCard() instanceof MonsterCard && ((MonsterCard) player.getSelectedCard()).hasBattledInBattlePhase()) {
+            battleView.thisCardAlreadyAttacked();
+        } else if (!rivalPlayer.doesHaveMonsterCardInThisLocation(location)){
+            battleView.thereIsNoCardToAttackHere();
+        } else {
+            battleView.printString(((BattlePhase) phase).attackToCardAndReturnAttackReport(location));
+        }
     }
 }

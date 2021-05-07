@@ -15,6 +15,7 @@ public class Player {
     private ArrayList<Card> cardsInGraveyard = new ArrayList<>();
     private Card fieldZoneCard;
     private Card selectedCard;
+    private boolean isSelectedCardVisible;
     private Random random = new Random();
 
     public Player(User user) throws CloneNotSupportedException {
@@ -22,6 +23,7 @@ public class Player {
         setMainAndSideDuelDeckAndRemainingCards();
         shuffleRemainingCards();
         setCardsInHand();
+        setSelectedCardVisible(false);
     }
 
     public User getUser() {
@@ -30,6 +32,10 @@ public class Player {
 
     public int getLifePoint() {
         return lifePoint;
+    }
+
+    public boolean isSelectedCardVisible() {
+        return isSelectedCardVisible;
     }
 
     public HashMap<Integer, MonsterCard> getMonsterCardsInZone() {
@@ -74,6 +80,10 @@ public class Player {
 
     private void setUser(User user){
         this.user = user;
+    }
+
+    public void setSelectedCardVisible(boolean selectedCardVisible) {
+        isSelectedCardVisible = selectedCardVisible;
     }
 
     public Card getSelectedCard() {
@@ -237,12 +247,40 @@ public class Player {
         if(!hasSelectedCard()){
             return false;
         }
-        for (Map.Entry<Integer, MonsterCard> e : monsterCardsInZone.entrySet()){
-            if(e.getValue().equals(selectedCard)){
+        for (Map.Entry<Integer, MonsterCard> locationAndMonsterCard : monsterCardsInZone.entrySet()){
+            if(locationAndMonsterCard.getValue().equals(selectedCard)){
                 return true;
             }
         }
         return false;
     }
+
+    public boolean doesHaveMonsterCardInThisLocation(int location){
+        for (Map.Entry<Integer, MonsterCard> locationAndMonsterCard : monsterCardsInZone.entrySet()){
+            if(locationAndMonsterCard.getKey() == location){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean doesHaveSpellOrTrapCardInThisPosition(int location){
+        for (Map.Entry<Integer, Card> locationAndCard : spellOrTrapCardsInZone.entrySet()){
+            if(locationAndCard.getKey() == location){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int getLocationOfThisMonsterCardInZone (MonsterCard monsterCard){
+        for (Map.Entry<Integer, MonsterCard> locationAndCard : monsterCardsInZone.entrySet()){
+            if(locationAndCard.getValue().equals(monsterCard)){
+                return locationAndCard.getKey();
+            }
+        }
+        return -1;
+    }
+
 }
 
