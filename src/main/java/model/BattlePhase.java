@@ -26,10 +26,13 @@ public class BattlePhase extends Phase{
         MonsterCard attackerCard = (MonsterCard) getPlayerByTurn().getSelectedCard();
         MonsterCard defenderCard = getRivalPlayerByTurn().getMonsterCardsInZone().get(location);
         if(defenderCard.getPosition() == MonsterCardPosition.OFFENSIVE_OCCUPIED){
+            attackerCard.setHasBattledInBattlePhase(true);
             return attackToOffensiveOccupiedCardAndReturnReport(location, attackerCard, defenderCard);
         } else {
+            attackerCard.setHasBattledInBattlePhase(true);
             return attackToDefensiveCardAndReturnReport(location, attackerCard, defenderCard);
         }
+
     }
 
     private String attackToDefensiveCardAndReturnReport(int location, MonsterCard attackerCard, MonsterCard defenderCard) {

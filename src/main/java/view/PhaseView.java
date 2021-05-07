@@ -84,4 +84,8 @@ public class PhaseView {
     public void cardIsNotVisible(){
         System.out.println("card is not visible");
     }
+
+    public void graveyardEmpty(){
+        System.out.println("graveyard empty");
+    }
 }

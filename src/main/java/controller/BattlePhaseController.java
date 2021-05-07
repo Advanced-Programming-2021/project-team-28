@@ -1,5 +1,6 @@
 package controller;
 
+import enums.MonsterCardPosition;
 import model.BattlePhase;
 import model.MonsterCard;
 import model.Player;
@@ -66,6 +67,8 @@ public class BattlePhaseController extends PhaseController {
             battleView.noCardSelectedYet();
         } else if (!player.isSelectedCardFromMonsterCardZone()) {
             battleView.canNotAttackWithThisCard();
+        } else if(player.getSelectedCard() instanceof MonsterCard && ((MonsterCard) player.getSelectedCard()).getPosition() != MonsterCardPosition.OFFENSIVE_OCCUPIED){
+            battleView.canNotAttackWithThisCard();
         } else if (player.getSelectedCard() instanceof MonsterCard && ((MonsterCard) player.getSelectedCard()).hasBattledInBattlePhase()) {
             battleView.thisCardAlreadyAttacked();
         } else if (rivalPlayer.getMonsterCardsInZone().size() > 0) {
@@ -73,6 +76,7 @@ public class BattlePhaseController extends PhaseController {
         } else if (phase instanceof BattlePhase) {
             int damage = ((BattlePhase) phase).attackDirect();
             battleView.attackDirectResult(damage);
+            battleView.printString(phase.getMapToString());
         }
     }
 
@@ -93,13 +97,14 @@ public class BattlePhaseController extends PhaseController {
         if (!player.hasSelectedCard()) {
             battleView.noCardSelectedYet();
         } else if (!player.isSelectedCardFromMonsterCardZone()) {
-            battleView.canNotChangeCardPosition();
+            battleView.canNotAttackWithThisCard();
         } else if (player.getSelectedCard() instanceof MonsterCard && ((MonsterCard) player.getSelectedCard()).hasBattledInBattlePhase()) {
             battleView.thisCardAlreadyAttacked();
         } else if (!rivalPlayer.doesHaveMonsterCardInThisLocation(location)){
             battleView.thereIsNoCardToAttackHere();
         } else {
             battleView.printString(((BattlePhase) phase).attackToCardAndReturnAttackReport(location));
+            battleView.printString(phase.getMapToString());
         }
     }
 }

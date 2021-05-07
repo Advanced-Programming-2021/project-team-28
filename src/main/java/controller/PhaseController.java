@@ -47,7 +47,9 @@ public abstract class PhaseController {
         } else if (command.equals("activate effect")) {
             controlActivateEffectCommand();
         } else if (command.equals("show graveyard")) {
-            view.printString(phase.getPlayerByTurn().graveyardToString());
+            controlShowGraveyardCommand();
+        } else if (command.equals("card show --selected")){
+            controlShowCardSelectedCommand();
         } else if (matcherForAttackToCard.find()) {
             controlAttackToCardCommand(Integer.parseInt(matcherForAttackToCard.group(1)));
         } else if (command.startsWith("select ")) {
@@ -72,9 +74,7 @@ public abstract class PhaseController {
                 controlSelectFromOwnHand(Integer.parseInt(selectCommandMatchers[9].group(1)));
             } else if (selectCommandMatchers[10].find()) {
                 controlDeselectCommand();
-            } else if (selectCommandMatchers[11].find()) {
-                controlShowCardSelectedCommand();
-            }else {
+            } else {
                 view.invalidSelection();
             }
         } else {
@@ -83,7 +83,6 @@ public abstract class PhaseController {
         if (phase.getFirstPlayer().getLifePoint() <= 0 || phase.getSecondPlayer().getLifePoint() <= 0) {
             return MenuEnum.BACK;
         }
-        view.printString(phase.getMapToString());
         return MenuEnum.CONTINUE;
     }
 
@@ -202,20 +201,27 @@ public abstract class PhaseController {
         }
     }
 
+    protected void controlShowGraveyardCommand(){
+        if(phase.getPlayerByTurn().getCardsInGraveyard().size() > 0){
+            view.printString(phase.getPlayerByTurn().graveyardToString());
+        } else {
+            view.graveyardEmpty();
+        }
+    }
+
     public Matcher[] getSelectCommandMatchers(String command) {
         Pattern patternForSelectOwnMonsterInZone = Pattern.compile("^select --monster (\\d+)$");
         Pattern patternForSelectOwnSpellInZone = Pattern.compile("^select --spell (\\d+)$");
-        Pattern patternForSelectRivalMonsterInZone1 = Pattern.compile("^select --monster --opponent (\\d+)$");
+        Pattern patternForSelectRivalMonsterInZone1 = Pattern.compile("^select --monster (\\d+) --opponent$");
         Pattern patternForSelectRivalMonsterInZone2 = Pattern.compile("^select --opponent --monster (\\d+)$");
-        Pattern patternForSelectRivalSpellInZone1 = Pattern.compile("^select --spell --opponent (\\d+)$");
+        Pattern patternForSelectRivalSpellInZone1 = Pattern.compile("^select --spell (\\d+) --opponent$");
         Pattern patternForSelectRivalSpellInZone2 = Pattern.compile("^select --opponent --spell (\\d+)$");
         Pattern patternForSelectOwnFieldZoneSpell = Pattern.compile("^select --field$");
         Pattern patternForSelectRivalFieldZoneSpell1 = Pattern.compile("^select --field --opponent$");
         Pattern patternForSelectRivalFieldZoneSpell2 = Pattern.compile("^select --opponent --field$");
         Pattern patternForSelectFromOwnHand = Pattern.compile("^select --hand (\\d+)$");
         Pattern patternForDeselect = Pattern.compile("^select -d$");
-        Pattern patternForShowCardSelected = Pattern.compile("^card show --selected$");
-        Matcher[] selectCommandMatchers = new Matcher[12];
+        Matcher[] selectCommandMatchers = new Matcher[11];
         selectCommandMatchers[0] = patternForSelectOwnMonsterInZone.matcher(command);
         selectCommandMatchers[1] = patternForSelectOwnSpellInZone.matcher(command);
         selectCommandMatchers[2] = patternForSelectRivalMonsterInZone1.matcher(command);
@@ -227,7 +233,6 @@ public abstract class PhaseController {
         selectCommandMatchers[8] = patternForSelectRivalFieldZoneSpell2.matcher(command);
         selectCommandMatchers[9] = patternForSelectFromOwnHand.matcher(command);
         selectCommandMatchers[10] = patternForDeselect.matcher(command);
-        selectCommandMatchers[11] = patternForShowCardSelected.matcher(command);
         return selectCommandMatchers;
     }
 }
