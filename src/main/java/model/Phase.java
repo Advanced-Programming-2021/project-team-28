@@ -9,12 +9,14 @@ public abstract class Phase {
     protected Player secondPlayer;
     protected Turn turn;
     protected Round round;
+    protected int turnsPlayed;
 
-    public Phase(Player firstPlayer, Player secondPlayer, Turn turn) {
+    public Phase(Player firstPlayer, Player secondPlayer, Turn turn, int turnsPlayed) {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
         this.turn = turn;
 
+        this.turnsPlayed = turnsPlayed;
     }
 
     public Turn getTurn() {
@@ -27,6 +29,14 @@ public abstract class Phase {
 
     public Player getSecondPlayer() {
         return secondPlayer;
+    }
+
+    public int getTurnsPlayed() {
+        return turnsPlayed;
+    }
+
+    public void setTurnsPlayed(int turnsPlayed) {
+        this.turnsPlayed = turnsPlayed;
     }
 
     public Player getPlayerByTurn (){

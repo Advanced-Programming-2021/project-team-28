@@ -4,8 +4,8 @@ import enums.MonsterCardPosition;
 import enums.Turn;
 
 public class BattlePhase extends Phase{
-    public BattlePhase(Player firstPlayer, Player secondPlayer, Turn turn) {
-        super(firstPlayer, secondPlayer, turn);
+    public BattlePhase(Player firstPlayer, Player secondPlayer, Turn turn, int turnsPlayed) {
+        super(firstPlayer, secondPlayer, turn, turnsPlayed);
     }
 
     public int attackDirect(){
@@ -26,10 +26,13 @@ public class BattlePhase extends Phase{
         MonsterCard attackerCard = (MonsterCard) getPlayerByTurn().getSelectedCard();
         MonsterCard defenderCard = getRivalPlayerByTurn().getMonsterCardsInZone().get(location);
         if(defenderCard.getPosition() == MonsterCardPosition.OFFENSIVE_OCCUPIED){
+            attackerCard.setHasBattledInBattlePhase(true);
             return attackToOffensiveOccupiedCardAndReturnReport(location, attackerCard, defenderCard);
         } else {
+            attackerCard.setHasBattledInBattlePhase(true);
             return attackToDefensiveCardAndReturnReport(location, attackerCard, defenderCard);
         }
+
     }
 
     private String attackToDefensiveCardAndReturnReport(int location, MonsterCard attackerCard, MonsterCard defenderCard) {

@@ -30,4 +30,8 @@ public class BattlePhaseView extends PhaseView {
     public void thereIsNoCardToAttackHere(){
         System.out.println("there is no card to attack here");
     }
+
+    public void youCanNotAttackInYourFirstTurn(){
+        System.out.println("You can't attack in your first turn");
+    }
 }
