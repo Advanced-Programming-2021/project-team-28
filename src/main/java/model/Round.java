@@ -22,9 +22,11 @@ public class Round {
 
     public void run() {
         while (true) {
-            DrawPhase drawPhase = new DrawPhase(firstPlayer, secondPlayer, turn);
+            DrawPhase drawPhase = new DrawPhase(firstPlayer, secondPlayer, turn, this);
+            drawPhase.run();
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;
+
             MainPhase1 mainPhase1 = new MainPhase1(firstPlayer, secondPlayer, turn);
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;
@@ -88,11 +90,7 @@ public class Round {
     }
 
     public void changeTurn() {
-        if (turn == Turn.FIRST_PLAYER) {
-            turn = Turn.SECOND_PLAYER;
-        } else {
-            turn = Turn.FIRST_PLAYER;
-        }
+        this.turn = turn.opposite;
     }
 
     public void checkTheWinner() {

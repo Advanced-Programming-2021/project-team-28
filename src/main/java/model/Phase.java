@@ -8,11 +8,13 @@ public abstract class Phase {
     protected Player firstPlayer;
     protected Player secondPlayer;
     protected Turn turn;
+    protected Round round;
 
     public Phase(Player firstPlayer, Player secondPlayer, Turn turn) {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
         this.turn = turn;
+
     }
 
     public Turn getTurn() {
