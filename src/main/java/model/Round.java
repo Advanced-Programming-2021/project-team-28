@@ -1,6 +1,7 @@
 package model;
 
 import controller.BattlePhaseController;
+import controller.MainPhaseController;
 import enums.Turn;
 
 import java.util.HashMap;
@@ -27,16 +28,22 @@ public class Round {
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;
 
-            MainPhase1 mainPhase1 = new MainPhase1(firstPlayer, secondPlayer, turn);
+            MainPhase1 mainPhase1 = new MainPhase1(firstPlayer, secondPlayer, this);
+            MainPhaseController mainPhaseController = new MainPhaseController(mainPhase1);
+            mainPhaseController.run();
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;
+
             BattlePhase battlePhase = new BattlePhase(firstPlayer, secondPlayer, turn, turnsPlayed);
             new BattlePhaseController(battlePhase).run();
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;
+
             MainPhase2 mainPhase2 = new MainPhase2(firstPlayer, secondPlayer, turn, turnsPlayed);
+            mainPhaseController.run();
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;
+
             ++turnsPlayed;
             changeTurn();
 

@@ -19,6 +19,18 @@ public abstract class Phase {
         this.turnsPlayed = turnsPlayed;
     }
 
+    public Phase(Player firstPlayer, Player secondPlayer, Turn turn) {
+        this.firstPlayer = firstPlayer;
+        this.secondPlayer = secondPlayer;
+        this.turn = turn;
+    }
+
+    public Phase(Player firstPlayer, Player secondPlayer, Round round) {
+        this.firstPlayer = firstPlayer;
+        this.secondPlayer = secondPlayer;
+        this.round = round;
+    }
+
     public Turn getTurn() {
         return turn;
     }

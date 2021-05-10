@@ -12,6 +12,24 @@ public class MonsterCard extends Card {
     private boolean hasBattledInBattlePhase;
     private MonsterPower specialPower;
     private MonsterCardPosition position;
+    private boolean isPositionChangedInThisTurn;
+    private boolean isSummonedInThisTurn;
+
+    public boolean isSummonedInThisTurn() {
+        return isSummonedInThisTurn;
+    }
+
+    public void setSummonedInThisTurn(boolean summonedInThisTurn) {
+        isSummonedInThisTurn = summonedInThisTurn;
+    }
+
+    public boolean isPositionChangedInThisTurn() {
+        return isPositionChangedInThisTurn;
+    }
+
+    public void setPositionChangedInThisTurn(boolean positionChangedInThisTurn) {
+        isPositionChangedInThisTurn = positionChangedInThisTurn;
+    }
 
     public MonsterCard(String name, String number, String description , int attackPoint , int defencePoint , MonsterPower specialPower , int level , Attribute attribute) {
         super(name, number, description);
