@@ -2,8 +2,11 @@ package model;
 
 import enums.NumberOfRounds;
 import enums.Turn;
+import view.GameView;
 
 public class Game {
+    GameView view = new GameView(this);
+
     Player player1;
     Player player2;
 
@@ -27,8 +30,14 @@ public class Game {
         if(this.numberOfRounds == NumberOfRounds.ONE_ROUND_MATCH){
             Round round = new Round(player1 , player2 , Turn.FIRST_PLAYER);
             round.run();
-            if(player1.getNumberOfRoundsWon() == 1){giveOneRoundWinnerPrize(player1);}
-            else{giveOneRoundWinnerPrize(player2);}
+            if(player1.getNumberOfRoundsWon() == 1){
+                giveOneRoundWinnerPrize(player1);
+                view.showMatchWinner(player1.getUser() , 1 ,0);
+            }
+            else{
+                giveOneRoundWinnerPrize(player2);
+                view.showMatchWinner(player2.getUser() , 1 , 0);
+            }
         }
         else if(this.numberOfRounds == NumberOfRounds.THREE_ROUND_MATCH){
 
@@ -36,6 +45,7 @@ public class Game {
             round1.run();
             round1Winner = round1.getWinner();
             round1WinnerLp = round1.getWinner().getLifePoint();
+            view.showRoundWinner(round1Winner.getUser() , 1 , 0);
 
             Round round2 = new Round(player1 , player2 , Turn.FIRST_PLAYER);
             round2.run();
@@ -45,18 +55,28 @@ public class Game {
 
             if(player1.getNumberOfRoundsWon() == 2){
                 giveTwoRoundWinnerPrize(player1 , player2);
+                view.showMatchWinner(round2Winner.getUser() , 2 , 0);
                 return;
             }
             else if(player2.getNumberOfRoundsWon() == 2){
                 giveTwoRoundWinnerPrize(player2 , player1);
+                view.showMatchWinner(round2Winner.getUser() , 2 , 0);
                 return;
             }
+
+            view.showRoundWinner(round2Winner.getUser() , 1 , 1);
 
             Round round3 = new Round(player1 , player2 , Turn.FIRST_PLAYER);
             round3Winner = round3.getWinner();
             round3WinnerLp = round3.getWinner().getLifePoint();
-            if(player1.getNumberOfRoundsWon() == 2){giveThreeRoundWinnerPrize1(player1 , player2);return;}
-            else if(player2.getNumberOfRoundsWon() == 2){giveThreeRoundWinnerPrize1(player2 , player1);return;}
+            if(player1.getNumberOfRoundsWon() == 2){giveThreeRoundWinnerPrize1(player1 , player2);
+                view.showMatchWinner(round3Winner.getUser() , 2 , 1);
+            return;
+            }
+            else if(player2.getNumberOfRoundsWon() == 2){giveThreeRoundWinnerPrize1(player2 , player1);
+                view.showMatchWinner(round3Winner.getUser() , 2 , 1);
+            return;
+            }
         }
     }
 
