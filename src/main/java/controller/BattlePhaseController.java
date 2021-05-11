@@ -79,6 +79,7 @@ public class BattlePhaseController extends PhaseController {
             int damage = ((BattlePhase) phase).attackDirect();
             battleView.attackDirectResult(damage);
             battleView.printString(phase.getMapToString());
+            player.setSelectedCard(null);
         }
     }
 
@@ -109,6 +110,7 @@ public class BattlePhaseController extends PhaseController {
         } else {
             battleView.printString(((BattlePhase) phase).attackToCardAndReturnAttackReport(location));
             battleView.printString(phase.getMapToString());
+            player.setSelectedCard(null);
         }
     }
 }

@@ -15,7 +15,6 @@ public abstract class Phase {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
         this.turn = turn;
-
         this.turnsPlayed = turnsPlayed;
     }
 
@@ -92,7 +91,7 @@ public abstract class Phase {
         mapToStringBuilder.append(playerAtTurn.getRemainingPlayerCardsInGame().size());
         mapToStringBuilder.append("\n");
         for (int i=0; i<playerAtTurn.getCardsInHand().size(); i++){
-            mapToStringBuilder.append("c\t");
+            mapToStringBuilder.append("\tc");
         }
         mapToStringBuilder.append("\n");
     }

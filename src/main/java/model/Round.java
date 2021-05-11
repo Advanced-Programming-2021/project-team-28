@@ -39,7 +39,7 @@ public class Round {
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;
 
-            MainPhase2 mainPhase2 = new MainPhase2(firstPlayer, secondPlayer, turn, turnsPlayed);
+            MainPhase2 mainPhase2 = new MainPhase2(firstPlayer, secondPlayer, this);
             mainPhaseController.run();
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;

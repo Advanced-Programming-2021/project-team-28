@@ -38,7 +38,8 @@ public class Player {
         return isSelectedCardVisible;
     }
 
-    public HashMap<Integer, MonsterCard> getMonsterCardsInZone() {
+    public HashMap<Integer, MonsterCard>
+    getMonsterCardsInZone() {
         return monsterCardsInZone;
     }
 
@@ -220,12 +221,12 @@ public class Player {
 
     public String graveyardToString (){
         StringBuilder graveyardToStringBuilder = new StringBuilder();
-        for(int i=cardsInGraveyard.size() - 1; i>=0; i--){
-            graveyardToStringBuilder.append(4-i);
+        for(int i=1; i<=cardsInGraveyard.size(); i++){
+            graveyardToStringBuilder.append(i);
             graveyardToStringBuilder.append(". ");
-            graveyardToStringBuilder.append(cardsInGraveyard.get(i).getName());
+            graveyardToStringBuilder.append(cardsInGraveyard.get(i-1).getName());
             graveyardToStringBuilder.append(" : ");
-            graveyardToStringBuilder.append(cardsInGraveyard.get(i).getDescription());
+            graveyardToStringBuilder.append(cardsInGraveyard.get(i-1).getDescription());
             graveyardToStringBuilder.append("\n");
         }
         return graveyardToStringBuilder.toString();
