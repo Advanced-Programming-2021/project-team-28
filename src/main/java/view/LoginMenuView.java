@@ -13,7 +13,7 @@ public class LoginMenuView {
     }
 
     public void run() throws CloneNotSupportedException {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = ScannerInstance.getInstance().getScanner();
         String command;
         while(true){
             command = scanner.nextLine();

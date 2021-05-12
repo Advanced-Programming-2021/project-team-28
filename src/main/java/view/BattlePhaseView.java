@@ -34,4 +34,8 @@ public class BattlePhaseView extends PhaseView {
     public void youCanNotAttackInYourFirstTurn(){
         System.out.println("You can't attack in your first turn");
     }
+
+    public void printPhaseName(){
+        System.out.println("phase: Battle Phase");
+    }
 }

@@ -14,7 +14,7 @@ public class ScoreboardView {
     }
 
     public void run (){
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = ScannerInstance.getInstance().getScanner();
         String command;
         while(true){
             command = scanner.nextLine();

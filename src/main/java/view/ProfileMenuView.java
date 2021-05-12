@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class ProfileMenuView {
 
     ProfileMenuController controller;
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner = ScannerInstance.getInstance().getScanner();
     private String command ;
 
     public ProfileMenuView(ProfileMenuController controller){

@@ -13,7 +13,7 @@ public class MainMenuView {
     }
 
 
-    private  Scanner scanner = new Scanner(System.in);
+    private  Scanner scanner = ScannerInstance.getInstance().getScanner();
 
     private  String command;
 
