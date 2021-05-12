@@ -3,10 +3,13 @@ package model;
 import enums.MonsterCardPosition;
 import enums.MonsterPower;
 import enums.Turn;
+import view.MonsterPowerView;
 
 import java.util.Map;
 
 public class MonsterPowers {
+
+    private MonsterPowerView view = new MonsterPowerView(this);
 
     Round round;
 
@@ -14,8 +17,8 @@ public class MonsterPowers {
         this.round = round;
     }
 
-    public void  run(MonsterPower power , MonsterCard activeCard , MonsterCard opponentCard){
-        switch (power) {
+    public void  run( MonsterCard activeCard , MonsterCard opponentCard){
+        switch (activeCard.getSpecialPower()) {
             case NONE: return;
             case MAN_EATER_BUG:{
                 manEaterBug();
@@ -96,5 +99,10 @@ public class MonsterPowers {
     }
 
     public void yomiShip(MonsterCard yomiShip , MonsterCard attacker){
+        if(yomiShip.isGoingToGraveyard()){
+            Player attackerPlayer = round.getPlayerByTurn();
+            attackerPlayer.addCardToGraveyard(attacker);
+            attackerPlayer.removeCardFromCardsInZone(attacker , attackerPlayer.getLocationOfThisMonsterCardInZone(attacker) );
+            }
+        }
     }
-}

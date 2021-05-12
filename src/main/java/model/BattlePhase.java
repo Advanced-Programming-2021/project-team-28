@@ -38,6 +38,7 @@ public class BattlePhase extends Phase{
     private String attackToDefensiveCardAndReturnReport(int location, MonsterCard attackerCard, MonsterCard defenderCard) {
         int damage = attackerCard.getAttackPoint() - defenderCard.getDefencePoint();
         if(damage > 0){
+
             getRivalPlayerByTurn().addCardToGraveyard(defenderCard);
             getRivalPlayerByTurn().removeCardFromCardsInZone(defenderCard, location);
             if(defenderCard.getPosition() == MonsterCardPosition.DEFENSIVE_HIDDEN){
