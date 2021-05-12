@@ -16,6 +16,16 @@ public class Player {
     private Card fieldZoneCard;
     private Card selectedCard;
     private boolean isSelectedCardVisible;
+    private boolean isAbleToActivateTrapCard = true;
+
+    public boolean isAbleToActivateTrapCard() {
+        return isAbleToActivateTrapCard;
+    }
+
+    public void setAbleToActivateTrapCard(boolean ableToActivateTrapCard) {
+        isAbleToActivateTrapCard = ableToActivateTrapCard;
+    }
+
     private Random random = new Random();
 
     public Player(User user) throws CloneNotSupportedException {

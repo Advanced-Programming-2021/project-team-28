@@ -12,9 +12,13 @@ public abstract class Card {
     protected String number;
     @Expose
     protected String description;
+
+    protected User owner;
+
     public static ArrayList<Card> allCards = new ArrayList<>();
 
-    public Card(String name, String number, String description) {
+    public Card(User owner , String name, String number, String description) {
+        setOwner(owner);
         setName(name);
         setDescription(description);
         setNumber(number);
@@ -96,6 +100,14 @@ public abstract class Card {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public static Card getCardByName(ArrayList<Card> cards , String name){

@@ -10,8 +10,8 @@ public class TrapCard extends Card implements Cloneable{
     private TrapEffect effect;
     private SpellOrTrapCardPosition position;
 
-    public TrapCard (String name, String number, String description , TrapIcon icon , TrapEffect effect){
-        super(name, number, description);
+    public TrapCard (User owner , String name, String number, String description , TrapIcon icon , TrapEffect effect){
+        super(owner , name, number, description);
         setIcon(icon);
         setEffect(effect);
         setPosition(SpellOrTrapCardPosition.NOT_IN_PLAY_ZONE);

@@ -1,0 +1,74 @@
+package model;
+
+import enums.MonsterCardPosition;
+import enums.MonsterPower;
+import enums.Turn;
+
+import java.util.Map;
+
+public class MonsterPowers {
+
+    Round round;
+
+    MonsterPowers(Round round){
+        this.round = round;
+    }
+
+    public void  run(MonsterPower power , MonsterCard activeCard , MonsterCard opponentCard){
+        switch (power) {
+            case NONE: return;
+            case MAN_EATER_BUG:{
+                manEaterBug();
+                return;
+            }
+            case MARSHMALLON:
+            case SUIJIN:
+            case SCANNER:
+            case YOMI_SHIP:
+            case TEXCHANGER:
+            case THE_TRICKY:
+            case CRAB_TURTLE:
+            case GATE_GUARDIAN:
+            case MIRAGE_DRAGON:{
+                mirageDragon();
+                return;
+            }
+            case COMMAND_KNIGHT:
+            case SKULL_GUARDIAN:
+            case THE_CALCULATOR:{
+                theCalculator(activeCard);
+                return;
+            }
+            case EXPLODER_DRAGON:
+            case HERALD_OF_CREATION:
+            case BEAST_KING_BARBAROS:
+            case TERRATIGER_THE_EMPOWERED_WARRIOR:
+        }
+    }
+    public void manEaterBug(){
+
+    }
+    // TODO : should find a way to let the card understand who is the owner
+    public void theCalculator(MonsterCard activeCard){
+        int levelSum = 0;
+        if(round.getTurn() == Turn.FIRST_PLAYER){
+          for(Map.Entry<Integer, MonsterCard> monsterZone  : round.getFirstPlayer().getMonsterCardsInZone().entrySet()){
+            if(monsterZone.getValue().getPosition() == MonsterCardPosition.DEFENSIVE_OCCUPIED || monsterZone.getValue().getPosition() == MonsterCardPosition.OFFENSIVE_OCCUPIED){
+                levelSum += monsterZone.getValue().getLevel();
+            }
+          }
+            activeCard.setAttackPoint(300 * levelSum);
+        }
+        else{
+            for(Map.Entry<Integer, MonsterCard> monsterZone  : round.getSecondPlayer().getMonsterCardsInZone().entrySet()){
+                if(monsterZone.getValue().getPosition() == MonsterCardPosition.DEFENSIVE_OCCUPIED || monsterZone.getValue().getPosition() == MonsterCardPosition.OFFENSIVE_OCCUPIED){
+                    levelSum += monsterZone.getValue().getLevel();
+                }
+            }
+        }
+    }
+
+    public void mirageDragon(){
+
+    }
+}
