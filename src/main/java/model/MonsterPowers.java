@@ -24,13 +24,16 @@ public class MonsterPowers {
             case MARSHMALLON:
             case SUIJIN:
             case SCANNER:
-            case YOMI_SHIP:
+            case YOMI_SHIP:{
+                yomiShip(activeCard , opponentCard);
+                return;
+            }
             case TEXCHANGER:
             case THE_TRICKY:
             case CRAB_TURTLE:
             case GATE_GUARDIAN:
             case MIRAGE_DRAGON:{
-                mirageDragon();
+                mirageDragon(activeCard);
                 return;
             }
             case COMMAND_KNIGHT:
@@ -51,7 +54,7 @@ public class MonsterPowers {
     // TODO : should find a way to let the card understand who is the owner
     public void theCalculator(MonsterCard activeCard){
         int levelSum = 0;
-        if(round.getTurn() == Turn.FIRST_PLAYER){
+        if(activeCard.getOwner() == round.getFirstPlayer().getUser()){
           for(Map.Entry<Integer, MonsterCard> monsterZone  : round.getFirstPlayer().getMonsterCardsInZone().entrySet()){
             if(monsterZone.getValue().getPosition() == MonsterCardPosition.DEFENSIVE_OCCUPIED || monsterZone.getValue().getPosition() == MonsterCardPosition.OFFENSIVE_OCCUPIED){
                 levelSum += monsterZone.getValue().getLevel();
@@ -65,10 +68,33 @@ public class MonsterPowers {
                     levelSum += monsterZone.getValue().getLevel();
                 }
             }
+            activeCard.setAttackPoint(300 * levelSum);
         }
     }
 
-    public void mirageDragon(){
+    public void mirageDragon(MonsterCard activeCard){
+        if(!activeCard.isGoingToGraveyard) {
+            if (activeCard.getOwner() == round.getFirstPlayer().getUser()) {
+                round.getSecondPlayer().setAbleToActivateTrapCard(false);
+                return;
+            } else {
+                round.getFirstPlayer().setAbleToActivateTrapCard(false);
+                return;
+            }
+        }
+        else{
+            if (activeCard.getOwner() == round.getFirstPlayer().getUser()) {
+                round.getSecondPlayer().setAbleToActivateTrapCard(true);
+                activeCard.setGoingToGraveyard(false);
+                return;
+            } else {
+                round.getFirstPlayer().setAbleToActivateTrapCard(true);
+                activeCard.setGoingToGraveyard(false);
+                return;
+            }
+        }
+    }
 
+    public void yomiShip(MonsterCard yomiShip , MonsterCard attacker){
     }
 }

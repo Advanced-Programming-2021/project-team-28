@@ -13,6 +13,8 @@ public abstract class Card {
     @Expose
     protected String description;
 
+    protected boolean isGoingToGraveyard = false;
+
     protected User owner;
 
     public static ArrayList<Card> allCards = new ArrayList<>();
@@ -108,6 +110,14 @@ public abstract class Card {
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    public boolean isGoingToGraveyard() {
+        return isGoingToGraveyard;
+    }
+
+    public void setGoingToGraveyard(boolean goingToGraveyard) {
+        isGoingToGraveyard = goingToGraveyard;
     }
 
     public static Card getCardByName(ArrayList<Card> cards , String name){
