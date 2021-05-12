@@ -9,8 +9,8 @@ public class SpellCard extends Card{
     private SpellIcon icon;
     private SpellOrTrapCardPosition position;
 
-    public SpellCard (User owner ,String name , String number , String description , SpellIcon icon , SpellEffect effect){
-        super(owner ,name, number, description);
+    public SpellCard (String ownerUsername ,String name , String number , String description , SpellIcon icon , SpellEffect effect){
+        super(ownerUsername ,name, number, description);
         setEffect(effect);
         setIcon(icon);
         setPosition(SpellOrTrapCardPosition.NOT_IN_PLAY_ZONE);

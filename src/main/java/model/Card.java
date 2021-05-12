@@ -15,12 +15,12 @@ public abstract class Card {
 
     protected boolean isGoingToGraveyard = false;
 
-    protected User owner;
+    protected String ownerUsername;
 
     public static ArrayList<Card> allCards = new ArrayList<>();
 
-    public Card(User owner , String name, String number, String description) {
-        setOwner(owner);
+    public Card(String ownerUsername , String name, String number, String description) {
+
         setName(name);
         setDescription(description);
         setNumber(number);
@@ -104,20 +104,20 @@ public abstract class Card {
         this.number = number;
     }
 
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
-
     public boolean isGoingToGraveyard() {
         return isGoingToGraveyard;
     }
 
     public void setGoingToGraveyard(boolean goingToGraveyard) {
         isGoingToGraveyard = goingToGraveyard;
+    }
+
+    public String getOwnerUsername() {
+        return ownerUsername;
+    }
+
+    public void setOwnerUsername(String ownerUsername) {
+        this.ownerUsername = ownerUsername;
     }
 
     public static Card getCardByName(ArrayList<Card> cards , String name){
@@ -127,4 +127,5 @@ public abstract class Card {
         }
         return null;
     }
+
 }

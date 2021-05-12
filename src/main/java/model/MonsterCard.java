@@ -31,8 +31,8 @@ public class MonsterCard extends Card {
         isPositionChangedInThisTurn = positionChangedInThisTurn;
     }
 
-    public MonsterCard(User owner ,String name, String number, String description , int attackPoint , int defencePoint , MonsterPower specialPower , int level , Attribute attribute) {
-        super(owner ,name, number, description);
+    public MonsterCard(String ownerUsername ,String name, String number, String description , int attackPoint , int defencePoint , MonsterPower specialPower , int level , Attribute attribute) {
+        super(ownerUsername ,name, number, description);
         setAttackPoint(attackPoint);
         setDefencePoint(defencePoint);
         setSpecialPower(specialPower);
