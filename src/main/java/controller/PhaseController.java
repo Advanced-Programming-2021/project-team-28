@@ -3,6 +3,7 @@ package controller;
 import enums.MenuEnum;
 import enums.MonsterCardPosition;
 import enums.SpellOrTrapCardPosition;
+import enums.Turn;
 import model.*;
 import view.PhaseView;
 
@@ -19,13 +20,13 @@ public abstract class PhaseController {
     }
 
     public void run() {
+        view.printString(phase.getMapToString());
         this.view.run();
     }
 
     public MenuEnum processCommand(String command) {
         Matcher matcherForAttackToCard = Pattern.compile("^attack (\\d+)$").matcher(command);
         if (command.equals("next phase")) {
-            view.printString(phase.getMapToString());
             return MenuEnum.BACK;
         } else if (command.equals("surrender")) {
             phase.getPlayerByTurn().setLifePoint(0);
@@ -48,7 +49,7 @@ public abstract class PhaseController {
             controlActivateEffectCommand();
         } else if (command.equals("show graveyard")) {
             controlShowGraveyardCommand();
-        } else if (command.equals("card show --selected")){
+        } else if (command.equals("card show --selected")) {
             controlShowCardSelectedCommand();
         } else if (matcherForAttackToCard.find()) {
             controlAttackToCardCommand(Integer.parseInt(matcherForAttackToCard.group(1)));
@@ -81,8 +82,10 @@ public abstract class PhaseController {
             view.invalidCommand();
         }
         if (phase.getFirstPlayer().getLifePoint() <= 0 || phase.getSecondPlayer().getLifePoint() <= 0) {
+            view.printString(phase.getMapToString());
             return MenuEnum.BACK;
         }
+        view.printString(phase.getMapToString());
         return MenuEnum.CONTINUE;
     }
 
@@ -103,7 +106,9 @@ public abstract class PhaseController {
     protected abstract void controlAttackToCardCommand(int location);
 
     protected void controlSelectOwnMonsterCommand(int location) {
-        if (phase.getPlayerByTurn().doesHaveMonsterCardInThisLocation(location)) {
+        if (location < 1 || location > 5) {
+            view.invalidSelection();
+        } else if (phase.getPlayerByTurn().doesHaveMonsterCardInThisLocation(location)) {
             phase.getPlayerByTurn().setSelectedCard(phase.getPlayerByTurn().getMonsterCardsInZone().get(location));
             phase.getPlayerByTurn().setSelectedCardVisible(true);
             view.cardSelected();
@@ -113,7 +118,9 @@ public abstract class PhaseController {
     }
 
     protected void controlSelectOwnSpellCommand(int location) {
-        if (phase.getPlayerByTurn().doesHaveSpellOrTrapCardInThisPosition(location)) {
+        if (location < 1 || location > 5) {
+            view.invalidSelection();
+        } else if (phase.getPlayerByTurn().doesHaveSpellOrTrapCardInThisPosition(location)) {
             phase.getPlayerByTurn().setSelectedCard(phase.getPlayerByTurn().getSpellOrTrapCardsInZone().get(location));
             phase.getPlayerByTurn().setSelectedCardVisible(true);
             view.cardSelected();
@@ -123,7 +130,9 @@ public abstract class PhaseController {
     }
 
     protected void controlSelectRivalMonsterCommand(int location) {
-        if (phase.getRivalPlayerByTurn().doesHaveMonsterCardInThisLocation(location)) {
+        if (location < 1 || location > 5) {
+            view.invalidSelection();
+        } else if (phase.getRivalPlayerByTurn().doesHaveMonsterCardInThisLocation(location)) {
             MonsterCard cardToSelect = phase.getRivalPlayerByTurn().getMonsterCardsInZone().get(location);
             phase.getPlayerByTurn().setSelectedCard(cardToSelect);
             phase.getPlayerByTurn().setSelectedCardVisible(cardToSelect.getPosition() != MonsterCardPosition.DEFENSIVE_HIDDEN);
@@ -134,7 +143,9 @@ public abstract class PhaseController {
     }
 
     protected void controlSelectRivalSpellCommand(int location) {
-        if (phase.getRivalPlayerByTurn().doesHaveSpellOrTrapCardInThisPosition(location)) {
+        if (location < 1 || location > 5) {
+            view.invalidSelection();
+        } else if (phase.getRivalPlayerByTurn().doesHaveSpellOrTrapCardInThisPosition(location)) {
             Card cardToSelect = phase.getRivalPlayerByTurn().getSpellOrTrapCardsInZone().get(location);
             phase.getPlayerByTurn().setSelectedCard(cardToSelect);
             if (cardToSelect instanceof TrapCard && ((TrapCard) cardToSelect).getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
@@ -190,19 +201,19 @@ public abstract class PhaseController {
         }
     }
 
-    protected void controlShowCardSelectedCommand(){
+    protected void controlShowCardSelectedCommand() {
         Player player = phase.getPlayerByTurn();
-        if(!player.hasSelectedCard()){
+        if (!player.hasSelectedCard()) {
             view.noCardSelectedYet();
-        } else if (!player.isSelectedCardVisible()){
+        } else if (!player.isSelectedCardVisible()) {
             view.cardIsNotVisible();
         } else {
             view.printString(player.getSelectedCard().toString());
         }
     }
 
-    protected void controlShowGraveyardCommand(){
-        if(phase.getPlayerByTurn().getCardsInGraveyard().size() > 0){
+    protected void controlShowGraveyardCommand() {
+        if (phase.getPlayerByTurn().getCardsInGraveyard().size() > 0) {
             view.printString(phase.getPlayerByTurn().graveyardToString());
         } else {
             view.graveyardEmpty();

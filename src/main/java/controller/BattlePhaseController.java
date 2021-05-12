@@ -13,6 +13,7 @@ public class BattlePhaseController extends PhaseController {
 
     public BattlePhaseController(BattlePhase battlePhase) {
         super(battlePhase);
+        battleView.printPhaseName();
     }
 
     protected void controlSummonCommand() {
@@ -78,7 +79,6 @@ public class BattlePhaseController extends PhaseController {
         } else if (phase instanceof BattlePhase) {
             int damage = ((BattlePhase) phase).attackDirect();
             battleView.attackDirectResult(damage);
-            battleView.printString(phase.getMapToString());
             player.setSelectedCard(null);
         }
     }
@@ -109,7 +109,6 @@ public class BattlePhaseController extends PhaseController {
             battleView.youCanNotAttackInYourFirstTurn();
         } else {
             battleView.printString(((BattlePhase) phase).attackToCardAndReturnAttackReport(location));
-            battleView.printString(phase.getMapToString());
             player.setSelectedCard(null);
         }
     }

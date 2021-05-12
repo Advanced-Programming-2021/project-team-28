@@ -13,7 +13,7 @@ public class DeckMenuView {
     }
     public void run(){
         String command;
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = ScannerInstance.getInstance().getScanner();
         while(true){
             command = scanner.nextLine();
             if(controller.processCommand(command).equals(MenuEnum.BACK)){

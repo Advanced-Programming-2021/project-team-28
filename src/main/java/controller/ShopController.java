@@ -2,8 +2,10 @@ package controller;
 
 import enums.*;
 import model.*;
+import view.ScannerInstance;
 import view.ShopView;
 
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,7 +14,7 @@ public class ShopController {
     User user;
     ShopView view = new ShopView(this);
 
-    public ShopController(User user){
+    public ShopController(User user) {
         this.user = user;
     }
 
@@ -20,21 +22,27 @@ public class ShopController {
         this.view.run();
     }
 
-    public void processCommand(String command){
-        if(command.startsWith("shop buy ")){
-            Matcher matcher = getCommandMatcher(command , "^shop buy (.+)$");
+    public void processCommand(String command) {
+        Pattern patternForImpossibleMenuNavigation = Pattern.compile("^menu enter (Duel|Scoreboard|Import/Export|Deck|Profile)$");
+        Matcher matcherForImpossibleMenuNavigation = patternForImpossibleMenuNavigation.matcher(command);
+        if (matcherForImpossibleMenuNavigation.find()) {
+            view.impossibleMenuNavigation();
+        } else if (command.equals("menu show-current")) {
+            view.menuShowCurrent();
+        } else if (command.startsWith("shop buy ")) {
+            Matcher matcher = getCommandMatcher(command, "^shop buy (.+)$");
             sellCard(matcher.group(1));
-        }
-        else if(command.equals("shop show all")){
+        } else if (command.equals("shop show all")) {
             showAllCards();
-        }
-        else if(command.startsWith("card show")){
-            Matcher matcher = getCommandMatcher(command , "^card show (.*)");
+        } else if (command.startsWith("card show ")) {
+            Matcher matcher = getCommandMatcher(command, "^card show (.*)");
             showCard(matcher.group(1));
+        } else {
+            view.invalidCommand();
         }
     }
 
-    public static Matcher getCommandMatcher(String command , String regex){
+    public static Matcher getCommandMatcher(String command, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(command);
         if (matcher.find())
@@ -43,9 +51,9 @@ public class ShopController {
             return null;
     }
 
-    public void showCard(String name){
-        if(Card.getCardByName(Card.allCards , name) != null)
-            view.showCard(Card.getCardByName(Card.allCards , name));
+    public void showCard(String name) {
+        if (Card.getCardByName(Card.allCards, name) != null)
+            view.showCard(Card.getCardByName(Card.allCards, name));
         else view.cardNotFound();
     }
 
@@ -548,27 +556,24 @@ public class ShopController {
                 TrapCard card = new TrapCard(user , cardName, "", TrapsDescription.wallOfRevealingLight , TrapIcon.CONTINUOUS , TrapEffect.WALL_OF_REVEALING_LIGHT);
                 user.addToCards(card);
             }
-        }
-        else view.cardNotFound();
+        } else view.cardNotFound();
     }
 
-    public boolean checkUserMoney (int price){
-        if(user.getBalance() < price) {
+    public boolean checkUserMoney(int price) {
+        if (user.getBalance() < price) {
             view.notEnoughMoney();
             return false;
-        }
-        else return true;
+        } else return true;
     }
 
-    private boolean receiveMoneyFromCustomer(int price){
-        if(checkUserMoney(price)){
+    private boolean receiveMoneyFromCustomer(int price) {
+        if (checkUserMoney(price)) {
             user.changeBalance(-1 * price);
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
-    public void showAllCards(){
+    public void showAllCards() {
         view.showAllCards();
     }
 }

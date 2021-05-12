@@ -3,6 +3,7 @@ package controller;
 import enums.MonsterCardPosition;
 import model.*;
 import view.MainPhaseView;
+import view.ScannerInstance;
 
 import java.util.Scanner;
 
@@ -15,7 +16,7 @@ public class MainPhaseController extends PhaseController {
     public MainPhaseController(MainPhase mainPhase) {
         super(mainPhase);
         this.isSummonOrSetMonsterCard = false;
-        for (MonsterCard card: phase.getPlayerByTurn().getMonsterCardsInZone().values()){
+        for (MonsterCard card : phase.getPlayerByTurn().getMonsterCardsInZone().values()) {
             card.setPositionChangedInThisTurn(false);
             card.setSummonedInThisTurn(false);
         }
@@ -32,7 +33,7 @@ public class MainPhaseController extends PhaseController {
             mainPhaseView.canNotSummonCard();
         } else if (phase.getPlayerByTurn().isMonsterCardZoneFull()) {
             mainPhaseView.monsterZoneIsFull();
-        } else if (!isSummonOrSetMonsterCard) {
+        } else if (isSummonOrSetMonsterCard) {
             mainPhaseView.printString("you already summoned/set on this turn");
         } else if (((MonsterCard) player.getSelectedCard()).getLevel() <= 4) {
             summonMonsterCard(player, (MonsterCard) player.getSelectedCard());
@@ -49,7 +50,7 @@ public class MainPhaseController extends PhaseController {
         if (player.getMonsterCardsInZone().size() < tributeNeeded) {
             mainPhaseView.printString("there are not enough cards for tribute");
         } else {
-            Scanner scanner = new Scanner(System.in);
+            Scanner scanner = ScannerInstance.getInstance().getScanner();
             if (tributeNeeded == 1) {
                 int tributeAddress = scanner.nextInt();
                 if (!player.doesHaveMonsterCardInThisLocation(tributeAddress)) {
@@ -123,7 +124,7 @@ public class MainPhaseController extends PhaseController {
         if (player.getMonsterCardsInZone().size() < tributeNeeded) {
             mainPhaseView.printString("there are not enough cards for tribute");
         } else {
-            Scanner scanner = new Scanner(System.in);
+            Scanner scanner = ScannerInstance.getInstance().getScanner();
             if (tributeNeeded == 1) {
                 int tributeAddress = scanner.nextInt();
                 if (!player.doesHaveMonsterCardInThisLocation(tributeAddress)) {
@@ -225,8 +226,8 @@ public class MainPhaseController extends PhaseController {
             mainPhaseView.noCardSelectedYet();
         } else if (!player.isSelectedCardFromMonsterCardZone()) {
             mainPhaseView.canNotChangeCardPosition();
-        } else if (((MonsterCard)player.getSelectedCard()).isSummonedInThisTurn()
-                || ((MonsterCard)player.getSelectedCard()).getPosition() != DEFENSIVE_HIDDEN){
+        } else if (((MonsterCard) player.getSelectedCard()).isSummonedInThisTurn()
+                || ((MonsterCard) player.getSelectedCard()).getPosition() != DEFENSIVE_HIDDEN) {
             mainPhaseView.printString("you can’t flip summon this card");
         } else {
             ((MonsterCard) player.getSelectedCard()).setPosition(OFFENSIVE_OCCUPIED);

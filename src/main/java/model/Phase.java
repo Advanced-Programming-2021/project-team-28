@@ -28,6 +28,8 @@ public abstract class Phase {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
         this.round = round;
+        this.turn  = round.getTurn();
+        this.turnsPlayed = round.getTurnsPlayed();
     }
 
     public Turn getTurn() {
@@ -70,6 +72,7 @@ public abstract class Phase {
         Player rivalPlayer = turn == Turn.FIRST_PLAYER ? secondPlayer : firstPlayer;
         Player playerAtTurn = turn == Turn.FIRST_PLAYER ? firstPlayer : secondPlayer;
         StringBuilder mapToStringBuilder = new StringBuilder();
+        mapToStringBuilder.append("\n");
         appendNicknameAndLifePoint(rivalPlayer, mapToStringBuilder);
         appendRivalOutOfZoneCards(rivalPlayer, mapToStringBuilder);
         HashMap<Integer, Card> rivalPlayerSpellsInZone = rivalPlayer.getSpellOrTrapCardsInZone();
@@ -83,6 +86,7 @@ public abstract class Phase {
         appendPlayerAtTurnZone(mapToStringBuilder, playerAtTurnSpellsInZone, playerAtTurnMonstersInZone);
         appendPlayerAtTurnOutOfZoneCards(playerAtTurn, mapToStringBuilder);
         appendNicknameAndLifePoint(playerAtTurn, mapToStringBuilder);
+        mapToStringBuilder.append("\n");
         return mapToStringBuilder.toString();
     }
 
@@ -90,8 +94,14 @@ public abstract class Phase {
         mapToStringBuilder.append("\t\t\t\t\t\t");
         mapToStringBuilder.append(playerAtTurn.getRemainingPlayerCardsInGame().size());
         mapToStringBuilder.append("\n");
-        for (int i=0; i<playerAtTurn.getCardsInHand().size(); i++){
-            mapToStringBuilder.append("\tc");
+        if(playerAtTurn.getCardsInHand().size() > 5){
+            for (int i=0; i<playerAtTurn.getCardsInHand().size(); i++){
+                mapToStringBuilder.append("c\t");
+            }
+        } else {
+            for (int i=0; i<playerAtTurn.getCardsInHand().size(); i++){
+                mapToStringBuilder.append("\tc");
+            }
         }
         mapToStringBuilder.append("\n");
     }

@@ -3,16 +3,31 @@ package controller;
 import enums.MenuEnum;
 import model.User;
 import view.LoginMenuView;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LoginMenuController {
     LoginMenuView loginMenuView = new LoginMenuView(this);
 
-    public void run() throws CloneNotSupportedException {
+    public void run() throws CloneNotSupportedException, IOException {
+        createResourceFileIfNeeded();
         User.deserialize();
         this.loginMenuView.run();
         User.serialize();
+    }
+
+    private void createResourceFileIfNeeded() throws IOException {
+        File resource = new File("src/UserOutput.json");
+        if(!resource.exists()){
+            resource.createNewFile();
+            FileWriter writer = new FileWriter(resource);
+            writer.write("[]");
+            writer.close();
+        }
     }
 
     public MenuEnum processCommand(String command) throws CloneNotSupportedException {
@@ -73,7 +88,7 @@ public class LoginMenuController {
         Pattern patternForCreateUser3 = Pattern.compile("^user create --password (.+?) --username (.+?) --nickname (.+?)$");
         Pattern patternForCreateUser4 = Pattern.compile("^user create --password (.+?) --nickname (.+?) --username (.+?)$");
         Pattern patternForCreateUser5 = Pattern.compile("^user create --nickname (.+?) --password (.+?) --username (.+?)$");
-        Pattern patternForCreateUser6 = Pattern.compile("^user create --nickname (.+?) --nickname (.+?) --password (.+?)$");
+        Pattern patternForCreateUser6 = Pattern.compile("^user create --nickname (.+?) --username (.+?) --password (.+?)$");
         Pattern patternForLoginUser1 = Pattern.compile("^user login --username (.+?) --password (.+?)$");
         Pattern patternForLoginUser2 = Pattern.compile("^user login --password (.+?) --username (.+?)$");
         Pattern patternForEnterAnotherMenu = Pattern.compile("^menu enter (Duel|Scoreboard|Deck|Import/Export|Shop|Profile)$");

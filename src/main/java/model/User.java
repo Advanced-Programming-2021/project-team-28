@@ -217,7 +217,7 @@ public class User {
     }
 
     public static void serialize() {
-        try (Writer writer = new FileWriter("UserOutput.json")) {
+        try (Writer writer = new FileWriter("src/UserOutput.json")) {
             Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
             gson.toJson(User.users, writer);
         } catch (IOException e) {
@@ -229,7 +229,7 @@ public class User {
         Gson gson = new Gson();
         Reader reader = null;
         try {
-            reader = Files.newBufferedReader(Paths.get("UserOutput.json"));
+            reader = Files.newBufferedReader(Paths.get("src/UserOutput.json"));
         } catch (IOException e) {
             e.printStackTrace();
         }

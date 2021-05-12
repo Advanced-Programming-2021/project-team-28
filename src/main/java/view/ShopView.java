@@ -9,7 +9,7 @@ import model.TrapsDescription;
 import java.util.Scanner;
 
 public class ShopView {
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner = ScannerInstance.getInstance().getScanner();
     ShopController controller;
 
     public ShopView (ShopController controller){
@@ -32,6 +32,18 @@ public class ShopView {
 
     public void cardNotFound(){
         System.out.println("there is no card with this name");
+    }
+
+    public void invalidCommand(){
+        System.out.println("invalid command");
+    }
+
+    public void menuShowCurrent(){
+        System.out.println("Shop Menu");
+    }
+
+    public void impossibleMenuNavigation() {
+        System.out.println("menu navigation is not possible");
     }
 
     public void showCard(Card card){
