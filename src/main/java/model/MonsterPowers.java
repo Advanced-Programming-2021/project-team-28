@@ -54,7 +54,7 @@ public class MonsterPowers {
     // TODO : should find a way to let the card understand who is the owner
     public void theCalculator(MonsterCard activeCard){
         int levelSum = 0;
-        if(activeCard.getOwner() == round.getFirstPlayer().getUser()){
+        if(User.getUserByUsername(activeCard.getOwnerUsername()) == round.getFirstPlayer().getUser()){
           for(Map.Entry<Integer, MonsterCard> monsterZone  : round.getFirstPlayer().getMonsterCardsInZone().entrySet()){
             if(monsterZone.getValue().getPosition() == MonsterCardPosition.DEFENSIVE_OCCUPIED || monsterZone.getValue().getPosition() == MonsterCardPosition.OFFENSIVE_OCCUPIED){
                 levelSum += monsterZone.getValue().getLevel();
@@ -74,7 +74,7 @@ public class MonsterPowers {
 
     public void mirageDragon(MonsterCard activeCard){
         if(!activeCard.isGoingToGraveyard) {
-            if (activeCard.getOwner() == round.getFirstPlayer().getUser()) {
+            if (User.getUserByUsername(activeCard.getOwnerUsername()) == round.getFirstPlayer().getUser()) {
                 round.getSecondPlayer().setAbleToActivateTrapCard(false);
                 return;
             } else {
@@ -83,7 +83,7 @@ public class MonsterPowers {
             }
         }
         else{
-            if (activeCard.getOwner() == round.getFirstPlayer().getUser()) {
+            if (User.getUserByUsername(activeCard.getOwnerUsername()) == round.getFirstPlayer().getUser()) {
                 round.getSecondPlayer().setAbleToActivateTrapCard(true);
                 activeCard.setGoingToGraveyard(false);
                 return;
