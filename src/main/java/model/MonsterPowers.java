@@ -21,7 +21,7 @@ public class MonsterPowers {
         switch (activeCard.getSpecialPower()) {
             case NONE: return;
             case MAN_EATER_BUG:{
-                manEaterBug();
+                manEaterBug(activeCard);
                 return;
             }
             case MARSHMALLON:
@@ -51,10 +51,27 @@ public class MonsterPowers {
             case TERRATIGER_THE_EMPOWERED_WARRIOR:
         }
     }
-    public void manEaterBug(){
-
+    public void manEaterBug(MonsterCard manEaterBug){
+        int opponentCardLocation;
+        if(manEaterBug.isFlipped()){
+            if(!round.getRivalPlayerByTurn().isMonsterCardZoneEmpty()){
+                view.printError("please enter a location to destroy enemy card : ");
+                opponentCardLocation = view.manEaterBug();
+               if(opponentCardLocation < 1 || opponentCardLocation > 5){
+                   view.printError("there is no place with this number");
+                   return;
+               }
+               if(!round.getRivalPlayerByTurn().doesHaveMonsterCardInThisLocation(opponentCardLocation)){
+                   view.printError("there is no card in selected zone");
+                   return;
+               }
+               MonsterCard opponentCard = round.getRivalPlayerByTurn().getMonsterCardByLocationFromZone(opponentCardLocation);
+               round.getRivalPlayerByTurn().addCardToGraveyard(opponentCard);
+               round.getRivalPlayerByTurn().removeCardFromCardsInZone(opponentCard , opponentCardLocation);
+            }
+        }
+        manEaterBug.setFlipped(false);
     }
-    // TODO : should find a way to let the card understand who is the owner
     public void theCalculator(MonsterCard activeCard){
         int levelSum = 0;
         if(User.getUserByUsername(activeCard.getOwnerUsername()) == round.getFirstPlayer().getUser()){

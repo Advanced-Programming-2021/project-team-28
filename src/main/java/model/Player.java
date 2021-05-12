@@ -173,6 +173,8 @@ public class Player {
         return monsterCardsInZone.size() >= 5;
     }
 
+    public boolean isMonsterCardZoneEmpty(){return monsterCardsInZone.isEmpty();}
+
     public boolean isSpellCardZoneFull (){
         return spellOrTrapCardsInZone.size() >= 5;
     }
@@ -205,6 +207,8 @@ public class Player {
     }
 
     public void addCardToGraveyard (Card card){
+
+        card.setGoingToGraveyard(false);
         cardsInGraveyard.add(card);
     }
 
@@ -287,6 +291,10 @@ public class Player {
             }
         }
         return -1;
+    }
+
+    public MonsterCard getMonsterCardByLocationFromZone(int location){
+       return monsterCardsInZone.get(location);
     }
 
 }

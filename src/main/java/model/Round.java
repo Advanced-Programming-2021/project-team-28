@@ -114,4 +114,12 @@ public class Round {
             return secondPlayer;
         }
     }
+
+    public Player getRivalPlayerByTurn(){
+        if(turn == Turn.FIRST_PLAYER){
+            return secondPlayer;
+        } else {
+            return firstPlayer;
+        }
+    }
 }
