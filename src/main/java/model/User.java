@@ -234,7 +234,7 @@ public class User {
             e.printStackTrace();
         }
         User[] users = gson.fromJson(reader,User[].class);
-        ArrayList<User> usersArray = new ArrayList<User>(Arrays.asList(users));
+        ArrayList<User> usersArray = new ArrayList<>(Arrays.asList(users));
         User.users = usersArray;
     }
 }

@@ -14,7 +14,7 @@ public abstract class Card {
     protected String description;
 
     protected boolean isGoingToGraveyard = false;
-
+    @Expose
     protected String ownerUsername;
 
     public static ArrayList<Card> allCards = new ArrayList<>();
