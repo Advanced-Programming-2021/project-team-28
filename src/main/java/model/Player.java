@@ -183,11 +183,7 @@ public class Player {
     }
 
     public void shuffleRemainingCards () {
-        for (int i=0; i<200; i++){
-            int firstRandomInt = Math.abs(random.nextInt()%(remainingPlayerCardsInGame.size()));
-            int secondRandomInt = Math.abs(random.nextInt()%(remainingPlayerCardsInGame.size()-1));
-            Collections.swap(remainingPlayerCardsInGame, firstRandomInt, secondRandomInt);
-        }
+        Collections.shuffle(remainingPlayerCardsInGame);
     }
 
     public void addCardToHand (Card card){
