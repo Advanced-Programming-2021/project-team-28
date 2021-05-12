@@ -20,7 +20,7 @@ public abstract class Card {
     public static ArrayList<Card> allCards = new ArrayList<>();
 
     public Card(String ownerUsername , String name, String number, String description) {
-
+        setOwnerUsername(ownerUsername);
         setName(name);
         setDescription(description);
         setNumber(number);
