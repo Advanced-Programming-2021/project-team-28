@@ -1,24 +1,41 @@
 package model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
 import enums.SpellOrTrapCardPosition;
 import enums.TrapEffect;
 import enums.TrapIcon;
 
-public class TrapCard extends Card implements Cloneable{
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 
+public class TrapCard extends Card implements Cloneable {
+
+    @Expose
     private TrapIcon icon;
+    @Expose
     private TrapEffect effect;
+    @Expose
     private SpellOrTrapCardPosition position;
+    @Expose
+    public static ArrayList<TrapCard> allTrapCard;
 
-    public TrapCard (String ownerUsername , String name, String number, String description , TrapIcon icon , TrapEffect effect){
-        super(ownerUsername , name, number, description);
+    public TrapCard(String ownerUsername, String name, String number, String description, TrapIcon icon, TrapEffect effect) {
+        super(ownerUsername, name, number, description);
         setIcon(icon);
         setEffect(effect);
         setPosition(SpellOrTrapCardPosition.NOT_IN_PLAY_ZONE);
+        TrapCard.allTrapCard.add(this);
     }
 
-    public TrapCard(){
-
+    public TrapCard() {
+        TrapCard.allTrapCard.add(this);
     }
 
     @Override
@@ -26,7 +43,7 @@ public class TrapCard extends Card implements Cloneable{
         return "Name : " + this.name + "\n"
                 + "Trap" + "\n"
                 + "Type : " + this.icon.getName() + "\n"
-                + "Description : " + this.description ;
+                + "Description : " + this.description;
     }
 
     public SpellOrTrapCardPosition getPosition() {
@@ -63,5 +80,34 @@ public class TrapCard extends Card implements Cloneable{
         cloneTrapCard.effect = this.effect;
         cloneTrapCard.position = this.position;
         return cloneTrapCard;
+    }
+
+    public static void serialize() {
+        try (Writer writer = new FileWriter("TrapCardsOutput.json")) {
+            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+            gson.toJson(TrapCard.allTrapCard, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deserialize() {
+        Gson gson = new Gson();
+        Reader reader = null;
+        try {
+            reader = Files.newBufferedReader(Paths.get("src/TrapCardsOutput.json"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        TrapCard[] trapCards = gson.fromJson(reader, TrapCard[].class);
+
+
+        TrapCard.allTrapCard = new ArrayList<>();
+        for (TrapCard trapCard : trapCards) {
+            TrapCard.allTrapCard.add(trapCard);
+            Card.allCards.add(trapCard);
+            User.getUserByUsername(trapCard.getOwnerUsername()).addToCards(trapCard);
+        }
+
     }
 }

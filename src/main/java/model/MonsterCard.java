@@ -1,18 +1,43 @@
 package model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
 import enums.*;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class MonsterCard extends Card {
+    @Expose
+    public static  ArrayList<MonsterCard> allMonsterCards = new ArrayList<>();
+    @Expose
     private int attackPoint;
+    @Expose
     private int defencePoint;
+    @Expose
     private boolean isSummoned;
+    @Expose
     private boolean isFlipped;
+    @Expose
     private int level;
+    @Expose
     private Attribute attribute;
+    @Expose
     private boolean hasBattledInBattlePhase;
+    @Expose
     private MonsterPower specialPower;
+    @Expose
     private MonsterCardPosition position;
+    @Expose
     private boolean isPositionChangedInThisTurn;
+    @Expose
     private boolean isSummonedInThisTurn;
 
     public boolean isSummonedInThisTurn() {
@@ -39,9 +64,10 @@ public class MonsterCard extends Card {
         setLevel(level);
         setAttribute(attribute);
         setPosition(MonsterCardPosition.NOT_IN_PLAY_ZONE);
+        MonsterCard.allMonsterCards.add(this);
     }
     public MonsterCard(){
-
+        MonsterCard.allMonsterCards.add(this);
     }
 
     @Override
@@ -151,5 +177,33 @@ public class MonsterCard extends Card {
         cloneMonsterCard.specialPower = this.specialPower;
         cloneMonsterCard.position = this.position;
         return cloneMonsterCard;
+    }
+
+    public static void serialize(){
+        try (Writer writer = new FileWriter("MonsterCardsOutput.json")) {
+            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+            gson.toJson(MonsterCard.allMonsterCards, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deserialize(){
+        Gson gson = new Gson();
+        Reader reader = null;
+        try {
+            reader = Files.newBufferedReader(Paths.get("src/MonsterCardsOutput.json"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        MonsterCard[] monsterCards = gson.fromJson(reader,MonsterCard[].class);
+
+
+        for (MonsterCard monsterCard: monsterCards){
+            MonsterCard.allMonsterCards.add(monsterCard);
+            Card.allCards.add(monsterCard);
+            User.getUserByUsername(monsterCard.getOwnerUsername()).addToCards(monsterCard);
+        }
+
     }
 }

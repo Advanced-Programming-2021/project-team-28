@@ -22,22 +22,27 @@ public class User {
     private String password;
     @Expose
     private String nickname;
-
     @Expose
     private int score;
     @Expose
     private int balance = 100000;
 
+
     @Expose
-    private ArrayList <Deck> decks = new ArrayList<>();
+    private ArrayList<String> decksName = new ArrayList<>();
+    private ArrayList<Deck> decks = new ArrayList<>();
+
     @Expose
+    private String activeDeckName;
     private Deck activeDeck;
     @Expose
-    private ArrayList <Card> allCards = new ArrayList<>();
-    @Expose
-    private static ArrayList <User> users = new ArrayList<>();
+    private ArrayList<String> allCardsName = new ArrayList<>();
+    private ArrayList<Card> allCards = new ArrayList<>();
 
-    public User (String username , String password , String nickname){
+    @Expose
+    private static ArrayList<User> users = new ArrayList<>();
+
+    public User(String username, String password, String nickname) {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
@@ -58,6 +63,7 @@ public class User {
 
     public void setActiveDeck(Deck activeDeck) {
         this.activeDeck = activeDeck;
+        this.activeDeckName = activeDeck.getDeckName();
     }
 
     public void changeScore(int score) {
@@ -68,12 +74,14 @@ public class User {
         this.balance += balance;
     }
 
-    public void addToDecks (Deck deck){
+    public void addToDecks(Deck deck) {
         decks.add(deck);
+        decksName.add(deck.getDeckName());
     }
 
-    public void addToCards (Card card){
+    public void addToCards(Card card) {
         allCards.add(card);
+        allCardsName.add(card.getName());
     }
 
     public String getUsername() {
@@ -112,28 +120,28 @@ public class User {
         return allCards;
     }
 
-    public static User getUserByUsername (String username) {
+    public static User getUserByUsername(String username) {
         for (int i = 0; i < users.size(); i++) {
-            if ( users.get(i).getUsername().equals(username)) return users.get(i);
+            if (users.get(i).getUsername().equals(username)) return users.get(i);
         }
         return null;
     }
 
-    public static User getUserByNickName (String nickname) {
+    public static User getUserByNickName(String nickname) {
         for (int i = 0; i < users.size(); i++) {
-            if ( users.get(i).getNickname().equals(nickname)) return users.get(i);
+            if (users.get(i).getNickname().equals(nickname)) return users.get(i);
         }
         return null;
     }
 
-    public static boolean isPasswordCorrect ( String username , String password){
-        return getUserByUsername(username).getPassword().equals( password );
+    public static boolean isPasswordCorrect(String username, String password) {
+        return getUserByUsername(username).getPassword().equals(password);
     }
 
-    public static boolean isNicknameAvailable(String nickname){
-       if(getUserByNickName(nickname) == null ) return true;
-       else
-           return false;
+    public static boolean isNicknameAvailable(String nickname) {
+        if (getUserByNickName(nickname) == null) return true;
+        else
+            return false;
     }
 
     public static boolean isUsernameAvailable(String username) {
@@ -142,28 +150,28 @@ public class User {
             return false;
     }
 
-    public Deck getDeckByDeckName (String deckName){
-        for (Deck deck : decks){
-            if(deck.getDeckName().equals(deckName)){
+    public Deck getDeckByDeckName(String deckName) {
+        for (Deck deck : decks) {
+            if (deck.getDeckName().equals(deckName)) {
                 return deck;
             }
         }
         return null;
     }
 
-    public boolean doesUserHaveThisDeck (String deckName){
-        for (Deck deck : decks){
-            if(deck.getDeckName().equals(deckName)){
+    public boolean doesUserHaveThisDeck(String deckName) {
+        for (Deck deck : decks) {
+            if (deck.getDeckName().equals(deckName)) {
                 return true;
             }
         }
         return false;
     }
 
-    public String decksArrayListToString (){
+    public String decksArrayListToString() {
         StringBuilder decksArrayListToStringBuilder = new StringBuilder();
         decksArrayListToStringBuilder.append("Decks:\nActive Deck:\n");
-        if(hasActiveDeck()){
+        if (hasActiveDeck()) {
             decksArrayListToStringBuilder.append(activeDeck.toString());
         }
         sortDecksArrayList();
@@ -176,40 +184,40 @@ public class User {
         return decksArrayListToStringBuilder.toString();
     }
 
-    private void sortDecksArrayList (){
-        for (int i=0; i<decks.size(); i++){
-            for (int j=0; j<decks.size() - 1; j++){
-                if(Utilities.compareAlphabetical(decks.get(j).getDeckName(), decks.get(j+1).getDeckName()) > 0){
-                    Collections.swap(decks, j, j+1);
+    private void sortDecksArrayList() {
+        for (int i = 0; i < decks.size(); i++) {
+            for (int j = 0; j < decks.size() - 1; j++) {
+                if (Utilities.compareAlphabetical(decks.get(j).getDeckName(), decks.get(j + 1).getDeckName()) > 0) {
+                    Collections.swap(decks, j, j + 1);
                 }
             }
         }
     }
 
-    public boolean hasActiveDeck(){
+    public boolean hasActiveDeck() {
         return !(activeDeck == null);
     }
 
-    public int numOfCardsWithThisName (String cardName){
+    public int numOfCardsWithThisName(String cardName) {
         int numOfCardsWithThisName = 0;
-        for (Card card : allCards){
-            if(card.getName().equals(cardName)){
+        for (Card card : allCards) {
+            if (card.getName().equals(cardName)) {
                 numOfCardsWithThisName++;
             }
         }
         return numOfCardsWithThisName;
     }
 
-    public boolean isAmountOfThisCardEnough (Deck deck, String cardName){
+    public boolean isAmountOfThisCardEnough(Deck deck, String cardName) {
         int numOfThisTypeOfCardUserHave = numOfCardsWithThisName(cardName);
         int numOfThisTypeOfCardInDeck = 0;
-        for (Card card : deck.getAllCardsInMainDeck()){
-            if(card.getName().equals(cardName)){
+        for (Card card : deck.getAllCardsInMainDeck()) {
+            if (card.getName().equals(cardName)) {
                 numOfThisTypeOfCardInDeck++;
             }
         }
-        for (Card card : deck.getAllCardsInSideDeck()){
-            if(card.getName().equals(cardName)){
+        for (Card card : deck.getAllCardsInSideDeck()) {
+            if (card.getName().equals(cardName)) {
                 numOfThisTypeOfCardInDeck++;
             }
         }
@@ -225,7 +233,7 @@ public class User {
         }
     }
 
-    public static void deserialize()  {
+    public static void deserialize() {
         Gson gson = new Gson();
         Reader reader = null;
         try {
@@ -233,8 +241,20 @@ public class User {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        User[] users = gson.fromJson(reader,User[].class);
-        ArrayList<User> usersArray = new ArrayList<>(Arrays.asList(users));
-        User.users = usersArray;
+        User[] users = gson.fromJson(reader, User[].class);
+
+        for (User user : users) {
+            user.allCards = new ArrayList<>();
+            for (String cardName: user.allCardsName){
+                user.allCards.add(Card.getCardByName(Card.allCards, cardName));
+            }
+            user.decks = new ArrayList<>();
+            for (String deckName: user.decksName){
+                user.decks.add(Deck.getDeckByOwnerAndName(user.username, deckName));
+            }
+            User.users.add(user);
+        }
+
+
     }
 }

@@ -53,6 +53,7 @@ public class MainPhaseController extends PhaseController {
             Scanner scanner = ScannerInstance.getInstance().getScanner();
             if (tributeNeeded == 1) {
                 int tributeAddress = scanner.nextInt();
+                //handle
                 if (!player.doesHaveMonsterCardInThisLocation(tributeAddress)) {
                     mainPhaseView.printString("there is no monster on one of these addresses");
                 } else {
@@ -159,6 +160,7 @@ public class MainPhaseController extends PhaseController {
         card.setPosition(DEFENSIVE_HIDDEN);
         player.addCardToCardsInZone(card);
         player.removeCardFromHand(card);
+        card.setSummonedInThisTurn(true);
         player.setSelectedCard(null);
         this.isSummonOrSetMonsterCard = true;
         mainPhaseView.printString("set successfully");

@@ -1,7 +1,12 @@
 package model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -12,7 +17,7 @@ public abstract class Card {
     protected String number;
     @Expose
     protected String description;
-
+    @Expose
     protected boolean isGoingToGraveyard = false;
     @Expose
     protected String ownerUsername;
@@ -127,5 +132,6 @@ public abstract class Card {
         }
         return null;
     }
+
 
 }

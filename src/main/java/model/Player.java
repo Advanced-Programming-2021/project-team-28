@@ -234,9 +234,9 @@ public class Player {
         for(int i=1; i<=cardsInGraveyard.size(); i++){
             graveyardToStringBuilder.append(i);
             graveyardToStringBuilder.append(". ");
-            graveyardToStringBuilder.append(cardsInGraveyard.get(i-1).getName());
+            graveyardToStringBuilder.append(cardsInGraveyard.get(i).getName());
             graveyardToStringBuilder.append(" : ");
-            graveyardToStringBuilder.append(cardsInGraveyard.get(i-1).getDescription());
+            graveyardToStringBuilder.append(cardsInGraveyard.get(i).getDescription());
             graveyardToStringBuilder.append("\n");
         }
         return graveyardToStringBuilder.toString();

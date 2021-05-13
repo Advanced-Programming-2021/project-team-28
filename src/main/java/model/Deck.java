@@ -1,18 +1,35 @@
 package model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Deck {
+
     @Expose
     private String creatorUsername;
     @Expose
     private String deckName;
-    @Expose
+
     private ArrayList<Card> allCardsInMainDeck = new ArrayList<>();
-    @Expose
+
     private ArrayList<Card> allCardsInSideDeck = new ArrayList<>();
+
+    @Expose
+    private ArrayList<String> allCardsNameInMainDeck = new ArrayList<>();
+    @Expose
+    private ArrayList<String> allCardsNameInSideDeck = new ArrayList<>();
+    @Expose
+    public static ArrayList<Deck> allDecks = new ArrayList<>();
+
 
     public Deck(String deckName, String creatorUsername) {
         setCreatorUsername(creatorUsername);
@@ -41,8 +58,10 @@ public class Deck {
                     !isThisCardInDeck(user.getAllCards().get(i))) {
                 if (isToSideDeck) {
                     allCardsInSideDeck.add(user.getAllCards().get(i));
+                    allCardsNameInSideDeck.add(user.getAllCards().get(i).getName());
                 } else {
                     allCardsInMainDeck.add(user.getAllCards().get(i));
+                    allCardsNameInMainDeck.add(user.getAllCards().get(i).getName());
                 }
                 return;
             }
@@ -69,6 +88,7 @@ public class Deck {
             for (Card card : allCardsInSideDeck) {
                 if (card.getName().equals(cardName)) {
                     allCardsInSideDeck.remove(card);
+                    allCardsNameInSideDeck.remove(card.getName());
                     return;
                 }
             }
@@ -76,10 +96,19 @@ public class Deck {
             for (Card card : allCardsInMainDeck) {
                 if (card.getName().equals(cardName)) {
                     allCardsInMainDeck.remove(card);
+                    allCardsNameInSideDeck.remove(card.getName());
                     return;
                 }
             }
         }
+    }
+
+    public static Deck getDeckByOwnerAndName(String ownerName, String deckName) {
+        for (Deck deck: allDecks){
+            if (ownerName.equals(deck.creatorUsername)
+                    && deckName.equals(deck.getDeckName())) return deck;
+        }
+        return null;
     }
 
     public void removeDeck() {
@@ -160,20 +189,50 @@ public class Deck {
         return (allCardsInMainDeck.size() >= 40 && allCardsInMainDeck.size() <= 60 && allCardsInSideDeck.size() <= 15);
     }
 
-    public boolean isThisCardInSideOrMainDeck (String cardName, boolean isInSideDeck){
-        if(isInSideDeck){
-            for (Card card : allCardsInSideDeck){
-                if(card.getName().equals(cardName)){
+    public boolean isThisCardInSideOrMainDeck(String cardName, boolean isInSideDeck) {
+        if (isInSideDeck) {
+            for (Card card : allCardsInSideDeck) {
+                if (card.getName().equals(cardName)) {
                     return true;
                 }
             }
         } else {
-            for (Card card : allCardsInMainDeck){
-                if(card.getName().equals(cardName)){
+            for (Card card : allCardsInMainDeck) {
+                if (card.getName().equals(cardName)) {
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    public static void serialize() {
+        try (Writer writer = new FileWriter("DecksOutput.json")) {
+            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+            gson.toJson(Deck.allDecks, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deserialize() {
+        Gson gson = new Gson();
+        Reader reader = null;
+        try {
+            reader = Files.newBufferedReader(Paths.get("src/DecksOutput.json"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Deck[] decks = gson.fromJson(reader, Deck[].class);
+        for (Deck deck : decks) {
+            for (String cardName : deck.allCardsNameInMainDeck) {
+                deck.allCardsInMainDeck.add(Card.getCardByName(Card.allCards, cardName));
+            }
+            for (String cardName : deck.allCardsNameInSideDeck) {
+                deck.allCardsInSideDeck.add(Card.getCardByName(Card.allCards, cardName));
+            }
+            Deck.allDecks.add(deck);
+        }
     }
 }

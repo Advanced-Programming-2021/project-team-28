@@ -1,12 +1,13 @@
 package controller;
 
 import enums.MenuEnum;
-import model.User;
+import model.*;
 import view.LoginMenuView;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,19 +16,39 @@ public class LoginMenuController {
 
     public void run() throws CloneNotSupportedException, IOException {
         createResourceFileIfNeeded();
+
+        MonsterCard.deserialize();
+        SpellCard.deserialize();
+        TrapCard.deserialize();
+        Deck.deserialize();
         User.deserialize();
+
         this.loginMenuView.run();
+
+        MonsterCard.serialize();
+        SpellCard.serialize();
+        TrapCard.serialize();
+        Deck.serialize();
         User.serialize();
     }
 
     private void createResourceFileIfNeeded() throws IOException {
-        File resource = new File("src/UserOutput.json");
-        if(!resource.exists()){
-            resource.createNewFile();
-            FileWriter writer = new FileWriter(resource);
+        ArrayList<File> files= new ArrayList<>();
+        files.add(new File("src/UserOutput.json"));
+        files.add(new File("src/MonsterCardsOutput.json"));
+        files.add(new File("src/SpellCardsOutput.json"));
+        files.add(new File("src/TrapCardsOutput.json"));
+        files.add(new File("src/DecksOutput.json"));
+
+
+        for (File file : files)
+        if(!file.exists()){
+            file.createNewFile();
+            FileWriter writer = new FileWriter(file);
             writer.write("[]");
             writer.close();
         }
+
     }
 
     public MenuEnum processCommand(String command) throws CloneNotSupportedException {
