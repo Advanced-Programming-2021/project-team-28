@@ -61,287 +61,287 @@ public class ShopController {
     private void sellCard(String cardName){
         if(cardName.equals("Command knight")){
             if(receiveMoneyFromCustomer(2100)) {
-                MonsterCard card = new MonsterCard(user.getUsername() ,"Command knight", "", MonstersDescriptions.commandKnight, 1000, 1000,
+                MonsterCard card = new MonsterCard(MonsterType.WARRIOR , user.getUsername() ,"Command knight", "", MonstersDescriptions.commandKnight, 1000, 1000,
                         MonsterPower.COMMAND_KNIGHT, 4, Attribute.FIRE);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Battle Ox")){
             if(receiveMoneyFromCustomer(2900)) {
-                MonsterCard card = new MonsterCard(user.getUsername(),"Battle Ox", "", MonstersDescriptions.battleOX, 1700, 1000,
+                MonsterCard card = new MonsterCard(MonsterType.BEAST_WARRIOR , user.getUsername(),"Battle Ox", "", MonstersDescriptions.battleOX, 1700, 1000,
                         MonsterPower.NONE, 4, Attribute.EARTH);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Axe Raider")){
             if(receiveMoneyFromCustomer(3100)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.axeRaider, 1700, 1150,
+                MonsterCard card = new MonsterCard(MonsterType.WARRIOR , user.getUsername() , cardName, "", MonstersDescriptions.axeRaider, 1700, 1150,
                         MonsterPower.NONE, 4, Attribute.EARTH);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Horn Imp")){
             if(receiveMoneyFromCustomer(2500)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.hornImp, 1300, 1000,
+                MonsterCard card = new MonsterCard(MonsterType.FIEND , user.getUsername() , cardName, "", MonstersDescriptions.hornImp, 1300, 1000,
                         MonsterPower.NONE, 4, Attribute.DARK);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Silver Fang")){
             if(receiveMoneyFromCustomer(1700)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.silverFang, 1200, 800,
+                MonsterCard card = new MonsterCard(MonsterType.BEAST , user.getUsername() , cardName, "", MonstersDescriptions.silverFang, 1200, 800,
                         MonsterPower.NONE, 3, Attribute.EARTH);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Yomi Ship")){
             if(receiveMoneyFromCustomer(1700)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.yomiShip, 800, 1400,
+                MonsterCard card = new MonsterCard(MonsterType.AQUA , user.getUsername() , cardName, "", MonstersDescriptions.yomiShip, 800, 1400,
                         MonsterPower.YOMI_SHIP, 3, Attribute.WATER);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Suijin")){
             if(receiveMoneyFromCustomer(8700)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.suijin, 2500, 2400,
+                MonsterCard card = new MonsterCard(MonsterType.AQUA , user.getUsername() , cardName, "", MonstersDescriptions.suijin, 2500, 2400,
                         MonsterPower.SUIJIN, 7, Attribute.WATER);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Fireyarou")){
             if(receiveMoneyFromCustomer(2500)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.fireYarou, 1300, 1000,
+                MonsterCard card = new MonsterCard(MonsterType.PYRO , user.getUsername() , cardName, "", MonstersDescriptions.fireYarou, 1300, 1000,
                         MonsterPower.NONE, 4, Attribute.FIRE);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Curtain of Dark Ones")){
             if(receiveMoneyFromCustomer(700)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.curtainOfTheDarkOnes, 600, 500,
+                MonsterCard card = new MonsterCard(MonsterType.SPELL_CASTER , user.getUsername() , cardName, "", MonstersDescriptions.curtainOfTheDarkOnes, 600, 500,
                         MonsterPower.NONE, 2, Attribute.DARK);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Feral Imp")){
             if(receiveMoneyFromCustomer(2800)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.feralImp, 1400, 1300,
+                MonsterCard card = new MonsterCard(MonsterType.FIEND , user.getUsername() , cardName, "", MonstersDescriptions.feralImp, 1400, 1300,
                         MonsterPower.NONE, 4, Attribute.DARK);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Dark Magician")){
             if(receiveMoneyFromCustomer(8300)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.darkMagician, 2500, 2100,
+                MonsterCard card = new MonsterCard(MonsterType.SPELL_CASTER , user.getUsername() , cardName, "", MonstersDescriptions.darkMagician, 2500, 2100,
                         MonsterPower.NONE, 7, Attribute.DARK);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Wattkid")){
             if(receiveMoneyFromCustomer(1300)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.wattkid, 1000, 500,
+                MonsterCard card = new MonsterCard(MonsterType.THUNDER , user.getUsername() , cardName, "", MonstersDescriptions.wattkid, 1000, 500,
                         MonsterPower.NONE, 3, Attribute.LIGHT);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Baby Dragon")){
             if(receiveMoneyFromCustomer(1600)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.babyDragon, 1200, 700,
+                MonsterCard card = new MonsterCard(MonsterType.DRAGON , user.getUsername() , cardName, "", MonstersDescriptions.babyDragon, 1200, 700,
                         MonsterPower.NONE, 3, Attribute.WIND);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Hero of the East")){
             if(receiveMoneyFromCustomer(1700)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.heroOfTheEast, 1100, 1000,
+                MonsterCard card = new MonsterCard(MonsterType.WARRIOR , user.getUsername() , cardName, "", MonstersDescriptions.heroOfTheEast, 1100, 1000,
                         MonsterPower.NONE, 3, Attribute.EARTH);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Battle Warrior")){
             if(receiveMoneyFromCustomer(1300)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.battleWarrior, 700, 1000,
+                MonsterCard card = new MonsterCard(MonsterType.WARRIOR , user.getUsername() , cardName, "", MonstersDescriptions.battleWarrior, 700, 1000,
                         MonsterPower.NONE, 3, Attribute.EARTH);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Crawling dragon")){
             if(receiveMoneyFromCustomer(3900)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.crawlingDragon, 1600, 1400,
+                MonsterCard card = new MonsterCard(MonsterType.DRAGON , user.getUsername() , cardName, "", MonstersDescriptions.crawlingDragon, 1600, 1400,
                         MonsterPower.NONE, 5, Attribute.EARTH);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Flame Manipulator")){
             if(receiveMoneyFromCustomer(1500)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.flameManipulator, 900, 100,
+                MonsterCard card = new MonsterCard(MonsterType.SPELL_CASTER , user.getUsername() , cardName, "", MonstersDescriptions.flameManipulator, 900, 100,
                         MonsterPower.NONE, 3, Attribute.FIRE);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Blue-Eyes White Dragon")){
             if(receiveMoneyFromCustomer(11300)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.blueEyesDragon, 3000, 2500,
+                MonsterCard card = new MonsterCard(MonsterType.DRAGON , user.getUsername() , cardName, "", MonstersDescriptions.blueEyesDragon, 3000, 2500,
                         MonsterPower.NONE, 8, Attribute.LIGHT);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Crab Turtle")){
             if(receiveMoneyFromCustomer(10200)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.crabTurtle, 2550, 2500,
+                MonsterCard card = new MonsterCard(MonsterType.AQUA , user.getUsername() , cardName, "", MonstersDescriptions.crabTurtle, 2550, 2500,
                         MonsterPower.CRAB_TURTLE, 7, Attribute.WATER);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Skull Guardian")){
             if(receiveMoneyFromCustomer(7900)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.skullGuardian, 2050, 2500,
+                MonsterCard card = new MonsterCard(MonsterType.WARRIOR , user.getUsername() , cardName, "", MonstersDescriptions.skullGuardian, 2050, 2500,
                         MonsterPower.SKULL_GUARDIAN, 7, Attribute.LIGHT);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Slot Machine")){
             if(receiveMoneyFromCustomer(7500)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.slotMachine, 2000, 2300,
+                MonsterCard card = new MonsterCard(MonsterType.MACHINE , user.getUsername() , cardName, "", MonstersDescriptions.slotMachine, 2000, 2300,
                         MonsterPower.NONE, 7, Attribute.DARK);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Haniwa")){
             if(receiveMoneyFromCustomer(600)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.haniwa, 500, 500,
+                MonsterCard card = new MonsterCard(MonsterType.ROCK , user.getUsername() , cardName, "", MonstersDescriptions.haniwa, 500, 500,
                         MonsterPower.NONE, 2, Attribute.EARTH);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Man-Eater Bug")){
             if(receiveMoneyFromCustomer(600)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.manEaterBug, 450, 600,
+                MonsterCard card = new MonsterCard(MonsterType.INSECT , user.getUsername() , cardName, "", MonstersDescriptions.manEaterBug, 450, 600,
                         MonsterPower.MAN_EATER_BUG, 2, Attribute.EARTH);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Gate Guardian")){
             if(receiveMoneyFromCustomer(20000)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.gateGuardian, 3750, 3400,
+                MonsterCard card = new MonsterCard(MonsterType.WARRIOR , user.getUsername() , cardName, "", MonstersDescriptions.gateGuardian, 3750, 3400,
                         MonsterPower.GATE_GUARDIAN, 11, Attribute.DARK);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Scanner")){
             if(receiveMoneyFromCustomer(8000)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.scanner, 0, 0,
+                MonsterCard card = new MonsterCard(MonsterType.MACHINE , user.getUsername() , cardName, "", MonstersDescriptions.scanner, 0, 0,
                         MonsterPower.SCANNER, 1, Attribute.LIGHT);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Bitron")){
             if(receiveMoneyFromCustomer(1000)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.bitron, 200, 2000,
+                MonsterCard card = new MonsterCard(MonsterType.CYBERSE , user.getUsername() , cardName, "", MonstersDescriptions.bitron, 200, 2000,
                         MonsterPower.NONE, 2, Attribute.DARK);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Marshmallon")){
             if(receiveMoneyFromCustomer(700)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.marshmallon, 300, 500,
+                MonsterCard card = new MonsterCard(MonsterType.FAIRY , user.getUsername() , cardName, "", MonstersDescriptions.marshmallon, 300, 500,
                         MonsterPower.MARSHMALLON, 3, Attribute.LIGHT);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Beast King Barbaros")){
             if(receiveMoneyFromCustomer(9200)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.beastKing, 3000, 1200,
+                MonsterCard card = new MonsterCard(MonsterType.BEAST_WARRIOR , user.getUsername() , cardName, "", MonstersDescriptions.beastKing, 3000, 1200,
                         MonsterPower.BEAST_KING_BARBAROS, 8, Attribute.EARTH);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Texchanger")){
             if(receiveMoneyFromCustomer(200)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.texChanger, 100, 100,
+                MonsterCard card = new MonsterCard(MonsterType.CYBERSE , user.getUsername() , cardName, "", MonstersDescriptions.texChanger, 100, 100,
                         MonsterPower.TEXCHANGER, 1, Attribute.DARK);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Leotron")){
             if(receiveMoneyFromCustomer(2500)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.leotron, 2000, 0,
+                MonsterCard card = new MonsterCard(MonsterType.CYBERSE , user.getUsername() , cardName, "", MonstersDescriptions.leotron, 2000, 0,
                         MonsterPower.NONE, 4, Attribute.EARTH);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("The Calculator")){
             if(receiveMoneyFromCustomer(8000)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.theCalculator ,0, 0,
+                MonsterCard card = new MonsterCard(MonsterType.THUNDER , user.getUsername() , cardName, "", MonstersDescriptions.theCalculator ,0, 0,
                         MonsterPower.THE_CALCULATOR, 2, Attribute.LIGHT);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Alexandrite Dragon")){
             if(receiveMoneyFromCustomer(2600)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.alexandriteDragon, 2000, 100,
+                MonsterCard card = new MonsterCard(MonsterType.DRAGON , user.getUsername() , cardName, "", MonstersDescriptions.alexandriteDragon, 2000, 100,
                         MonsterPower.NONE, 4, Attribute.LIGHT);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Mirage Dragon")){
             if(receiveMoneyFromCustomer(2500)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.mirageDragon, 1600, 600,
+                MonsterCard card = new MonsterCard(MonsterType.DRAGON , user.getUsername() , cardName, "", MonstersDescriptions.mirageDragon, 1600, 600,
                         MonsterPower.MIRAGE_DRAGON, 4, Attribute.LIGHT);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Herald of Creation")){
             if(receiveMoneyFromCustomer(2700)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.heraldOfTheCreation, 1800, 600,
+                MonsterCard card = new MonsterCard(MonsterType.SPELL_CASTER , user.getUsername() , cardName, "", MonstersDescriptions.heraldOfTheCreation, 1800, 600,
                         MonsterPower.HERALD_OF_CREATION, 4, Attribute.LIGHT);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Exploder Dragon")){
             if(receiveMoneyFromCustomer(1000)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.exploderDragon, 1000, 0,
+                MonsterCard card = new MonsterCard(MonsterType.DRAGON , user.getUsername() , cardName, "", MonstersDescriptions.exploderDragon, 1000, 0,
                         MonsterPower.EXPLODER_DRAGON, 3, Attribute.EARTH);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Warrior Dai Grepher")){
             if(receiveMoneyFromCustomer(3400)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.warriorDaiGrepher, 1700, 1600,
+                MonsterCard card = new MonsterCard(MonsterType.WARRIOR , user.getUsername() , cardName, "", MonstersDescriptions.warriorDaiGrepher, 1700, 1600,
                         MonsterPower.NONE, 4, Attribute.EARTH);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Dark Blade")){
             if(receiveMoneyFromCustomer(3500)) {
-                MonsterCard card = new MonsterCard(user.getUsername(), cardName, "", MonstersDescriptions.darkBlade, 1800, 1500,
+                MonsterCard card = new MonsterCard(MonsterType.WARRIOR , user.getUsername(), cardName, "", MonstersDescriptions.darkBlade, 1800, 1500,
                         MonsterPower.NONE, 4, Attribute.DARK);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Wattaildragon")){
             if(receiveMoneyFromCustomer(5800)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.wattailDragon, 2500, 1700,
+                MonsterCard card = new MonsterCard(MonsterType.DRAGON , user.getUsername() , cardName, "", MonstersDescriptions.wattailDragon, 2500, 1700,
                         MonsterPower.NONE, 6, Attribute.LIGHT);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Terratiger, the Empowered Warrior")){
             if(receiveMoneyFromCustomer(3200)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.terraTigerTheEmpoweredWarrior, 1800, 1200,
+                MonsterCard card = new MonsterCard(MonsterType.WARRIOR , user.getUsername() , cardName, "", MonstersDescriptions.terraTigerTheEmpoweredWarrior, 1800, 1200,
                         MonsterPower.TERRATIGER_THE_EMPOWERED_WARRIOR, 4, Attribute.EARTH);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("The Tricky")){
             if(receiveMoneyFromCustomer(4300)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.theTricky, 2000, 1200,
+                MonsterCard card = new MonsterCard(MonsterType.SPELL_CASTER , user.getUsername() , cardName, "", MonstersDescriptions.theTricky, 2000, 1200,
                         MonsterPower.THE_TRICKY, 5, Attribute.WIND);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Spiral Serpent")){
             if(receiveMoneyFromCustomer(11700)) {
-                MonsterCard card = new MonsterCard(user.getUsername() , cardName, "", MonstersDescriptions.spiralSerpent, 2900, 2900,
+                MonsterCard card = new MonsterCard(MonsterType.SEA_SERPENT , user.getUsername() , cardName, "", MonstersDescriptions.spiralSerpent, 2900, 2900,
                         MonsterPower.NONE, 8, Attribute.WATER);
                 user.addToCards(card);
             }

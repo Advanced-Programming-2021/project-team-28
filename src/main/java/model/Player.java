@@ -292,7 +292,14 @@ public class Player {
         }
         return -1;
     }
-
+    public int getLocationOfThisSpellOrTrapCardInZone (Card card){
+        for (Map.Entry<Integer, Card> locationAndCard : spellOrTrapCardsInZone.entrySet()){
+            if(locationAndCard.getValue().equals(card)){
+                return locationAndCard.getKey();
+            }
+        }
+        return -1;
+    }
     public MonsterCard getMonsterCardByLocationFromZone(int location){
        return monsterCardsInZone.get(location);
     }
