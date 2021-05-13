@@ -252,6 +252,7 @@ public class User {
             for (String deckName: user.decksName){
                 user.decks.add(Deck.getDeckByOwnerAndName(user.username, deckName));
             }
+            user.setActiveDeck(Deck.getDeckByOwnerAndName(user.getUsername(), user.activeDeckName));
             User.users.add(user);
         }
 

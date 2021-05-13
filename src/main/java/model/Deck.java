@@ -227,9 +227,11 @@ public class Deck {
 
         Deck[] decks = gson.fromJson(reader, Deck[].class);
         for (Deck deck : decks) {
+            deck.allCardsInMainDeck = new ArrayList<>();
             for (String cardName : deck.allCardsNameInMainDeck) {
                 deck.allCardsInMainDeck.add(Card.getCardByName(Card.allCards, cardName));
             }
+            deck.allCardsInSideDeck = new ArrayList<>();
             for (String cardName : deck.allCardsNameInSideDeck) {
                 deck.allCardsInSideDeck.add(Card.getCardByName(Card.allCards, cardName));
             }
