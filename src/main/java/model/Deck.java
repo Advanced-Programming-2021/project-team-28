@@ -35,6 +35,7 @@ public class Deck {
         setCreatorUsername(creatorUsername);
         setDeckName(deckName);
         User.getUserByUsername(creatorUsername).addToDecks(this);
+        Deck.allDecks.add(this);
     }
 
     public String showDeck(boolean isSideDeck) {
@@ -207,7 +208,7 @@ public class Deck {
     }
 
     public static void serialize() {
-        try (Writer writer = new FileWriter("DecksOutput.json")) {
+        try (Writer writer = new FileWriter("src/DecksOutput.json")) {
             Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
             gson.toJson(Deck.allDecks, writer);
         } catch (IOException e) {

@@ -190,7 +190,7 @@ public class MonsterCard extends Card {
     }
 
     public static void serialize(){
-        try (Writer writer = new FileWriter("MonsterCardsOutput.json")) {
+        try (Writer writer = new FileWriter("src/MonsterCardsOutput.json")) {
             Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
             gson.toJson(MonsterCard.allMonsterCards, writer);
         } catch (IOException e) {
@@ -212,7 +212,7 @@ public class MonsterCard extends Card {
         for (MonsterCard monsterCard: monsterCards){
             MonsterCard.allMonsterCards.add(monsterCard);
             Card.allCards.add(monsterCard);
-            User.getUserByUsername(monsterCard.getOwnerUsername()).addToCards(monsterCard);
+//            User.getUserByUsername(monsterCard.getOwnerUsername()).addToCards(monsterCard);
         }
 
     }

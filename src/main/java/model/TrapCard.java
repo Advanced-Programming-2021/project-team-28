@@ -24,7 +24,7 @@ public class TrapCard extends Card implements Cloneable {
     @Expose
     private SpellOrTrapCardPosition position;
     @Expose
-    public static ArrayList<TrapCard> allTrapCard;
+    public static ArrayList<TrapCard> allTrapCard = new ArrayList<>();
 
     public TrapCard(String ownerUsername, String name, String number, String description, TrapIcon icon, TrapEffect effect) {
         super(ownerUsername, name, number, description);
@@ -83,7 +83,7 @@ public class TrapCard extends Card implements Cloneable {
     }
 
     public static void serialize() {
-        try (Writer writer = new FileWriter("TrapCardsOutput.json")) {
+        try (Writer writer = new FileWriter("src/TrapCardsOutput.json")) {
             Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
             gson.toJson(TrapCard.allTrapCard, writer);
         } catch (IOException e) {
@@ -106,7 +106,7 @@ public class TrapCard extends Card implements Cloneable {
         for (TrapCard trapCard : trapCards) {
             TrapCard.allTrapCard.add(trapCard);
             Card.allCards.add(trapCard);
-            User.getUserByUsername(trapCard.getOwnerUsername()).addToCards(trapCard);
+//            User.getUserByUsername(trapCard.getOwnerUsername()).addToCards(trapCard);
         }
 
     }

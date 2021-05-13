@@ -83,7 +83,7 @@ public class SpellCard extends Card{
     }
 
     public static void serialize(){
-        try (Writer writer = new FileWriter("SpellCardsOutput.json")) {
+        try (Writer writer = new FileWriter("src/SpellCardsOutput.json")) {
             Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
             gson.toJson(SpellCard.allSpellCard, writer);
         } catch (IOException e) {
@@ -105,7 +105,7 @@ public class SpellCard extends Card{
         for (SpellCard spellCard: spellCards){
             SpellCard.allSpellCard.add(spellCard);
             Card.allCards.add(spellCard);
-            User.getUserByUsername(spellCard.getOwnerUsername()).addToCards(spellCard);
+//            User.getUserByUsername(spellCard.getOwnerUsername()).addToCards(spellCard);
         }
 
     }
