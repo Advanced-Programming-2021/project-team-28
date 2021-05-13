@@ -14,6 +14,7 @@ public class MonsterCard extends Card {
     private MonsterCardPosition position;
     private boolean isPositionChangedInThisTurn;
     private boolean isSummonedInThisTurn;
+    private MonsterType type;
 
     public boolean isSummonedInThisTurn() {
         return isSummonedInThisTurn;
@@ -31,7 +32,7 @@ public class MonsterCard extends Card {
         isPositionChangedInThisTurn = positionChangedInThisTurn;
     }
 
-    public MonsterCard(String ownerUsername ,String name, String number, String description , int attackPoint , int defencePoint , MonsterPower specialPower , int level , Attribute attribute) {
+    public MonsterCard(MonsterType type , String ownerUsername ,String name, String number, String description , int attackPoint , int defencePoint , MonsterPower specialPower , int level , Attribute attribute) {
         super(ownerUsername ,name, number, description);
         setAttackPoint(attackPoint);
         setDefencePoint(defencePoint);
@@ -39,6 +40,7 @@ public class MonsterCard extends Card {
         setLevel(level);
         setAttribute(attribute);
         setPosition(MonsterCardPosition.NOT_IN_PLAY_ZONE);
+        setType(type);
     }
     public MonsterCard(){
 
@@ -133,6 +135,14 @@ public class MonsterCard extends Card {
 
     public void setDefencePoint(int defencePoint) {
         this.defencePoint = defencePoint;
+    }
+
+    public MonsterType getType() {
+        return type;
+    }
+
+    public void setType(MonsterType type) {
+        this.type = type;
     }
 
     @Override
