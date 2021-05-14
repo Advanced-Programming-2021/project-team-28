@@ -52,31 +52,30 @@ public class LoginMenuController {
     }
 
     public MenuEnum processCommand(String command) throws CloneNotSupportedException {
+        String username = "username";
+        String password = "password";
+        String nickname = "nickname";
         Matcher[] commandMatchers = getCommandMatchers(command);
         if (commandMatchers[0].find()) {
             return MenuEnum.BACK;
         } else if (commandMatchers[1].find()) {
             loginMenuView.showCurrentMenu();
-        } else if (commandMatchers[2].find()) {
-            controlCreateUserCommand(commandMatchers[2].group(1), commandMatchers[2].group(2), commandMatchers[2].group(3));
-        } else if (commandMatchers[3].find()) {
-            controlCreateUserCommand(commandMatchers[3].group(1), commandMatchers[3].group(3), commandMatchers[3].group(2));
-        } else if (commandMatchers[4].find()) {
-            controlCreateUserCommand(commandMatchers[4].group(2), commandMatchers[4].group(1), commandMatchers[4].group(3));
-        } else if (commandMatchers[5].find()) {
-            controlCreateUserCommand(commandMatchers[5].group(3), commandMatchers[5].group(1), commandMatchers[5].group(2));
-        } else if (commandMatchers[6].find()) {
-            controlCreateUserCommand(commandMatchers[6].group(3), commandMatchers[6].group(2), commandMatchers[6].group(1));
-        } else if (commandMatchers[7].find()) {
-            controlCreateUserCommand(commandMatchers[7].group(2), commandMatchers[7].group(3), commandMatchers[7].group(1));
-        } else if (commandMatchers[8].find()) {
-            controlLoginUserCommand(commandMatchers[8].group(1), commandMatchers[8].group(2));
-        } else if (commandMatchers[9].find()) {
-            controlLoginUserCommand(commandMatchers[9].group(2), commandMatchers[9].group(1));
-        }else if(commandMatchers[10].find()){
+            return MenuEnum.CONTINUE;
+        } else if (commandMatchers[18].find()){
             loginMenuView.pleaseLoginFirst();
-        } else {
-            loginMenuView.invalidCommand();
+            return MenuEnum.CONTINUE;
+        }
+        for (int i=2 ; i<14; i++){
+            if(commandMatchers[i].find()){
+                controlCreateUserCommand(commandMatchers[i].group(username), commandMatchers[i].group(password), commandMatchers[i].group(nickname));
+                return MenuEnum.CONTINUE;
+            }
+        }
+        for (int i=14; i<18; i++){
+            if(commandMatchers[i].find()){
+                controlLoginUserCommand(commandMatchers[i].group(username), commandMatchers[i].group(password));
+                return MenuEnum.CONTINUE;
+            }
         }
         return MenuEnum.CONTINUE;
     }
@@ -104,16 +103,24 @@ public class LoginMenuController {
     private Matcher[] getCommandMatchers(String command) {
         Pattern patternForExit = Pattern.compile("^menu exit$");
         Pattern patternForShowCurrentMenu = Pattern.compile("^menu show-current$");
-        Pattern patternForCreateUser1 = Pattern.compile("^user create --username (.+?) --password (.+?) --nickname (.+?)$");
-        Pattern patternForCreateUser2 = Pattern.compile("^user create --username (.+?) --nickname (.+?) --password (.+?)$");
-        Pattern patternForCreateUser3 = Pattern.compile("^user create --password (.+?) --username (.+?) --nickname (.+?)$");
-        Pattern patternForCreateUser4 = Pattern.compile("^user create --password (.+?) --nickname (.+?) --username (.+?)$");
-        Pattern patternForCreateUser5 = Pattern.compile("^user create --nickname (.+?) --password (.+?) --username (.+?)$");
-        Pattern patternForCreateUser6 = Pattern.compile("^user create --nickname (.+?) --username (.+?) --password (.+?)$");
-        Pattern patternForLoginUser1 = Pattern.compile("^user login --username (.+?) --password (.+?)$");
-        Pattern patternForLoginUser2 = Pattern.compile("^user login --password (.+?) --username (.+?)$");
+        Pattern patternForCreateUser1 = Pattern.compile("^user create -u (?<username>.+?) -p (?<password>.+?) -n (?<nickname>.+?)$");
+        Pattern patternForCreateUser2 = Pattern.compile("^user create -u (?<username>.+?) -n (?<nickname>.+?) -p (?<password>.+?)$");
+        Pattern patternForCreateUser3 = Pattern.compile("^user create -p (?<password>.+?) -u (?<username>.+?) -n (?<nickname>.+?)$");
+        Pattern patternForCreateUser4 = Pattern.compile("^user create -p (?<password>.+?) -n (?<nickname>.+?) -u (?<username>.+?)$");
+        Pattern patternForCreateUser5 = Pattern.compile("^user create -n (?<nickname>.+?) -p (?<password>.+?) -u (?<username>.+?)$");
+        Pattern patternForCreateUser6 = Pattern.compile("^user create -n (?<nickname>.+?) -u (?<username>.+?) -p (?<password>.+?)$");
+        Pattern patternForCreateUser7 = Pattern.compile("^user create --username (?<username>.+?) --password (?<password>.+?) --nickname (?<nickname>.+?)$");
+        Pattern patternForCreateUser8 = Pattern.compile("^user create --username (?<username>.+?) --nickname (?<nickname>.+?) --password (?<password>.+?)$");
+        Pattern patternForCreateUser9 = Pattern.compile("^user create --password (?<password>.+?) --username (?<username>.+?) --nickname (?<nickname>.+?)$");
+        Pattern patternForCreateUser10 = Pattern.compile("^user create --password (?<password>.+?) --nickname (?<nickname>.+?) --username (?<username>.+?)$");
+        Pattern patternForCreateUser11 = Pattern.compile("^user create --nickname (?<nickname>.+?) --password (?<password>.+?) --username (?<username>.+?)$");
+        Pattern patternForCreateUser12 = Pattern.compile("^user create --nickname (?<nickname>.+?) --username (?<username>.+?) --password (?<password>.+?)$");
+        Pattern patternForLoginUser1 = Pattern.compile("^user login --username (?<username>.+?) --password (?<password>.+?)$");
+        Pattern patternForLoginUser2 = Pattern.compile("^user login --password (?<password>.+?) --username (?<username>.+?)$");
+        Pattern patternForLoginUser3 = Pattern.compile("^user login -u (?<username>.+?) -p (?<password>.+?)$");
+        Pattern patternForLoginUser4 = Pattern.compile("^user login -p (?<password>.+?) -u (?<username>.+?)$");
         Pattern patternForEnterAnotherMenu = Pattern.compile("^menu enter (Duel|Scoreboard|Deck|Import/Export|Shop|Profile)$");
-        Matcher[] commandMatchers = new Matcher[11];
+        Matcher[] commandMatchers = new Matcher[19];
         commandMatchers[0] = patternForExit.matcher(command);
         commandMatchers[1] = patternForShowCurrentMenu.matcher(command);
         commandMatchers[2] = patternForCreateUser1.matcher(command);
@@ -122,9 +129,17 @@ public class LoginMenuController {
         commandMatchers[5] = patternForCreateUser4.matcher(command);
         commandMatchers[6] = patternForCreateUser5.matcher(command);
         commandMatchers[7] = patternForCreateUser6.matcher(command);
-        commandMatchers[8] = patternForLoginUser1.matcher(command);
-        commandMatchers[9] = patternForLoginUser2.matcher(command);
-        commandMatchers[10] = patternForEnterAnotherMenu.matcher(command);
+        commandMatchers[8] = patternForCreateUser7.matcher(command);
+        commandMatchers[9] = patternForCreateUser8.matcher(command);
+        commandMatchers[10] = patternForCreateUser9.matcher(command);
+        commandMatchers[11] = patternForCreateUser10.matcher(command);
+        commandMatchers[12] = patternForCreateUser11.matcher(command);
+        commandMatchers[13] = patternForCreateUser12.matcher(command);
+        commandMatchers[14] = patternForLoginUser1.matcher(command);
+        commandMatchers[15] = patternForLoginUser2.matcher(command);
+        commandMatchers[16] = patternForLoginUser3.matcher(command);
+        commandMatchers[17] = patternForLoginUser4.matcher(command);
+        commandMatchers[18] = patternForEnterAnotherMenu.matcher(command);
         return commandMatchers;
     }
 }

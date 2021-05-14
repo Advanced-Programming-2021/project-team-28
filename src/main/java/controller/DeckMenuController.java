@@ -4,6 +4,7 @@ import enums.MenuEnum;
 import model.*;
 import view.DeckMenuView;
 
+import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,7 +21,7 @@ public class DeckMenuController {
         view.run();
     }
 
-    public MenuEnum processCommand(String command) {
+    public MenuEnum processCommand (String command){
         String cardName = "cardName";
         String deckName = "deckName";
         Matcher[] commandMatchers = getCommandMatchers(command);
@@ -30,56 +31,56 @@ public class DeckMenuController {
             controlDeleteCommand(commandMatchers[1].group(1));
         } else if (commandMatchers[2].find()) {
             controlSetActivateCommand(commandMatchers[2].group(1));
-        } else if (commandMatchers[3].find()) {
+        } else if (commandMatchers[3].find() || commandMatchers[4].find()) {
             view.print(user.decksArrayListToString());
-        } else if (commandMatchers[4].find()) {
+        } else if (commandMatchers[5].find() || commandMatchers[6].find()) {
             view.print(Card.cardsArrayListToString(user.getAllCards()));
-        } else if (commandMatchers[5].find()) {
+        }  else if (commandMatchers[7].find()) {
             return MenuEnum.BACK;
-        } else if (commandMatchers[6].find()) {
-            view.showCurrentMenu();
-        } else if (commandMatchers[9].find()) {
-            controlAddCardCommand(commandMatchers[9].group(cardName), commandMatchers[9].group(deckName), true);
-        } else if (commandMatchers[10].find()) {
-            controlAddCardCommand(commandMatchers[10].group(cardName), commandMatchers[10].group(deckName), true);
-        } else if (commandMatchers[11].find()) {
-            controlAddCardCommand(commandMatchers[11].group(cardName), commandMatchers[11].group(deckName), true);
-        } else if (commandMatchers[12].find()) {
-            controlAddCardCommand(commandMatchers[12].group(cardName), commandMatchers[12].group(deckName), true);
-        } else if (commandMatchers[13].find()) {
-            controlAddCardCommand(commandMatchers[13].group(cardName), commandMatchers[13].group(deckName), true);
-        } else if (commandMatchers[14].find()) {
-            controlAddCardCommand(commandMatchers[14].group(cardName), commandMatchers[14].group(deckName), true);
-        } else if (commandMatchers[7].find()) {
-            controlAddCardCommand(commandMatchers[7].group(cardName), commandMatchers[7].group(deckName), false);
         } else if (commandMatchers[8].find()) {
-            controlAddCardCommand(commandMatchers[8].group(cardName), commandMatchers[8].group(deckName), false);
-        } else if (commandMatchers[17].find()) {
-            controlRemoveCardCommand(commandMatchers[17].group(cardName), commandMatchers[17].group(deckName), true);
-        } else if (commandMatchers[18].find()) {
-            controlRemoveCardCommand(commandMatchers[18].group(cardName), commandMatchers[18].group(deckName), true);
-        } else if (commandMatchers[19].find()) {
-            controlRemoveCardCommand(commandMatchers[19].group(cardName), commandMatchers[19].group(deckName), true);
-        } else if (commandMatchers[20].find()) {
-            controlRemoveCardCommand(commandMatchers[20].group(cardName), commandMatchers[20].group(deckName), true);
-        } else if (commandMatchers[21].find()) {
-            controlRemoveCardCommand(commandMatchers[21].group(cardName), commandMatchers[21].group(deckName), true);
-        } else if (commandMatchers[22].find()) {
-            controlRemoveCardCommand(commandMatchers[22].group(cardName), commandMatchers[22].group(deckName), true);
-        } else if (commandMatchers[15].find()) {
-            controlRemoveCardCommand(commandMatchers[15].group(cardName), commandMatchers[15].group(deckName), false);
-        } else if (commandMatchers[16].find()) {
-            controlRemoveCardCommand(commandMatchers[16].group(cardName), commandMatchers[16].group(deckName), false);
-        } else if (commandMatchers[24].find()) {
-            controlShowOneDeckCommand(commandMatchers[24].group(deckName), true);
-        } else if (commandMatchers[25].find()) {
-            controlShowOneDeckCommand(commandMatchers[25].group(deckName), true);
-        } else if (commandMatchers[23].find()) {
-            controlShowOneDeckCommand(commandMatchers[23].group(deckName), false);
-        } else if (commandMatchers[26].find()) {
-            view.impossibleMenuNavigation();
+            view.showCurrentMenu();
         } else {
-            view.invalidCommand();
+            for(int i=9; i<21; i++){
+                if(commandMatchers[i].find()){
+                    controlAddCardCommand(commandMatchers[i].group(cardName), commandMatchers[i].group(deckName), true);
+                    return MenuEnum.CONTINUE;
+                }
+            }
+            for (int i=21; i<25; i++){
+                if(commandMatchers[i].find()){
+                    controlAddCardCommand(commandMatchers[i].group(cardName), commandMatchers[i].group(deckName), false);
+                    return MenuEnum.CONTINUE;
+                }
+            }
+            for (int i=25; i<37; i++){
+                if(commandMatchers[i].find()){
+                    controlRemoveCardCommand(commandMatchers[i].group(cardName), commandMatchers[i].group(deckName), true);
+                    return MenuEnum.CONTINUE;
+                }
+            }
+            for (int i=37; i<41; i++){
+                if(commandMatchers[i].find()){
+                    controlRemoveCardCommand(commandMatchers[i].group(cardName), commandMatchers[i].group(deckName), false);
+                    return MenuEnum.CONTINUE;
+                }
+            }
+            for (int i=41; i<45; i++){
+                if(commandMatchers[i].find()){
+                    controlShowOneDeckCommand(commandMatchers[i].group(deckName), true);
+                    return MenuEnum.CONTINUE;
+                }
+            }
+            for (int i=45; i<47; i++){
+                if(commandMatchers[i].find()){
+                    controlShowOneDeckCommand(commandMatchers[i].group(deckName), false);
+                    return MenuEnum.CONTINUE;
+                }
+            }
+            if(commandMatchers[47].find()){
+                view.impossibleMenuNavigation();
+            } else {
+                view.invalidCommand();
+            }
         }
         return MenuEnum.CONTINUE;
     }
@@ -166,7 +167,9 @@ public class DeckMenuController {
         Pattern patternForDeckDelete = Pattern.compile("^deck delete (.+)$");
         Pattern patternForSetActivateDeck = Pattern.compile("^deck set-activate (.+)$");
         Pattern patternForDeckShowAll = Pattern.compile("^deck show --all$");
+        Pattern patternForDeckShowAll2 = Pattern.compile("^deck show -a$");
         Pattern patternForDeckShowCards = Pattern.compile("^deck show --cards$");
+        Pattern patternForDeckShowCards2 = Pattern.compile("^deck show -c$");
         Pattern patternForMenuExit = Pattern.compile("^menu exit$");
         Pattern patternForShowCurrentMenu = Pattern.compile("^menu show-current$");
         Pattern patternForAddCardToSideDeck1 = Pattern.compile("^deck add-card --card (?<cardName>.+?) --deck (?<deckName>.+?) --side$");
@@ -175,48 +178,88 @@ public class DeckMenuController {
         Pattern patternForAddCardToSideDeck4 = Pattern.compile("^deck add-card --deck (?<deckName>.+?) --side --card (?<cardName>.+?)$");
         Pattern patternForAddCardToSideDeck5 = Pattern.compile("^deck add-card --side --card (?<cardName>.+?) --deck (?<deckName>.+?)$");
         Pattern patternForAddCardToSideDeck6 = Pattern.compile("^deck add-card --side --deck (?<deckName>.+?) --card (?<cardName>.+?)$");
+        Pattern patternForAddCardToSideDeck7 = Pattern.compile("^deck add-card -c (?<cardName>.+?) -d (?<deckName>.+?) -s$");
+        Pattern patternForAddCardToSideDeck8 = Pattern.compile("^deck add-card -d (?<deckName>.+?) -c (?<cardName>.+?) -s$");
+        Pattern patternForAddCardToSideDeck9 = Pattern.compile("^deck add-card -c (?<cardName>.+?) -s -d (?<deckName>.+?)$");
+        Pattern patternForAddCardToSideDeck10 = Pattern.compile("^deck add-card -d (?<deckName>.+?) -s -c (?<cardName>.+?)$");
+        Pattern patternForAddCardToSideDeck11 = Pattern.compile("^deck add-card -s -c (?<cardName>.+?) -d (?<deckName>.+?)$");
+        Pattern patternForAddCardToSideDeck12 = Pattern.compile("^deck add-card -s -d (?<deckName>.+?) -c (?<cardName>.+?)$");
         Pattern patternForAddCardToMainDeck1 = Pattern.compile("^deck add-card --card (?<cardName>.+?) --deck (?<deckName>.+?)$");
         Pattern patternForAddCardToMainDeck2 = Pattern.compile("^deck add-card --deck (?<deckName>.+?) --card (?<cardName>.+?)$");
+        Pattern patternForAddCardToMainDeck3 = Pattern.compile("^deck add-card -d (?<deckName>.+?) -c (?<cardName>.+?)$");
+        Pattern patternForAddCardToMainDeck4 = Pattern.compile("^deck add-card -c (?<cardName>.+?) -d (?<deckName>.+?)$");
         Pattern patternForRemoveCardFromSideDeck1 = Pattern.compile("^deck rm-card --card (?<cardName>.+?) --deck (?<deckName>.+?) --side$");
         Pattern patternForRemoveCardFromSideDeck2 = Pattern.compile("^deck rm-card --deck (?<deckName>.+?) --card (?<cardName>.+?) --side$");
         Pattern patternForRemoveCardFromSideDeck3 = Pattern.compile("^deck rm-card --card (?<cardName>.+?) --side --deck (?<deckName>.+?)$");
         Pattern patternForRemoveCardFromSideDeck4 = Pattern.compile("^deck rm-card --deck (?<deckName>.+?) --side --card (?<cardName>.+?)$");
         Pattern patternForRemoveCardFromSideDeck5 = Pattern.compile("^deck rm-card --side --card (?<cardName>.+?) --deck (?<deckName>.+?)$");
         Pattern patternForRemoveCardFromSideDeck6 = Pattern.compile("^deck rm-card --side --deck (?<deckName>.+?) --card (?<cardName>.+?)$");
+        Pattern patternForRemoveCardFromSideDeck7 = Pattern.compile("^deck rm-card -c (?<cardName>.+?) -d (?<deckName>.+?) -s$");
+        Pattern patternForRemoveCardFromSideDeck8 = Pattern.compile("^deck rm-card -d (?<deckName>.+?) -c (?<cardName>.+?) -s$");
+        Pattern patternForRemoveCardFromSideDeck9 = Pattern.compile("^deck rm-card -c (?<cardName>.+?) -s -d (?<deckName>.+?)$");
+        Pattern patternForRemoveCardFromSideDeck10 = Pattern.compile("^deck rm-card -d (?<deckName>.+?) -s -c (?<cardName>.+?)$");
+        Pattern patternForRemoveCardFromSideDeck11 = Pattern.compile("^deck rm-card -s -c (?<cardName>.+?) -d (?<deckName>.+?)$");
+        Pattern patternForRemoveCardFromSideDeck12 = Pattern.compile("^deck rm-card -s -d (?<deckName>.+?) -c (?<cardName>.+?)$");
         Pattern patternForRemoveCardFromMainDeck1 = Pattern.compile("^deck rm-card --card (?<cardName>.+?) --deck (?<deckName>.+?)$");
         Pattern patternForRemoveCardFromMainDeck2 = Pattern.compile("^deck rm-card --deck (?<deckName>.+?) --card (?<cardName>.+?)$");
+        Pattern patternForRemoveCardFromMainDeck3 = Pattern.compile("^deck rm-card -c (?<cardName>.+?) -d (?<deckName>.+?)$");
+        Pattern patternForRemoveCardFromMainDeck4 = Pattern.compile("^deck rm-card -d (?<deckName>.+?) -c (?<cardName>.+?)$");
         Pattern patternForShowSideDeck1 = Pattern.compile("^deck show --deck-name (?<deckName>.+?) --side$");
         Pattern patternForShowSideDeck2 = Pattern.compile("^deck show --side --deck-name (?<deckName>.+?)$");
-        Pattern patternForShowMainDeck = Pattern.compile("^deck show --deck-name (?<deckName>.+?)$");
+        Pattern patternForShowSideDeck3 = Pattern.compile("^deck show -d-n (?<deckName>.+?) -s$");
+        Pattern patternForShowSideDeck4 = Pattern.compile("^deck show -s -d-n (?<deckName>.+?)$");
+        Pattern patternForShowMainDeck1 = Pattern.compile("^deck show --deck-name (?<deckName>.+?)$");
+        Pattern patternForShowMainDeck2 = Pattern.compile("^deck show -d-n (?<deckName>.+?)$");
         Pattern patternForImpossibleMenuNavigation = Pattern.compile("^menu enter (Duel|Scoreboard|Import/Export|Shop|Profile)$");
-        Matcher[] commandMatchers = new Matcher[27];
+        Matcher[] commandMatchers = new Matcher[48];
         commandMatchers[0] = patternForDeckCreate.matcher(command);
         commandMatchers[1] = patternForDeckDelete.matcher(command);
         commandMatchers[2] = patternForSetActivateDeck.matcher(command);
         commandMatchers[3] = patternForDeckShowAll.matcher(command);
-        commandMatchers[4] = patternForDeckShowCards.matcher(command);
-        commandMatchers[5] = patternForMenuExit.matcher(command);
-        commandMatchers[6] = patternForShowCurrentMenu.matcher(command);
-        commandMatchers[7] = patternForAddCardToMainDeck1.matcher(command);
-        commandMatchers[8] = patternForAddCardToMainDeck2.matcher(command);
+        commandMatchers[4] = patternForDeckShowAll2.matcher(command);
+        commandMatchers[5] = patternForDeckShowCards.matcher(command);
+        commandMatchers[6] = patternForDeckShowCards2.matcher(command);
+        commandMatchers[7] = patternForMenuExit.matcher(command);
+        commandMatchers[8] = patternForShowCurrentMenu.matcher(command);
         commandMatchers[9] = patternForAddCardToSideDeck1.matcher(command);
         commandMatchers[10] = patternForAddCardToSideDeck2.matcher(command);
         commandMatchers[11] = patternForAddCardToSideDeck3.matcher(command);
         commandMatchers[12] = patternForAddCardToSideDeck4.matcher(command);
         commandMatchers[13] = patternForAddCardToSideDeck5.matcher(command);
         commandMatchers[14] = patternForAddCardToSideDeck6.matcher(command);
-        commandMatchers[15] = patternForRemoveCardFromMainDeck1.matcher(command);
-        commandMatchers[16] = patternForRemoveCardFromMainDeck2.matcher(command);
-        commandMatchers[17] = patternForRemoveCardFromSideDeck1.matcher(command);
-        commandMatchers[18] = patternForRemoveCardFromSideDeck2.matcher(command);
-        commandMatchers[19] = patternForRemoveCardFromSideDeck3.matcher(command);
-        commandMatchers[20] = patternForRemoveCardFromSideDeck4.matcher(command);
-        commandMatchers[21] = patternForRemoveCardFromSideDeck5.matcher(command);
-        commandMatchers[22] = patternForRemoveCardFromSideDeck6.matcher(command);
-        commandMatchers[23] = patternForShowMainDeck.matcher(command);
-        commandMatchers[24] = patternForShowSideDeck1.matcher(command);
-        commandMatchers[25] = patternForShowSideDeck2.matcher(command);
-        commandMatchers[26] = patternForImpossibleMenuNavigation.matcher(command);
+        commandMatchers[15] = patternForAddCardToSideDeck7.matcher(command);
+        commandMatchers[16] = patternForAddCardToSideDeck8.matcher(command);
+        commandMatchers[17] = patternForAddCardToSideDeck9.matcher(command);
+        commandMatchers[18] = patternForAddCardToSideDeck10.matcher(command);
+        commandMatchers[19] = patternForAddCardToSideDeck11.matcher(command);
+        commandMatchers[20] = patternForAddCardToSideDeck12.matcher(command);
+        commandMatchers[21] = patternForAddCardToMainDeck1.matcher(command);
+        commandMatchers[22] = patternForAddCardToMainDeck2.matcher(command);
+        commandMatchers[23] = patternForAddCardToMainDeck3.matcher(command);
+        commandMatchers[24] = patternForAddCardToMainDeck4.matcher(command);
+        commandMatchers[25] = patternForRemoveCardFromSideDeck1.matcher(command);
+        commandMatchers[26] = patternForRemoveCardFromSideDeck2.matcher(command);
+        commandMatchers[27] = patternForRemoveCardFromSideDeck3.matcher(command);
+        commandMatchers[28] = patternForRemoveCardFromSideDeck4.matcher(command);
+        commandMatchers[29] = patternForRemoveCardFromSideDeck5.matcher(command);
+        commandMatchers[30] = patternForRemoveCardFromSideDeck6.matcher(command);
+        commandMatchers[31] = patternForRemoveCardFromSideDeck7.matcher(command);
+        commandMatchers[32] = patternForRemoveCardFromSideDeck8.matcher(command);
+        commandMatchers[33] = patternForRemoveCardFromSideDeck9.matcher(command);
+        commandMatchers[34] = patternForRemoveCardFromSideDeck10.matcher(command);
+        commandMatchers[35] = patternForRemoveCardFromSideDeck11.matcher(command);
+        commandMatchers[36] = patternForRemoveCardFromSideDeck12.matcher(command);
+        commandMatchers[37] = patternForRemoveCardFromMainDeck1.matcher(command);
+        commandMatchers[38] = patternForRemoveCardFromMainDeck2.matcher(command);
+        commandMatchers[39] = patternForRemoveCardFromMainDeck3.matcher(command);
+        commandMatchers[40] = patternForRemoveCardFromMainDeck4.matcher(command);
+        commandMatchers[41] = patternForShowSideDeck1.matcher(command);
+        commandMatchers[42] = patternForShowSideDeck2.matcher(command);
+        commandMatchers[43] = patternForShowSideDeck3.matcher(command);
+        commandMatchers[44] = patternForShowSideDeck4.matcher(command);
+        commandMatchers[45] = patternForShowMainDeck1.matcher(command);
+        commandMatchers[46] = patternForShowMainDeck2.matcher(command);
+        commandMatchers[47] = patternForImpossibleMenuNavigation.matcher(command);
         return commandMatchers;
     }
 }

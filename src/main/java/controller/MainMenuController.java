@@ -37,31 +37,15 @@ public class MainMenuController {
 
         } else if (command.equals("menu enter Scoreboard")) {
             new ScoreboardController().run();
-        } else if (duelCommandMatchers[0].find()) {
-            if(validateMatch(duelCommandMatchers[0]) != NumberOfRounds.OTHERS){
-                new Game(user, User.getUserByUsername(duelCommandMatchers[0].group("secondPlayer")), validateMatch(duelCommandMatchers[0])).run();
-            }
-        } else if (duelCommandMatchers[1].find()) {
-            if(validateMatch(duelCommandMatchers[1]) != NumberOfRounds.OTHERS){
-                new Game(user, User.getUserByUsername(duelCommandMatchers[1].group("secondPlayer")), validateMatch(duelCommandMatchers[1])).run();
-            }
-        } else if (duelCommandMatchers[2].find()) {
-            if(validateMatch(duelCommandMatchers[2]) != NumberOfRounds.OTHERS){
-                new Game(user, User.getUserByUsername(duelCommandMatchers[2].group("secondPlayer")), validateMatch(duelCommandMatchers[2])).run();
-            }
-        } else if (duelCommandMatchers[3].find()) {
-            if(validateMatch(duelCommandMatchers[3]) != NumberOfRounds.OTHERS){
-                new Game(user, User.getUserByUsername(duelCommandMatchers[3].group("secondPlayer")), validateMatch(duelCommandMatchers[3])).run();
-            }
-        } else if (duelCommandMatchers[4].find()) {
-            if(validateMatch(duelCommandMatchers[4]) != NumberOfRounds.OTHERS){
-                new Game(user, User.getUserByUsername(duelCommandMatchers[4].group("secondPlayer")), validateMatch(duelCommandMatchers[4])).run();
-            }
-        } else if (duelCommandMatchers[5].find()) {
-            if(validateMatch(duelCommandMatchers[5]) != NumberOfRounds.OTHERS){
-                new Game(user, User.getUserByUsername(duelCommandMatchers[5].group("secondPlayer")), validateMatch(duelCommandMatchers[5])).run();
-            }
         } else {
+            for (int i=0; i<12; i++){
+                if(duelCommandMatchers[i].find()){
+                    if(validateMatch(duelCommandMatchers[i]) != NumberOfRounds.OTHERS){
+                        new Game(user, User.getUserByUsername(duelCommandMatchers[i].group("secondPlayer")), validateMatch(duelCommandMatchers[i])).run();
+                    }
+                    return;
+                }
+            }
             view.showError("invalid command");
         }
     }
@@ -74,13 +58,25 @@ public class MainMenuController {
         Pattern pattern3 = Pattern.compile("^duel --second-player (?<secondPlayer>.+) --rounds (?<numberOfRounds>\\d+) --new$");
         Pattern pattern4 = Pattern.compile("^duel --rounds (?<numberOfRounds>\\d+) --new --second-player (?<secondPlayer>.+)$");
         Pattern pattern5 = Pattern.compile("^duel --rounds (?<numberOfRounds>\\d+) --second-player (?<secondPlayer>.+) --new$");
-        Matcher[] matchers = new Matcher[6];
+        Pattern pattern6 = Pattern.compile("^duel -n -s-p (?<secondPlayer>.+) -r (?<numberOfRounds>\\d+)$");
+        Pattern pattern7 = Pattern.compile("^duel -n -r (?<numberOfRounds>\\d+) -s-p (?<secondPlayer>.+)$");
+        Pattern pattern8 = Pattern.compile("^duel -s-p (?<secondPlayer>.+) -n -r (?<numberOfRounds>\\d+)$");
+        Pattern pattern9 = Pattern.compile("^duel -s-p (?<secondPlayer>.+) -r (?<numberOfRounds>\\d+) -n$");
+        Pattern pattern10 = Pattern.compile("^duel -r (?<numberOfRounds>\\d+) -n -s-p (?<secondPlayer>.+)$");
+        Pattern pattern11 = Pattern.compile("^duel -r (?<numberOfRounds>\\d+) -s-p (?<secondPlayer>.+) -n$");
+        Matcher[] matchers = new Matcher[12];
         matchers[0] = pattern0.matcher(command);
         matchers[1] = pattern1.matcher(command);
         matchers[2] = pattern2.matcher(command);
         matchers[3] = pattern3.matcher(command);
         matchers[4] = pattern4.matcher(command);
         matchers[5] = pattern5.matcher(command);
+        matchers[6] = pattern6.matcher(command);
+        matchers[7] = pattern7.matcher(command);
+        matchers[8] = pattern8.matcher(command);
+        matchers[9] = pattern9.matcher(command);
+        matchers[10] = pattern10.matcher(command);
+        matchers[11] = pattern11.matcher(command);
         return matchers;
     }
 

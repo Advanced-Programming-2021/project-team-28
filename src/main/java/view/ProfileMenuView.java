@@ -47,4 +47,12 @@ public class ProfileMenuView {
     public void showMenu(){
         System.out.println("Profile Menu");
     }
+
+    public void impossibleMenuNavigation(){
+        System.out.println("menu navigation is not possible");
+    }
+
+    public void invalidCommand(){
+        System.out.println("invalid command");
+    }
 }

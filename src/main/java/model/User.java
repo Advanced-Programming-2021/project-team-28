@@ -62,8 +62,13 @@ public class User {
     }
 
     public void setActiveDeck(Deck activeDeck) {
-        this.activeDeck = activeDeck;
-        this.activeDeckName = activeDeck.getDeckName();
+        if(activeDeck == null){
+            this.activeDeck = null;
+            this.activeDeckName = null;
+        } else {
+            this.activeDeck = activeDeck;
+            this.activeDeckName = activeDeck.getDeckName();
+        }
     }
 
     public void changeScore(int score) {
