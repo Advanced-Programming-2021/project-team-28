@@ -53,7 +53,7 @@ public class Deck {
     }
 
     public void addCardToDeck(String cardName, boolean isToSideDeck) {
-        User user = User.getUserByUsername(creatorUsername);
+        User user = User.getUserByUsername(this.creatorUsername);
         for (int i = 0; i < user.getAllCards().size(); i++) {
             if (user.getAllCards().get(i).getName().equals(cardName) &&
                     !isThisCardInDeck(user.getAllCards().get(i))) {
@@ -105,7 +105,7 @@ public class Deck {
     }
 
     public static Deck getDeckByOwnerAndName(String ownerName, String deckName) {
-        for (Deck deck: allDecks){
+        for (Deck deck : allDecks) {
             if (ownerName.equals(deck.creatorUsername)
                     && deckName.equals(deck.getDeckName())) return deck;
         }
@@ -229,13 +229,15 @@ public class Deck {
         for (Deck deck : decks) {
             deck.allCardsInMainDeck = new ArrayList<>();
             for (String cardName : deck.allCardsNameInMainDeck) {
-                deck.allCardsInMainDeck.add(Card.getCardByName(Card.allCards, cardName));
+//                deck.allCardsInMainDeck.add(Card.getCardByName(Card.allCards, cardName));
+                deck.addCardToDeck(cardName,false);
             }
             deck.allCardsInSideDeck = new ArrayList<>();
             for (String cardName : deck.allCardsNameInSideDeck) {
-                deck.allCardsInSideDeck.add(Card.getCardByName(Card.allCards, cardName));
+//                deck.allCardsInSideDeck.add(Card.getCardByName(Card.allCards, cardName));
+                deck.addCardToDeck(cardName,true);
             }
             Deck.allDecks.add(deck);
         }
-    }
+    } // add card to deck
 }

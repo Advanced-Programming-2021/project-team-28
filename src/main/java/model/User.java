@@ -249,16 +249,18 @@ public class User {
         User[] users = gson.fromJson(reader, User[].class);
 
         for (User user : users) {
+            User.users.add(user);
             user.allCards = new ArrayList<>();
             for (String cardName: user.allCardsName){
                 user.allCards.add(Card.getCardByName(Card.allCards, cardName));
             }
+            Deck.deserialize();
             user.decks = new ArrayList<>();
             for (String deckName: user.decksName){
                 user.decks.add(Deck.getDeckByOwnerAndName(user.username, deckName));
             }
             user.setActiveDeck(Deck.getDeckByOwnerAndName(user.getUsername(), user.activeDeckName));
-            User.users.add(user);
+
         }
 
 

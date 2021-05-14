@@ -20,7 +20,6 @@ public class LoginMenuController {
         MonsterCard.deserialize();
         SpellCard.deserialize();
         TrapCard.deserialize();
-        Deck.deserialize();
         User.deserialize();
 
         this.loginMenuView.run();
