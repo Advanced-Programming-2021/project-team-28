@@ -215,5 +215,7 @@ public class MonsterCard extends Card {
 //            User.getUserByUsername(monsterCard.getOwnerUsername()).addToCards(monsterCard);
         }
 
+
     }
+
 }

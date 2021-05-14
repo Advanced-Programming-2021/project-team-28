@@ -1,8 +1,10 @@
 package model;
 
+import enums.MonsterType;
 import enums.SpellOrTrapCardPosition;
 import view.SpellEffectsView;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class SpellEffects {
@@ -19,6 +21,7 @@ public class SpellEffects {
         switch (activeCard.getEffect()) {
             case SWORDS_OF_REVEALING_LIGHT:
             case YAMI:
+
             case FOREST:
             case RAIGEKI: {
                 raigeki(activeCard);
@@ -134,4 +137,20 @@ public class SpellEffects {
             }
         }
     }
+        private void yami(SpellCard card){
+            HashMap<Integer , MonsterCard> player1Field = round.getFirstPlayer().getMonsterCardsInZone();
+            HashMap<Integer , MonsterCard> player2Field = round.getSecondPlayer().getMonsterCardsInZone();
+
+            for(Map.Entry<Integer, MonsterCard> mapElement : player1Field.entrySet()){
+                if(mapElement.getValue().getType() == MonsterType.FIEND || mapElement.getValue().getType() == MonsterType.SPELL_CASTER){
+                    mapElement.getValue().changeAttackPoint(200);
+                    mapElement.getValue().changeDefencePoint(200);
+                }
+                if(mapElement.getValue().getType() == MonsterType.FAIRY){
+                    mapElement.getValue().changeAttackPoint(-1 * 200);
+                    mapElement.getValue().changeDefencePoint(-1 * 200);
+                }
+            }
+        }
+
 }

@@ -42,4 +42,5 @@ public class SpellEffectsView {
         System.out.println("There is no card in this location");
     }
 
+
 }
