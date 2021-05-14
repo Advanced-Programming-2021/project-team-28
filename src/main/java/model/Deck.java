@@ -225,19 +225,40 @@ public class Deck {
             e.printStackTrace();
         }
 
+
         Deck[] decks = gson.fromJson(reader, Deck[].class);
         for (Deck deck : decks) {
             deck.allCardsInMainDeck = new ArrayList<>();
-            for (String cardName : deck.allCardsNameInMainDeck) {
-//                deck.allCardsInMainDeck.add(Card.getCardByName(Card.allCards, cardName));
+            deck.allCardsInSideDeck = new ArrayList<>();
+            Deck.allDecks.add(deck);
+            ArrayList<String> mainCardsNameCopy = new ArrayList<>();
+            ArrayList<String> sideCardsNameCopy = new ArrayList<>();
+            for (String cardName: deck.allCardsNameInSideDeck){
+                sideCardsNameCopy.add(cardName);
+            }
+            for (String cardName: deck.allCardsNameInMainDeck){
+                mainCardsNameCopy.add(cardName);
+            }
+            deck.allCardsNameInSideDeck.clear();
+            deck.allCardsNameInMainDeck.clear();
+            for (String cardName: mainCardsNameCopy){
                 deck.addCardToDeck(cardName,false);
             }
-            deck.allCardsInSideDeck = new ArrayList<>();
-            for (String cardName : deck.allCardsNameInSideDeck) {
-//                deck.allCardsInSideDeck.add(Card.getCardByName(Card.allCards, cardName));
+            for (String cardName: sideCardsNameCopy){
                 deck.addCardToDeck(cardName,true);
             }
-            Deck.allDecks.add(deck);
+
+
+//            for (String cardName : deck.allCardsNameInMainDeck) {
+////                deck.allCardsInMainDeck.add(Card.getCardByName(Card.allCards, cardName));
+//                deck.addCardToDeck(cardName,false);
+//            }
+//
+//            for (String cardName : deck.allCardsNameInSideDeck) {
+////                deck.allCardsInSideDeck.add(Card.getCardByName(Card.allCards, cardName));
+//                deck.addCardToDeck(cardName,true);
+//            }
+
         }
-    } // add card to deck
+    }
 }

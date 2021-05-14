@@ -254,7 +254,9 @@ public class User {
             for (String cardName: user.allCardsName){
                 user.allCards.add(Card.getCardByName(Card.allCards, cardName));
             }
-            Deck.deserialize();
+        }
+        Deck.deserialize();
+        for (User user : users) {
             user.decks = new ArrayList<>();
             for (String deckName: user.decksName){
                 user.decks.add(Deck.getDeckByOwnerAndName(user.username, deckName));
