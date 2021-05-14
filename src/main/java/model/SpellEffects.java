@@ -10,7 +10,7 @@ import java.util.Map;
 public class SpellEffects {
 
     private Round round;
-    private SpellEffectsView effectsView = new SpellEffectsView (this);
+    private SpellEffectsView effectsView = new SpellEffectsView(this);
 
     SpellEffects(Round round) {
         this.round = round;
@@ -66,16 +66,16 @@ public class SpellEffects {
             effectsView.selectSpellZoneYouWantToSelectCardFrom();
             try {
                 int whichZone = Integer.parseInt(effectsView.scanString());
-                if(whichZone != 1 && whichZone != 2){
+                if (whichZone != 1 && whichZone != 2) {
                     effectsView.invalidChoice();
                 } else {
-                    while(true){
+                    while (true) {
                         Player playerThatLosesACard = whichZone == 1 ? round.getPlayerByTurn() : round.getRivalPlayerByTurn();
                         effectsView.selectLocationOfCardYouWantToDestroy();
                         int location = Integer.parseInt(effectsView.scanString());
-                        if(location > 5 || location < 1){
+                        if (location > 5 || location < 1) {
                             effectsView.invalidLocation();
-                        } else if (!playerThatLosesACard.doesHaveSpellOrTrapCardInThisPosition(location)){
+                        } else if (!playerThatLosesACard.doesHaveSpellOrTrapCardInThisPosition(location)) {
                             effectsView.thereIsNoCardInThisLocation();
                         } else {
                             playerThatLosesACard.getSpellOrTrapCardsInZone().get(location).setGoingToGraveyard(true);
@@ -88,7 +88,7 @@ public class SpellEffects {
                         }
                     }
                 }
-            } catch (NumberFormatException exception){
+            } catch (NumberFormatException exception) {
                 effectsView.invalidChoice();
             }
         }
@@ -137,20 +137,87 @@ public class SpellEffects {
             }
         }
     }
-        private void yami(SpellCard card){
-            HashMap<Integer , MonsterCard> player1Field = round.getFirstPlayer().getMonsterCardsInZone();
-            HashMap<Integer , MonsterCard> player2Field = round.getSecondPlayer().getMonsterCardsInZone();
 
-            for(Map.Entry<Integer, MonsterCard> mapElement : player1Field.entrySet()){
-                if(mapElement.getValue().getType() == MonsterType.FIEND || mapElement.getValue().getType() == MonsterType.SPELL_CASTER){
-                    mapElement.getValue().changeAttackPoint(200);
-                    mapElement.getValue().changeDefencePoint(200);
-                }
-                if(mapElement.getValue().getType() == MonsterType.FAIRY){
-                    mapElement.getValue().changeAttackPoint(-1 * 200);
-                    mapElement.getValue().changeDefencePoint(-1 * 200);
-                }
+    private void yami(SpellCard card) {
+        HashMap<Integer, MonsterCard> player1Field = round.getFirstPlayer().getMonsterCardsInZone();
+        HashMap<Integer, MonsterCard> player2Field = round.getSecondPlayer().getMonsterCardsInZone();
+
+        for (Map.Entry<Integer, MonsterCard> mapElement : player1Field.entrySet()) {
+            if (mapElement.getValue().getType() == MonsterType.FIEND || mapElement.getValue().getType() == MonsterType.SPELL_CASTER) {
+                mapElement.getValue().changeAttackPoint(200);
+                mapElement.getValue().changeDefencePoint(200);
+            }
+            if (mapElement.getValue().getType() == MonsterType.FAIRY) {
+                mapElement.getValue().changeAttackPoint(-1 * 200);
+                mapElement.getValue().changeDefencePoint(-1 * 200);
+            }
+        }
+        for (Map.Entry<Integer, MonsterCard> mapElement : player2Field.entrySet()) {
+            if (mapElement.getValue().getType() == MonsterType.FIEND || mapElement.getValue().getType() == MonsterType.SPELL_CASTER) {
+                mapElement.getValue().changeAttackPoint(200);
+                mapElement.getValue().changeDefencePoint(200);
+            }
+            if (mapElement.getValue().getType() == MonsterType.FAIRY) {
+                mapElement.getValue().changeAttackPoint(-1 * 200);
+                mapElement.getValue().changeDefencePoint(-1 * 200);
+            }
+        }
+    }
+
+    private void forest(SpellCard card) {
+        HashMap<Integer, MonsterCard> player1Field = round.getFirstPlayer().getMonsterCardsInZone();
+        HashMap<Integer, MonsterCard> player2Field = round.getSecondPlayer().getMonsterCardsInZone();
+
+        for (Map.Entry<Integer, MonsterCard> mapElement : player1Field.entrySet()) {
+            if (mapElement.getValue().getType() == MonsterType.INSECT || mapElement.getValue().getType() == MonsterType.BEAST_WARRIOR || mapElement.getValue().getType() == MonsterType.BEAST) {
+                mapElement.getValue().changeAttackPoint(200);
+                mapElement.getValue().changeDefencePoint(200);
             }
         }
 
+        for (Map.Entry<Integer, MonsterCard> mapElement : player2Field.entrySet()) {
+            if (mapElement.getValue().getType() == MonsterType.INSECT || mapElement.getValue().getType() == MonsterType.BEAST_WARRIOR || mapElement.getValue().getType() == MonsterType.BEAST) {
+                mapElement.getValue().changeAttackPoint(200);
+                mapElement.getValue().changeDefencePoint(200);
+            }
+        }
+    }
+
+    private void closedForest(SpellCard card) {
+        User user = User.getUserByUsername(card.getOwnerUsername());
+        Player player1 = round.getFirstPlayer();
+        Player player2 = round.getSecondPlayer();
+
+        if (user == player1.getUser()) {
+            int graveSize = player1.getCardsInGraveyard().size();
+            for (Map.Entry<Integer, MonsterCard> mapElement : player1.getMonsterCardsInZone().entrySet()) {
+                mapElement.getValue().changeAttackPoint(100 * graveSize);
+            }
+        } else {
+            int graveSize = player2.getCardsInGraveyard().size();
+            for (Map.Entry<Integer, MonsterCard> mapElement : player2.getMonsterCardsInZone().entrySet()) {
+                mapElement.getValue().changeAttackPoint(100 * graveSize);
+            }
+        }
+    }
+
+    private void umiiruka(SpellCard card){
+
+        HashMap<Integer, MonsterCard> player1Field = round.getFirstPlayer().getMonsterCardsInZone();
+        HashMap<Integer, MonsterCard> player2Field = round.getSecondPlayer().getMonsterCardsInZone();
+
+        for (Map.Entry<Integer, MonsterCard> mapElement : player1Field.entrySet()) {
+            if (mapElement.getValue().getType() == MonsterType.AQUA ){
+                mapElement.getValue().changeAttackPoint(500);
+                mapElement.getValue().changeDefencePoint(-400);
+            }
+        }
+
+        for (Map.Entry<Integer, MonsterCard> mapElement : player2Field.entrySet()) {
+            if (mapElement.getValue().getType() == MonsterType.AQUA ) {
+                mapElement.getValue().changeAttackPoint(500);
+                mapElement.getValue().changeDefencePoint(-400);
+            }
+        }
+    }
 }
