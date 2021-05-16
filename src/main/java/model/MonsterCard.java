@@ -40,6 +40,7 @@ public class MonsterCard extends Card {
     @Expose
     private boolean isSummonedInThisTurn;
     private MonsterType type;
+    private boolean isEffectedByFieldSpell = false;
 
     public boolean isSummonedInThisTurn() {
         return isSummonedInThisTurn;
@@ -169,6 +170,14 @@ public class MonsterCard extends Card {
 
     public void setType(MonsterType type) {
         this.type = type;
+    }
+
+    public boolean isEffectedByFieldSpell() {
+        return isEffectedByFieldSpell;
+    }
+
+    public void setEffectedByFieldSpell(boolean effectedByFieldSpell) {
+        isEffectedByFieldSpell = effectedByFieldSpell;
     }
 
     @Override
