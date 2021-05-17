@@ -5,6 +5,7 @@ import enums.SpellIcon;
 import enums.SpellOrTrapCardPosition;
 import view.SpellEffectsView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -334,8 +335,7 @@ public class SpellEffects {
                     }
                 }
             }
-        }
-        else {
+        } else {
             for (Map.Entry<Integer, MonsterCard> mapElement : player1Field.entrySet()) {
                 if (mapElement.getValue().getType() == MonsterType.AQUA) {
                     if (mapElement.getValue().isEffectedByFieldSpell()) {
@@ -358,71 +358,73 @@ public class SpellEffects {
         }
     }
 
-    public void swordOfDarkDestruction(SpellCard card){
-        if(card.getPosition() == SpellOrTrapCardPosition.OCCUPIED){
-            if(!card.isHasDeployedEffect()){
+    public void swordOfDarkDestruction(SpellCard card) {
+        if (card.getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
+            if (!card.isHasDeployedEffect()) {
 
             }
         }
     }
 
-    public void monsterReborn(SpellCard card){
+    public void monsterReborn(SpellCard card) {
         int cardPositionInGraveyard;
         Card cardToBeSummoned;
 
-        if(card.getPosition() == SpellOrTrapCardPosition.OCCUPIED){
+        if (card.getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
             effectsView.whichGraveyard();
             String graveyard = effectsView.scanString();
 
 
-            if(!(graveyard.equals("o") || graveyard.equals("y"))) {
+            if (!(graveyard.equals("o") || graveyard.equals("y"))) {
                 round.getPlayerByTurn().addCardToGraveyard(card);
                 return;
-            }
-            else {
-              if(graveyard.equals("y")){
-                  effectsView.selectCardFromGraveyard();
-                  round.getPlayerByTurn().graveyardToString();
-                  cardPositionInGraveyard = effectsView.scanNumber();
-                  cardToBeSummoned = round.getPlayerByTurn().getCardsInGraveyard().get(cardPositionInGraveyard);
-                  if(!(cardToBeSummoned instanceof MonsterCard)){
-                      effectsView.thisIsNotMonsterCard();
-                      round.getPlayerByTurn().addCardToGraveyard(card);
-                      return;
-                  }
-                 round.getPlayerByTurn().addCardToCardsInZone(cardToBeSummoned);
-                  round.getPlayerByTurn().removeCardFromGraveyard(cardToBeSummoned);
-                  round.getPlayerByTurn().addCardToGraveyard(card);
-              }
-              else{
-                  effectsView.selectCardFromGraveyard();
-                  round.getRivalPlayerByTurn().graveyardToString();
-                  cardPositionInGraveyard = effectsView.scanNumber();
-                  cardToBeSummoned = round.getRivalPlayerByTurn().getCardsInGraveyard().get(cardPositionInGraveyard);
-                  if(!(cardToBeSummoned instanceof MonsterCard)){
-                      effectsView.thisIsNotMonsterCard();
-                      round.getPlayerByTurn().addCardToGraveyard(card);
-                      return;
-                  }
-                  round.getPlayerByTurn().addCardToCardsInZone(cardToBeSummoned);
-                  round.getRivalPlayerByTurn().removeCardFromGraveyard(cardToBeSummoned);
-                  round.getPlayerByTurn().addCardToGraveyard(card);
+            } else {
+                if (graveyard.equals("y")) {
+                    effectsView.selectCardFromGraveyard();
+                    round.getPlayerByTurn().graveyardToString();
+                    cardPositionInGraveyard = effectsView.scanNumber();
+                    cardToBeSummoned = round.getPlayerByTurn().getCardsInGraveyard().get(cardPositionInGraveyard);
+                    if (!(cardToBeSummoned instanceof MonsterCard)) {
+                        effectsView.thisIsNotMonsterCard();
+                        round.getPlayerByTurn().addCardToGraveyard(card);
+                        return;
+                    }
+                    round.getPlayerByTurn().addCardToCardsInZone(cardToBeSummoned);
+                    round.getPlayerByTurn().removeCardFromGraveyard(cardToBeSummoned);
+                    round.getPlayerByTurn().addCardToGraveyard(card);
+                } else {
+                    effectsView.selectCardFromGraveyard();
+                    round.getRivalPlayerByTurn().graveyardToString();
+                    cardPositionInGraveyard = effectsView.scanNumber();
+                    cardToBeSummoned = round.getRivalPlayerByTurn().getCardsInGraveyard().get(cardPositionInGraveyard);
+                    if (!(cardToBeSummoned instanceof MonsterCard)) {
+                        effectsView.thisIsNotMonsterCard();
+                        round.getPlayerByTurn().addCardToGraveyard(card);
+                        return;
+                    }
+                    round.getPlayerByTurn().addCardToCardsInZone(cardToBeSummoned);
+                    round.getRivalPlayerByTurn().removeCardFromGraveyard(cardToBeSummoned);
+                    round.getPlayerByTurn().addCardToGraveyard(card);
                 }
             }
         }
     }
-//TODO : must be completed :)
-    public void terraforming(SpellCard card){
-        if(card.getPosition() == SpellOrTrapCardPosition.OCCUPIED){
-            for (Card cardToBeEffected : round.getPlayerByTurn().getRemainingPlayerCardsInGame()) {
-                if(cardToBeEffected instanceof SpellCard){
-                    if(((SpellCard) cardToBeEffected).getIcon() == SpellIcon.FIELD){
 
+    public void terraforming(SpellCard card) {
+        ArrayList<Card> cards = round.getPlayerByTurn().getRemainingPlayerCardsInGame();
+        if (card.getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
+            for (int i = 0; i < cards.size(); i++) {
+                if(cards.get(i) instanceof SpellCard){
+                    if(((SpellCard) cards.get(i)).getIcon() == SpellIcon.FIELD){
+                        round.getPlayerByTurn().addCardToCardsInZone(cards.get(i));
+                        cards.remove(i);
                     }
                 }
             }
         }
     }
-
-
 }
+
+
+
+

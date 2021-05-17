@@ -21,4 +21,8 @@ public class MonsterPowerView {
     public void printError(String error){
         System.out.println(error);
     }
+
+    public int intScanner(){
+        return scanner.nextInt();
+    }
 }

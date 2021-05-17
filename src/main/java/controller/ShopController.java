@@ -188,14 +188,14 @@ public class ShopController {
         else if(cardName.equals("Crab Turtle")){
             if(receiveMoneyFromCustomer(10200)) {
                 MonsterCard card = new MonsterCard(MonsterType.AQUA , user.getUsername() , cardName, "", MonstersDescriptions.crabTurtle, 2550, 2500,
-                        MonsterPower.CRAB_TURTLE, 7, Attribute.WATER);
+                        MonsterPower.RITUAL, 7, Attribute.WATER);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Skull Guardian")){
             if(receiveMoneyFromCustomer(7900)) {
                 MonsterCard card = new MonsterCard(MonsterType.WARRIOR , user.getUsername() , cardName, "", MonstersDescriptions.skullGuardian, 2050, 2500,
-                        MonsterPower.SKULL_GUARDIAN, 7, Attribute.LIGHT);
+                        MonsterPower.RITUAL, 7, Attribute.LIGHT);
                 user.addToCards(card);
             }
         }

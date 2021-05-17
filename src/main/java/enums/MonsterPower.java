@@ -19,5 +19,6 @@ public enum MonsterPower {
     EXPLODER_DRAGON,
     TERRATIGER_THE_EMPOWERED_WARRIOR,
     THE_TRICKY,
+    RITUAL,
 
 }
