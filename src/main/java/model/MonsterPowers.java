@@ -140,7 +140,7 @@ public class MonsterPowers {
     private boolean ritualSummonProcedure(MonsterCard card) {
         ArrayList<Integer> locations = new ArrayList<>();
         HashMap<Integer, MonsterCard> cards = round.getPlayerByTurn().getMonsterCardsInZone();
-        int location = 10;
+        int location = 100;
         int levelSum = 0;
         view.printError("enter location of cards that you want to tribute for the ritual summon (sum of levels of selected cards must either be equal or greater than the target card level)");
         view.printError("to end the selection enter 0");
@@ -164,6 +164,7 @@ public class MonsterPowers {
                 for (Integer integer : locations) {
                     round.getPlayerByTurn().removeCardFromCardsInZone(round.getPlayerByTurn().getMonsterCardByLocationFromZone(integer) , integer);
                     round.getPlayerByTurn().addCardToGraveyard(cards.get(integer));
+                    return true;
                 }
             }
         }
