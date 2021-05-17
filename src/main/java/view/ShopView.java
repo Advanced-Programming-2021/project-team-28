@@ -84,7 +84,7 @@ public class ShopView {
         System.out.println("Horn Imp " + ": " + MonstersDescriptions.hornImp);
         System.out.println("Leotron " + ": " + MonstersDescriptions.leotron);
         System.out.println("Magic Cylinder " + ": " + TrapsDescription.magicCylinder);
-        System.out.println("Magic jamamer " + ": " + TrapsDescription.magicJamamer);
+        System.out.println("Magic jammer " + ": " + TrapsDescription.magicJammer);
         System.out.println("Magnum Shield " + ": " + SpellsDescription.magnumShield);
         System.out.println("Man-Eater Bug " + ": " + MonstersDescriptions.manEaterBug);
         System.out.println("Marshmallon " + ": " + MonstersDescriptions.marshmallon);

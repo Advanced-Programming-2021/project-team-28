@@ -117,7 +117,7 @@ public class AllCardsInitiator {
         Card.allCards.add(new TrapCard(null , "Time Seal", "", TrapsDescription.timeSeal , TrapIcon.NORMAL , TrapEffect.TIME_SEAL));
         Card.allCards.add(new TrapCard(null , "Negate Attack", "", TrapsDescription.negateAttack , TrapIcon.COUNTER , TrapEffect.NEGATE_ATTACK));
         Card.allCards.add( new TrapCard(null , "Solemn Warning", "", TrapsDescription.solemnWarning , TrapIcon.COUNTER , TrapEffect.SOLEMN_WARNING));
-        Card.allCards.add(new TrapCard(null , "Magic Jamamer", "", TrapsDescription.magicJamamer , TrapIcon.COUNTER , TrapEffect.MAGIC_JAMAMER));
+        Card.allCards.add(new TrapCard(null , "Magic Jammer", "", TrapsDescription.magicJammer , TrapIcon.COUNTER , TrapEffect.MAGIC_JAMMER));
         Card.allCards.add( new TrapCard(null , "Call of The Haunted", "", TrapsDescription.callOfTheHaunted , TrapIcon.CONTINUOUS , TrapEffect.CALL_OF_THE_HAUNTED));
         Card.allCards.add(new TrapCard(null , "Vanity's Emptiness", "", TrapsDescription.vanitiesEmptiness , TrapIcon.CONTINUOUS , TrapEffect.VANITYS_EMPTINESS));
         Card.allCards.add( new TrapCard(null , "Wall of Revealing Light", "", TrapsDescription.wallOfRevealingLight , TrapIcon.CONTINUOUS , TrapEffect.WALL_OF_REVEALING_LIGHT));

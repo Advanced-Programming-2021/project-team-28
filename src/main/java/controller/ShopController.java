@@ -533,9 +533,9 @@ public class ShopController {
                 user.addToCards(card);
             }
         }
-        else if(cardName.equals("Magic Jamamer")){
+        else if(cardName.equals("Magic Jammer")){
             if(receiveMoneyFromCustomer(3000)) {
-                TrapCard card = new TrapCard(user.getUsername() , cardName, "", TrapsDescription.magicJamamer , TrapIcon.COUNTER , TrapEffect.MAGIC_JAMAMER);
+                TrapCard card = new TrapCard(user.getUsername() , cardName, "", TrapsDescription.magicJammer , TrapIcon.COUNTER , TrapEffect.MAGIC_JAMMER);
                 user.addToCards(card);
             }
         }
