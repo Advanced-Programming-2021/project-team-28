@@ -22,9 +22,9 @@ public class MonsterCard extends Card {
     @Expose
     private int defencePoint;
     @Expose
-    private boolean isSummoned;
+    private boolean isSummoned = false;
     @Expose
-    private boolean isFlipped;
+    private boolean isFlipped = false;
     @Expose
     private int level;
     @Expose

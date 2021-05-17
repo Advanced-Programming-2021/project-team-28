@@ -31,7 +31,7 @@ public class SpellEffectsView {
     }
 
     public void invalidChoice(){
-        System.out.println("invalid choose");
+        System.out.println("invalid choice");
     }
 
     public void invalidLocation(){
@@ -42,5 +42,19 @@ public class SpellEffectsView {
         System.out.println("There is no card in this location");
     }
 
+    public void whichGraveyard(){
+        System.out.println("which graveyard do you want to use (for yours enter \"y\" for opponent's enter \"o\")");
+    }
 
+    public void selectCardFromGraveyard(){
+        System.out.println("which Card do you want to select (enter the number)");
+    }
+
+    public int scanNumber(){
+        return scanner.nextInt();
+    }
+
+    public void thisIsNotMonsterCard(){
+        System.out.println("this is not a monster card");
+    }
 }

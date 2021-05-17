@@ -26,7 +26,11 @@ public class SpellCard extends Card{
 
     private SpellOrTrapCardPosition position;
 
-    public SpellCard (String ownerUsername ,String name , String number , String description , SpellIcon icon , SpellEffect effect){
+    private boolean hasDeployedEffect = false;
+
+
+
+    public SpellCard (String ownerUsername , String name , String number , String description , SpellIcon icon , SpellEffect effect){
         super(ownerUsername ,name, number, description);
         setEffect(effect);
         setIcon(icon);
@@ -68,6 +72,14 @@ public class SpellCard extends Card{
 
     public void setIcon(SpellIcon icon) {
         this.icon = icon;
+    }
+
+    public boolean isHasDeployedEffect() {
+        return hasDeployedEffect;
+    }
+
+    public void setHasDeployedEffect(boolean hasDeployedEffect) {
+        this.hasDeployedEffect = hasDeployedEffect;
     }
 
     @Override
