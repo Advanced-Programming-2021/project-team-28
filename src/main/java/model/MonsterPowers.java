@@ -127,10 +127,16 @@ public class MonsterPowers {
     }
 
     public boolean ritualSummoned (MonsterCard card) {
+        boolean status;
         HashMap<Integer, Card> cards = round.getPlayerByTurn().getSpellOrTrapCardsInZone();
         for (Map.Entry<Integer, Card> mapElement : cards.entrySet()) {
             if (((SpellCard) mapElement.getValue()).getEffect() == SpellEffect.ADVANCED_RITUAL_ART) {
-                return ritualSummonProcedure(card);
+                status =  ritualSummonProcedure(card);
+                if(status){
+                    round.getPlayerByTurn().removeCardFromCardsInZone(mapElement.getValue() , round.getPlayerByTurn().getLocationOfThisSpellOrTrapCardInZone(mapElement.getValue()));
+                    round.getPlayerByTurn().addCardToGraveyard(mapElement.getValue());
+                }
+                return status;
             }
         }
         view.printError("there is no Advanced Ritual Art card in field to be used for special summon");
