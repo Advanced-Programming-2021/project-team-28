@@ -263,7 +263,6 @@ public class User {
             }
             if(user.activeDeckName != null)
             user.setActiveDeck(Deck.getDeckByOwnerAndName(user.getUsername(), user.activeDeckName));
-
         }
 
 

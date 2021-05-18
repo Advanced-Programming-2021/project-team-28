@@ -1,10 +1,9 @@
 package controller;
 
+import enums.MenuEnum;
 import enums.MonsterCardPosition;
-import model.BattlePhase;
-import model.MonsterCard;
-import model.Player;
-import model.SpellCard;
+import enums.RecentActionsInGame;
+import model.*;
 import view.BattlePhaseView;
 
 public class BattlePhaseController extends PhaseController {
@@ -105,11 +104,19 @@ public class BattlePhaseController extends PhaseController {
             battleView.thisCardAlreadyAttacked();
         } else if (!rivalPlayer.doesHaveMonsterCardInThisLocation(location)) {
             battleView.thereIsNoCardToAttackHere();
-        } else if (phase.getTurnsPlayed() < 2) {
+        } else if (phase.getTurnsPlayed() < 1) {
             battleView.youCanNotAttackInYourFirstTurn();
         } else {
+            Card attackerCard = player.getSelectedCard();
+            Card defenderCard = rivalPlayer.getMonsterCardsInZone().get(location);
+            checkForRivalSpellOrTrapEffect(attackerCard, defenderCard, RecentActionsInGame.DECLARED_A_BATTLE);
+            if(((MonsterCard) attackerCard).isCardAttackCanceledByAnEffect()){
+                ((MonsterCard) attackerCard).setCardAttackCanceledByAnEffect(false);
+                return;
+            }
             battleView.printString(((BattlePhase) phase).attackToCardAndReturnAttackReport(location));
             player.setSelectedCard(null);
         }
     }
+
 }

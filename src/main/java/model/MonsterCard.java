@@ -41,6 +41,7 @@ public class MonsterCard extends Card {
     private boolean isSummonedInThisTurn;
     private MonsterType type;
     private boolean isEffectedByFieldSpell = false;
+    private boolean isCardAttackCanceledByAnEffect = false;
 
     public boolean isSummonedInThisTurn() {
         return isSummonedInThisTurn;
@@ -122,6 +123,13 @@ public class MonsterCard extends Card {
         this.hasBattledInBattlePhase = hasBattledInBattlePhase;
     }
 
+    public boolean isCardAttackCanceledByAnEffect() {
+        return isCardAttackCanceledByAnEffect;
+    }
+
+    public void setCardAttackCanceledByAnEffect(boolean cardAttackCanceledByAnEffect) {
+        isCardAttackCanceledByAnEffect = cardAttackCanceledByAnEffect;
+    }
 
     public MonsterCardPosition getPosition() {
         return position;

@@ -15,7 +15,7 @@ public class DrawPhase extends Phase {
 
     public void run() {
         if (getPlayerByTurn().getRemainingPlayerCardsInGame().size() == 0) {
-            this.turn = turn.opposite;
+            changeTurn();
             this.round.setWinner(getPlayerByTurn());
         } else {
             getPlayerByTurn().getCardsInHand().add(getPlayerByTurn().getRemainingPlayerCardsInGame().get(0));

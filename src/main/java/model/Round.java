@@ -9,7 +9,7 @@ public class Round {
     private Player firstPlayer;
     private Player secondPlayer;
     private Turn turn;
-    private int turnsPlayed;
+    private int turnsPlayed = 0;
     private Player winner = null;
     private boolean isDrawHappened = false;
 

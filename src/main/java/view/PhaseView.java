@@ -8,13 +8,13 @@ import java.util.Scanner;
 public class PhaseView {
 
     PhaseController controller;
+    Scanner scanner = ScannerInstance.getInstance().getScanner();
 
     public PhaseView(PhaseController controller) {
         this.controller = controller;
     }
 
     public void run(){
-        Scanner scanner = ScannerInstance.getInstance().getScanner();
         String command;
         while(true){
             command = scanner.nextLine();
@@ -23,6 +23,26 @@ public class PhaseView {
             }
         }
 
+    }
+
+    public void doYouWantToActiveSpellOrTrap(){
+        System.out.print("do you want to activate your trap and spell?");
+    }
+
+    public String scanString(){
+        return scanner.nextLine();
+    }
+
+    public void invalidLocation(){
+        System.out.println("invalid location");
+    }
+
+    public void thereIsNoCardInThisLocation(){
+        System.out.println("There is no card in this location");
+    }
+
+    public void invalidChoice(){
+        System.out.println("invalid choice");
     }
 
     public void menuShowCurrent() {
@@ -90,4 +110,28 @@ public class PhaseView {
     }
 
     public void monsterZoneIsFull(){System.out.println("monster card zone is full");}
+
+    public void thisCardCanNotBeActivated(){
+        System.out.println("This card can't be activated");
+    }
+
+    public void preparationsOfSpellHaveNotBeenDoneYet(){
+        System.out.println("preparations of this spell are not done yet");
+    }
+
+    public void effectActivated(){
+        System.out.println("Effect activated");
+    }
+
+    public void nowItWillBeRivalsTurn(String playerName){
+        System.out.println("now it will be " + playerName + " 's turn");
+    }
+
+    public void canNotPlayThisKindOfMoves(){
+        System.out.println("it’s not your turn to play this kind of moves");
+    }
+
+    public void spellOrTrapActivated(String spellOrTrap){
+        System.out.println(spellOrTrap + " activated");
+    }
 }

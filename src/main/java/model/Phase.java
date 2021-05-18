@@ -10,6 +10,7 @@ public abstract class Phase {
     protected Turn turn;
     protected Round round;
     protected int turnsPlayed;
+    protected boolean isEndedByATrapCard = false;
 
     public Phase(Player firstPlayer, Player secondPlayer, Turn turn, int turnsPlayed) {
         this.firstPlayer = firstPlayer;
@@ -52,6 +53,14 @@ public abstract class Phase {
         this.turnsPlayed = turnsPlayed;
     }
 
+    public boolean isEndedByATrapCard() {
+        return isEndedByATrapCard;
+    }
+
+    public void setEndedByATrapCard(boolean endedByATrapCard) {
+        isEndedByATrapCard = endedByATrapCard;
+    }
+
     public Player getPlayerByTurn (){
         if(turn == Turn.FIRST_PLAYER){
             return firstPlayer;
@@ -66,6 +75,10 @@ public abstract class Phase {
         } else {
             return firstPlayer;
         }
+    }
+
+    public void changeTurn() {
+        this.turn = turn.opposite;
     }
 
     public String getMapToString() {

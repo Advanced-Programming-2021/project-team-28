@@ -32,7 +32,6 @@ public class BattlePhase extends Phase{
             attackerCard.setHasBattledInBattlePhase(true);
             return attackToDefensiveCardAndReturnReport(location, attackerCard, defenderCard);
         }
-
     }
 
     private String attackToDefensiveCardAndReturnReport(int location, MonsterCard attackerCard, MonsterCard defenderCard) {
@@ -42,12 +41,14 @@ public class BattlePhase extends Phase{
             getRivalPlayerByTurn().addCardToGraveyard(defenderCard);
             getRivalPlayerByTurn().removeCardFromCardsInZone(defenderCard, location);
             if(defenderCard.getPosition() == MonsterCardPosition.DEFENSIVE_HIDDEN){
+                defenderCard.setPosition(MonsterCardPosition.DEFENSIVE_OCCUPIED);
                 return "opponent’s monster card was " + defenderCard.getName() + " and the defense position monster is destroyed";
             } else {
                 return "the defense position monster is destroyed";
             }
         } else if (damage == 0){
             if(defenderCard.getPosition() == MonsterCardPosition.DEFENSIVE_HIDDEN){
+                defenderCard.setPosition(MonsterCardPosition.DEFENSIVE_OCCUPIED);
                 return "opponent’s monster card was " + defenderCard.getName() + " and no card is destroyed";
             } else {
                 return "no card is destroyed";
@@ -55,6 +56,7 @@ public class BattlePhase extends Phase{
         } else {
             getPlayerByTurn().decreaseLifePoint(-damage);
             if(defenderCard.getPosition() == MonsterCardPosition.DEFENSIVE_HIDDEN){
+                defenderCard.setPosition(MonsterCardPosition.DEFENSIVE_OCCUPIED);
                 return "opponent’s monster card was " + defenderCard.getName() + " and no card is destroyed and you received "
                 + -damage + " battle damage";
             } else {

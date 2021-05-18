@@ -1,12 +1,10 @@
 package controller;
 
-import enums.MenuEnum;
-import enums.MonsterCardPosition;
-import enums.SpellOrTrapCardPosition;
-import enums.Turn;
+import enums.*;
 import model.*;
 import view.PhaseView;
 
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,6 +20,32 @@ public abstract class PhaseController {
     public void run() {
         view.printString(phase.getMapToString());
         this.view.run();
+    }
+
+    protected MenuEnum processActivatingEffectInRivalTurnCommand(Card rivalCard, Card ourCard, String selection, RecentActionsInGame recentAction) {
+        Matcher[] selectCommandMatchers = getSelectCommandMatchers(selection);
+        if(selection.equals("activate effect")){
+            if(!phase.getPlayerByTurn().hasSelectedCard()){
+                view.noCardSelectedYet();
+            } else {
+                if(phase.getPlayerByTurn().getSelectedCard() instanceof SpellCard){
+
+                } else if(phase.getPlayerByTurn().getSelectedCard() instanceof TrapCard){
+                    TrapEffectController.searchForThisEffect(phase, rivalCard, ourCard, (TrapCard) phase.getPlayerByTurn().getSelectedCard());
+                }
+                view.spellOrTrapActivated(phase.getPlayerByTurn().getSelectedCard() instanceof SpellCard ? "Spell" : "Trap");
+                return MenuEnum.BACK;
+            }
+        } else if(selectCommandMatchers[2].find()){
+            controlSelectOwnSpellCommand(Integer.parseInt(selectCommandMatchers[2].group(1)), true, recentAction);
+        } else if(selectCommandMatchers[3].find()){
+            controlSelectOwnSpellCommand(Integer.parseInt(selectCommandMatchers[3].group(1)), true, recentAction);
+        } else if (selection.equals("cancel")) {
+            return MenuEnum.BACK;
+        } else {
+            view.canNotPlayThisKindOfMoves();
+        }
+        return MenuEnum.CONTINUE;
     }
 
     public MenuEnum processCommand(String command) {
@@ -54,61 +78,65 @@ public abstract class PhaseController {
         } else if (matcherForAttackToCard.find()) {
             controlAttackToCardCommand(Integer.parseInt(matcherForAttackToCard.group(1)));
         } else if (command.startsWith("select ")) {
-            Matcher[] selectCommandMatchers = getSelectCommandMatchers(command);
-            if (selectCommandMatchers[0].find()) {
-                controlSelectOwnMonsterCommand(Integer.parseInt(selectCommandMatchers[0].group(1)));
-            } else if (selectCommandMatchers[1].find()) {
-                controlSelectOwnMonsterCommand(Integer.parseInt(selectCommandMatchers[1].group(1)));
-            } else if (selectCommandMatchers[2].find()) {
-                controlSelectOwnSpellCommand(Integer.parseInt(selectCommandMatchers[2].group(1)));
-            } else if (selectCommandMatchers[3].find()) {
-                controlSelectOwnSpellCommand(Integer.parseInt(selectCommandMatchers[3].group(1)));
-            } else if (selectCommandMatchers[4].find()) {
-                controlSelectRivalMonsterCommand(Integer.parseInt(selectCommandMatchers[4].group(1)));
-            } else if (selectCommandMatchers[5].find()) {
-                controlSelectRivalMonsterCommand(Integer.parseInt(selectCommandMatchers[5].group(1)));
-            } else if (selectCommandMatchers[6].find()) {
-                controlSelectRivalMonsterCommand(Integer.parseInt(selectCommandMatchers[6].group(1)));
-            } else if (selectCommandMatchers[7].find()) {
-                controlSelectRivalMonsterCommand(Integer.parseInt(selectCommandMatchers[7].group(1)));
-            } else if (selectCommandMatchers[8].find()) {
-                controlSelectRivalSpellCommand(Integer.parseInt(selectCommandMatchers[8].group(1)));
-            } else if (selectCommandMatchers[9].find()) {
-                controlSelectRivalSpellCommand(Integer.parseInt(selectCommandMatchers[9].group(1)));
-            } else if (selectCommandMatchers[10].find()) {
-                controlSelectRivalSpellCommand(Integer.parseInt(selectCommandMatchers[10].group(1)));
-            } else if (selectCommandMatchers[11].find()) {
-                controlSelectRivalSpellCommand(Integer.parseInt(selectCommandMatchers[11].group(1)));
-            } else if (selectCommandMatchers[12].find()) {
-                controlSelectFromOwnHand(Integer.parseInt(selectCommandMatchers[12].group(1)));
-            } else if (selectCommandMatchers[13].find()) {
-                controlSelectFromOwnHand(Integer.parseInt(selectCommandMatchers[13].group(1)));
-            } else if (selectCommandMatchers[14].find()) {
-                controlSelectOwnFieldZoneSpellCommand();
-            } else if (selectCommandMatchers[15].find()) {
-                controlSelectOwnFieldZoneSpellCommand();
-            } else if (selectCommandMatchers[16].find()) {
-                controlSelectRivalFieldZoneSpellCommand();
-            } else if (selectCommandMatchers[17].find()) {
-                controlSelectRivalFieldZoneSpellCommand();
-            } else if (selectCommandMatchers[18].find()) {
-                controlSelectRivalFieldZoneSpellCommand();
-            } else if (selectCommandMatchers[19].find()) {
-                controlSelectRivalFieldZoneSpellCommand();
-            } else if (selectCommandMatchers[20].find()) {
-                controlDeselectCommand();
-            } else {
-                view.invalidSelection();
-            }
+            controlSelectionCommands(command);
         } else {
             view.invalidCommand();
         }
-        if (phase.getFirstPlayer().getLifePoint() <= 0 || phase.getSecondPlayer().getLifePoint() <= 0) {
+        if (phase.getFirstPlayer().getLifePoint() <= 0 || phase.getSecondPlayer().getLifePoint() <= 0 || phase.isEndedByATrapCard()) {
             view.printString(phase.getMapToString());
             return MenuEnum.BACK;
         }
         view.printString(phase.getMapToString());
         return MenuEnum.CONTINUE;
+    }
+
+    private void controlSelectionCommands(String command) {
+        Matcher[] selectCommandMatchers = getSelectCommandMatchers(command);
+        if (selectCommandMatchers[0].find()) {
+            controlSelectOwnMonsterCommand(Integer.parseInt(selectCommandMatchers[0].group(1)));
+        } else if (selectCommandMatchers[1].find()) {
+            controlSelectOwnMonsterCommand(Integer.parseInt(selectCommandMatchers[1].group(1)));
+        } else if (selectCommandMatchers[2].find()) {
+            controlSelectOwnSpellCommand(Integer.parseInt(selectCommandMatchers[2].group(1)), false, RecentActionsInGame.IN_OUR_MAIN_PHASE);
+        } else if (selectCommandMatchers[3].find()) {
+            controlSelectOwnSpellCommand(Integer.parseInt(selectCommandMatchers[3].group(1)), false, RecentActionsInGame.IN_OUR_MAIN_PHASE);
+        } else if (selectCommandMatchers[4].find()) {
+            controlSelectRivalMonsterCommand(Integer.parseInt(selectCommandMatchers[4].group(1)));
+        } else if (selectCommandMatchers[5].find()) {
+            controlSelectRivalMonsterCommand(Integer.parseInt(selectCommandMatchers[5].group(1)));
+        } else if (selectCommandMatchers[6].find()) {
+            controlSelectRivalMonsterCommand(Integer.parseInt(selectCommandMatchers[6].group(1)));
+        } else if (selectCommandMatchers[7].find()) {
+            controlSelectRivalMonsterCommand(Integer.parseInt(selectCommandMatchers[7].group(1)));
+        } else if (selectCommandMatchers[8].find()) {
+            controlSelectRivalSpellCommand(Integer.parseInt(selectCommandMatchers[8].group(1)));
+        } else if (selectCommandMatchers[9].find()) {
+            controlSelectRivalSpellCommand(Integer.parseInt(selectCommandMatchers[9].group(1)));
+        } else if (selectCommandMatchers[10].find()) {
+            controlSelectRivalSpellCommand(Integer.parseInt(selectCommandMatchers[10].group(1)));
+        } else if (selectCommandMatchers[11].find()) {
+            controlSelectRivalSpellCommand(Integer.parseInt(selectCommandMatchers[11].group(1)));
+        } else if (selectCommandMatchers[12].find()) {
+            controlSelectFromOwnHand(Integer.parseInt(selectCommandMatchers[12].group(1)));
+        } else if (selectCommandMatchers[13].find()) {
+            controlSelectFromOwnHand(Integer.parseInt(selectCommandMatchers[13].group(1)));
+        } else if (selectCommandMatchers[14].find()) {
+            controlSelectOwnFieldZoneSpellCommand();
+        } else if (selectCommandMatchers[15].find()) {
+            controlSelectOwnFieldZoneSpellCommand();
+        } else if (selectCommandMatchers[16].find()) {
+            controlSelectRivalFieldZoneSpellCommand();
+        } else if (selectCommandMatchers[17].find()) {
+            controlSelectRivalFieldZoneSpellCommand();
+        } else if (selectCommandMatchers[18].find()) {
+            controlSelectRivalFieldZoneSpellCommand();
+        } else if (selectCommandMatchers[19].find()) {
+            controlSelectRivalFieldZoneSpellCommand();
+        } else if (selectCommandMatchers[20].find()) {
+            controlDeselectCommand();
+        } else {
+            view.invalidSelection();
+        }
     }
 
     protected abstract void controlSummonCommand();
@@ -139,10 +167,14 @@ public abstract class PhaseController {
         }
     }
 
-    protected void controlSelectOwnSpellCommand(int location) {
+    protected void controlSelectOwnSpellCommand(int location, boolean isForActivatingInRivalTurn, RecentActionsInGame recentAction) {
         if (location < 1 || location > 5) {
             view.invalidSelection();
         } else if (phase.getPlayerByTurn().doesHaveSpellOrTrapCardInThisPosition(location)) {
+            if(isForActivatingInRivalTurn && !canCardBeActivatedAfterThisAction(recentAction, phase.getPlayerByTurn().getSpellOrTrapCardsInZone().get(location))){
+                view.canNotPlayThisKindOfMoves();
+                return;
+            }
             phase.getPlayerByTurn().setSelectedCard(phase.getPlayerByTurn().getSpellOrTrapCardsInZone().get(location));
             phase.getPlayerByTurn().setSelectedCardVisible(true);
             view.cardSelected();
@@ -241,6 +273,65 @@ public abstract class PhaseController {
             view.graveyardEmpty();
         }
     }
+
+    public boolean canRivalActivateEffect (RecentActionsInGame recentAction){
+        if(recentAction == RecentActionsInGame.DECLARED_A_BATTLE){
+            for(Map.Entry<Integer, Card> locationCard : phase.getRivalPlayerByTurn().getSpellOrTrapCardsInZone().entrySet()){
+                if(canCardBeActivatedAfterThisAction(RecentActionsInGame.DECLARED_A_BATTLE, locationCard.getValue())){
+                    return true;
+                }
+            }
+            return false;
+        }
+        //TODO: ADD OTHER ACTIONS
+        return false;
+    }
+
+    public boolean canCardBeActivatedAfterThisAction(RecentActionsInGame recentAction, Card card){
+        if(recentAction == RecentActionsInGame.DECLARED_A_BATTLE){
+            if(card instanceof TrapCard){
+                return ((TrapCard) card).getEffect() == TrapEffect.MIRROR_FORCE ||
+                        ((TrapCard) card).getEffect() == TrapEffect.MAGIC_CYLINDER ||
+                        ((TrapCard) card).getEffect() == TrapEffect.NEGATE_ATTACK;
+            } else if(card instanceof MonsterCard){
+                return false;
+            } else {
+                //TODO: search for spell cards can be activated
+            }
+        }
+        return false;
+    }
+
+    protected void checkForRivalSpellOrTrapEffect(Card rivalCard, Card ourCard, RecentActionsInGame recentAction) {
+        if (canRivalActivateEffect(recentAction)) {
+            phase.changeTurn();
+            view.nowItWillBeRivalsTurn(phase.getPlayerByTurn().getUser().getNickname());
+            view.printString(phase.getMapToString());
+            view.doYouWantToActiveSpellOrTrap();
+            while (true) {
+                String yesOrNo = view.scanString();
+                if (yesOrNo.equals("yes")) {
+                    phase.getPlayerByTurn().setSelectedCard(null);
+                    while (true) {
+                        String selection = view.scanString();
+                        if (processActivatingEffectInRivalTurnCommand(rivalCard, ourCard, selection, recentAction) == MenuEnum.BACK) {
+                            break;
+                        }
+                    }
+                    phase.getPlayerByTurn().setSelectedCard(null);
+                    break;
+                } else if (yesOrNo.equals("no")) {
+                    break;
+                } else {
+                    view.invalidCommand();
+                }
+            }
+            phase.changeTurn();
+            view.nowItWillBeRivalsTurn(phase.getPlayerByTurn().getUser().getNickname());
+            view.printString(phase.getMapToString());
+        }
+    }
+
 
     public Matcher[] getSelectCommandMatchers(String command) {
         Pattern patternForSelectOwnMonsterInZone = Pattern.compile("^select --monster (\\d+)$");
