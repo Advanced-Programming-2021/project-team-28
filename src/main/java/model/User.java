@@ -25,7 +25,7 @@ public class User {
     @Expose
     private int score;
     @Expose
-    private int balance = 100000;
+    private int balance = 1000000;
 
 
     @Expose
@@ -264,7 +264,5 @@ public class User {
             if(user.activeDeckName != null)
             user.setActiveDeck(Deck.getDeckByOwnerAndName(user.getUsername(), user.activeDeckName));
         }
-
-
     }
 }

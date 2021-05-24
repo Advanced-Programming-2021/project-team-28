@@ -35,7 +35,7 @@ public class TrapCard extends Card implements Cloneable {
     }
 
     public TrapCard() {
-        TrapCard.allTrapCard.add(this);
+
     }
 
     @Override

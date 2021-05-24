@@ -82,8 +82,10 @@ public abstract class PhaseController {
         } else {
             view.invalidCommand();
         }
-        if (phase.getFirstPlayer().getLifePoint() <= 0 || phase.getSecondPlayer().getLifePoint() <= 0 || phase.isEndedByATrapCard()) {
+        if (phase.getFirstPlayer().getLifePoint() <= 0 || phase.getSecondPlayer().getLifePoint() <= 0) {
             view.printString(phase.getMapToString());
+            return MenuEnum.BACK;
+        } else if (phase.isEndedByATrapCard()){
             return MenuEnum.BACK;
         }
         view.printString(phase.getMapToString());
@@ -275,28 +277,47 @@ public abstract class PhaseController {
     }
 
     public boolean canRivalActivateEffect (RecentActionsInGame recentAction){
-        if(recentAction == RecentActionsInGame.DECLARED_A_BATTLE){
             for(Map.Entry<Integer, Card> locationCard : phase.getRivalPlayerByTurn().getSpellOrTrapCardsInZone().entrySet()){
-                if(canCardBeActivatedAfterThisAction(RecentActionsInGame.DECLARED_A_BATTLE, locationCard.getValue())){
+                if(canCardBeActivatedAfterThisAction(recentAction, locationCard.getValue())){
                     return true;
                 }
             }
             return false;
-        }
-        //TODO: ADD OTHER ACTIONS
-        return false;
     }
 
     public boolean canCardBeActivatedAfterThisAction(RecentActionsInGame recentAction, Card card){
+        if(card instanceof MonsterCard){
+            return false;
+        }
         if(recentAction == RecentActionsInGame.DECLARED_A_BATTLE){
             if(card instanceof TrapCard){
                 return ((TrapCard) card).getEffect() == TrapEffect.MIRROR_FORCE ||
                         ((TrapCard) card).getEffect() == TrapEffect.MAGIC_CYLINDER ||
                         ((TrapCard) card).getEffect() == TrapEffect.NEGATE_ATTACK;
-            } else if(card instanceof MonsterCard){
-                return false;
             } else {
                 //TODO: search for spell cards can be activated
+            }
+        } else if(recentAction == RecentActionsInGame.SUMMONED_A_MONSTER_WITH_LESS_THAN_1000_ATTACK_POINT){
+            if(card instanceof TrapCard){
+                return ((TrapCard) card).getEffect() == TrapEffect.TORRENTIAL_TRIBUTE ||
+                        ((TrapCard) card).getEffect() == TrapEffect.SOLEMN_WARNING;
+            } else {
+
+            }
+        } else if(recentAction == RecentActionsInGame.SUMMONED_A_MONSTER_WITH_1000_OR_MORE_ATTACK_POINT){
+            if(card instanceof TrapCard){
+                return ((TrapCard) card).getEffect() == TrapEffect.TORRENTIAL_TRIBUTE ||
+                        ((TrapCard) card).getEffect() == TrapEffect.TRAP_HOLE ||
+                        ((TrapCard) card).getEffect() == TrapEffect.SOLEMN_WARNING;
+            } else {
+
+            }
+        } else if(recentAction == RecentActionsInGame.SPECIAL_SUMMONED){
+            if(card instanceof TrapCard){
+                return ((TrapCard) card).getEffect() == TrapEffect.TORRENTIAL_TRIBUTE ||
+                        ((TrapCard) card).getEffect() == TrapEffect.SOLEMN_WARNING;
+            } else {
+
             }
         }
         return false;
@@ -328,7 +349,6 @@ public abstract class PhaseController {
             }
             phase.changeTurn();
             view.nowItWillBeRivalsTurn(phase.getPlayerByTurn().getUser().getNickname());
-            view.printString(phase.getMapToString());
         }
     }
 

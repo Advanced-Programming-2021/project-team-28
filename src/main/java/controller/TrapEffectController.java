@@ -13,26 +13,25 @@ public class TrapEffectController {
             TrapEffectMethods.magicCylinder(phase.getRivalPlayerByTurn(), rivalCard);
         } else if (effect == TrapEffect.MIRROR_FORCE) {
             TrapEffectMethods.mirrorForce(phase.getRivalPlayerByTurn(), rivalCard);
+        } else if (effect == TrapEffect.TRAP_HOLE) {
+            TrapEffectMethods.trapHole(phase.getRivalPlayerByTurn(), rivalCard);
+        } else if (effect == TrapEffect.SOLEMN_WARNING) {
+            TrapEffectMethods.solemnWarning(phase.getPlayerByTurn(), phase.getRivalPlayerByTurn(), rivalCard);
+        } else if (effect == TrapEffect.TORRENTIAL_TRIBUTE) {
+            TrapEffectMethods.torrentialTribute(phase);
+        } else if (effect == TrapEffect.NEGATE_ATTACK) {
+            TrapEffectMethods.negateAttack(phase, rivalCard);
+        } else if (effect == TrapEffect.MAGIC_JAMMER) {
+
         } else if (effect == TrapEffect.MIND_CRUSH) {
 
         } else if (effect == TrapEffect.CALL_OF_THE_HAUNTED) {
 
-        } else if (effect == TrapEffect.TRAP_HOLE) {
-
         } else if (effect == TrapEffect.TIME_SEAL) {
 
-        } else if (effect == TrapEffect.SOLEMN_WARNING) {
-
-        } else if (effect == TrapEffect.TORRENTIAL_TRIBUTE) {
-
-        } else if (effect == TrapEffect.VANITYS_EMPTINESS) {
-
-        } else if (effect == TrapEffect.WALL_OF_REVEALING_LIGHT) {
-
-        } else if(effect == TrapEffect.NEGATE_ATTACK){
-            TrapEffectMethods.negateAttack(phase, rivalCard);
-        } else if(effect == TrapEffect.MAGIC_JAMMER){
-
         }
+        phase.getPlayerByTurn().addCardToGraveyard(trapCard);
+        phase.getPlayerByTurn().removeCardFromCardsInZone(trapCard,
+                phase.getPlayerByTurn().getLocationOfThisSpellOrTrapCardInZone(trapCard));
     }
 }

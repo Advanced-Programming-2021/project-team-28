@@ -12,7 +12,6 @@ import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MonsterCard extends Card {
     @Expose
@@ -41,7 +40,8 @@ public class MonsterCard extends Card {
     private boolean isSummonedInThisTurn;
     private MonsterType type;
     private boolean isEffectedByFieldSpell = false;
-    private boolean isCardAttackCanceledByAnEffect = false;
+    private boolean isCardActionCanceledByAnEffect = false;
+    private boolean isSpecialSummoned = false;
 
     public boolean isSummonedInThisTurn() {
         return isSummonedInThisTurn;
@@ -71,7 +71,7 @@ public class MonsterCard extends Card {
         MonsterCard.allMonsterCards.add(this);
     }
     public MonsterCard(){
-        MonsterCard.allMonsterCards.add(this);
+
     }
 
     @Override
@@ -119,16 +119,24 @@ public class MonsterCard extends Card {
         return hasBattledInBattlePhase;
     }
 
+    public boolean isSpecialSummoned() {
+        return isSpecialSummoned;
+    }
+
+    public void setSpecialSummoned(boolean specialSummoned) {
+        isSpecialSummoned = specialSummoned;
+    }
+
     public void setHasBattledInBattlePhase(boolean hasBattledInBattlePhase) {
         this.hasBattledInBattlePhase = hasBattledInBattlePhase;
     }
 
-    public boolean isCardAttackCanceledByAnEffect() {
-        return isCardAttackCanceledByAnEffect;
+    public boolean isCardActionCanceledByAnEffect() {
+        return isCardActionCanceledByAnEffect;
     }
 
-    public void setCardAttackCanceledByAnEffect(boolean cardAttackCanceledByAnEffect) {
-        isCardAttackCanceledByAnEffect = cardAttackCanceledByAnEffect;
+    public void setCardActionCanceledByAnEffect(boolean cardActionCanceledByAnEffect) {
+        isCardActionCanceledByAnEffect = cardActionCanceledByAnEffect;
     }
 
     public MonsterCardPosition getPosition() {
@@ -203,6 +211,8 @@ public class MonsterCard extends Card {
         cloneMonsterCard.level = this.level;
         cloneMonsterCard.specialPower = this.specialPower;
         cloneMonsterCard.position = this.position;
+        cloneMonsterCard.isSummonedInThisTurn = this.isSummonedInThisTurn;
+        cloneMonsterCard.isPositionChangedInThisTurn = this.isPositionChangedInThisTurn;
         return cloneMonsterCard;
     }
 

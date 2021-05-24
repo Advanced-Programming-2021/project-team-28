@@ -1,6 +1,7 @@
 package controller;
 
 import enums.MonsterCardPosition;
+import enums.RecentActionsInGame;
 import model.*;
 import view.MainPhaseView;
 import view.ScannerInstance;
@@ -37,7 +38,6 @@ public class MainPhaseController extends PhaseController {
             mainPhaseView.printString("you already summoned/set on this turn");
         } else if (((MonsterCard) player.getSelectedCard()).getLevel() <= 4) {
             summonMonsterCard(player, (MonsterCard) player.getSelectedCard());
-
         } else controlTributeSummon(player);
     }
 
@@ -87,10 +87,28 @@ public class MainPhaseController extends PhaseController {
         card.setPosition(OFFENSIVE_OCCUPIED);
         player.addCardToCardsInZone(card);
         player.removeCardFromHand(card);
+        checkRivalActionsAfterSummon(card);
+        if(card.isCardActionCanceledByAnEffect()){
+            card.setCardActionCanceledByAnEffect(false);
+            player.setSelectedCard(null);
+            return;
+        }
         player.setSelectedCard(null);
         this.isSummonOrSetMonsterCard = true;
-
         mainPhaseView.printString("summoned successfully");
+    }
+
+    private void checkRivalActionsAfterSummon(MonsterCard card) {
+        if(card.isSpecialSummoned()){
+            checkForRivalSpellOrTrapEffect(card, null,
+                    RecentActionsInGame.SPECIAL_SUMMONED);
+        } else if(card.getAttackPoint() < 1000){
+            checkForRivalSpellOrTrapEffect(card, null,
+                    RecentActionsInGame.SUMMONED_A_MONSTER_WITH_LESS_THAN_1000_ATTACK_POINT);
+        } else {
+            checkForRivalSpellOrTrapEffect(card, null,
+                    RecentActionsInGame.SUMMONED_A_MONSTER_WITH_1000_OR_MORE_ATTACK_POINT);
+        }
     }
 
     @Override
@@ -232,8 +250,17 @@ public class MainPhaseController extends PhaseController {
                 || ((MonsterCard) player.getSelectedCard()).getPosition() != DEFENSIVE_HIDDEN) {
             mainPhaseView.printString("you can’t flip summon this card");
         } else {
-            ((MonsterCard) player.getSelectedCard()).setPosition(OFFENSIVE_OCCUPIED);
-            ((MonsterCard) player.getSelectedCard()).setPositionChangedInThisTurn(true);
+            MonsterCard flipSummonedCard = (MonsterCard) player.getSelectedCard();
+            flipSummonedCard.setPosition(OFFENSIVE_OCCUPIED);
+            flipSummonedCard.setPositionChangedInThisTurn(true);
+            flipSummonedCard.setFlipped(true);
+            if(flipSummonedCard.getAttackPoint() < 1000){
+                checkForRivalSpellOrTrapEffect(flipSummonedCard, null,
+                        RecentActionsInGame.SUMMONED_A_MONSTER_WITH_LESS_THAN_1000_ATTACK_POINT);
+            } else {
+                checkForRivalSpellOrTrapEffect(flipSummonedCard, null,
+                        RecentActionsInGame.SUMMONED_A_MONSTER_WITH_1000_OR_MORE_ATTACK_POINT);
+            }
             player.setSelectedCard(null);
             mainPhaseView.printString("flip summoned successfully");
         }

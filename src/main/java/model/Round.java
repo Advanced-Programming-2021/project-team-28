@@ -4,6 +4,8 @@ import controller.BattlePhaseController;
 import controller.MainPhaseController;
 import enums.Turn;
 
+import java.util.Map;
+
 
 public class Round {
     private Player firstPlayer;
@@ -39,9 +41,9 @@ public class Round {
             mainPhaseController.run();
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;
+            setAllHasBattledInThisTurnFalse();
             ++turnsPlayed;
             changeTurn();
-
         }
     }
 
@@ -120,6 +122,15 @@ public class Round {
             return secondPlayer;
         } else {
             return firstPlayer;
+        }
+    }
+
+    public void setAllHasBattledInThisTurnFalse(){
+        for(Map.Entry<Integer, MonsterCard> locationCard : getPlayerByTurn().getMonsterCardsInZone().entrySet()){
+            locationCard.getValue().setHasBattledInBattlePhase(false);
+        }
+        for(Map.Entry<Integer, MonsterCard> locationCard : getRivalPlayerByTurn().getMonsterCardsInZone().entrySet()){
+            locationCard.getValue().setHasBattledInBattlePhase(false);
         }
     }
 }

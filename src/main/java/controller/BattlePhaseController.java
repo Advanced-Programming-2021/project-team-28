@@ -1,6 +1,5 @@
 package controller;
 
-import enums.MenuEnum;
 import enums.MonsterCardPosition;
 import enums.RecentActionsInGame;
 import model.*;
@@ -76,6 +75,12 @@ public class BattlePhaseController extends PhaseController {
         } else if (phase.getTurnsPlayed() < 2) {
             battleView.youCanNotAttackInYourFirstTurn();
         } else if (phase instanceof BattlePhase) {
+            Card attackerCard = player.getSelectedCard();
+            checkForRivalSpellOrTrapEffect(attackerCard, null, RecentActionsInGame.DECLARED_A_BATTLE);
+            if(((MonsterCard) attackerCard).isCardActionCanceledByAnEffect()){
+                ((MonsterCard) attackerCard).setCardActionCanceledByAnEffect(false);
+                return;
+            }
             int damage = ((BattlePhase) phase).attackDirect();
             battleView.attackDirectResult(damage);
             player.setSelectedCard(null);
@@ -110,8 +115,8 @@ public class BattlePhaseController extends PhaseController {
             Card attackerCard = player.getSelectedCard();
             Card defenderCard = rivalPlayer.getMonsterCardsInZone().get(location);
             checkForRivalSpellOrTrapEffect(attackerCard, defenderCard, RecentActionsInGame.DECLARED_A_BATTLE);
-            if(((MonsterCard) attackerCard).isCardAttackCanceledByAnEffect()){
-                ((MonsterCard) attackerCard).setCardAttackCanceledByAnEffect(false);
+            if(((MonsterCard) attackerCard).isCardActionCanceledByAnEffect()){
+                ((MonsterCard) attackerCard).setCardActionCanceledByAnEffect(false);
                 return;
             }
             battleView.printString(((BattlePhase) phase).attackToCardAndReturnAttackReport(location));

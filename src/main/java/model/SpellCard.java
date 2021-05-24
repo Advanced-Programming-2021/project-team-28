@@ -39,7 +39,7 @@ public class SpellCard extends Card{
     }
 
     public SpellCard(){
-        SpellCard.allSpellCard.add(this);
+
     }
 
     @Override
