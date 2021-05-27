@@ -1,5 +1,7 @@
 package model;
 
+import enums.MonsterCardPosition;
+
 import java.util.*;
 
 public class Player {
@@ -17,6 +19,7 @@ public class Player {
     private Card selectedCard;
     private boolean isSelectedCardVisible;
     private boolean isAbleToActivateTrapCard = true;
+    private boolean isAbleToAddCardInDrawPhase = true;
 
     public boolean isAbleToActivateTrapCard() {
         return isAbleToActivateTrapCard;
@@ -34,6 +37,14 @@ public class Player {
         shuffleRemainingCards();
         setCardsInHand();
         setSelectedCardVisible(false);
+    }
+
+    public boolean isAbleToAddCardInDrawPhase() {
+        return isAbleToAddCardInDrawPhase;
+    }
+
+    public void setAbleToAddCardInDrawPhase(boolean ableToAddCardInDrawPhase) {
+        this.isAbleToAddCardInDrawPhase = ableToAddCardInDrawPhase;
     }
 
     public User getUser() {
@@ -73,15 +84,15 @@ public class Player {
         return numberOfRoundsWon;
     }
 
-    public void increaseNumberOfRoundsWon(){
+    public void increaseNumberOfRoundsWon() {
         numberOfRoundsWon++;
     }
 
-    public void increaseLifePoint(int lifePoint){
+    public void increaseLifePoint(int lifePoint) {
         this.lifePoint += lifePoint;
     }
 
-    public void decreaseLifePoint (int lifePoint){
+    public void decreaseLifePoint(int lifePoint) {
         this.lifePoint -= lifePoint;
     }
 
@@ -89,7 +100,7 @@ public class Player {
         this.lifePoint = lifePoint;
     }
 
-    private void setUser(User user){
+    private void setUser(User user) {
         this.user = user;
     }
 
@@ -105,63 +116,63 @@ public class Player {
         this.selectedCard = selectedCard;
     }
 
-    public boolean hasSelectedCard(){
+    public boolean hasSelectedCard() {
         return selectedCard != null;
     }
 
     private void setMainAndSideDuelDeckAndRemainingCards() throws CloneNotSupportedException {
-        for (Card card : user.getActiveDeck().getAllCardsInMainDeck()){
-            if(card instanceof MonsterCard){
+        for (Card card : user.getActiveDeck().getAllCardsInMainDeck()) {
+            if (card instanceof MonsterCard) {
                 mainDuelDeck.add((MonsterCard) card.clone());
-            } else if(card instanceof TrapCard){
+            } else if (card instanceof TrapCard) {
                 mainDuelDeck.add((TrapCard) card.clone());
-            } else if(card instanceof SpellCard){
+            } else if (card instanceof SpellCard) {
                 mainDuelDeck.add((SpellCard) card.clone());
             }
         }
 
-        for (Card card : user.getActiveDeck().getAllCardsInSideDeck()){
-            if(card instanceof MonsterCard){
+        for (Card card : user.getActiveDeck().getAllCardsInSideDeck()) {
+            if (card instanceof MonsterCard) {
                 sideDuelDeck.add((MonsterCard) card.clone());
-            } else if(card instanceof TrapCard){
+            } else if (card instanceof TrapCard) {
                 sideDuelDeck.add((TrapCard) card.clone());
-            } else if(card instanceof SpellCard){
+            } else if (card instanceof SpellCard) {
                 sideDuelDeck.add((SpellCard) card.clone());
             }
         }
 
-        for(Card card : mainDuelDeck){
-            if(card instanceof MonsterCard){
+        for (Card card : mainDuelDeck) {
+            if (card instanceof MonsterCard) {
                 remainingPlayerCardsInGame.add((MonsterCard) card.clone());
-            } else if(card instanceof TrapCard){
+            } else if (card instanceof TrapCard) {
                 remainingPlayerCardsInGame.add((TrapCard) card.clone());
-            } else if(card instanceof SpellCard){
+            } else if (card instanceof SpellCard) {
                 remainingPlayerCardsInGame.add((SpellCard) card.clone());
             }
         }
     }
 
-    public void addCardToCardsInZone (Card card){
+    public void addCardToCardsInZone(Card card) {
         int location;
-        if(card instanceof TrapCard || card instanceof SpellCard){
+        if (card instanceof TrapCard || card instanceof SpellCard) {
             location = getProperLocationForCard(false);
             spellOrTrapCardsInZone.put(location, card);
-        } else if(card instanceof MonsterCard){
+        } else if (card instanceof MonsterCard) {
             location = getProperLocationForCard(true);
-            monsterCardsInZone.put(location,(MonsterCard) card);
+            monsterCardsInZone.put(location, (MonsterCard) card);
         }
     }
 
     private int getProperLocationForCard(boolean isCardMonster) {
-        if(isCardMonster){
-            for(int i=1; i<=5; i++){
-                if(!monsterCardsInZone.containsKey(i)){
+        if (isCardMonster) {
+            for (int i = 1; i <= 5; i++) {
+                if (!monsterCardsInZone.containsKey(i)) {
                     return i;
                 }
             }
         } else {
-            for (int i=1; i<=5; i++){
-                if(!spellOrTrapCardsInZone.containsKey(i)){
+            for (int i = 1; i <= 5; i++) {
+                if (!spellOrTrapCardsInZone.containsKey(i)) {
                     return i;
                 }
             }
@@ -169,51 +180,53 @@ public class Player {
         return -1;
     }
 
-    public boolean isMonsterCardZoneFull (){
+    public boolean isMonsterCardZoneFull() {
         return monsterCardsInZone.size() >= 5;
     }
 
-    public boolean isMonsterCardZoneEmpty(){return monsterCardsInZone.isEmpty();}
+    public boolean isMonsterCardZoneEmpty() {
+        return monsterCardsInZone.isEmpty();
+    }
 
-    public boolean isSpellCardZoneFull (){
+    public boolean isSpellCardZoneFull() {
         return spellOrTrapCardsInZone.size() >= 5;
     }
 
-    public void removeCardFromCardsInZone (Card card, int location){
-        if(card instanceof TrapCard || card instanceof SpellCard){
+    public void removeCardFromCardsInZone(Card card, int location) {
+        if (card instanceof TrapCard || card instanceof SpellCard) {
             spellOrTrapCardsInZone.remove(location, card);
-        } else if(card instanceof MonsterCard){
+        } else if (card instanceof MonsterCard) {
             monsterCardsInZone.remove(location, card);
         }
     }
 
-    public void setCardsInHand(){
-        for (int i=0; i<5; i++){
+    public void setCardsInHand() {
+        for (int i = 0; i < 5; i++) {
             cardsInHand.add(remainingPlayerCardsInGame.get(i));
         }
         remainingPlayerCardsInGame.subList(0, 5).clear();
     }
 
-    public void shuffleRemainingCards () {
+    public void shuffleRemainingCards() {
         Collections.shuffle(remainingPlayerCardsInGame);
     }
 
-    public void addCardToHand (Card card){
+    public void addCardToHand(Card card) {
         cardsInHand.add(card);
     }
 
-    public void removeCardFromHand (Card card){
+    public void removeCardFromHand(Card card) {
         cardsInHand.remove(card);
     }
 
-    public void addCardToGraveyard (Card card){
+    public void addCardToGraveyard(Card card) {
 
         card.setGoingToGraveyard(false);
         cardsInGraveyard.add(card);
     }
 
 
-    public void removeCardFromGraveyard (Card card){
+    public void removeCardFromGraveyard(Card card) {
         cardsInGraveyard.remove(card);
     }
 
@@ -225,13 +238,13 @@ public class Player {
         this.fieldZoneCard = fieldZoneCard;
     }
 
-    public boolean hasFieldSpellCardInZone (){
+    public boolean hasFieldSpellCardInZone() {
         return !(fieldZoneCard == null);
     }
 
-    public String graveyardToString (){
+    public String graveyardToString() {
         StringBuilder graveyardToStringBuilder = new StringBuilder();
-        for(int i=1; i<=cardsInGraveyard.size(); i++){
+        for (int i = 1; i <= cardsInGraveyard.size(); i++) {
             graveyardToStringBuilder.append(i);
             graveyardToStringBuilder.append(". ");
             graveyardToStringBuilder.append(cardsInGraveyard.get(i).getName());
@@ -242,66 +255,99 @@ public class Player {
         return graveyardToStringBuilder.toString();
     }
 
-    public boolean isSelectedCardFromHand(){
-        if(!hasSelectedCard()){
+    public boolean isSelectedCardFromHand() {
+        if (!hasSelectedCard()) {
             return false;
         }
-        for(Card card : cardsInHand){
-            if(card.equals(selectedCard)){
+        for (Card card : cardsInHand) {
+            if (card.equals(selectedCard)) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean isSelectedCardFromMonsterCardZone(){
-        if(!hasSelectedCard()){
+    public boolean isSelectedCardFromMonsterCardZone() {
+        if (!hasSelectedCard()) {
             return false;
         }
-        for (Map.Entry<Integer, MonsterCard> locationAndMonsterCard : monsterCardsInZone.entrySet()){
-            if(locationAndMonsterCard.getValue().equals(selectedCard)){
+        for (Map.Entry<Integer, MonsterCard> locationAndMonsterCard : monsterCardsInZone.entrySet()) {
+            if (locationAndMonsterCard.getValue().equals(selectedCard)) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean doesHaveMonsterCardInThisLocation(int location){
-        for (Map.Entry<Integer, MonsterCard> locationAndMonsterCard : monsterCardsInZone.entrySet()){
-            if(locationAndMonsterCard.getKey() == location){
+    public boolean isSelectedCardFromSpellAndTrapZone() {
+        if (!hasSelectedCard()) {
+            return false;
+        }
+        for (Map.Entry<Integer, Card> locationCard : spellOrTrapCardsInZone.entrySet()) {
+            if (locationCard.getValue().equals(selectedCard)) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean doesHaveSpellOrTrapCardInThisPosition(int location){
-        for (Map.Entry<Integer, Card> locationAndCard : spellOrTrapCardsInZone.entrySet()){
-            if(locationAndCard.getKey() == location){
+    public boolean doesHaveMonsterCardInThisLocation(int location) {
+        for (Map.Entry<Integer, MonsterCard> locationAndMonsterCard : monsterCardsInZone.entrySet()) {
+            if (locationAndMonsterCard.getKey() == location) {
                 return true;
             }
         }
         return false;
     }
 
-    public int getLocationOfThisMonsterCardInZone (MonsterCard monsterCard){
-        for (Map.Entry<Integer, MonsterCard> locationAndCard : monsterCardsInZone.entrySet()){
-            if(locationAndCard.getValue().equals(monsterCard)){
+    public boolean doesHaveSpellOrTrapCardInThisPosition(int location) {
+        for (Map.Entry<Integer, Card> locationAndCard : spellOrTrapCardsInZone.entrySet()) {
+            if (locationAndCard.getKey() == location) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean doesHaveThisCardNameInHand(String cardName) {
+        for (Card card : cardsInHand) {
+            if (card.getName().equals(cardName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int getLocationOfThisMonsterCardInZone(MonsterCard monsterCard) {
+        for (Map.Entry<Integer, MonsterCard> locationAndCard : monsterCardsInZone.entrySet()) {
+            if (locationAndCard.getValue().equals(monsterCard)) {
                 return locationAndCard.getKey();
             }
         }
         return -1;
     }
-    public int getLocationOfThisSpellOrTrapCardInZone (Card card){
-        for (Map.Entry<Integer, Card> locationAndCard : spellOrTrapCardsInZone.entrySet()){
-            if(locationAndCard.getValue().equals(card)){
+
+    public int getLocationOfThisSpellOrTrapCardInZone(Card card) {
+        for (Map.Entry<Integer, Card> locationAndCard : spellOrTrapCardsInZone.entrySet()) {
+            if (locationAndCard.getValue().equals(card)) {
                 return locationAndCard.getKey();
             }
         }
         return -1;
     }
-    public MonsterCard getMonsterCardByLocationFromZone(int location){
-       return monsterCardsInZone.get(location);
+
+    public void destroyAllCardsWithThisName(String cardName) {
+        cardsInHand.removeIf(card -> card.getName().equals(cardName));
+        cardsInGraveyard.removeIf(card -> card.getName().equals(cardName));
+        remainingPlayerCardsInGame.removeIf(card -> card.getName().equals(cardName));
+        Set<Map.Entry<Integer, MonsterCard>> entrySet = getMonsterCardsInZone().entrySet();
+        entrySet.removeIf(entry -> entry.getValue().getName().equals(cardName));
+        Set<Map.Entry<Integer, Card>> entrySet2 = getSpellOrTrapCardsInZone().entrySet();
+        entrySet2.removeIf(entry2 -> entry2.getValue().getName().equals(cardName));
+    }
+
+    public MonsterCard getMonsterCardByLocationFromZone(int location) {
+        return monsterCardsInZone.get(location);
     }
 
 }

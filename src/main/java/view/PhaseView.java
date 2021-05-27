@@ -2,6 +2,8 @@ package view;
 
 import controller.PhaseController;
 import enums.MenuEnum;
+import model.BattlePhase;
+import model.MainPhase;
 
 import java.util.Scanner;
 
@@ -15,6 +17,7 @@ public class PhaseView {
     }
 
     public void run(){
+        printPhaseName();
         String command;
         while(true){
             command = scanner.nextLine();
@@ -116,7 +119,7 @@ public class PhaseView {
     }
 
     public void preparationsOfSpellHaveNotBeenDoneYet(){
-        System.out.println("preparations of this spell are not done yet");
+        System.out.println("preparations of this spell/trap are not done yet");
     }
 
     public void effectActivated(){
@@ -133,5 +136,13 @@ public class PhaseView {
 
     public void spellOrTrapActivated(String spellOrTrap){
         System.out.println(spellOrTrap + " activated");
+    }
+
+    public void printPhaseName (){
+        if(controller.getPhase() instanceof MainPhase){
+            System.out.println("phase: Main Phase " + ((MainPhase) controller.getPhase()).getWhatMainPhase());
+        } else if(controller.getPhase() instanceof BattlePhase){
+            System.out.println("phase: Battle Phase");
+        }
     }
 }

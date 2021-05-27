@@ -85,6 +85,23 @@ public abstract class Card {
         }
     }
 
+    public static ArrayList<Card> getAllCards() {
+        return allCards;
+    }
+
+    public static void addToAllCards(Card card) {
+        Card.allCards.add(card);
+    }
+
+    public static boolean isThisCardNameValid(String cardName){
+        for(Card card : Card.getAllCards()){
+            if(card.getName().equals(cardName)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String getName() {
         return name;
     }

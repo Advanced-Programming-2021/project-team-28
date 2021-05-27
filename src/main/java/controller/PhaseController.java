@@ -17,35 +17,17 @@ public abstract class PhaseController {
         this.phase = phase;
     }
 
+    public Phase getPhase() {
+        return phase;
+    }
+
+    public void setPhase(Phase phase) {
+        this.phase = phase;
+    }
+
     public void run() {
         view.printString(phase.getMapToString());
         this.view.run();
-    }
-
-    protected MenuEnum processActivatingEffectInRivalTurnCommand(Card rivalCard, Card ourCard, String selection, RecentActionsInGame recentAction) {
-        Matcher[] selectCommandMatchers = getSelectCommandMatchers(selection);
-        if(selection.equals("activate effect")){
-            if(!phase.getPlayerByTurn().hasSelectedCard()){
-                view.noCardSelectedYet();
-            } else {
-                if(phase.getPlayerByTurn().getSelectedCard() instanceof SpellCard){
-
-                } else if(phase.getPlayerByTurn().getSelectedCard() instanceof TrapCard){
-                    TrapEffectController.searchForThisEffect(phase, rivalCard, ourCard, (TrapCard) phase.getPlayerByTurn().getSelectedCard());
-                }
-                view.spellOrTrapActivated(phase.getPlayerByTurn().getSelectedCard() instanceof SpellCard ? "Spell" : "Trap");
-                return MenuEnum.BACK;
-            }
-        } else if(selectCommandMatchers[2].find()){
-            controlSelectOwnSpellCommand(Integer.parseInt(selectCommandMatchers[2].group(1)), true, recentAction);
-        } else if(selectCommandMatchers[3].find()){
-            controlSelectOwnSpellCommand(Integer.parseInt(selectCommandMatchers[3].group(1)), true, recentAction);
-        } else if (selection.equals("cancel")) {
-            return MenuEnum.BACK;
-        } else {
-            view.canNotPlayThisKindOfMoves();
-        }
-        return MenuEnum.CONTINUE;
     }
 
     public MenuEnum processCommand(String command) {
@@ -85,7 +67,7 @@ public abstract class PhaseController {
         if (phase.getFirstPlayer().getLifePoint() <= 0 || phase.getSecondPlayer().getLifePoint() <= 0) {
             view.printString(phase.getMapToString());
             return MenuEnum.BACK;
-        } else if (phase.isEndedByATrapCard()){
+        } else if (phase.isEndedByATrapCard()) {
             return MenuEnum.BACK;
         }
         view.printString(phase.getMapToString());
@@ -141,6 +123,32 @@ public abstract class PhaseController {
         }
     }
 
+    protected MenuEnum processActivatingEffectInRivalTurnCommand(Card rivalCard, Card ourCard, String selection, RecentActionsInGame recentAction) {
+        Matcher[] selectCommandMatchers = getSelectCommandMatchers(selection);
+        if (selection.equals("activate effect")) {
+            if (!phase.getPlayerByTurn().hasSelectedCard()) {
+                view.noCardSelectedYet();
+            } else {
+                if (phase.getPlayerByTurn().getSelectedCard() instanceof SpellCard) {
+
+                } else if (phase.getPlayerByTurn().getSelectedCard() instanceof TrapCard) {
+                    TrapEffectController.searchForThisEffect(phase, rivalCard, (TrapCard) phase.getPlayerByTurn().getSelectedCard());
+                }
+                view.spellOrTrapActivated(phase.getPlayerByTurn().getSelectedCard() instanceof SpellCard ? "Spell" : "Trap");
+                return MenuEnum.BACK;
+            }
+        } else if (selectCommandMatchers[2].find()) {
+            controlSelectOwnSpellCommand(Integer.parseInt(selectCommandMatchers[2].group(1)), true, recentAction);
+        } else if (selectCommandMatchers[3].find()) {
+            controlSelectOwnSpellCommand(Integer.parseInt(selectCommandMatchers[3].group(1)), true, recentAction);
+        } else if (selection.equals("cancel")) {
+            return MenuEnum.BACK;
+        } else {
+            view.canNotPlayThisKindOfMoves();
+        }
+        return MenuEnum.CONTINUE;
+    }
+
     protected abstract void controlSummonCommand();
 
     protected abstract void controlSetCommand();
@@ -173,7 +181,7 @@ public abstract class PhaseController {
         if (location < 1 || location > 5) {
             view.invalidSelection();
         } else if (phase.getPlayerByTurn().doesHaveSpellOrTrapCardInThisPosition(location)) {
-            if(isForActivatingInRivalTurn && !canCardBeActivatedAfterThisAction(recentAction, phase.getPlayerByTurn().getSpellOrTrapCardsInZone().get(location))){
+            if (isForActivatingInRivalTurn && !canCardBeActivatedAfterThisAction(recentAction, phase.getPlayerByTurn().getSpellOrTrapCardsInZone().get(location))) {
                 view.canNotPlayThisKindOfMoves();
                 return;
             }
@@ -276,48 +284,56 @@ public abstract class PhaseController {
         }
     }
 
-    public boolean canRivalActivateEffect (RecentActionsInGame recentAction){
-            for(Map.Entry<Integer, Card> locationCard : phase.getRivalPlayerByTurn().getSpellOrTrapCardsInZone().entrySet()){
-                if(canCardBeActivatedAfterThisAction(recentAction, locationCard.getValue())){
-                    return true;
-                }
+    public boolean canRivalActivateEffect(RecentActionsInGame recentAction) {
+        for (Map.Entry<Integer, Card> locationCard : phase.getRivalPlayerByTurn().getSpellOrTrapCardsInZone().entrySet()) {
+            if (canCardBeActivatedAfterThisAction(recentAction, locationCard.getValue())) {
+                return true;
             }
-            return false;
+        }
+        return false;
     }
 
-    public boolean canCardBeActivatedAfterThisAction(RecentActionsInGame recentAction, Card card){
-        if(card instanceof MonsterCard){
+    public boolean canCardBeActivatedAfterThisAction(RecentActionsInGame recentAction, Card card) {
+        if (card instanceof MonsterCard) {
             return false;
         }
-        if(recentAction == RecentActionsInGame.DECLARED_A_BATTLE){
-            if(card instanceof TrapCard){
+        if (recentAction == RecentActionsInGame.DECLARED_A_BATTLE) {
+            if (card instanceof TrapCard) {
                 return ((TrapCard) card).getEffect() == TrapEffect.MIRROR_FORCE ||
                         ((TrapCard) card).getEffect() == TrapEffect.MAGIC_CYLINDER ||
                         ((TrapCard) card).getEffect() == TrapEffect.NEGATE_ATTACK;
             } else {
                 //TODO: search for spell cards can be activated
             }
-        } else if(recentAction == RecentActionsInGame.SUMMONED_A_MONSTER_WITH_LESS_THAN_1000_ATTACK_POINT){
-            if(card instanceof TrapCard){
+        } else if (recentAction == RecentActionsInGame.SUMMONED_A_MONSTER_WITH_LESS_THAN_1000_ATTACK_POINT) {
+            if (card instanceof TrapCard) {
                 return ((TrapCard) card).getEffect() == TrapEffect.TORRENTIAL_TRIBUTE ||
                         ((TrapCard) card).getEffect() == TrapEffect.SOLEMN_WARNING;
             } else {
-
+                //TODO: search for spell cards can be activated
             }
-        } else if(recentAction == RecentActionsInGame.SUMMONED_A_MONSTER_WITH_1000_OR_MORE_ATTACK_POINT){
-            if(card instanceof TrapCard){
+        } else if (recentAction == RecentActionsInGame.SUMMONED_A_MONSTER_WITH_1000_OR_MORE_ATTACK_POINT) {
+            if (card instanceof TrapCard) {
                 return ((TrapCard) card).getEffect() == TrapEffect.TORRENTIAL_TRIBUTE ||
                         ((TrapCard) card).getEffect() == TrapEffect.TRAP_HOLE ||
                         ((TrapCard) card).getEffect() == TrapEffect.SOLEMN_WARNING;
             } else {
-
+                //TODO: search for spell cards can be activated
             }
-        } else if(recentAction == RecentActionsInGame.SPECIAL_SUMMONED){
-            if(card instanceof TrapCard){
+        } else if (recentAction == RecentActionsInGame.SPECIAL_SUMMONED) {
+            if (card instanceof TrapCard) {
                 return ((TrapCard) card).getEffect() == TrapEffect.TORRENTIAL_TRIBUTE ||
                         ((TrapCard) card).getEffect() == TrapEffect.SOLEMN_WARNING;
             } else {
-
+                //TODO: search for spell cards can be activated
+            }
+        } else if (recentAction == RecentActionsInGame.IN_OUR_MAIN_PHASE) {
+            if (card instanceof TrapCard) {
+                return ((TrapCard) card).getEffect() == TrapEffect.MIND_CRUSH ||
+                        ((TrapCard) card).getEffect() == TrapEffect.TIME_SEAL ||
+                        ((TrapCard) card).getEffect() == TrapEffect.CALL_OF_THE_HAUNTED;
+            } else {
+                //TODO: search for spell cards can be activated
             }
         }
         return false;

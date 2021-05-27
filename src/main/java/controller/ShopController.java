@@ -544,18 +544,6 @@ public class ShopController {
                 TrapCard card = new TrapCard(user.getUsername() , cardName, "", TrapsDescription.callOfTheHaunted , TrapIcon.CONTINUOUS , TrapEffect.CALL_OF_THE_HAUNTED);
                 user.addToCards(card);
             }
-        }
-        else if(cardName.equals("Vanity's Emptiness")){
-            if(receiveMoneyFromCustomer(3500)) {
-                TrapCard card = new TrapCard(user.getUsername() , cardName, "", TrapsDescription.vanitiesEmptiness , TrapIcon.CONTINUOUS , TrapEffect.VANITYS_EMPTINESS);
-                user.addToCards(card);
-            }
-        }
-        else if(cardName.equals("Wall of Revealing Light")){
-            if(receiveMoneyFromCustomer(3500)) {
-                TrapCard card = new TrapCard(user.getUsername() , cardName, "", TrapsDescription.wallOfRevealingLight , TrapIcon.CONTINUOUS , TrapEffect.WALL_OF_REVEALING_LIGHT);
-                user.addToCards(card);
-            }
         } else view.cardNotFound();
     }
 

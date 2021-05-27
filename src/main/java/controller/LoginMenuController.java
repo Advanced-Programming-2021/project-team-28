@@ -15,15 +15,13 @@ public class LoginMenuController {
     LoginMenuView loginMenuView = new LoginMenuView(this);
 
     public void run() throws CloneNotSupportedException, IOException {
+        AllCardsInitiator.fillAllCards();
         createResourceFileIfNeeded();
-
         MonsterCard.deserialize();
         SpellCard.deserialize();
         TrapCard.deserialize();
         User.deserialize();
-
         this.loginMenuView.run();
-
         MonsterCard.serialize();
         SpellCard.serialize();
         TrapCard.serialize();
@@ -38,7 +36,6 @@ public class LoginMenuController {
         files.add(new File("src/SpellCardsOutput.json"));
         files.add(new File("src/TrapCardsOutput.json"));
         files.add(new File("src/DecksOutput.json"));
-
 
         for (File file : files)
         if(!file.exists()){

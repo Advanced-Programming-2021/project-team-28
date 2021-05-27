@@ -2,6 +2,7 @@ package controller;
 
 import enums.MonsterCardPosition;
 import enums.RecentActionsInGame;
+import enums.SpellOrTrapCardPosition;
 import model.*;
 import view.MainPhaseView;
 import view.ScannerInstance;
@@ -102,6 +103,7 @@ public class MainPhaseController extends PhaseController {
         if(card.isSpecialSummoned()){
             checkForRivalSpellOrTrapEffect(card, null,
                     RecentActionsInGame.SPECIAL_SUMMONED);
+            card.setSpecialSummoned(false);
         } else if(card.getAttackPoint() < 1000){
             checkForRivalSpellOrTrapEffect(card, null,
                     RecentActionsInGame.SUMMONED_A_MONSTER_WITH_LESS_THAN_1000_ATTACK_POINT);
@@ -192,6 +194,11 @@ public class MainPhaseController extends PhaseController {
         } else if (player.isSpellCardZoneFull()) {
             mainPhaseView.printString("spell card zone is full");
         } else {
+            if(card instanceof TrapCard){
+                ((TrapCard) card).setPosition(SpellOrTrapCardPosition.HIDDEN);
+            } else if (card instanceof SpellCard){
+                ((SpellCard) card).setPosition(SpellOrTrapCardPosition.HIDDEN);
+            }
             player.addCardToCardsInZone(card);
             player.removeCardFromHand(card);
             player.setSelectedCard(null);
@@ -268,16 +275,39 @@ public class MainPhaseController extends PhaseController {
 
     @Override
     protected void controlAttackDirectCommand() {
-
-    }
-
-    @Override
-    protected void controlActivateEffectCommand() {
-
+        controlAttackCommand();
     }
 
     @Override
     protected void controlAttackToCardCommand(int location) {
+        controlAttackCommand();
+    }
 
+    @Override
+    protected void controlActivateEffectCommand() {
+        Player player = phase.getPlayerByTurn();
+        if (!player.hasSelectedCard()) {
+            view.noCardSelectedYet();
+            return;
+        }
+        if(player.isSelectedCardFromSpellAndTrapZone() && player.getSelectedCard() instanceof TrapCard){
+            if(canCardBeActivatedAfterThisAction(RecentActionsInGame.IN_OUR_MAIN_PHASE, player.getSelectedCard())){
+                TrapEffectController.searchForThisEffect(phase, null, (TrapCard) player.getSelectedCard());
+                view.spellOrTrapActivated("Trap");
+            } else {
+                view.preparationsOfSpellHaveNotBeenDoneYet();
+            }
+        }
+    }
+
+    private void controlAttackCommand() {
+        Player player = phase.getPlayerByTurn();
+        if (!player.hasSelectedCard()) {
+            view.noCardSelectedYet();
+        } else if (!player.isSelectedCardFromMonsterCardZone()) {
+            view.canNotAttackWithThisCard();
+        } else {
+            view.canNotDoThisActionInThisPhase();
+        }
     }
 }

@@ -28,7 +28,7 @@ public class Round {
             drawPhase.run();
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;
-            MainPhase1 mainPhase1 = new MainPhase1(firstPlayer, secondPlayer, this);
+            MainPhase mainPhase1 = new MainPhase(firstPlayer, secondPlayer, this);
             MainPhaseController mainPhaseController = new MainPhaseController(mainPhase1);
             mainPhaseController.run();
             checkTheWinner();
@@ -37,7 +37,7 @@ public class Round {
             new BattlePhaseController(battlePhase).run();
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;
-            MainPhase2 mainPhase2 = new MainPhase2(firstPlayer, secondPlayer, this);
+            mainPhase1.setWhatMainPhase(2);
             mainPhaseController.run();
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;

@@ -1,7 +1,6 @@
 package model;
 
 import enums.Turn;
-
 import java.util.Collections;
 
 
@@ -17,6 +16,8 @@ public class DrawPhase extends Phase {
         if (getPlayerByTurn().getRemainingPlayerCardsInGame().size() == 0) {
             changeTurn();
             this.round.setWinner(getPlayerByTurn());
+        } else if(!getPlayerByTurn().isAbleToAddCardInDrawPhase()){
+            getPlayerByTurn().setAbleToAddCardInDrawPhase(true);
         } else {
             getPlayerByTurn().getCardsInHand().add(getPlayerByTurn().getRemainingPlayerCardsInGame().get(0));
             getPlayerByTurn().getRemainingPlayerCardsInGame().remove(0);
