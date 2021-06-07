@@ -24,14 +24,14 @@ public abstract class Card {
 
     public static ArrayList<Card> allCards = new ArrayList<>();
 
-    public Card(String ownerUsername , String name, String number, String description) {
+    public Card(String ownerUsername, String name, String number, String description) {
         setOwnerUsername(ownerUsername);
         setName(name);
         setDescription(description);
         setNumber(number);
     }
 
-    public Card(){
+    public Card() {
 
     }
 
@@ -78,7 +78,7 @@ public abstract class Card {
     private static void sortCards(ArrayList<Card> cards) {
         for (int i = 0; i < cards.size(); i++) {
             for (int j = 0; j < cards.size() - 1; j++) {
-                if (Utilities.compareAlphabetical(cards.get(j).getName(), cards.get(j+1).getName()) > 0) {
+                if (Utilities.compareAlphabetical(cards.get(j).getName(), cards.get(j + 1).getName()) > 0) {
                     Collections.swap(cards, j, j + 1);
                 }
             }
@@ -93,9 +93,9 @@ public abstract class Card {
         Card.allCards.add(card);
     }
 
-    public static boolean isThisCardNameValid(String cardName){
-        for(Card card : Card.getAllCards()){
-            if(card.getName().equals(cardName)){
+    public static boolean isThisCardNameValid(String cardName) {
+        for (Card card : Card.getAllCards()) {
+            if (card.getName().equals(cardName)) {
                 return true;
             }
         }
@@ -142,10 +142,11 @@ public abstract class Card {
         this.ownerUsername = ownerUsername;
     }
 
-    public static Card getCardByName(ArrayList<Card> cards , String name){
-        for (int i = 0; i < cards.size(); i++) {
-            if(cards.get(i).getName().equals(name))
-                return cards.get(i);
+    public static Card getCardByName(ArrayList<Card> cards, String name) throws CloneNotSupportedException {
+        for (Card card : cards) {
+            if (card.getName().equals(name)) {
+                return (Card) card.clone();
+            }
         }
         return null;
     }

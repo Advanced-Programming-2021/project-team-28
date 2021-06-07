@@ -21,24 +21,20 @@ public class MonsterCard extends Card {
     @Expose
     private int defencePoint;
     @Expose
-    private boolean isSummoned = false;
-    @Expose
-    private boolean isFlipped = false;
-    @Expose
     private int level;
     @Expose
     private Attribute attribute;
-    @Expose
-    private boolean hasBattledInBattlePhase;
     @Expose
     private MonsterPower specialPower;
     @Expose
     private MonsterCardPosition position;
     @Expose
-    private boolean isPositionChangedInThisTurn;
-    @Expose
-    private boolean isSummonedInThisTurn;
     private MonsterType type;
+    private boolean isSummoned = false;
+    private boolean isFlipped = false;
+    private boolean hasBattledInBattlePhase = false;
+    private boolean isPositionChangedInThisTurn = false;
+    private boolean isSummonedInThisTurn = false;
     private boolean isEffectedByFieldSpell = false;
     private boolean isCardActionCanceledByAnEffect = false;
     private boolean isSpecialSummoned = false;
@@ -202,17 +198,13 @@ public class MonsterCard extends Card {
         cloneMonsterCard.number = this.number;
         cloneMonsterCard.description = this.description;
         cloneMonsterCard.name = this.name;
+        cloneMonsterCard.ownerUsername = this.ownerUsername;
         cloneMonsterCard.attackPoint = this.attackPoint;
         cloneMonsterCard.defencePoint = this.defencePoint;
         cloneMonsterCard.attribute = this.attribute;
-        cloneMonsterCard.hasBattledInBattlePhase = this.hasBattledInBattlePhase;
-        cloneMonsterCard.isFlipped = this.isFlipped;
-        cloneMonsterCard.isSummoned = this.isSummoned;
         cloneMonsterCard.level = this.level;
         cloneMonsterCard.specialPower = this.specialPower;
         cloneMonsterCard.position = this.position;
-        cloneMonsterCard.isSummonedInThisTurn = this.isSummonedInThisTurn;
-        cloneMonsterCard.isPositionChangedInThisTurn = this.isPositionChangedInThisTurn;
         return cloneMonsterCard;
     }
 

@@ -238,7 +238,7 @@ public class User {
         }
     }
 
-    public static void deserialize() {
+    public static void deserialize() throws Exception {
         Gson gson = new Gson();
         Reader reader = null;
         try {

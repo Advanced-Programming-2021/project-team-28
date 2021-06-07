@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 public class LoginMenuController {
     LoginMenuView loginMenuView = new LoginMenuView(this);
 
-    public void run() throws CloneNotSupportedException, IOException {
+    public void run() throws Exception {
         AllCardsInitiator.fillAllCards();
         createResourceFileIfNeeded();
         MonsterCard.deserialize();
@@ -47,7 +47,7 @@ public class LoginMenuController {
 
     }
 
-    public MenuEnum processCommand(String command) throws CloneNotSupportedException {
+    public MenuEnum processCommand(String command) throws Exception {
         String username = "username";
         String password = "password";
         String nickname = "nickname";
@@ -73,10 +73,11 @@ public class LoginMenuController {
                 return MenuEnum.CONTINUE;
             }
         }
+        loginMenuView.invalidCommand();
         return MenuEnum.CONTINUE;
     }
 
-    private void controlLoginUserCommand(String username, String password) throws CloneNotSupportedException {
+    private void controlLoginUserCommand(String username, String password) throws Exception {
         if(User.isUsernameAvailable(username) || !User.getUserByUsername(username).getPassword().equals(password)){
             loginMenuView.usernameAndPasswordDidNotMatch();
         } else {

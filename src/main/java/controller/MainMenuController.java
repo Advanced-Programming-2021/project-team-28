@@ -18,12 +18,12 @@ public class MainMenuController {
     }
 
 
-    public void run() throws CloneNotSupportedException {
+    public void run() throws Exception {
         this.view.run();
     }
 
 
-    public void processCommand(String command) throws CloneNotSupportedException {
+    public void processCommand(String command) throws Exception {
         Matcher[] duelCommandMatchers = getDuelCommandMatchers(command);
         if (command.equals("menu show-current")) {
             view.showMenu();

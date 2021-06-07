@@ -18,11 +18,11 @@ public class ShopController {
         this.user = user;
     }
 
-    public void run() {
+    public void run() throws Exception {
         this.view.run();
     }
 
-    public void processCommand(String command) {
+    public void processCommand(String command) throws Exception {
         Pattern patternForImpossibleMenuNavigation = Pattern.compile("^menu enter (Duel|Scoreboard|Import/Export|Deck|Profile)$");
         Matcher matcherForImpossibleMenuNavigation = patternForImpossibleMenuNavigation.matcher(command);
         if (matcherForImpossibleMenuNavigation.find()) {
@@ -51,7 +51,7 @@ public class ShopController {
             return null;
     }
 
-    public void showCard(String name) {
+    public void showCard(String name) throws Exception {
         if (Card.getCardByName(Card.allCards, name) != null)
             view.showCard(Card.getCardByName(Card.allCards, name));
         else view.cardNotFound();

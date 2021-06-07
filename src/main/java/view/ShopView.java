@@ -16,7 +16,7 @@ public class ShopView {
         this.controller = controller;
     }
 
-    public void run(){
+    public void run() throws Exception {
         String command;
         while (true){
 

@@ -76,6 +76,7 @@ public class TrapCard extends Card implements Cloneable {
         cloneTrapCard.number = this.number;
         cloneTrapCard.description = this.description;
         cloneTrapCard.name = this.name;
+        cloneTrapCard.ownerUsername = this.ownerUsername;
         cloneTrapCard.icon = this.icon;
         cloneTrapCard.effect = this.effect;
         cloneTrapCard.position = this.position;

@@ -23,7 +23,7 @@ public class SpellCard extends Card{
     private SpellIcon icon;
     @Expose
     public static ArrayList<SpellCard> allSpellCard = new ArrayList<>();
-
+    @Expose
     private SpellOrTrapCardPosition position;
 
     private boolean hasDeployedEffect = false;
@@ -88,6 +88,7 @@ public class SpellCard extends Card{
         cloneSpellCard.name = this.name;
         cloneSpellCard.description = this.description;
         cloneSpellCard.number = this.number;
+        cloneSpellCard.ownerUsername = this.ownerUsername;
         cloneSpellCard.icon = this.icon;
         cloneSpellCard.effect = this.effect;
         cloneSpellCard.position = this.position;
