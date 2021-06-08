@@ -112,14 +112,6 @@ public class Deck {
         return null;
     }
 
-    public void removeDeck() {
-        User.getUserByUsername(creatorUsername).getDecks().remove(this);
-    }
-
-    public void activateDeck() {
-        User.getUserByUsername(creatorUsername).setActiveDeck(this);
-    }
-
     public boolean isMainDeckFull() {
         return this.allCardsInMainDeck.size() == 60;
     }

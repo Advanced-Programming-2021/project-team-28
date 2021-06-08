@@ -1,6 +1,7 @@
 package controller;
 
 import enums.MonsterCardPosition;
+import enums.MonsterPower;
 import enums.RecentActionsInGame;
 import enums.SpellOrTrapCardPosition;
 import model.*;
@@ -14,6 +15,7 @@ import static enums.MonsterCardPosition.*;
 public class MainPhaseController extends PhaseController {
 
     protected boolean isSummonOrSetMonsterCard;
+    MonsterPowers monsterPowers;
 
     public MainPhaseController(MainPhase mainPhase) {
         super(mainPhase);
@@ -22,6 +24,7 @@ public class MainPhaseController extends PhaseController {
             card.setPositionChangedInThisTurn(false);
             card.setSummonedInThisTurn(false);
         }
+        monsterPowers = new MonsterPowers(phase);
     }
 
     private MainPhaseView mainPhaseView = new MainPhaseView(this);
@@ -84,6 +87,7 @@ public class MainPhaseController extends PhaseController {
 
     protected void summonMonsterCard(Player player, MonsterCard card) {
         card.setSummoned(true);
+        monsterPowers.run(card, null);
         card.setPositionChangedInThisTurn(true);
         card.setPosition(OFFENSIVE_OCCUPIED);
         player.addCardToCardsInZone(card);
@@ -101,14 +105,14 @@ public class MainPhaseController extends PhaseController {
 
     private void checkRivalActionsAfterSummon(MonsterCard card) {
         if(card.isSpecialSummoned()){
-            checkForRivalSpellOrTrapEffect(card, null,
+            checkForPossibleSpellOrTrapEffect(card, null,
                     RecentActionsInGame.SPECIAL_SUMMONED);
             card.setSpecialSummoned(false);
         } else if(card.getAttackPoint() < 1000){
-            checkForRivalSpellOrTrapEffect(card, null,
+            checkForPossibleSpellOrTrapEffect(card, null,
                     RecentActionsInGame.SUMMONED_A_MONSTER_WITH_LESS_THAN_1000_ATTACK_POINT);
         } else {
-            checkForRivalSpellOrTrapEffect(card, null,
+            checkForPossibleSpellOrTrapEffect(card, null,
                     RecentActionsInGame.SUMMONED_A_MONSTER_WITH_1000_OR_MORE_ATTACK_POINT);
         }
     }
@@ -262,10 +266,10 @@ public class MainPhaseController extends PhaseController {
             flipSummonedCard.setPositionChangedInThisTurn(true);
             flipSummonedCard.setFlipped(true);
             if(flipSummonedCard.getAttackPoint() < 1000){
-                checkForRivalSpellOrTrapEffect(flipSummonedCard, null,
+                checkForPossibleSpellOrTrapEffect(flipSummonedCard, null,
                         RecentActionsInGame.SUMMONED_A_MONSTER_WITH_LESS_THAN_1000_ATTACK_POINT);
             } else {
-                checkForRivalSpellOrTrapEffect(flipSummonedCard, null,
+                checkForPossibleSpellOrTrapEffect(flipSummonedCard, null,
                         RecentActionsInGame.SUMMONED_A_MONSTER_WITH_1000_OR_MORE_ATTACK_POINT);
             }
             player.setSelectedCard(null);
@@ -291,7 +295,7 @@ public class MainPhaseController extends PhaseController {
             return;
         }
         if(player.isSelectedCardFromSpellAndTrapZone() && player.getSelectedCard() instanceof TrapCard){
-            if(canCardBeActivatedAfterThisAction(RecentActionsInGame.IN_OUR_MAIN_PHASE, player.getSelectedCard())){
+            if(canCardBeActivatedAfterThisAction(player,RecentActionsInGame.IN_OUR_MAIN_PHASE, player.getSelectedCard())){
                 TrapEffectController.searchForThisEffect(phase, null, (TrapCard) player.getSelectedCard());
                 view.spellOrTrapActivated("Trap");
             } else {

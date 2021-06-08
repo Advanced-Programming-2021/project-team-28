@@ -1,9 +1,7 @@
 package model;
 
 import enums.MonsterCardPosition;
-import enums.MonsterPower;
 import enums.SpellEffect;
-import enums.Turn;
 import view.MonsterPowerView;
 
 import java.util.ArrayList;
@@ -12,12 +10,12 @@ import java.util.Map;
 
 public class MonsterPowers {
 
-    private MonsterPowerView view = new MonsterPowerView(this);
+    public MonsterPowerView view = new MonsterPowerView(this);
 
-    Round round;
+    Phase phase;
 
-    MonsterPowers(Round round) {
-        this.round = round;
+    public MonsterPowers(Phase phase) {
+        this.phase = phase;
     }
 
     public void run(MonsterCard activeCard, MonsterCard opponentCard) {
@@ -58,20 +56,20 @@ public class MonsterPowers {
     public void manEaterBug(MonsterCard manEaterBug) {
         int opponentCardLocation;
         if (manEaterBug.isFlipped()) {
-            if (!round.getRivalPlayerByTurn().isMonsterCardZoneEmpty()) {
+            if (!phase.getRivalPlayerByTurn().isMonsterCardZoneEmpty()) {
                 view.printError("please enter a location to destroy enemy card : ");
                 opponentCardLocation = view.manEaterBug();
                 if (opponentCardLocation < 1 || opponentCardLocation > 5) {
                     view.printError("there is no place with this number");
                     return;
                 }
-                if (!round.getRivalPlayerByTurn().doesHaveMonsterCardInThisLocation(opponentCardLocation)) {
+                if (!phase.getRivalPlayerByTurn().doesHaveMonsterCardInThisLocation(opponentCardLocation)) {
                     view.printError("there is no card in selected zone");
                     return;
                 }
-                MonsterCard opponentCard = round.getRivalPlayerByTurn().getMonsterCardByLocationFromZone(opponentCardLocation);
-                round.getRivalPlayerByTurn().addCardToGraveyard(opponentCard);
-                round.getRivalPlayerByTurn().removeCardFromCardsInZone(opponentCard, opponentCardLocation);
+                MonsterCard opponentCard = phase.getRivalPlayerByTurn().getMonsterCardByLocationFromZone(opponentCardLocation);
+                phase.getRivalPlayerByTurn().addCardToGraveyard(opponentCard);
+                phase.getRivalPlayerByTurn().removeCardFromCardsInZone(opponentCard, opponentCardLocation);
             }
         }
         manEaterBug.setFlipped(false);
@@ -79,15 +77,15 @@ public class MonsterPowers {
 
     public void theCalculator(MonsterCard activeCard) {
         int levelSum = 0;
-        if (User.getUserByUsername(activeCard.getOwnerUsername()) == round.getFirstPlayer().getUser()) {
-            for (Map.Entry<Integer, MonsterCard> monsterZone : round.getFirstPlayer().getMonsterCardsInZone().entrySet()) {
+        if (User.getUserByUsername(activeCard.getOwnerUsername()) == phase.getFirstPlayer().getUser()) {
+            for (Map.Entry<Integer, MonsterCard> monsterZone : phase.getFirstPlayer().getMonsterCardsInZone().entrySet()) {
                 if (monsterZone.getValue().getPosition() == MonsterCardPosition.DEFENSIVE_OCCUPIED || monsterZone.getValue().getPosition() == MonsterCardPosition.OFFENSIVE_OCCUPIED) {
                     levelSum += monsterZone.getValue().getLevel();
                 }
             }
             activeCard.setAttackPoint(300 * levelSum);
         } else {
-            for (Map.Entry<Integer, MonsterCard> monsterZone : round.getSecondPlayer().getMonsterCardsInZone().entrySet()) {
+            for (Map.Entry<Integer, MonsterCard> monsterZone : phase.getSecondPlayer().getMonsterCardsInZone().entrySet()) {
                 if (monsterZone.getValue().getPosition() == MonsterCardPosition.DEFENSIVE_OCCUPIED || monsterZone.getValue().getPosition() == MonsterCardPosition.OFFENSIVE_OCCUPIED) {
                     levelSum += monsterZone.getValue().getLevel();
                 }
@@ -98,29 +96,25 @@ public class MonsterPowers {
 
     public void mirageDragon(MonsterCard activeCard) {
         if (!activeCard.isGoingToGraveyard) {
-            if (User.getUserByUsername(activeCard.getOwnerUsername()) == round.getFirstPlayer().getUser()) {
-                round.getSecondPlayer().setAbleToActivateTrapCard(false);
-                return;
+            if (User.getUserByUsername(activeCard.getOwnerUsername()) == phase.getFirstPlayer().getUser()) {
+                phase.getSecondPlayer().setAbleToActivateTrapCard(false);
             } else {
-                round.getFirstPlayer().setAbleToActivateTrapCard(false);
-                return;
+                phase.getFirstPlayer().setAbleToActivateTrapCard(false);
             }
         } else {
-            if (User.getUserByUsername(activeCard.getOwnerUsername()) == round.getFirstPlayer().getUser()) {
-                round.getSecondPlayer().setAbleToActivateTrapCard(true);
+            if (User.getUserByUsername(activeCard.getOwnerUsername()) == phase.getFirstPlayer().getUser()) {
+                phase.getSecondPlayer().setAbleToActivateTrapCard(true);
                 activeCard.setGoingToGraveyard(false);
-                return;
             } else {
-                round.getFirstPlayer().setAbleToActivateTrapCard(true);
+                phase.getFirstPlayer().setAbleToActivateTrapCard(true);
                 activeCard.setGoingToGraveyard(false);
-                return;
             }
         }
     }
 
     public void yomiShip(MonsterCard yomiShip, MonsterCard attacker) {
         if (yomiShip.isGoingToGraveyard()) {
-            Player attackerPlayer = round.getPlayerByTurn();
+            Player attackerPlayer = phase.getPlayerByTurn();
             attackerPlayer.addCardToGraveyard(attacker);
             attackerPlayer.removeCardFromCardsInZone(attacker, attackerPlayer.getLocationOfThisMonsterCardInZone(attacker));
         }
@@ -128,13 +122,13 @@ public class MonsterPowers {
 
     public boolean ritualSummoned (MonsterCard card) {
         boolean status;
-        HashMap<Integer, Card> cards = round.getPlayerByTurn().getSpellOrTrapCardsInZone();
+        HashMap<Integer, Card> cards = phase.getPlayerByTurn().getSpellOrTrapCardsInZone();
         for (Map.Entry<Integer, Card> mapElement : cards.entrySet()) {
             if (((SpellCard) mapElement.getValue()).getEffect() == SpellEffect.ADVANCED_RITUAL_ART) {
                 status =  ritualSummonProcedure(card);
                 if(status){
-                    round.getPlayerByTurn().removeCardFromCardsInZone(mapElement.getValue() , round.getPlayerByTurn().getLocationOfThisSpellOrTrapCardInZone(mapElement.getValue()));
-                    round.getPlayerByTurn().addCardToGraveyard(mapElement.getValue());
+                    phase.getPlayerByTurn().removeCardFromCardsInZone(mapElement.getValue() , phase.getPlayerByTurn().getLocationOfThisSpellOrTrapCardInZone(mapElement.getValue()));
+                    phase.getPlayerByTurn().addCardToGraveyard(mapElement.getValue());
                 }
                 return status;
             }
@@ -145,7 +139,7 @@ public class MonsterPowers {
 
     private boolean ritualSummonProcedure(MonsterCard card) {
         ArrayList<Integer> locations = new ArrayList<>();
-        HashMap<Integer, MonsterCard> cards = round.getPlayerByTurn().getMonsterCardsInZone();
+        HashMap<Integer, MonsterCard> cards = phase.getPlayerByTurn().getMonsterCardsInZone();
         int location = 100;
         int levelSum = 0;
         view.printError("enter location of cards that you want to tribute for the ritual summon (sum of levels of selected cards must either be equal or greater than the target card level)");
@@ -168,8 +162,8 @@ public class MonsterPowers {
 
             if(levelSum >= card.getLevel()){
                 for (Integer integer : locations) {
-                    round.getPlayerByTurn().removeCardFromCardsInZone(round.getPlayerByTurn().getMonsterCardByLocationFromZone(integer) , integer);
-                    round.getPlayerByTurn().addCardToGraveyard(cards.get(integer));
+                    phase.getPlayerByTurn().removeCardFromCardsInZone(phase.getPlayerByTurn().getMonsterCardByLocationFromZone(integer) , integer);
+                    phase.getPlayerByTurn().addCardToGraveyard(cards.get(integer));
                     return true;
                 }
             }

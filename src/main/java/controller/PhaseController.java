@@ -181,7 +181,8 @@ public abstract class PhaseController {
         if (location < 1 || location > 5) {
             view.invalidSelection();
         } else if (phase.getPlayerByTurn().doesHaveSpellOrTrapCardInThisPosition(location)) {
-            if (isForActivatingInRivalTurn && !canCardBeActivatedAfterThisAction(recentAction, phase.getPlayerByTurn().getSpellOrTrapCardsInZone().get(location))) {
+            if (isForActivatingInRivalTurn && !canCardBeActivatedAfterThisAction(phase.getPlayerByTurn(), recentAction,
+                    phase.getPlayerByTurn().getSpellOrTrapCardsInZone().get(location))) {
                 view.canNotPlayThisKindOfMoves();
                 return;
             }
@@ -284,17 +285,19 @@ public abstract class PhaseController {
         }
     }
 
-    public boolean canRivalActivateEffect(RecentActionsInGame recentAction) {
-        for (Map.Entry<Integer, Card> locationCard : phase.getRivalPlayerByTurn().getSpellOrTrapCardsInZone().entrySet()) {
-            if (canCardBeActivatedAfterThisAction(recentAction, locationCard.getValue())) {
+    public boolean canPlayerActivateEffect(Player player, RecentActionsInGame recentAction) {
+        for (Map.Entry<Integer, Card> locationCard : player.getSpellOrTrapCardsInZone().entrySet()) {
+            if (canCardBeActivatedAfterThisAction(player, recentAction, locationCard.getValue())) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean canCardBeActivatedAfterThisAction(RecentActionsInGame recentAction, Card card) {
+    public boolean canCardBeActivatedAfterThisAction(Player player, RecentActionsInGame recentAction, Card card) {
         if (card instanceof MonsterCard) {
+            return false;
+        } else if (card instanceof TrapCard && !player.isAbleToActivateTrapCard()) {
             return false;
         }
         if (recentAction == RecentActionsInGame.DECLARED_A_BATTLE) {
@@ -339,8 +342,9 @@ public abstract class PhaseController {
         return false;
     }
 
-    protected void checkForRivalSpellOrTrapEffect(Card rivalCard, Card ourCard, RecentActionsInGame recentAction) {
-        if (canRivalActivateEffect(recentAction)) {
+    protected void checkForPossibleSpellOrTrapEffect(Card rivalCard, Card ourCard, RecentActionsInGame recentAction) {
+        //TODO Activate a trap after summoning a monster from own cards
+        if (canPlayerActivateEffect(phase.getRivalPlayerByTurn(), recentAction)) {
             phase.changeTurn();
             view.nowItWillBeRivalsTurn(phase.getPlayerByTurn().getUser().getNickname());
             view.printString(phase.getMapToString());

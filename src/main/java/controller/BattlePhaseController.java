@@ -75,7 +75,7 @@ public class BattlePhaseController extends PhaseController {
             battleView.youCanNotAttackInYourFirstTurn();
         } else if (phase instanceof BattlePhase) {
             Card attackerCard = player.getSelectedCard();
-            checkForRivalSpellOrTrapEffect(attackerCard, null, RecentActionsInGame.DECLARED_A_BATTLE);
+            checkForPossibleSpellOrTrapEffect(attackerCard, null, RecentActionsInGame.DECLARED_A_BATTLE);
             if (((MonsterCard) attackerCard).isCardActionCanceledByAnEffect()) {
                 ((MonsterCard) attackerCard).setCardActionCanceledByAnEffect(false);
                 return;
@@ -113,7 +113,7 @@ public class BattlePhaseController extends PhaseController {
         } else {
             Card attackerCard = player.getSelectedCard();
             Card defenderCard = rivalPlayer.getMonsterCardsInZone().get(location);
-            checkForRivalSpellOrTrapEffect(attackerCard, defenderCard, RecentActionsInGame.DECLARED_A_BATTLE);
+            checkForPossibleSpellOrTrapEffect(attackerCard, defenderCard, RecentActionsInGame.DECLARED_A_BATTLE);
             if (((MonsterCard) attackerCard).isCardActionCanceledByAnEffect()) {
                 ((MonsterCard) attackerCard).setCardActionCanceledByAnEffect(false);
                 return;
