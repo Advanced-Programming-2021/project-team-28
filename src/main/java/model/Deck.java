@@ -28,7 +28,7 @@ public class Deck {
     @Expose
     private ArrayList<String> allCardsNameInSideDeck = new ArrayList<>();
     @Expose
-    public static ArrayList<Deck> allDecks = new ArrayList<>();
+    private static ArrayList<Deck> allDecks = new ArrayList<>();
 
 
     public Deck(String deckName, String creatorUsername) {
@@ -154,6 +154,10 @@ public class Deck {
         return deckInfo;
     }
 
+    public static ArrayList<Deck> getAllDecks(){
+        return allDecks;
+    }
+
     public String getCreatorUsername() {
         return creatorUsername;
     }
@@ -168,14 +172,6 @@ public class Deck {
 
     private void setDeckName(String deckName) {
         this.deckName = deckName;
-    }
-
-    public int getNumOfMainCards() {
-        return allCardsInMainDeck.size();
-    }
-
-    public int getNumOfSideCards() {
-        return this.allCardsInSideDeck.size();
     }
 
     public ArrayList<Card> getAllCardsInMainDeck() {

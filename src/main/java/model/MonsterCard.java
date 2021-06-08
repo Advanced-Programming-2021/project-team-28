@@ -230,7 +230,7 @@ public class MonsterCard extends Card {
 
         for (MonsterCard monsterCard: monsterCards){
             MonsterCard.allMonsterCards.add(monsterCard);
-            Card.allCards.add(monsterCard);
+            Card.getAllCards().add(monsterCard);
 //            User.getUserByUsername(monsterCard.getOwnerUsername()).addToCards(monsterCard);
         }
 

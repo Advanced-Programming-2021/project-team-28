@@ -117,7 +117,7 @@ public class SpellCard extends Card{
 
         for (SpellCard spellCard: spellCards){
             SpellCard.allSpellCard.add(spellCard);
-            Card.allCards.add(spellCard);
+            Card.getAllCards().add(spellCard);
 //            User.getUserByUsername(spellCard.getOwnerUsername()).addToCards(spellCard);
         }
 

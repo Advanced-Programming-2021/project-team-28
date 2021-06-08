@@ -106,7 +106,7 @@ public class TrapCard extends Card implements Cloneable {
         TrapCard.allTrapCard = new ArrayList<>();
         for (TrapCard trapCard : trapCards) {
             TrapCard.allTrapCard.add(trapCard);
-            Card.allCards.add(trapCard);
+            Card.getAllCards().add(trapCard);
 //            User.getUserByUsername(trapCard.getOwnerUsername()).addToCards(trapCard);
         }
 

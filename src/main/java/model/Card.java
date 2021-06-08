@@ -22,7 +22,7 @@ public abstract class Card {
     @Expose
     protected String ownerUsername;
 
-    public static ArrayList<Card> allCards = new ArrayList<>();
+    private static ArrayList<Card> allCards = new ArrayList<>();
 
     public Card(String ownerUsername, String name, String number, String description) {
         setOwnerUsername(ownerUsername);

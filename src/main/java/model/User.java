@@ -25,7 +25,7 @@ public class User {
     @Expose
     private int score;
     @Expose
-    private int balance = 1000000;
+    private int balance = 100000;
 
 
     @Expose
@@ -252,7 +252,7 @@ public class User {
             User.users.add(user);
             user.allCards = new ArrayList<>();
             for (String cardName: user.allCardsName){
-                user.allCards.add(Card.getCardByName(Card.allCards, cardName));
+                user.allCards.add(Card.getCardByName(Card.getAllCards(), cardName));
             }
         }
         Deck.deserialize();

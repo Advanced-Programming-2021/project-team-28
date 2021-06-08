@@ -18,6 +18,10 @@ public class ShopController {
         this.user = user;
     }
 
+    public ShopView getView() {
+        return view;
+    }
+
     public void run() throws Exception {
         this.view.run();
     }
@@ -52,8 +56,8 @@ public class ShopController {
     }
 
     public void showCard(String name) throws Exception {
-        if (Card.getCardByName(Card.allCards, name) != null)
-            view.showCard(Card.getCardByName(Card.allCards, name));
+        if (Card.getCardByName(Card.getAllCards(), name) != null)
+            view.showCard(Card.getCardByName(Card.getAllCards(), name));
         else view.cardNotFound();
     }
 
