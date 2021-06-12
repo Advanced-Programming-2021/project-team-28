@@ -38,20 +38,21 @@ public class Game {
                 giveOneRoundWinnerPrize(player2);
                 view.showMatchWinner(player2.getUser() , 1 , 0);
             }
-        }
-        else if(this.numberOfRounds == NumberOfRounds.THREE_ROUND_MATCH){
+        } else if(this.numberOfRounds == NumberOfRounds.THREE_ROUND_MATCH){
 
             Round round1 = new Round(player1 , player2 , Turn.FIRST_PLAYER);
             round1.run();
             round1Winner = round1.getWinner();
+            round1Winner.increaseNumberOfRoundsWon();
             round1WinnerLp = round1.getWinner().getLifePoint();
             view.showRoundWinner(round1Winner.getUser() , 1 , 0);
-
+            //TODO changing card
+            setPlayerCardsForGame();
             Round round2 = new Round(player1 , player2 , Turn.FIRST_PLAYER);
             round2.run();
             round2Winner = round2.getWinner();
+            round2Winner.increaseNumberOfRoundsWon();
             round2WinnerLp = round2.getWinner().getLifePoint();
-
 
             if(player1.getNumberOfRoundsWon() == 2){
                 giveTwoRoundWinnerPrize(player1 , player2);
@@ -63,21 +64,35 @@ public class Game {
                 view.showMatchWinner(round2Winner.getUser() , 2 , 0);
                 return;
             }
-
+            setPlayerCardsForGame();
             view.showRoundWinner(round2Winner.getUser() , 1 , 1);
 
             Round round3 = new Round(player1 , player2 , Turn.FIRST_PLAYER);
+            round3.run();
             round3Winner = round3.getWinner();
             round3WinnerLp = round3.getWinner().getLifePoint();
             if(player1.getNumberOfRoundsWon() == 2){giveThreeRoundWinnerPrize1(player1 , player2);
                 view.showMatchWinner(round3Winner.getUser() , 2 , 1);
-            return;
             }
             else if(player2.getNumberOfRoundsWon() == 2){giveThreeRoundWinnerPrize1(player2 , player1);
                 view.showMatchWinner(round3Winner.getUser() , 2 , 1);
-            return;
             }
         }
+    }
+
+    private void setPlayerCardsForGame() {
+        try {
+            resetHandAndRemainingCards(player1);
+            resetHandAndRemainingCards(player2);
+        } catch (CloneNotSupportedException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    private void resetHandAndRemainingCards(Player player1) throws CloneNotSupportedException {
+        player1.fillArraylistWithCardClones(player1.getMainDuelDeck(), player1.getRemainingPlayerCardsInGame());
+        player1.shuffleRemainingCards();
+        player1.setCardsInHand();
     }
 
     public void giveOneRoundWinnerPrize(Player winner){

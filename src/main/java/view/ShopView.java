@@ -129,4 +129,7 @@ public class ShopView {
         System.out.println("Yomi Ship " + ": " + MonstersDescriptions.yomiShip);
     }
 
+    public void cheatActivated() {
+        System.out.println("Cheat activated");
+    }
 }

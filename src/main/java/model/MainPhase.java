@@ -4,8 +4,8 @@ import enums.Turn;
 
 public class MainPhase extends Phase {
     private int whatMainPhase = 1;
-    public MainPhase(Player firstPlayer, Player secondPlayer,Round round) {
-        super(firstPlayer, secondPlayer,round);
+    public MainPhase(Round round) {
+        super(round);
     }
 
     public int getWhatMainPhase() {

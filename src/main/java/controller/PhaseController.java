@@ -62,7 +62,18 @@ public abstract class PhaseController {
         } else if (command.startsWith("select ")) {
             controlSelectionCommands(command);
         } else {
-            view.invalidCommand();
+            boolean isCommandCheat = false;
+            Matcher[] cheatMatchers = getCheatMatchers(command);
+            for (int i=0; i<2; i++){
+                if(cheatMatchers[i].find()){
+                    phase.getPlayerByTurn().increaseLifePoint(Integer.parseInt(cheatMatchers[i].group(1)));
+                    view.cheatActivated();
+                    isCommandCheat = true;
+                }
+            }
+            if(!isCommandCheat){
+                view.invalidCommand();
+            }
         }
         if (phase.getFirstPlayer().getLifePoint() <= 0 || phase.getSecondPlayer().getLifePoint() <= 0) {
             view.printString(phase.getMapToString());
@@ -395,7 +406,9 @@ public abstract class PhaseController {
         Pattern patternForSelectRivalFieldZoneSpell3 = Pattern.compile("^select -f -o$");
         Pattern patternForSelectRivalFieldZoneSpell4 = Pattern.compile("^select -o -f$");
         Pattern patternForDeselect = Pattern.compile("^select -d$");
-        Matcher[] selectCommandMatchers = new Matcher[21];
+        Pattern patternForIncreaseLP = Pattern.compile("^increase --LP (\\d+)$");
+        Pattern patternForIncreaseLP2 = Pattern.compile("^increase -L (\\d+)$");
+        Matcher[] selectCommandMatchers = new Matcher[23];
         selectCommandMatchers[0] = patternForSelectOwnMonsterInZone.matcher(command);
         selectCommandMatchers[1] = patternForSelectOwnMonsterInZone2.matcher(command);
         selectCommandMatchers[2] = patternForSelectOwnSpellInZone.matcher(command);
@@ -418,6 +431,15 @@ public abstract class PhaseController {
         selectCommandMatchers[19] = patternForSelectRivalFieldZoneSpell4.matcher(command);
         selectCommandMatchers[20] = patternForDeselect.matcher(command);
         return selectCommandMatchers;
+    }
+
+    private Matcher[] getCheatMatchers(String command){
+        Pattern patternForIncreaseLP = Pattern.compile("^increase --LP (\\d+)$");
+        Pattern patternForIncreaseLP2 = Pattern.compile("^increase -L (\\d+)$");
+        Matcher[] cheatMatchers = new Matcher[2];
+        cheatMatchers[0] = patternForIncreaseLP.matcher(command);
+        cheatMatchers[1] = patternForIncreaseLP2.matcher(command);
+        return cheatMatchers;
     }
 }
 

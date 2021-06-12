@@ -5,11 +5,9 @@ import java.util.Collections;
 
 
 public class DrawPhase extends Phase {
-    private Round round;
 
-    public DrawPhase(Player firstPlayer, Player secondPlayer, Turn turn, Round round) {
-        super(firstPlayer, secondPlayer, turn);
-        this.round = round;
+    public DrawPhase(Round round) {
+        super(round);
     }
 
     public void run() {

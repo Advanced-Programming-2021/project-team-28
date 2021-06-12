@@ -145,4 +145,8 @@ public class PhaseView {
             System.out.println("phase: Battle Phase");
         }
     }
+
+    public void cheatActivated() {
+        System.out.println("Cheat activated");
+    }
 }

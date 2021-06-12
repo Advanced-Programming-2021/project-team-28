@@ -1,7 +1,5 @@
 package model;
 
-import enums.MonsterCardPosition;
-
 import java.util.*;
 
 public class Player {
@@ -17,17 +15,9 @@ public class Player {
     private ArrayList<Card> cardsInGraveyard = new ArrayList<>();
     private Card fieldZoneCard;
     private Card selectedCard;
-    private boolean isSelectedCardVisible;
+    private boolean isSelectedCardVisible = false;
     private boolean isAbleToActivateTrapCard = true;
     private boolean isAbleToAddCardInDrawPhase = true;
-
-    public boolean isAbleToActivateTrapCard() {
-        return isAbleToActivateTrapCard;
-    }
-
-    public void setAbleToActivateTrapCard(boolean ableToActivateTrapCard) {
-        isAbleToActivateTrapCard = ableToActivateTrapCard;
-    }
 
     private Random random = new Random();
 
@@ -36,7 +26,22 @@ public class Player {
         setMainAndSideDuelDeckAndRemainingCards();
         shuffleRemainingCards();
         setCardsInHand();
-        setSelectedCardVisible(false);
+    }
+
+    public ArrayList<Card> getMainDuelDeck() {
+        return mainDuelDeck;
+    }
+
+    public ArrayList<Card> getSideDuelDeck() {
+        return sideDuelDeck;
+    }
+
+    public boolean isAbleToActivateTrapCard() {
+        return isAbleToActivateTrapCard;
+    }
+
+    public void setAbleToActivateTrapCard(boolean ableToActivateTrapCard) {
+        isAbleToActivateTrapCard = ableToActivateTrapCard;
     }
 
     public boolean isAbleToAddCardInDrawPhase() {
@@ -121,33 +126,21 @@ public class Player {
     }
 
     private void setMainAndSideDuelDeckAndRemainingCards() throws CloneNotSupportedException {
-        for (Card card : user.getActiveDeck().getAllCardsInMainDeck()) {
-            if (card instanceof MonsterCard) {
-                mainDuelDeck.add((MonsterCard) card.clone());
-            } else if (card instanceof TrapCard) {
-                mainDuelDeck.add((TrapCard) card.clone());
-            } else if (card instanceof SpellCard) {
-                mainDuelDeck.add((SpellCard) card.clone());
-            }
-        }
+        fillArraylistWithCardClones(user.getActiveDeck().getAllCardsInMainDeck(), mainDuelDeck);
 
-        for (Card card : user.getActiveDeck().getAllCardsInSideDeck()) {
-            if (card instanceof MonsterCard) {
-                sideDuelDeck.add((MonsterCard) card.clone());
-            } else if (card instanceof TrapCard) {
-                sideDuelDeck.add((TrapCard) card.clone());
-            } else if (card instanceof SpellCard) {
-                sideDuelDeck.add((SpellCard) card.clone());
-            }
-        }
+        fillArraylistWithCardClones(user.getActiveDeck().getAllCardsInSideDeck(), sideDuelDeck);
 
-        for (Card card : mainDuelDeck) {
+        fillArraylistWithCardClones(mainDuelDeck, remainingPlayerCardsInGame);
+    }
+
+    public void fillArraylistWithCardClones(ArrayList<Card> mainArrayList, ArrayList<Card> cloneArrayList) throws CloneNotSupportedException {
+        for (Card card : mainArrayList) {
             if (card instanceof MonsterCard) {
-                remainingPlayerCardsInGame.add((MonsterCard) card.clone());
+                cloneArrayList.add((MonsterCard) card.clone());
             } else if (card instanceof TrapCard) {
-                remainingPlayerCardsInGame.add((TrapCard) card.clone());
+                cloneArrayList.add((TrapCard) card.clone());
             } else if (card instanceof SpellCard) {
-                remainingPlayerCardsInGame.add((SpellCard) card.clone());
+                cloneArrayList.add((SpellCard) card.clone());
             }
         }
     }

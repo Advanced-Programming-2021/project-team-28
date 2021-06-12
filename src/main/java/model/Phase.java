@@ -12,24 +12,11 @@ public abstract class Phase {
     protected int turnsPlayed;
     protected boolean isEndedByATrapCard = false;
 
-    public Phase(Player firstPlayer, Player secondPlayer, Turn turn, int turnsPlayed) {
-        this.firstPlayer = firstPlayer;
-        this.secondPlayer = secondPlayer;
-        this.turn = turn;
-        this.turnsPlayed = turnsPlayed;
-    }
-
-    public Phase(Player firstPlayer, Player secondPlayer, Turn turn) {
-        this.firstPlayer = firstPlayer;
-        this.secondPlayer = secondPlayer;
-        this.turn = turn;
-    }
-
-    public Phase(Player firstPlayer, Player secondPlayer, Round round) {
-        this.firstPlayer = firstPlayer;
-        this.secondPlayer = secondPlayer;
+    public Phase (Round round){
         this.round = round;
-        this.turn  = round.getTurn();
+        this.firstPlayer = round.getFirstPlayer();
+        this.secondPlayer = round.getSecondPlayer();
+        this.turn = round.getTurn();
         this.turnsPlayed = round.getTurnsPlayed();
     }
 

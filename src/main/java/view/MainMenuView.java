@@ -40,4 +40,8 @@ public class MainMenuView {
         System.out.println(error);
     }
 
+    public void cheatActivated(){
+        System.out.println("Cheat activated");
+    }
+
 }

@@ -252,7 +252,9 @@ public class User {
             User.users.add(user);
             user.allCards = new ArrayList<>();
             for (String cardName: user.allCardsName){
-                user.allCards.add(Card.getCardByName(Card.getAllCards(), cardName));
+                Card cardToAdd = Card.getCardByName(Card.getAllCards(), cardName);
+                user.allCards.add(cardToAdd);
+                cardToAdd.setOwnerUsername(user.username);
             }
         }
         Deck.deserialize();

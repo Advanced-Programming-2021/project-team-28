@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class MonsterCard extends Card {
     @Expose
-    public static  ArrayList<MonsterCard> allMonsterCards = new ArrayList<>();
+    public static ArrayList<MonsterCard> allMonsterCards = new ArrayList<>();
     @Expose
     private int attackPoint;
     @Expose

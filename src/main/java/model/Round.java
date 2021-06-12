@@ -24,16 +24,16 @@ public class Round {
 
     public void run() {
         while (true) {
-            DrawPhase drawPhase = new DrawPhase(firstPlayer, secondPlayer, turn, this);
+            DrawPhase drawPhase = new DrawPhase( this);
             drawPhase.run();
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;
-            MainPhase mainPhase1 = new MainPhase(firstPlayer, secondPlayer, this);
+            MainPhase mainPhase1 = new MainPhase(this);
             MainPhaseController mainPhaseController = new MainPhaseController(mainPhase1);
             mainPhaseController.run();
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;
-            BattlePhase battlePhase = new BattlePhase(firstPlayer, secondPlayer, turn, turnsPlayed);
+            BattlePhase battlePhase = new BattlePhase(this);
             new BattlePhaseController(battlePhase).run();
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;
@@ -45,6 +45,25 @@ public class Round {
             ++turnsPlayed;
             changeTurn();
         }
+        resetPlayersData();
+    }
+
+    private void resetPlayersData() {
+        resetPlayerData(firstPlayer);
+        resetPlayerData(secondPlayer);
+    }
+
+    private void resetPlayerData(Player player) {
+        player.setLifePoint(8000);
+        player.setSelectedCard(null);
+        player.setAbleToAddCardInDrawPhase(true);
+        player.setAbleToActivateTrapCard(true);
+        player.setSelectedCardVisible(false);
+        player.getRemainingPlayerCardsInGame().clear();
+        player.getMonsterCardsInZone().clear();
+        player.getSpellOrTrapCardsInZone().clear();
+        player.getCardsInHand().clear();
+        player.getCardsInGraveyard().clear();
     }
 
     public Player getFirstPlayer() {

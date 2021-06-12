@@ -46,6 +46,13 @@ public class MainMenuController {
                     return;
                 }
             }
+            for (int i=12; i<14; i++){
+                if (duelCommandMatchers[i].find()) {
+                    user.changeBalance(Integer.parseInt(duelCommandMatchers[i].group(1)));
+                    view.cheatActivated();
+                    return;
+                }
+            }
             view.showError("invalid command");
         }
     }
@@ -64,7 +71,9 @@ public class MainMenuController {
         Pattern pattern9 = Pattern.compile("^duel -s-p (?<secondPlayer>.+) -r (?<numberOfRounds>\\d+) -n$");
         Pattern pattern10 = Pattern.compile("^duel -r (?<numberOfRounds>\\d+) -n -s-p (?<secondPlayer>.+)$");
         Pattern pattern11 = Pattern.compile("^duel -r (?<numberOfRounds>\\d+) -s-p (?<secondPlayer>.+) -n$");
-        Matcher[] matchers = new Matcher[12];
+        Pattern patternForIncreaseMoney = Pattern.compile("^increase --money (\\d+)$");
+        Pattern patternForIncreaseMoney2 = Pattern.compile("^increase -m (\\d+)$");
+        Matcher[] matchers = new Matcher[14];
         matchers[0] = pattern0.matcher(command);
         matchers[1] = pattern1.matcher(command);
         matchers[2] = pattern2.matcher(command);
@@ -77,6 +86,8 @@ public class MainMenuController {
         matchers[9] = pattern9.matcher(command);
         matchers[10] = pattern10.matcher(command);
         matchers[11] = pattern11.matcher(command);
+        matchers[12] = patternForIncreaseMoney.matcher(command);
+        matchers[13] = patternForIncreaseMoney2.matcher(command);
         return matchers;
     }
 

@@ -42,6 +42,14 @@ public class ShopController {
             Matcher matcher = getCommandMatcher(command, "^card show (.*)");
             showCard(matcher.group(1));
         } else {
+            Matcher[] cheatMatchers = getCheatMatchers(command);
+            for (int i=0; i<2; i++){
+                if(cheatMatchers[i].find()){
+                    user.changeBalance(Integer.parseInt(cheatMatchers[i].group(1)));
+                    view.cheatActivated();
+                    return;
+                }
+            }
             view.invalidCommand();
         }
     }
@@ -567,5 +575,14 @@ public class ShopController {
 
     public void showAllCards() {
         view.showAllCards();
+    }
+
+    private Matcher[] getCheatMatchers(String command){
+        Pattern patternForIncreaseMoney = Pattern.compile("^increase --money (\\d+)$");
+        Pattern patternForIncreaseMoney2 = Pattern.compile("^increase -m (\\d+)$");
+        Matcher[] cheatMatchers = new Matcher[2];
+        cheatMatchers[0] = patternForIncreaseMoney.matcher(command);
+        cheatMatchers[1] = patternForIncreaseMoney2.matcher(command);
+        return cheatMatchers;
     }
 }
