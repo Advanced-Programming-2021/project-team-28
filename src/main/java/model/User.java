@@ -62,7 +62,7 @@ public class User {
     }
 
     public void setActiveDeck(Deck activeDeck) {
-        if(activeDeck == null){
+        if (activeDeck == null) {
             this.activeDeck = null;
             this.activeDeckName = null;
         } else {
@@ -126,15 +126,15 @@ public class User {
     }
 
     public static User getUserByUsername(String username) {
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getUsername().equals(username)) return users.get(i);
+        for (User user : users) {
+            if (user.getUsername().equals(username)) return user;
         }
         return null;
     }
 
     public static User getUserByNickName(String nickname) {
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getNickname().equals(nickname)) return users.get(i);
+        for (User user : users) {
+            if (user.getNickname().equals(nickname)) return user;
         }
         return null;
     }
@@ -229,6 +229,15 @@ public class User {
         return (numOfThisTypeOfCardUserHave > numOfThisTypeOfCardInDeck);
     }
 
+    public boolean doesHaveCardWithThisNumber(String cardNumber) {
+        for (Card card : allCards) {
+            if (card.getNumber().equals(cardNumber)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void serialize() {
         try (Writer writer = new FileWriter("src/UserOutput.json")) {
             Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
@@ -251,7 +260,7 @@ public class User {
         for (User user : users) {
             User.users.add(user);
             user.allCards = new ArrayList<>();
-            for (String cardName: user.allCardsName){
+            for (String cardName : user.allCardsName) {
                 Card cardToAdd = Card.getCardByName(Card.getAllCards(), cardName);
                 user.allCards.add(cardToAdd);
                 cardToAdd.setOwnerUsername(user.username);
@@ -260,11 +269,11 @@ public class User {
         Deck.deserialize();
         for (User user : users) {
             user.decks = new ArrayList<>();
-            for (String deckName: user.decksName){
+            for (String deckName : user.decksName) {
                 user.decks.add(Deck.getDeckByOwnerAndName(user.username, deckName));
             }
-            if(user.activeDeckName != null)
-            user.setActiveDeck(Deck.getDeckByOwnerAndName(user.getUsername(), user.activeDeckName));
+            if (user.activeDeckName != null)
+                user.setActiveDeck(Deck.getDeckByOwnerAndName(user.getUsername(), user.activeDeckName));
         }
     }
 }

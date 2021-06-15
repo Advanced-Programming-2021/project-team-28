@@ -2,6 +2,7 @@ package view;
 
 import controller.PhaseController;
 import enums.MenuEnum;
+import enums.PhaseName;
 import model.BattlePhase;
 import model.MainPhase;
 
@@ -14,6 +15,10 @@ public class PhaseView {
 
     public PhaseView(PhaseController controller) {
         this.controller = controller;
+    }
+
+    public PhaseView(){
+
     }
 
     public void run(){
@@ -146,7 +151,15 @@ public class PhaseView {
         }
     }
 
+    public void printPhaseName (PhaseName phaseName){
+        System.out.println("phase: " + phaseName.getPhaseName());
+    }
+
     public void cheatActivated() {
         System.out.println("Cheat activated");
+    }
+
+    public void itIsRivalTurnForEndPhase(String rivalUsername){
+        System.out.println("its " + rivalUsername + " 's turn");
     }
 }

@@ -13,7 +13,7 @@ public class MainMenuController {
     User user;
     MainMenuView view = new MainMenuView(this);
 
-    MainMenuController(User user) {
+    public MainMenuController(User user) {
         this.user = user;
     }
 
@@ -34,7 +34,7 @@ public class MainMenuController {
         } else if (command.equals("menu enter Shop")) {
             new ShopController(user).run();
         } else if (command.equals("menu enter Import/Export")) {
-
+            new ImportExportController(user).run();
         } else if (command.equals("menu enter Scoreboard")) {
             new ScoreboardController().run();
         } else {

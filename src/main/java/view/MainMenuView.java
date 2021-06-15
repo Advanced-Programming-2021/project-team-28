@@ -13,9 +13,9 @@ public class MainMenuView {
     }
 
 
-    private  Scanner scanner = ScannerInstance.getInstance().getScanner();
+    private Scanner scanner = ScannerInstance.getInstance().getScanner();
 
-    private  String command;
+    private String command;
 
     public  void run () throws Exception {
         while (true) {

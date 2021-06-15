@@ -18,6 +18,7 @@ public class Player {
     private boolean isSelectedCardVisible = false;
     private boolean isAbleToActivateTrapCard = true;
     private boolean isAbleToAddCardInDrawPhase = true;
+    private boolean isSurrenderedOrLostByCheat = false;
 
     private Random random = new Random();
 
@@ -50,6 +51,14 @@ public class Player {
 
     public void setAbleToAddCardInDrawPhase(boolean ableToAddCardInDrawPhase) {
         this.isAbleToAddCardInDrawPhase = ableToAddCardInDrawPhase;
+    }
+
+    public boolean isSurrenderedOrLostByCheat() {
+        return isSurrenderedOrLostByCheat;
+    }
+
+    public void setSurrenderedOrLostByCheat(boolean surrenderedOrLostByCheat) {
+        isSurrenderedOrLostByCheat = surrenderedOrLostByCheat;
     }
 
     public User getUser() {

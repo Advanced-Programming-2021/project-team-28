@@ -2,7 +2,9 @@ package model;
 
 import controller.BattlePhaseController;
 import controller.MainPhaseController;
+import enums.PhaseName;
 import enums.Turn;
+import view.PhaseView;
 
 import java.util.Map;
 
@@ -28,6 +30,7 @@ public class Round {
             drawPhase.run();
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;
+            standbyPhase();
             MainPhase mainPhase1 = new MainPhase(this);
             MainPhaseController mainPhaseController = new MainPhaseController(mainPhase1);
             mainPhaseController.run();
@@ -41,11 +44,22 @@ public class Round {
             mainPhaseController.run();
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;
+            endPhase();
             setAllHasBattledInThisTurnFalse();
             ++turnsPlayed;
             changeTurn();
         }
         resetPlayersData();
+    }
+
+    private void standbyPhase() {
+        new PhaseView().printPhaseName(PhaseName.STANDBY_PHASE);
+    }
+
+    private void endPhase() {
+        PhaseView view = new PhaseView();
+        view.printPhaseName(PhaseName.END_PHASE);
+        view.itIsRivalTurnForEndPhase(getRivalPlayerByTurn().getUser().getUsername());
     }
 
     private void resetPlayersData() {
@@ -54,7 +68,9 @@ public class Round {
     }
 
     private void resetPlayerData(Player player) {
-        player.setLifePoint(8000);
+        if(!player.isSurrenderedOrLostByCheat()){
+            player.setLifePoint(8000);
+        }
         player.setSelectedCard(null);
         player.setAbleToAddCardInDrawPhase(true);
         player.setAbleToActivateTrapCard(true);

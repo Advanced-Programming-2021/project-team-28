@@ -35,6 +35,7 @@ public abstract class PhaseController {
         if (command.equals("next phase")) {
             return MenuEnum.BACK;
         } else if (command.equals("surrender")) {
+            phase.getPlayerByTurn().setSurrenderedOrLostByCheat(true);
             phase.getPlayerByTurn().setLifePoint(0);
             return MenuEnum.BACK;
         } else if (command.equals("menu show-current")) {
@@ -59,6 +60,8 @@ public abstract class PhaseController {
             controlShowCardSelectedCommand();
         } else if (matcherForAttackToCard.find()) {
             controlAttackToCardCommand(Integer.parseInt(matcherForAttackToCard.group(1)));
+        } else if(command.startsWith("duel set-winner ")){
+            controlWinningCheatCommand(command);
         } else if (command.startsWith("select ")) {
             controlSelectionCommands(command);
         } else {
@@ -83,6 +86,16 @@ public abstract class PhaseController {
         }
         view.printString(phase.getMapToString());
         return MenuEnum.CONTINUE;
+    }
+
+    protected void controlWinningCheatCommand(String command){
+        Matcher matcherForCheat = Pattern.compile("^duel set-winner (.+?)$").matcher(command);
+        if(matcherForCheat.find() && matcherForCheat.group(1).equals(phase.getPlayerByTurn().getUser().getNickname())){
+            phase.getRivalPlayerByTurn().setSurrenderedOrLostByCheat(true);
+            phase.getRivalPlayerByTurn().setLifePoint(0);
+        } else {
+            view.invalidCommand();
+        }
     }
 
     private void controlSelectionCommands(String command) {
@@ -406,8 +419,6 @@ public abstract class PhaseController {
         Pattern patternForSelectRivalFieldZoneSpell3 = Pattern.compile("^select -f -o$");
         Pattern patternForSelectRivalFieldZoneSpell4 = Pattern.compile("^select -o -f$");
         Pattern patternForDeselect = Pattern.compile("^select -d$");
-        Pattern patternForIncreaseLP = Pattern.compile("^increase --LP (\\d+)$");
-        Pattern patternForIncreaseLP2 = Pattern.compile("^increase -L (\\d+)$");
         Matcher[] selectCommandMatchers = new Matcher[23];
         selectCommandMatchers[0] = patternForSelectOwnMonsterInZone.matcher(command);
         selectCommandMatchers[1] = patternForSelectOwnMonsterInZone2.matcher(command);

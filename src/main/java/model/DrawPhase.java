@@ -1,6 +1,8 @@
 package model;
 
-import enums.Turn;
+import enums.PhaseName;
+import view.PhaseView;
+
 import java.util.Collections;
 
 
@@ -11,6 +13,9 @@ public class DrawPhase extends Phase {
     }
 
     public void run() {
+        if(!getPlayerByTurn().isSurrenderedOrLostByCheat()){
+            new PhaseView().printPhaseName(PhaseName.DRAW_PHASE);
+        }
         if (getPlayerByTurn().getRemainingPlayerCardsInGame().size() == 0) {
             changeTurn();
             this.round.setWinner(getPlayerByTurn());
