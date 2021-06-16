@@ -2,6 +2,7 @@ package controller;
 
 import enums.MonsterCardPosition;
 import enums.RecentActionsInGame;
+import enums.SpellIcon;
 import enums.SpellOrTrapCardPosition;
 import model.*;
 import view.MainPhaseView;
@@ -15,6 +16,7 @@ public class MainPhaseController extends PhaseController {
 
     protected boolean isSummonOrSetMonsterCard;
     MonsterPowers monsterPowers;
+    SpellEffects spellEffects = new SpellEffects(phase.getRound());
 
     public MainPhaseController(MainPhase mainPhase) {
         super(mainPhase);
@@ -127,7 +129,17 @@ public class MainPhaseController extends PhaseController {
         }
         player.setSelectedCard(null);
         this.isSummonOrSetMonsterCard = true;
+
+        if(player.getFieldZoneCard() != null){
+            spellEffects.run((SpellCard) player.getFieldZoneCard());
+        }
+
+        if(phase.getRivalPlayerByTurn().getFieldZoneCard() != null){
+            spellEffects.run((SpellCard) phase.getRivalPlayerByTurn().getFieldZoneCard());
+        }
+
         mainPhaseView.printString("summoned successfully");
+
     }
 
     private void checkRivalActionsAfterSummon(MonsterCard card) {
@@ -190,7 +202,6 @@ public class MainPhaseController extends PhaseController {
                 ((TrapCard) card).setPosition(SpellOrTrapCardPosition.HIDDEN);
                 ((TrapCard) card).setHasSetInThisTurn(true);
             } else if (card instanceof SpellCard) {
-                //TODO: sharayete set kardane spell check shavad. dar soorate bargharar naboodan khata chap shode va return shavad.
                 ((SpellCard) card).setPosition(SpellOrTrapCardPosition.HIDDEN);
             }
             player.addCardToCardsInZone(card);
@@ -199,6 +210,17 @@ public class MainPhaseController extends PhaseController {
             mainPhaseView.printString("set successfully");
         }
     }
+
+
+    protected void controlChangeMonsterCardPosition() {
+        Player player = phase.getPlayerByTurn();
+        if (!player.hasSelectedCard()) {
+            mainPhaseView.noCardSelectedYet();
+        } else if (!player.isSelectedCardFromMonsterCardZone()) {
+            mainPhaseView.canNotChangeCardPosition();
+        }
+    }
+
 
     @Override
     protected void controlSetPositionAttackCommand() {
@@ -264,11 +286,18 @@ public class MainPhaseController extends PhaseController {
 
     @Override
     protected void controlActivateEffectCommand() {
+
+
         Player player = phase.getPlayerByTurn();
         if (!player.hasSelectedCard()) {
             view.noCardSelectedYet();
             return;
         }
+        if (player.getSelectedCard() instanceof MonsterCard){
+            mainPhaseView.selectedCardIsMonster();
+            return;
+        }
+
         if (player.getSelectedCard() instanceof TrapCard) {
             if (player.isSelectedCardFromSpellAndTrapZone()) {
                 if (((TrapCard) player.getSelectedCard()).hasSetInThisTurn()) {
@@ -285,6 +314,39 @@ public class MainPhaseController extends PhaseController {
                 view.thisCardCanNotBeActivated();
             }
             return;
+        }
+        // field spell procedure
+        if (player.getSelectedCard() instanceof SpellCard) {
+            if (((SpellCard) player.getSelectedCard()).getIcon() == SpellIcon.FIELD) {
+                if (player.getFieldZoneCard() == player.getSelectedCard()) {
+                    mainPhaseView.effectAlreadyActivated();
+                    return;
+                }
+                if (phase.getRivalPlayerByTurn().getFieldZoneCard() == player.getSelectedCard()) {
+                    mainPhaseView.opponentFieldSpellSelected();
+                    return;
+                }
+
+                if(player.getFieldZoneCard() != null){
+                    player.getFieldZoneCard().setGoingToGraveyard(true);
+                    spellEffects.run((SpellCard) player.getFieldZoneCard());
+                    player.getFieldZoneCard().setGoingToGraveyard(false);
+                    player.addCardToGraveyard(player.getFieldZoneCard());
+                }
+
+                if(phase.getRivalPlayerByTurn().getFieldZoneCard() != null){
+                    phase.getRivalPlayerByTurn().getFieldZoneCard().setGoingToGraveyard(true);
+                    spellEffects.run((SpellCard) phase.getRivalPlayerByTurn().getFieldZoneCard());
+                    phase.getRivalPlayerByTurn().getFieldZoneCard().setGoingToGraveyard(false);
+                    phase.getRivalPlayerByTurn().addCardToGraveyard(phase.getRivalPlayerByTurn().getFieldZoneCard());
+                }
+
+                player.removeCardFromHand(player.getSelectedCard());
+                player.setFieldZoneCard(player.getSelectedCard());
+                spellEffects.run((SpellCard) player.getFieldZoneCard());
+                mainPhaseView.spellActivated();
+
+            }
         }
     }
 

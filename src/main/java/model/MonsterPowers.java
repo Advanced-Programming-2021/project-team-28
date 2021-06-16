@@ -1,7 +1,9 @@
 package model;
 
 import enums.MonsterCardPosition;
+import enums.MonsterPower;
 import enums.SpellEffect;
+import enums.Turn;
 import view.MonsterPowerView;
 
 import java.util.ArrayList;

@@ -20,6 +20,10 @@ public abstract class Phase {
         this.turnsPlayed = round.getTurnsPlayed();
     }
 
+    public Round getRound() {
+        return round;
+    }
+
     public Turn getTurn() {
         return turn;
     }

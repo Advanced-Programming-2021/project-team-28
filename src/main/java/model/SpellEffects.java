@@ -13,10 +13,13 @@ public class SpellEffects {
 
     private Round round;
     private SpellEffectsView effectsView = new SpellEffectsView(this);
+    SpellEffects instance;
 
-    SpellEffects(Round round) {
+
+    public SpellEffects(Round round) {
         this.round = round;
     }
+
 
     public void run(SpellCard activeCard) {
 
@@ -97,7 +100,6 @@ public class SpellEffects {
     }
 
     private void potOfGreed(SpellCard activeCard) {
-        //TODO: needs to check if it has set recently
         Player player = round.getPlayerByTurn();
         player.addCardToHand(player.getRemainingPlayerCardsInGame().get(0));
         player.addCardToHand(player.getRemainingPlayerCardsInGame().get(1));
