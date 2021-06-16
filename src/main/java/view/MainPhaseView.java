@@ -22,6 +22,6 @@ public class MainPhaseView extends PhaseView {
     }
 
     public void canNotChangeDefensiveHiddenPosition(){
-        System.out.println("You can't change defensive hidden card with this command. Yuo should flip summon it");
+        System.out.println("You can't change defensive hidden card with this command. You should flip summon it");
     }
 }
