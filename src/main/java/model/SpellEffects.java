@@ -29,13 +29,18 @@ public class SpellEffects {
                 yami(activeCard);
                 return;
             }
-            case FOREST:
+            case FOREST: {
                 forest(activeCard);
+                return;
+            }
             case RAIGEKI: {
                 raigeki(activeCard);
                 return;
             }
-            case UMIIRUKA:
+            case UMIIRUKA:{
+                umiiruka(activeCard);
+                return;
+            }
             case DARK_HOLE: {
                 darkHole(activeCard);
                 return;
@@ -48,8 +53,10 @@ public class SpellEffects {
             case TERRAFORMING:
             case BLACK_PENDANT:
             case CHANGEOFHEART:
-            case CLOSED_FOREST:
-
+            case CLOSED_FOREST:{
+                closedForest(activeCard);
+                return;
+            }
             case MAGNUM_SHIELD:
             case TWIN_TWISTERS:
             case MONSTER_REBORN:
