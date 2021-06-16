@@ -26,7 +26,7 @@ public class SpellEffects {
         switch (activeCard.getEffect()) {
             case SWORDS_OF_REVEALING_LIGHT:
             case YAMI:
-
+                yami(activeCard);
             case FOREST:
             case RAIGEKI: {
                 raigeki(activeCard);
