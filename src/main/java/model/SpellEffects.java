@@ -174,7 +174,7 @@ public class SpellEffects {
                 }
             }
             for (Map.Entry<Integer, MonsterCard> mapElement : player2Field.entrySet()) {
-                if (mapElement.getValue().getType() == MonsterType.FIEND || mapElement.getValue().getType() == MonsterType.SPELL_CASTER) {
+                   if (mapElement.getValue().getType() == MonsterType.FIEND || mapElement.getValue().getType() == MonsterType.SPELL_CASTER) {
                     if (!mapElement.getValue().isEffectedByFieldSpell()) {
                         mapElement.getValue().changeAttackPoint(200);
                         mapElement.getValue().changeDefencePoint(200);
@@ -223,13 +223,11 @@ public class SpellEffects {
                 }
             }
         }
-
     }
 
     private void forest(SpellCard card) {
         HashMap<Integer, MonsterCard> player1Field = round.getFirstPlayer().getMonsterCardsInZone();
         HashMap<Integer, MonsterCard> player2Field = round.getSecondPlayer().getMonsterCardsInZone();
-
         if (!card.isGoingToGraveyard) {
             for (Map.Entry<Integer, MonsterCard> mapElement : player1Field.entrySet()) {
                 if (mapElement.getValue().getType() == MonsterType.INSECT || mapElement.getValue().getType() == MonsterType.BEAST_WARRIOR || mapElement.getValue().getType() == MonsterType.BEAST) {

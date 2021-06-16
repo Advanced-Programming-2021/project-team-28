@@ -286,8 +286,6 @@ public class MainPhaseController extends PhaseController {
 
     @Override
     protected void controlActivateEffectCommand() {
-
-
         Player player = phase.getPlayerByTurn();
         if (!player.hasSelectedCard()) {
             view.noCardSelectedYet();
@@ -297,7 +295,6 @@ public class MainPhaseController extends PhaseController {
             mainPhaseView.selectedCardIsMonster();
             return;
         }
-
         if (player.getSelectedCard() instanceof TrapCard) {
             if (player.isSelectedCardFromSpellAndTrapZone()) {
                 if (((TrapCard) player.getSelectedCard()).hasSetInThisTurn()) {
@@ -326,7 +323,6 @@ public class MainPhaseController extends PhaseController {
                     mainPhaseView.opponentFieldSpellSelected();
                     return;
                 }
-
                 if(player.getFieldZoneCard() != null){
                     player.getFieldZoneCard().setGoingToGraveyard(true);
                     spellEffects.run((SpellCard) player.getFieldZoneCard());
@@ -343,10 +339,10 @@ public class MainPhaseController extends PhaseController {
 
                 player.removeCardFromHand(player.getSelectedCard());
                 player.setFieldZoneCard(player.getSelectedCard());
-                spellEffects.run((SpellCard) player.getFieldZoneCard());
+                spellEffects.run((SpellCard) player.getSelectedCard());
                 mainPhaseView.spellActivated();
-
             }
+
         }
     }
 

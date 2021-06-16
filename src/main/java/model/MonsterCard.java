@@ -205,6 +205,7 @@ public class MonsterCard extends Card {
         cloneMonsterCard.level = this.level;
         cloneMonsterCard.specialPower = this.specialPower;
         cloneMonsterCard.position = this.position;
+        cloneMonsterCard.type = this.type;
         return cloneMonsterCard;
     }
 

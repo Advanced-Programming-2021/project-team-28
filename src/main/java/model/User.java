@@ -25,7 +25,7 @@ public class User {
     @Expose
     private int score;
     @Expose
-    private int balance = 1000000;
+    private int balance = 100000;
 
 
     @Expose
