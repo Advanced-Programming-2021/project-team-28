@@ -1,7 +1,6 @@
 package controller;
 
 import enums.MonsterCardPosition;
-import enums.MonsterPower;
 import enums.RecentActionsInGame;
 import enums.SpellOrTrapCardPosition;
 import model.*;
@@ -42,12 +41,11 @@ public class MainPhaseController extends PhaseController {
             mainPhaseView.printString("you already summoned/set on this turn");
         } else if (((MonsterCard) player.getSelectedCard()).getLevel() <= 4) {
             summonMonsterCard(player, (MonsterCard) player.getSelectedCard());
-        } else controlTributeSummon(player);
+        } else controlTributeSummonOrSet(player, true);
     }
 
-    protected void controlTributeSummon(Player player) {
+    protected void controlTributeSummonOrSet(Player player, boolean isForSummon) {
         int tributeNeeded;
-
         if (((MonsterCard) player.getSelectedCard()).getLevel() <= 6) {
             tributeNeeded = 1;
         } else tributeNeeded = 2;
@@ -55,34 +53,63 @@ public class MainPhaseController extends PhaseController {
             mainPhaseView.printString("there are not enough cards for tribute");
         } else {
             Scanner scanner = ScannerInstance.getInstance().getScanner();
-            if (tributeNeeded == 1) {
-                int tributeAddress = scanner.nextInt();
-                //handle
-                if (!player.doesHaveMonsterCardInThisLocation(tributeAddress)) {
-                    mainPhaseView.printString("there is no monster on one of these addresses");
+            try{
+                if (tributeNeeded == 1) {
+                    payOneTribute(player, isForSummon, scanner);
                 } else {
-                    player.addCardToGraveyard(player.getMonsterCardsInZone().get(tributeAddress));
-                    player.removeCardFromCardsInZone(player.getMonsterCardsInZone().get(tributeAddress), tributeAddress);
-                    summonMonsterCard(player, (MonsterCard) player.getSelectedCard());
-
+                    payTwoTributes(player, isForSummon, scanner);
                 }
-            } else {
-                int firstTributeAddress = scanner.nextInt();
-                int secondTributeAddress = scanner.nextInt();
-                if (!player.doesHaveMonsterCardInThisLocation(firstTributeAddress)
-                        || !player.doesHaveMonsterCardInThisLocation(secondTributeAddress)) {
-                    mainPhaseView.printString("there is no monster on one of these addresses");
-                } else {
-                    player.addCardToGraveyard(player.getMonsterCardsInZone().get(firstTributeAddress));
-                    player.removeCardFromCardsInZone(player.getMonsterCardsInZone().get(firstTributeAddress), firstTributeAddress);
-                    player.addCardToGraveyard(player.getMonsterCardsInZone().get(secondTributeAddress));
-                    player.removeCardFromCardsInZone(player.getMonsterCardsInZone().get(secondTributeAddress), secondTributeAddress);
-                    summonMonsterCard(player, (MonsterCard) player.getSelectedCard());
-                }
-
+            } catch (NumberFormatException exception) {
+                view.invalidLocation();
             }
+
         }
 
+    }
+
+    private void payTwoTributes(Player player, boolean isForSummon, Scanner scanner) {
+        int firstTributeAddress;
+        int secondTributeAddress;
+        mainPhaseView.chooseMonsterLocationForTribute(2);
+        while(true){
+            firstTributeAddress = Integer.parseInt(scanner.nextLine());
+            secondTributeAddress = Integer.parseInt(scanner.nextLine());
+            if(firstTributeAddress != secondTributeAddress) {
+                break;
+            }
+            mainPhaseView.pleaseChooseTwoDifferentMonsters();
+        }
+        if (!player.doesHaveMonsterCardInThisLocation(firstTributeAddress)
+                || !player.doesHaveMonsterCardInThisLocation(secondTributeAddress)) {
+            mainPhaseView.printString("there is no monster on one of these addresses");
+        } else {
+            player.addCardToGraveyard(player.getMonsterCardsInZone().get(firstTributeAddress));
+            player.removeCardFromCardsInZone(player.getMonsterCardsInZone().get(firstTributeAddress), firstTributeAddress);
+            player.addCardToGraveyard(player.getMonsterCardsInZone().get(secondTributeAddress));
+            player.removeCardFromCardsInZone(player.getMonsterCardsInZone().get(secondTributeAddress), secondTributeAddress);
+            if(isForSummon){
+                summonMonsterCard(player, (MonsterCard) player.getSelectedCard());
+            } else {
+                setMonsterCard(player, (MonsterCard) player.getSelectedCard());
+            }
+        }
+    }
+
+    private void payOneTribute(Player player, boolean isForSummon, Scanner scanner) {
+        mainPhaseView.chooseMonsterLocationForTribute(1);
+
+        int tributeAddress = Integer.parseInt(scanner.nextLine());
+        if (!player.doesHaveMonsterCardInThisLocation(tributeAddress)) {
+            mainPhaseView.printString("there is no monster on one of these addresses");
+        } else {
+            player.addCardToGraveyard(player.getMonsterCardsInZone().get(tributeAddress));
+            player.removeCardFromCardsInZone(player.getMonsterCardsInZone().get(tributeAddress), tributeAddress);
+            if(isForSummon){
+                summonMonsterCard(player, (MonsterCard) player.getSelectedCard());
+            } else {
+                setMonsterCard(player, (MonsterCard) player.getSelectedCard());
+            }
+        }
     }
 
     public void summonMonsterCard(Player player, MonsterCard card) {
@@ -137,47 +164,8 @@ public class MainPhaseController extends PhaseController {
             mainPhaseView.printString("you already summoned/set on this turn");
         } else if (((MonsterCard) player.getSelectedCard()).getLevel() <= 4) {
             setMonsterCard(player, ((MonsterCard) player.getSelectedCard()));
-        } else controlTributeSet(player, card);
+        } else controlTributeSummonOrSet(player, false);
     }
-
-    protected void controlTributeSet(Player player, MonsterCard card) {
-        int tributeNeeded;
-
-        if (((MonsterCard) player.getSelectedCard()).getLevel() <= 6) {
-            tributeNeeded = 1;
-        } else tributeNeeded = 2;
-        if (player.getMonsterCardsInZone().size() < tributeNeeded) {
-            mainPhaseView.printString("there are not enough cards for tribute");
-        } else {
-            Scanner scanner = ScannerInstance.getInstance().getScanner();
-            if (tributeNeeded == 1) {
-                int tributeAddress = scanner.nextInt();
-                if (!player.doesHaveMonsterCardInThisLocation(tributeAddress)) {
-                    mainPhaseView.printString("there is no monster on one of these addresses");
-                } else {
-                    player.addCardToGraveyard(player.getMonsterCardsInZone().get(tributeAddress));
-                    player.removeCardFromCardsInZone(player.getMonsterCardsInZone().get(tributeAddress), tributeAddress);
-                    setMonsterCard(player, (MonsterCard) player.getSelectedCard());
-
-                }
-            } else {
-                int firstTributeAddress = scanner.nextInt();
-                int secondTributeAddress = scanner.nextInt();
-                if (!player.doesHaveMonsterCardInThisLocation(firstTributeAddress)
-                        || !player.doesHaveMonsterCardInThisLocation(secondTributeAddress)) {
-                    mainPhaseView.printString("there is no monster on one of these addresses");
-                } else {
-                    player.addCardToGraveyard(player.getMonsterCardsInZone().get(firstTributeAddress));
-                    player.removeCardFromCardsInZone(player.getMonsterCardsInZone().get(firstTributeAddress), firstTributeAddress);
-                    player.addCardToGraveyard(player.getMonsterCardsInZone().get(secondTributeAddress));
-                    player.removeCardFromCardsInZone(player.getMonsterCardsInZone().get(secondTributeAddress), secondTributeAddress);
-                    setMonsterCard(player, (MonsterCard) player.getSelectedCard());
-                }
-
-            }
-        }
-    }
-
 
     protected void setMonsterCard(Player player, MonsterCard card) {
         //nothing to save this card has been set?!
