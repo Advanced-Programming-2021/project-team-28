@@ -249,9 +249,9 @@ public class Player {
         for (int i = 1; i <= cardsInGraveyard.size(); i++) {
             graveyardToStringBuilder.append(i);
             graveyardToStringBuilder.append(". ");
-            graveyardToStringBuilder.append(cardsInGraveyard.get(i).getName());
+            graveyardToStringBuilder.append(cardsInGraveyard.get(i-1).getName());
             graveyardToStringBuilder.append(" : ");
-            graveyardToStringBuilder.append(cardsInGraveyard.get(i).getDescription());
+            graveyardToStringBuilder.append(cardsInGraveyard.get(i-1).getDescription());
             graveyardToStringBuilder.append("\n");
         }
         return graveyardToStringBuilder.toString();
@@ -311,13 +311,22 @@ public class Player {
         return false;
     }
 
-    public boolean doesHaveThisCardNameInHand(String cardName) {
-        for (Card card : cardsInHand) {
+    public boolean doesHaveThisCardNameInThisPlace(String cardName, ArrayList<Card> cards) {
+        for (Card card : cards) {
             if (card.getName().equals(cardName)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public Card getACardWithThisNameInThisPlace(String cardName, ArrayList<Card> cards){
+        for (Card card : cards) {
+            if (card.getName().equals(cardName)) {
+                return card;
+            }
+        }
+        return null;
     }
 
     public int getLocationOfThisMonsterCardInZone(MonsterCard monsterCard) {

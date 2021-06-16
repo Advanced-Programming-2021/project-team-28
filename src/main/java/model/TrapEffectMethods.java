@@ -1,5 +1,7 @@
 package model;
 
+import controller.MainPhaseController;
+import controller.PhaseController;
 import enums.MonsterCardPosition;
 import view.TrapEffectsView;
 
@@ -9,6 +11,9 @@ import java.util.Random;
 import java.util.Set;
 
 public class TrapEffectMethods {
+
+    private static final TrapEffectsView view = new TrapEffectsView();
+
     public static void magicCylinder(Player player, Player rivalPlayer, Card rivalAttackerCard, TrapCard trapCard) {
         rivalPlayer.decreaseLifePoint(((MonsterCard) rivalAttackerCard).getAttackPoint());
         ((MonsterCard) rivalAttackerCard).setCardActionCanceledByAnEffect(true);
@@ -56,30 +61,63 @@ public class TrapEffectMethods {
         player.removeCardFromCardsInZone(trapCard, player.getLocationOfThisSpellOrTrapCardInZone(trapCard));
     }
 
-    public static void timeSeal(Player player, Player rivalPlayer, TrapCard trapCard){
+    public static void timeSeal(Player player, Player rivalPlayer, TrapCard trapCard) {
         rivalPlayer.setAbleToAddCardInDrawPhase(false);
         player.addCardToGraveyard(trapCard);
         player.removeCardFromCardsInZone(trapCard, player.getLocationOfThisSpellOrTrapCardInZone(trapCard));
     }
 
-    public static void mindCrush(Player player, Player rivalPlayer, TrapCard trapCard){
-        TrapEffectsView view = new TrapEffectsView();
+    public static void mindCrush(Player player, Player rivalPlayer, TrapCard trapCard) {
         view.enterCardName();
-        while(true){
+        while (true) {
             String cardName = view.scanCardName();
-            if(Card.isThisCardNameValid(cardName)){
-                if(rivalPlayer.doesHaveThisCardNameInHand(cardName)){
+            if (Card.isThisCardNameValid(cardName)) {
+                if (rivalPlayer.doesHaveThisCardNameInThisPlace(cardName, rivalPlayer.getCardsInHand())) {
                     rivalPlayer.destroyAllCardsWithThisName(cardName);
                 } else {
                     ArrayList<Card> playerHand = player.getCardsInHand();
                     Random random = new Random();
-                    int randomInt = Math.abs((random.nextInt())%(playerHand.size()));
+                    int randomInt = Math.abs((random.nextInt()) % (playerHand.size()));
                     playerHand.remove(randomInt);
                 }
                 player.addCardToGraveyard(trapCard);
                 player.removeCardFromCardsInZone(trapCard, player.getLocationOfThisSpellOrTrapCardInZone(trapCard));
                 break;
-            } else if(cardName.equals("cancel")){
+            } else if (cardName.equals("cancel")) {
+                break;
+            } else {
+                view.invalidCardName();
+            }
+        }
+    }
+
+    public static void callOfTheHaunted(PhaseController controller, Player player, TrapCard trapCard) {
+        if(player.isMonsterCardZoneFull()){
+            view.yourMonsterCardZoneIsFull();
+            return;
+        }
+        view.yourCardsInGraveyard();
+        controller.controlShowGraveyardCommand();
+        view.enterCardName();
+        while (true) {
+            String cardName = view.scanCardName();
+            if (Card.isThisCardNameValid(cardName)) {
+                if (player.doesHaveThisCardNameInThisPlace(cardName, player.getCardsInGraveyard())) {
+                    Card card = player.getACardWithThisNameInThisPlace(cardName, player.getCardsInGraveyard());
+                    if (card instanceof MonsterCard) {
+                        player.removeCardFromGraveyard(card);
+                        player.setSelectedCard(card);
+                        ((MainPhaseController) controller).summonMonsterCard(player, (MonsterCard) card);
+                        player.addCardToGraveyard(trapCard);
+                        player.removeCardFromCardsInZone(trapCard, player.getLocationOfThisSpellOrTrapCardInZone(trapCard));
+                        break;
+                    } else {
+                        view.thisCardIsNotAMonster();
+                    }
+                } else {
+                    view.youDoNotHaveThisCardInGraveYard();
+                }
+            } else if (cardName.equals("cancel")) {
                 break;
             } else {
                 view.invalidCardName();

@@ -46,6 +46,7 @@ public class Round {
             if (isSomeOneWon() || isDrawHappened) break;
             endPhase();
             setAllHasBattledInThisTurnFalse();
+            setAllHasSetInTHisTurnFalseForTwoPlayers();
             ++turnsPlayed;
             changeTurn();
         }
@@ -166,6 +167,19 @@ public class Round {
         }
         for(Map.Entry<Integer, MonsterCard> locationCard : getRivalPlayerByTurn().getMonsterCardsInZone().entrySet()){
             locationCard.getValue().setHasBattledInBattlePhase(false);
+        }
+    }
+
+    private void setAllHasSetInTHisTurnFalseForTwoPlayers() {
+        setAllHasSetInThisTurnFalseForAPlayer(getFirstPlayer());
+        setAllHasSetInThisTurnFalseForAPlayer(getSecondPlayer());
+    }
+
+    public void setAllHasSetInThisTurnFalseForAPlayer(Player player){
+        for(Map.Entry<Integer, Card> locationCard : player.getSpellOrTrapCardsInZone().entrySet()){
+            if(locationCard.getValue() instanceof TrapCard){
+                ((TrapCard) locationCard.getValue()).setHasSetInThisTurn(false);
+            }
         }
     }
 }

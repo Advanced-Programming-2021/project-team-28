@@ -25,6 +25,7 @@ public class TrapCard extends Card implements Cloneable {
     private SpellOrTrapCardPosition position;
     @Expose
     public static ArrayList<TrapCard> allTrapCard = new ArrayList<>();
+    private boolean hasSetInThisTurn = false;
 
     public TrapCard(String ownerUsername, String name, String number, String description, TrapIcon icon, TrapEffect effect) {
         super(ownerUsername, name, number, description);
@@ -38,12 +39,12 @@ public class TrapCard extends Card implements Cloneable {
 
     }
 
-    @Override
-    public String toString() {
-        return "Name : " + this.name + "\n"
-                + "Trap" + "\n"
-                + "Type : " + this.icon.getName() + "\n"
-                + "Description : " + this.description;
+    public boolean hasSetInThisTurn() {
+        return hasSetInThisTurn;
+    }
+
+    public void setHasSetInThisTurn(boolean hasSetInThisTurn) {
+        this.hasSetInThisTurn = hasSetInThisTurn;
     }
 
     public SpellOrTrapCardPosition getPosition() {
@@ -109,6 +110,13 @@ public class TrapCard extends Card implements Cloneable {
             Card.getAllCards().add(trapCard);
 //            User.getUserByUsername(trapCard.getOwnerUsername()).addToCards(trapCard);
         }
+    }
 
+    @Override
+    public String toString() {
+        return "Name : " + this.name + "\n"
+                + "Trap" + "\n"
+                + "Type : " + this.icon.getName() + "\n"
+                + "Description : " + this.description;
     }
 }

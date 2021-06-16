@@ -14,7 +14,7 @@ public abstract class PhaseController {
     protected PhaseView view = new PhaseView(this);
 
     public PhaseController(Phase phase) {
-        this.phase = phase;
+        setPhase(phase);
     }
 
     public Phase getPhase() {
@@ -156,7 +156,7 @@ public abstract class PhaseController {
                 if (phase.getPlayerByTurn().getSelectedCard() instanceof SpellCard) {
 
                 } else if (phase.getPlayerByTurn().getSelectedCard() instanceof TrapCard) {
-                    TrapEffectController.searchForThisEffect(phase, rivalCard, (TrapCard) phase.getPlayerByTurn().getSelectedCard());
+                    TrapEffectController.searchForThisEffect(this,phase, rivalCard, (TrapCard) phase.getPlayerByTurn().getSelectedCard());
                 }
                 view.spellOrTrapActivated(phase.getPlayerByTurn().getSelectedCard() instanceof SpellCard ? "Spell" : "Trap");
                 return MenuEnum.BACK;
@@ -301,7 +301,7 @@ public abstract class PhaseController {
         }
     }
 
-    protected void controlShowGraveyardCommand() {
+    public void controlShowGraveyardCommand() {
         if (phase.getPlayerByTurn().getCardsInGraveyard().size() > 0) {
             view.printString(phase.getPlayerByTurn().graveyardToString());
         } else {

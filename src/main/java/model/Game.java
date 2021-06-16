@@ -44,7 +44,7 @@ public class Game {
             round1Winner = round1.getWinner();
             round1Winner.increaseNumberOfRoundsWon();
             round1WinnerLp = round1.getWinner().getLifePoint();
-            if(!isSomeoneSurrendered()){
+            if(!isSomeoneSurrenderedOrLostByCheat()){
                 view.showRoundWinner(round1Winner.getUser(), 1, 0);
             }
             //TODO changing card
@@ -65,7 +65,7 @@ public class Game {
                 return;
             }
             setPlayerCardsForGame();
-            if(!isSomeoneSurrendered()){
+            if(!isSomeoneSurrenderedOrLostByCheat()){
                 view.showRoundWinner(round2Winner.getUser(), 1, 1);
             }
 
@@ -144,15 +144,12 @@ public class Game {
             if (lp1 > lp3)
                 return lp1;
         } else {
-            if (lp2 > lp3)
-                return lp2;
-            else
-                return lp3;
+            return Math.max(lp2, lp3);
         }
         return 0;
     }
 
-    private boolean isSomeoneSurrendered(){
+    private boolean isSomeoneSurrenderedOrLostByCheat(){
         return player1.isSurrenderedOrLostByCheat() || player2.isSurrenderedOrLostByCheat();
     }
 }
