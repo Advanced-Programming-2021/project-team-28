@@ -73,12 +73,14 @@ public class TrapEffectMethods {
             String cardName = view.scanCardName();
             if (Card.isThisCardNameValid(cardName)) {
                 if (rivalPlayer.doesHaveThisCardNameInThisPlace(cardName, rivalPlayer.getCardsInHand())) {
-                    rivalPlayer.destroyAllCardsWithThisName(cardName);
+                    rivalPlayer.addAllCardsWithThisNameToGraveyard(cardName);
                 } else {
                     ArrayList<Card> playerHand = player.getCardsInHand();
                     Random random = new Random();
                     int randomInt = Math.abs((random.nextInt()) % (playerHand.size()));
-                    playerHand.remove(randomInt);
+                    Card cardToRemove = playerHand.get(randomInt);
+                    playerHand.remove(cardToRemove);
+                    player.addCardToGraveyard(cardToRemove);
                 }
                 player.addCardToGraveyard(trapCard);
                 player.removeCardFromCardsInZone(trapCard, player.getLocationOfThisSpellOrTrapCardInZone(trapCard));

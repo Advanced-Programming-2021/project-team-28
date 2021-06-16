@@ -249,9 +249,9 @@ public class Player {
         for (int i = 1; i <= cardsInGraveyard.size(); i++) {
             graveyardToStringBuilder.append(i);
             graveyardToStringBuilder.append(". ");
-            graveyardToStringBuilder.append(cardsInGraveyard.get(i-1).getName());
+            graveyardToStringBuilder.append(cardsInGraveyard.get(i - 1).getName());
             graveyardToStringBuilder.append(" : ");
-            graveyardToStringBuilder.append(cardsInGraveyard.get(i-1).getDescription());
+            graveyardToStringBuilder.append(cardsInGraveyard.get(i - 1).getDescription());
             graveyardToStringBuilder.append("\n");
         }
         return graveyardToStringBuilder.toString();
@@ -320,7 +320,7 @@ public class Player {
         return false;
     }
 
-    public Card getACardWithThisNameInThisPlace(String cardName, ArrayList<Card> cards){
+    public Card getACardWithThisNameInThisPlace(String cardName, ArrayList<Card> cards) {
         for (Card card : cards) {
             if (card.getName().equals(cardName)) {
                 return card;
@@ -347,14 +347,33 @@ public class Player {
         return -1;
     }
 
-    public void destroyAllCardsWithThisName(String cardName) {
+    public void addAllCardsWithThisNameToGraveyard(String cardName) {
+        addCardsWithThisNameToGraveyardFromArrayList(cardName, cardsInHand);
+        addCardsWithThisNameToGraveyardFromArrayList(cardName, remainingPlayerCardsInGame);
+        for (Map.Entry<Integer, MonsterCard> locationCard : monsterCardsInZone.entrySet()){
+            if(locationCard.getValue().getName().equals(cardName)){
+                addCardToGraveyard(locationCard.getValue());
+            }
+        }
+        for (Map.Entry<Integer, Card> locationCard : spellOrTrapCardsInZone.entrySet()){
+            if(locationCard.getValue().getName().equals(cardName)){
+                addCardToGraveyard(locationCard.getValue());
+            }
+        }
         cardsInHand.removeIf(card -> card.getName().equals(cardName));
-        cardsInGraveyard.removeIf(card -> card.getName().equals(cardName));
         remainingPlayerCardsInGame.removeIf(card -> card.getName().equals(cardName));
         Set<Map.Entry<Integer, MonsterCard>> entrySet = getMonsterCardsInZone().entrySet();
         entrySet.removeIf(entry -> entry.getValue().getName().equals(cardName));
         Set<Map.Entry<Integer, Card>> entrySet2 = getSpellOrTrapCardsInZone().entrySet();
         entrySet2.removeIf(entry2 -> entry2.getValue().getName().equals(cardName));
+    }
+
+    private void addCardsWithThisNameToGraveyardFromArrayList(String cardName, ArrayList<Card> cards) {
+        for (Card card : cards) {
+            if (card.getName().equals(cardName)) {
+                addCardToGraveyard(card);
+            }
+        }
     }
 
     public MonsterCard getMonsterCardByLocationFromZone(int location) {

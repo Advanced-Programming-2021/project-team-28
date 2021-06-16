@@ -20,4 +20,8 @@ public class MainPhaseView extends PhaseView {
     public void pleaseChooseTwoDifferentMonsters() {
         System.out.println("Please choose two different locations");
     }
+
+    public void canNotChangeDefensiveHiddenPosition(){
+        System.out.println("You can't change defensive hidden card with this command. Yuo should flip summon it");
+    }
 }
