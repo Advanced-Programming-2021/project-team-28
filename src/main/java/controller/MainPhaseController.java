@@ -129,15 +129,12 @@ public class MainPhaseController extends PhaseController {
         }
         player.setSelectedCard(null);
         this.isSummonOrSetMonsterCard = true;
-
         if(player.getFieldZoneCard() != null){
             spellEffects.run((SpellCard) player.getFieldZoneCard());
         }
-
-        if(phase.getRivalPlayerByTurn().getFieldZoneCard() != null){
+        if(phase.getRivalPlayerByTurn().getFieldZoneCard() != null) {
             spellEffects.run((SpellCard) phase.getRivalPlayerByTurn().getFieldZoneCard());
         }
-
         mainPhaseView.printString("summoned successfully");
 
     }
@@ -187,6 +184,12 @@ public class MainPhaseController extends PhaseController {
         card.setSummonedInThisTurn(true);
         player.setSelectedCard(null);
         this.isSummonOrSetMonsterCard = true;
+        if(player.getFieldZoneCard() != null){
+            spellEffects.run((SpellCard) player.getFieldZoneCard());
+        }
+        if(phase.getRivalPlayerByTurn().getFieldZoneCard() != null){
+            spellEffects.run((SpellCard) phase.getRivalPlayerByTurn().getFieldZoneCard());
+        }
         mainPhaseView.printString("set successfully");
     }
 
@@ -202,6 +205,10 @@ public class MainPhaseController extends PhaseController {
                 ((TrapCard) card).setPosition(SpellOrTrapCardPosition.HIDDEN);
                 ((TrapCard) card).setHasSetInThisTurn(true);
             } else if (card instanceof SpellCard) {
+                if(((SpellCard) card).getIcon() == SpellIcon.FIELD){
+                    view.canNotSetCard();
+                    return;
+                }
                 ((SpellCard) card).setPosition(SpellOrTrapCardPosition.HIDDEN);
             }
             player.addCardToCardsInZone(card);
@@ -210,17 +217,6 @@ public class MainPhaseController extends PhaseController {
             mainPhaseView.printString("set successfully");
         }
     }
-
-
-    protected void controlChangeMonsterCardPosition() {
-        Player player = phase.getPlayerByTurn();
-        if (!player.hasSelectedCard()) {
-            mainPhaseView.noCardSelectedYet();
-        } else if (!player.isSelectedCardFromMonsterCardZone()) {
-            mainPhaseView.canNotChangeCardPosition();
-        }
-    }
-
 
     @Override
     protected void controlSetPositionAttackCommand() {

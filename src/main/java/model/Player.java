@@ -1,5 +1,7 @@
 package model;
 
+import enums.MonsterCardPosition;
+
 import java.util.*;
 
 public class Player {
@@ -222,9 +224,21 @@ public class Player {
     }
 
     public void addCardToGraveyard(Card card) {
-
+        try {
+            if(card instanceof MonsterCard){
+                resetMonsterCardDataAfterGoingToGraveyard((MonsterCard) card);
+            }
+        } catch (Exception exception){
+            exception.printStackTrace();
+        }
         card.setGoingToGraveyard(false);
         cardsInGraveyard.add(card);
+    }
+
+    private void resetMonsterCardDataAfterGoingToGraveyard(MonsterCard card) throws CloneNotSupportedException {
+        card.setPosition(MonsterCardPosition.NOT_IN_PLAY_ZONE);
+        card.setAttackPoint(((MonsterCard) Card.getCardByName(Card.getAllCards(), card.getName())).getAttackPoint());
+        card.setDefencePoint(((MonsterCard) Card.getCardByName(Card.getAllCards(), card.getName())).getDefencePoint());
     }
 
 

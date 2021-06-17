@@ -131,7 +131,7 @@ public class Deck {
             if (card.getName().equals(cardName)) ++numberOfThisCard;
         }
 
-        return numberOfThisCard >= 3;
+        return numberOfThisCard >= 15;
     }
 
     public String toString() {
