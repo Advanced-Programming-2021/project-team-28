@@ -22,22 +22,23 @@ public class BattlePhase extends Phase{
         return damageOfAttackingCard;
     }
 
-    public String attackToCardAndReturnAttackReport(int location){
+    public String attackToCardAndReturnAttackReport(int location, MonsterPowers powers){
         MonsterCard attackerCard = (MonsterCard) getPlayerByTurn().getSelectedCard();
         MonsterCard defenderCard = getRivalPlayerByTurn().getMonsterCardsInZone().get(location);
         if(defenderCard.getPosition() == MonsterCardPosition.OFFENSIVE_OCCUPIED){
             attackerCard.setHasBattledInBattlePhase(true);
-            return attackToOffensiveOccupiedCardAndReturnReport(location, attackerCard, defenderCard);
+            return attackToOffensiveOccupiedCardAndReturnReport(location, attackerCard, defenderCard, powers);
         } else {
             attackerCard.setHasBattledInBattlePhase(true);
-            return attackToDefensiveCardAndReturnReport(location, attackerCard, defenderCard);
+            return attackToDefensiveCardAndReturnReport(location, attackerCard, defenderCard, powers);
         }
     }
 
-    private String attackToDefensiveCardAndReturnReport(int location, MonsterCard attackerCard, MonsterCard defenderCard) {
+    private String attackToDefensiveCardAndReturnReport(int location, MonsterCard attackerCard, MonsterCard defenderCard, MonsterPowers powers) {
         int damage = attackerCard.getAttackPoint() - defenderCard.getDefencePoint();
         if(damage > 0){
-
+            defenderCard.setGoingToGraveyard(true);
+            powers.run(defenderCard, attackerCard);
             getRivalPlayerByTurn().addCardToGraveyard(defenderCard);
             getRivalPlayerByTurn().removeCardFromCardsInZone(defenderCard, location);
             if(defenderCard.getPosition() == MonsterCardPosition.DEFENSIVE_HIDDEN){
@@ -65,14 +66,18 @@ public class BattlePhase extends Phase{
         }
     }
 
-    private String attackToOffensiveOccupiedCardAndReturnReport(int location, MonsterCard attackerCard, MonsterCard defenderCard) {
+    private String attackToOffensiveOccupiedCardAndReturnReport(int location, MonsterCard attackerCard, MonsterCard defenderCard, MonsterPowers powers) {
         int damage = attackerCard.getAttackPoint() - defenderCard.getAttackPoint();
         if(damage > 0){
             getRivalPlayerByTurn().decreaseLifePoint(damage);
+            defenderCard.setGoingToGraveyard(true);
+            powers.run(defenderCard, attackerCard);
             getRivalPlayerByTurn().addCardToGraveyard(defenderCard);
             getRivalPlayerByTurn().removeCardFromCardsInZone(defenderCard, location);
             return "your opponent’s monster is destroyed and your opponent receives " + damage + " battle damage";
         } else if (damage == 0){
+            defenderCard.setGoingToGraveyard(true);
+            powers.run(defenderCard, attackerCard);
             getPlayerByTurn().addCardToGraveyard(attackerCard);
             getPlayerByTurn().removeCardFromCardsInZone(attackerCard, getPlayerByTurn().getLocationOfThisMonsterCardInZone(attackerCard));
             getRivalPlayerByTurn().addCardToGraveyard(defenderCard);

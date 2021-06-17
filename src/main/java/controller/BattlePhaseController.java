@@ -81,6 +81,7 @@ public class BattlePhaseController extends PhaseController {
                 return;
             }
             int damage = ((BattlePhase) phase).attackDirect();
+            runAllMonsterPowersInZone(player);
             battleView.attackDirectResult(damage);
             player.setSelectedCard(null);
         }
@@ -112,13 +113,20 @@ public class BattlePhaseController extends PhaseController {
             battleView.youCanNotAttackInYourFirstTurn();
         } else {
             Card attackerCard = player.getSelectedCard();
-            Card defenderCard = rivalPlayer.getMonsterCardsInZone().get(location);
+            MonsterCard defenderCard = rivalPlayer.getMonsterCardsInZone().get(location);
+            if(defenderCard.getPosition() == MonsterCardPosition.DEFENSIVE_HIDDEN){
+                defenderCard.setPosition(MonsterCardPosition.DEFENSIVE_OCCUPIED);
+                defenderCard.setFlipped(true);
+            }
+            monsterPowers.run(defenderCard, (MonsterCard) attackerCard);
             checkForPossibleSpellOrTrapEffect(attackerCard, defenderCard, RecentActionsInGame.DECLARED_A_BATTLE);
             if (((MonsterCard) attackerCard).isCardActionCanceledByAnEffect()) {
                 ((MonsterCard) attackerCard).setCardActionCanceledByAnEffect(false);
                 return;
             }
-            battleView.printString(((BattlePhase) phase).attackToCardAndReturnAttackReport(location));
+            battleView.printString(((BattlePhase) phase).attackToCardAndReturnAttackReport(location, monsterPowers));
+            runAllMonsterPowersInZone(player);
+            runAllMonsterPowersInZone(rivalPlayer);
             player.setSelectedCard(null);
         }
     }

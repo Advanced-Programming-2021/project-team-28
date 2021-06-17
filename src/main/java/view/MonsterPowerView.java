@@ -25,4 +25,8 @@ public class MonsterPowerView {
     public int intScanner(){
         return scanner.nextInt();
     }
+
+    public void nowItIsRivalTurn(String rivalNickname){
+        System.out.println("Now It's " + rivalNickname + "'s turn");
+    }
 }

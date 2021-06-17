@@ -8,6 +8,7 @@ import model.*;
 import view.MainPhaseView;
 import view.ScannerInstance;
 
+import java.util.Map;
 import java.util.Scanner;
 
 import static enums.MonsterCardPosition.*;
@@ -15,7 +16,7 @@ import static enums.MonsterCardPosition.*;
 public class MainPhaseController extends PhaseController {
 
     protected boolean isSummonOrSetMonsterCard;
-    MonsterPowers monsterPowers;
+
     SpellEffects spellEffects = new SpellEffects(phase.getRound());
 
     public MainPhaseController(MainPhase mainPhase) {
@@ -25,7 +26,7 @@ public class MainPhaseController extends PhaseController {
             card.setPositionChangedInThisTurn(false);
             card.setSummonedInThisTurn(false);
         }
-        monsterPowers = new MonsterPowers(phase);
+
     }
 
     private MainPhaseView mainPhaseView = new MainPhaseView(this);
@@ -116,7 +117,6 @@ public class MainPhaseController extends PhaseController {
 
     public void summonMonsterCard(Player player, MonsterCard card) {
         card.setSummoned(true);
-        monsterPowers.run(card, null);
         card.setPositionChangedInThisTurn(true);
         card.setPosition(OFFENSIVE_OCCUPIED);
         player.addCardToCardsInZone(card);
@@ -129,14 +129,19 @@ public class MainPhaseController extends PhaseController {
         }
         player.setSelectedCard(null);
         this.isSummonOrSetMonsterCard = true;
-        if(player.getFieldZoneCard() != null){
-            spellEffects.run((SpellCard) player.getFieldZoneCard());
-        }
-        if(phase.getRivalPlayerByTurn().getFieldZoneCard() != null) {
-            spellEffects.run((SpellCard) phase.getRivalPlayerByTurn().getFieldZoneCard());
-        }
+        runFieldZoneSpells(player);
+        runAllMonsterPowersInZone(player);
         mainPhaseView.printString("summoned successfully");
 
+    }
+
+    private void runFieldZoneSpells(Player player) {
+        if (player.getFieldZoneCard() != null) {
+            spellEffects.run((SpellCard) player.getFieldZoneCard());
+        }
+        if (phase.getRivalPlayerByTurn().getFieldZoneCard() != null) {
+            spellEffects.run((SpellCard) phase.getRivalPlayerByTurn().getFieldZoneCard());
+        }
     }
 
     private void checkRivalActionsAfterSummon(MonsterCard card) {
@@ -184,12 +189,8 @@ public class MainPhaseController extends PhaseController {
         card.setSummonedInThisTurn(true);
         player.setSelectedCard(null);
         this.isSummonOrSetMonsterCard = true;
-        if(player.getFieldZoneCard() != null){
-            spellEffects.run((SpellCard) player.getFieldZoneCard());
-        }
-        if(phase.getRivalPlayerByTurn().getFieldZoneCard() != null){
-            spellEffects.run((SpellCard) phase.getRivalPlayerByTurn().getFieldZoneCard());
-        }
+        runFieldZoneSpells(player);
+        runAllMonsterPowersInZone(player);
         mainPhaseView.printString("set successfully");
     }
 
@@ -244,6 +245,10 @@ public class MainPhaseController extends PhaseController {
         } else {
             ((MonsterCard) player.getSelectedCard()).setPosition(position);
             ((MonsterCard) player.getSelectedCard()).setPositionChangedInThisTurn(true);
+            if(position == OFFENSIVE_OCCUPIED){
+                ((MonsterCard) player.getSelectedCard()).setFlipped(true);
+            }
+            runAllMonsterPowersInZone(phase.getPlayerByTurn());
             mainPhaseView.printString("monster card position changed successfully");
         }
     }
@@ -263,6 +268,7 @@ public class MainPhaseController extends PhaseController {
             flipSummonedCard.setPosition(OFFENSIVE_OCCUPIED);
             flipSummonedCard.setPositionChangedInThisTurn(true);
             flipSummonedCard.setFlipped(true);
+            runAllMonsterPowersInZone(player);
             flipSummonedCard.setSpecialSummoned(false);
             checkRivalActionsAfterSummon(flipSummonedCard);
             player.setSelectedCard(null);
@@ -283,6 +289,8 @@ public class MainPhaseController extends PhaseController {
     @Override
     protected void controlActivateEffectCommand() {
         Player player = phase.getPlayerByTurn();
+        player.setAbleToActivateTrapCard(false);
+        runAllMonsterPowersInZone(player);
         if (!player.hasSelectedCard()) {
             view.noCardSelectedYet();
             return;
@@ -332,14 +340,13 @@ public class MainPhaseController extends PhaseController {
                     phase.getRivalPlayerByTurn().getFieldZoneCard().setGoingToGraveyard(false);
                     phase.getRivalPlayerByTurn().addCardToGraveyard(phase.getRivalPlayerByTurn().getFieldZoneCard());
                 }
-
                 player.removeCardFromHand(player.getSelectedCard());
                 player.setFieldZoneCard(player.getSelectedCard());
                 spellEffects.run((SpellCard) player.getSelectedCard());
                 mainPhaseView.spellActivated();
             }
-
         }
+        runAllMonsterPowersInZone(player);
     }
 
     private void controlAttackCommand() {

@@ -12,9 +12,11 @@ public abstract class PhaseController {
 
     protected Phase phase;
     protected PhaseView view = new PhaseView(this);
+    protected MonsterPowers monsterPowers;
 
     public PhaseController(Phase phase) {
         setPhase(phase);
+        monsterPowers = new MonsterPowers(phase);
     }
 
     public Phase getPhase() {
@@ -367,6 +369,8 @@ public abstract class PhaseController {
     }
 
     protected void checkForPossibleSpellOrTrapEffect(Card rivalCard, Card ourCard, RecentActionsInGame recentAction) {
+        phase.getRivalPlayerByTurn().setAbleToActivateTrapCard(false);
+        runAllMonsterPowersInZone(phase.getRivalPlayerByTurn());
         //TODO Activate a trap after summoning a monster from own cards
         if (canPlayerActivateEffect(phase.getRivalPlayerByTurn(), recentAction)) {
             phase.changeTurn();
@@ -394,8 +398,15 @@ public abstract class PhaseController {
             phase.changeTurn();
             view.nowItWillBeRivalsTurn(phase.getPlayerByTurn().getUser().getNickname());
         }
+        runAllMonsterPowersInZone(phase.getRivalPlayerByTurn());
+        runAllMonsterPowersInZone(phase.getPlayerByTurn());
     }
 
+    protected void runAllMonsterPowersInZone(Player player) {
+        for (Map.Entry<Integer, MonsterCard> mapElement : player.getMonsterCardsInZone().entrySet()){
+            monsterPowers.run(mapElement.getValue(), null);
+        }
+    }
 
     public Matcher[] getSelectCommandMatchers(String command) {
         Pattern patternForSelectOwnMonsterInZone = Pattern.compile("^select --monster (\\d+)$");
