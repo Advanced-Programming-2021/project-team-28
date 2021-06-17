@@ -44,5 +44,5 @@ public class MonstersDescriptions {
     public static String terraTigerTheEmpoweredWarrior = "When this card is Normal Summoned: You can Special Summon 1 Level 4 or lower Normal Monster from your hand in Defense Position.";
     public static String theTricky = "You can Special Summon this card (from your hand) by discarding 1 card.";
     public static String spiralSerpent = "When huge whirlpools lay cities asunder, it is the hunger of this sea serpent at work. No one has ever escaped its dreaded Spiral Wave to accurately describe the terror they experienced.";
-    public static String professorFazli = "The master of snakes(Specially pythons) the man who tried to make AP a project based course. ";
+    public static String professorFazli = "The master of snakes(Specially pythons) the man who lead us in a great battle to make AP a project based course. ";
 }
