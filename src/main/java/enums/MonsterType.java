@@ -16,4 +16,6 @@ public enum MonsterType {
     CYBERSE,
     FAIRY,
     SEA_SERPENT,
+    SUT
+    ;
 }

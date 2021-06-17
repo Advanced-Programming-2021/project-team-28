@@ -119,7 +119,7 @@ public class MainPhaseController extends PhaseController {
     public void summonMonsterCard(Player player, MonsterCard card , MonsterCardPosition position) {
         card.setSummoned(true);
         card.setPositionChangedInThisTurn(true);
-        card.setPosition(OFFENSIVE_OCCUPIED);
+        card.setPosition(position);
         player.addCardToCardsInZone(card);
         player.removeCardFromHand(card);
         checkRivalActionsAfterSummon(card);
@@ -348,6 +348,7 @@ public class MainPhaseController extends PhaseController {
                 spellEffects.run((SpellCard) player.getSelectedCard());
                 mainPhaseView.spellActivated();
             }
+            ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
         }
         runAllMonsterPowersInZone(player);
     }

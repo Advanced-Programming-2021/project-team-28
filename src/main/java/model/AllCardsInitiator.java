@@ -44,6 +44,8 @@ public class AllCardsInitiator {
                 MonsterPower.CRAB_TURTLE, 7, Attribute.WATER));
         Card.addToAllCards(new MonsterCard(MonsterType.WARRIOR, null, "Skull Guardian", "", MonstersDescriptions.skullGuardian, 2050, 2500,
                 MonsterPower.SKULL_GUARDIAN, 7, Attribute.LIGHT));
+        Card.addToAllCards(new MonsterCard(MonsterType.SUT, null, "Professor Fazli", "", MonstersDescriptions.professorFazli, 10500, 9000,
+                MonsterPower.SKULL_GUARDIAN, 7, Attribute.LIGHT));
         Card.addToAllCards(new MonsterCard(MonsterType.MACHINE, null, "Slot Machine", "", MonstersDescriptions.slotMachine, 2000, 2300,
                 MonsterPower.NONE, 7, Attribute.DARK));
         Card.addToAllCards(new MonsterCard(MonsterType.ROCK, null, "Haniwa", "", MonstersDescriptions.haniwa, 500, 500,

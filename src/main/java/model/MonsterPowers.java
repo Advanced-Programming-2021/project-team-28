@@ -40,10 +40,6 @@ public class MonsterPowers {
                 return;
             }
             case COMMAND_KNIGHT:
-            case RITUAL:{
-                ritualSummoned(activeCard);
-                return;
-            }
             case THE_CALCULATOR: {
                 theCalculator(activeCard);
                 return;
@@ -89,6 +85,7 @@ public class MonsterPowers {
                 view.nowItIsRivalTurn(phase.getRivalPlayerByTurn().getUser().getNickname());
                 phase.changeTurn();
             }
+
         }
         manEaterBug.setFlipped(false);
     }
@@ -158,8 +155,8 @@ public class MonsterPowers {
             if (((SpellCard) mapElement.getValue()).getEffect() == SpellEffect.ADVANCED_RITUAL_ART && ((SpellCard) mapElement.getValue()).getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
                 status = ritualSummonProcedure(card);
                 if (status) {
-                    phase.getPlayerByTurn().removeCardFromCardsInZone(mapElement.getValue(), phase.getPlayerByTurn().getLocationOfThisSpellOrTrapCardInZone(mapElement.getValue()));
                     phase.getPlayerByTurn().addCardToGraveyard(mapElement.getValue());
+                    phase.getPlayerByTurn().removeCardFromCardsInZone(mapElement.getValue(), phase.getPlayerByTurn().getLocationOfThisSpellOrTrapCardInZone(mapElement.getValue()));
                 }
                 return status;
             }
@@ -187,11 +184,12 @@ public class MonsterPowers {
                 view.printError("no card in selected location");
             } else if (locations.contains(location)) {
                 view.printError("repeated location");
+            } else if (cards.get(location).getSpecialPower() != MonsterPower.NONE){
+                view.printError("This card is not a normal monster");
             } else {
                 locations.add(location);
                 levelSum += cards.get(location).getLevel();
             }
-
             if (location == 0)
                 return false;
 
@@ -199,10 +197,10 @@ public class MonsterPowers {
 
             if (levelSum >= card.getLevel()) {
                 for (Integer integer : locations) {
-                    phase.getPlayerByTurn().removeCardFromCardsInZone(phase.getPlayerByTurn().getMonsterCardByLocationFromZone(integer), integer);
                     phase.getPlayerByTurn().addCardToGraveyard(cards.get(integer));
-                    return true;
+                    phase.getPlayerByTurn().removeCardFromCardsInZone(phase.getPlayerByTurn().getMonsterCardByLocationFromZone(integer), integer);
                 }
+                return true;
             }
         }
     }
