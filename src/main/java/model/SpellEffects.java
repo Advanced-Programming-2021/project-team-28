@@ -11,9 +11,9 @@ import java.util.Map;
 
 public class SpellEffects {
 
+
     private Round round;
     private SpellEffectsView effectsView = new SpellEffectsView(this);
-    SpellEffects instance;
 
 
     public SpellEffects(Round round) {
@@ -71,6 +71,7 @@ public class SpellEffects {
             }
             case MYSTICAL_SPACE_TYPHOON: {
                 mysticalSpaceTyphoon(activeCard);
+                return;
             }
             case SWORD_OF_DARK_DESTRUCTION:
 

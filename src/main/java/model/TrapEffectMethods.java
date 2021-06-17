@@ -109,7 +109,7 @@ public class TrapEffectMethods {
                     if (card instanceof MonsterCard) {
                         player.removeCardFromGraveyard(card);
                         player.setSelectedCard(card);
-                        ((MainPhaseController) controller).summonMonsterCard(player, (MonsterCard) card);
+                        ((MainPhaseController) controller).summonMonsterCard(player, (MonsterCard) card , MonsterCardPosition.OFFENSIVE_OCCUPIED);
                         player.addCardToGraveyard(trapCard);
                         player.removeCardFromCardsInZone(trapCard, player.getLocationOfThisSpellOrTrapCardInZone(trapCard));
                         break;

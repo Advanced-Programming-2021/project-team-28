@@ -23,7 +23,7 @@ public class MonsterPowerView {
     }
 
     public int intScanner(){
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public void nowItIsRivalTurn(String rivalNickname){

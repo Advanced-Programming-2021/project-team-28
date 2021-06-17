@@ -1,9 +1,6 @@
 package controller;
 
-import enums.MonsterCardPosition;
-import enums.RecentActionsInGame;
-import enums.SpellIcon;
-import enums.SpellOrTrapCardPosition;
+import enums.*;
 import model.*;
 import view.MainPhaseView;
 import view.ScannerInstance;
@@ -18,6 +15,7 @@ public class MainPhaseController extends PhaseController {
     protected boolean isSummonOrSetMonsterCard;
 
     SpellEffects spellEffects = new SpellEffects(phase.getRound());
+
 
     public MainPhaseController(MainPhase mainPhase) {
         super(mainPhase);
@@ -42,10 +40,13 @@ public class MainPhaseController extends PhaseController {
             mainPhaseView.monsterZoneIsFull();
         } else if (isSummonOrSetMonsterCard) {
             mainPhaseView.printString("you already summoned/set on this turn");
+        } else if(((MonsterCard) player.getSelectedCard()).getSpecialPower() == MonsterPower.RITUAL){
+            ritualSummon((MonsterCard) player.getSelectedCard());
         } else if (((MonsterCard) player.getSelectedCard()).getLevel() <= 4) {
-            summonMonsterCard(player, (MonsterCard) player.getSelectedCard());
+            summonMonsterCard(player, (MonsterCard) player.getSelectedCard() , OFFENSIVE_OCCUPIED);
         } else controlTributeSummonOrSet(player, true);
     }
+
 
     protected void controlTributeSummonOrSet(Player player, boolean isForSummon) {
         int tributeNeeded;
@@ -91,7 +92,7 @@ public class MainPhaseController extends PhaseController {
             player.addCardToGraveyard(player.getMonsterCardsInZone().get(secondTributeAddress));
             player.removeCardFromCardsInZone(player.getMonsterCardsInZone().get(secondTributeAddress), secondTributeAddress);
             if (isForSummon) {
-                summonMonsterCard(player, (MonsterCard) player.getSelectedCard());
+                summonMonsterCard(player, (MonsterCard) player.getSelectedCard() , OFFENSIVE_OCCUPIED);
             } else {
                 setMonsterCard(player, (MonsterCard) player.getSelectedCard());
             }
@@ -108,14 +109,14 @@ public class MainPhaseController extends PhaseController {
             player.addCardToGraveyard(player.getMonsterCardsInZone().get(tributeAddress));
             player.removeCardFromCardsInZone(player.getMonsterCardsInZone().get(tributeAddress), tributeAddress);
             if (isForSummon) {
-                summonMonsterCard(player, (MonsterCard) player.getSelectedCard());
+                summonMonsterCard(player, (MonsterCard) player.getSelectedCard() , OFFENSIVE_OCCUPIED);
             } else {
                 setMonsterCard(player, (MonsterCard) player.getSelectedCard());
             }
         }
     }
 
-    public void summonMonsterCard(Player player, MonsterCard card) {
+    public void summonMonsterCard(Player player, MonsterCard card , MonsterCardPosition position) {
         card.setSummoned(true);
         card.setPositionChangedInThisTurn(true);
         card.setPosition(OFFENSIVE_OCCUPIED);
@@ -316,7 +317,9 @@ public class MainPhaseController extends PhaseController {
             }
             return;
         }
+
         // field spell procedure
+
         if (player.getSelectedCard() instanceof SpellCard) {
             if (((SpellCard) player.getSelectedCard()).getIcon() == SpellIcon.FIELD) {
                 if (player.getFieldZoneCard() == player.getSelectedCard()) {
@@ -358,5 +361,25 @@ public class MainPhaseController extends PhaseController {
         } else {
             view.canNotDoThisActionInThisPhase();
         }
+    }
+
+    private void ritualSummon(MonsterCard card) {
+        String position;
+            if(!monsterPowers.ritualSummoned(card))
+                return;
+            while(true) {
+                view.printString("Enter OO for Offensive Occupied OR DO for Defensive Occupied");
+                position = view.scanString();
+                if(position.equals("OO")){
+                    summonMonsterCard(phase.getPlayerByTurn() , card , OFFENSIVE_OCCUPIED);
+                    break;
+                }
+                else if(position.equals("DO")){
+                    summonMonsterCard(phase.getPlayerByTurn() , card , DEFENSIVE_OCCUPIED);
+                    break;
+                }
+                view.printString("invalid input");
+            }
+
     }
 }

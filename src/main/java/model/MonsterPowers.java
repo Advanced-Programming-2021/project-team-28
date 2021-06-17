@@ -1,9 +1,6 @@
 package model;
 
-import enums.MonsterCardPosition;
-import enums.MonsterPower;
-import enums.SpellEffect;
-import enums.Turn;
+import enums.*;
 import view.MonsterPowerView;
 
 import java.util.ArrayList;
@@ -20,7 +17,7 @@ public class MonsterPowers {
         this.phase = phase;
     }
 
-    public void run(MonsterCard activeCard, MonsterCard opponentCard) {
+    public void run(MonsterCard activeCard, MonsterCard opponentCard)  {
         switch (activeCard.getSpecialPower()) {
             case NONE:
                 return;
@@ -43,7 +40,10 @@ public class MonsterPowers {
                 return;
             }
             case COMMAND_KNIGHT:
-            case RITUAL:
+            case RITUAL:{
+                ritualSummoned(activeCard);
+                return;
+            }
             case THE_CALCULATOR: {
                 theCalculator(activeCard);
                 return;
@@ -137,11 +137,25 @@ public class MonsterPowers {
         }
     }
 
-    public boolean ritualSummoned(MonsterCard card) {
+    public boolean ritualSummoned(MonsterCard card)  {
         boolean status;
+        int levelSum = 0;
         HashMap<Integer, Card> cards = phase.getPlayerByTurn().getSpellOrTrapCardsInZone();
+        HashMap<Integer, MonsterCard> monsters = phase.getPlayerByTurn().getMonsterCardsInZone();
+
+        for (Map.Entry<Integer, MonsterCard> mapElement : monsters.entrySet()){
+            if(mapElement.getValue() != null && (mapElement.getValue().getSpecialPower() == MonsterPower.NONE)){
+                levelSum += mapElement.getValue().getLevel();
+            }
+        }
+        if(levelSum < card.getLevel()){
+            view.printError("there is no way you could ritual summon a monster");
+            return false;
+        }
+
+
         for (Map.Entry<Integer, Card> mapElement : cards.entrySet()) {
-            if (((SpellCard) mapElement.getValue()).getEffect() == SpellEffect.ADVANCED_RITUAL_ART) {
+            if (((SpellCard) mapElement.getValue()).getEffect() == SpellEffect.ADVANCED_RITUAL_ART && ((SpellCard) mapElement.getValue()).getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
                 status = ritualSummonProcedure(card);
                 if (status) {
                     phase.getPlayerByTurn().removeCardFromCardsInZone(mapElement.getValue(), phase.getPlayerByTurn().getLocationOfThisSpellOrTrapCardInZone(mapElement.getValue()));
@@ -150,19 +164,23 @@ public class MonsterPowers {
                 return status;
             }
         }
-        view.printError("there is no Advanced Ritual Art card in field to be used for special summon");
+        view.printError("there is no way you could ritual summon a monster");
         return false;
     }
 
     private boolean ritualSummonProcedure(MonsterCard card) {
         ArrayList<Integer> locations = new ArrayList<>();
         HashMap<Integer, MonsterCard> cards = phase.getPlayerByTurn().getMonsterCardsInZone();
-        int location;
+        int location = 0;
         int levelSum = 0;
         view.printError("enter location of cards that you want to tribute for the ritual summon (sum of levels of selected cards must either be equal or greater than the target card level)");
         view.printError("to end the selection enter 0");
         while (true) {
-            location = view.intScanner();
+            try {
+                location = view.intScanner();
+            } catch (Exception e) {
+                view.printError("you should ritual summon right now");
+            }
             if (location < 1 || location > 5) {
                 view.printError("invalid location");
             } else if (cards.get(location) == null) {
@@ -176,6 +194,8 @@ public class MonsterPowers {
 
             if (location == 0)
                 return false;
+
+            view.printError("selected monsters levels don’t match with ritual monster");
 
             if (levelSum >= card.getLevel()) {
                 for (Integer integer : locations) {
