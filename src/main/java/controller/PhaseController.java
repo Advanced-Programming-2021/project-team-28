@@ -369,8 +369,8 @@ public abstract class PhaseController {
     }
 
     protected void checkForPossibleSpellOrTrapEffect(Card rivalCard, Card ourCard, RecentActionsInGame recentAction) {
-        phase.getRivalPlayerByTurn().setAbleToActivateTrapCard(false);
-        runAllMonsterPowersInZone(phase.getRivalPlayerByTurn());
+        phase.getPlayerByTurn().setAbleToActivateTrapCard(true);
+        runAllMonsterPowersInZone(phase.getPlayerByTurn());
         //TODO Activate a trap after summoning a monster from own cards
         if (canPlayerActivateEffect(phase.getRivalPlayerByTurn(), recentAction)) {
             phase.changeTurn();

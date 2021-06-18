@@ -36,15 +36,26 @@ public class MainPhaseController extends PhaseController {
             mainPhaseView.noCardSelectedYet();
         } else if (!player.isSelectedCardFromHand() || !(player.getSelectedCard() instanceof MonsterCard)) {
             mainPhaseView.canNotSummonCard();
-        } else if (((MonsterCard) player.getSelectedCard()).getLevel() <= 4 && player.isMonsterCardZoneFull()) {
+        } else if ((((MonsterCard) player.getSelectedCard()).getLevel() <= 4 || player.getSelectedCard().getName().equals("The Tricky"))
+                && player.isMonsterCardZoneFull()) {
             mainPhaseView.monsterZoneIsFull();
         } else if (isSummonOrSetMonsterCard) {
             mainPhaseView.printString("you already summoned/set on this turn");
-        } else if(((MonsterCard) player.getSelectedCard()).getSpecialPower() == MonsterPower.RITUAL){
+        } else if (isCardSpecial(player.getSelectedCard())){
+            specialSummon((MonsterCard) player.getSelectedCard());
+        } else if (((MonsterCard) player.getSelectedCard()).getSpecialPower() == MonsterPower.RITUAL) {
             ritualSummon((MonsterCard) player.getSelectedCard());
         } else if (((MonsterCard) player.getSelectedCard()).getLevel() <= 4) {
-            summonMonsterCard(player, (MonsterCard) player.getSelectedCard() , OFFENSIVE_OCCUPIED);
+            summonMonsterCard(player, (MonsterCard) player.getSelectedCard(), OFFENSIVE_OCCUPIED);
         } else controlTributeSummonOrSet(player, true);
+    }
+
+    private void specialSummon(MonsterCard selectedCard) {
+        //TODO
+    }
+
+    private boolean isCardSpecial(Card selectedCard) {
+        return selectedCard.getName().equals("The Tricky") || selectedCard.getName().equals("Gate Guardian");
     }
 
 
@@ -92,7 +103,7 @@ public class MainPhaseController extends PhaseController {
             player.addCardToGraveyard(player.getMonsterCardsInZone().get(secondTributeAddress));
             player.removeCardFromCardsInZone(player.getMonsterCardsInZone().get(secondTributeAddress), secondTributeAddress);
             if (isForSummon) {
-                summonMonsterCard(player, (MonsterCard) player.getSelectedCard() , OFFENSIVE_OCCUPIED);
+                summonMonsterCard(player, (MonsterCard) player.getSelectedCard(), OFFENSIVE_OCCUPIED);
             } else {
                 setMonsterCard(player, (MonsterCard) player.getSelectedCard());
             }
@@ -109,14 +120,14 @@ public class MainPhaseController extends PhaseController {
             player.addCardToGraveyard(player.getMonsterCardsInZone().get(tributeAddress));
             player.removeCardFromCardsInZone(player.getMonsterCardsInZone().get(tributeAddress), tributeAddress);
             if (isForSummon) {
-                summonMonsterCard(player, (MonsterCard) player.getSelectedCard() , OFFENSIVE_OCCUPIED);
+                summonMonsterCard(player, (MonsterCard) player.getSelectedCard(), OFFENSIVE_OCCUPIED);
             } else {
                 setMonsterCard(player, (MonsterCard) player.getSelectedCard());
             }
         }
     }
 
-    public void summonMonsterCard(Player player, MonsterCard card , MonsterCardPosition position) {
+    public void summonMonsterCard(Player player, MonsterCard card, MonsterCardPosition position) {
         card.setSummoned(true);
         card.setPositionChangedInThisTurn(true);
         card.setPosition(position);
@@ -207,7 +218,7 @@ public class MainPhaseController extends PhaseController {
                 ((TrapCard) card).setPosition(SpellOrTrapCardPosition.HIDDEN);
                 ((TrapCard) card).setHasSetInThisTurn(true);
             } else if (card instanceof SpellCard) {
-                if(((SpellCard) card).getIcon() == SpellIcon.FIELD){
+                if (((SpellCard) card).getIcon() == SpellIcon.FIELD) {
                     view.canNotSetCard();
                     return;
                 }
@@ -246,7 +257,7 @@ public class MainPhaseController extends PhaseController {
         } else {
             ((MonsterCard) player.getSelectedCard()).setPosition(position);
             ((MonsterCard) player.getSelectedCard()).setPositionChangedInThisTurn(true);
-            if(position == OFFENSIVE_OCCUPIED){
+            if (position == OFFENSIVE_OCCUPIED) {
                 ((MonsterCard) player.getSelectedCard()).setFlipped(true);
             }
             runAllMonsterPowersInZone(phase.getPlayerByTurn());
@@ -269,11 +280,13 @@ public class MainPhaseController extends PhaseController {
             flipSummonedCard.setPosition(OFFENSIVE_OCCUPIED);
             flipSummonedCard.setPositionChangedInThisTurn(true);
             flipSummonedCard.setFlipped(true);
+            flipSummonedCard.setSummoned(true);
             runAllMonsterPowersInZone(player);
             flipSummonedCard.setSpecialSummoned(false);
             checkRivalActionsAfterSummon(flipSummonedCard);
             player.setSelectedCard(null);
             mainPhaseView.printString("flip summoned successfully");
+            flipSummonedCard.setSummoned(false);
         }
     }
 
@@ -294,50 +307,31 @@ public class MainPhaseController extends PhaseController {
         runAllMonsterPowersInZone(player);
         if (!player.hasSelectedCard()) {
             view.noCardSelectedYet();
-            return;
-        }
-        if (player.getSelectedCard() instanceof MonsterCard){
+        } else if (player.getSelectedCard() instanceof MonsterCard) {
             mainPhaseView.selectedCardIsMonster();
-            return;
+        } else if (player.getSelectedCard() instanceof TrapCard) {
+            controlActivateTrapEffect(player);
+        } else if (player.getSelectedCard() instanceof SpellCard) {
+            controlActivateSpellEffect(player);
         }
-        if (player.getSelectedCard() instanceof TrapCard) {
-            if (player.isSelectedCardFromSpellAndTrapZone()) {
-                if (((TrapCard) player.getSelectedCard()).hasSetInThisTurn()) {
-                    mainPhaseView.canNotActivateCardInThisTurn();
-                } else {
-                    if (canCardBeActivatedAfterThisAction(player, RecentActionsInGame.IN_OUR_MAIN_PHASE, player.getSelectedCard())) {
-                        TrapEffectController.searchForThisEffect(this, phase, null, (TrapCard) player.getSelectedCard());
-                        view.spellOrTrapActivated("Trap");
-                    } else {
-                        view.preparationsOfSpellHaveNotBeenDoneYet();
-                    }
-                }
+        runAllMonsterPowersInZone(player);
+    }
+
+    private void controlActivateSpellEffect(Player player) {
+        if (((SpellCard) player.getSelectedCard()).getIcon() == SpellIcon.FIELD) {
+            if (player.getFieldZoneCard() == player.getSelectedCard()) {
+                mainPhaseView.effectAlreadyActivated();
+            } else if (phase.getRivalPlayerByTurn().getFieldZoneCard() == player.getSelectedCard()) {
+                mainPhaseView.opponentFieldSpellSelected();
             } else {
-                view.thisCardCanNotBeActivated();
-            }
-            return;
-        }
-
-        // field spell procedure
-
-        if (player.getSelectedCard() instanceof SpellCard) {
-            if (((SpellCard) player.getSelectedCard()).getIcon() == SpellIcon.FIELD) {
-                if (player.getFieldZoneCard() == player.getSelectedCard()) {
-                    mainPhaseView.effectAlreadyActivated();
-                    return;
-                }
-                if (phase.getRivalPlayerByTurn().getFieldZoneCard() == player.getSelectedCard()) {
-                    mainPhaseView.opponentFieldSpellSelected();
-                    return;
-                }
-                if(player.getFieldZoneCard() != null){
+                if (player.getFieldZoneCard() != null) {
                     player.getFieldZoneCard().setGoingToGraveyard(true);
                     spellEffects.run((SpellCard) player.getFieldZoneCard());
                     player.getFieldZoneCard().setGoingToGraveyard(false);
                     player.addCardToGraveyard(player.getFieldZoneCard());
                 }
 
-                if(phase.getRivalPlayerByTurn().getFieldZoneCard() != null){
+                if (phase.getRivalPlayerByTurn().getFieldZoneCard() != null) {
                     phase.getRivalPlayerByTurn().getFieldZoneCard().setGoingToGraveyard(true);
                     spellEffects.run((SpellCard) phase.getRivalPlayerByTurn().getFieldZoneCard());
                     phase.getRivalPlayerByTurn().getFieldZoneCard().setGoingToGraveyard(false);
@@ -348,9 +342,32 @@ public class MainPhaseController extends PhaseController {
                 spellEffects.run((SpellCard) player.getSelectedCard());
                 mainPhaseView.spellActivated();
             }
+        } else if (((SpellCard) player.getSelectedCard()).getIcon() == SpellIcon.RITUAL) {
+            if (!player.isSelectedCardFromSpellAndTrapZone()) {
+                view.thisCardCanNotBeActivated();
+            }
             ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
+            mainPhaseView.spellActivated();
         }
-        runAllMonsterPowersInZone(player);
+    }
+
+    private void controlActivateTrapEffect(Player player) {
+        if (player.isSelectedCardFromSpellAndTrapZone()) {
+            if (((TrapCard) player.getSelectedCard()).hasSetInThisTurn()) {
+                mainPhaseView.canNotActivateCardInThisTurn();
+            } else {
+                player.setAbleToActivateTrapCard(true);
+                runAllMonsterPowersInZone(player);
+                if (canCardBeActivatedAfterThisAction(player, RecentActionsInGame.IN_OUR_MAIN_PHASE, player.getSelectedCard())) {
+                    TrapEffectController.searchForThisEffect(this, phase, null, (TrapCard) player.getSelectedCard());
+                    view.spellOrTrapActivated("Trap");
+                } else {
+                    view.preparationsOfSpellHaveNotBeenDoneYet();
+                }
+            }
+        } else {
+            view.thisCardCanNotBeActivated();
+        }
     }
 
     private void controlAttackCommand() {
@@ -366,21 +383,20 @@ public class MainPhaseController extends PhaseController {
 
     private void ritualSummon(MonsterCard card) {
         String position;
-            if(!monsterPowers.ritualSummoned(card))
-                return;
-            while(true) {
-                view.printString("Enter OO for Offensive Occupied OR DO for Defensive Occupied");
-                position = view.scanString();
-                if(position.equals("OO")){
-                    summonMonsterCard(phase.getPlayerByTurn() , card , OFFENSIVE_OCCUPIED);
-                    break;
-                }
-                else if(position.equals("DO")){
-                    summonMonsterCard(phase.getPlayerByTurn() , card , DEFENSIVE_OCCUPIED);
-                    break;
-                }
-                view.printString("invalid input");
+        if (!monsterPowers.ritualSummoned(card))
+            return;
+        while (true) {
+            view.printString("Enter OO for Offensive Occupied OR DO for Defensive Occupied");
+            position = view.scanString();
+            if (position.equals("OO")) {
+                summonMonsterCard(phase.getPlayerByTurn(), card, OFFENSIVE_OCCUPIED);
+                break;
+            } else if (position.equals("DO")) {
+                summonMonsterCard(phase.getPlayerByTurn(), card, DEFENSIVE_OCCUPIED);
+                break;
             }
+            view.printString("invalid input");
+        }
 
     }
 }
