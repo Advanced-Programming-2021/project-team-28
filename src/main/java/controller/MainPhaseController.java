@@ -349,6 +349,8 @@ public class MainPhaseController extends PhaseController {
             ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
             mainPhaseView.spellActivated();
         }
+
+        //Haaji added this
     }
 
     private void controlActivateTrapEffect(Player player) {

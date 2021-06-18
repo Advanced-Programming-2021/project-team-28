@@ -77,7 +77,7 @@ public class SpellEffects {
 
         }
     }
-
+    //type: quick
     private void mysticalSpaceTyphoon(SpellCard activeCard) {
         while (true) {
             effectsView.selectSpellZoneYouWantToSelectCardFrom();
@@ -138,6 +138,7 @@ public class SpellEffects {
             }
         }
     }
+
 
     public void darkHole(SpellCard activeCard) {
         if (activeCard.getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
