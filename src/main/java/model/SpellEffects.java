@@ -123,8 +123,8 @@ public class SpellEffects {
         if (activeCard.getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
             for (Map.Entry<Integer, MonsterCard> mapElement : round.getRivalPlayerByTurn().getMonsterCardsInZone().entrySet()) {
                 round.getRivalPlayerByTurn().addCardToGraveyard(mapElement.getValue());
-                round.getRivalPlayerByTurn().removeCardFromCardsInZone(mapElement.getValue(), round.getRivalPlayerByTurn().getLocationOfThisMonsterCardInZone(mapElement.getValue()));
             }
+            round.getRivalPlayerByTurn().getMonsterCardsInZone().clear();
         }
     }
 
@@ -134,8 +134,8 @@ public class SpellEffects {
         if (activeCard.getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
             for (Map.Entry<Integer, Card> mapElement : round.getRivalPlayerByTurn().getSpellOrTrapCardsInZone().entrySet()) {
                 opponent.addCardToGraveyard(mapElement.getValue());
-                opponent.removeCardFromCardsInZone(mapElement.getValue(), opponent.getLocationOfThisSpellOrTrapCardInZone(mapElement.getValue()));
             }
+            round.getRivalPlayerByTurn().getSpellOrTrapCardsInZone().clear();
         }
     }
 
@@ -145,12 +145,13 @@ public class SpellEffects {
             Player opponent = round.getRivalPlayerByTurn();
             for (Map.Entry<Integer, MonsterCard> mapElement : player.getMonsterCardsInZone().entrySet()) {
                 player.addCardToGraveyard(mapElement.getValue());
-                player.removeCardFromCardsInZone(mapElement.getValue(), player.getLocationOfThisMonsterCardInZone(mapElement.getValue()));
             }
+            player.getMonsterCardsInZone().clear();
+
             for (Map.Entry<Integer, MonsterCard> mapElement : opponent.getMonsterCardsInZone().entrySet()) {
                 opponent.addCardToGraveyard(mapElement.getValue());
-                opponent.removeCardFromCardsInZone(mapElement.getValue(), opponent.getLocationOfThisMonsterCardInZone(mapElement.getValue()));
             }
+            opponent.getMonsterCardsInZone().clear();
         }
     }
 
