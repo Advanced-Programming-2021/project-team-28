@@ -144,14 +144,9 @@ public class SpellEffects {
         if (activeCard.getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
             Player player = round.getPlayerByTurn();
             Player opponent = round.getRivalPlayerByTurn();
-            for (Map.Entry<Integer, MonsterCard> mapElement : player.getMonsterCardsInZone().entrySet()) {
-                player.addCardToGraveyard(mapElement.getValue());
-            }
+            player.addAllCardsOfMonsterZoneToGraveyard();
             player.getMonsterCardsInZone().clear();
-
-            for (Map.Entry<Integer, MonsterCard> mapElement : opponent.getMonsterCardsInZone().entrySet()) {
-                opponent.addCardToGraveyard(mapElement.getValue());
-            }
+            opponent.addAllCardsOfMonsterZoneToGraveyard();
             opponent.getMonsterCardsInZone().clear();
         }
     }

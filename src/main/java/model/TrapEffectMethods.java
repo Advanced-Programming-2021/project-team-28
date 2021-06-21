@@ -43,8 +43,8 @@ public class TrapEffectMethods {
     }
 
     public static void torrentialTribute(Phase phase, TrapCard trapCard) {
-        addAllCardsOfMonsterZoneToGraveyard(phase.getFirstPlayer());
-        addAllCardsOfMonsterZoneToGraveyard(phase.getSecondPlayer());
+        phase.getFirstPlayer().addAllCardsOfMonsterZoneToGraveyard();
+        phase.getSecondPlayer().addAllCardsOfMonsterZoneToGraveyard();
         phase.getFirstPlayer().getMonsterCardsInZone().clear();
         phase.getSecondPlayer().getMonsterCardsInZone().clear();
         Player player = phase.getPlayerByTurn();
@@ -135,12 +135,6 @@ public class TrapEffectMethods {
             } else {
                 view.invalidCardName();
             }
-        }
-    }
-
-    private static void addAllCardsOfMonsterZoneToGraveyard(Player player){
-        for (Map.Entry<Integer, MonsterCard> mapElement : player.getMonsterCardsInZone().entrySet()){
-            player.addCardToGraveyard(mapElement.getValue());
         }
     }
 }

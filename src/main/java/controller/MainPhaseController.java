@@ -318,62 +318,72 @@ public class MainPhaseController extends PhaseController {
 
     private void controlActivateSpellEffect(Player player) {
         if (((SpellCard) player.getSelectedCard()).getIcon() == SpellIcon.FIELD) {
-            if (player.getFieldZoneCard() == player.getSelectedCard()) {
-                mainPhaseView.effectAlreadyActivated();
-            } else if (phase.getRivalPlayerByTurn().getFieldZoneCard() == player.getSelectedCard()) {
-                mainPhaseView.opponentFieldSpellSelected();
-            } else {
-                if (player.getFieldZoneCard() != null) {
-                    player.getFieldZoneCard().setGoingToGraveyard(true);
-                    spellEffects.run((SpellCard) player.getFieldZoneCard());
-                    player.getFieldZoneCard().setGoingToGraveyard(false);
-                    player.addCardToGraveyard(player.getFieldZoneCard());
-                }
-
-                if (phase.getRivalPlayerByTurn().getFieldZoneCard() != null) {
-                    phase.getRivalPlayerByTurn().getFieldZoneCard().setGoingToGraveyard(true);
-                    spellEffects.run((SpellCard) phase.getRivalPlayerByTurn().getFieldZoneCard());
-                    phase.getRivalPlayerByTurn().getFieldZoneCard().setGoingToGraveyard(false);
-                    phase.getRivalPlayerByTurn().addCardToGraveyard(phase.getRivalPlayerByTurn().getFieldZoneCard());
-                }
-                player.removeCardFromHand(player.getSelectedCard());
-                player.setFieldZoneCard(player.getSelectedCard());
-                spellEffects.run((SpellCard) player.getSelectedCard());
-                mainPhaseView.spellActivated();
-            }
+            activateFieldZoneSpell(player);
         } else if (((SpellCard) player.getSelectedCard()).getIcon() == SpellIcon.RITUAL) {
-            if(player.isSelectedCardFromHand()){
-                player.addCardToCardsInZone(player.getSelectedCard());
+            activateRitualSpell(player);
+        } else if (((SpellCard) player.getSelectedCard()).getIcon() == SpellIcon.NORMAL) {
+            activateNormalSpell(player);
+        }
+    }
+
+    private void activateRitualSpell(Player player) {
+        if(player.isSelectedCardFromHand()){
+            player.addCardToCardsInZone(player.getSelectedCard());
+        }
+        ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
+        mainPhaseView.spellActivated();
+    }
+
+    private void activateNormalSpell(Player player) {
+        if (((SpellCard) player.getSelectedCard()).hasDeployedEffect())
+            mainPhaseView.effectAlreadyActivated();
+        else {
+            if (((SpellCard) player.getSelectedCard()).getPosition() == SpellOrTrapCardPosition.NOT_IN_PLAY_ZONE) {
+                if (phase.getPlayerByTurn().isSpellCardZoneFull()) {
+                    mainPhaseView.printString("spell card zone is full");
+                    phase.getPlayerByTurn().setSelectedCard(null);
+                    return;
+                } else {
+                    player.addCardToCardsInZone(player.getSelectedCard());
+                    player.removeCardFromHand(player.getSelectedCard());
+
+                }
             }
             ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
+            spellEffects.run((SpellCard) player.getSelectedCard());
             mainPhaseView.spellActivated();
-        } else if (((SpellCard) player.getSelectedCard()).getIcon() == SpellIcon.NORMAL) {
-            if (((SpellCard) player.getSelectedCard()).hasDeployedEffect())
-                mainPhaseView.effectAlreadyActivated();
-            else {
-                if (((SpellCard) player.getSelectedCard()).getPosition() == SpellOrTrapCardPosition.NOT_IN_PLAY_ZONE) {
-                    if (phase.getPlayerByTurn().isSpellCardZoneFull()) {
-                        mainPhaseView.printString("spell card zone is full");
-                        phase.getPlayerByTurn().setSelectedCard(null);
-                        return;
-                    } else {
-                        player.addCardToCardsInZone(player.getSelectedCard());
-                        player.removeCardFromHand(player.getSelectedCard());
+            phase.getPlayerByTurn().addCardToGraveyard(phase.getPlayerByTurn().getSelectedCard());
+            phase.getPlayerByTurn().removeCardFromCardsInZone(phase.getPlayerByTurn().getSelectedCard()
+                    , phase.getPlayerByTurn().getLocationOfThisSpellOrTrapCardInZone(phase.getPlayerByTurn().getSelectedCard()));
 
-                    }
-                }
-                ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
+            phase.getPlayerByTurn().setSelectedCard(null);
 
-                spellEffects.run((SpellCard) player.getSelectedCard());
-                mainPhaseView.spellActivated();
+        }
+    }
 
-                phase.getPlayerByTurn().addCardToGraveyard(phase.getPlayerByTurn().getSelectedCard());
-                phase.getPlayerByTurn().removeCardFromCardsInZone(phase.getPlayerByTurn().getSelectedCard()
-                        , phase.getPlayerByTurn().getLocationOfThisSpellOrTrapCardInZone(phase.getPlayerByTurn().getSelectedCard()));
-
-                phase.getPlayerByTurn().setSelectedCard(null);
-
+    private void activateFieldZoneSpell(Player player) {
+        if (player.getFieldZoneCard() == player.getSelectedCard()) {
+            mainPhaseView.effectAlreadyActivated();
+        } else if (phase.getRivalPlayerByTurn().getFieldZoneCard() == player.getSelectedCard()) {
+            mainPhaseView.opponentFieldSpellSelected();
+        } else {
+            if (player.getFieldZoneCard() != null) {
+                player.getFieldZoneCard().setGoingToGraveyard(true);
+                spellEffects.run((SpellCard) player.getFieldZoneCard());
+                player.getFieldZoneCard().setGoingToGraveyard(false);
+                player.addCardToGraveyard(player.getFieldZoneCard());
             }
+
+            if (phase.getRivalPlayerByTurn().getFieldZoneCard() != null) {
+                phase.getRivalPlayerByTurn().getFieldZoneCard().setGoingToGraveyard(true);
+                spellEffects.run((SpellCard) phase.getRivalPlayerByTurn().getFieldZoneCard());
+                phase.getRivalPlayerByTurn().getFieldZoneCard().setGoingToGraveyard(false);
+                phase.getRivalPlayerByTurn().addCardToGraveyard(phase.getRivalPlayerByTurn().getFieldZoneCard());
+            }
+            player.removeCardFromHand(player.getSelectedCard());
+            player.setFieldZoneCard(player.getSelectedCard());
+            spellEffects.run((SpellCard) player.getSelectedCard());
+            mainPhaseView.spellActivated();
         }
     }
 

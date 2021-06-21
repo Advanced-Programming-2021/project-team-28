@@ -399,5 +399,11 @@ public class Player {
         return monsterCardsInZone.get(location);
     }
 
+    public void addAllCardsOfMonsterZoneToGraveyard(){
+        for (Map.Entry<Integer, MonsterCard> mapElement : getMonsterCardsInZone().entrySet()){
+            addCardToGraveyard(mapElement.getValue());
+        }
+    }
+
 }
 
