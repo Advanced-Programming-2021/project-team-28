@@ -53,19 +53,21 @@ public class TrapEffectMethods {
     }
 
     public static void trapHole(Player player, Player rivalPlayer, Card rivalSummonedCard, TrapCard trapCard) {
-        rivalPlayer.addCardToGraveyard(rivalSummonedCard);
-        rivalPlayer.getMonsterCardsInZone().remove
-                (rivalPlayer.getLocationOfThisMonsterCardInZone((MonsterCard) rivalSummonedCard), rivalSummonedCard);
+        Player whoSummonedAMonster = rivalSummonedCard.getOwnerUsername().equals(player.getUser().getUsername()) ? player : rivalPlayer;
+        whoSummonedAMonster.addCardToGraveyard(rivalSummonedCard);
+        whoSummonedAMonster.getMonsterCardsInZone().remove
+                (whoSummonedAMonster.getLocationOfThisMonsterCardInZone((MonsterCard) rivalSummonedCard), rivalSummonedCard);
         player.addCardToGraveyard(trapCard);
         player.removeCardFromCardsInZone(trapCard, player.getLocationOfThisSpellOrTrapCardInZone(trapCard));
     }
 
     public static void solemnWarning(Player player, Player rivalPlayer, Card rivalSummonedCard, TrapCard trapCard) {
+        Player whoSummonedAMonster = rivalSummonedCard.getOwnerUsername().equals(player.getUser().getUsername()) ? player : rivalPlayer;
         player.decreaseLifePoint(2000);
         ((MonsterCard) rivalSummonedCard).setCardActionCanceledByAnEffect(true);
-        rivalPlayer.addCardToGraveyard(rivalSummonedCard);
-        rivalPlayer.getMonsterCardsInZone().remove
-                (rivalPlayer.getLocationOfThisMonsterCardInZone((MonsterCard) rivalSummonedCard), rivalSummonedCard);
+        whoSummonedAMonster.addCardToGraveyard(rivalSummonedCard);
+        whoSummonedAMonster.getMonsterCardsInZone().remove
+                (whoSummonedAMonster.getLocationOfThisMonsterCardInZone((MonsterCard) rivalSummonedCard), rivalSummonedCard);
         player.addCardToGraveyard(trapCard);
         player.removeCardFromCardsInZone(trapCard, player.getLocationOfThisSpellOrTrapCardInZone(trapCard));
     }

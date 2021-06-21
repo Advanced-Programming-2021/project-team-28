@@ -132,7 +132,7 @@ public class MainPhaseController extends PhaseController {
         card.setPosition(position);
         player.addCardToCardsInZone(card);
         player.removeCardFromHand(card);
-        checkRivalActionsAfterSummon(card);
+        checkTrapActionsAfterSummon(card);
         if (card.isCardActionCanceledByAnEffect()) {
             card.setCardActionCanceledByAnEffect(false);
             player.setSelectedCard(null);
@@ -155,17 +155,17 @@ public class MainPhaseController extends PhaseController {
         }
     }
 
-    private void checkRivalActionsAfterSummon(MonsterCard card) {
+    private void checkTrapActionsAfterSummon(MonsterCard card) {
         if (card.isSpecialSummoned()) {
             checkForPossibleSpellOrTrapEffect(card, null,
-                    RecentActionsInGame.SPECIAL_SUMMONED);
+                    RecentActionsInGame.RIVAL_SPECIAL_SUMMONED);
             card.setSpecialSummoned(false);
         } else if (card.getAttackPoint() < 1000) {
             checkForPossibleSpellOrTrapEffect(card, null,
-                    RecentActionsInGame.SUMMONED_A_MONSTER_WITH_LESS_THAN_1000_ATTACK_POINT);
+                    RecentActionsInGame.RIVAL_SUMMONED_A_MONSTER_WITH_LESS_THAN_1000_ATTACK_POINT);
         } else {
             checkForPossibleSpellOrTrapEffect(card, null,
-                    RecentActionsInGame.SUMMONED_A_MONSTER_WITH_1000_OR_MORE_ATTACK_POINT);
+                    RecentActionsInGame.RIVAL_SUMMONED_A_MONSTER_WITH_1000_OR_MORE_ATTACK_POINT);
         }
     }
 
@@ -206,11 +206,7 @@ public class MainPhaseController extends PhaseController {
     }
 
     protected void setTrapOrSpellCard(Player player, Card card) {
-        if (!player.hasSelectedCard()) {
-            mainPhaseView.noCardSelectedYet();
-        } else if (!player.isSelectedCardFromHand()) {
-            mainPhaseView.canNotSetCard();
-        } else if (player.isSpellCardZoneFull()) {
+        if (player.isSpellCardZoneFull()) {
             mainPhaseView.printString("spell card zone is full");
         } else {
             if (card instanceof TrapCard) {
@@ -282,7 +278,7 @@ public class MainPhaseController extends PhaseController {
             flipSummonedCard.setSummoned(true);
             runAllMonsterPowersInZone(player);
             flipSummonedCard.setSpecialSummoned(false);
-            checkRivalActionsAfterSummon(flipSummonedCard);
+            checkTrapActionsAfterSummon(flipSummonedCard);
             player.setSelectedCard(null);
             mainPhaseView.printString("flip summoned successfully");
             flipSummonedCard.setSummoned(false);
@@ -302,6 +298,10 @@ public class MainPhaseController extends PhaseController {
     @Override
     protected void controlActivateEffectCommand() {
         Player player = phase.getPlayerByTurn();
+        if(!player.isSelectedCardFromSpellAndTrapZone() && !player.isSelectedCardFromHand()){
+            view.thisCardCanNotBeActivated();
+            return;
+        }
         player.setAbleToActivateTrapCard(false);
         runAllMonsterPowersInZone(player);
         if (!player.hasSelectedCard()) {
@@ -342,8 +342,8 @@ public class MainPhaseController extends PhaseController {
                 mainPhaseView.spellActivated();
             }
         } else if (((SpellCard) player.getSelectedCard()).getIcon() == SpellIcon.RITUAL) {
-            if (!player.isSelectedCardFromSpellAndTrapZone()) {
-                view.thisCardCanNotBeActivated();
+            if(player.isSelectedCardFromHand()){
+                player.addCardToCardsInZone(player.getSelectedCard());
             }
             ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
             mainPhaseView.spellActivated();
@@ -374,10 +374,7 @@ public class MainPhaseController extends PhaseController {
                 phase.getPlayerByTurn().setSelectedCard(null);
 
             }
-
         }
-
-        //Haaji added this
     }
 
     private void controlActivateTrapEffect(Player player) {

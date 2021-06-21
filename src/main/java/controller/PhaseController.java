@@ -62,21 +62,21 @@ public abstract class PhaseController {
             controlShowCardSelectedCommand();
         } else if (matcherForAttackToCard.find()) {
             controlAttackToCardCommand(Integer.parseInt(matcherForAttackToCard.group(1)));
-        } else if(command.startsWith("duel set-winner ")){
+        } else if (command.startsWith("duel set-winner ")) {
             controlWinningCheatCommand(command);
         } else if (command.startsWith("select ")) {
             controlSelectionCommands(command);
         } else {
             boolean isCommandCheat = false;
             Matcher[] cheatMatchers = getCheatMatchers(command);
-            for (int i=0; i<2; i++){
-                if(cheatMatchers[i].find()){
+            for (int i = 0; i < 2; i++) {
+                if (cheatMatchers[i].find()) {
                     phase.getPlayerByTurn().increaseLifePoint(Integer.parseInt(cheatMatchers[i].group(1)));
                     view.cheatActivated();
                     isCommandCheat = true;
                 }
             }
-            if(!isCommandCheat){
+            if (!isCommandCheat) {
                 view.invalidCommand();
             }
         }
@@ -90,9 +90,9 @@ public abstract class PhaseController {
         return MenuEnum.CONTINUE;
     }
 
-    protected void controlWinningCheatCommand(String command){
+    protected void controlWinningCheatCommand(String command) {
         Matcher matcherForCheat = Pattern.compile("^duel set-winner (.+?)$").matcher(command);
-        if(matcherForCheat.find() && matcherForCheat.group(1).equals(phase.getPlayerByTurn().getUser().getNickname())){
+        if (matcherForCheat.find() && matcherForCheat.group(1).equals(phase.getPlayerByTurn().getUser().getNickname())) {
             phase.getRivalPlayerByTurn().setSurrenderedOrLostByCheat(true);
             phase.getRivalPlayerByTurn().setLifePoint(0);
         } else {
@@ -158,7 +158,7 @@ public abstract class PhaseController {
                 if (phase.getPlayerByTurn().getSelectedCard() instanceof SpellCard) {
 
                 } else if (phase.getPlayerByTurn().getSelectedCard() instanceof TrapCard) {
-                    TrapEffectController.searchForThisEffect(this,phase, rivalCard, (TrapCard) phase.getPlayerByTurn().getSelectedCard());
+                    TrapEffectController.searchForThisEffect(this, phase, rivalCard, (TrapCard) phase.getPlayerByTurn().getSelectedCard());
                 }
                 view.spellOrTrapActivated(phase.getPlayerByTurn().getSelectedCard() instanceof SpellCard ? "Spell" : "Trap");
                 return MenuEnum.BACK;
@@ -169,6 +169,8 @@ public abstract class PhaseController {
             controlSelectOwnSpellCommand(Integer.parseInt(selectCommandMatchers[3].group(1)), true, recentAction);
         } else if (selection.equals("cancel")) {
             return MenuEnum.BACK;
+        } else if (selection.equals("card show --selected") || selection.equals("card show -s")) {
+            controlShowCardSelectedCommand();
         } else {
             view.canNotPlayThisKindOfMoves();
         }
@@ -334,14 +336,14 @@ public abstract class PhaseController {
             } else {
                 //TODO: search for spell cards can be activated
             }
-        } else if (recentAction == RecentActionsInGame.SUMMONED_A_MONSTER_WITH_LESS_THAN_1000_ATTACK_POINT) {
+        } else if (recentAction == RecentActionsInGame.RIVAL_SUMMONED_A_MONSTER_WITH_LESS_THAN_1000_ATTACK_POINT) {
             if (card instanceof TrapCard) {
                 return ((TrapCard) card).getEffect() == TrapEffect.TORRENTIAL_TRIBUTE ||
                         ((TrapCard) card).getEffect() == TrapEffect.SOLEMN_WARNING;
             } else {
                 //TODO: search for spell cards can be activated
             }
-        } else if (recentAction == RecentActionsInGame.SUMMONED_A_MONSTER_WITH_1000_OR_MORE_ATTACK_POINT) {
+        } else if (recentAction == RecentActionsInGame.RIVAL_SUMMONED_A_MONSTER_WITH_1000_OR_MORE_ATTACK_POINT) {
             if (card instanceof TrapCard) {
                 return ((TrapCard) card).getEffect() == TrapEffect.TORRENTIAL_TRIBUTE ||
                         ((TrapCard) card).getEffect() == TrapEffect.TRAP_HOLE ||
@@ -349,7 +351,7 @@ public abstract class PhaseController {
             } else {
                 //TODO: search for spell cards can be activated
             }
-        } else if (recentAction == RecentActionsInGame.SPECIAL_SUMMONED) {
+        } else if (recentAction == RecentActionsInGame.RIVAL_SPECIAL_SUMMONED) {
             if (card instanceof TrapCard) {
                 return ((TrapCard) card).getEffect() == TrapEffect.TORRENTIAL_TRIBUTE ||
                         ((TrapCard) card).getEffect() == TrapEffect.SOLEMN_WARNING;
@@ -364,37 +366,36 @@ public abstract class PhaseController {
             } else {
                 //TODO: search for spell cards can be activated
             }
+        } else if (recentAction == RecentActionsInGame.PLAYER_SUMMONED) {
+            if (card instanceof TrapCard) {
+                return ((TrapCard) card).getEffect() == TrapEffect.TORRENTIAL_TRIBUTE;
+            } else {
+                //TODO: search for spell cards can be activated
+            }
         }
         return false;
     }
 
     protected void checkForPossibleSpellOrTrapEffect(Card rivalCard, Card ourCard, RecentActionsInGame recentAction) {
+        //Fucking torrential tribute
         phase.getPlayerByTurn().setAbleToActivateTrapCard(true);
+        runAllMonsterPowersInZone(phase.getRivalPlayerByTurn());
+        if(isActionAboutSummon(recentAction)){
+            if(canPlayerActivateEffect(phase.getPlayerByTurn(), RecentActionsInGame.PLAYER_SUMMONED)){
+                activateATrapOrSpellAfterAnAction(rivalCard, ourCard, RecentActionsInGame.PLAYER_SUMMONED);
+            }
+        }
+        if(phase.getFirstPlayer().getMonsterCardsInZone().isEmpty() && phase.getSecondPlayer().getMonsterCardsInZone().isEmpty()){
+            return;
+        }
+        //End
+        phase.getRivalPlayerByTurn().setAbleToActivateTrapCard(true);
         runAllMonsterPowersInZone(phase.getPlayerByTurn());
-        //TODO Activate a trap after summoning a monster from own cards
         if (canPlayerActivateEffect(phase.getRivalPlayerByTurn(), recentAction)) {
             phase.changeTurn();
             view.nowItWillBeRivalsTurn(phase.getPlayerByTurn().getUser().getNickname());
             view.printString(phase.getMapToString());
-            view.doYouWantToActiveSpellOrTrap();
-            while (true) {
-                String yesOrNo = view.scanString();
-                if (yesOrNo.equals("yes")) {
-                    phase.getPlayerByTurn().setSelectedCard(null);
-                    while (true) {
-                        String selection = view.scanString();
-                        if (processActivatingEffectInRivalTurnCommand(rivalCard, ourCard, selection, recentAction) == MenuEnum.BACK) {
-                            break;
-                        }
-                    }
-                    phase.getPlayerByTurn().setSelectedCard(null);
-                    break;
-                } else if (yesOrNo.equals("no")) {
-                    break;
-                } else {
-                    view.invalidCommand();
-                }
-            }
+            activateATrapOrSpellAfterAnAction(rivalCard, ourCard, recentAction);
             phase.changeTurn();
             view.nowItWillBeRivalsTurn(phase.getPlayerByTurn().getUser().getNickname());
         }
@@ -402,8 +403,36 @@ public abstract class PhaseController {
         runAllMonsterPowersInZone(phase.getPlayerByTurn());
     }
 
+    protected boolean isActionAboutSummon(RecentActionsInGame recentAction){
+        return recentAction == RecentActionsInGame.RIVAL_SPECIAL_SUMMONED ||
+                recentAction == RecentActionsInGame.RIVAL_SUMMONED_A_MONSTER_WITH_1000_OR_MORE_ATTACK_POINT ||
+                recentAction == RecentActionsInGame.RIVAL_SUMMONED_A_MONSTER_WITH_LESS_THAN_1000_ATTACK_POINT;
+    }
+
+    private void activateATrapOrSpellAfterAnAction(Card rivalCard, Card ourCard, RecentActionsInGame recentAction) {
+        view.doYouWantToActiveSpellOrTrap();
+        while (true) {
+            String yesOrNo = view.scanString();
+            if (yesOrNo.equals("yes")) {
+                phase.getPlayerByTurn().setSelectedCard(null);
+                while (true) {
+                    String selection = view.scanString();
+                    if (processActivatingEffectInRivalTurnCommand(rivalCard, ourCard, selection, recentAction) == MenuEnum.BACK) {
+                        break;
+                    }
+                }
+                phase.getPlayerByTurn().setSelectedCard(null);
+                break;
+            } else if (yesOrNo.equals("no")) {
+                break;
+            } else {
+                view.invalidCommand();
+            }
+        }
+    }
+
     protected void runAllMonsterPowersInZone(Player player) {
-        for (Map.Entry<Integer, MonsterCard> mapElement : player.getMonsterCardsInZone().entrySet()){
+        for (Map.Entry<Integer, MonsterCard> mapElement : player.getMonsterCardsInZone().entrySet()) {
             monsterPowers.run(mapElement.getValue(), null);
         }
     }
@@ -455,7 +484,7 @@ public abstract class PhaseController {
         return selectCommandMatchers;
     }
 
-    private Matcher[] getCheatMatchers(String command){
+    private Matcher[] getCheatMatchers(String command) {
         Pattern patternForIncreaseLP = Pattern.compile("^increase --LP (\\d+)$");
         Pattern patternForIncreaseLP2 = Pattern.compile("^increase -L (\\d+)$");
         Matcher[] cheatMatchers = new Matcher[2];

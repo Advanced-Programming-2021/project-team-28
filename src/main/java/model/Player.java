@@ -1,6 +1,7 @@
 package model;
 
 import enums.MonsterCardPosition;
+import enums.SpellOrTrapCardPosition;
 
 import java.util.*;
 
@@ -227,6 +228,10 @@ public class Player {
         try {
             if(card instanceof MonsterCard){
                 resetMonsterCardDataAfterGoingToGraveyard((MonsterCard) card);
+            } else if (card instanceof SpellCard){
+                ((SpellCard) card).setPosition(SpellOrTrapCardPosition.NOT_IN_PLAY_ZONE);
+            } else if (card instanceof TrapCard){
+                ((TrapCard) card).setPosition(SpellOrTrapCardPosition.NOT_IN_PLAY_ZONE);
             }
         } catch (Exception exception){
             exception.printStackTrace();
