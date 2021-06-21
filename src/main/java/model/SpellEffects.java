@@ -77,7 +77,7 @@ public class SpellEffects {
 
         }
     }
-
+    //type: quick
     private void mysticalSpaceTyphoon(SpellCard activeCard) {
         while (true) {
             effectsView.selectSpellZoneYouWantToSelectCardFrom();
@@ -138,6 +138,7 @@ public class SpellEffects {
             round.getRivalPlayerByTurn().getSpellOrTrapCardsInZone().clear();
         }
     }
+
 
     public void darkHole(SpellCard activeCard) {
         if (activeCard.getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
@@ -373,7 +374,7 @@ public class SpellEffects {
 
     public void swordOfDarkDestruction(SpellCard card) {
         if (card.getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
-            if (!card.isHasDeployedEffect()) {
+            if (!card.hasDeployedEffect()) {
 
             }
         }

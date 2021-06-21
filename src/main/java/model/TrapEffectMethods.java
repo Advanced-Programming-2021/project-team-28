@@ -23,6 +23,11 @@ public class TrapEffectMethods {
 
     public static void mirrorForce(Player player, Player rivalPlayer, Card rivalAttackerCard, TrapCard trapCard) {
         ((MonsterCard) rivalAttackerCard).setCardActionCanceledByAnEffect(true);
+        for (Map.Entry<Integer, MonsterCard> mapElement : rivalPlayer.getMonsterCardsInZone().entrySet()){
+            if(mapElement.getValue().getPosition() == MonsterCardPosition.OFFENSIVE_OCCUPIED){
+                rivalPlayer.addCardToGraveyard(mapElement.getValue());
+            }
+        }
         Set<Map.Entry<Integer, MonsterCard>> entrySet = rivalPlayer.getMonsterCardsInZone().entrySet();
         entrySet.removeIf(entry -> entry.getValue().getPosition() == MonsterCardPosition.OFFENSIVE_OCCUPIED);
         player.addCardToGraveyard(trapCard);
@@ -38,6 +43,8 @@ public class TrapEffectMethods {
     }
 
     public static void torrentialTribute(Phase phase, TrapCard trapCard) {
+        addAllCardsOfMonsterZoneToGraveyard(phase.getFirstPlayer());
+        addAllCardsOfMonsterZoneToGraveyard(phase.getSecondPlayer());
         phase.getFirstPlayer().getMonsterCardsInZone().clear();
         phase.getSecondPlayer().getMonsterCardsInZone().clear();
         Player player = phase.getPlayerByTurn();
@@ -46,6 +53,7 @@ public class TrapEffectMethods {
     }
 
     public static void trapHole(Player player, Player rivalPlayer, Card rivalSummonedCard, TrapCard trapCard) {
+        rivalPlayer.addCardToGraveyard(rivalSummonedCard);
         rivalPlayer.getMonsterCardsInZone().remove
                 (rivalPlayer.getLocationOfThisMonsterCardInZone((MonsterCard) rivalSummonedCard), rivalSummonedCard);
         player.addCardToGraveyard(trapCard);
@@ -55,6 +63,7 @@ public class TrapEffectMethods {
     public static void solemnWarning(Player player, Player rivalPlayer, Card rivalSummonedCard, TrapCard trapCard) {
         player.decreaseLifePoint(2000);
         ((MonsterCard) rivalSummonedCard).setCardActionCanceledByAnEffect(true);
+        rivalPlayer.addCardToGraveyard(rivalSummonedCard);
         rivalPlayer.getMonsterCardsInZone().remove
                 (rivalPlayer.getLocationOfThisMonsterCardInZone((MonsterCard) rivalSummonedCard), rivalSummonedCard);
         player.addCardToGraveyard(trapCard);
@@ -124,6 +133,12 @@ public class TrapEffectMethods {
             } else {
                 view.invalidCardName();
             }
+        }
+    }
+
+    private static void addAllCardsOfMonsterZoneToGraveyard(Player player){
+        for (Map.Entry<Integer, MonsterCard> mapElement : player.getMonsterCardsInZone().entrySet()){
+            player.addCardToGraveyard(mapElement.getValue());
         }
     }
 }

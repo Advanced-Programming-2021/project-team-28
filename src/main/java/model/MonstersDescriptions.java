@@ -17,7 +17,6 @@ public class MonstersDescriptions {
     public static String heroOfTheEast= "Feel da strength ah dis sword-swinging samurai from da Far East.";
     public static String battleWarrior = "A warrior that fights with his bare hands!!!";
     public static String crawlingDragon = "This weakened dragon can no longer fly, but is still a deadly force to be reckoned with.";
-    //TODO : check if the "s work correctly
     public static String flameManipulator = "This Spellcaster attacks enemies with fire-related spells such as \"Sea of Flames\" and \"Wall of Fire\".";
     public static String blueEyesDragon = "This legendary dragon is a powerful engine of destruction. Virtually invincible, very few have faced this awesome creature and lived to tell the tale.";
     public static String crabTurtle = "This monster can only be Ritual Summoned with the Ritual Spell Card, \"Turtle Oath\". You must also offer monsters whose total Level Stars equal 8 or more as a Tribute from the field or your hand.";
@@ -44,5 +43,5 @@ public class MonstersDescriptions {
     public static String terraTigerTheEmpoweredWarrior = "When this card is Normal Summoned: You can Special Summon 1 Level 4 or lower Normal Monster from your hand in Defense Position.";
     public static String theTricky = "You can Special Summon this card (from your hand) by discarding 1 card.";
     public static String spiralSerpent = "When huge whirlpools lay cities asunder, it is the hunger of this sea serpent at work. No one has ever escaped its dreaded Spiral Wave to accurately describe the terror they experienced.";
-    public static String professorFazli = "The master of snakes(Specially pythons) the man who lead us in a great battle to make AP a project based course. ";
+    public static String professorFazli = "The master of snakes(Specially pythons) the man who led us in a great battle to make AP a project based course. ";
 }

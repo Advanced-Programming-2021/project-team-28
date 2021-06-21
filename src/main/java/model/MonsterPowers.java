@@ -55,6 +55,7 @@ public class MonsterPowers {
 
         int opponentCardLocation;
         if (manEaterBug.isFlipped()) {
+            manEaterBug.setFlipped(false);
             boolean needsToChangeTurn = false;
             if (manEaterBug.getOwnerUsername().equals(phase.getRivalPlayerByTurn().getUser().getUsername())) {
                 needsToChangeTurn = true;
@@ -77,7 +78,6 @@ public class MonsterPowers {
                     opponentCard.setCardActionCanceledByAnEffect(true);
                 }
                 opponentCard.setGoingToGraveyard(true);
-                this.run(opponentCard, manEaterBug);
                 phase.getRivalPlayerByTurn().addCardToGraveyard(opponentCard);
                 phase.getRivalPlayerByTurn().removeCardFromCardsInZone(opponentCard, opponentCardLocation);
             }
@@ -87,7 +87,6 @@ public class MonsterPowers {
             }
 
         }
-        manEaterBug.setFlipped(false);
     }
 
     private void theCalculator(MonsterCard activeCard) {
@@ -108,14 +107,6 @@ public class MonsterPowers {
                     phase.getSecondPlayer().setAbleToActivateTrapCard(false);
                 } else {
                     phase.getFirstPlayer().setAbleToActivateTrapCard(false);
-                }
-            } else {
-                if (User.getUserByUsername(activeCard.getOwnerUsername()) == phase.getFirstPlayer().getUser()) {
-                    phase.getSecondPlayer().setAbleToActivateTrapCard(true);
-                    activeCard.setGoingToGraveyard(false);
-                } else {
-                    phase.getFirstPlayer().setAbleToActivateTrapCard(true);
-                    activeCard.setGoingToGraveyard(false);
                 }
             }
         }
