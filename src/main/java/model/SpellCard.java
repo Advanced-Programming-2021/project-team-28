@@ -74,7 +74,7 @@ public class SpellCard extends Card{
         this.icon = icon;
     }
 
-    public boolean isHasDeployedEffect() {
+    public boolean hasDeployedEffect() {
         return hasDeployedEffect;
     }
 

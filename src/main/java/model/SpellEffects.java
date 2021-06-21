@@ -373,7 +373,7 @@ public class SpellEffects {
 
     public void swordOfDarkDestruction(SpellCard card) {
         if (card.getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
-            if (!card.isHasDeployedEffect()) {
+            if (!card.hasDeployedEffect()) {
 
             }
         }

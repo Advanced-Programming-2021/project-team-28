@@ -5,7 +5,6 @@ import model.*;
 import view.MainPhaseView;
 import view.ScannerInstance;
 
-import java.util.Map;
 import java.util.Scanner;
 
 import static enums.MonsterCardPosition.*;
@@ -349,7 +348,7 @@ public class MainPhaseController extends PhaseController {
             ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
             mainPhaseView.spellActivated();
         } else if (((SpellCard) player.getSelectedCard()).getIcon() == SpellIcon.NORMAL) {
-            if (((SpellCard) player.getSelectedCard()).isHasDeployedEffect())
+            if (((SpellCard) player.getSelectedCard()).hasDeployedEffect())
                 mainPhaseView.effectAlreadyActivated();
             else {
                 if (((SpellCard) player.getSelectedCard()).getPosition() == SpellOrTrapCardPosition.NOT_IN_PLAY_ZONE) {
