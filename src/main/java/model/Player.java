@@ -264,6 +264,9 @@ public class Player {
     }
 
     public String graveyardToString() {
+        if(cardsInGraveyard.size() == 0){
+            return "graveyard empty";
+        }
         StringBuilder graveyardToStringBuilder = new StringBuilder();
         for (int i = 1; i <= cardsInGraveyard.size(); i++) {
             graveyardToStringBuilder.append(i);

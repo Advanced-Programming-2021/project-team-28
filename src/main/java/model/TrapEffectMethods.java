@@ -97,6 +97,7 @@ public class TrapEffectMethods {
                 player.removeCardFromCardsInZone(trapCard, player.getLocationOfThisSpellOrTrapCardInZone(trapCard));
                 break;
             } else if (cardName.equals("cancel")) {
+                trapCard.setActivationCancelled(true);
                 break;
             } else {
                 view.invalidCardName();
@@ -131,6 +132,7 @@ public class TrapEffectMethods {
                     view.youDoNotHaveThisCardInGraveYard();
                 }
             } else if (cardName.equals("cancel")) {
+                trapCard.setActivationCancelled(true);
                 break;
             } else {
                 view.invalidCardName();

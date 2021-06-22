@@ -26,6 +26,7 @@ public class TrapCard extends Card implements Cloneable {
     @Expose
     public static ArrayList<TrapCard> allTrapCard = new ArrayList<>();
     private boolean hasSetInThisTurn = false;
+    private boolean isActivationCancelled = false;
 
     public TrapCard(String ownerUsername, String name, String number, String description, TrapIcon icon, TrapEffect effect) {
         super(ownerUsername, name, number, description);
@@ -37,6 +38,14 @@ public class TrapCard extends Card implements Cloneable {
 
     public TrapCard() {
 
+    }
+
+    public boolean isActivationCancelled() {
+        return isActivationCancelled;
+    }
+
+    public void setActivationCancelled(boolean activationCancelled) {
+        isActivationCancelled = activationCancelled;
     }
 
     public boolean hasSetInThisTurn() {

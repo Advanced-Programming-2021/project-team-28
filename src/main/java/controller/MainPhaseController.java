@@ -13,7 +13,7 @@ public class MainPhaseController extends PhaseController {
 
     protected boolean isSummonOrSetMonsterCard;
 
-    SpellEffects spellEffects = new SpellEffects(phase.getRound());
+    SpellEffects spellEffects = new SpellEffects(phase.getRound(), this);
 
 
     public MainPhaseController(MainPhase mainPhase) {
@@ -66,28 +66,31 @@ public class MainPhaseController extends PhaseController {
         if (player.getMonsterCardsInZone().size() < tributeNeeded) {
             mainPhaseView.printString("there are not enough cards for tribute");
         } else {
-            Scanner scanner = ScannerInstance.getInstance().getScanner();
-            try {
-                if (tributeNeeded == 1) {
-                    payOneTribute(player, isForSummon, scanner);
-                } else {
-                    payTwoTributes(player, isForSummon, scanner);
-                }
-            } catch (NumberFormatException exception) {
-                view.invalidLocation();
+            if (tributeNeeded == 1) {
+                payOneTribute(player, isForSummon);
+            } else {
+                payTwoTributes(player, isForSummon);
             }
-
         }
 
     }
 
-    private void payTwoTributes(Player player, boolean isForSummon, Scanner scanner) {
+    private void payTwoTributes(Player player, boolean isForSummon) {
         int firstTributeAddress;
         int secondTributeAddress;
         mainPhaseView.chooseMonsterLocationForTribute(2);
         while (true) {
-            firstTributeAddress = Integer.parseInt(scanner.nextLine());
-            secondTributeAddress = Integer.parseInt(scanner.nextLine());
+            String firstTributeAddressToString = mainPhaseView.scanString();
+            if (firstTributeAddressToString.equals("cancel")) return;
+            String secondTributeAddressToString = mainPhaseView.scanString();
+            if (secondTributeAddressToString.equals("cancel")) return;
+            try {
+                firstTributeAddress = Integer.parseInt(firstTributeAddressToString);
+                secondTributeAddress = Integer.parseInt(secondTributeAddressToString);
+            } catch (NumberFormatException exception) {
+                view.invalidLocation();
+                continue;
+            }
             if (firstTributeAddress != secondTributeAddress) {
                 break;
             }
@@ -109,21 +112,33 @@ public class MainPhaseController extends PhaseController {
         }
     }
 
-    private void payOneTribute(Player player, boolean isForSummon, Scanner scanner) {
+    private void payOneTribute(Player player, boolean isForSummon) {
         mainPhaseView.chooseMonsterLocationForTribute(1);
-
-        int tributeAddress = Integer.parseInt(scanner.nextLine());
-        if (!player.doesHaveMonsterCardInThisLocation(tributeAddress)) {
-            mainPhaseView.printString("there is no monster on one of these addresses");
-        } else {
-            player.addCardToGraveyard(player.getMonsterCardsInZone().get(tributeAddress));
-            player.removeCardFromCardsInZone(player.getMonsterCardsInZone().get(tributeAddress), tributeAddress);
-            if (isForSummon) {
-                summonMonsterCard(player, (MonsterCard) player.getSelectedCard(), OFFENSIVE_OCCUPIED);
+        while (true) {
+            String tributeAddressToString = mainPhaseView.scanString();
+            if (tributeAddressToString.equals("cancel")) return;
+            int tributeAddress;
+            try {
+                tributeAddress = Integer.parseInt(tributeAddressToString);
+            } catch (NumberFormatException exception) {
+                mainPhaseView.invalidLocation();
+                continue;
+            }
+            if (!player.doesHaveMonsterCardInThisLocation(tributeAddress)) {
+                mainPhaseView.printString("there is no monster on one of these addresses");
             } else {
-                setMonsterCard(player, (MonsterCard) player.getSelectedCard());
+                player.addCardToGraveyard(player.getMonsterCardsInZone().get(tributeAddress));
+                player.removeCardFromCardsInZone(player.getMonsterCardsInZone().get(tributeAddress), tributeAddress);
+                if (isForSummon) {
+                    summonMonsterCard(player, (MonsterCard) player.getSelectedCard(), OFFENSIVE_OCCUPIED);
+                } else {
+                    setMonsterCard(player, (MonsterCard) player.getSelectedCard());
+                }
+                return;
             }
         }
+
+
     }
 
     public void summonMonsterCard(Player player, MonsterCard card, MonsterCardPosition position) {
@@ -146,7 +161,7 @@ public class MainPhaseController extends PhaseController {
 
     }
 
-    private void runFieldZoneSpells(Player player) {
+    public void runFieldZoneSpells(Player player) {
         if (player.getFieldZoneCard() != null) {
             spellEffects.run((SpellCard) player.getFieldZoneCard());
         }
@@ -155,7 +170,7 @@ public class MainPhaseController extends PhaseController {
         }
     }
 
-    private void checkTrapActionsAfterSummon(MonsterCard card) {
+    public void checkTrapActionsAfterSummon(MonsterCard card) {
         if (card.isSpecialSummoned()) {
             checkForPossibleSpellOrTrapEffect(card, null,
                     RecentActionsInGame.RIVAL_SPECIAL_SUMMONED);
@@ -298,7 +313,7 @@ public class MainPhaseController extends PhaseController {
     @Override
     protected void controlActivateEffectCommand() {
         Player player = phase.getPlayerByTurn();
-        if(!player.isSelectedCardFromSpellAndTrapZone() && !player.isSelectedCardFromHand()){
+        if (!player.isSelectedCardFromSpellAndTrapZone() && !player.isSelectedCardFromHand()) {
             view.thisCardCanNotBeActivated();
             return;
         }
@@ -327,7 +342,7 @@ public class MainPhaseController extends PhaseController {
     }
 
     private void activateRitualSpell(Player player) {
-        if(player.isSelectedCardFromHand()){
+        if (player.isSelectedCardFromHand()) {
             player.addCardToCardsInZone(player.getSelectedCard());
         }
         ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
@@ -335,22 +350,31 @@ public class MainPhaseController extends PhaseController {
     }
 
     private void activateNormalSpell(Player player) {
-        if (((SpellCard) player.getSelectedCard()).hasDeployedEffect())
+        if (((SpellCard) player.getSelectedCard()).getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
             mainPhaseView.effectAlreadyActivated();
-        else {
-            if (((SpellCard) player.getSelectedCard()).getPosition() == SpellOrTrapCardPosition.NOT_IN_PLAY_ZONE) {
-                if (phase.getPlayerByTurn().isSpellCardZoneFull()) {
-                    mainPhaseView.printString("spell card zone is full");
-                    phase.getPlayerByTurn().setSelectedCard(null);
+        } else {
+            if (player.getSelectedCard().getName().equals("Monster Reborn")) {
+                if (phase.getFirstPlayer().getCardsInGraveyard().isEmpty() && phase.getSecondPlayer().getCardsInGraveyard().isEmpty()) {
+                    mainPhaseView.noWayToSpecialSummon();
                     return;
-                } else {
-                    player.addCardToCardsInZone(player.getSelectedCard());
-                    player.removeCardFromHand(player.getSelectedCard());
-
                 }
             }
-            ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
+            if (((SpellCard) player.getSelectedCard()).getPosition() == SpellOrTrapCardPosition.NOT_IN_PLAY_ZONE
+                    && phase.getPlayerByTurn().isSpellCardZoneFull()) {
+                mainPhaseView.printString("spell card zone is full");
+                phase.getPlayerByTurn().setSelectedCard(null);
+                return;
+            }
             spellEffects.run((SpellCard) player.getSelectedCard());
+            if (((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
+                ((SpellCard) player.getSelectedCard()).setActivationCancelled(false);
+                return;
+            }
+            if (((SpellCard) player.getSelectedCard()).getPosition() == SpellOrTrapCardPosition.NOT_IN_PLAY_ZONE) {
+                player.addCardToCardsInZone(player.getSelectedCard());
+                player.removeCardFromHand(player.getSelectedCard());
+            }
+            ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
             mainPhaseView.spellActivated();
             phase.getPlayerByTurn().addCardToGraveyard(phase.getPlayerByTurn().getSelectedCard());
             phase.getPlayerByTurn().removeCardFromCardsInZone(phase.getPlayerByTurn().getSelectedCard()
@@ -396,13 +420,18 @@ public class MainPhaseController extends PhaseController {
                 runAllMonsterPowersInZone(player);
                 if (canCardBeActivatedAfterThisAction(player, RecentActionsInGame.IN_OUR_MAIN_PHASE, player.getSelectedCard())) {
                     TrapEffectController.searchForThisEffect(this, phase, null, (TrapCard) player.getSelectedCard());
-                    view.spellOrTrapActivated("Trap");
+                    if(((TrapCard) player.getSelectedCard()).isActivationCancelled()){
+                        ((TrapCard) player.getSelectedCard()).setActivationCancelled(false);
+                        mainPhaseView.activationCancelled();
+                    } else {
+                        mainPhaseView.spellOrTrapActivated("Trap");
+                    }
                 } else {
-                    view.preparationsOfSpellHaveNotBeenDoneYet();
+                    mainPhaseView.preparationsOfSpellHaveNotBeenDoneYet();
                 }
             }
         } else {
-            view.thisCardCanNotBeActivated();
+            mainPhaseView.thisCardCanNotBeActivated();
         }
     }
 

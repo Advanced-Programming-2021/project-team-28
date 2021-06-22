@@ -306,11 +306,7 @@ public abstract class PhaseController {
     }
 
     public void controlShowGraveyardCommand() {
-        if (phase.getPlayerByTurn().getCardsInGraveyard().size() > 0) {
-            view.printString(phase.getPlayerByTurn().graveyardToString());
-        } else {
-            view.graveyardEmpty();
-        }
+        view.printString(phase.getPlayerByTurn().graveyardToString());
     }
 
     public boolean canPlayerActivateEffect(Player player, RecentActionsInGame recentAction) {
@@ -380,12 +376,12 @@ public abstract class PhaseController {
         //Fucking torrential tribute
         phase.getPlayerByTurn().setAbleToActivateTrapCard(true);
         runAllMonsterPowersInZone(phase.getRivalPlayerByTurn());
-        if(isActionAboutSummon(recentAction)){
-            if(canPlayerActivateEffect(phase.getPlayerByTurn(), RecentActionsInGame.PLAYER_SUMMONED)){
+        if (isActionAboutSummon(recentAction)) {
+            if (canPlayerActivateEffect(phase.getPlayerByTurn(), RecentActionsInGame.PLAYER_SUMMONED)) {
                 activateATrapOrSpellAfterAnAction(rivalCard, ourCard, RecentActionsInGame.PLAYER_SUMMONED);
             }
         }
-        if(phase.getFirstPlayer().getMonsterCardsInZone().isEmpty() && phase.getSecondPlayer().getMonsterCardsInZone().isEmpty()){
+        if (phase.getFirstPlayer().getMonsterCardsInZone().isEmpty() && phase.getSecondPlayer().getMonsterCardsInZone().isEmpty()) {
             return;
         }
         //End
@@ -403,7 +399,7 @@ public abstract class PhaseController {
         runAllMonsterPowersInZone(phase.getPlayerByTurn());
     }
 
-    protected boolean isActionAboutSummon(RecentActionsInGame recentAction){
+    protected boolean isActionAboutSummon(RecentActionsInGame recentAction) {
         return recentAction == RecentActionsInGame.RIVAL_SPECIAL_SUMMONED ||
                 recentAction == RecentActionsInGame.RIVAL_SUMMONED_A_MONSTER_WITH_1000_OR_MORE_ATTACK_POINT ||
                 recentAction == RecentActionsInGame.RIVAL_SUMMONED_A_MONSTER_WITH_LESS_THAN_1000_ATTACK_POINT;
@@ -431,7 +427,7 @@ public abstract class PhaseController {
         }
     }
 
-    protected void runAllMonsterPowersInZone(Player player) {
+    public void runAllMonsterPowersInZone(Player player) {
         for (Map.Entry<Integer, MonsterCard> mapElement : player.getMonsterCardsInZone().entrySet()) {
             monsterPowers.run(mapElement.getValue(), null);
         }
