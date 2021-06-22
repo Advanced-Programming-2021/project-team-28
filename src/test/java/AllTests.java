@@ -29,14 +29,17 @@ public class AllTests {
     @Test
     public void createUserTest() throws Exception {
         LoginMenuController controller = new LoginMenuController();
-        controller.processCommand("user create -u mam -n oooo -p jfjfjjf");
-        controller.processCommand("user create -p password -u mam -n nickname");
+        controller.processCommand("user create -u firstUsername -n firstNickname -p firstPassword");
+        controller.processCommand("user create -p password -u firstUsername -n nickname");
         controller.processCommand("user create -u reza -p mammad -n jaafar");
         controller.processCommand("user create -p reza -n mammad -u jaafar");
         controller.processCommand("user create");
         Assertions.assertEquals(3, User.getUsers().size());
         Assertions.assertNull(User.getUserByUsername("newUser"));
         Assertions.assertNull(User.getUserByNickName("nickname"));
+        Assertions.assertNotNull(User.getUserByUsername("firstUsername"));
+        Assertions.assertFalse(User.isNicknameAvailable("firstNickname"));
+        Assertions.assertTrue(User.isPasswordCorrect("firstUsername", "firstPassword"));
         Assertions.assertEquals(User.getUserByUsername("reza"), User.getUserByNickName("jaafar"));
     }
 }

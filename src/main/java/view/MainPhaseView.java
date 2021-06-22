@@ -41,4 +41,11 @@ public class MainPhaseView extends PhaseView {
         System.out.println("spell activated");
     }
 
+    public void noWayToSpecialSummon() {
+        System.out.println("there is no way you could special summon a monster");
+    }
+
+    public void activationCancelled() {
+        System.out.println("Activation cancelled");
+    }
 }

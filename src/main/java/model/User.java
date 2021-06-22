@@ -43,9 +43,9 @@ public class User {
     private static ArrayList<User> users = new ArrayList<>();
 
     public User(String username, String password, String nickname) {
-        this.username = username;
-        this.password = password;
-        this.nickname = nickname;
+        setUsername(username);
+        setPassword(password);
+        setNickname(nickname);
         users.add(this);
     }
 

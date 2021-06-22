@@ -119,6 +119,7 @@ public class BattlePhaseController extends PhaseController {
                 defenderCard.setFlipped(true);
             }
             monsterPowers.run(defenderCard, (MonsterCard) attackerCard);
+            defenderCard.setFlipped(false);
             checkForPossibleSpellOrTrapEffect(attackerCard, defenderCard, RecentActionsInGame.DECLARED_A_BATTLE);
             if (((MonsterCard) attackerCard).isCardActionCanceledByAnEffect()) {
                 ((MonsterCard) attackerCard).setCardActionCanceledByAnEffect(false);

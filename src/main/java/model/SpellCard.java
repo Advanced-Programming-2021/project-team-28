@@ -26,7 +26,7 @@ public class SpellCard extends Card{
     @Expose
     private SpellOrTrapCardPosition position;
 
-    private boolean hasDeployedEffect = false;
+    private boolean isActivationCancelled = false;
 
 
 
@@ -74,12 +74,12 @@ public class SpellCard extends Card{
         this.icon = icon;
     }
 
-    public boolean hasDeployedEffect() {
-        return hasDeployedEffect;
+    public boolean isActivationCancelled() {
+        return isActivationCancelled;
     }
 
-    public void setHasDeployedEffect(boolean hasDeployedEffect) {
-        this.hasDeployedEffect = hasDeployedEffect;
+    public void setActivationCancelled(boolean activationCancelled) {
+        isActivationCancelled = activationCancelled;
     }
 
     @Override

@@ -113,10 +113,6 @@ public class PhaseView {
         System.out.println("card is not visible");
     }
 
-    public void graveyardEmpty(){
-        System.out.println("graveyard empty");
-    }
-
     public void monsterZoneIsFull(){System.out.println("monster card zone is full");}
 
     public void thisCardCanNotBeActivated(){

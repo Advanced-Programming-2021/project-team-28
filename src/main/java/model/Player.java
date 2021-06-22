@@ -1,6 +1,7 @@
 package model;
 
 import enums.MonsterCardPosition;
+import enums.SpellOrTrapCardPosition;
 
 import java.util.*;
 
@@ -227,6 +228,10 @@ public class Player {
         try {
             if(card instanceof MonsterCard){
                 resetMonsterCardDataAfterGoingToGraveyard((MonsterCard) card);
+            } else if (card instanceof SpellCard){
+                ((SpellCard) card).setPosition(SpellOrTrapCardPosition.NOT_IN_PLAY_ZONE);
+            } else if (card instanceof TrapCard){
+                ((TrapCard) card).setPosition(SpellOrTrapCardPosition.NOT_IN_PLAY_ZONE);
             }
         } catch (Exception exception){
             exception.printStackTrace();
@@ -259,6 +264,9 @@ public class Player {
     }
 
     public String graveyardToString() {
+        if(cardsInGraveyard.size() == 0){
+            return "graveyard empty";
+        }
         StringBuilder graveyardToStringBuilder = new StringBuilder();
         for (int i = 1; i <= cardsInGraveyard.size(); i++) {
             graveyardToStringBuilder.append(i);
@@ -392,6 +400,12 @@ public class Player {
 
     public MonsterCard getMonsterCardByLocationFromZone(int location) {
         return monsterCardsInZone.get(location);
+    }
+
+    public void addAllCardsOfMonsterZoneToGraveyard(){
+        for (Map.Entry<Integer, MonsterCard> mapElement : getMonsterCardsInZone().entrySet()){
+            addCardToGraveyard(mapElement.getValue());
+        }
     }
 
 }

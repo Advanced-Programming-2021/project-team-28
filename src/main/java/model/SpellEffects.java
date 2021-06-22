@@ -1,5 +1,6 @@
 package model;
 
+import controller.MainPhaseController;
 import enums.MonsterType;
 import enums.SpellIcon;
 import enums.SpellOrTrapCardPosition;
@@ -9,14 +10,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static enums.MonsterCardPosition.DEFENSIVE_OCCUPIED;
+import static enums.MonsterCardPosition.OFFENSIVE_OCCUPIED;
+
 public class SpellEffects {
 
 
     private Round round;
+    private MainPhaseController controller;
     private SpellEffectsView effectsView = new SpellEffectsView(this);
 
 
-    public SpellEffects(Round round) {
+    public SpellEffects(Round round, MainPhaseController controller) {
+        this.controller = controller;
         this.round = round;
     }
 
@@ -37,7 +43,7 @@ public class SpellEffects {
                 raigeki(activeCard);
                 return;
             }
-            case UMIIRUKA:{
+            case UMIIRUKA: {
                 umiiruka(activeCard);
                 return;
             }
@@ -53,13 +59,16 @@ public class SpellEffects {
             case TERRAFORMING:
             case BLACK_PENDANT:
             case CHANGEOFHEART:
-            case CLOSED_FOREST:{
+            case CLOSED_FOREST: {
                 closedForest(activeCard);
                 return;
             }
             case MAGNUM_SHIELD:
             case TWIN_TWISTERS:
-            case MONSTER_REBORN:
+            case MONSTER_REBORN: {
+                monsterReborn(activeCard);
+                return;
+            }
             case RING_OF_DEFENCE:
             case UNITED_WE_STAND:
             case SPELL_ABSORPTION:
@@ -77,6 +86,7 @@ public class SpellEffects {
 
         }
     }
+
     //type: quick
     private void mysticalSpaceTyphoon(SpellCard activeCard) {
         while (true) {
@@ -144,14 +154,9 @@ public class SpellEffects {
         if (activeCard.getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
             Player player = round.getPlayerByTurn();
             Player opponent = round.getRivalPlayerByTurn();
-            for (Map.Entry<Integer, MonsterCard> mapElement : player.getMonsterCardsInZone().entrySet()) {
-                player.addCardToGraveyard(mapElement.getValue());
-            }
+            player.addAllCardsOfMonsterZoneToGraveyard();
             player.getMonsterCardsInZone().clear();
-
-            for (Map.Entry<Integer, MonsterCard> mapElement : opponent.getMonsterCardsInZone().entrySet()) {
-                opponent.addCardToGraveyard(mapElement.getValue());
-            }
+            opponent.addAllCardsOfMonsterZoneToGraveyard();
             opponent.getMonsterCardsInZone().clear();
         }
     }
@@ -177,7 +182,7 @@ public class SpellEffects {
                 }
             }
             for (Map.Entry<Integer, MonsterCard> mapElement : player2Field.entrySet()) {
-                   if (mapElement.getValue().getType() == MonsterType.FIEND || mapElement.getValue().getType() == MonsterType.SPELL_CASTER) {
+                if (mapElement.getValue().getType() == MonsterType.FIEND || mapElement.getValue().getType() == MonsterType.SPELL_CASTER) {
                     if (!mapElement.getValue().isEffectedByFieldSpell()) {
                         mapElement.getValue().changeAttackPoint(200);
                         mapElement.getValue().changeDefencePoint(200);
@@ -374,51 +379,91 @@ public class SpellEffects {
 
     public void swordOfDarkDestruction(SpellCard card) {
         if (card.getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
-            if (!card.hasDeployedEffect()) {
 
-            }
         }
     }
 
     public void monsterReborn(SpellCard card) {
-        int cardPositionInGraveyard;
-        Card cardToBeSummoned;
-
-        if (card.getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
-            effectsView.whichGraveyard();
+        effectsView.whichGraveyard();
+        while (true) {
             String graveyard = effectsView.scanString();
+            if (graveyard.equals("y")) {
+                if (round.getPlayerByTurn().getCardsInGraveyard().isEmpty()) {
+                    effectsView.thisGraveyardIsEmpty();
+                } else {
+                    summonFromThisPlayerGraveyard(round.getPlayerByTurn(), card);
+                    return;
+                }
+            } else if (graveyard.equals("o")) {
+                if (round.getRivalPlayerByTurn().getCardsInGraveyard().isEmpty()) {
+                    effectsView.thisGraveyardIsEmpty();
+                } else {
+                    summonFromThisPlayerGraveyard(round.getRivalPlayerByTurn(), card);
+                    return;
+                }
+            } else if (graveyard.equals("cancel")) {
+                effectsView.activationCancelled();
+                card.setActivationCancelled(true);
+                break;
+            } else if (graveyard.equals("show graveyard")) {
+                effectsView.printString(round.getPlayerByTurn().graveyardToString());
+            } else if (graveyard.equals("show opponent graveyard")) {
+                effectsView.printString(round.getRivalPlayerByTurn().graveyardToString());
+            } else {
+                effectsView.youShouldSpecialSummonRightNow();
+            }
+        }
+    }
 
 
-            if (!(graveyard.equals("o") || graveyard.equals("y"))) {
-                round.getPlayerByTurn().addCardToGraveyard(card);
+    private void summonFromThisPlayerGraveyard(Player player, SpellCard card) {
+        effectsView.selectCardFromGraveyard();
+        effectsView.printString(player.graveyardToString());
+        while (true) {
+            String cardLocation = effectsView.scanString();
+            if (cardLocation.equals("cancel")) {
+                card.setActivationCancelled(true);
+                effectsView.activationCancelled();
                 return;
             } else {
-                if (graveyard.equals("y")) {
-                    effectsView.selectCardFromGraveyard();
-                    round.getPlayerByTurn().graveyardToString();
-                    cardPositionInGraveyard = effectsView.scanNumber();
-                    cardToBeSummoned = round.getPlayerByTurn().getCardsInGraveyard().get(cardPositionInGraveyard);
-                    if (!(cardToBeSummoned instanceof MonsterCard)) {
-                        effectsView.thisIsNotMonsterCard();
-                        round.getPlayerByTurn().addCardToGraveyard(card);
-                        return;
+                try {
+                    int location = Integer.parseInt(cardLocation);
+                    if (location < 1 || location > player.getCardsInGraveyard().size()) {
+                        effectsView.thereIsNoCardInThisLocation();
+                    } else {
+                        Card cardToBeSummoned = player.getCardsInGraveyard().get(location - 1);
+                        if (!(cardToBeSummoned instanceof MonsterCard)) {
+                            effectsView.thisIsNotMonsterCard();
+                        } else {
+                            String position;
+                            while(true){
+                                effectsView.enterMonsterPosition();
+                                position = effectsView.scanString();
+                                if (position.equals("OO")) {
+                                    ((MonsterCard) cardToBeSummoned).setPosition(OFFENSIVE_OCCUPIED);
+                                    break;
+                                } else if (position.equals("DO")) {
+                                    ((MonsterCard) cardToBeSummoned).setPosition(DEFENSIVE_OCCUPIED);
+                                    break;
+                                } else if (position.equals("cancel")){
+                                    card.setActivationCancelled(true);
+                                    effectsView.activationCancelled();
+                                    return;
+                                } else {
+                                    effectsView.invalidChoice();
+                                }
+                            }
+                            round.getPlayerByTurn().addCardToCardsInZone(cardToBeSummoned);
+                            player.removeCardFromGraveyard(cardToBeSummoned);
+                            ((MonsterCard) cardToBeSummoned).setSpecialSummoned(true);
+                            controller.checkTrapActionsAfterSummon((MonsterCard) cardToBeSummoned);
+                            controller.runFieldZoneSpells(round.getPlayerByTurn());
+                            controller.runAllMonsterPowersInZone(round.getPlayerByTurn());
+                            return;
+                        }
                     }
-                    round.getPlayerByTurn().addCardToCardsInZone(cardToBeSummoned);
-                    round.getPlayerByTurn().removeCardFromGraveyard(cardToBeSummoned);
-                    round.getPlayerByTurn().addCardToGraveyard(card);
-                } else {
-                    effectsView.selectCardFromGraveyard();
-                    round.getRivalPlayerByTurn().graveyardToString();
-                    cardPositionInGraveyard = effectsView.scanNumber();
-                    cardToBeSummoned = round.getRivalPlayerByTurn().getCardsInGraveyard().get(cardPositionInGraveyard);
-                    if (!(cardToBeSummoned instanceof MonsterCard)) {
-                        effectsView.thisIsNotMonsterCard();
-                        round.getPlayerByTurn().addCardToGraveyard(card);
-                        return;
-                    }
-                    round.getPlayerByTurn().addCardToCardsInZone(cardToBeSummoned);
-                    round.getRivalPlayerByTurn().removeCardFromGraveyard(cardToBeSummoned);
-                    round.getPlayerByTurn().addCardToGraveyard(card);
+                } catch (NumberFormatException exception) {
+                    effectsView.invalidLocation();
                 }
             }
         }
@@ -428,8 +473,8 @@ public class SpellEffects {
         ArrayList<Card> cards = round.getPlayerByTurn().getRemainingPlayerCardsInGame();
         if (card.getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
             for (int i = 0; i < cards.size(); i++) {
-                if(cards.get(i) instanceof SpellCard){
-                    if(((SpellCard) cards.get(i)).getIcon() == SpellIcon.FIELD){
+                if (cards.get(i) instanceof SpellCard) {
+                    if (((SpellCard) cards.get(i)).getIcon() == SpellIcon.FIELD) {
                         round.getPlayerByTurn().addCardToCardsInZone(cards.get(i));
                         cards.remove(i);
                         return;
