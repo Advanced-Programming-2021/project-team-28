@@ -432,6 +432,7 @@ public class SpellEffects {
                     if(((SpellCard) cards.get(i)).getIcon() == SpellIcon.FIELD){
                         round.getPlayerByTurn().addCardToCardsInZone(cards.get(i));
                         cards.remove(i);
+                        return;
                     }
                 }
             }
