@@ -70,7 +70,10 @@ public class SpellEffects {
                 closedForest(activeCard);
                 return;
             }
-            case MAGNUM_SHIELD:
+            case MAGNUM_SHIELD:{
+                magnumShield();
+                return;
+            }
             case TWIN_TWISTERS:
             case MONSTER_REBORN: {
                 monsterReborn(activeCard);
@@ -584,6 +587,12 @@ public class SpellEffects {
            return target;
        }
     }
+
+    private void magnumShield(SpellCard card){
+
+    }
+
+
 }
 
 

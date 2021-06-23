@@ -267,9 +267,9 @@ public class MainPhaseController extends PhaseController {
         } else {
             ((MonsterCard) player.getSelectedCard()).setPosition(position);
             ((MonsterCard) player.getSelectedCard()).setPositionChangedInThisTurn(true);
-            if (position == OFFENSIVE_OCCUPIED) {
-                ((MonsterCard) player.getSelectedCard()).setFlipped(true);
-            }
+//            if (position == OFFENSIVE_OCCUPIED ) {
+//                ((MonsterCard) player.getSelectedCard()).setFlipped(true);
+//            }
             runAllMonsterPowersInZone(phase.getPlayerByTurn());
             mainPhaseView.printString("monster card position changed successfully");
         }
