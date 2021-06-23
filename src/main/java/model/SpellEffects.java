@@ -70,7 +70,7 @@ public class SpellEffects {
                 return;
             }
             case MAGNUM_SHIELD:{
-                magnumShield();
+                magnumShield(activeCard);
                 return;
             }
             case TWIN_TWISTERS:

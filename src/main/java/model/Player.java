@@ -244,6 +244,7 @@ public class Player {
         card.setPosition(MonsterCardPosition.NOT_IN_PLAY_ZONE);
         card.setAttackPoint(((MonsterCard) Card.getCardByName(Card.getAllCards(), card.getName())).getAttackPoint());
         card.setDefencePoint(((MonsterCard) Card.getCardByName(Card.getAllCards(), card.getName())).getDefencePoint());
+        card.setEffectedByFieldSpell(false);
         equipReset(card);
     }
 

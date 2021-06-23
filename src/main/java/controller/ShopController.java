@@ -216,7 +216,7 @@ public class ShopController {
         else if(cardName.equals("Professor Fazli")){
             if(receiveMoneyFromCustomer(0)) {
                 MonsterCard card = new MonsterCard(MonsterType.SUT, user.getUsername() , cardName, cardNumber, MonstersDescriptions.professorFazli, 10500, 9000,
-                        MonsterPower.RITUAL, 7, Attribute.LIGHT);
+                        MonsterPower.NONE, 4, Attribute.LIGHT);
                 user.addToCards(card);
             }
         }
