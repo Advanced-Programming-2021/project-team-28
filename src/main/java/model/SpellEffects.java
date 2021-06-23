@@ -89,7 +89,9 @@ public class SpellEffects {
                 mysticalSpaceTyphoon(activeCard);
                 return;
             }
-            case SWORD_OF_DARK_DESTRUCTION:
+            case SWORD_OF_DARK_DESTRUCTION:{
+                swordOfDarkDestruction(activeCard);
+            }
 
         }
     }
@@ -404,11 +406,7 @@ public class SpellEffects {
         }
     }
 
-    public void swordOfDarkDestruction(SpellCard card) {
-        if (card.getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
-
-        }
-    }
+    
 
     public void monsterReborn(SpellCard card) {
         effectsView.whichGraveyard();
@@ -513,7 +511,7 @@ public class SpellEffects {
 
     private void blackPendant(SpellCard card){
         if(!card.isGoingToGraveyard) {
-            MonsterCard targetCard = getBlackPendantTarget();
+            MonsterCard targetCard = getTarget();
             if (targetCard == null) {
                 return;
             }
@@ -528,7 +526,7 @@ public class SpellEffects {
         }
     }
 
-    private MonsterCard getBlackPendantTarget(){
+    private MonsterCard getTarget(){
         int targetLocation;
         while(true){
             effectsView.enterTargetPosition();
@@ -551,6 +549,40 @@ public class SpellEffects {
 
             return round.getPlayerByTurn().getMonsterCardByLocationFromZone(targetLocation);
         }
+    }
+    
+    public void swordOfDarkDestruction(SpellCard card) {
+        if(!card.isGoingToGraveyard) {
+            MonsterCard targetCard = getSwordOfDarkDestructionTarget();
+            if (targetCard == null) {
+                return;
+            }
+            targetCard.changeAttackPoint(400);
+            targetCard.changeDefencePoint(-1 * 200);
+            targetCard.setEquipCard(card);
+        }
+        else {
+            if (round.getPlayerByTurn().findEquipCardOwner(card) != null) {
+                round.getPlayerByTurn().findEquipCardOwner(card).changeAttackPoint(-1 * 400);
+                round.getPlayerByTurn().findEquipCardOwner(card).changeDefencePoint(200);
+                round.getPlayerByTurn().findEquipCardOwner(card).setEquipCard(null);
+            }
+        }
+    }
+
+    private MonsterCard getSwordOfDarkDestructionTarget() {
+        MonsterCard target;
+       while (true){
+           target = getTarget();
+           if(target == null){
+               return null;
+           }
+           if(target.getType() != MonsterType.FIEND){
+               effectsView.theSelectedCardMustBeFiend();
+               continue;
+           }
+           return target;
+       }
     }
 }
 

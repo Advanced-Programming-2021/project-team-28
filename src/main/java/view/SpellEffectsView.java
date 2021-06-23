@@ -96,4 +96,8 @@ public class SpellEffectsView {
     public void thisCardAlreadyHasAnEquipSpell(){
         System.out.println("this Card Already Has An Equip Spell");
     }
+
+    public void theSelectedCardMustBeFiend() {
+        System.out.println("you must select a fiend card in order to equip it with this spell");
+    }
 }
