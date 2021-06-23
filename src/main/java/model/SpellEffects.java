@@ -641,9 +641,28 @@ public class SpellEffects {
         try {
             card.setAttackPoint(((MonsterCard) Card.getCardByName(Card.getAllCards(), card.getName())).getAttackPoint());
             card.setDefencePoint(((MonsterCard) Card.getCardByName(Card.getAllCards(), card.getName())).getDefencePoint());
+            card.setEffectedByFieldSpell(false);
         }
         catch (Exception e){}
+
+        if(card.getPosition() == OFFENSIVE_OCCUPIED){
+            card.changeAttackPoint(card.getDefencePoint());
+        }
+        if(card.getPosition() == DEFENSIVE_OCCUPIED){
+            card.changeDefencePoint(card.getAttackPoint());
+        }
+
+        if(round.getRivalPlayerByTurn().getFieldZoneCard() != null){
+            run((SpellCard) round.getRivalPlayerByTurn().getFieldZoneCard());
+            return;
+        }
+        if(round.getPlayerByTurn().getFieldZoneCard() != null){
+            run((SpellCard) round.getPlayerByTurn().getFieldZoneCard());
+            return;
+        }
     }
+
+
 }
 
 
