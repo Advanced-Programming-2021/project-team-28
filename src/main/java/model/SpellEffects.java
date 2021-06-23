@@ -521,9 +521,9 @@ public class SpellEffects {
             targetCard.setEquipCard(card);
         }
         else {
-            if (round.getPlayerByTurn().findEquipCardOwner(card) != null) {
-                round.getPlayerByTurn().findEquipCardOwner(card).changeAttackPoint(-1 * 500);
-                round.getPlayerByTurn().findEquipCardOwner(card).setEquipCard(null);
+            if (round.getRivalPlayerByTurn().findEquipCardOwner(card) != null) {
+                round.getRivalPlayerByTurn().findEquipCardOwner(card).changeAttackPoint(-1 * 500);
+                round.getRivalPlayerByTurn().findEquipCardOwner(card).setEquipCard(null);
             }
         }
     }
