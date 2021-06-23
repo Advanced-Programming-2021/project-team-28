@@ -18,6 +18,10 @@ public class SpellEffectsView {
         return scanner.nextLine();
     }
 
+    public int intScanner(){
+        return Integer.parseInt(scanner.nextLine());
+    }
+
     public void selectSpellZoneYouWantToSelectCardFrom() {
         System.out.println("Select spell zone you want to select card from\n1. Your Spell zone   2. Opponent's Spell zone");
     }
@@ -83,5 +87,13 @@ public class SpellEffectsView {
 
     public void enterMonsterPosition(){
         System.out.println("Choose monster position, Enter OO for Offensive Occupied OR DO for Defensive Occupied");
+    }
+
+    public void enterTargetPosition(){
+        System.out.println("Enter the position of the monster you want to equip with this spell (enter \"0\" to terminate process):");
+    }
+
+    public void thisCardAlreadyHasAnEquipSpell(){
+        System.out.println("this Card Already Has An Equip Spell");
     }
 }

@@ -244,6 +244,16 @@ public class Player {
         card.setPosition(MonsterCardPosition.NOT_IN_PLAY_ZONE);
         card.setAttackPoint(((MonsterCard) Card.getCardByName(Card.getAllCards(), card.getName())).getAttackPoint());
         card.setDefencePoint(((MonsterCard) Card.getCardByName(Card.getAllCards(), card.getName())).getDefencePoint());
+        equipReset(card);
+    }
+
+    private void equipReset(MonsterCard card) {
+        if(card.getEquipCard() == null){
+            return;
+        }
+        addCardToGraveyard(card.getEquipCard());
+        removeCardFromHand(card.getEquipCard());
+        card.setEquipCard(null);
     }
 
 

@@ -228,7 +228,7 @@ public class MainPhaseController extends PhaseController {
                 ((TrapCard) card).setPosition(SpellOrTrapCardPosition.HIDDEN);
                 ((TrapCard) card).setHasSetInThisTurn(true);
             } else if (card instanceof SpellCard) {
-                if (((SpellCard) card).getIcon() == SpellIcon.FIELD) {
+                if (((SpellCard) card).getIcon() == SpellIcon.FIELD || ((SpellCard) card).getIcon() == SpellIcon.EQUIP) {
                     view.canNotSetCard();
                     return;
                 }
@@ -338,7 +338,26 @@ public class MainPhaseController extends PhaseController {
             activateRitualSpell(player);
         } else if (((SpellCard) player.getSelectedCard()).getIcon() == SpellIcon.NORMAL) {
             activateNormalSpell(player);
+        } else if (((SpellCard) player.getSelectedCard()).getIcon() == SpellIcon.EQUIP) {
+            activateEquipSpell(player);
         }
+    }
+
+    private void activateEquipSpell(Player player) {
+        if (phase.getPlayerByTurn().isSpellCardZoneFull()) {
+            mainPhaseView.printString("spell card zone is full");
+            phase.getPlayerByTurn().setSelectedCard(null);
+            return;
+        }
+        if(((SpellCard)player.getSelectedCard()).getPosition() == SpellOrTrapCardPosition.OCCUPIED){
+            mainPhaseView.effectAlreadyActivated();
+            return;
+        }
+        spellEffects.run((SpellCard) player.getSelectedCard());
+        ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
+        player.addCardToCardsInZone(player.getSelectedCard());
+        player.removeCardFromHand(player.getSelectedCard());
+        phase.getPlayerByTurn().setSelectedCard(null);
     }
 
     private void activateRitualSpell(Player player) {

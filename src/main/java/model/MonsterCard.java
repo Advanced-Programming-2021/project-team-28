@@ -30,6 +30,8 @@ public class MonsterCard extends Card {
     private MonsterCardPosition position;
     @Expose
     private MonsterType type;
+
+    private SpellCard EquipCard = null;
     private boolean isSummoned = false;
     private boolean isFlipped = false;
     private boolean hasBattledInBattlePhase = false;
@@ -38,6 +40,7 @@ public class MonsterCard extends Card {
     private boolean isEffectedByFieldSpell = false;
     private boolean isCardActionCanceledByAnEffect = false;
     private boolean isSpecialSummoned = false;
+
 
     public boolean isSummonedInThisTurn() {
         return isSummonedInThisTurn;
@@ -238,4 +241,11 @@ public class MonsterCard extends Card {
 
     }
 
+    public SpellCard getEquipCard() {
+        return EquipCard;
+    }
+
+    public void setEquipCard(SpellCard equipCard) {
+        EquipCard = equipCard;
+    }
 }

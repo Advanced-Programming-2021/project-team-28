@@ -6,6 +6,7 @@ import enums.SpellIcon;
 import enums.SpellOrTrapCardPosition;
 import view.SpellEffectsView;
 
+import javax.swing.plaf.IconUIResource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,8 +57,14 @@ public class SpellEffects {
                 return;
             }
             case SUPPLY_SQUAD:
-            case TERRAFORMING:
-            case BLACK_PENDANT:
+            case TERRAFORMING: {
+                terraforming(activeCard);
+                return;
+            }
+            case BLACK_PENDANT: {
+                blackPendant(activeCard);
+                return;
+            }
             case CHANGEOFHEART:
             case CLOSED_FOREST: {
                 closedForest(activeCard);
@@ -86,6 +93,10 @@ public class SpellEffects {
 
         }
     }
+
+//    public void runEquipSpells(SpellCard equipSpell , MonsterCard monsterToBeEquipped){
+//
+//    }
 
     //type: quick
     private void mysticalSpaceTyphoon(SpellCard activeCard) {
@@ -481,6 +492,40 @@ public class SpellEffects {
                     }
                 }
             }
+        }
+    }
+
+    private void blackPendant(SpellCard card){
+        MonsterCard targetCard = getBlackPendantTarget();
+        if(targetCard == null){
+            return;
+        }
+        targetCard.changeAttackPoint(500);
+        targetCard.setEquipCard(card);
+    }
+
+    private MonsterCard getBlackPendantTarget(){
+        int targetLocation;
+        while(true){
+            effectsView.enterTargetPosition();
+            targetLocation = effectsView.intScanner();
+            if(targetLocation == 0){
+                return null;
+            }
+            if(targetLocation < 1 || targetLocation > 5){
+                effectsView.invalidLocation();
+                continue;
+            }
+            if(!round.getPlayerByTurn().doesHaveMonsterCardInThisLocation(targetLocation)){
+                effectsView.thereIsNoCardInThisLocation();
+                continue;
+            }
+            if(round.getPlayerByTurn().getMonsterCardByLocationFromZone(targetLocation).getEquipCard() != null){
+                effectsView.thisCardAlreadyHasAnEquipSpell();
+                continue;
+            }
+
+            return round.getPlayerByTurn().getMonsterCardByLocationFromZone(targetLocation);
         }
     }
 }
