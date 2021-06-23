@@ -155,8 +155,24 @@ public class SpellEffects {
         if (activeCard.getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
             for (Map.Entry<Integer, Card> mapElement : round.getRivalPlayerByTurn().getSpellOrTrapCardsInZone().entrySet()) {
                 opponent.addCardToGraveyard(mapElement.getValue());
+                if(mapElement.getValue() instanceof SpellCard){
+                    if(((SpellCard)mapElement.getValue()).getIcon() == SpellIcon.EQUIP){
+                        mapElement.getValue().setGoingToGraveyard(true);
+                        run(((SpellCard)mapElement.getValue()));
+                        mapElement.getValue().setGoingToGraveyard(false);
+                    }
+                }
             }
             round.getRivalPlayerByTurn().getSpellOrTrapCardsInZone().clear();
+
+            if(opponent.hasFieldSpellCardInZone()){
+                opponent.addCardToGraveyard(opponent.getFieldZoneCard());
+                opponent.getFieldZoneCard().setGoingToGraveyard(true);
+                run((SpellCard) opponent.getFieldZoneCard());
+                opponent.getFieldZoneCard().setGoingToGraveyard(false);
+                opponent.setFieldZoneCard(null);
+
+            }
         }
     }
 
@@ -496,12 +512,20 @@ public class SpellEffects {
     }
 
     private void blackPendant(SpellCard card){
-        MonsterCard targetCard = getBlackPendantTarget();
-        if(targetCard == null){
-            return;
+        if(!card.isGoingToGraveyard) {
+            MonsterCard targetCard = getBlackPendantTarget();
+            if (targetCard == null) {
+                return;
+            }
+            targetCard.changeAttackPoint(500);
+            targetCard.setEquipCard(card);
         }
-        targetCard.changeAttackPoint(500);
-        targetCard.setEquipCard(card);
+        else {
+            if (round.getPlayerByTurn().findEquipCardOwner(card) != null) {
+                round.getPlayerByTurn().findEquipCardOwner(card).changeAttackPoint(-1 * 500);
+                round.getPlayerByTurn().findEquipCardOwner(card).setEquipCard(null);
+            }
+        }
     }
 
     private MonsterCard getBlackPendantTarget(){

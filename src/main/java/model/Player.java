@@ -418,5 +418,13 @@ public class Player {
         }
     }
 
+    public MonsterCard findEquipCardOwner(SpellCard card){
+        for (Map.Entry<Integer, MonsterCard> mapElement : getMonsterCardsInZone().entrySet()){
+            if(mapElement.getValue().getEquipCard() == card){
+                return mapElement.getValue();
+            }
+        }
+        return null;
+    }
 }
 
