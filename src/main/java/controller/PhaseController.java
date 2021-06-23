@@ -211,7 +211,7 @@ public abstract class PhaseController {
         } else if (phase.getPlayerByTurn().doesHaveSpellOrTrapCardInThisPosition(location)) {
             if (isForActivatingInRivalTurn && !canCardBeActivatedAfterThisAction(phase.getPlayerByTurn(), recentAction,
                     phase.getPlayerByTurn().getSpellOrTrapCardsInZone().get(location))) {
-                view.canNotPlayThisKindOfMoves();
+                view.preparationsOfSpellHaveNotBeenDoneYet();
                 return;
             }
             phase.getPlayerByTurn().setSelectedCard(phase.getPlayerByTurn().getSpellOrTrapCardsInZone().get(location));
@@ -429,7 +429,7 @@ public abstract class PhaseController {
 
     public void runAllMonsterPowersInZone(Player player) {
         for (Map.Entry<Integer, MonsterCard> mapElement : player.getMonsterCardsInZone().entrySet()) {
-            monsterPowers.run(mapElement.getValue(), null);
+            monsterPowers.run(mapElement.getValue(), null, 0);
         }
     }
 

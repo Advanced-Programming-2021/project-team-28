@@ -313,14 +313,14 @@ public class MainPhaseController extends PhaseController {
     @Override
     protected void controlActivateEffectCommand() {
         Player player = phase.getPlayerByTurn();
-        if (!player.isSelectedCardFromSpellAndTrapZone() && !player.isSelectedCardFromHand()) {
-            view.thisCardCanNotBeActivated();
-            return;
-        }
         player.setAbleToActivateTrapCard(false);
         runAllMonsterPowersInZone(player);
         if (!player.hasSelectedCard()) {
             view.noCardSelectedYet();
+            return;
+        } else if (!player.isSelectedCardFromSpellAndTrapZone() && !player.isSelectedCardFromHand() && !player.isSelectedCardFromFieldZone()){
+            view.thisCardCanNotBeActivated();
+            return;
         } else if (player.getSelectedCard() instanceof MonsterCard) {
             mainPhaseView.selectedCardIsMonster();
         } else if (player.getSelectedCard() instanceof TrapCard) {
@@ -384,16 +384,19 @@ public class MainPhaseController extends PhaseController {
                 phase.getPlayerByTurn().setSelectedCard(null);
                 return;
             }
+            SpellOrTrapCardPosition firstPosition = ((SpellCard) player.getSelectedCard()).getPosition();
+            ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
             spellEffects.run((SpellCard) player.getSelectedCard());
             if (((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
                 ((SpellCard) player.getSelectedCard()).setActivationCancelled(false);
+                ((SpellCard) player.getSelectedCard()).setPosition(firstPosition);
                 return;
             }
-            if (((SpellCard) player.getSelectedCard()).getPosition() == SpellOrTrapCardPosition.NOT_IN_PLAY_ZONE) {
+            if (firstPosition == SpellOrTrapCardPosition.NOT_IN_PLAY_ZONE) {
                 player.addCardToCardsInZone(player.getSelectedCard());
                 player.removeCardFromHand(player.getSelectedCard());
             }
-            ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
+
             mainPhaseView.spellActivated();
             phase.getPlayerByTurn().addCardToGraveyard(phase.getPlayerByTurn().getSelectedCard());
             phase.getPlayerByTurn().removeCardFromCardsInZone(phase.getPlayerByTurn().getSelectedCard()

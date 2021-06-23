@@ -3,6 +3,7 @@ package model;
 import controller.MainPhaseController;
 import controller.PhaseController;
 import enums.MonsterCardPosition;
+import enums.SpellIcon;
 import view.TrapEffectsView;
 
 import java.util.ArrayList;

@@ -71,7 +71,7 @@ public class BattlePhaseController extends PhaseController {
             battleView.thisCardAlreadyAttacked();
         } else if (rivalPlayer.getMonsterCardsInZone().size() > 0) {
             battleView.canNotAttackDirectly();
-        } else if (phase.getTurnsPlayed() < 2) {
+        } else if (phase.getTurnsPlayed() < 1) {
             battleView.youCanNotAttackInYourFirstTurn();
         } else if (phase instanceof BattlePhase) {
             Card attackerCard = player.getSelectedCard();
@@ -118,7 +118,7 @@ public class BattlePhaseController extends PhaseController {
                 defenderCard.setPosition(MonsterCardPosition.DEFENSIVE_OCCUPIED);
                 defenderCard.setFlipped(true);
             }
-            monsterPowers.run(defenderCard, (MonsterCard) attackerCard);
+            monsterPowers.run(defenderCard, (MonsterCard) attackerCard, 0);
             defenderCard.setFlipped(false);
             checkForPossibleSpellOrTrapEffect(attackerCard, defenderCard, RecentActionsInGame.DECLARED_A_BATTLE);
             if (((MonsterCard) attackerCard).isCardActionCanceledByAnEffect()) {
