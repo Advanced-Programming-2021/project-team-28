@@ -17,7 +17,7 @@ public class MonsterPowers {
         this.phase = phase;
     }
 
-    public void run(MonsterCard activeCard, MonsterCard opponentCard)  {
+    public void run(MonsterCard activeCard, MonsterCard opponentCard, int attackDamage)  {
         switch (activeCard.getSpecialPower()) {
             case NONE:
                 return;
@@ -44,7 +44,10 @@ public class MonsterPowers {
                 theCalculator(activeCard);
                 return;
             }
-            case EXPLODER_DRAGON:
+            case EXPLODER_DRAGON:{
+                exploderDragon(activeCard, opponentCard, attackDamage);
+                return;
+            }
             case HERALD_OF_CREATION:
             case BEAST_KING_BARBAROS:
             case TERRATIGER_THE_EMPOWERED_WARRIOR:
@@ -115,14 +118,27 @@ public class MonsterPowers {
 
     private void yomiShip(MonsterCard yomiShip, MonsterCard attacker) {
         if (yomiShip.isGoingToGraveyard()) {
-            Player attackerPlayer = phase.getPlayerByTurn();
-            attacker.setGoingToGraveyard(true);
-            if (!(attacker.getSpecialPower() == MonsterPower.YOMI_SHIP)) {
-                run(attacker, null);
-            }
-            attackerPlayer.addCardToGraveyard(attacker);
-            attackerPlayer.removeCardFromCardsInZone(attacker, attackerPlayer.getLocationOfThisMonsterCardInZone(attacker));
+            runRivalCardPowerAndAddItToGraveyard(attacker);
         }
+    }
+
+    private void exploderDragon(MonsterCard exploderDragon, MonsterCard rivalCard, int attackDamage){
+        if(exploderDragon.isGoingToGraveyard()){
+            runRivalCardPowerAndAddItToGraveyard(rivalCard);
+            Player dragonOwner = exploderDragon.getOwnerUsername().equals(phase.getPlayerByTurn().getUser().getUsername()) ?
+                    phase.getPlayerByTurn() : phase.getRivalPlayerByTurn();
+            dragonOwner.increaseLifePoint(Math.abs(attackDamage));
+        }
+    }
+
+    private void runRivalCardPowerAndAddItToGraveyard(MonsterCard rivalCard) {
+        Player attackerPlayer = phase.getPlayerByTurn();
+        rivalCard.setGoingToGraveyard(true);
+        if (!(rivalCard.getSpecialPower() == MonsterPower.YOMI_SHIP) && !(rivalCard.getSpecialPower() == MonsterPower.EXPLODER_DRAGON)) {
+            run(rivalCard, null, 0);
+        }
+        attackerPlayer.addCardToGraveyard(rivalCard);
+        attackerPlayer.removeCardFromCardsInZone(rivalCard, attackerPlayer.getLocationOfThisMonsterCardInZone(rivalCard));
     }
 
     public boolean ritualSummoned(MonsterCard card)  {

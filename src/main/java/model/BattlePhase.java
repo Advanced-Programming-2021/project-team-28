@@ -38,7 +38,7 @@ public class BattlePhase extends Phase{
         int damage = attackerCard.getAttackPoint() - defenderCard.getDefencePoint();
         if(damage > 0){
             defenderCard.setGoingToGraveyard(true);
-            powers.run(defenderCard, attackerCard);
+            powers.run(defenderCard, attackerCard, 0);
             getRivalPlayerByTurn().addCardToGraveyard(defenderCard);
             getRivalPlayerByTurn().removeCardFromCardsInZone(defenderCard, location);
             if(defenderCard.getPosition() == MonsterCardPosition.DEFENSIVE_HIDDEN){
@@ -71,13 +71,13 @@ public class BattlePhase extends Phase{
         if(damage > 0){
             getRivalPlayerByTurn().decreaseLifePoint(damage);
             defenderCard.setGoingToGraveyard(true);
-            powers.run(defenderCard, attackerCard);
+            powers.run(defenderCard, attackerCard, damage);
             getRivalPlayerByTurn().addCardToGraveyard(defenderCard);
             getRivalPlayerByTurn().removeCardFromCardsInZone(defenderCard, location);
             return "your opponent’s monster is destroyed and your opponent receives " + damage + " battle damage";
         } else if (damage == 0){
             defenderCard.setGoingToGraveyard(true);
-            powers.run(defenderCard, attackerCard);
+            powers.run(defenderCard, attackerCard, 0);
             getPlayerByTurn().addCardToGraveyard(attackerCard);
             getPlayerByTurn().removeCardFromCardsInZone(attackerCard, getPlayerByTurn().getLocationOfThisMonsterCardInZone(attackerCard));
             getRivalPlayerByTurn().addCardToGraveyard(defenderCard);

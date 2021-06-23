@@ -325,6 +325,14 @@ public class Player {
         return false;
     }
 
+    public boolean isSelectedCardFromFieldZone(){
+        if(!hasSelectedCard()){
+            return false;
+        } else if (!hasFieldSpellCardInZone()){
+            return false;
+        } else return getSelectedCard().equals(getFieldZoneCard());
+    }
+
     public boolean doesHaveMonsterCardInThisLocation(int location) {
         for (Map.Entry<Integer, MonsterCard> locationAndMonsterCard : monsterCardsInZone.entrySet()) {
             if (locationAndMonsterCard.getKey() == location) {
@@ -398,6 +406,10 @@ public class Player {
         entrySet.removeIf(entry -> entry.getValue().getName().equals(cardName));
         Set<Map.Entry<Integer, Card>> entrySet2 = getSpellOrTrapCardsInZone().entrySet();
         entrySet2.removeIf(entry2 -> entry2.getValue().getName().equals(cardName));
+        if(hasFieldSpellCardInZone() && cardName.equals(fieldZoneCard.getName())) {
+            addCardToGraveyard(fieldZoneCard);
+            setFieldZoneCard(null);
+        }
     }
 
     private void addCardsWithThisNameToGraveyardFromArrayList(String cardName, ArrayList<Card> cards) {

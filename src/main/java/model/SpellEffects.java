@@ -11,8 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static enums.MonsterCardPosition.DEFENSIVE_OCCUPIED;
-import static enums.MonsterCardPosition.OFFENSIVE_OCCUPIED;
+import static enums.MonsterCardPosition.*;
 
 public class SpellEffects {
 
