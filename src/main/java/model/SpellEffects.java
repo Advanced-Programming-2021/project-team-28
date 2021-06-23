@@ -1,6 +1,7 @@
 package model;
 
 import controller.MainPhaseController;
+import enums.MonsterCardPosition;
 import enums.MonsterType;
 import enums.SpellIcon;
 import enums.SpellOrTrapCardPosition;
@@ -70,7 +71,7 @@ public class SpellEffects {
                 return;
             }
             case MAGNUM_SHIELD:{
-                magnumShield();
+                magnumShield(activeCard);
                 return;
             }
             case TWIN_TWISTERS:
@@ -515,6 +516,7 @@ public class SpellEffects {
         if(!card.isGoingToGraveyard) {
             MonsterCard targetCard = getTarget();
             if (targetCard == null) {
+                card.setActivationCancelled(true);
                 return;
             }
             targetCard.changeAttackPoint(500);
@@ -557,6 +559,7 @@ public class SpellEffects {
         if(!card.isGoingToGraveyard) {
             MonsterCard targetCard = getSwordOfDarkDestructionTarget();
             if (targetCard == null) {
+                card.setActivationCancelled(true);
                 return;
             }
             targetCard.changeAttackPoint(400);
@@ -579,8 +582,8 @@ public class SpellEffects {
            if(target == null){
                return null;
            }
-           if(target.getType() != MonsterType.FIEND){
-               effectsView.theSelectedCardMustBeFiend();
+           if(target.getType() != MonsterType.FIEND || target.getType() != MonsterType.SPELL_CASTER){
+               effectsView.theSelectedCardMustBeFiendOrSpellCaster();
                continue;
            }
            return target;
@@ -588,10 +591,59 @@ public class SpellEffects {
     }
 
     private void magnumShield(SpellCard card){
-
+        if(!card.isGoingToGraveyard) {
+            MonsterCard targetCard = getMagnumShieldTarget();
+            if (targetCard == null) {
+                card.setActivationCancelled(true);
+                return;
+            }
+            if(targetCard.getPosition() == OFFENSIVE_OCCUPIED){
+                targetCard.changeAttackPoint(targetCard.getDefencePoint());
+            }
+            if(targetCard.getPosition() == DEFENSIVE_OCCUPIED){
+                targetCard.changeDefencePoint(targetCard.getAttackPoint());
+            }
+        }
+        else {
+            if (round.getPlayerByTurn().findEquipCardOwner(card) != null) {
+                if (round.getPlayerByTurn().findEquipCardOwner(card).getPosition() == OFFENSIVE_OCCUPIED) {
+                    round.getPlayerByTurn().findEquipCardOwner(card).changeAttackPoint(-1 * round.getPlayerByTurn().findEquipCardOwner(card).getDefencePoint());
+                }
+                if (round.getPlayerByTurn().findEquipCardOwner(card).getPosition() == DEFENSIVE_OCCUPIED) {
+                    round.getPlayerByTurn().findEquipCardOwner(card).changeDefencePoint(-1 * round.getPlayerByTurn().findEquipCardOwner(card).getAttackPoint());
+                }
+                round.getPlayerByTurn().findEquipCardOwner(card).setEquipCard(null);
+            }
+        }
     }
 
+    private MonsterCard getMagnumShieldTarget(){
+        MonsterCard target;
+        while (true){
+            target = getTarget();
+            if(target == null){
 
+                return null;
+            }
+            if(target.getPosition() == DEFENSIVE_HIDDEN){
+                effectsView.youMustChooseAnOccupiedCard();
+                continue;
+            }
+            if(target.getType() != MonsterType.WARRIOR){
+                effectsView.theSelectedCardMustBeWarrior();
+                continue;
+            }
+            return target;
+        }
+    }
+
+    public void magnumShieldEffectMidGame(MonsterCard card) {
+        try {
+            card.setAttackPoint(((MonsterCard) Card.getCardByName(Card.getAllCards(), card.getName())).getAttackPoint());
+            card.setDefencePoint(((MonsterCard) Card.getCardByName(Card.getAllCards(), card.getName())).getDefencePoint());
+        }
+        catch (Exception e){}
+    }
 }
 
 

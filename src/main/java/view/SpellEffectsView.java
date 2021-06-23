@@ -97,7 +97,15 @@ public class SpellEffectsView {
         System.out.println("this Card Already Has An Equip Spell");
     }
 
-    public void theSelectedCardMustBeFiend() {
-        System.out.println("you must select a fiend card in order to equip it with this spell");
+    public void theSelectedCardMustBeFiendOrSpellCaster() {
+        System.out.println("you must select a fiend or spellCaster card in order to equip it with this spell");
+    }
+
+    public void youMustChooseAnOccupiedCard() {
+        System.out.println("you must choose an occupied card (either defensive or offensive) in order to equip it with this card");
+    }
+
+    public void theSelectedCardMustBeWarrior() {
+        System.out.println("you must select a warrior card in order to equip it with this spell");
     }
 }

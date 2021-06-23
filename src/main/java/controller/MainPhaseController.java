@@ -266,10 +266,22 @@ public class MainPhaseController extends PhaseController {
             mainPhaseView.canNotChangeDefensiveHiddenPosition();
         } else {
             ((MonsterCard) player.getSelectedCard()).setPosition(position);
+
+
+            if(((MonsterCard) player.getSelectedCard()).getEquipCard().getEffect() == SpellEffect.MAGNUM_SHIELD){
+                spellEffects.magnumShieldEffectMidGame((MonsterCard) player.getSelectedCard());
+            }
+
+
             ((MonsterCard) player.getSelectedCard()).setPositionChangedInThisTurn(true);
+
+
+
 //            if (position == OFFENSIVE_OCCUPIED ) {
 //                ((MonsterCard) player.getSelectedCard()).setFlipped(true);
 //            }
+
+
             runAllMonsterPowersInZone(phase.getPlayerByTurn());
             mainPhaseView.printString("monster card position changed successfully");
         }
@@ -354,10 +366,15 @@ public class MainPhaseController extends PhaseController {
             return;
         }
         spellEffects.run((SpellCard) player.getSelectedCard());
-        ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
-        player.addCardToCardsInZone(player.getSelectedCard());
-        player.removeCardFromHand(player.getSelectedCard());
-        phase.getPlayerByTurn().setSelectedCard(null);
+        if(!((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
+            ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
+            player.addCardToCardsInZone(player.getSelectedCard());
+            player.removeCardFromHand(player.getSelectedCard());
+            phase.getPlayerByTurn().setSelectedCard(null);
+        }
+        ((SpellCard) player.getSelectedCard()).setActivationCancelled(false);
+
+
     }
 
     private void activateRitualSpell(Player player) {
