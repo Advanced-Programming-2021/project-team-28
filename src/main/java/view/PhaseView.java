@@ -166,4 +166,13 @@ public class PhaseView {
     public void nowYouCanSelectAndActivateYourSpellOrTrap() {
         System.out.println("Now you can activate your spell/trap card");
     }
+
+    public void salam(){
+
+    }
+
+
+
+
+
 }
