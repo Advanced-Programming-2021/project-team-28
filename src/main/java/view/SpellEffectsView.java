@@ -23,7 +23,9 @@ public class SpellEffectsView {
     }
 
     public void selectSpellZoneYouWantToSelectCardFrom() {
-        System.out.println("Select spell zone you want to select card from\n1. Your Spell zone   2. Opponent's Spell zone");
+        System.out.println("Select spell zone you want to select card from\n" +
+                "1. Your Spell zone   2. Opponent's Spell zone\n" +
+                "3. Your field spell zone   4. Opponent's field spell zone");
     }
 
     public void selectLocationOfCardYouWantToDestroy() {
@@ -111,5 +113,13 @@ public class SpellEffectsView {
 
     public void youDidNotHaveAnyFieldSpellCardInYourDeck() {
         System.out.println("Tou didn't have any field spell card in your deck");
+    }
+
+    public void thisPlayerDoesNotHaveFieldSpellInZone() {
+        System.out.println("This player doesn't have any field spell in zone\n");
+    }
+
+    public void thisSpellZoneIsEmpty() {
+        System.out.println("This spell and trap zone is empty");
     }
 }

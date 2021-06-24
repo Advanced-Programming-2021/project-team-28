@@ -75,12 +75,12 @@ public class BattlePhaseController extends PhaseController {
             battleView.youCanNotAttackInYourFirstTurn();
         } else if (phase instanceof BattlePhase) {
             Card attackerCard = player.getSelectedCard();
-            checkForPossibleSpellOrTrapEffect(attackerCard, null, RecentActionsInGame.DECLARED_A_BATTLE);
+            checkForPossibleSpellOrTrapEffect(attackerCard, null, RecentActionsInGame.RIVAL_DECLARED_A_BATTLE);
             if (((MonsterCard) attackerCard).isCardActionCanceledByAnEffect()) {
                 ((MonsterCard) attackerCard).setCardActionCanceledByAnEffect(false);
                 return;
             }
-            int damage = ((BattlePhase) phase).attackDirect();
+            int damage = ((BattlePhase) phase).attackDirect((MonsterCard) attackerCard);
             runAllMonsterPowersInZone(player);
             battleView.attackDirectResult(damage);
             player.setSelectedCard(null);
@@ -120,12 +120,12 @@ public class BattlePhaseController extends PhaseController {
             }
             monsterPowers.run(defenderCard, (MonsterCard) attackerCard, 0);
             defenderCard.setFlipped(false);
-            checkForPossibleSpellOrTrapEffect(attackerCard, defenderCard, RecentActionsInGame.DECLARED_A_BATTLE);
+            checkForPossibleSpellOrTrapEffect(attackerCard, defenderCard, RecentActionsInGame.RIVAL_DECLARED_A_BATTLE);
             if (((MonsterCard) attackerCard).isCardActionCanceledByAnEffect()) {
                 ((MonsterCard) attackerCard).setCardActionCanceledByAnEffect(false);
                 return;
             }
-            battleView.printString(((BattlePhase) phase).attackToCardAndReturnAttackReport(location, monsterPowers));
+            battleView.printString(((BattlePhase) phase).attackToCardAndReturnAttackReport(location, monsterPowers,(MonsterCard) attackerCard));
             runAllMonsterPowersInZone(player);
             runAllMonsterPowersInZone(rivalPlayer);
             player.setSelectedCard(null);

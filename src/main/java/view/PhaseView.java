@@ -34,7 +34,7 @@ public class PhaseView {
     }
 
     public void doYouWantToActiveSpellOrTrap(){
-        System.out.print("do you want to activate your trap and spell?");
+        System.out.print("do you want to activate your trap and spell? enter \"yes\" or \"no\"");
     }
 
     public String scanString(){
@@ -161,5 +161,9 @@ public class PhaseView {
 
     public void activationCancelled() {
         System.out.println("Activation Cancelled");
+    }
+
+    public void nowYouCanSelectAndActivateYourSpellOrTrap() {
+        System.out.println("Now you can activate your spell/trap card");
     }
 }

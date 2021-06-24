@@ -8,22 +8,20 @@ public class BattlePhase extends Phase{
         super(round);
     }
 
-    public int attackDirect(){
-        Player player = getPlayerByTurn();
+    public int attackDirect(MonsterCard attackerCard){
         Player rivalPlayer = getRivalPlayerByTurn();
-        int damageOfAttackingCard = ((MonsterCard) player.getSelectedCard()).getAttackPoint();
+        int damageOfAttackingCard = attackerCard.getAttackPoint();
         if(rivalPlayer.getLifePoint() < damageOfAttackingCard){
             int attackDamage = rivalPlayer.getLifePoint();
             rivalPlayer.setLifePoint(0);
             return attackDamage;
         }
         rivalPlayer.decreaseLifePoint(damageOfAttackingCard);
-        ((MonsterCard) player.getSelectedCard()).setHasBattledInBattlePhase(true);
+        attackerCard.setHasBattledInBattlePhase(true);
         return damageOfAttackingCard;
     }
 
-    public String attackToCardAndReturnAttackReport(int location, MonsterPowers powers){
-        MonsterCard attackerCard = (MonsterCard) getPlayerByTurn().getSelectedCard();
+    public String attackToCardAndReturnAttackReport(int location, MonsterPowers powers, MonsterCard attackerCard){
         MonsterCard defenderCard = getRivalPlayerByTurn().getMonsterCardsInZone().get(location);
         if(defenderCard.getPosition() == MonsterCardPosition.OFFENSIVE_OCCUPIED){
             attackerCard.setHasBattledInBattlePhase(true);

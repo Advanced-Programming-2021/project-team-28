@@ -3,9 +3,6 @@ package controller;
 import enums.*;
 import model.*;
 import view.MainPhaseView;
-import view.ScannerInstance;
-
-import java.util.Scanner;
 
 import static enums.MonsterCardPosition.*;
 
@@ -340,13 +337,14 @@ public class MainPhaseController extends PhaseController {
     }
 
     private void controlActivateSpellEffect(Player player) {
-        if (((SpellCard) player.getSelectedCard()).getIcon() == SpellIcon.FIELD) {
+        SpellCard selectedSpell = (SpellCard) player.getSelectedCard();
+        if (selectedSpell.getIcon() == SpellIcon.FIELD) {
             activateFieldZoneSpell(player);
-        } else if (((SpellCard) player.getSelectedCard()).getIcon() == SpellIcon.RITUAL) {
+        } else if (selectedSpell.getIcon() == SpellIcon.RITUAL) {
             activateRitualSpell(player);
-        } else if (((SpellCard) player.getSelectedCard()).getIcon() == SpellIcon.NORMAL) {
-            activateNormalSpell(player);
-        } else if (((SpellCard) player.getSelectedCard()).getIcon() == SpellIcon.EQUIP) {
+        } else if (selectedSpell.getIcon() == SpellIcon.NORMAL || selectedSpell.getIcon() == SpellIcon.QUICK_PLAY) {
+            activateNormalAndQuickPlaySpell(player);
+        } else if (selectedSpell.getIcon() == SpellIcon.EQUIP) {
             activateEquipSpell(player);
         }
     }
@@ -361,7 +359,7 @@ public class MainPhaseController extends PhaseController {
             mainPhaseView.effectAlreadyActivated();
             return;
         }
-        checkForPossibleSpellOrTrapEffect(player.getSelectedCard(), null, RecentActionsInGame.ACTIVATED_A_SPELL_CARD);
+        checkForPossibleSpellOrTrapEffect(player.getSelectedCard(), null, RecentActionsInGame.RIVAL_ACTIVATED_A_SPELL_CARD);
         if(((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
             view.activationCancelled();
             ((SpellCard) player.getSelectedCard()).setActivationCancelled(false);
@@ -384,7 +382,7 @@ public class MainPhaseController extends PhaseController {
         if (((SpellCard) player.getSelectedCard()).getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
             mainPhaseView.effectAlreadyActivated();
         } else {
-            checkForPossibleSpellOrTrapEffect(player.getSelectedCard(), null, RecentActionsInGame.ACTIVATED_A_SPELL_CARD);
+            checkForPossibleSpellOrTrapEffect(player.getSelectedCard(), null, RecentActionsInGame.RIVAL_ACTIVATED_A_SPELL_CARD);
             if(((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
                 view.activationCancelled();
                 ((SpellCard) player.getSelectedCard()).setActivationCancelled(false);
@@ -398,7 +396,7 @@ public class MainPhaseController extends PhaseController {
         }
     }
 
-    private void activateNormalSpell(Player player) {
+    private void activateNormalAndQuickPlaySpell(Player player) {
         if (((SpellCard) player.getSelectedCard()).getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
             mainPhaseView.effectAlreadyActivated();
         } else {
@@ -414,7 +412,7 @@ public class MainPhaseController extends PhaseController {
                 phase.getPlayerByTurn().setSelectedCard(null);
                 return;
             }
-            checkForPossibleSpellOrTrapEffect(player.getSelectedCard(), null, RecentActionsInGame.ACTIVATED_A_SPELL_CARD);
+            checkForPossibleSpellOrTrapEffect(player.getSelectedCard(), null, RecentActionsInGame.RIVAL_ACTIVATED_A_SPELL_CARD);
             if(((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
                 view.activationCancelled();
                 ((SpellCard) player.getSelectedCard()).setActivationCancelled(false);
@@ -437,9 +435,7 @@ public class MainPhaseController extends PhaseController {
             phase.getPlayerByTurn().addCardToGraveyard(phase.getPlayerByTurn().getSelectedCard());
             phase.getPlayerByTurn().removeCardFromCardsInZone(phase.getPlayerByTurn().getSelectedCard()
                     , phase.getPlayerByTurn().getLocationOfThisSpellOrTrapCardInZone(phase.getPlayerByTurn().getSelectedCard()));
-
             phase.getPlayerByTurn().setSelectedCard(null);
-
         }
     }
 
@@ -449,7 +445,7 @@ public class MainPhaseController extends PhaseController {
         } else if (phase.getRivalPlayerByTurn().getFieldZoneCard() == player.getSelectedCard()) {
             mainPhaseView.opponentFieldSpellSelected();
         } else {
-            checkForPossibleSpellOrTrapEffect(player.getSelectedCard(), null, RecentActionsInGame.ACTIVATED_A_SPELL_CARD);
+            checkForPossibleSpellOrTrapEffect(player.getSelectedCard(), null, RecentActionsInGame.RIVAL_ACTIVATED_A_SPELL_CARD);
             if(((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
                 view.activationCancelled();
                 ((SpellCard) player.getSelectedCard()).setActivationCancelled(false);

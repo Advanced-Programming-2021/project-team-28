@@ -1,6 +1,7 @@
 package model;
 
 import controller.MainPhaseController;
+import controller.PhaseController;
 import enums.MonsterCardPosition;
 import enums.MonsterType;
 import enums.SpellIcon;
@@ -99,34 +100,66 @@ public class SpellEffects {
         }
     }
 
-//    public void runEquipSpells(SpellCard equipSpell , MonsterCard monsterToBeEquipped){
-//
-//    }
-
-    //type: quick
     private void mysticalSpaceTyphoon(SpellCard activeCard) {
         while (true) {
             effectsView.selectSpellZoneYouWantToSelectCardFrom();
             try {
-                int whichZone = Integer.parseInt(effectsView.scanString());
-                if (whichZone != 1 && whichZone != 2) {
+                String input = effectsView.scanString();
+                if(input.equals("cancel")){
+                    activeCard.setActivationCancelled(true);
+                    effectsView.activationCancelled();
+                    return;
+                }
+                int whichZone = Integer.parseInt(input);
+                if (whichZone != 1 && whichZone != 2 && whichZone != 3 && whichZone != 4) {
                     effectsView.invalidChoice();
+                } else if (whichZone == 3 || whichZone == 4){
+                    Player playerThatLosesACard = whichZone == 3 ? round.getPlayerByTurn() : round.getRivalPlayerByTurn();
+                    if (!playerThatLosesACard.hasFieldSpellCardInZone()){
+                        effectsView.thisPlayerDoesNotHaveFieldSpellInZone();
+                    } else {
+                        Card destroyedCard = playerThatLosesACard.getFieldZoneCard();
+                        destroyedCard.setGoingToGraveyard(true);
+                        run((SpellCard) destroyedCard);
+                        playerThatLosesACard.addCardToGraveyard(destroyedCard);
+                        playerThatLosesACard.setFieldZoneCard(null);
+                        effectsView.cardSentToGraveyardSuccessfully();
+                        return;
+                    }
                 } else {
+                    Player playerThatLosesACard = whichZone == 1 ? round.getPlayerByTurn() : round.getRivalPlayerByTurn();
+                    if(playerThatLosesACard.getSpellOrTrapCardsInZone().isEmpty()){
+                        effectsView.thisSpellZoneIsEmpty();
+                        continue;
+                    }
                     while (true) {
-                        Player playerThatLosesACard = whichZone == 1 ? round.getPlayerByTurn() : round.getRivalPlayerByTurn();
                         effectsView.selectLocationOfCardYouWantToDestroy();
-                        int location = Integer.parseInt(effectsView.scanString());
+                        String locationToString = effectsView.scanString();
+                        if(locationToString.equals("cancel")){
+                            activeCard.setActivationCancelled(true);
+                            effectsView.activationCancelled();
+                            return;
+                        }
+                        int location;
+                        try {
+                            location = Integer.parseInt(locationToString);
+                        } catch (NumberFormatException exception){
+                            effectsView.invalidLocation();
+                            continue;
+                        }
                         if (location > 5 || location < 1) {
                             effectsView.invalidLocation();
                         } else if (!playerThatLosesACard.doesHaveSpellOrTrapCardInThisPosition(location)) {
                             effectsView.thereIsNoCardInThisLocation();
                         } else {
-                            playerThatLosesACard.getSpellOrTrapCardsInZone().get(location).setGoingToGraveyard(true);
-                            playerThatLosesACard.addCardToGraveyard(playerThatLosesACard.getSpellOrTrapCardsInZone().get(location));
-                            playerThatLosesACard.removeCardFromCardsInZone(playerThatLosesACard.getSpellOrTrapCardsInZone().get(location), location);
+                            Card destroyedCard = playerThatLosesACard.getSpellOrTrapCardsInZone().get(location);
+                            destroyedCard.setGoingToGraveyard(true);
+                            if(destroyedCard instanceof SpellCard && ((SpellCard) destroyedCard).getIcon() == SpellIcon.EQUIP){
+                                run((SpellCard) destroyedCard);
+                            }
+                            playerThatLosesACard.addCardToGraveyard(destroyedCard);
+                            playerThatLosesACard.removeCardFromCardsInZone(destroyedCard, location);
                             effectsView.cardSentToGraveyardSuccessfully();
-                            //card is going to graveyard. must call the run function
-                            playerThatLosesACard.getSpellOrTrapCardsInZone().get(location).setGoingToGraveyard(true);
                             return;
                         }
                     }
@@ -666,7 +699,6 @@ public class SpellEffects {
         }
         if(round.getPlayerByTurn().getFieldZoneCard() != null){
             run((SpellCard) round.getPlayerByTurn().getFieldZoneCard());
-            return;
         }
     }
 
