@@ -108,4 +108,8 @@ public class SpellEffectsView {
     public void theSelectedCardMustBeWarrior() {
         System.out.println("you must select a warrior card in order to equip it with this spell");
     }
+
+    public void youDidNotHaveAnyFieldSpellCardInYourDeck() {
+        System.out.println("Tou didn't have any field spell card in your deck");
+    }
 }

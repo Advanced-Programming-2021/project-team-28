@@ -117,6 +117,10 @@ public class MonsterPowers {
     }
 
     private void yomiShip(MonsterCard yomiShip, MonsterCard attacker) {
+        if(yomiShip.isGoingToGraveyardWithItsOwnAttack()){
+            yomiShip.setGoingToGraveyardWithItsOwnAttack(false);
+            return;
+        }
         if (yomiShip.isGoingToGraveyard()) {
             runRivalCardPowerAndAddItToGraveyard(attacker);
         }
@@ -132,13 +136,14 @@ public class MonsterPowers {
     }
 
     private void runRivalCardPowerAndAddItToGraveyard(MonsterCard rivalCard) {
-        Player attackerPlayer = phase.getPlayerByTurn();
+        Player rivalPlayer = rivalCard.getOwnerUsername().equals(phase.getPlayerByTurn().getUser().getUsername()) ?
+                phase.getPlayerByTurn() : phase.getRivalPlayerByTurn();
         rivalCard.setGoingToGraveyard(true);
         if (!(rivalCard.getSpecialPower() == MonsterPower.YOMI_SHIP) && !(rivalCard.getSpecialPower() == MonsterPower.EXPLODER_DRAGON)) {
             run(rivalCard, null, 0);
         }
-        attackerPlayer.addCardToGraveyard(rivalCard);
-        attackerPlayer.removeCardFromCardsInZone(rivalCard, attackerPlayer.getLocationOfThisMonsterCardInZone(rivalCard));
+        rivalPlayer.addCardToGraveyard(rivalCard);
+        rivalPlayer.removeCardFromCardsInZone(rivalCard, rivalPlayer.getLocationOfThisMonsterCardInZone(rivalCard));
     }
 
     public boolean ritualSummoned(MonsterCard card)  {

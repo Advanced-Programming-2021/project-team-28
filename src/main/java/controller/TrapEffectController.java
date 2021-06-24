@@ -27,7 +27,7 @@ public class TrapEffectController {
         } else if (effect == TrapEffect.CALL_OF_THE_HAUNTED) {
             TrapEffectMethods.callOfTheHaunted(controller, player, trapCard);
         } else if (effect == TrapEffect.MAGIC_JAMMER) {
-
+            TrapEffectMethods.magicJammer(player, rivalPlayer, rivalCard, trapCard);
         }
     }
 }

@@ -106,7 +106,7 @@ public class AllCardsInitiator {
         Card.addToAllCards(new SpellCard(null, "Forest", "", SpellsDescription.forest, SpellIcon.FIELD, SpellEffect.FOREST));
         Card.addToAllCards(new SpellCard(null, "Closed Forest", "", SpellsDescription.closedForest, SpellIcon.FIELD, SpellEffect.CLOSED_FOREST));
         Card.addToAllCards(new SpellCard(null, "Umiiruka", "", SpellsDescription.umiiruka, SpellIcon.FIELD, SpellEffect.UMIIRUKA));
-        Card.addToAllCards(new SpellCard(null, "Sword of Destruction", "", SpellsDescription.swordOfDestruction, SpellIcon.EQUIP, SpellEffect.SWORD_OF_DARK_DESTRUCTION));
+        Card.addToAllCards(new SpellCard(null, "Sword of Dark Destruction", "", SpellsDescription.swordOfDestruction, SpellIcon.EQUIP, SpellEffect.SWORD_OF_DARK_DESTRUCTION));
         Card.addToAllCards(new SpellCard(null, "Black Pendant", "", SpellsDescription.blackPendant, SpellIcon.EQUIP, SpellEffect.BLACK_PENDANT));
         Card.addToAllCards(new SpellCard(null, "United We Stand", "", SpellsDescription.unitedWeStand, SpellIcon.EQUIP, SpellEffect.UNITED_WE_STAND));
         Card.addToAllCards(new SpellCard(null, "Magnum Shield", "", SpellsDescription.magnumShield, SpellIcon.EQUIP, SpellEffect.MAGNUM_SHIELD));

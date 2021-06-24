@@ -3,7 +3,6 @@ package model;
 import controller.MainPhaseController;
 import controller.PhaseController;
 import enums.MonsterCardPosition;
-import enums.SpellIcon;
 import view.TrapEffectsView;
 
 import java.util.ArrayList;
@@ -11,12 +10,18 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import static enums.MonsterCardPosition.DEFENSIVE_OCCUPIED;
+import static enums.MonsterCardPosition.OFFENSIVE_OCCUPIED;
+
 public class TrapEffectMethods {
 
     private static final TrapEffectsView view = new TrapEffectsView();
 
     public static void magicCylinder(Player player, Player rivalPlayer, Card rivalAttackerCard, TrapCard trapCard) {
         rivalPlayer.decreaseLifePoint(((MonsterCard) rivalAttackerCard).getAttackPoint());
+        if(rivalPlayer.getLifePoint() < 0){
+            rivalPlayer.setLifePoint(0);
+        }
         ((MonsterCard) rivalAttackerCard).setCardActionCanceledByAnEffect(true);
         player.addCardToGraveyard(trapCard);
         player.removeCardFromCardsInZone(trapCard, player.getLocationOfThisSpellOrTrapCardInZone(trapCard));
@@ -65,6 +70,9 @@ public class TrapEffectMethods {
     public static void solemnWarning(Player player, Player rivalPlayer, Card rivalSummonedCard, TrapCard trapCard) {
         Player whoSummonedAMonster = rivalSummonedCard.getOwnerUsername().equals(player.getUser().getUsername()) ? player : rivalPlayer;
         player.decreaseLifePoint(2000);
+        if(player.getLifePoint() < 0){
+            player.setLifePoint(0);
+        }
         ((MonsterCard) rivalSummonedCard).setCardActionCanceledByAnEffect(true);
         whoSummonedAMonster.addCardToGraveyard(rivalSummonedCard);
         whoSummonedAMonster.getMonsterCardsInZone().remove
@@ -82,7 +90,7 @@ public class TrapEffectMethods {
     public static void mindCrush(Player player, Player rivalPlayer, TrapCard trapCard) {
         view.enterCardName();
         while (true) {
-            String cardName = view.scanCardName();
+            String cardName = view.scanString();
             if (Card.isThisCardNameValid(cardName)) {
                 if (rivalPlayer.doesHaveThisCardNameInThisPlace(cardName, rivalPlayer.getCardsInHand())) {
                     rivalPlayer.addAllCardsWithThisNameToGraveyard(cardName);
@@ -115,7 +123,7 @@ public class TrapEffectMethods {
         controller.controlShowGraveyardCommand();
         view.enterCardName();
         while (true) {
-            String cardName = view.scanCardName();
+            String cardName = view.scanString();
             if (Card.isThisCardNameValid(cardName)) {
                 if (player.doesHaveThisCardNameInThisPlace(cardName, player.getCardsInGraveyard())) {
                     Card card = player.getACardWithThisNameInThisPlace(cardName, player.getCardsInGraveyard());
@@ -137,6 +145,41 @@ public class TrapEffectMethods {
                 break;
             } else {
                 view.invalidCardName();
+            }
+        }
+    }
+
+    public static void magicJammer(Player player, Player rivalPlayer, Card activatedCard, TrapCard trapCard){
+        view.enterCardLocationInHand();
+        while (true) {
+            String cardLocation = view.scanString();
+            if (cardLocation.equals("cancel")) {
+                trapCard.setActivationCancelled(true);
+                return;
+            } else {
+                try {
+                    int location = Integer.parseInt(cardLocation);
+                    if (location < 1 || location > player.getCardsInHand().size()) {
+                        view.thereIsNoCardInThisLocation();
+                    } else {
+                        Card cardThatGoesToGraveyard = player.getCardsInHand().get(location - 1);
+                        player.addCardToGraveyard(cardThatGoesToGraveyard);
+                        player.removeCardFromHand(cardThatGoesToGraveyard);
+                        ((SpellCard) activatedCard).setActivationCancelled(true);
+                        rivalPlayer.addCardToGraveyard(activatedCard);
+                        if(rivalPlayer.isSelectedCardFromHand()){
+                            rivalPlayer.removeCardFromHand(activatedCard);
+                        } else if (rivalPlayer.isSelectedCardFromSpellAndTrapZone()){
+                            rivalPlayer.removeCardFromCardsInZone(activatedCard,
+                                    rivalPlayer.getLocationOfThisSpellOrTrapCardInZone(activatedCard));
+                        }
+                        player.addCardToGraveyard(trapCard);
+                        player.removeCardFromCardsInZone(trapCard, player.getLocationOfThisSpellOrTrapCardInZone(trapCard));
+                        return;
+                    }
+                } catch (NumberFormatException exception) {
+                   view.invalidLocation();
+                }
             }
         }
     }

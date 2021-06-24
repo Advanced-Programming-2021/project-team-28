@@ -7,6 +7,5 @@ public enum RecentActionsInGame {
     RIVAL_SPECIAL_SUMMONED,
     PLAYER_SUMMONED,
     IN_OUR_MAIN_PHASE,
-    NOTHING
-    //TODO: ADD ALL ACTIONS
+    ACTIVATED_A_SPELL_CARD
 }

@@ -40,7 +40,15 @@ public class MonsterCard extends Card {
     private boolean isEffectedByFieldSpell = false;
     private boolean isCardActionCanceledByAnEffect = false;
     private boolean isSpecialSummoned = false;
+    private boolean isGoingToGraveyardWithItsOwnAttack = false;
 
+    public boolean isGoingToGraveyardWithItsOwnAttack() {
+        return isGoingToGraveyardWithItsOwnAttack;
+    }
+
+    public void setGoingToGraveyardWithItsOwnAttack(boolean goingToGraveyardWithItsOwnAttack) {
+        isGoingToGraveyardWithItsOwnAttack = goingToGraveyardWithItsOwnAttack;
+    }
 
     public boolean isSummonedInThisTurn() {
         return isSummonedInThisTurn;

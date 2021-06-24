@@ -7,6 +7,8 @@ import view.PhaseView;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import static enums.RecentActionsInGame.*;
+import static enums.TrapEffect.*;
 
 public abstract class PhaseController {
 
@@ -159,6 +161,10 @@ public abstract class PhaseController {
 
                 } else if (phase.getPlayerByTurn().getSelectedCard() instanceof TrapCard) {
                     TrapEffectController.searchForThisEffect(this, phase, rivalCard, (TrapCard) phase.getPlayerByTurn().getSelectedCard());
+                    if(((TrapCard) phase.getPlayerByTurn().getSelectedCard()).isActivationCancelled()){
+                        view.activationCancelled();
+                        return MenuEnum.BACK;
+                    }
                 }
                 view.spellOrTrapActivated(phase.getPlayerByTurn().getSelectedCard() instanceof SpellCard ? "Spell" : "Trap");
                 return MenuEnum.BACK;
@@ -324,47 +330,53 @@ public abstract class PhaseController {
         } else if (card instanceof TrapCard && !player.isAbleToActivateTrapCard()) {
             return false;
         }
-        if (recentAction == RecentActionsInGame.DECLARED_A_BATTLE) {
+        if (recentAction == DECLARED_A_BATTLE) {
             if (card instanceof TrapCard) {
-                return ((TrapCard) card).getEffect() == TrapEffect.MIRROR_FORCE ||
-                        ((TrapCard) card).getEffect() == TrapEffect.MAGIC_CYLINDER ||
-                        ((TrapCard) card).getEffect() == TrapEffect.NEGATE_ATTACK;
+                return ((TrapCard) card).getEffect() == MIRROR_FORCE ||
+                        ((TrapCard) card).getEffect() == MAGIC_CYLINDER ||
+                        ((TrapCard) card).getEffect() == NEGATE_ATTACK;
             } else {
                 //TODO: search for spell cards can be activated
             }
-        } else if (recentAction == RecentActionsInGame.RIVAL_SUMMONED_A_MONSTER_WITH_LESS_THAN_1000_ATTACK_POINT) {
+        } else if (recentAction == RIVAL_SUMMONED_A_MONSTER_WITH_LESS_THAN_1000_ATTACK_POINT) {
             if (card instanceof TrapCard) {
-                return ((TrapCard) card).getEffect() == TrapEffect.TORRENTIAL_TRIBUTE ||
-                        ((TrapCard) card).getEffect() == TrapEffect.SOLEMN_WARNING;
+                return ((TrapCard) card).getEffect() == TORRENTIAL_TRIBUTE ||
+                        ((TrapCard) card).getEffect() == SOLEMN_WARNING;
             } else {
                 //TODO: search for spell cards can be activated
             }
-        } else if (recentAction == RecentActionsInGame.RIVAL_SUMMONED_A_MONSTER_WITH_1000_OR_MORE_ATTACK_POINT) {
+        } else if (recentAction == RIVAL_SUMMONED_A_MONSTER_WITH_1000_OR_MORE_ATTACK_POINT) {
             if (card instanceof TrapCard) {
-                return ((TrapCard) card).getEffect() == TrapEffect.TORRENTIAL_TRIBUTE ||
-                        ((TrapCard) card).getEffect() == TrapEffect.TRAP_HOLE ||
-                        ((TrapCard) card).getEffect() == TrapEffect.SOLEMN_WARNING;
+                return ((TrapCard) card).getEffect() == TORRENTIAL_TRIBUTE ||
+                        ((TrapCard) card).getEffect() == TRAP_HOLE ||
+                        ((TrapCard) card).getEffect() == SOLEMN_WARNING;
             } else {
                 //TODO: search for spell cards can be activated
             }
-        } else if (recentAction == RecentActionsInGame.RIVAL_SPECIAL_SUMMONED) {
+        } else if (recentAction == RIVAL_SPECIAL_SUMMONED) {
             if (card instanceof TrapCard) {
-                return ((TrapCard) card).getEffect() == TrapEffect.TORRENTIAL_TRIBUTE ||
-                        ((TrapCard) card).getEffect() == TrapEffect.SOLEMN_WARNING;
+                return ((TrapCard) card).getEffect() == TORRENTIAL_TRIBUTE ||
+                        ((TrapCard) card).getEffect() == SOLEMN_WARNING;
             } else {
                 //TODO: search for spell cards can be activated
             }
-        } else if (recentAction == RecentActionsInGame.IN_OUR_MAIN_PHASE) {
+        } else if (recentAction == IN_OUR_MAIN_PHASE) {
             if (card instanceof TrapCard) {
-                return ((TrapCard) card).getEffect() == TrapEffect.MIND_CRUSH ||
-                        ((TrapCard) card).getEffect() == TrapEffect.TIME_SEAL ||
-                        ((TrapCard) card).getEffect() == TrapEffect.CALL_OF_THE_HAUNTED;
+                return ((TrapCard) card).getEffect() == MIND_CRUSH ||
+                        ((TrapCard) card).getEffect() == TIME_SEAL ||
+                        ((TrapCard) card).getEffect() == CALL_OF_THE_HAUNTED;
             } else {
                 //TODO: search for spell cards can be activated
             }
-        } else if (recentAction == RecentActionsInGame.PLAYER_SUMMONED) {
+        } else if (recentAction == PLAYER_SUMMONED) {
             if (card instanceof TrapCard) {
-                return ((TrapCard) card).getEffect() == TrapEffect.TORRENTIAL_TRIBUTE;
+                return ((TrapCard) card).getEffect() == TORRENTIAL_TRIBUTE;
+            } else {
+                //TODO: search for spell cards can be activated
+            }
+        } else if (recentAction == ACTIVATED_A_SPELL_CARD){
+            if(card instanceof TrapCard) {
+                return ((TrapCard) card).getEffect() == MAGIC_JAMMER;
             } else {
                 //TODO: search for spell cards can be activated
             }
@@ -373,18 +385,16 @@ public abstract class PhaseController {
     }
 
     protected void checkForPossibleSpellOrTrapEffect(Card rivalCard, Card ourCard, RecentActionsInGame recentAction) {
-        //Fucking torrential tribute
         phase.getPlayerByTurn().setAbleToActivateTrapCard(true);
         runAllMonsterPowersInZone(phase.getRivalPlayerByTurn());
         if (isActionAboutSummon(recentAction)) {
             if (canPlayerActivateEffect(phase.getPlayerByTurn(), RecentActionsInGame.PLAYER_SUMMONED)) {
                 activateATrapOrSpellAfterAnAction(rivalCard, ourCard, RecentActionsInGame.PLAYER_SUMMONED);
             }
+            if (phase.getFirstPlayer().getMonsterCardsInZone().isEmpty() && phase.getSecondPlayer().getMonsterCardsInZone().isEmpty()) {
+                return;
+            }
         }
-        if (phase.getFirstPlayer().getMonsterCardsInZone().isEmpty() && phase.getSecondPlayer().getMonsterCardsInZone().isEmpty()) {
-            return;
-        }
-        //End
         phase.getRivalPlayerByTurn().setAbleToActivateTrapCard(true);
         runAllMonsterPowersInZone(phase.getPlayerByTurn());
         if (canPlayerActivateEffect(phase.getRivalPlayerByTurn(), recentAction)) {

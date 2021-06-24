@@ -476,7 +476,7 @@ public class ShopController {
                 user.addToCards(card);
             }
         }
-        else if(cardName.equals("Sword of Destruction")){
+        else if(cardName.equals("Sword of Dark Destruction")){
             if(receiveMoneyFromCustomer(4300)) {
                 SpellCard card = new SpellCard(user.getUsername() , cardName, cardNumber, SpellsDescription.swordOfDestruction , SpellIcon.EQUIP , SpellEffect.SWORD_OF_DARK_DESTRUCTION);
                 user.addToCards(card);

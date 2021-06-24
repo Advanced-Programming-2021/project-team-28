@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class TrapEffectsView {
     Scanner scanner = ScannerInstance.getInstance().getScanner();
 
-    public String scanCardName (){
+    public String scanString(){
         return scanner.nextLine();
     }
 
@@ -31,5 +31,17 @@ public class TrapEffectsView {
 
     public void yourCardsInGraveyard(){
         System.out.println("Your cards in graveyard: ");
+    }
+
+    public void thereIsNoCardInThisLocation() {
+        System.out.println("There is no card in this location");
+    }
+
+    public void invalidLocation() {
+        System.out.println("Invalid location");
+    }
+
+    public void enterCardLocationInHand() {
+        System.out.println("Enter the location number of card you want to send to graveyard");
     }
 }

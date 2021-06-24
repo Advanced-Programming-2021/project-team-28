@@ -503,12 +503,13 @@ public class SpellEffects {
             for (int i = 0; i < cards.size(); i++) {
                 if (cards.get(i) instanceof SpellCard) {
                     if (((SpellCard) cards.get(i)).getIcon() == SpellIcon.FIELD) {
-                        round.getPlayerByTurn().addCardToCardsInZone(cards.get(i));
+                        round.getPlayerByTurn().addCardToHand(cards.get(i));
                         cards.remove(i);
                         return;
                     }
                 }
             }
+            effectsView.youDidNotHaveAnyFieldSpellCardInYourDeck();
         }
     }
 
@@ -534,7 +535,12 @@ public class SpellEffects {
         int targetLocation;
         while(true){
             effectsView.enterTargetPosition();
-            targetLocation = effectsView.intScanner();
+            try {
+                targetLocation = effectsView.intScanner();
+            } catch (NumberFormatException exception){
+                effectsView.invalidLocation();
+                continue;
+            }
             if(targetLocation == 0){
                 return null;
             }
@@ -582,7 +588,7 @@ public class SpellEffects {
            if(target == null){
                return null;
            }
-           if(target.getType() != MonsterType.FIEND || target.getType() != MonsterType.SPELL_CASTER){
+           if(target.getType() != MonsterType.FIEND && target.getType() != MonsterType.SPELL_CASTER){
                effectsView.theSelectedCardMustBeFiendOrSpellCaster();
                continue;
            }
@@ -643,7 +649,9 @@ public class SpellEffects {
             card.setDefencePoint(((MonsterCard) Card.getCardByName(Card.getAllCards(), card.getName())).getDefencePoint());
             card.setEffectedByFieldSpell(false);
         }
-        catch (Exception e){}
+        catch (Exception e){
+            e.printStackTrace();
+        }
 
         if(card.getPosition() == OFFENSIVE_OCCUPIED){
             card.changeAttackPoint(card.getDefencePoint());

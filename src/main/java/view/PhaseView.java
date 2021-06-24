@@ -158,4 +158,8 @@ public class PhaseView {
     public void itIsRivalTurnForEndPhase(String rivalUsername){
         System.out.println("its " + rivalUsername + " 's turn");
     }
+
+    public void activationCancelled() {
+        System.out.println("Activation Cancelled");
+    }
 }

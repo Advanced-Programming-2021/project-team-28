@@ -56,6 +56,9 @@ public class BattlePhase extends Phase{
             }
         } else {
             getPlayerByTurn().decreaseLifePoint(-damage);
+            if(getPlayerByTurn().getLifePoint()<0){
+                getPlayerByTurn().setLifePoint(0);
+            }
             if(defenderCard.getPosition() == MonsterCardPosition.DEFENSIVE_HIDDEN){
                 defenderCard.setPosition(MonsterCardPosition.DEFENSIVE_OCCUPIED);
                 return "opponent’s monster card was " + defenderCard.getName() + " and no card is destroyed and you received "
@@ -70,6 +73,9 @@ public class BattlePhase extends Phase{
         int damage = attackerCard.getAttackPoint() - defenderCard.getAttackPoint();
         if(damage > 0){
             getRivalPlayerByTurn().decreaseLifePoint(damage);
+            if(getRivalPlayerByTurn().getLifePoint()<0){
+                getRivalPlayerByTurn().setLifePoint(0);
+            }
             defenderCard.setGoingToGraveyard(true);
             powers.run(defenderCard, attackerCard, damage);
             getRivalPlayerByTurn().addCardToGraveyard(defenderCard);
@@ -77,7 +83,10 @@ public class BattlePhase extends Phase{
             return "your opponent’s monster is destroyed and your opponent receives " + damage + " battle damage";
         } else if (damage == 0){
             defenderCard.setGoingToGraveyard(true);
+            attackerCard.setGoingToGraveyard(true);
+            attackerCard.setGoingToGraveyardWithItsOwnAttack(true);
             powers.run(defenderCard, attackerCard, 0);
+            powers.run(attackerCard, defenderCard, 0);
             getPlayerByTurn().addCardToGraveyard(attackerCard);
             getPlayerByTurn().removeCardFromCardsInZone(attackerCard, getPlayerByTurn().getLocationOfThisMonsterCardInZone(attackerCard));
             getRivalPlayerByTurn().addCardToGraveyard(defenderCard);
@@ -85,6 +94,12 @@ public class BattlePhase extends Phase{
             return "both you and your opponent monster cards are destroyed and no one receives damage";
         } else {
             getPlayerByTurn().decreaseLifePoint(-damage);
+            if(getPlayerByTurn().getLifePoint()<0){
+                getPlayerByTurn().setLifePoint(0);
+            }
+            attackerCard.setGoingToGraveyardWithItsOwnAttack(true);
+            attackerCard.setGoingToGraveyard(true);
+            powers.run(attackerCard, defenderCard, damage);
             getPlayerByTurn().addCardToGraveyard(attackerCard);
             getPlayerByTurn().removeCardFromCardsInZone(attackerCard, getPlayerByTurn().getLocationOfThisMonsterCardInZone(attackerCard));
             return "Your monster card is destroyed and you received " + -damage + " battle damage";

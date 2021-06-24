@@ -268,20 +268,16 @@ public class MainPhaseController extends PhaseController {
             ((MonsterCard) player.getSelectedCard()).setPosition(position);
 
 
-            if(((MonsterCard) player.getSelectedCard()).getEquipCard().getEffect() == SpellEffect.MAGNUM_SHIELD){
+            if(((MonsterCard) player.getSelectedCard()).getEquipCard() != null &&
+                    ((MonsterCard) player.getSelectedCard()).getEquipCard().getEffect() == SpellEffect.MAGNUM_SHIELD){
                 spellEffects.magnumShieldEffectMidGame((MonsterCard) player.getSelectedCard());
             }
 
 
             ((MonsterCard) player.getSelectedCard()).setPositionChangedInThisTurn(true);
-
-
-
 //            if (position == OFFENSIVE_OCCUPIED ) {
 //                ((MonsterCard) player.getSelectedCard()).setFlipped(true);
 //            }
-
-
             runAllMonsterPowersInZone(phase.getPlayerByTurn());
             mainPhaseView.printString("monster card position changed successfully");
         }
@@ -356,13 +352,19 @@ public class MainPhaseController extends PhaseController {
     }
 
     private void activateEquipSpell(Player player) {
-        if (phase.getPlayerByTurn().isSpellCardZoneFull()) {
+        if (player.isSpellCardZoneFull()) {
             mainPhaseView.printString("spell card zone is full");
-            phase.getPlayerByTurn().setSelectedCard(null);
+            player.setSelectedCard(null);
             return;
         }
         if(((SpellCard)player.getSelectedCard()).getPosition() == SpellOrTrapCardPosition.OCCUPIED){
             mainPhaseView.effectAlreadyActivated();
+            return;
+        }
+        checkForPossibleSpellOrTrapEffect(player.getSelectedCard(), null, RecentActionsInGame.ACTIVATED_A_SPELL_CARD);
+        if(((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
+            view.activationCancelled();
+            ((SpellCard) player.getSelectedCard()).setActivationCancelled(false);
             return;
         }
         spellEffects.run((SpellCard) player.getSelectedCard());
@@ -370,19 +372,30 @@ public class MainPhaseController extends PhaseController {
             ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
             player.addCardToCardsInZone(player.getSelectedCard());
             player.removeCardFromHand(player.getSelectedCard());
-            phase.getPlayerByTurn().setSelectedCard(null);
+            player.setSelectedCard(null);
+        } else {
+            ((SpellCard) player.getSelectedCard()).setActivationCancelled(false);
         }
-        ((SpellCard) player.getSelectedCard()).setActivationCancelled(false);
 
 
     }
 
     private void activateRitualSpell(Player player) {
-        if (player.isSelectedCardFromHand()) {
-            player.addCardToCardsInZone(player.getSelectedCard());
+        if (((SpellCard) player.getSelectedCard()).getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
+            mainPhaseView.effectAlreadyActivated();
+        } else {
+            checkForPossibleSpellOrTrapEffect(player.getSelectedCard(), null, RecentActionsInGame.ACTIVATED_A_SPELL_CARD);
+            if(((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
+                view.activationCancelled();
+                ((SpellCard) player.getSelectedCard()).setActivationCancelled(false);
+                return;
+            }
+            if (player.isSelectedCardFromHand()) {
+                player.addCardToCardsInZone(player.getSelectedCard());
+            }
+            ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
+            mainPhaseView.spellActivated();
         }
-        ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
-        mainPhaseView.spellActivated();
     }
 
     private void activateNormalSpell(Player player) {
@@ -399,6 +412,12 @@ public class MainPhaseController extends PhaseController {
                     && phase.getPlayerByTurn().isSpellCardZoneFull()) {
                 mainPhaseView.printString("spell card zone is full");
                 phase.getPlayerByTurn().setSelectedCard(null);
+                return;
+            }
+            checkForPossibleSpellOrTrapEffect(player.getSelectedCard(), null, RecentActionsInGame.ACTIVATED_A_SPELL_CARD);
+            if(((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
+                view.activationCancelled();
+                ((SpellCard) player.getSelectedCard()).setActivationCancelled(false);
                 return;
             }
             SpellOrTrapCardPosition firstPosition = ((SpellCard) player.getSelectedCard()).getPosition();
@@ -430,6 +449,12 @@ public class MainPhaseController extends PhaseController {
         } else if (phase.getRivalPlayerByTurn().getFieldZoneCard() == player.getSelectedCard()) {
             mainPhaseView.opponentFieldSpellSelected();
         } else {
+            checkForPossibleSpellOrTrapEffect(player.getSelectedCard(), null, RecentActionsInGame.ACTIVATED_A_SPELL_CARD);
+            if(((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
+                view.activationCancelled();
+                ((SpellCard) player.getSelectedCard()).setActivationCancelled(false);
+                return;
+            }
             if (player.getFieldZoneCard() != null) {
                 player.getFieldZoneCard().setGoingToGraveyard(true);
                 spellEffects.run((SpellCard) player.getFieldZoneCard());
