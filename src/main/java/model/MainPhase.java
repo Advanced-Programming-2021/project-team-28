@@ -1,7 +1,5 @@
 package model;
 
-import enums.Turn;
-
 public class MainPhase extends Phase {
     private int whatMainPhase = 1;
     public MainPhase(Round round) {

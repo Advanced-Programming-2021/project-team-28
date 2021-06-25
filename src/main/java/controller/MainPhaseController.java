@@ -1,10 +1,10 @@
 package controller;
 
-import enums.*;
+import model.enums.*;
 import model.*;
 import view.MainPhaseView;
 
-import static enums.MonsterCardPosition.*;
+import static model.enums.MonsterCardPosition.*;
 
 public class MainPhaseController extends PhaseController {
 
@@ -272,9 +272,9 @@ public class MainPhaseController extends PhaseController {
 
 
             ((MonsterCard) player.getSelectedCard()).setPositionChangedInThisTurn(true);
-//            if (position == OFFENSIVE_OCCUPIED ) {
-//                ((MonsterCard) player.getSelectedCard()).setFlipped(true);
-//            }
+            if (position == OFFENSIVE_OCCUPIED ) {
+                ((MonsterCard) player.getSelectedCard()).setFlipped(true);
+            }
             runAllMonsterPowersInZone(phase.getPlayerByTurn());
             mainPhaseView.printString("monster card position changed successfully");
         }
@@ -371,10 +371,10 @@ public class MainPhaseController extends PhaseController {
             player.addCardToCardsInZone(player.getSelectedCard());
             player.removeCardFromHand(player.getSelectedCard());
             player.setSelectedCard(null);
+            view.spellOrTrapActivated("Spell");
         } else {
             ((SpellCard) player.getSelectedCard()).setActivationCancelled(false);
         }
-
 
     }
 
@@ -390,6 +390,7 @@ public class MainPhaseController extends PhaseController {
             }
             if (player.isSelectedCardFromHand()) {
                 player.addCardToCardsInZone(player.getSelectedCard());
+                player.removeCardFromHand(player.getSelectedCard());
             }
             ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
             mainPhaseView.spellActivated();

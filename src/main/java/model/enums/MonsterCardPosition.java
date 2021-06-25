@@ -1,4 +1,4 @@
-package enums;
+package model.enums;
 
 public enum MonsterCardPosition {
     DEFENSIVE_HIDDEN("\tDH"),

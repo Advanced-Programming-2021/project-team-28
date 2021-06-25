@@ -1,6 +1,6 @@
 package model;
 
-import enums.*;
+import model.enums.*;
 import view.MonsterPowerView;
 
 import java.util.ArrayList;

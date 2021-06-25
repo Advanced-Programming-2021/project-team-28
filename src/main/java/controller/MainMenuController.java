@@ -1,7 +1,7 @@
 package controller;
 
 import model.Game;
-import enums.NumberOfRounds;
+import model.enums.NumberOfRounds;
 import model.User;
 import view.MainMenuView;
 

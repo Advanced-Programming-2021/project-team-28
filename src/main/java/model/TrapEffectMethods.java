@@ -2,16 +2,13 @@ package model;
 
 import controller.MainPhaseController;
 import controller.PhaseController;
-import enums.MonsterCardPosition;
+import model.enums.MonsterCardPosition;
 import view.TrapEffectsView;
 
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
-
-import static enums.MonsterCardPosition.DEFENSIVE_OCCUPIED;
-import static enums.MonsterCardPosition.OFFENSIVE_OCCUPIED;
 
 public class TrapEffectMethods {
 

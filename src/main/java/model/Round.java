@@ -2,8 +2,8 @@ package model;
 
 import controller.BattlePhaseController;
 import controller.MainPhaseController;
-import enums.PhaseName;
-import enums.Turn;
+import model.enums.PhaseName;
+import model.enums.Turn;
 import view.PhaseView;
 
 import java.util.Map;
@@ -60,7 +60,7 @@ public class Round {
     private void endPhase() {
         PhaseView view = new PhaseView();
         view.printPhaseName(PhaseName.END_PHASE);
-        view.itIsRivalTurnForEndPhase(getRivalPlayerByTurn().getUser().getUsername());
+        view.itIsRivalTurn(getRivalPlayerByTurn().getUser().getUsername());
     }
 
     private void resetPlayersData() {

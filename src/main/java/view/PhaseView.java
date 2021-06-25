@@ -1,8 +1,8 @@
 package view;
 
 import controller.PhaseController;
-import enums.MenuEnum;
-import enums.PhaseName;
+import controller.MenuEnum;
+import model.enums.PhaseName;
 import model.BattlePhase;
 import model.MainPhase;
 
@@ -155,7 +155,7 @@ public class PhaseView {
         System.out.println("Cheat activated");
     }
 
-    public void itIsRivalTurnForEndPhase(String rivalUsername){
+    public void itIsRivalTurn(String rivalUsername){
         System.out.println("its " + rivalUsername + " 's turn");
     }
 

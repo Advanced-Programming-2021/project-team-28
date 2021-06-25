@@ -1,6 +1,6 @@
 package controller;
 
-import enums.TrapEffect;
+import model.enums.TrapEffect;
 import model.*;
 
 public class TrapEffectController {
@@ -8,6 +8,7 @@ public class TrapEffectController {
         Player player = phase.getPlayerByTurn();
         Player rivalPlayer = phase.getRivalPlayerByTurn();
         TrapEffect effect = trapCard.getEffect();
+
         if (effect == TrapEffect.MAGIC_CYLINDER) {
             TrapEffectMethods.magicCylinder(player, rivalPlayer, rivalCard, trapCard);
         } else if (effect == TrapEffect.MIRROR_FORCE) {
@@ -29,5 +30,6 @@ public class TrapEffectController {
         } else if (effect == TrapEffect.MAGIC_JAMMER) {
             TrapEffectMethods.magicJammer(player, rivalPlayer, rivalCard, trapCard);
         }
+
     }
 }

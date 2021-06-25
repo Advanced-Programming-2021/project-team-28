@@ -1,15 +1,14 @@
 package controller;
 
 import com.google.gson.Gson;
-import enums.MenuEnum;
 import model.*;
 import view.ImportExportView;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -93,42 +92,54 @@ public class ImportExportController {
                 return;
             }
             if(Card.getCardByName(Card.getAllCards(), cardName) instanceof MonsterCard){
-                for (File file : cardsWithThisNameForImport) {
-                    String json = new String(Files.readAllBytes(file.toPath()));
-                    MonsterCard card = new Gson().fromJson(json, MonsterCard.class);
-                    if(!user.doesHaveCardWithThisNumber(card.getNumber())){
-                        user.addToCards(card);
-                        view.cardImportedAndAddedToYourCards();
-                        return;
-                    }
-                }
-                view.youAlreadyHaveThisCard();
+                importMonster(cardsWithThisNameForImport);
             } else if (Card.getCardByName(Card.getAllCards(), cardName) instanceof TrapCard){
-                for (File file : cardsWithThisNameForImport) {
-                    String json = new String(Files.readAllBytes(file.toPath()));
-                    TrapCard card = new Gson().fromJson(json, TrapCard.class);
-                    if(!user.doesHaveCardWithThisNumber(card.getNumber())){
-                        user.addToCards(card);
-                        view.cardImportedAndAddedToYourCards();
-                        return;
-                    }
-                }
-                view.youAlreadyHaveThisCard();
+                importTrap(cardsWithThisNameForImport);
             } else {
-                for (File file : cardsWithThisNameForImport) {
-                    String json = new String(Files.readAllBytes(file.toPath()));
-                    SpellCard card = new Gson().fromJson(json, SpellCard.class);
-                    if(!user.doesHaveCardWithThisNumber(card.getNumber())){
-                        user.addToCards(card);
-                        view.cardImportedAndAddedToYourCards();
-                        return;
-                    }
-                }
-                view.youAlreadyHaveThisCard();
+                importSpell(cardsWithThisNameForImport);
             }
         } catch (Exception exception){
             exception.printStackTrace();
         }
+    }
+
+    private void importSpell(ArrayList<File> cardsWithThisNameForImport) throws IOException {
+        for (File file : cardsWithThisNameForImport) {
+            String json = new String(Files.readAllBytes(file.toPath()));
+            SpellCard card = new Gson().fromJson(json, SpellCard.class);
+            if(!user.doesHaveCardWithThisNumber(card.getNumber())){
+                user.addToCards(card);
+                view.cardImportedAndAddedToYourCards();
+                return;
+            }
+        }
+        view.youAlreadyHaveThisCard();
+    }
+
+    private void importTrap(ArrayList<File> cardsWithThisNameForImport) throws IOException {
+        for (File file : cardsWithThisNameForImport) {
+            String json = new String(Files.readAllBytes(file.toPath()));
+            TrapCard card = new Gson().fromJson(json, TrapCard.class);
+            if(!user.doesHaveCardWithThisNumber(card.getNumber())){
+                user.addToCards(card);
+                view.cardImportedAndAddedToYourCards();
+                return;
+            }
+        }
+        view.youAlreadyHaveThisCard();
+    }
+
+    private void importMonster(ArrayList<File> cardsWithThisNameForImport) throws IOException {
+        for (File file : cardsWithThisNameForImport) {
+            String json = new String(Files.readAllBytes(file.toPath()));
+            MonsterCard card = new Gson().fromJson(json, MonsterCard.class);
+            if(!user.doesHaveCardWithThisNumber(card.getNumber())){
+                user.addToCards(card);
+                view.cardImportedAndAddedToYourCards();
+                return;
+            }
+        }
+        view.youAlreadyHaveThisCard();
     }
 
 

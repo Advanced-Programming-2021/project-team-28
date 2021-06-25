@@ -1,7 +1,7 @@
 package controller;
 
-import enums.MonsterCardPosition;
-import enums.RecentActionsInGame;
+import model.enums.MonsterCardPosition;
+import model.enums.RecentActionsInGame;
 import model.*;
 import view.BattlePhaseView;
 

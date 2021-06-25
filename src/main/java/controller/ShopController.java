@@ -1,11 +1,9 @@
 package controller;
 
-import enums.*;
+import model.enums.*;
 import model.*;
-import view.ScannerInstance;
 import view.ShopView;
 
-import java.util.Scanner;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

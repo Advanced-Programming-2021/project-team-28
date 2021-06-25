@@ -1,19 +1,16 @@
 package model;
 
 import controller.MainPhaseController;
-import controller.PhaseController;
-import enums.MonsterCardPosition;
-import enums.MonsterType;
-import enums.SpellIcon;
-import enums.SpellOrTrapCardPosition;
+import model.enums.MonsterType;
+import model.enums.SpellIcon;
+import model.enums.SpellOrTrapCardPosition;
 import view.SpellEffectsView;
 
-import javax.swing.plaf.IconUIResource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static enums.MonsterCardPosition.*;
+import static model.enums.MonsterCardPosition.*;
 
 public class SpellEffects {
 
@@ -54,7 +51,7 @@ public class SpellEffects {
                 return;
             }
             case POT_OF_GREED: {
-                potOfGreed(activeCard);
+                potOfGreed();
                 return;
             }
             case SUPPLY_SQUAD:
@@ -170,7 +167,7 @@ public class SpellEffects {
         }
     }
 
-    private void potOfGreed(SpellCard activeCard) {
+    private void potOfGreed() {
         Player player = round.getPlayerByTurn();
         player.addCardToHand(player.getRemainingPlayerCardsInGame().get(0));
         player.addCardToHand(player.getRemainingPlayerCardsInGame().get(1));
@@ -230,69 +227,47 @@ public class SpellEffects {
         HashMap<Integer, MonsterCard> player1Field = round.getFirstPlayer().getMonsterCardsInZone();
         HashMap<Integer, MonsterCard> player2Field = round.getSecondPlayer().getMonsterCardsInZone();
         if (!card.isGoingToGraveyard) {
-            for (Map.Entry<Integer, MonsterCard> mapElement : player1Field.entrySet()) {
-                if (mapElement.getValue().getType() == MonsterType.FIEND || mapElement.getValue().getType() == MonsterType.SPELL_CASTER) {
-                    if (!mapElement.getValue().isEffectedByFieldSpell()) {
-                        mapElement.getValue().changeAttackPoint(200);
-                        mapElement.getValue().changeDefencePoint(200);
-                        mapElement.getValue().setEffectedByFieldSpell(true);
-                    }
-                }
-                if (mapElement.getValue().getType() == MonsterType.FAIRY) {
-                    if (!mapElement.getValue().isEffectedByFieldSpell()) {
-                        mapElement.getValue().changeAttackPoint(-1 * 200);
-                        mapElement.getValue().changeDefencePoint(-1 * 200);
-                        mapElement.getValue().setEffectedByFieldSpell(true);
-                    }
-                }
-            }
-            for (Map.Entry<Integer, MonsterCard> mapElement : player2Field.entrySet()) {
-                if (mapElement.getValue().getType() == MonsterType.FIEND || mapElement.getValue().getType() == MonsterType.SPELL_CASTER) {
-                    if (!mapElement.getValue().isEffectedByFieldSpell()) {
-                        mapElement.getValue().changeAttackPoint(200);
-                        mapElement.getValue().changeDefencePoint(200);
-                        mapElement.getValue().setEffectedByFieldSpell(true);
-                    }
-                }
-                if (mapElement.getValue().getType() == MonsterType.FAIRY) {
-                    if (!mapElement.getValue().isEffectedByFieldSpell()) {
-                        mapElement.getValue().changeAttackPoint(-1 * 200);
-                        mapElement.getValue().changeDefencePoint(-1 * 200);
-                        mapElement.getValue().setEffectedByFieldSpell(true);
-                    }
-                }
-            }
+            setYamiPower(player1Field);
+            setYamiPower(player2Field);
         } else {
-            for (Map.Entry<Integer, MonsterCard> mapElement : player1Field.entrySet()) {
-                if (mapElement.getValue().getType() == MonsterType.FIEND || mapElement.getValue().getType() == MonsterType.SPELL_CASTER) {
-                    if (mapElement.getValue().isEffectedByFieldSpell()) {
-                        mapElement.getValue().changeAttackPoint(-1 * 200);
-                        mapElement.getValue().changeDefencePoint(-1 * 200);
-                        mapElement.getValue().setEffectedByFieldSpell(false);
-                    }
-                }
-                if (mapElement.getValue().getType() == MonsterType.FAIRY) {
-                    if (mapElement.getValue().isEffectedByFieldSpell()) {
-                        mapElement.getValue().changeAttackPoint(200);
-                        mapElement.getValue().changeDefencePoint(200);
-                        mapElement.getValue().setEffectedByFieldSpell(false);
-                    }
+            resetYamiPower(player1Field);
+            resetYamiPower(player2Field);
+        }
+    }
+
+    private void resetYamiPower(HashMap<Integer, MonsterCard> player1Field) {
+        for (Map.Entry<Integer, MonsterCard> mapElement : player1Field.entrySet()) {
+            if (mapElement.getValue().getType() == MonsterType.FIEND || mapElement.getValue().getType() == MonsterType.SPELL_CASTER) {
+                if (mapElement.getValue().isEffectedByFieldSpell()) {
+                    mapElement.getValue().changeAttackPoint(-1 * 200);
+                    mapElement.getValue().changeDefencePoint(-1 * 200);
+                    mapElement.getValue().setEffectedByFieldSpell(false);
                 }
             }
-            for (Map.Entry<Integer, MonsterCard> mapElement : player2Field.entrySet()) {
-                if (mapElement.getValue().getType() == MonsterType.FIEND || mapElement.getValue().getType() == MonsterType.SPELL_CASTER) {
-                    if (mapElement.getValue().isEffectedByFieldSpell()) {
-                        mapElement.getValue().changeAttackPoint(-1 * 200);
-                        mapElement.getValue().changeDefencePoint(-1 * 200);
-                        mapElement.getValue().setEffectedByFieldSpell(false);
-                    }
+            if (mapElement.getValue().getType() == MonsterType.FAIRY) {
+                if (mapElement.getValue().isEffectedByFieldSpell()) {
+                    mapElement.getValue().changeAttackPoint(200);
+                    mapElement.getValue().changeDefencePoint(200);
+                    mapElement.getValue().setEffectedByFieldSpell(false);
                 }
-                if (mapElement.getValue().getType() == MonsterType.FAIRY) {
-                    if (mapElement.getValue().isEffectedByFieldSpell()) {
-                        mapElement.getValue().changeAttackPoint(200);
-                        mapElement.getValue().changeDefencePoint(200);
-                        mapElement.getValue().setEffectedByFieldSpell(false);
-                    }
+            }
+        }
+    }
+
+    private void setYamiPower(HashMap<Integer, MonsterCard> player1Field) {
+        for (Map.Entry<Integer, MonsterCard> mapElement : player1Field.entrySet()) {
+            if (mapElement.getValue().getType() == MonsterType.FIEND || mapElement.getValue().getType() == MonsterType.SPELL_CASTER) {
+                if (!mapElement.getValue().isEffectedByFieldSpell()) {
+                    mapElement.getValue().changeAttackPoint(200);
+                    mapElement.getValue().changeDefencePoint(200);
+                    mapElement.getValue().setEffectedByFieldSpell(true);
+                }
+            }
+            if (mapElement.getValue().getType() == MonsterType.FAIRY) {
+                if (!mapElement.getValue().isEffectedByFieldSpell()) {
+                    mapElement.getValue().changeAttackPoint(-1 * 200);
+                    mapElement.getValue().changeDefencePoint(-1 * 200);
+                    mapElement.getValue().setEffectedByFieldSpell(true);
                 }
             }
         }
@@ -302,43 +277,33 @@ public class SpellEffects {
         HashMap<Integer, MonsterCard> player1Field = round.getFirstPlayer().getMonsterCardsInZone();
         HashMap<Integer, MonsterCard> player2Field = round.getSecondPlayer().getMonsterCardsInZone();
         if (!card.isGoingToGraveyard) {
-            for (Map.Entry<Integer, MonsterCard> mapElement : player1Field.entrySet()) {
-                if (mapElement.getValue().getType() == MonsterType.INSECT || mapElement.getValue().getType() == MonsterType.BEAST_WARRIOR || mapElement.getValue().getType() == MonsterType.BEAST) {
-                    if (!mapElement.getValue().isEffectedByFieldSpell()) {
-                        mapElement.getValue().changeAttackPoint(200);
-                        mapElement.getValue().changeDefencePoint(200);
-                        mapElement.getValue().setEffectedByFieldSpell(true);
-                    }
-                }
-            }
-
-            for (Map.Entry<Integer, MonsterCard> mapElement : player2Field.entrySet()) {
-                if (mapElement.getValue().getType() == MonsterType.INSECT || mapElement.getValue().getType() == MonsterType.BEAST_WARRIOR || mapElement.getValue().getType() == MonsterType.BEAST) {
-                    if (!mapElement.getValue().isEffectedByFieldSpell()) {
-                        mapElement.getValue().changeAttackPoint(200);
-                        mapElement.getValue().changeDefencePoint(200);
-                        mapElement.getValue().setEffectedByFieldSpell(true);
-                    }
-                }
-            }
+            setForestPower(player1Field);
+            setForestPower(player2Field);
         } else {
-            for (Map.Entry<Integer, MonsterCard> mapElement : player1Field.entrySet()) {
-                if (mapElement.getValue().getType() == MonsterType.INSECT || mapElement.getValue().getType() == MonsterType.BEAST_WARRIOR || mapElement.getValue().getType() == MonsterType.BEAST) {
-                    if (mapElement.getValue().isEffectedByFieldSpell()) {
-                        mapElement.getValue().changeAttackPoint(-1 * 200);
-                        mapElement.getValue().changeDefencePoint(-1 * 200);
-                        mapElement.getValue().setEffectedByFieldSpell(false);
-                    }
+            resetForestPower(player1Field);
+            resetForestPower(player2Field);
+        }
+    }
+
+    private void resetForestPower(HashMap<Integer, MonsterCard> player1Field) {
+        for (Map.Entry<Integer, MonsterCard> mapElement : player1Field.entrySet()) {
+            if (mapElement.getValue().getType() == MonsterType.INSECT || mapElement.getValue().getType() == MonsterType.BEAST_WARRIOR || mapElement.getValue().getType() == MonsterType.BEAST) {
+                if (mapElement.getValue().isEffectedByFieldSpell()) {
+                    mapElement.getValue().changeAttackPoint(-1 * 200);
+                    mapElement.getValue().changeDefencePoint(-1 * 200);
+                    mapElement.getValue().setEffectedByFieldSpell(false);
                 }
             }
+        }
+    }
 
-            for (Map.Entry<Integer, MonsterCard> mapElement : player2Field.entrySet()) {
-                if (mapElement.getValue().getType() == MonsterType.INSECT || mapElement.getValue().getType() == MonsterType.BEAST_WARRIOR || mapElement.getValue().getType() == MonsterType.BEAST) {
-                    if (mapElement.getValue().isEffectedByFieldSpell()) {
-                        mapElement.getValue().changeAttackPoint(-1 * 200);
-                        mapElement.getValue().changeDefencePoint(-1 * 200);
-                        mapElement.getValue().setEffectedByFieldSpell(false);
-                    }
+    private void setForestPower(HashMap<Integer, MonsterCard> player1Field) {
+        for (Map.Entry<Integer, MonsterCard> mapElement : player1Field.entrySet()) {
+            if (mapElement.getValue().getType() == MonsterType.INSECT || mapElement.getValue().getType() == MonsterType.BEAST_WARRIOR || mapElement.getValue().getType() == MonsterType.BEAST) {
+                if (!mapElement.getValue().isEffectedByFieldSpell()) {
+                    mapElement.getValue().changeAttackPoint(200);
+                    mapElement.getValue().changeDefencePoint(200);
+                    mapElement.getValue().setEffectedByFieldSpell(true);
                 }
             }
         }
@@ -350,45 +315,37 @@ public class SpellEffects {
         Player player2 = round.getSecondPlayer();
         if (!card.isGoingToGraveyard) {
             if (user == player1.getUser()) {
-                int graveSize = player1.getCardsInGraveyard().size();
-                for (Map.Entry<Integer, MonsterCard> mapElement : player1.getMonsterCardsInZone().entrySet()) {
-                    if (mapElement.getValue().getType() == MonsterType.BEAST) {
-                        if (!mapElement.getValue().isEffectedByFieldSpell()) {
-                            mapElement.getValue().changeAttackPoint(100 * graveSize);
-                            mapElement.getValue().setEffectedByFieldSpell(true);
-                        }
-                    }
-                }
+                setClosedForestEffect(player1);
             } else {
-                int graveSize = player2.getCardsInGraveyard().size();
-                for (Map.Entry<Integer, MonsterCard> mapElement : player2.getMonsterCardsInZone().entrySet()) {
-                    if (mapElement.getValue().getType() == MonsterType.BEAST) {
-                        if (!mapElement.getValue().isEffectedByFieldSpell()) {
-                            mapElement.getValue().changeAttackPoint(100 * graveSize);
-                            mapElement.getValue().setEffectedByFieldSpell(true);
-                        }
-                    }
-                }
+                setClosedForestEffect(player2);
             }
         } else {
             if (user == player1.getUser()) {
-                int graveSize = player1.getCardsInGraveyard().size();
-                for (Map.Entry<Integer, MonsterCard> mapElement : player1.getMonsterCardsInZone().entrySet()) {
-                    if (mapElement.getValue().getType() == MonsterType.BEAST) {
-                        if (mapElement.getValue().isEffectedByFieldSpell())
-                            mapElement.getValue().changeAttackPoint(-1 * 100 * graveSize);
-                        mapElement.getValue().setEffectedByFieldSpell(false);
-                    }
-                }
+                resetClosedForestEffect(player1);
             } else {
-                int graveSize = player2.getCardsInGraveyard().size();
-                for (Map.Entry<Integer, MonsterCard> mapElement : player2.getMonsterCardsInZone().entrySet()) {
-                    if (mapElement.getValue().getType() == MonsterType.BEAST) {
-                        if (mapElement.getValue().isEffectedByFieldSpell()) {
-                            mapElement.getValue().changeAttackPoint(-1 * 100 * graveSize);
-                            mapElement.getValue().setEffectedByFieldSpell(false);
-                        }
-                    }
+                resetClosedForestEffect(player2);
+            }
+        }
+    }
+
+    private void resetClosedForestEffect(Player player1) {
+        int graveSize = player1.getCardsInGraveyard().size();
+        for (Map.Entry<Integer, MonsterCard> mapElement : player1.getMonsterCardsInZone().entrySet()) {
+            if (mapElement.getValue().getType() == MonsterType.BEAST) {
+                if (mapElement.getValue().isEffectedByFieldSpell())
+                    mapElement.getValue().changeAttackPoint(-1 * 100 * graveSize);
+                mapElement.getValue().setEffectedByFieldSpell(false);
+            }
+        }
+    }
+
+    private void setClosedForestEffect(Player player1) {
+        int graveSize = player1.getCardsInGraveyard().size();
+        for (Map.Entry<Integer, MonsterCard> mapElement : player1.getMonsterCardsInZone().entrySet()) {
+            if (mapElement.getValue().getType() == MonsterType.BEAST) {
+                if (!mapElement.getValue().isEffectedByFieldSpell()) {
+                    mapElement.getValue().changeAttackPoint(100 * graveSize);
+                    mapElement.getValue().setEffectedByFieldSpell(true);
                 }
             }
         }
@@ -400,49 +357,38 @@ public class SpellEffects {
         HashMap<Integer, MonsterCard> player2Field = round.getSecondPlayer().getMonsterCardsInZone();
 
         if (!card.isGoingToGraveyard) {
-            for (Map.Entry<Integer, MonsterCard> mapElement : player1Field.entrySet()) {
-                if (mapElement.getValue().getType() == MonsterType.AQUA) {
-                    if (!mapElement.getValue().isEffectedByFieldSpell()) {
-                        mapElement.getValue().changeAttackPoint(500);
-                        mapElement.getValue().changeDefencePoint(-1 * 400);
-                        mapElement.getValue().setEffectedByFieldSpell(true);
-                    }
-                }
-            }
-
-            for (Map.Entry<Integer, MonsterCard> mapElement : player2Field.entrySet()) {
-                if (mapElement.getValue().getType() == MonsterType.AQUA) {
-                    if (!mapElement.getValue().isEffectedByFieldSpell()) {
-                        mapElement.getValue().changeAttackPoint(500);
-                        mapElement.getValue().changeDefencePoint(-1 * 400);
-                        mapElement.getValue().setEffectedByFieldSpell(true);
-                    }
-                }
-            }
+            setUmiirukaEffect(player1Field);
+            setUmiirukaEffect(player2Field);
         } else {
-            for (Map.Entry<Integer, MonsterCard> mapElement : player1Field.entrySet()) {
-                if (mapElement.getValue().getType() == MonsterType.AQUA) {
-                    if (mapElement.getValue().isEffectedByFieldSpell()) {
-                        mapElement.getValue().changeAttackPoint(-1 * 500);
-                        mapElement.getValue().changeDefencePoint(400);
-                        mapElement.getValue().setEffectedByFieldSpell(false);
-                    }
-                }
-            }
+            resetUmiirukaEffect(player1Field);
+            resetUmiirukaEffect(player2Field);
+        }
+    }
 
-            for (Map.Entry<Integer, MonsterCard> mapElement : player2Field.entrySet()) {
-                if (mapElement.getValue().getType() == MonsterType.AQUA) {
-                    if (mapElement.getValue().isEffectedByFieldSpell()) {
-                        mapElement.getValue().changeAttackPoint(-1 * 500);
-                        mapElement.getValue().changeDefencePoint(400);
-                        mapElement.getValue().setEffectedByFieldSpell(false);
-                    }
+    private void resetUmiirukaEffect(HashMap<Integer, MonsterCard> player1Field) {
+        for (Map.Entry<Integer, MonsterCard> mapElement : player1Field.entrySet()) {
+            if (mapElement.getValue().getType() == MonsterType.AQUA) {
+                if (mapElement.getValue().isEffectedByFieldSpell()) {
+                    mapElement.getValue().changeAttackPoint(-1 * 500);
+                    mapElement.getValue().changeDefencePoint(400);
+                    mapElement.getValue().setEffectedByFieldSpell(false);
                 }
             }
         }
     }
 
-    
+    private void setUmiirukaEffect(HashMap<Integer, MonsterCard> player1Field) {
+        for (Map.Entry<Integer, MonsterCard> mapElement : player1Field.entrySet()) {
+            if (mapElement.getValue().getType() == MonsterType.AQUA) {
+                if (!mapElement.getValue().isEffectedByFieldSpell()) {
+                    mapElement.getValue().changeAttackPoint(500);
+                    mapElement.getValue().changeDefencePoint(-1 * 400);
+                    mapElement.getValue().setEffectedByFieldSpell(true);
+                }
+            }
+        }
+    }
+
 
     public void monsterReborn(SpellCard card) {
         effectsView.whichGraveyard();

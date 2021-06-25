@@ -1,6 +1,6 @@
 package model;
 
-import enums.Turn;
+import model.enums.Turn;
 
 import java.util.HashMap;
 

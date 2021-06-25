@@ -1,6 +1,6 @@
 package controller;
 
-import enums.*;
+import model.enums.*;
 import model.*;
 import view.PhaseView;
 
@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static enums.RecentActionsInGame.*;
-import static enums.TrapEffect.*;
+import static model.enums.RecentActionsInGame.*;
+import static model.enums.TrapEffect.*;
 
 public abstract class PhaseController {
 

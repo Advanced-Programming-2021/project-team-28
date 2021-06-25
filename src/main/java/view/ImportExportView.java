@@ -1,7 +1,7 @@
 package view;
 
 import controller.ImportExportController;
-import enums.MenuEnum;
+import controller.MenuEnum;
 
 import java.util.Scanner;
 

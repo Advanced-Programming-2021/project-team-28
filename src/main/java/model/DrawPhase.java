@@ -1,6 +1,6 @@
 package model;
 
-import enums.PhaseName;
+import model.enums.PhaseName;
 import view.PhaseView;
 
 import java.util.Collections;

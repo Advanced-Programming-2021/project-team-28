@@ -1,4 +1,4 @@
-package enums;
+package model.enums;
 
 public enum MonsterType {
     BEAST_WARRIOR,

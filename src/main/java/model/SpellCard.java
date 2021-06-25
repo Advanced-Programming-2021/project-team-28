@@ -3,9 +3,9 @@ package model;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
-import enums.SpellEffect;
-import enums.SpellIcon;
-import enums.SpellOrTrapCardPosition;
+import model.enums.SpellEffect;
+import model.enums.SpellIcon;
+import model.enums.SpellOrTrapCardPosition;
 
 import java.io.FileWriter;
 import java.io.IOException;

@@ -1,7 +1,7 @@
 package model;
 
-import enums.NumberOfRounds;
-import enums.Turn;
+import model.enums.NumberOfRounds;
+import model.enums.Turn;
 import view.GameView;
 
 public class Game {

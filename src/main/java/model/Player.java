@@ -1,7 +1,7 @@
 package model;
 
-import enums.MonsterCardPosition;
-import enums.SpellOrTrapCardPosition;
+import model.enums.MonsterCardPosition;
+import model.enums.SpellOrTrapCardPosition;
 
 import java.util.*;
 

@@ -1,7 +1,6 @@
 package model;
 
-import enums.MonsterCardPosition;
-import enums.Turn;
+import model.enums.MonsterCardPosition;
 
 public class BattlePhase extends Phase{
     public BattlePhase(Round round) {
