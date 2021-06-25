@@ -47,7 +47,71 @@ public class MainPhaseController extends PhaseController {
     }
 
     private void specialSummon(MonsterCard selectedCard) {
-        //TODO
+        if (selectedCard.getName() == "The Tricky") {
+            int cardAddress;
+            String cardLocationStr;
+            while (true){
+
+                view.printString("for special summon this card you have to remove a card from your hand\n" +
+                        "select that card, or enter \"cancel\"");
+                cardLocationStr = view.scanString();
+                if (cardLocationStr.equals("cancel"))
+                    return;
+                try {
+                    cardAddress = Integer.parseInt(cardLocationStr);
+
+                } catch (NumberFormatException exception) {
+                    mainPhaseView.invalidLocation();
+                    continue;
+                }
+                summonWithTributeOneCardFromHand(cardAddress,selectedCard);
+                return;
+            }
+
+        } else if (selectedCard.getName() == "Gate Guardian") {
+            if (phase.getPlayerByTurn().getMonsterCardsInZone().size() < 3) {
+
+                view.printString("You don't have enough Monster Cards in zone to tribute");
+                return;
+            }else {
+                String position;
+                while (true) {
+                    view.printString("Enter OO for Offensive Occupied OR DO for Defensive Occupied");
+                    position = view.scanString();
+                    if (position.equals("OO")) {
+                        payThreeTributes(phase.getPlayerByTurn(),true,selectedCard );
+                        break;
+                    } else if (position.equals("DO")) {
+                        payThreeTributes(phase.getPlayerByTurn(),false,selectedCard );
+                        break;
+                    }
+                    view.printString("invalid input");
+                }
+                view.printString("You have to tribute 3 monsters to summon this card");
+
+            }
+        }
+
+    }
+
+    private void summonWithTributeOneCardFromHand(int tributeAddress, Card selectedCard){
+        String position;
+        boolean isIsSummonOrSetMonsterCardWasTrue = this.isSummonOrSetMonsterCard;
+        while (true) {
+            view.printString("Enter OO for Offensive Occupied OR DO for Defensive Occupied");
+            position = view.scanString();
+            if (position.equals("OO")) {
+                summonMonsterCard(phase.getPlayerByTurn(),(MonsterCard) selectedCard, OFFENSIVE_OCCUPIED);
+                break;
+            } else if (position.equals("DO")) {
+                summonMonsterCard(phase.getPlayerByTurn(),(MonsterCard) selectedCard, DEFENSIVE_OCCUPIED);
+                break;
+            }
+            view.printString("invalid input");
+        }
+        if (!isIsSummonOrSetMonsterCardWasTrue){
+            this.isSummonOrSetMonsterCard = false;
+        }
     }
 
     private boolean isCardSpecial(Card selectedCard) {
@@ -70,6 +134,58 @@ public class MainPhaseController extends PhaseController {
             }
         }
 
+    }
+
+    private void payThreeTributes(Player player, boolean isForOffensive, Card selectedCard) {
+        int firstTributeAddress;
+        int secondTributeAddress;
+        int thirdTributeAddress;
+        mainPhaseView.chooseMonsterLocationForTribute(3);
+        while (true) {
+            String firstTributeAddressToString = mainPhaseView.scanString();
+            if (firstTributeAddressToString.equals("cancel")) return;
+            String secondTributeAddressToString = mainPhaseView.scanString();
+            if (secondTributeAddressToString.equals("cancel")) return;
+            String thirdTributeAddressToString = mainPhaseView.scanString();
+            if (thirdTributeAddressToString.equals("cancel")) return;
+
+            try {
+                firstTributeAddress = Integer.parseInt(firstTributeAddressToString);
+                secondTributeAddress = Integer.parseInt(secondTributeAddressToString);
+                thirdTributeAddress = Integer.parseInt(thirdTributeAddressToString);
+            } catch (NumberFormatException exception) {
+                view.invalidLocation();
+                continue;
+            }
+            if (firstTributeAddress != secondTributeAddress && thirdTributeAddress != secondTributeAddress &&
+                    thirdTributeAddress != firstTributeAddress) {
+                break;
+            }
+            mainPhaseView.printString("Please enter 3 different address");
+        }
+        if (!player.doesHaveMonsterCardInThisLocation(firstTributeAddress)
+                || !player.doesHaveMonsterCardInThisLocation(secondTributeAddress)
+                || !player.doesHaveSpellOrTrapCardInThisPosition(thirdTributeAddress)) {
+            mainPhaseView.printString("there is no monster on one of these addresses");
+        } else {
+            player.addCardToGraveyard(player.getMonsterCardsInZone().get(firstTributeAddress));
+            player.removeCardFromCardsInZone(player.getMonsterCardsInZone().get(firstTributeAddress), firstTributeAddress);
+            player.addCardToGraveyard(player.getMonsterCardsInZone().get(secondTributeAddress));
+            player.removeCardFromCardsInZone(player.getMonsterCardsInZone().get(secondTributeAddress), secondTributeAddress);
+            player.addCardToGraveyard(player.getMonsterCardsInZone().get(thirdTributeAddress));
+            player.removeCardFromCardsInZone(player.getMonsterCardsInZone().get(thirdTributeAddress), thirdTributeAddress);
+            boolean isIsSummonOrSetMonsterCardWasTrue = this.isSummonOrSetMonsterCard;
+            if (isForOffensive) {
+
+                summonMonsterCard(player, (MonsterCard) selectedCard, OFFENSIVE_OCCUPIED);
+
+            } else {
+                summonMonsterCard(player, (MonsterCard) selectedCard, DEFENSIVE_OCCUPIED);
+            }
+            if (!isIsSummonOrSetMonsterCardWasTrue){
+                this.isSummonOrSetMonsterCard = false;
+            }
+        }
     }
 
     private void payTwoTributes(Player player, boolean isForSummon) {
@@ -265,14 +381,14 @@ public class MainPhaseController extends PhaseController {
             ((MonsterCard) player.getSelectedCard()).setPosition(position);
 
 
-            if(((MonsterCard) player.getSelectedCard()).getEquipCard() != null &&
-                    ((MonsterCard) player.getSelectedCard()).getEquipCard().getEffect() == SpellEffect.MAGNUM_SHIELD){
+            if (((MonsterCard) player.getSelectedCard()).getEquipCard() != null &&
+                    ((MonsterCard) player.getSelectedCard()).getEquipCard().getEffect() == SpellEffect.MAGNUM_SHIELD) {
                 spellEffects.magnumShieldEffectMidGame((MonsterCard) player.getSelectedCard());
             }
 
 
             ((MonsterCard) player.getSelectedCard()).setPositionChangedInThisTurn(true);
-            if (position == OFFENSIVE_OCCUPIED ) {
+            if (position == OFFENSIVE_OCCUPIED) {
                 ((MonsterCard) player.getSelectedCard()).setFlipped(true);
             }
             runAllMonsterPowersInZone(phase.getPlayerByTurn());
@@ -323,7 +439,7 @@ public class MainPhaseController extends PhaseController {
         if (!player.hasSelectedCard()) {
             view.noCardSelectedYet();
             return;
-        } else if (!player.isSelectedCardFromSpellAndTrapZone() && !player.isSelectedCardFromHand() && !player.isSelectedCardFromFieldZone()){
+        } else if (!player.isSelectedCardFromSpellAndTrapZone() && !player.isSelectedCardFromHand() && !player.isSelectedCardFromFieldZone()) {
             view.thisCardCanNotBeActivated();
             return;
         } else if (player.getSelectedCard() instanceof MonsterCard) {
@@ -355,18 +471,18 @@ public class MainPhaseController extends PhaseController {
             player.setSelectedCard(null);
             return;
         }
-        if(((SpellCard)player.getSelectedCard()).getPosition() == SpellOrTrapCardPosition.OCCUPIED){
+        if (((SpellCard) player.getSelectedCard()).getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
             mainPhaseView.effectAlreadyActivated();
             return;
         }
         checkForPossibleSpellOrTrapEffect(player.getSelectedCard(), null, RecentActionsInGame.RIVAL_ACTIVATED_A_SPELL_CARD);
-        if(((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
+        if (((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
             view.activationCancelled();
             ((SpellCard) player.getSelectedCard()).setActivationCancelled(false);
             return;
         }
         spellEffects.run((SpellCard) player.getSelectedCard());
-        if(!((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
+        if (!((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
             ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
             player.addCardToCardsInZone(player.getSelectedCard());
             player.removeCardFromHand(player.getSelectedCard());
@@ -383,7 +499,7 @@ public class MainPhaseController extends PhaseController {
             mainPhaseView.effectAlreadyActivated();
         } else {
             checkForPossibleSpellOrTrapEffect(player.getSelectedCard(), null, RecentActionsInGame.RIVAL_ACTIVATED_A_SPELL_CARD);
-            if(((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
+            if (((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
                 view.activationCancelled();
                 ((SpellCard) player.getSelectedCard()).setActivationCancelled(false);
                 return;
@@ -414,7 +530,7 @@ public class MainPhaseController extends PhaseController {
                 return;
             }
             checkForPossibleSpellOrTrapEffect(player.getSelectedCard(), null, RecentActionsInGame.RIVAL_ACTIVATED_A_SPELL_CARD);
-            if(((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
+            if (((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
                 view.activationCancelled();
                 ((SpellCard) player.getSelectedCard()).setActivationCancelled(false);
                 return;
@@ -447,7 +563,7 @@ public class MainPhaseController extends PhaseController {
             mainPhaseView.opponentFieldSpellSelected();
         } else {
             checkForPossibleSpellOrTrapEffect(player.getSelectedCard(), null, RecentActionsInGame.RIVAL_ACTIVATED_A_SPELL_CARD);
-            if(((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
+            if (((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
                 view.activationCancelled();
                 ((SpellCard) player.getSelectedCard()).setActivationCancelled(false);
                 return;
@@ -481,7 +597,7 @@ public class MainPhaseController extends PhaseController {
                 runAllMonsterPowersInZone(player);
                 if (canCardBeActivatedAfterThisAction(player, RecentActionsInGame.IN_OUR_MAIN_PHASE, player.getSelectedCard())) {
                     TrapEffectController.searchForThisEffect(this, phase, null, (TrapCard) player.getSelectedCard());
-                    if(((TrapCard) player.getSelectedCard()).isActivationCancelled()){
+                    if (((TrapCard) player.getSelectedCard()).isActivationCancelled()) {
                         ((TrapCard) player.getSelectedCard()).setActivationCancelled(false);
                         mainPhaseView.activationCancelled();
                     } else {
