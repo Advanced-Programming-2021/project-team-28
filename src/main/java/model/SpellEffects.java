@@ -584,9 +584,11 @@ public class SpellEffects {
             }
             if(targetCard.getPosition() == OFFENSIVE_OCCUPIED){
                 targetCard.changeAttackPoint(targetCard.getDefencePoint());
+                targetCard.setEquipCard(card);
             }
             if(targetCard.getPosition() == DEFENSIVE_OCCUPIED){
                 targetCard.changeDefencePoint(targetCard.getAttackPoint());
+                targetCard.setEquipCard(card);
             }
         }
         else {
