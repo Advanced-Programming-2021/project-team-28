@@ -35,10 +35,10 @@ public class MainPhaseController extends PhaseController {
         } else if ((((MonsterCard) player.getSelectedCard()).getLevel() <= 4 || player.getSelectedCard().getName().equals("The Tricky"))
                 && player.isMonsterCardZoneFull()) {
             mainPhaseView.monsterZoneIsFull();
-        } else if (isSummonOrSetMonsterCard) {
-            mainPhaseView.printString("you already summoned/set on this turn");
         } else if (isCardSpecial(player.getSelectedCard())) {
             specialSummon((MonsterCard) player.getSelectedCard());
+        } else if (isSummonOrSetMonsterCard) {
+            mainPhaseView.printString("you already summoned/set on this turn");
         } else if (((MonsterCard) player.getSelectedCard()).getSpecialPower() == MonsterPower.RITUAL) {
             ritualSummon((MonsterCard) player.getSelectedCard());
         } else if (((MonsterCard) player.getSelectedCard()).getLevel() <= 4) {
@@ -47,10 +47,10 @@ public class MainPhaseController extends PhaseController {
     }
 
     private void specialSummon(MonsterCard selectedCard) {
-        if (selectedCard.getName() == "The Tricky") {
+        if (selectedCard.getName().equals("The Tricky")) {
             int cardAddress;
             String cardLocationStr;
-            while (true){
+            while (true) {
 
                 view.printString("for special summon this card you have to remove a card from your hand\n" +
                         "select that card, or enter \"cancel\"");
@@ -64,25 +64,25 @@ public class MainPhaseController extends PhaseController {
                     mainPhaseView.invalidLocation();
                     continue;
                 }
-                summonWithTributeOneCardFromHand(cardAddress,selectedCard);
+                summonWithTributeOneCardFromHand(cardAddress, selectedCard);
                 return;
             }
 
-        } else if (selectedCard.getName() == "Gate Guardian") {
+        } else if (selectedCard.getName().equals("Gate Guardian")) {
             if (phase.getPlayerByTurn().getMonsterCardsInZone().size() < 3) {
 
                 view.printString("You don't have enough Monster Cards in zone to tribute");
                 return;
-            }else {
+            } else {
                 String position;
                 while (true) {
                     view.printString("Enter OO for Offensive Occupied OR DO for Defensive Occupied");
                     position = view.scanString();
                     if (position.equals("OO")) {
-                        payThreeTributes(phase.getPlayerByTurn(),true,selectedCard );
+                        payThreeTributes(phase.getPlayerByTurn(), true, selectedCard);
                         break;
                     } else if (position.equals("DO")) {
-                        payThreeTributes(phase.getPlayerByTurn(),false,selectedCard );
+                        payThreeTributes(phase.getPlayerByTurn(), false, selectedCard);
                         break;
                     }
                     view.printString("invalid input");
@@ -94,22 +94,25 @@ public class MainPhaseController extends PhaseController {
 
     }
 
-    private void summonWithTributeOneCardFromHand(int tributeAddress, Card selectedCard){
+    private void summonWithTributeOneCardFromHand(int tributeAddress, Card selectedCard) {
         String position;
+        Player player = phase.getPlayerByTurn();
         boolean isIsSummonOrSetMonsterCardWasTrue = this.isSummonOrSetMonsterCard;
         while (true) {
             view.printString("Enter OO for Offensive Occupied OR DO for Defensive Occupied");
             position = view.scanString();
             if (position.equals("OO")) {
-                summonMonsterCard(phase.getPlayerByTurn(),(MonsterCard) selectedCard, OFFENSIVE_OCCUPIED);
+                player.addCardToGraveyard(player.getCardsInHand().get(tributeAddress - 1));
+                player.removeCardFromHand(player.getCardsInHand().get(tributeAddress - 1));
+                summonMonsterCard(phase.getPlayerByTurn(), (MonsterCard) selectedCard, OFFENSIVE_OCCUPIED);
                 break;
             } else if (position.equals("DO")) {
-                summonMonsterCard(phase.getPlayerByTurn(),(MonsterCard) selectedCard, DEFENSIVE_OCCUPIED);
+                summonMonsterCard(phase.getPlayerByTurn(), (MonsterCard) selectedCard, DEFENSIVE_OCCUPIED);
                 break;
             }
             view.printString("invalid input");
         }
-        if (!isIsSummonOrSetMonsterCardWasTrue){
+        if (!isIsSummonOrSetMonsterCardWasTrue) {
             this.isSummonOrSetMonsterCard = false;
         }
     }
@@ -182,7 +185,7 @@ public class MainPhaseController extends PhaseController {
             } else {
                 summonMonsterCard(player, (MonsterCard) selectedCard, DEFENSIVE_OCCUPIED);
             }
-            if (!isIsSummonOrSetMonsterCardWasTrue){
+            if (!isIsSummonOrSetMonsterCardWasTrue) {
                 this.isSummonOrSetMonsterCard = false;
             }
         }
@@ -379,8 +382,8 @@ public class MainPhaseController extends PhaseController {
             mainPhaseView.canNotChangeDefensiveHiddenPosition();
         } else {
             ((MonsterCard) player.getSelectedCard()).setPosition(position);
-            if(((MonsterCard) player.getSelectedCard()).getEquipCard() != null ){
-                if (((MonsterCard) player.getSelectedCard()).getEquipCard().getEffect() == SpellEffect.MAGNUM_SHIELD){
+            if (((MonsterCard) player.getSelectedCard()).getEquipCard() != null) {
+                if (((MonsterCard) player.getSelectedCard()).getEquipCard().getEffect() == SpellEffect.MAGNUM_SHIELD) {
                     spellEffects.magnumShieldEffectMidGame((MonsterCard) player.getSelectedCard());
                 }
             }
