@@ -58,4 +58,8 @@ public class ImportExportView {
     public void youAlreadyHaveThisCard(){
         System.out.println("You already have this card");
     }
+
+    public void cardFolderNotFound(){
+        System.out.println("Cards folder not found");
+    }
 }

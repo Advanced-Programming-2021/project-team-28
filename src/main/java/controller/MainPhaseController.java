@@ -59,7 +59,11 @@ public class MainPhaseController extends PhaseController {
                     return;
                 try {
                     cardAddress = Integer.parseInt(cardLocationStr);
-
+                    if (cardAddress < 1 || cardAddress > phase.getPlayerByTurn().getCardsInHand().size() ||
+                            phase.getPlayerByTurn().getCardsInHand().get(cardAddress - 1).equals(phase.getPlayerByTurn().getSelectedCard())) {
+                        view.invalidLocation();
+                        continue;
+                    }
                 } catch (NumberFormatException exception) {
                     mainPhaseView.invalidLocation();
                     continue;
@@ -70,7 +74,6 @@ public class MainPhaseController extends PhaseController {
 
         } else if (selectedCard.getName().equals("Gate Guardian")) {
             if (phase.getPlayerByTurn().getMonsterCardsInZone().size() < 3) {
-
                 view.printString("You don't have enough Monster Cards in zone to tribute");
                 return;
             } else {
@@ -84,11 +87,11 @@ public class MainPhaseController extends PhaseController {
                     } else if (position.equals("DO")) {
                         payThreeTributes(phase.getPlayerByTurn(), false, selectedCard);
                         break;
+                    } else if (position.equals("cancel")){
+                        return;
                     }
                     view.printString("invalid input");
                 }
-                view.printString("You have to tribute 3 monsters to summon this card");
-
             }
         }
 
@@ -107,6 +110,8 @@ public class MainPhaseController extends PhaseController {
                 summonMonsterCard(phase.getPlayerByTurn(), (MonsterCard) selectedCard, OFFENSIVE_OCCUPIED);
                 break;
             } else if (position.equals("DO")) {
+                player.addCardToGraveyard(player.getCardsInHand().get(tributeAddress - 1));
+                player.removeCardFromHand(player.getCardsInHand().get(tributeAddress - 1));
                 summonMonsterCard(phase.getPlayerByTurn(), (MonsterCard) selectedCard, DEFENSIVE_OCCUPIED);
                 break;
             }
@@ -168,7 +173,7 @@ public class MainPhaseController extends PhaseController {
         }
         if (!player.doesHaveMonsterCardInThisLocation(firstTributeAddress)
                 || !player.doesHaveMonsterCardInThisLocation(secondTributeAddress)
-                || !player.doesHaveSpellOrTrapCardInThisPosition(thirdTributeAddress)) {
+                || !player.doesHaveMonsterCardInThisLocation(thirdTributeAddress)) {
             mainPhaseView.printString("there is no monster on one of these addresses");
         } else {
             player.addCardToGraveyard(player.getMonsterCardsInZone().get(firstTributeAddress));
@@ -178,10 +183,9 @@ public class MainPhaseController extends PhaseController {
             player.addCardToGraveyard(player.getMonsterCardsInZone().get(thirdTributeAddress));
             player.removeCardFromCardsInZone(player.getMonsterCardsInZone().get(thirdTributeAddress), thirdTributeAddress);
             boolean isIsSummonOrSetMonsterCardWasTrue = this.isSummonOrSetMonsterCard;
+            ((MonsterCard) selectedCard).setSpecialSummoned(true);
             if (isForOffensive) {
-
                 summonMonsterCard(player, (MonsterCard) selectedCard, OFFENSIVE_OCCUPIED);
-
             } else {
                 summonMonsterCard(player, (MonsterCard) selectedCard, DEFENSIVE_OCCUPIED);
             }

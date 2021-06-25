@@ -35,7 +35,8 @@ public class LoginMenuController {
         files.add(new File("src/SpellCardsOutput.json"));
         files.add(new File("src/TrapCardsOutput.json"));
         files.add(new File("src/DecksOutput.json"));
-
+        File cardsFolder = new File("src/ExportedCards");
+        cardsFolder.mkdir();
         for (File file : files)
         if(!file.exists()){
             file.createNewFile();

@@ -640,7 +640,6 @@ public class SpellEffects {
         if(card.getPosition() == DEFENSIVE_OCCUPIED){
             card.changeDefencePoint(card.getAttackPoint());
         }
-
         if(round.getRivalPlayerByTurn().getFieldZoneCard() != null){
             run((SpellCard) round.getRivalPlayerByTurn().getFieldZoneCard());
             return;

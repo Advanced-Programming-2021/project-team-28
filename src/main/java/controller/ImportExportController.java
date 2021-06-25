@@ -73,7 +73,7 @@ public class ImportExportController {
             }
             File importCardsFolder = new File("src/CardsToImport");
             if (!importCardsFolder.exists()){
-                view.youDoNotHaveThisCardForImport();
+                view.cardFolderNotFound();
                 return;
             }
             File[] cardsForImport = importCardsFolder.listFiles();

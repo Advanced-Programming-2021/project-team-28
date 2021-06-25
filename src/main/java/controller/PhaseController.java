@@ -37,7 +37,11 @@ public abstract class PhaseController {
 
     public MenuEnum processCommand(String command) {
         Matcher matcherForAttackToCard = Pattern.compile("^attack (\\d+)$").matcher(command);
-        if (command.equals("next phase")) {
+        if (command.equalsIgnoreCase("hesoyam")){
+            phase.getPlayerByTurn().setLifePoint(8000);
+            phase.getPlayerByTurn().getUser().changeBalance(250000);
+            view.cheatActivated();
+        }else if (command.equals("next phase")) {
             return MenuEnum.BACK;
         } else if (command.equals("surrender")) {
             phase.getPlayerByTurn().setSurrenderedOrLostByCheat(true);
