@@ -265,9 +265,10 @@ public class MainPhaseController extends PhaseController {
             ((MonsterCard) player.getSelectedCard()).setPosition(position);
 
 
-            if(((MonsterCard) player.getSelectedCard()).getEquipCard() != null &&
-                    ((MonsterCard) player.getSelectedCard()).getEquipCard().getEffect() == SpellEffect.MAGNUM_SHIELD){
-                spellEffects.magnumShieldEffectMidGame((MonsterCard) player.getSelectedCard());
+            if(((MonsterCard) player.getSelectedCard()).getEquipCard() != null ){
+                if (((MonsterCard) player.getSelectedCard()).getEquipCard().getEffect() == SpellEffect.MAGNUM_SHIELD){
+                    spellEffects.magnumShieldEffectMidGame((MonsterCard) player.getSelectedCard());
+                }
             }
 
 
