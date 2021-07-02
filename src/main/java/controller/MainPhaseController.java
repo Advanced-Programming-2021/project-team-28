@@ -75,7 +75,6 @@ public class MainPhaseController extends PhaseController {
         } else if (selectedCard.getName().equals("Gate Guardian")) {
             if (phase.getPlayerByTurn().getMonsterCardsInZone().size() < 3) {
                 view.printString("You don't have enough Monster Cards in zone to tribute");
-                return;
             } else {
                 String position;
                 while (true) {

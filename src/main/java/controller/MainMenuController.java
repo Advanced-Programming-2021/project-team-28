@@ -27,6 +27,9 @@ public class MainMenuController {
         Matcher[] duelCommandMatchers = getDuelCommandMatchers(command);
         if (command.equals("menu show-current")) {
             view.showMenu();
+        } else if (command.equalsIgnoreCase("hesoyam")){
+            user.changeBalance(250000);
+            view.cheatActivated();
         } else if (command.equals("menu enter Deck")) {
             new DeckMenuController(user).run();
         } else if (command.equals("menu enter Profile")) {

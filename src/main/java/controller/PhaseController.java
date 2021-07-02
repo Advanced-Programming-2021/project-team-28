@@ -163,7 +163,6 @@ public abstract class PhaseController {
                 view.noCardSelectedYet();
             } else {
                 if (phase.getPlayerByTurn().getSelectedCard() instanceof SpellCard) {
-                    //Start
                     SpellCard spellCard = (SpellCard) phase.getPlayerByTurn().getSelectedCard();
                     checkForPossibleSpellOrTrapEffect(spellCard, null, RecentActionsInGame.RIVAL_ACTIVATED_A_SPELL_CARD);
                     if(spellCard.isActivationCancelled()) {
@@ -180,7 +179,9 @@ public abstract class PhaseController {
                         spellCard.setPosition(firstPosition);
                         return MenuEnum.BACK;
                     }
-                    //End
+                    Player player = phase.getPlayerByTurn();
+                    player.addCardToGraveyard(spellCard);
+                    player.removeCardFromCardsInZone(spellCard, player.getLocationOfThisSpellOrTrapCardInZone(spellCard));
                 } else if (phase.getPlayerByTurn().getSelectedCard() instanceof TrapCard) {
                     TrapEffectController.searchForThisEffect(this, phase, rivalCard, (TrapCard) phase.getPlayerByTurn().getSelectedCard());
                     if (((TrapCard) phase.getPlayerByTurn().getSelectedCard()).isActivationCancelled()) {

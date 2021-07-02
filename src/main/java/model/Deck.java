@@ -131,7 +131,7 @@ public class Deck {
             if (card.getName().equals(cardName)) ++numberOfThisCard;
         }
 
-        return numberOfThisCard >= 15;
+        return numberOfThisCard >= 3;
     }
 
     public String toString() {
@@ -235,18 +235,6 @@ public class Deck {
             for (String cardName: sideCardsNameCopy){
                 deck.addCardToDeck(cardName,true);
             }
-
-
-//            for (String cardName : deck.allCardsNameInMainDeck) {
-////                deck.allCardsInMainDeck.add(Card.getCardByName(Card.allCards, cardName));
-//                deck.addCardToDeck(cardName,false);
-//            }
-//
-//            for (String cardName : deck.allCardsNameInSideDeck) {
-////                deck.allCardsInSideDeck.add(Card.getCardByName(Card.allCards, cardName));
-//                deck.addCardToDeck(cardName,true);
-//            }
-
         }
     }
 }
