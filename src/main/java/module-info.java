@@ -8,4 +8,5 @@ module project {
 
     opens org to javafx.fxml, com.google.gson;
     exports org to javafx.graphics, javafx.media, javafx.base;
+    exports org.view to javafx.graphics;
 }
