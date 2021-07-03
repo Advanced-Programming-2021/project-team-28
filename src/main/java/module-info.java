@@ -7,6 +7,9 @@ module project {
     requires javafx.media;
 
     opens org to javafx.fxml, com.google.gson;
+    opens org.model to com.google.gson;
     exports org to javafx.graphics, javafx.media, javafx.base;
     exports org.view to javafx.graphics;
+    exports org.model to com.google.gson;
+
 }
