@@ -4,6 +4,7 @@ import org.model.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.view.LoginMenuView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class AllTests {
 
     @Test
     public void createUserTest() throws Exception {
-        LoginMenuController controller = new LoginMenuController();
+        LoginMenuController controller = new LoginMenuController(new LoginMenuView());
         controller.processCommand("user create -u firstUsername -n firstNickname -p firstPassword");
         controller.processCommand("user create -p password -u firstUsername -n nickname");
         controller.processCommand("user create -u reza -p mammad -n jaafar");

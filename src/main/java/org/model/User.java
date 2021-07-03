@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 
 public class User {
@@ -25,8 +26,8 @@ public class User {
     private int score;
     @Expose
     private int balance = 100000;
-
-
+    @Expose
+    private String profilePicturePath;
     @Expose
     private ArrayList<String> decksName = new ArrayList<>();
     private ArrayList<Deck> decks = new ArrayList<>();
@@ -45,8 +46,10 @@ public class User {
         setUsername(username);
         setPassword(password);
         setNickname(nickname);
+        setProfilePicturePath(getRandomProfilePicturePath());
         users.add(this);
     }
+
 
     public void setUsername(String username) {
         this.username = username;
@@ -122,6 +125,14 @@ public class User {
 
     public ArrayList<Card> getAllCards() {
         return allCards;
+    }
+
+    public String getProfilePicturePath() {
+        return profilePicturePath;
+    }
+
+    public void setProfilePicturePath(String profilePicturePath) {
+        this.profilePicturePath = profilePicturePath;
     }
 
     public static User getUserByUsername(String username) {
@@ -235,6 +246,12 @@ public class User {
             }
         }
         return false;
+    }
+
+    private String getRandomProfilePicturePath() {
+        Random random = new Random();
+        int randomInt = Math.abs(random.nextInt()%16 + 1);
+        return "/profilepics/Chara007_1.dds" + randomInt + ".png";
     }
 
     public static void serialize() {

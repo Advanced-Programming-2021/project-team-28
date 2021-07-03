@@ -11,40 +11,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LoginMenuController {
-    LoginMenuView loginMenuView = new LoginMenuView(this);
+    LoginMenuView loginMenuView;
 
-    public void run() throws Exception {
-        AllCardsInitiator.fillAllCards();
-        createResourceFileIfNeeded();
-        MonsterCard.deserialize();
-        SpellCard.deserialize();
-        TrapCard.deserialize();
-        User.deserialize();
-        this.loginMenuView.run();
-        MonsterCard.serialize();
-        SpellCard.serialize();
-        TrapCard.serialize();
-        Deck.serialize();
-        User.serialize();
+    public LoginMenuController (LoginMenuView view){
+        this.loginMenuView = view;
     }
 
-    private void createResourceFileIfNeeded() throws IOException {
-        ArrayList<File> files= new ArrayList<>();
-        files.add(new File("src/UserOutput.json"));
-        files.add(new File("src/MonsterCardsOutput.json"));
-        files.add(new File("src/SpellCardsOutput.json"));
-        files.add(new File("src/TrapCardsOutput.json"));
-        files.add(new File("src/DecksOutput.json"));
-        File cardsFolder = new File("src/ExportedCards");
-        cardsFolder.mkdir();
-        for (File file : files)
-        if(!file.exists()){
-            file.createNewFile();
-            FileWriter writer = new FileWriter(file);
-            writer.write("[]");
-            writer.close();
-        }
+    public void run() throws Exception {
 
+        this.loginMenuView.run();
     }
 
     public MenuEnum processCommand(String command) throws Exception {
@@ -138,5 +113,13 @@ public class LoginMenuController {
         commandMatchers[17] = patternForLoginUser4.matcher(command);
         commandMatchers[18] = patternForEnterAnotherMenu.matcher(command);
         return commandMatchers;
+    }
+
+    public void saveDatabase() {
+        MonsterCard.serialize();
+        SpellCard.serialize();
+        TrapCard.serialize();
+        Deck.serialize();
+        User.serialize();
     }
 }
