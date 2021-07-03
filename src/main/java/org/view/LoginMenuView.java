@@ -27,11 +27,11 @@ public class LoginMenuView extends Application {
     @FXML
     private TextField nickname;
 
-    private LoginMenuController controller;
+    private final LoginMenuController CONTROLLER;
 
 
     public LoginMenuView(){
-        controller = new LoginMenuController(this);
+        CONTROLLER = new LoginMenuController(this);
     }
 
     public void run() throws Exception {
@@ -80,10 +80,10 @@ public class LoginMenuView extends Application {
 
     public void signup() {
         try {
-            if (password.getText().equals("") || username.getText().equals("")) {
+            if (password.getText().equals("") || username.getText().equals("") || nickname.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Please enter username, password and nickname first.");
             } else {
-                controller.processCommand("user create -u " + username.getText() + " -p " + password.getText()
+                CONTROLLER.processCommand("user create -u " + username.getText() + " -p " + password.getText()
                         + " -n " + nickname.getText());
             }
         } catch(Exception e){
@@ -97,7 +97,7 @@ public class LoginMenuView extends Application {
             if (passwordForLogin.getText().equals("") || usernameForLogin.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Please enter username and password first.");
             } else {
-                controller.processCommand("user login -u " + usernameForLogin.getText() + " -p " + passwordForLogin.getText());
+                CONTROLLER.processCommand("user login -u " + usernameForLogin.getText() + " -p " + passwordForLogin.getText());
             }
         } catch(Exception e){
             e.printStackTrace();
@@ -105,7 +105,7 @@ public class LoginMenuView extends Application {
     }
 
     public void exitGame() {
-        controller.saveDatabase();
+        CONTROLLER.saveDatabase();
         System.exit(0);
     }
 }
