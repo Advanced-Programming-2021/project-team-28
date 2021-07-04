@@ -1,10 +1,19 @@
 package org.view;
 
+import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import org.controller.MainMenuController;
 
+import javax.swing.*;
 import java.util.Scanner;
 
-public class MainMenuView {
+public class MainMenuView extends Application {
 
     MainMenuController controller ;
 
@@ -15,19 +24,8 @@ public class MainMenuView {
 
     private Scanner scanner = ScannerInstance.getInstance().getScanner();
 
-    private String command;
-
     public  void run () throws Exception {
-        while (true) {
-            command = scanner.nextLine();
-            command = command.trim();
-            if (command.equals("user logout"))
-            {
-                System.out.println("user logged out successfully");
-                return;
-            }
-            controller.processCommand(command);
-        }
+        start(LoginMenuView.getPrimaryStage());
     }
 
 
@@ -42,6 +40,16 @@ public class MainMenuView {
 
     public void cheatActivated(){
         System.out.println("Cheat activated");
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setController(this);
+        loader.setLocation(getClass().getResource("/mainclass/mainmenu.fxml"));
+        Scene scene = new Scene(loader.load(), 1200, 700);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

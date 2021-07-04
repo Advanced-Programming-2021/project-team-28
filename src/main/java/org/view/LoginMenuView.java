@@ -14,6 +14,7 @@ import javax.swing.*;
 
 
 public class LoginMenuView extends Application {
+    private static Stage primaryStage;
     @FXML
     private AnchorPane anchorPane;
     @FXML
@@ -29,6 +30,9 @@ public class LoginMenuView extends Application {
 
     private final LoginMenuController CONTROLLER;
 
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
 
     public LoginMenuView(){
         CONTROLLER = new LoginMenuController(this);
@@ -67,13 +71,14 @@ public class LoginMenuView extends Application {
     }
 
     public void userLoggedIn() {
-        System.out.println("user logged in successfully!");
+        //System.out.println("user logged in successfully!");
     }
 
     @Override
     public void start(Stage stage) throws Exception {
         AnchorPane parent = FXMLLoader.load(getClass().getResource("/mainclass/loginmenu.fxml"));
         Scene scene = new Scene(parent, 1200, 700);
+        primaryStage = stage;
         stage.setScene(scene);
         stage.show();
     }
