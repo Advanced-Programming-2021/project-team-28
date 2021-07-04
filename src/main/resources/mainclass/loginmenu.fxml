@@ -4,18 +4,28 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.view.LoginMenuView">
-    <Text fill="BLACK" layoutX="538.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TEAM 28 PRESENTS Yu-Gi-Oh" wrappingWidth="195.9999877929688">
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.view.LoginMenuView">
+    <Text fill="BLACK" layoutX="538.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="TEAM 28 PRESENTS Yu-Gi-Oh" wrappingWidth="195.9999877929688">
         <font>
-            <Font name="Eras Medium ITC" size="19.0" />
+            <Font name="Eras Medium ITC" size="19.0"/>
         </font>
     </Text>
-    <Button alignment="CENTER" layoutX="458.0" layoutY="349.0" mnemonicParsing="false" onMouseClicked="#signup" prefHeight="34.0" prefWidth="160.0" text="Register" />
-    <Button alignment="CENTER" layoutX="636.0" layoutY="304.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="34.0" prefWidth="160.0" text="Login" />
-    <Button alignment="CENTER" layoutX="636.0" layoutY="349.0" mnemonicParsing="false" onMouseClicked="#exitGame" prefHeight="34.0" prefWidth="160.0" text="Exit" />
-    <PasswordField fx:id="password" alignment="CENTER" layoutX="458.0" layoutY="262.0" prefHeight="34.0" prefWidth="160.0" promptText="Password" />
-    <TextField fx:id="username" alignment="CENTER" layoutX="458.0" layoutY="221.0" prefHeight="34.0" prefWidth="160.0" promptText="Username" />
-    <TextField fx:id="nickname" alignment="CENTER" layoutX="458.0" layoutY="304.0" prefHeight="34.0" prefWidth="160.0" promptText="Nickname" />
-   <TextField fx:id="usernameForLogin" alignment="CENTER" layoutX="636.0" layoutY="221.0" prefHeight="34.0" prefWidth="160.0" promptText="Username" />
-   <PasswordField fx:id="passwordForLogin" alignment="CENTER" layoutX="636.0" layoutY="262.0" prefHeight="34.0" prefWidth="160.0" promptText="Password" />
+    <Button alignment="CENTER" layoutX="458.0" layoutY="349.0" mnemonicParsing="false" onMouseClicked="#signup"
+            prefHeight="34.0" prefWidth="160.0" text="Register"/>
+    <Button alignment="CENTER" layoutX="636.0" layoutY="304.0" mnemonicParsing="false" onMouseClicked="#login"
+            prefHeight="34.0" prefWidth="160.0" text="Login"/>
+    <Button alignment="CENTER" layoutX="636.0" layoutY="349.0" mnemonicParsing="false" onMouseClicked="#exitGame"
+            prefHeight="34.0" prefWidth="160.0" text="Exit"/>
+    <PasswordField fx:id="password" alignment="CENTER" layoutX="458.0" layoutY="262.0" prefHeight="34.0"
+                   prefWidth="160.0" promptText="Password"/>
+    <TextField fx:id="username" alignment="CENTER" layoutX="458.0" layoutY="221.0" prefHeight="34.0" prefWidth="160.0"
+               promptText="Username"/>
+    <TextField fx:id="nickname" alignment="CENTER" layoutX="458.0" layoutY="304.0" prefHeight="34.0" prefWidth="160.0"
+               promptText="Nickname"/>
+    <TextField fx:id="usernameForLogin" alignment="CENTER" layoutX="636.0" layoutY="221.0" prefHeight="34.0"
+               prefWidth="160.0" promptText="Username"/>
+    <PasswordField fx:id="passwordForLogin" alignment="CENTER" layoutX="636.0" layoutY="262.0" prefHeight="34.0"
+                   prefWidth="160.0" promptText="Password"/>
 </AnchorPane>

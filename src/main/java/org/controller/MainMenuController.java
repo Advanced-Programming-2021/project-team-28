@@ -35,7 +35,7 @@ public class MainMenuController {
         Matcher[] duelCommandMatchers = getDuelCommandMatchers(command);
         if (command.equals("menu show-current")) {
             view.showMenu();
-        } else if (command.equalsIgnoreCase("hesoyam")){
+        } else if (command.equalsIgnoreCase("hesoyam")) {
             user.changeBalance(250000);
             view.cheatActivated();
         } else if (command.equals("menu enter Deck")) {
@@ -49,15 +49,15 @@ public class MainMenuController {
         } else if (command.equals("menu enter Scoreboard")) {
             new ScoreboardController().run();
         } else {
-            for (int i=0; i<12; i++){
-                if(duelCommandMatchers[i].find()){
-                    if(validateMatch(duelCommandMatchers[i]) != NumberOfRounds.OTHERS){
+            for (int i = 0; i < 12; i++) {
+                if (duelCommandMatchers[i].find()) {
+                    if (validateMatch(duelCommandMatchers[i]) != NumberOfRounds.OTHERS) {
                         new Game(user, User.getUserByUsername(duelCommandMatchers[i].group("secondPlayer")), validateMatch(duelCommandMatchers[i])).run();
                     }
                     return;
                 }
             }
-            for (int i=12; i<14; i++){
+            for (int i = 12; i < 14; i++) {
                 if (duelCommandMatchers[i].find()) {
                     user.changeBalance(Integer.parseInt(duelCommandMatchers[i].group(1)));
                     view.cheatActivated();

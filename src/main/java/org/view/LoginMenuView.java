@@ -75,7 +75,7 @@ public class LoginMenuView extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public  void start(Stage stage) throws Exception {
         AnchorPane parent = FXMLLoader.load(getClass().getResource("/mainclass/loginmenu.fxml"));
         Scene scene = new Scene(parent, 1280, 720);
         primaryStage = stage;
@@ -113,4 +113,7 @@ public class LoginMenuView extends Application {
         CONTROLLER.saveDatabase();
         System.exit(0);
     }
+
+
+
 }
