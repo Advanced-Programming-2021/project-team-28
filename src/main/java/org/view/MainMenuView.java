@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.controller.DeckMenuController;
 import org.controller.MainMenuController;
 
 import java.util.Scanner;
@@ -45,6 +46,7 @@ public class MainMenuView extends Application {
         loader.setController(this);
         loader.setLocation(getClass().getResource("/mainclass/mainmenu.fxml"));
         Scene scene = new Scene(loader.load(), 1280, 720);
+        stage.setTitle("Main Menu");
         setUserText();
         stage.setScene(scene);
         stage.show();
@@ -68,7 +70,8 @@ public class MainMenuView extends Application {
 
     }
 
-    public void deck() {
+    public void deck() throws Exception {
+        new DeckMenuController(controller.getUser()).run();
         try {
             controller.processCommand("menu enter Deck");
         } catch (Exception e) {

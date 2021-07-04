@@ -199,7 +199,7 @@ public class User {
         return decksArrayListToStringBuilder.toString();
     }
 
-    private void sortDecksArrayList() {
+    public void sortDecksArrayList() {
         for (int i = 0; i < decks.size(); i++) {
             for (int j = 0; j < decks.size() - 1; j++) {
                 if (Utilities.compareAlphabetical(decks.get(j).getDeckName(), decks.get(j + 1).getDeckName()) > 0) {

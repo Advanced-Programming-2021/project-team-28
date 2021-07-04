@@ -6,9 +6,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.controller.LoginMenuController;
+
 import javax.swing.*;
 
 
@@ -70,17 +72,15 @@ public class LoginMenuView extends Application {
         JOptionPane.showMessageDialog(null,"Username and password didn’t match!");
     }
 
-    public void userLoggedIn() {
-        //System.out.println("user logged in successfully!");
-    }
-
     @Override
     public  void start(Stage stage) throws Exception {
         AnchorPane parent = FXMLLoader.load(getClass().getResource("/mainclass/loginmenu.fxml"));
         Scene scene = new Scene(parent, 1280, 720);
         primaryStage = stage;
         stage.setScene(scene);
+        stage.setTitle("Register Menu");
         stage.show();
+        stage.getIcons().add(new Image(getClass().getResource("/logos/yugioh.jpg").toExternalForm()));
     }
 
     public void signup() {

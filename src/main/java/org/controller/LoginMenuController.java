@@ -27,25 +27,6 @@ public class LoginMenuController {
         User.serialize();
     }
 
-    private void createResourceFileIfNeeded() throws IOException {
-        ArrayList<File> files= new ArrayList<>();
-        files.add(new File("src/UserOutput.json"));
-        files.add(new File("src/MonsterCardsOutput.json"));
-        files.add(new File("src/SpellCardsOutput.json"));
-        files.add(new File("src/TrapCardsOutput.json"));
-        files.add(new File("src/DecksOutput.json"));
-        File cardsFolder = new File("src/ExportedCards");
-        cardsFolder.mkdir();
-        for (File file : files)
-        if(!file.exists()){
-            file.createNewFile();
-            FileWriter writer = new FileWriter(file);
-            writer.write("[]");
-            writer.close();
-        }
-
-    }
-
     public MenuEnum processCommand(String command) throws Exception {
         String username = "username";
         String password = "password";
@@ -80,7 +61,6 @@ public class LoginMenuController {
         if(User.isUsernameAvailable(username) || !User.getUserByUsername(username).getPassword().equals(password)){
             loginMenuView.usernameAndPasswordDidNotMatch();
         } else {
-            loginMenuView.userLoggedIn();
             new MainMenuController(User.getUserByUsername(username)).run();
         }
     }

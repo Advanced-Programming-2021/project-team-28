@@ -1,5 +1,7 @@
 package org.controller;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
 import org.model.*;
 import org.view.DeckMenuView;
 
@@ -15,7 +17,15 @@ public class DeckMenuController {
         this.user = user;
     }
 
-    public void run() {
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void run() throws Exception {
         view.run();
     }
 

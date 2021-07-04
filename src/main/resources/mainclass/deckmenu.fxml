@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="1052.0" layoutY="650.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="43.0" prefWidth="190.0" text="Back" />
+      <ScrollPane layoutX="248.0" layoutY="67.0" prefHeight="583.0" prefWidth="787.0">
+         <content>
+            <VBox fx:id="vBox" prefHeight="583.0" prefWidth="770.0" spacing="7"/>
+         </content></ScrollPane>
+      <Button layoutX="1048.0" layoutY="233.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="190.0" text="Create a new deck" onMouseClicked="#createNewDeck"/>
+   </children>
+</AnchorPane>
