@@ -4,11 +4,15 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.controller.MainMenuController;
 import org.controller.ProfileMenuController;
+import org.model.enums.Status;
 
 
 import java.util.Scanner;
@@ -18,12 +22,30 @@ public class ProfileMenuView extends Application {
     @FXML
     private Label username;
     @FXML
-    private Label password;
+    private Label nickname;
+    @FXML
+    private Label passwordChangeNotifyLabel;
+    @FXML
+    private Label nicknameChangeNotifyLabel;
     @FXML
     private ImageView profilePicture;
+    @FXML
+    private Button back;
+    @FXML
+    private Button changePassword;
+    @FXML
+    private Button changeNickname;
+    @FXML
+    private TextField currentPasswordField;
+    @FXML
+    private TextField newPasswordField;
+    @FXML
+    private TextField nicknameFiled;
+
 
 
     ProfileMenuController controller;
+
     Scanner scanner = ScannerInstance.getInstance().getScanner();
     private String command ;
 
@@ -45,7 +67,7 @@ public class ProfileMenuView extends Application {
 
     private void fillProfileMenu() {
         username.setText("Username : " + controller.getUser().getUsername());
-        password.setText("Password : " + controller.getUser().getPassword());
+        nickname.setText("Nickname : " + controller.getUser().getNickname());
         profilePicture.setImage(new Image(getClass().getResource(controller.getUser().getProfilePicturePath()).toExternalForm()));
     }
 
@@ -63,6 +85,49 @@ public class ProfileMenuView extends Application {
 //            controller.processCommand(command);
 //
 //        }
+    }
+
+    public void changePassword(){
+        Status result = controller.controlChangePassword(currentPasswordField.getText() , newPasswordField.getText());
+        switch (result){
+            case WRONG_PASSWORD:{
+                passwordChangeNotifyLabel.setText("Wrong password please retry");
+                currentPasswordField.setText("");
+                newPasswordField.setText("");
+                return;
+            }
+            case SUCCESS:{
+                passwordChangeNotifyLabel.setText("Password was Changed successfully");
+                currentPasswordField.setText("");
+                newPasswordField.setText("");
+                return;
+            }
+            case REPEATED_PASSWORD:{
+                passwordChangeNotifyLabel.setText("You must Enter a new password");
+                currentPasswordField.setText("");
+                newPasswordField.setText("");
+                return;
+            }
+        }
+    }
+
+    public void changeNickname(){
+        Status result = controller.controlChangeNickName(nicknameFiled.getText());
+        switch (result){
+            case SUCCESS:{
+                nicknameChangeNotifyLabel.setText("Nickname changed successfully");
+                nickname.setText("Nickname : " + controller.getUser().getNickname());
+                return;
+            }
+            case PLEASE_ENTER_DATA_FIRST:{
+                nicknameChangeNotifyLabel.setText("Please enter a valid nickname first");
+                return;
+            }
+            case REPEATED_NICKNAME:{
+                nicknameChangeNotifyLabel.setText("This nickname is already taken please try again");
+                return;
+            }
+        }
     }
 
     public void nicknameExists(String nickname) {
@@ -105,5 +170,10 @@ public class ProfileMenuView extends Application {
         System.out.println("invalid command");
     }
 
+    public void back(){
+        try {
+            new MainMenuController(controller.getUser()).run();
+        }catch (Exception e){}
+    }
 
 }

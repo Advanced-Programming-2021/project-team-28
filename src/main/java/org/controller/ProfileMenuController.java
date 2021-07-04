@@ -1,6 +1,7 @@
 package org.controller;
 
 import org.model.User;
+import org.model.enums.Status;
 import org.view.ProfileMenuView;
 
 import java.util.regex.Matcher;
@@ -85,24 +86,34 @@ public class ProfileMenuController {
         return commandMatchers;
     }
 
-    private void controlChangeNickName(String nickname){
+    public Status controlChangeNickName(String nickname){
+        if(nickname.equals(""))
+            return Status.PLEASE_ENTER_DATA_FIRST;
         if (User.isNicknameAvailable(nickname)) {
             user.setNickname(nickname);
             view.nicknameChanged();
+            return Status.SUCCESS;
         }
-            else view.nicknameExists(nickname);
+            else {
+            view.nicknameExists(nickname);
+            return Status.REPEATED_NICKNAME;
+        }
     }
 
-    private void controlChangePassword(String current , String alternate){
+    public Status controlChangePassword(String current , String alternate){
         if(user.getPassword().equals(current)) {
             if(current.equals(alternate)) {
                 view.passwordIsTheSame();
-                return;
+                return Status.REPEATED_PASSWORD;
             }
             user.setPassword(alternate);
             view.passwordChanged();
+            return Status.SUCCESS;
         }
-        else view.wrongPassword();
+        else {
+            view.wrongPassword();
+            return Status.WRONG_PASSWORD;
+        }
     }
 
     private void controlChangeUsername(String username){
