@@ -1,5 +1,6 @@
 package org.controller;
 
+import javafx.fxml.FXMLLoader;
 import org.model.Game;
 import org.model.enums.NumberOfRounds;
 import org.model.User;
@@ -17,6 +18,13 @@ public class MainMenuController {
         this.user = user;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public void run() throws Exception {
         this.view.run();
