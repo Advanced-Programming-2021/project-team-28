@@ -90,6 +90,9 @@ public class LoginMenuView extends Application {
             } else {
                 CONTROLLER.processCommand("user create -u " + username.getText() + " -p " + password.getText()
                         + " -n " + nickname.getText());
+                username.clear();
+                password.clear();
+                nickname.clear();
             }
         } catch(Exception e){
             e.printStackTrace();
@@ -103,6 +106,8 @@ public class LoginMenuView extends Application {
                 JOptionPane.showMessageDialog(null, "Please enter username and password first.");
             } else {
                 CONTROLLER.processCommand("user login -u " + usernameForLogin.getText() + " -p " + passwordForLogin.getText());
+                usernameForLogin.clear();
+                passwordForLogin.clear();
             }
         } catch(Exception e){
             e.printStackTrace();
