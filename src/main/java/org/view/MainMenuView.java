@@ -1,16 +1,11 @@
 package org.view;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.controller.MainMenuController;
 
-import javax.swing.*;
 import java.util.Scanner;
 
 public class MainMenuView extends Application {
@@ -47,7 +42,7 @@ public class MainMenuView extends Application {
         FXMLLoader loader = new FXMLLoader();
         loader.setController(this);
         loader.setLocation(getClass().getResource("/mainclass/mainmenu.fxml"));
-        Scene scene = new Scene(loader.load(), 1200, 700);
+        Scene scene = new Scene(loader.load(), 1280, 720);
         stage.setScene(scene);
         stage.show();
     }
