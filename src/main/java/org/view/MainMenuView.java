@@ -51,6 +51,7 @@ public class MainMenuView extends Application {
     }
 
     public void logout() {
+
         LoginMenuView loginMenuView = new LoginMenuView();
         try {
             loginMenuView.start(primaryStage);
@@ -60,24 +61,34 @@ public class MainMenuView extends Application {
     }
 
     public void newDuel() {
+
     }
 
     public void shop() {
+
     }
 
     public void deck() {
+        try {
+            controller.processCommand("menu enter Deck");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void scoreBoard() {
+
     }
 
     public void profile() {
+
     }
 
     public void importExport() {
     }
-    public void setUserText(){
-        userText.setText("User logged in: "+controller.getUser().getUsername() + "\nknown as: " + controller.getUser().getNickname());
+
+    public void setUserText() {
+        userText.setText("User logged in: " + controller.getUser().getUsername() + "\nknown as: " + controller.getUser().getNickname());
 
     }
 }

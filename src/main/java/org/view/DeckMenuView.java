@@ -12,14 +12,15 @@ public class DeckMenuView {
         this.controller = controller;
     }
     public void run(){
-        String command;
-        Scanner scanner = ScannerInstance.getInstance().getScanner();
-        while(true){
-            command = scanner.nextLine();
-            if(controller.processCommand(command).equals(MenuEnum.BACK)){
-                return;
-            }
-        }
+        while (true);
+//        String command;
+//        Scanner scanner = ScannerInstance.getInstance().getScanner();
+//        while(true){
+//            command = scanner.nextLine();
+//            if(controller.processCommand(command).equals(MenuEnum.BACK)){
+//                return;
+//            }
+//        }
     }
 
     public void thisDeckAlreadyExists (String deckName){
