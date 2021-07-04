@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import org.controller.MainMenuController;
 import org.controller.ScoreboardController;
 import org.model.User;
 
@@ -58,8 +59,9 @@ public class ScoreboardView extends Application {
     private Label player19;
     @FXML
     private Label player20;
-   // @FXML
-    //public Button back;
+    @FXML
+    public Button back;
+
     @FXML
     private ArrayList<Label> labels;
 
@@ -147,7 +149,9 @@ public class ScoreboardView extends Application {
 
     }
 
-    private void back (){
-        System.out.println("surprise motherfucker");
+    public void back ()  {
+        try {
+            new MainMenuController(controller.getUser()).run();
+        }catch (Exception e){}
     }
 }

@@ -53,4 +53,8 @@ public class ScoreboardController {
         });
         return sortedUsers;
     }
+
+    public User getUser() {
+        return user;
+    }
 }

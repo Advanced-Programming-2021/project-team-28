@@ -112,4 +112,8 @@ public class ProfileMenuController {
         }
         else view.usernameExists(username);
     }
+
+    public User getUser() {
+        return user;
+    }
 }

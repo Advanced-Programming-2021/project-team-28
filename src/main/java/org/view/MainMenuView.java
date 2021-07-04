@@ -85,7 +85,11 @@ public class MainMenuView extends Application {
     }
 
     public void profile() {
-
+        try {
+            controller.processCommand("menu enter Profile");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void importExport() {
