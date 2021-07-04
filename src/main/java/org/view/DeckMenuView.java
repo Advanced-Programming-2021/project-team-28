@@ -1,29 +1,21 @@
 package org.view;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import org.controller.DeckMenuController;
 import org.controller.MainMenuController;
-import org.controller.MenuEnum;
 import org.model.Deck;
 
 import javax.swing.*;
-import java.util.Scanner;
 
 public class DeckMenuView extends Application {
     DeckMenuController controller;
