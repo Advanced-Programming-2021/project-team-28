@@ -47,7 +47,7 @@ public class MainMenuController {
         } else if (command.equals("menu enter Import/Export")) {
             new ImportExportController(user).run();
         } else if (command.equals("menu enter Scoreboard")) {
-            new ScoreboardController().run();
+            new ScoreboardController(user).run();
         } else {
             for (int i = 0; i < 12; i++) {
                 if (duelCommandMatchers[i].find()) {

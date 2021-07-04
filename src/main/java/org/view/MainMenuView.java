@@ -77,7 +77,11 @@ public class MainMenuView extends Application {
     }
 
     public void scoreBoard() {
-
+        try {
+            controller.processCommand("menu enter Scoreboard");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void profile() {
