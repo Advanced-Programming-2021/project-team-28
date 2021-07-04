@@ -4,11 +4,13 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.controller.ScoreboardController;
 import org.model.User;
 
-import java.awt.*;
+
 import java.util.ArrayList;
 
 public class ScoreboardView extends Application {
@@ -56,6 +58,8 @@ public class ScoreboardView extends Application {
     private Label player19;
     @FXML
     private Label player20;
+   // @FXML
+    //public Button back;
     @FXML
     private ArrayList<Label> labels;
 
@@ -75,10 +79,10 @@ public class ScoreboardView extends Application {
 
     private void setUpScoreboard() {
         ArrayList<User> users = controller.getSortedUsers();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < Math.min(20 , users.size()); i++) {
             if(users.get(i) != null) {
                 User user = users.get(i);
-                labels.get(i).setText(i + " - " + user.getUsername() + "   Score : " + user.getScore());
+                labels.get(i).setText((i + 1) + " - " + user.getUsername() + "   Score : " + user.getScore());
             }
         }
 
@@ -119,6 +123,7 @@ public class ScoreboardView extends Application {
 
 
     private void fillLabels() {
+        labels = new ArrayList<>();
         labels.add(player1);
         labels.add(player2);
         labels.add(player3);
@@ -140,5 +145,9 @@ public class ScoreboardView extends Application {
         labels.add(player19);
         labels.add(player20);
 
+    }
+
+    private void back (){
+        System.out.println("surprise motherfucker");
     }
 }

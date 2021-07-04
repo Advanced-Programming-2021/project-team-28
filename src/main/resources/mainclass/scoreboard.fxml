@@ -27,6 +27,6 @@
       <Label fx:id="player18" layoutX="780.0" layoutY="490.0" prefHeight="36.0" prefWidth="380.0" text="Label" />
       <Label fx:id="player19" layoutX="780.0" layoutY="540.0" prefHeight="36.0" prefWidth="380.0" text="Label" />
       <Label fx:id="player20" layoutX="780.0" layoutY="600.0" prefHeight="36.0" prefWidth="380.0" text="Label" />
-      <Button fx:id="back" layoutX="614.0" layoutY="645.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="52.0" text="BACK" />
+      <Button fx:id="back" layoutX="614.0" layoutY="645.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="52.0" text="BACK" onMouseClicked="#back"/>
    </children>
 </AnchorPane>
