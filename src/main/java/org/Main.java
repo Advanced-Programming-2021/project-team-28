@@ -17,6 +17,8 @@ public class Main {
 
     private static void restoreDatabase() throws Exception {
         AllCardsInitiator.fillAllCards();
+        AllCardsInitiator.addMonstersToImageArrayList();
+        AllCardsInitiator.addSpellTrapToImageArrayList();
         createResourceFileIfNeeded();
         MonsterCard.deserialize();
         SpellCard.deserialize();
