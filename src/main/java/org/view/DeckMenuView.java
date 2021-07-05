@@ -1,21 +1,26 @@
 package org.view;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import jfxtras.labs.util.event.MouseControlUtil;
 import org.controller.DeckMenuController;
 import org.controller.MainMenuController;
 import org.model.Card;
 import org.model.Deck;
+import jfxtras.labs.util.*;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -32,6 +37,8 @@ public class DeckMenuView extends Application {
     private ImageView selectedCardImageView;
     @FXML
     private Text selectedCardToString;
+    @FXML
+    private VBox playerCardsVBox;
     private boolean isInEditMode = false;
     private Deck selectedDeck;
 
@@ -204,14 +211,41 @@ public class DeckMenuView extends Application {
             LoginMenuView.getPrimaryStage().getScene().setRoot(loader.load());
             selectedDeckText.setText("Deck name: " + selectedDeck.getDeckName());
             selectedCardImageView.setImage(Card.getCardImageByName("Unknown"));
+            addCardsToGridPane();
         } catch (IOException exception) {
             exception.printStackTrace();
         }
     }
 
+    private void addCardsToGridPane() {
+        HBox row = new HBox();
+        int i=0;
+        for (Card card : controller.getUser().getAllCards()){
+            if(i%2==0){
+                row = new HBox();
+                row.setSpacing(7);
+                playerCardsVBox.getChildren().add(row);
+            }
+            ImageView view = new ImageView(Card.getCardImageByName(card.getName()));
+            view.setFitHeight(180);
+            view.setFitWidth(120);
+            view.setOnMouseClicked(mouseEvent -> {
+                selectedCardImageView.setImage(view.getImage());
+                //selectedDeckText.setText();
+            });
+            row.getChildren().add(view);
+            i++;
+        }
+    }
+
     public void back() {
         try {
-            new MainMenuController(controller.getUser()).run();
+            if(isInEditMode){
+                isInEditMode = false;
+                new DeckMenuController(controller.getUser()).run();
+            } else {
+                new MainMenuController(controller.getUser()).run();
+            }
         } catch (Exception exception) {
             exception.printStackTrace();
         }

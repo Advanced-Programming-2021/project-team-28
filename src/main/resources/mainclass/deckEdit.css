@@ -1,7 +1,11 @@
-.deckEdit {
-    -fx-background-image: url('1.jpg');
+.deckEditScrollPane .viewport {
+    -fx-background-image: url('mainDeckBackground.jpg');
 }
 
-.deckEditScrollPane {
-    -fx-background-image: url('deckBackground.jpg');
+.sideEditScrollPane .viewport {
+    -fx-background-image: url('sideDeckBackground.jpg');
+}
+
+.playerCardsScrollPane .viewport {
+    -fx-background-image: url('playerCardsBackground.jpg');
 }

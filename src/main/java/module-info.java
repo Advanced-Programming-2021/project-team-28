@@ -5,6 +5,8 @@ module project {
     requires java.desktop;
     requires com.google.gson;
     requires javafx.media;
+    requires jfxtras.controls;
+    requires jfxtras.labs;
 
     opens org.view to javafx.fxml, com.google.gson;
     opens org.model to com.google.gson;

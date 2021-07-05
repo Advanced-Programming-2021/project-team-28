@@ -124,13 +124,6 @@ public class ShopView extends Application {
 
     public void run() throws Exception {
         start(LoginMenuView.getPrimaryStage());
-//        String command;
-//        while (true){
-//
-//            command = scanner.nextLine().trim();
-//            if(command.equals("menu exit")) break;
-//            controller.processCommand(command);
-//        }
     }
 
     public void notEnoughMoney(){
@@ -249,6 +242,4 @@ public class ShopView extends Application {
     public void cheatActivated() {
         System.out.println("Cheat activated");
     }
-
-
 }
