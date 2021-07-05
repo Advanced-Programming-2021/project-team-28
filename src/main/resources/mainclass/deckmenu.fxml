@@ -2,14 +2,32 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Button layoutX="1052.0" layoutY="650.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="43.0" prefWidth="190.0" text="Back" />
-      <ScrollPane layoutX="248.0" layoutY="67.0" prefHeight="583.0" prefWidth="787.0">
-         <content>
-            <VBox fx:id="vBox" prefHeight="583.0" prefWidth="770.0" spacing="7"/>
-         </content></ScrollPane>
-      <Button layoutX="1048.0" layoutY="233.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="190.0" text="Create a new deck" onMouseClicked="#createNewDeck"/>
-   </children>
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <Button layoutX="1052.0" layoutY="650.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="43.0" prefWidth="190.0" text="Back" />
+   <Text fx:id="activeDeckText" fill="black" layoutX="341.0" layoutY="46.0" textAlignment="CENTER" wrappingWidth="522.4">
+      <font>
+         <Font name="Verdana" size="20.0" />
+      </font>
+   </Text>
+   <ScrollPane layoutX="248.0" layoutY="67.0" prefHeight="583.0" prefWidth="787.0">
+      <VBox fx:id="vBox" prefHeight="617.0" prefWidth="770.0" spacing="7" />
+   </ScrollPane>
+   <Button layoutX="1052.0" layoutY="67.0" mnemonicParsing="false" onMouseClicked="#createNewDeck" prefHeight="43.0" prefWidth="190.0" text="Create a new deck" />
+   <Text fontSmoothingType="LCD" layoutX="910.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main" textAlignment="CENTER" wrappingWidth="46.578125">
+      <font>
+         <Font name="Verdana" size="15.0" />
+      </font>
+   </Text>
+   <Text layoutX="990.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Side" textAlignment="CENTER">
+      <font>
+         <Font name="Verdana" size="15.0" />
+      </font>
+   </Text>
+   <Text layoutX="917.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deck size" textAlignment="CENTER" wrappingWidth="105.13671875">
+      <font>
+         <Font name="Verdana" size="18.0" />
+      </font>
+   </Text>
 </AnchorPane>

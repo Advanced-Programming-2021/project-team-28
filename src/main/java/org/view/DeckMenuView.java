@@ -16,11 +16,18 @@ import org.controller.MainMenuController;
 import org.model.Deck;
 
 import javax.swing.*;
+import java.io.IOException;
 
 public class DeckMenuView extends Application {
     DeckMenuController controller;
     @FXML
     private VBox vBox;
+    @FXML
+    private Text activeDeckText;
+    @FXML
+    private Text selectedDeckText;
+    private boolean isInEditMode = false;
+    private Deck selectedDeck;
 
     public DeckMenuView(DeckMenuController controller) {
         this.controller = controller;
@@ -102,30 +109,55 @@ public class DeckMenuView extends Application {
         stage.setTitle("Deck Menu");
         stage.show();
         refreshDecksList();
+        showActiveDeck();
+    }
+
+    private void showActiveDeck() {
+        String activeDeck = controller.getUser().hasActiveDeck() ?
+                "Active Deck: " + controller.getUser().getActiveDeck().getDeckName() :
+                "You don't have any active deck";
+        activeDeckText.setText(activeDeck);
     }
 
     private void refreshDecksList() {
         vBox.getChildren().clear();
         controller.getUser().sortDecksArrayList();
         for (Deck deck : controller.getUser().getDecks()) {
-            Rectangle rectangle = getRectangle(40, 768);
+            HBox row = new HBox();
+            row.setSpacing(8);
+            addNameAndButtonsToRow(deck, row);
             StackPane stackPane = new StackPane();
+            Rectangle rectangle = getRectangle(40, 100, Color.KHAKI);
             stackPane.getChildren().add(rectangle);
-            HBox hBox = new HBox();
-            hBox.setSpacing(10);
-            Text text = new Text(deck.getDeckName());
-            text.setFill(Color.BLACK);
-            text.setFont(Font.font("Verdana", 30));
-            hBox.getChildren().add(text);
-            stackPane.getChildren().add(hBox);
-            vBox.getChildren().add(stackPane);
-            stackPane.setOnMouseEntered(mouseEvent -> {
-                addButtons(hBox);
-            });
-            stackPane.setOnMouseExited(mouseEvent -> {
-                removeButtons(hBox);
-            });
+            HBox mainAndSideDeckSizeTexts = new HBox();
+            mainAndSideDeckSizeTexts.setSpacing(10);
+            mainAndSideDeckSizeTexts.getChildren().add(getText(String.valueOf(deck.getAllCardsInMainDeck().size())));
+            addRegionToHBox(mainAndSideDeckSizeTexts);
+            mainAndSideDeckSizeTexts.getChildren().add(getText(String.valueOf(deck.getAllCardsInSideDeck().size())));
+            stackPane.getChildren().add(mainAndSideDeckSizeTexts);
+            row.getChildren().add(stackPane);
+            vBox.getChildren().add(row);
         }
+    }
+
+    private void addRegionToHBox(HBox mainAndSideDeckSizeTexts) {
+        Region region = new Region();
+        HBox.setHgrow(region, Priority.ALWAYS);
+        mainAndSideDeckSizeTexts.getChildren().add(region);
+    }
+
+    private void addNameAndButtonsToRow(Deck deck, HBox row) {
+        Rectangle rectangle = getRectangle(40, 660, Color.MOCCASIN);
+        StackPane stackPane = new StackPane();
+        stackPane.getChildren().add(rectangle);
+        HBox nameAndButtons = new HBox();
+        nameAndButtons.setSpacing(10);
+        nameAndButtons.getChildren().add(getText(deck.getDeckName()));
+        addRegionToHBox(nameAndButtons);
+        stackPane.getChildren().add(nameAndButtons);
+        stackPane.setOnMouseEntered(mouseEvent -> addButtons(nameAndButtons, deck));
+        stackPane.setOnMouseExited(mouseEvent -> removeButtons(nameAndButtons));
+        row.getChildren().add(stackPane);
     }
 
     private void removeButtons(HBox hBox) {
@@ -134,22 +166,40 @@ public class DeckMenuView extends Application {
         hBox.getChildren().add(text1);
     }
 
-    private void addButtons(HBox hBox) {
-        Region region = new Region();
-        HBox.setHgrow(region, Priority.ALWAYS);
-        hBox.getChildren().add(region);
+    private void addButtons(HBox hBox, Deck deck) {
+        addRegionToHBox(hBox);
         Button activateButton = new Button("Activate");
-        activateButton.setOnMouseClicked(mouseEvent -> controller.processCommand("deck set-activate " + ((Text) hBox.getChildren().get(0)).getText()));
+        activateButton.setOnMouseClicked(mouseEvent -> {
+            controller.processCommand("deck set-activate " + ((Text) hBox.getChildren().get(0)).getText());
+            showActiveDeck();
+        });
         hBox.getChildren().add(activateButton);
         Button editDeckButton = new Button("Show deck details and edit");
+        editDeckButton.setOnMouseClicked(mouseEvent -> {
+            isInEditMode = true;
+            selectedDeck = deck;
+            loadEditMenu();
+        });
         hBox.getChildren().add(editDeckButton);
-        Button deleteDeckButton= new Button("Delete");
+        Button deleteDeckButton = new Button("Delete");
         deleteDeckButton.setOnMouseClicked(mouseEvent -> {
             controller.processCommand("deck delete " + ((Text) hBox.getChildren().get(0)).getText());
             refreshDecksList();
         });
         hBox.getChildren().add(deleteDeckButton);
 
+    }
+
+    private void loadEditMenu() {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setController(this);
+        loader.setLocation(getClass().getResource("/mainclass/deckEdit.fxml"));
+        try {
+            LoginMenuView.getPrimaryStage().getScene().setRoot(loader.load());
+            selectedDeckText.setText(selectedDeck.getDeckName());
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
     }
 
     public void back() {
@@ -170,11 +220,18 @@ public class DeckMenuView extends Application {
         refreshDecksList();
     }
 
-    public Rectangle getRectangle(double height, double width) {
+    public Rectangle getRectangle(double height, double width, Color color) {
         Rectangle rectangle = new Rectangle();
-        rectangle.setFill(Color.MOCCASIN);
+        rectangle.setFill(color);
         rectangle.setHeight(height);
         rectangle.setWidth(width);
         return rectangle;
+    }
+
+    public Text getText(String text) {
+        Text text1 = new Text(text);
+        text1.setFill(Color.BLACK);
+        text1.setFont(Font.font("Verdana", 30));
+        return text1;
     }
 }

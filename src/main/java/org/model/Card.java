@@ -1,9 +1,11 @@
 package org.model;
 
 import com.google.gson.annotations.Expose;
+import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 public abstract class Card {
     @Expose
@@ -19,6 +21,7 @@ public abstract class Card {
 
 
     private static ArrayList<Card> allCards = new ArrayList<>();
+    private static HashMap<ImageView, String> cardsPicturePath = new HashMap<>();
 
     public Card(String ownerUsername, String name, String number, String description) {
         setOwnerUsername(ownerUsername);
@@ -31,10 +34,10 @@ public abstract class Card {
 
     }
 
+
     public abstract Object clone() throws CloneNotSupportedException;
 
     public abstract String toString();
-
 
     public static String cardsArrayListToString(ArrayList<Card> cards) {
         ArrayList<Card> monsterCards = new ArrayList<>();
