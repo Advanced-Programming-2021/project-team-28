@@ -21,9 +21,9 @@ public class AllCardsInitiator {
                 MonsterPower.YOMI_SHIP, 3, Attribute.WATER));
         Card.addToAllCards(new MonsterCard(MonsterType.AQUA, null, "Suijin", "", MonstersDescriptions.suijin, 2500, 2400,
                 MonsterPower.SUIJIN, 7, Attribute.WATER));
-        Card.addToAllCards(new MonsterCard(MonsterType.PYRO, null, "Fire Yarou", "", MonstersDescriptions.fireYarou, 1300, 1000,
+        Card.addToAllCards(new MonsterCard(MonsterType.PYRO, null, "Fireyarou", "", MonstersDescriptions.fireYarou, 1300, 1000,
                 MonsterPower.NONE, 4, Attribute.FIRE));
-        Card.addToAllCards(new MonsterCard(MonsterType.SPELL_CASTER, null, "Curtain of Dark Ones", "", MonstersDescriptions.curtainOfTheDarkOnes, 600, 500,
+        Card.addToAllCards(new MonsterCard(MonsterType.SPELL_CASTER, null, "Curtain Of The Dark Ones", "", MonstersDescriptions.curtainOfTheDarkOnes, 600, 500,
                 MonsterPower.NONE, 2, Attribute.DARK));
         Card.addToAllCards(new MonsterCard(MonsterType.FIEND, null, "Feral Imp", "", MonstersDescriptions.feralImp, 1400, 1300,
                 MonsterPower.NONE, 4, Attribute.DARK));
@@ -33,7 +33,7 @@ public class AllCardsInitiator {
                 MonsterPower.NONE, 3, Attribute.LIGHT));
         Card.addToAllCards(new MonsterCard(MonsterType.DRAGON, null, "Baby Dragon", "", MonstersDescriptions.babyDragon, 1200, 700,
                 MonsterPower.NONE, 3, Attribute.WIND));
-        Card.addToAllCards(new MonsterCard(MonsterType.WARRIOR, null, "Hero of the East", "", MonstersDescriptions.heroOfTheEast, 1100, 1000,
+        Card.addToAllCards(new MonsterCard(MonsterType.WARRIOR, null, "Hero Of The East", "", MonstersDescriptions.heroOfTheEast, 1100, 1000,
                 MonsterPower.NONE, 3, Attribute.EARTH));
         Card.addToAllCards(new MonsterCard(MonsterType.WARRIOR, null, "Battle Warrior", "", MonstersDescriptions.battleWarrior, 700, 1000,
                 MonsterPower.NONE, 3, Attribute.EARTH));
@@ -75,7 +75,7 @@ public class AllCardsInitiator {
                 MonsterPower.NONE, 4, Attribute.LIGHT));
         Card.addToAllCards(new MonsterCard(MonsterType.DRAGON, null, "Mirage Dragon", "", MonstersDescriptions.mirageDragon, 1600, 600,
                 MonsterPower.MIRAGE_DRAGON, 4, Attribute.LIGHT));
-        Card.addToAllCards(new MonsterCard(MonsterType.SPELL_CASTER, null, "Herald of Creation", "", MonstersDescriptions.heraldOfTheCreation, 1800, 600,
+        Card.addToAllCards(new MonsterCard(MonsterType.SPELL_CASTER, null, "Herald Of Creation", "", MonstersDescriptions.heraldOfTheCreation, 1800, 600,
                 MonsterPower.HERALD_OF_CREATION, 4, Attribute.LIGHT));
         Card.addToAllCards(new MonsterCard(MonsterType.DRAGON, null, "Exploder Dragon", "", MonstersDescriptions.exploderDragon, 1000, 0,
                 MonsterPower.EXPLODER_DRAGON, 3, Attribute.EARTH));
@@ -131,28 +131,48 @@ public class AllCardsInitiator {
         HashMap<Image, String> cardsAndImages = Card.getCardsAndImages();
         cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AlexandriteDragon.jpg").toExternalForm()) , "Alexandrite Dragon");
         cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Axe Raider");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/BabyDragon.jpg").toExternalForm()) , "BabyDragon");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/BattleOx.jpg").toExternalForm()) , "BattleOx");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
-        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/BabyDragon.jpg").toExternalForm()) , "Baby Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/BattleOx.jpg").toExternalForm()) , "Battle Ox");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/BattleWarrior.jpg").toExternalForm()) , "Battle Warrior");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/BeastKingBarbaros.jpg").toExternalForm()) , "Beast King Barbaros");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/Bitron.jpg").toExternalForm()) , "Bitron");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/BlueEyesWhiteDragon.jpg").toExternalForm()) , "Blue-Eyes White Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/CommandKnight.jpg").toExternalForm()) , "Command Knight");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/CrabTurtle.jpg").toExternalForm()) , "Crab Turtle");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/CrawlingDragon.jpg").toExternalForm()) , "Crawling Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/CurtainOfTheDarkOnes.jpg").toExternalForm()) , "Curtain Of The Dark Ones");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/DarkBlade.jpg").toExternalForm()) , "Dark Blade");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/DarkMagician.jpg").toExternalForm()) , "Dark Magician");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/ExploderDragon.jpg").toExternalForm()) , "Exploder Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/FeralImp.jpg").toExternalForm()) , "Feral Imp");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/Fireyarou.jpg").toExternalForm()) , "Fireyarou");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/FlameManipulator.jpg").toExternalForm()) , "Flame Manipulator");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/GateGuardian.jpg").toExternalForm()) , "Gate Guardian");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/Haniwa.jpg").toExternalForm()) , "Haniwa");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/HeraldOfCreation.jpg").toExternalForm()) , "Herald Of Creation");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/HeroOfTheEast.jpg").toExternalForm()) , "Hero Of The East");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/HornImp.jpg").toExternalForm()) , "Horn Imp");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/Leotron.jpg").toExternalForm()) , "Leotron");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/ManEaterBug.jpg").toExternalForm()) , "Man-Eater Bug");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/Marshmallon.jpg").toExternalForm()) , "Marshmallon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/MirageDragon.jpg").toExternalForm()) , "Mirage Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/Scanner.jpg").toExternalForm()) , "Scanner");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/SilverFang.jpg").toExternalForm()) , "Silver Fang");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/SkullGuardian.jpg").toExternalForm()) , "Skull Guardian");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/SlotMachine.jpg").toExternalForm()) , "Slot Machine");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/SpiralSerpent.jpg").toExternalForm()) , "Spiral Serpent");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/Suijin.jpg").toExternalForm()) , "Suijin");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/Terratiger.jpg").toExternalForm()) , "Terratiger, the Empowered Warrior");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/Texchanger.jpg").toExternalForm()) , "Texchanger");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/TheCalculator.jpg").toExternalForm()) , "The Calculator");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/TheTricky.jpg").toExternalForm()) , "TheTricky");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/WarriorDaiGrepher.jpg").toExternalForm()) , "Warrior Dai Grepher");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/Wattaildragon.jpg").toExternalForm()) , "Wattaildragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/Wattkid.jpg").toExternalForm()) , "Wattkid");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/YomiShip.jpg").toExternalForm()) , "Yomi Ship");
+
+
+
 
 
     }
