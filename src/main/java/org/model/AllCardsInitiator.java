@@ -170,7 +170,7 @@ public class AllCardsInitiator {
         cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/Wattaildragon.jpg").toExternalForm()) , "Wattaildragon");
         cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/Wattkid.jpg").toExternalForm()) , "Wattkid");
         cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/YomiShip.jpg").toExternalForm()) , "Yomi Ship");
-
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/Unknown.jpg").toExternalForm()) , "Unknown");
 
 
 
