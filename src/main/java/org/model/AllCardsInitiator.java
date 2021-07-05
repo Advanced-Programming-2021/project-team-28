@@ -1,6 +1,9 @@
 package org.model;
 
+import javafx.scene.image.Image;
 import org.model.enums.*;
+
+import java.util.HashMap;
 
 public class AllCardsInitiator {
     public static void fillAllCards() {
@@ -123,4 +126,35 @@ public class AllCardsInitiator {
         Card.addToAllCards(new TrapCard(null, "Call of The Haunted", "", TrapsDescription.callOfTheHaunted, TrapIcon.CONTINUOUS, TrapEffect.CALL_OF_THE_HAUNTED));
 
     }
+
+    public void addMonstersToImageHashmap(){
+        HashMap<Image, String> cardsAndImages = Card.getCardsAndImages();
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AlexandriteDragon.jpg").toExternalForm()) , "Alexandrite Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Axe Raider");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/BabyDragon.jpg").toExternalForm()) , "BabyDragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/BattleOx.jpg").toExternalForm()) , "BattleOx");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
+        cardsAndImages.put(new Image(getClass().getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()) , "Alexandrite Dragon");
+
+
+    }
+
 }

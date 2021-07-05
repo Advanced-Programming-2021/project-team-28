@@ -1,6 +1,7 @@
 package org.model;
 
 import com.google.gson.annotations.Expose;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
@@ -19,6 +20,11 @@ public abstract class Card {
     @Expose
     protected String ownerUsername;
 
+    private static HashMap<Image , String> cardsAndImages = new HashMap<>();
+
+    public static HashMap<Image, String> getCardsAndImages() {
+        return cardsAndImages;
+    }
 
     private static ArrayList<Card> allCards = new ArrayList<>();
     private static HashMap<ImageView, String> cardsPicturePath = new HashMap<>();
