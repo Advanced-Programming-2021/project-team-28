@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import org.controller.MainMenuController;
 import org.controller.ShopController;
 import org.model.*;
 
@@ -136,6 +137,14 @@ public class ShopView extends Application {
         resultOfPurchase.setText("you dont have enough money");
         System.out.println("not enough money");
 
+    }
+
+    public void back(){
+        try {
+            new MainMenuController(controller.getUser()).run();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void cardNotFound(){
