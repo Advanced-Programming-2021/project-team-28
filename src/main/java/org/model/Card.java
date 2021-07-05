@@ -22,6 +22,8 @@ public abstract class Card {
     protected String ownerUsername;
 
     private static ArrayList<CardAndImage> cardsAndImages = new ArrayList<>();
+    private static HashMap<String, Integer> prices = new HashMap<>();
+    private static ArrayList<Card> allCards = new ArrayList<>();
 
     public static ArrayList<CardAndImage> getCardsAndImages() {
         cardsAndImages.sort(new Comparator<CardAndImage>() {
@@ -32,8 +34,6 @@ public abstract class Card {
         });
         return cardsAndImages;
     }
-
-    private static ArrayList<Card> allCards = new ArrayList<>();
 
     public Card(String ownerUsername, String name, String number, String description) {
         setOwnerUsername(ownerUsername);
@@ -55,6 +55,9 @@ public abstract class Card {
         return null;
     }
 
+    public static HashMap<String, Integer> getPrices() {
+        return prices;
+    }
 
     public abstract Object clone() throws CloneNotSupportedException;
 
