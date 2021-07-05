@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -24,10 +25,14 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ImageView fx:id="cardImage" fitHeight="491.2" fitWidth="336.8" layoutX="892.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cardImage" fitHeight="491.2" fitWidth="336.8" layoutX="892.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../cards/Monsters/SilverFang.jpg" />
+         </image></ImageView>
       <Label fx:id="ownedNumber" layoutX="648.0" layoutY="109.0" prefHeight="35.0" prefWidth="234.0" text="Label" />
       <Button fx:id="buyButton" layoutX="1025.0" layoutY="630.0" mnemonicParsing="false" onMouseClicked="#buyCard" prefHeight="46.0" prefWidth="71.0" text="Buy" />
       <Label fx:id="money" layoutX="503.0" layoutY="14.0" prefHeight="35.0" prefWidth="338.0" text="Label" />
       <Label fx:id="resultOfPurchase" layoutX="894.0" layoutY="591.0" prefHeight="25.0" prefWidth="338.0" text="Label" />
+      <Label fx:id="priceBar" layoutX="886.0" layoutY="44.0" prefHeight="35.0" prefWidth="338.0" text="Label" />
    </children>
 </AnchorPane>

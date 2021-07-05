@@ -31,6 +31,8 @@ public class ShopView extends Application {
     @FXML
     private Label ownedNumber;
     @FXML
+    private Label priceBar;
+    @FXML
     private Label money;
     @FXML
     private Label resultOfPurchase;
@@ -89,6 +91,11 @@ public class ShopView extends Application {
                     cardImage.setImage(cardAndImage.getImage());
                     ownedNumber.setText("You have : " + controller.getUser().numOfCardsWithThisName(cardAndImage.getCardName()) + " card of this type");
                     selectedCardName = cardAndImage.getCardName();
+                    priceBar.setText("Price : " + Card.getPrices().get(cardAndImage.getCardName()));
+                    if(Card.getPrices().get(cardAndImage.getCardName()) > controller.getUser().getBalance()){
+                        buyButton.setDisable(true);
+                    }
+                    else buyButton.setDisable(false);
                 }
             });
             vBox.getChildren().add(rectangle);
@@ -105,6 +112,9 @@ public class ShopView extends Application {
                     controller.sellCard(selectedCardName);
                     money.setText("Your current balance is : " + controller.getUser().getBalance());
                     ownedNumber.setText("You have : " + controller.getUser().numOfCardsWithThisName(selectedCardName) + " card of this type");
+                if(Card.getPrices().get(selectedCardName) > controller.getUser().getBalance()){
+                    buyButton.setDisable(true);
+                }
             }
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
