@@ -3,6 +3,7 @@ package org.model;
 import com.google.gson.annotations.Expose;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.model.enums.CardAndImage;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,9 +21,9 @@ public abstract class Card {
     @Expose
     protected String ownerUsername;
 
-    private static HashMap<Image , String> cardsAndImages = new HashMap<>();
+    private static ArrayList<CardAndImage> cardsAndImages = new ArrayList<>();
 
-    public static HashMap<Image, String> getCardsAndImages() {
+    public static ArrayList<CardAndImage> getCardsAndImages() {
         return cardsAndImages;
     }
 
