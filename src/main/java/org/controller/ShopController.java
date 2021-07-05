@@ -10,6 +10,10 @@ import java.util.regex.Pattern;
 
 public class ShopController {
 
+    public User getUser() {
+        return user;
+    }
+
     User user;
     ShopView view = new ShopView(this);
 
@@ -69,7 +73,7 @@ public class ShopController {
     }
 
 
-    private void sellCard(String cardName){
+    public void sellCard(String cardName){
         String cardNumber = UUID.randomUUID().toString();
         if(cardName.equals("Command knight")){
             if(receiveMoneyFromCustomer(2100)) {

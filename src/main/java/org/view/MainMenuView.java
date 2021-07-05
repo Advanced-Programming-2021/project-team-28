@@ -67,7 +67,11 @@ public class MainMenuView extends Application {
     }
 
     public void shop() {
-
+        try {
+            controller.processCommand("menu enter Shop");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void deck() throws Exception {

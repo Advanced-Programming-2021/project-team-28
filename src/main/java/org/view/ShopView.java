@@ -1,22 +1,29 @@
 package org.view;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import org.controller.ShopController;
 import org.model.*;
 
-import javax.swing.text.html.ImageView;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
 
 public class ShopView extends Application {
+
     @FXML
     private Button buyButton;
     @FXML
@@ -24,12 +31,19 @@ public class ShopView extends Application {
     @FXML
     private Label ownedNumber;
     @FXML
+    private Label money;
+    @FXML
+    private Label resultOfPurchase;
+    @FXML
     private ImageView cardImage;
     @FXML
     private VBox vBox;
+    @FXML
+    private AnchorPane parent;
 
     Scanner scanner = ScannerInstance.getInstance().getScanner();
     ShopController controller;
+    String selectedCardName;
 
     public ShopView (ShopController controller){
         this.controller = controller;
@@ -48,23 +62,70 @@ public class ShopView extends Application {
 
     private void fillShopCards() {
         ArrayList<CardAndImage> cardAndImages = Card.getCardsAndImages();
+        money.setText("Your current balance is : " + controller.getUser().getBalance());
+        cardImage.setImage(Card.getCardImageByName("Unknown"));
         for (CardAndImage cardAndImage : cardAndImages) {
-            vBox.getChildren().add(new javafx.scene.image.ImageView(cardAndImage.getImage()));
+            Rectangle rectangle = new Rectangle();
+            rectangle.setWidth(168.4);
+            rectangle.setHeight(245.6);
+            rectangle.setFill(new ImagePattern(cardAndImage.getImage()));
+            rectangle.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    rectangle.setEffect(new DropShadow());
+                }
+            });
+
+            rectangle.setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    rectangle.setEffect(null);
+                }
+            });
+
+            rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    cardImage.setImage(cardAndImage.getImage());
+                    ownedNumber.setText("You have : " + controller.getUser().numOfCardsWithThisName(cardAndImage.getCardName()) + " card of this type");
+                    selectedCardName = cardAndImage.getCardName();
+                }
+            });
+            vBox.getChildren().add(rectangle);
+        }
+    }
+
+    public void buyCard(){
+        try {
+            Card targetCard = Card.getCardByName(Card.getAllCards() , selectedCardName);
+            if(targetCard == null){
+                resultOfPurchase.setText("Please select a card first");
+            }
+            else {
+                    controller.sellCard(selectedCardName);
+                    money.setText("Your current balance is : " + controller.getUser().getBalance());
+                    ownedNumber.setText("You have : " + controller.getUser().numOfCardsWithThisName(selectedCardName) + " card of this type");
+            }
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
         }
     }
 
     public void run() throws Exception {
-        String command;
-        while (true){
-
-            command = scanner.nextLine().trim();
-            if(command.equals("menu exit")) break;
-            controller.processCommand(command);
-        }
+        start(LoginMenuView.getPrimaryStage());
+//        String command;
+//        while (true){
+//
+//            command = scanner.nextLine().trim();
+//            if(command.equals("menu exit")) break;
+//            controller.processCommand(command);
+//        }
     }
 
     public void notEnoughMoney(){
+        resultOfPurchase.setText("you dont have enough money");
         System.out.println("not enough money");
+
     }
 
     public void cardNotFound(){

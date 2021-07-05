@@ -8,24 +8,26 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainclass.ShopMenu">
+<AnchorPane fx:id="parent" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ScrollPane fx:id="cardsScrollBar" layoutX="145.0" layoutY="52.0" prefHeight="547.0" prefWidth="310.0">
+      <ScrollPane fx:id="cardsScrollBar" layoutX="145.0" layoutY="52.0" prefHeight="547.0" prefWidth="252.0">
          <content>
-            <VBox fx:id="vBox" prefHeight="606.0" prefWidth="309.0" />
+            <VBox fx:id="vBox" prefHeight="538.0" prefWidth="238.0" spacing="10" />
          </content></ScrollPane>
       <Button fx:id="backButton" layoutX="594.0" layoutY="627.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="91.0" text="Back">
          <font>
             <Font size="23.0" />
          </font>
       </Button>
-      <Label layoutX="270.0" layoutY="14.0" prefHeight="35.0" prefWidth="60.0" text="Cards">
+      <Label layoutX="241.0" layoutY="14.0" prefHeight="35.0" prefWidth="60.0" text="Cards">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <ImageView fx:id="cardImage" fitHeight="491.2" fitWidth="336.8" layoutX="894.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="ownedNumber" layoutX="889.0" layoutY="554.0" prefHeight="35.0" prefWidth="346.0" text="Label" />
-      <Button fx:id="buyButton" layoutX="1026.0" layoutY="630.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="71.0" text="Buy" />
+      <ImageView fx:id="cardImage" fitHeight="491.2" fitWidth="336.8" layoutX="892.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="ownedNumber" layoutX="648.0" layoutY="109.0" prefHeight="35.0" prefWidth="234.0" text="Label" />
+      <Button fx:id="buyButton" layoutX="1025.0" layoutY="630.0" mnemonicParsing="false" onMouseClicked="#buyCard" prefHeight="46.0" prefWidth="71.0" text="Buy" />
+      <Label fx:id="money" layoutX="503.0" layoutY="14.0" prefHeight="35.0" prefWidth="338.0" text="Label" />
+      <Label fx:id="resultOfPurchase" layoutX="894.0" layoutY="591.0" prefHeight="25.0" prefWidth="338.0" text="Label" />
    </children>
 </AnchorPane>
