@@ -165,6 +165,12 @@ public class User {
             return false;
     }
 
+    private static String getRandomProfilePicturePath() {
+        Random random = new Random();
+        int randomInt = Math.abs(random.nextInt() % 16 + 1);
+        return "/profilepics/Chara007_1.dds" + randomInt + ".png";
+    }
+
     public Deck getDeckByDeckName(String deckName) {
         for (Deck deck : decks) {
             if (deck.getDeckName().equals(deckName)) {
@@ -248,10 +254,15 @@ public class User {
         return false;
     }
 
-    private String getRandomProfilePicturePath() {
-        Random random = new Random();
-        int randomInt = Math.abs(random.nextInt()%16 + 1);
-        return "/profilepics/Chara007_1.dds" + randomInt + ".png";
+    public ArrayList<Card> getAllCardsOutOfThisDeck(Deck deck) {
+        ArrayList<Card> allCardsOutOfThisDeck = new ArrayList<>();
+        for (Card card : allCards) {
+            if (deck.getAllCardsInMainDeck().contains(card) || deck.getAllCardsInSideDeck().contains(card)) {
+                continue;
+            }
+            allCardsOutOfThisDeck.add(card);
+        }
+        return allCardsOutOfThisDeck;
     }
 
     public static void serialize() {

@@ -220,7 +220,7 @@ public class DeckMenuView extends Application {
     private void addCardsToGridPane() {
         HBox row = new HBox();
         int i=0;
-        for (Card card : controller.getUser().getAllCards()){
+        for (Card card : controller.getUser().getAllCardsOutOfThisDeck(selectedDeck)){
             if(i%2==0){
                 row = new HBox();
                 row.setSpacing(7);
@@ -231,7 +231,13 @@ public class DeckMenuView extends Application {
             view.setFitWidth(120);
             view.setOnMouseClicked(mouseEvent -> {
                 selectedCardImageView.setImage(view.getImage());
-                //selectedDeckText.setText();
+                String description = null;
+                try {
+                    description = Card.getCardByName(Card.getAllCards(), Card.getCardNameByImage(view.getImage())).getDescription();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+                selectedCardToString.setText(description);
             });
             row.getChildren().add(view);
             i++;

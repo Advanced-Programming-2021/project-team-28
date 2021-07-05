@@ -26,12 +26,7 @@ public abstract class Card {
     private static ArrayList<Card> allCards = new ArrayList<>();
 
     public static ArrayList<CardAndImage> getCardsAndImages() {
-        cardsAndImages.sort(new Comparator<CardAndImage>() {
-            @Override
-            public int compare(CardAndImage o1, CardAndImage o2) {
-                return o1.getCardName().compareTo(o2.getCardName());
-            }
-        });
+        cardsAndImages.sort(Comparator.comparing(CardAndImage::getCardName));
         return cardsAndImages;
     }
 
@@ -50,6 +45,15 @@ public abstract class Card {
         for (CardAndImage cardAndImage : cardsAndImages) {
             if(cardAndImage.getCardName().equals(cardName)){
                 return cardAndImage.getImage();
+            }
+        }
+        return null;
+    }
+
+    public static String getCardNameByImage(Image image){
+        for (CardAndImage cardAndImage : cardsAndImages) {
+            if(cardAndImage.getImage().equals(image)){
+                return cardAndImage.getCardName();
             }
         }
         return null;
