@@ -17,6 +17,7 @@ public class Main {
 
     private static void restoreDatabase() throws Exception {
         AllCardsInitiator.fillAllCards();
+        AllCardsInitiator.setPrices();
         createResourceFileIfNeeded();
         MonsterCard.deserialize();
         SpellCard.deserialize();
