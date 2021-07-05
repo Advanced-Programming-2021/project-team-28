@@ -30,6 +30,8 @@ public class DeckMenuView extends Application {
     private Text selectedDeckText;
     @FXML
     private ImageView selectedCardImageView;
+    @FXML
+    private Text selectedCardToString;
     private boolean isInEditMode = false;
     private Deck selectedDeck;
 
@@ -200,7 +202,7 @@ public class DeckMenuView extends Application {
         loader.setLocation(getClass().getResource("/mainclass/deckEdit.fxml"));
         try {
             LoginMenuView.getPrimaryStage().getScene().setRoot(loader.load());
-            selectedDeckText.setText(selectedDeck.getDeckName());
+            selectedDeckText.setText("Deck name: " + selectedDeck.getDeckName());
             selectedCardImageView.setImage(Card.getCardImageByName("Unknown"));
         } catch (IOException exception) {
             exception.printStackTrace();

@@ -1,0 +1,7 @@
+.deckEdit {
+    -fx-background-image: url('1.jpg');
+}
+
+.deckEditScrollPane {
+    -fx-background-image: url('deckBackground.jpg');
+}

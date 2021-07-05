@@ -165,11 +165,12 @@ public class AllCardsInitiator {
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/Terratiger.jpg").toExternalForm()) , "Terratiger, the Empowered Warrior"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/Texchanger.jpg").toExternalForm()) , "Texchanger"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/TheCalculator.jpg").toExternalForm()) , "The Calculator"));
-        cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/TheTricky.jpg").toExternalForm()) , "TheTricky"));
+        cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/TheTricky.jpg").toExternalForm()) , "The Tricky"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/WarriorDaiGrepher.jpg").toExternalForm()) , "Warrior Dai Grepher"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/Wattaildragon.jpg").toExternalForm()) , "Wattaildragon"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/Wattkid.jpg").toExternalForm()) , "Wattkid"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/YomiShip.jpg").toExternalForm()) , "Yomi Ship"));
+        cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/Unknown.jpg").toExternalForm()) , "Unknown"));
 
     }
 
