@@ -183,7 +183,7 @@ public class AllCardsInitiator {
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/SpellTrap/Forest.jpg").toExternalForm()) , "Forest"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/SpellTrap/HarpiesFeatherDuster.jpg").toExternalForm()) , "Harpie's Feather Duster"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/SpellTrap/MagicCylinder.jpg").toExternalForm()) , "Magic Cylinder"));
-        cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/SpellTrap/MagicJammer.jpg").toExternalForm()) , "Magic Jammer"));
+        cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/SpellTrap/MagicJammer.png").toExternalForm()) , "Magic Jammer"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/SpellTrap/MagnumShield.jpg").toExternalForm()) , "Magnum Shield"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/SpellTrap/MindCrush.jpg").toExternalForm()) , "Mind Crush"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/SpellTrap/MirrorForce.jpg").toExternalForm()) , "Mirror Force"));

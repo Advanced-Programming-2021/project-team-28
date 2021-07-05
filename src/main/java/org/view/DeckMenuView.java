@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -13,6 +14,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controller.DeckMenuController;
 import org.controller.MainMenuController;
+import org.model.Card;
 import org.model.Deck;
 
 import javax.swing.*;
@@ -26,6 +28,8 @@ public class DeckMenuView extends Application {
     private Text activeDeckText;
     @FXML
     private Text selectedDeckText;
+    @FXML
+    private ImageView selectedCardImageView;
     private boolean isInEditMode = false;
     private Deck selectedDeck;
 
@@ -197,6 +201,7 @@ public class DeckMenuView extends Application {
         try {
             LoginMenuView.getPrimaryStage().getScene().setRoot(loader.load());
             selectedDeckText.setText(selectedDeck.getDeckName());
+            selectedCardImageView.setImage(Card.getCardImageByName("Unknown"));
         } catch (IOException exception) {
             exception.printStackTrace();
         }

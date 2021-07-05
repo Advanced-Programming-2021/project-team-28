@@ -1,6 +1,7 @@
 package org.model;
 
 import com.google.gson.annotations.Expose;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
@@ -33,7 +34,6 @@ public abstract class Card {
     }
 
     private static ArrayList<Card> allCards = new ArrayList<>();
-    private static HashMap<ImageView, String> cardsPicturePath = new HashMap<>();
 
     public Card(String ownerUsername, String name, String number, String description) {
         setOwnerUsername(ownerUsername);
@@ -44,6 +44,15 @@ public abstract class Card {
 
     public Card() {
 
+    }
+
+    public static Image getCardImageByName(String  cardName){
+        for (CardAndImage cardAndImage : cardsAndImages) {
+            if(cardAndImage.getCardName().equals(cardName)){
+                return cardAndImage.getImage();
+            }
+        }
+        return null;
     }
 
 
