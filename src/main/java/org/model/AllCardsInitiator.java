@@ -4,7 +4,6 @@ import javafx.scene.image.Image;
 import org.model.enums.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class AllCardsInitiator {
     public static void fillAllCards() {

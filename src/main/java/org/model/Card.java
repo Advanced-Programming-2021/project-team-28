@@ -1,12 +1,11 @@
 package org.model;
 
 import com.google.gson.annotations.Expose;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import org.model.enums.CardAndImage;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public abstract class Card {
@@ -24,6 +23,12 @@ public abstract class Card {
     private static ArrayList<CardAndImage> cardsAndImages = new ArrayList<>();
 
     public static ArrayList<CardAndImage> getCardsAndImages() {
+        cardsAndImages.sort(new Comparator<CardAndImage>() {
+            @Override
+            public int compare(CardAndImage o1, CardAndImage o2) {
+                return o1.getCardName().compareTo(o2.getCardName());
+            }
+        });
         return cardsAndImages;
     }
 

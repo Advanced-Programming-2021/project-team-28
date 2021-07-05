@@ -1,19 +1,56 @@
 package org.view;
 
+import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.controller.ShopController;
-import org.model.Card;
-import org.model.MonstersDescriptions;
-import org.model.SpellsDescription;
-import org.model.TrapsDescription;
+import org.model.*;
 
+import javax.swing.text.html.ImageView;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
-public class ShopView {
+public class ShopView extends Application {
+    @FXML
+    private Button buyButton;
+    @FXML
+    private Button backButton;
+    @FXML
+    private Label ownedNumber;
+    @FXML
+    private ImageView cardImage;
+    @FXML
+    private VBox vBox;
+
     Scanner scanner = ScannerInstance.getInstance().getScanner();
     ShopController controller;
 
     public ShopView (ShopController controller){
         this.controller = controller;
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setController(this);
+        loader.setLocation(getClass().getResource("/mainclass/shopMenu.fxml"));
+        Scene scene = new Scene(loader.load());
+        fillShopCards();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void fillShopCards() {
+        ArrayList<CardAndImage> cardAndImages = Card.getCardsAndImages();
+        for (CardAndImage cardAndImage : cardAndImages) {
+            vBox.getChildren().add(new javafx.scene.image.ImageView(cardAndImage.getImage()));
+        }
     }
 
     public void run() throws Exception {
@@ -132,4 +169,6 @@ public class ShopView {
     public void cheatActivated() {
         System.out.println("Cheat activated");
     }
+
+
 }
