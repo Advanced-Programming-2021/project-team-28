@@ -43,12 +43,14 @@ public class ShopView extends Application {
     private VBox vBox;
     @FXML
     private AnchorPane parent;
+    @FXML
+    private Button createCard;
 
     Scanner scanner = ScannerInstance.getInstance().getScanner();
     ShopController controller;
     String selectedCardName;
 
-    public ShopView (ShopController controller){
+    public ShopView(ShopController controller) {
         this.controller = controller;
     }
 
@@ -106,17 +108,16 @@ public class ShopView extends Application {
         }
     }
 
-    public void buyCard(){
+    public void buyCard() {
         try {
-            Card targetCard = Card.getCardByName(Card.getAllCards() , selectedCardName);
-            if(targetCard == null){
+            Card targetCard = Card.getCardByName(Card.getAllCards(), selectedCardName);
+            if (targetCard == null) {
                 resultOfPurchase.setText("Please select a card first");
-            }
-            else {
-                    controller.sellCard(selectedCardName);
-                    money.setText("Your current balance is : " + controller.getUser().getBalance());
-                    ownedNumber.setText("You have : " + controller.getUser().numOfCardsWithThisName(selectedCardName) + " card of this type");
-                if(Card.getPrices().get(selectedCardName) > controller.getUser().getBalance()){
+            } else {
+                controller.sellCard(selectedCardName);
+                money.setText("Your current balance is : " + controller.getUser().getBalance());
+                ownedNumber.setText("You have : " + controller.getUser().numOfCardsWithThisName(selectedCardName) + " card of this type");
+                if (Card.getPrices().get(selectedCardName) > controller.getUser().getBalance()) {
                     buyButton.setDisable(true);
                 }
             }
@@ -129,13 +130,13 @@ public class ShopView extends Application {
         start(LoginMenuView.getPrimaryStage());
     }
 
-    public void notEnoughMoney(){
+    public void notEnoughMoney() {
         resultOfPurchase.setText("you dont have enough money");
         System.out.println("not enough money");
 
     }
 
-    public void back(){
+    public void back() {
         try {
             new MainMenuController(controller.getUser()).run();
         } catch (Exception e) {
@@ -143,15 +144,15 @@ public class ShopView extends Application {
         }
     }
 
-    public void cardNotFound(){
+    public void cardNotFound() {
         System.out.println("there is no card with this name");
     }
 
-    public void invalidCommand(){
+    public void invalidCommand() {
         System.out.println("invalid command");
     }
 
-    public void menuShowCurrent(){
+    public void menuShowCurrent() {
         System.out.println("Shop Menu");
     }
 
@@ -159,11 +160,11 @@ public class ShopView extends Application {
         System.out.println("menu navigation is not possible");
     }
 
-    public void showCard(Card card){
+    public void showCard(Card card) {
         System.out.println(card);
     }
 
-    public void showAllCards(){
+    public void showAllCards() {
         System.out.println("Advanced Ritual Art " + ": " + SpellsDescription.advancedRitualArt);
         System.out.println("Alexandrite Dragon " + ": " + MonstersDescriptions.alexandriteDragon);
         System.out.println("Axe Raider " + ": " + MonstersDescriptions.axeRaider);
@@ -217,7 +218,7 @@ public class ShopView extends Application {
         System.out.println("Slot Machine " + ": " + MonstersDescriptions.slotMachine);
         System.out.println("Solemn Warning " + ": " + TrapsDescription.solemnWarning);
         System.out.println("Spell Absorption " + ": " + SpellsDescription.spellAbsorption);
-        System.out.println("Spiral Serpent " +  ": " +MonstersDescriptions.spiralSerpent);
+        System.out.println("Spiral Serpent " + ": " + MonstersDescriptions.spiralSerpent);
         System.out.println("Suijin " + ": " + MonstersDescriptions.suijin);
         System.out.println("Supply Squad " + ": " + SpellsDescription.supplySquad);
         System.out.println("Sword of dark Destruction " + ": " + SpellsDescription.swordOfDestruction);
@@ -244,5 +245,8 @@ public class ShopView extends Application {
 
     public void cheatActivated() {
         System.out.println("Cheat activated");
+    }
+    public void createCard(){
+
     }
 }
