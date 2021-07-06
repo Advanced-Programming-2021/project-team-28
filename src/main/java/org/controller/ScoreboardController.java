@@ -48,7 +48,7 @@ public class ScoreboardController {
         sortedUsers.sort(new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
-                return Integer.compare(o1.getScore() , o2.getScore());
+                return Integer.compare( o2.getScore() , o1.getScore() );
             }
         });
         return sortedUsers;
