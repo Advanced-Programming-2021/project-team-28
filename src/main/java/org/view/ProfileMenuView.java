@@ -1,14 +1,17 @@
 package org.view;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.controller.MainMenuController;
 import org.controller.ProfileMenuController;
@@ -61,8 +64,51 @@ public class ProfileMenuView extends Application {
         loader.setLocation(getClass().getResource("/mainclass/profile.fxml"));
         Scene scene = new Scene(loader.load());
         fillProfileMenu();
+        setButtonsAnimation();
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void setButtonsAnimation() {
+        back.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                back.setEffect(new Glow());
+            }
+        });
+
+        back.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                back.setEffect(null);
+            }
+        });
+        changePassword.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                changePassword.setEffect(new Glow());
+            }
+        });
+
+        changePassword.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                changePassword.setEffect(null);
+            }
+        });
+        changeNickname.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                changeNickname.setEffect(new Glow());
+            }
+        });
+
+        changeNickname.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                changeNickname.setEffect(null);
+            }
+        });
     }
 
     private void fillProfileMenu() {

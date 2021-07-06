@@ -8,6 +8,11 @@
     -fx-background-size: cover;
 }
 
+.anchor3 {
+    -fx-background-image:url('background1.2.jpg');
+    -fx-background-size: cover;
+}
+
 .wiezdemin {
     -fx-font-family: thewitcher;
 }
@@ -31,9 +36,29 @@
 
 }
 
+.button3 {
+    -fx-background-radius: 30;
+    -fx-background-color: #edd9ce;
+    -fx-text-fill: #313335;
+
+}
+
 .text-field1 {
     -fx-background-radius: 10;
     -fx-background-color: #8672a5;
-    -fx-text-fill: #e0d0ac;
+    -fx-text-fill: #edd7cc;
+
+}
+
+.text-field2 {
+    -fx-background-radius: 10;
+    -fx-background-color: #020111;
+    -fx-text-fill: #ead6cb;
+
+}
+
+.Label1 {
+
+    -fx-text-fill: #bebaae;
 
 }
