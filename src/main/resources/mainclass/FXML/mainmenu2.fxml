@@ -23,7 +23,7 @@
         </font>
     </Text>
 
-    <Button fx:id="logout" layoutX="72.0" layoutY="655.0" onMouseClicked="#logout" prefHeight="50.0" prefWidth="160.0" text="Logout">
+    <Button fx:id="logout" layoutX="61.0" layoutY="648.0" onMouseClicked="#logout" opacity="0.55" prefHeight="50.0" prefWidth="160.0" text="Logout">
       <font>
          <Font size="25.0" />
       </font>
@@ -31,7 +31,7 @@
          <String fx:value="button2" />
          <String fx:value="wiezdemin" />
       </styleClass></Button>
-    <Button fx:id="start" layoutX="61.0" layoutY="150.0" mnemonicParsing="false" onMouseClicked="#newDuel" prefHeight="66.0" prefWidth="400.0" text="Start a new duel!">
+    <Button fx:id="start" layoutX="61.0" layoutY="150.0" mnemonicParsing="false" onMouseClicked="#newDuel" opacity="0.55" prefHeight="66.0" prefWidth="400.0" text="Start a new duel!">
       <font>
          <Font size="33.0" />
       </font>
@@ -39,7 +39,7 @@
          <String fx:value="button2" />
          <String fx:value="wiezdemin" />
       </styleClass></Button>
-    <Button fx:id="shop" layoutX="61.0" layoutY="420.0" mnemonicParsing="false" onMouseClicked="#shop" prefHeight="66.0" prefWidth="400.0" text="Shop Menu">
+    <Button fx:id="shop" layoutX="61.0" layoutY="420.0" mnemonicParsing="false" onMouseClicked="#shop" opacity="0.55" prefHeight="66.0" prefWidth="400.0" text="Shop Menu">
       <font>
          <Font size="25.0" />
       </font>
@@ -47,7 +47,7 @@
          <String fx:value="button2" />
          <String fx:value="wiezdemin" />
       </styleClass></Button>
-    <Button fx:id="deck" layoutX="61.0" layoutY="330.0" mnemonicParsing="false" onMouseClicked="#deck" prefHeight="66.0" prefWidth="400.0" text="Deck Menu">
+    <Button fx:id="deck" layoutX="61.0" layoutY="330.0" mnemonicParsing="false" onMouseClicked="#deck" opacity="0.55" prefHeight="66.0" prefWidth="400.0" text="Deck Menu">
       <font>
          <Font size="25.0" />
       </font>
@@ -55,7 +55,7 @@
          <String fx:value="wiezdemin" />
          <String fx:value="button2" />
       </styleClass></Button>
-    <Button fx:id="score" layoutX="61.0" layoutY="510.0" mnemonicParsing="false" onMouseClicked="#scoreBoard" prefHeight="66.0" prefWidth="400.0" text="Score Board">
+    <Button fx:id="score" layoutX="61.0" layoutY="510.0" mnemonicParsing="false" onMouseClicked="#scoreBoard" opacity="0.55" prefHeight="66.0" prefWidth="400.0" text="Score Board">
       <font>
          <Font size="20.0" />
       </font>
@@ -63,7 +63,7 @@
          <String fx:value="button2" />
          <String fx:value="wiezdemin" />
       </styleClass></Button>
-    <Button fx:id="profile" layoutX="290.0" layoutY="654.0" mnemonicParsing="false" onMouseClicked="#profile" prefHeight="52.0" prefWidth="160.0" text="Your Profile">
+    <Button fx:id="profile" layoutX="301.0" layoutY="647.0" mnemonicParsing="false" onMouseClicked="#profile" opacity="0.55" prefHeight="52.0" prefWidth="160.0" text="Your Profile">
       <font>
          <Font size="20.0" />
       </font>
@@ -71,7 +71,7 @@
          <String fx:value="button2" />
          <String fx:value="wiezdemin" />
       </styleClass></Button>
-    <Button fx:id="export" layoutX="61.0" layoutY="240.0" mnemonicParsing="false" onMouseClicked="#importExport" prefHeight="66.0" prefWidth="400.0" text="Import/Export">
+    <Button fx:id="export" layoutX="61.0" layoutY="240.0" mnemonicParsing="false" onMouseClicked="#importExport" opacity="0.55" prefHeight="66.0" prefWidth="400.0" text="Import/Export">
       <font>
          <Font size="25.0" />
       </font>
