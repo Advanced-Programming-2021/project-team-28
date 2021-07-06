@@ -8,26 +8,86 @@
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" styleClass="anchor4" stylesheets="@../menuStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="player1" layoutX="120.0" layoutY="70.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="1" textFill="#c4b2b2" />
-      <Label fx:id="player2" layoutX="120.0" layoutY="130.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="2" textFill="#c4b2b2" />
-      <Label fx:id="player3" layoutX="120.0" layoutY="190.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="3" textFill="#c4b2b2" />
-      <Label fx:id="player4" layoutX="120.0" layoutY="250.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="4" textFill="#c4b2b2" />
-      <Label fx:id="player5" layoutX="120.0" layoutY="310.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="5" textFill="#c4b2b2" />
-      <Label fx:id="player6" layoutX="120.0" layoutY="370.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="6" textFill="#c4b2b2" />
-      <Label fx:id="player8" layoutX="120.0" layoutY="490.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="8" textFill="#c4b2b2" />
-      <Label fx:id="player9" layoutX="120.0" layoutY="540.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="9" textFill="#c4b2b2" />
-      <Label fx:id="player7" layoutX="120.0" layoutY="430.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="7" textFill="#c4b2b2" />
-      <Label fx:id="player10" layoutX="120.0" layoutY="600.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="10" textFill="#c4b2b2" />
-      <Label fx:id="player11" layoutX="400.0" layoutY="70.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="11" textFill="#c4b2b2" />
-      <Label fx:id="player12" layoutX="400.0" layoutY="130.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="12" textFill="#c4b2b2" />
-      <Label fx:id="player13" layoutX="400.0" layoutY="190.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="13" textFill="#c4b2b2" />
-      <Label fx:id="player14" layoutX="400.0" layoutY="250.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="14" textFill="#c4b2b2" />
-      <Label fx:id="player15" layoutX="400.0" layoutY="310.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="15" textFill="#c4b2b2" />
-      <Label fx:id="player16" layoutX="400.0" layoutY="370.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="16" textFill="#c4b2b2" />
-      <Label fx:id="player17" layoutX="400.0" layoutY="430.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="17" textFill="#c4b2b2" />
-      <Label fx:id="player18" layoutX="400.0" layoutY="490.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="18" textFill="#c4b2b2" />
-      <Label fx:id="player19" layoutX="400.0" layoutY="540.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="19" textFill="#c4b2b2" />
-      <Label fx:id="player20" layoutX="400.0" layoutY="600.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="20" textFill="#c4b2b2" />
+      <Label fx:id="player1" layoutX="120.0" layoutY="70.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="1" textFill="#c4b2b2">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="player2" layoutX="120.0" layoutY="130.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="2" textFill="#c4b2b2">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="player3" layoutX="120.0" layoutY="190.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="3" textFill="#c4b2b2">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="player4" layoutX="120.0" layoutY="250.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="4" textFill="#c4b2b2">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="player5" layoutX="120.0" layoutY="310.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="5" textFill="#c4b2b2">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="player6" layoutX="120.0" layoutY="370.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="6" textFill="#c4b2b2">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="player8" layoutX="120.0" layoutY="490.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="8" textFill="#c4b2b2">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="player9" layoutX="120.0" layoutY="540.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="9" textFill="#c4b2b2">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="player7" layoutX="120.0" layoutY="430.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="7" textFill="#c4b2b2">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="player10" layoutX="120.0" layoutY="600.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="10" textFill="#c4b2b2">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="player11" layoutX="400.0" layoutY="70.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="11" textFill="#c4b2b2">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="player12" layoutX="400.0" layoutY="130.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="12" textFill="#c4b2b2">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="player13" layoutX="400.0" layoutY="190.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="13" textFill="#c4b2b2">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="player14" layoutX="400.0" layoutY="250.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="14" textFill="#c4b2b2">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="player15" layoutX="400.0" layoutY="310.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="15" textFill="#c4b2b2">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="player16" layoutX="400.0" layoutY="370.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="16" textFill="#c4b2b2">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="player17" layoutX="400.0" layoutY="430.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="17" textFill="#c4b2b2">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="player18" layoutX="400.0" layoutY="490.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="18" textFill="#c4b2b2">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="player19" layoutX="400.0" layoutY="540.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="19" textFill="#c4b2b2">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="player20" layoutX="400.0" layoutY="600.0" prefHeight="36.0" prefWidth="380.0" styleClass="wiezdemin" text="20" textFill="#c4b2b2">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
       <Button fx:id="back" layoutX="120.0" layoutY="658.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="48.0" prefWidth="76.0" text="BACK">
          <styleClass>
             <String fx:value="wiezdemin" />

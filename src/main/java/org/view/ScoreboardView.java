@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import org.controller.MainMenuController;
 import org.controller.ScoreboardController;
@@ -84,7 +86,12 @@ public class ScoreboardView extends Application {
         for (int i = 0; i < Math.min(20 , users.size()); i++) {
             if(users.get(i) != null) {
                 User user = users.get(i);
-                labels.get(i).setText((i + 1) + " - " + user.getUsername() + "   Score : " + user.getScore());
+                if(!controller.getUser().getUsername().equals(users.get(i).getUsername())) {
+                    labels.get(i).setText((i + 1) + " - " + user.getUsername() + "   Score : " + user.getScore());
+                }else {
+                    labels.get(i).setText((i + 1) + " - " + user.getUsername() + "   Score : " + user.getScore());
+                    labels.get(i).setTextFill(Color.web("#1D7127"));
+                }
             }
         }
 
