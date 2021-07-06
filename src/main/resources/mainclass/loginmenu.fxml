@@ -15,7 +15,7 @@
             <Font name="Eras Medium ITC" size="26.0" />
         </font>
     </Text>
-    <Button alignment="CENTER" layoutX="156.0" layoutY="429.0" mnemonicParsing="false" onMouseClicked="#signup" prefHeight="34.0" prefWidth="111.0" stylesheets="@menuStyles.css" text="Register">
+    <Button alignment="CENTER" layoutX="156.0" layoutY="490.0" mnemonicParsing="false" onMouseClicked="#signup" prefHeight="34.0" prefWidth="111.0" stylesheets="@menuStyles.css" text="Register">
       <styleClass>
          <String fx:value="button1" />
          <String fx:value="button1" />
@@ -31,12 +31,12 @@
          <String fx:value="wiezdemin" />
          <String fx:value="button1" />
       </styleClass></Button>
-    <PasswordField fx:id="password" alignment="CENTER" layoutX="132.0" layoutY="302.0" prefHeight="34.0" prefWidth="160.0" promptText="Password">
+    <PasswordField fx:id="password" alignment="CENTER" layoutX="132.0" layoutY="429.0" prefHeight="34.0" prefWidth="160.0" promptText="Password">
       <styleClass>
          <String fx:value="text-field1" />
          <String fx:value="wiezdemin" />
       </styleClass></PasswordField>
-    <TextField fx:id="username" alignment="CENTER" layoutX="132.0" layoutY="237.0" prefHeight="34.0" prefWidth="160.0" promptText="Username">
+    <TextField fx:id="username" alignment="CENTER" layoutX="132.0" layoutY="302.0" prefHeight="34.0" prefWidth="160.0" promptText="Username">
       <styleClass>
          <String fx:value="text-field1" />
          <String fx:value="wiezdemin" />

@@ -15,13 +15,13 @@
 .button1 {
     -fx-background-radius: 30;
     -fx-background-color: #503970;
-    -fx-text-fill: #94825a;
+    -fx-text-fill: #ae9f76;
 
 }
 
 .text-field1 {
     -fx-background-radius: 10;
     -fx-background-color: #8672a5;
-    -fx-text-fill: #94825a;
+    -fx-text-fill: #e0d0ac;
 
 }
