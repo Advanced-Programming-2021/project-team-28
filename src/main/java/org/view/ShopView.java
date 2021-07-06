@@ -71,6 +71,10 @@ public class ShopView extends Application {
         ArrayList<CardAndImage> cardAndImages = Card.getCardsAndImages();
         money.setText("Your current balance is : " + controller.getUser().getBalance());
         cardImage.setImage(Card.getCardImageByName("Unknown"));
+        setCardsInShop(cardAndImages);
+    }
+
+    private void setCardsInShop(ArrayList<CardAndImage> cardAndImages) {
         for (CardAndImage cardAndImage : cardAndImages) {
             if (!cardAndImage.getCardName().equals("Unknown")) {
                 Rectangle rectangle = new Rectangle();
