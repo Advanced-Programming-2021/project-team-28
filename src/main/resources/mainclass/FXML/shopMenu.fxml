@@ -25,17 +25,20 @@
             <String fx:value="wiezdemin" />
          </styleClass>
       </Button>
-      <Label layoutX="216.0" layoutY="14.0" prefHeight="35.0" prefWidth="71.0" styleClass="wiezdemin" text="Cards" textFill="#d7caca">
+      <Label layoutX="206.0" layoutY="13.0" prefHeight="35.0" prefWidth="71.0" styleClass="wiezdemin" text="Cards" textFill="#d7caca">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <ImageView fx:id="cardImage" fitHeight="491.2" fitWidth="336.8" layoutX="892.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="cardImage" fitHeight="491.2" fitWidth="336.8" layoutX="892.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../cards/Monsters/SilverFang.jpg" />
          </image></ImageView>
-      <Label fx:id="ownedNumber" layoutX="648.0" layoutY="109.0" prefHeight="35.0" prefWidth="234.0" textFill="#d7caca" />
-      <Button fx:id="buyButton" layoutX="1013.0" layoutY="633.0" mnemonicParsing="false" onMouseClicked="#buyCard" prefHeight="52.0" prefWidth="91.0" text="Buy">
+      <Label fx:id="ownedNumber" layoutX="891.0" layoutY="579.0" prefHeight="52.0" prefWidth="338.0" styleClass="wiezdemin" textFill="#d7caca">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Button fx:id="buyButton" layoutX="1014.0" layoutY="645.0" mnemonicParsing="false" onMouseClicked="#buyCard" prefHeight="52.0" prefWidth="91.0" text="Buy">
          <styleClass>
             <String fx:value="button3" />
             <String fx:value="wiezdemin" />
@@ -43,10 +46,19 @@
          <font>
             <Font size="23.0" />
          </font></Button>
-      <Label fx:id="money" layoutX="503.0" layoutY="14.0" prefHeight="35.0" prefWidth="338.0" styleClass="wiezdemin" textFill="#d7caca" />
-      <Label fx:id="resultOfPurchase" layoutX="894.0" layoutY="591.0" prefHeight="25.0" prefWidth="338.0" styleClass="wiezdemin" textFill="#d7caca" />
-      <Label fx:id="priceBar" layoutX="891.0" layoutY="49.0" prefHeight="35.0" prefWidth="338.0" styleClass="wiezdemin" text="price : " textAlignment="CENTER" textFill="#d7caca" />
-      <Button fx:id="createCard" layoutX="144.0" layoutY="633.0" mnemonicParsing="false" onMouseClicked="#createCard" prefHeight="52.0" prefWidth="214.0" text="create your own cards!">
+      <Label fx:id="money" layoutX="440.0" layoutY="31.0" prefHeight="35.0" prefWidth="414.0" styleClass="wiezdemin" textFill="#d7caca">
+         <font>
+            <Font size="25.0" />
+         </font></Label>
+      <Label fx:id="resultOfPurchase" layoutX="478.0" layoutY="584.0" prefHeight="25.0" prefWidth="338.0" styleClass="wiezdemin" textFill="#d7caca">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="priceBar" layoutX="891.0" layoutY="31.0" prefHeight="35.0" prefWidth="338.0" styleClass="wiezdemin" text="price : " textAlignment="CENTER" textFill="#d7caca">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Button fx:id="createCard" layoutX="134.0" layoutY="633.0" mnemonicParsing="false" onMouseClicked="#createCard" prefHeight="52.0" prefWidth="214.0" text="create your own cards!">
          <styleClass>
             <String fx:value="button3" />
             <String fx:value="wiezdemin" />
