@@ -66,7 +66,7 @@ public class MonsterCard extends Card {
         isPositionChangedInThisTurn = positionChangedInThisTurn;
     }
 
-    public MonsterCard(MonsterType type , String ownerUsername ,String name, String number, String description , int attackPoint , int defencePoint , MonsterPower specialPower , int level , Attribute attribute) {
+    public MonsterCard(MonsterType type , String ownerUsername , String name, String number, String description , int attackPoint , int defencePoint , MonsterPower specialPower , int level , Attribute attribute) {
         super(ownerUsername ,name, number, description);
         setAttackPoint(attackPoint);
         setDefencePoint(defencePoint);
@@ -76,9 +76,10 @@ public class MonsterCard extends Card {
         setPosition(MonsterCardPosition.NOT_IN_PLAY_ZONE);
         setType(type);
         MonsterCard.allMonsterCards.add(this);
+        classID = 2;
     }
     public MonsterCard(){
-
+        classID = 2;
     }
 
     @Override

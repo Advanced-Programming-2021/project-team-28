@@ -36,10 +36,11 @@ public class SpellCard extends Card{
         setIcon(icon);
         setPosition(SpellOrTrapCardPosition.NOT_IN_PLAY_ZONE);
         SpellCard.allSpellCard.add(this);
+        classID = 1;
     }
 
     public SpellCard(){
-
+        classID = 1;
     }
 
     @Override

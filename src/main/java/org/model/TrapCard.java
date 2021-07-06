@@ -34,10 +34,11 @@ public class TrapCard extends Card implements Cloneable {
         setEffect(effect);
         setPosition(SpellOrTrapCardPosition.NOT_IN_PLAY_ZONE);
         TrapCard.allTrapCard.add(this);
+        classID = 0;
     }
 
     public TrapCard() {
-
+        classID = 0;
     }
 
     public boolean isActivationCancelled() {

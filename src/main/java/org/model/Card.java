@@ -20,6 +20,7 @@ public abstract class Card {
     protected boolean isGoingToGraveyard = false;
     @Expose
     protected String ownerUsername;
+    protected int classID;
 
     private static ArrayList<CardAndImage> cardsAndImages = new ArrayList<>();
     private static HashMap<String, Integer> prices = new HashMap<>();
@@ -53,15 +54,6 @@ public abstract class Card {
     public static String getCardNameByImage(Image image){
         for (CardAndImage cardAndImage : cardsAndImages) {
             if(cardAndImage.getImage().equals(image)){
-                return cardAndImage.getCardName();
-            }
-        }
-        return null;
-    }
-
-    public static String getCardNameByUrl(String url) {
-        for (CardAndImage cardAndImage : cardsAndImages) {
-            if(cardAndImage.getImage().getUrl().equals(url)){
                 return cardAndImage.getCardName();
             }
         }
@@ -176,6 +168,10 @@ public abstract class Card {
 
     public void setOwnerUsername(String ownerUsername) {
         this.ownerUsername = ownerUsername;
+    }
+
+    public int getClassID() {
+        return classID;
     }
 
     public static Card getCardByName(ArrayList<Card> cards, String name) throws CloneNotSupportedException {

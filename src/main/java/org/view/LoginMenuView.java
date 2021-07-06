@@ -24,8 +24,6 @@ import javax.swing.*;
 public class LoginMenuView extends Application {
     private static Stage primaryStage;
     @FXML
-    private AnchorPane anchorPane;
-    @FXML
     private PasswordField passwordForLogin;
     @FXML
     private TextField usernameForLogin;
@@ -104,48 +102,12 @@ public class LoginMenuView extends Application {
     }
 
     private void buttonSet() {
-        loginButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                loginButton.setEffect(new Lighting());
-            }
-        });
-
-        loginButton.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                    loginButton.setEffect(null);
-            }
-        });
-
-        registerButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                registerButton.setEffect(new Lighting());
-            }
-        });
-
-        registerButton.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                registerButton.setEffect(null);
-            }
-        });
-
-        exit.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                exit.setEffect(new Lighting());
-            }
-        });
-
-        exit.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                exit.setEffect(null);
-            }
-        });
-
+        loginButton.setOnMouseEntered(mouseEvent -> loginButton.setEffect(new Lighting()));
+        loginButton.setOnMouseExited(mouseEvent -> loginButton.setEffect(null));
+        registerButton.setOnMouseEntered(mouseEvent -> registerButton.setEffect(new Lighting()));
+        registerButton.setOnMouseExited(mouseEvent -> registerButton.setEffect(null));
+        exit.setOnMouseEntered(mouseEvent -> exit.setEffect(new Lighting()));
+        exit.setOnMouseExited(mouseEvent -> exit.setEffect(null));
     }
 
     public void signup() {

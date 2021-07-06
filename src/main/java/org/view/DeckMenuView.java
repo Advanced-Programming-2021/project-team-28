@@ -17,8 +17,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controller.DeckMenuController;
 import org.controller.MainMenuController;
-import org.model.Card;
-import org.model.Deck;
+import org.model.*;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -243,6 +242,7 @@ public class DeckMenuView extends Application {
         vbox.getChildren().clear();
         HBox row = new HBox();
         int i = 0;
+        sortCards(cardsToAdd);
         for (Card card : cardsToAdd) {
             if (i % size == 0) {
                 row = new HBox();
@@ -259,6 +259,17 @@ public class DeckMenuView extends Application {
         }
     }
 
+    private void sortCards(ArrayList<Card> cardsToAdd) {
+        cardsToAdd.sort((o1, o2) -> {
+            int classCompare = o1.getClassID() - o2.getClassID();
+            if(classCompare != 0){
+                return -classCompare;
+            } else {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+    }
+
     private void showPictureAndDescription(ImageView view) {
         selectedCardImageView.setImage(view.getImage());
         String description = null;
@@ -272,7 +283,6 @@ public class DeckMenuView extends Application {
     }
 
     private void setDragAndDropMethodsForScrollPanes() {
-
         mainDeck.setOnDragOver(this::setDragOverForScrollPanes);
         sideDeck.setOnDragOver(this::setDragOverForScrollPanes);
         availableCards.setOnDragOver(this::setDragOverForScrollPanes);
