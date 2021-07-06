@@ -386,8 +386,4 @@ public class DeckMenuView extends Application {
         text1.setFont(Font.font("Verdana", 30));
         return text1;
     }
-
-    public void aVoid(){
-
-    }
 }
