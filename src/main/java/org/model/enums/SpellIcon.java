@@ -10,7 +10,7 @@ public enum SpellIcon {
 
     private String name;
 
-    private SpellIcon (String name){
+    SpellIcon (String name){
         this.name = name;
     }
 

@@ -31,7 +31,6 @@ public class User {
     @Expose
     private ArrayList<String> decksName = new ArrayList<>();
     private ArrayList<Deck> decks = new ArrayList<>();
-
     @Expose
     private String activeDeckName;
     private Deck activeDeck;

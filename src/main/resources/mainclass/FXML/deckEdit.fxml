@@ -13,8 +13,14 @@
          <Font name="System Bold" size="25.0" />
       </font></Text>
    <ImageView fx:id="selectedCardImageView" fitHeight="360.0" fitWidth="282.0" layoutX="14.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
-   <ScrollPane fx:id="mainDeck" layoutX="300.0" layoutY="92.0" prefHeight="391.0" prefWidth="613.0" styleClass="deckEditScrollPane" />
-   <ScrollPane fx:id="sideDeck" layoutX="300.0" layoutY="491.0" prefHeight="146.0" prefWidth="613.0" styleClass="sideEditScrollPane" />
+    <ScrollPane fx:id="mainDeck" layoutX="300.0" layoutY="92.0" prefHeight="391.0" prefWidth="613.0" styleClass="deckEditScrollPane">
+      <content>
+         <VBox fx:id="mainDeckVBox" prefHeight="380.0" prefWidth="601.0" />
+      </content></ScrollPane>
+   <ScrollPane fx:id="sideDeck" layoutX="300.0" layoutY="491.0" prefHeight="146.0" prefWidth="613.0" styleClass="sideEditScrollPane">
+      <content>
+         <VBox fx:id="sideDeckVBox" prefHeight="142.0" prefWidth="601.0" />
+      </content></ScrollPane>
     <ScrollPane layoutX="929.0" layoutY="92.0" prefHeight="544.0" prefWidth="281.0" styleClass="playerCardsScrollPane">
         <VBox fx:id="playerCardsVBox" prefHeight="540.0" prefWidth="279.0" spacing="7" />
     </ScrollPane>

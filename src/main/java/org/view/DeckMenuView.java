@@ -22,6 +22,9 @@ import org.model.Deck;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.util.ArrayList;
+
+import static org.view.ScrollPaneEnum.*;
 
 public class DeckMenuView extends Application {
     DeckMenuController controller;
@@ -39,6 +42,10 @@ public class DeckMenuView extends Application {
     private Text selectedCardToString;
     @FXML
     private VBox playerCardsVBox;
+    @FXML
+    private VBox mainDeckVBox;
+    @FXML
+    private VBox sideDeckVBox;
     @FXML
     private ScrollPane mainDeck;
     @FXML
@@ -215,68 +222,86 @@ public class DeckMenuView extends Application {
             LoginMenuView.getPrimaryStage().getScene().setRoot(loader.load());
             selectedDeckText.setText("Deck name: " + selectedDeck.getDeckName());
             selectedCardImageView.setImage(Card.getCardImageByName("Unknown"));
-            addAvailableCardsToVBox();
+            addAllCardImages();
             descriptionBackground.setImage(new Image(getClass().getResource("/mainclass/description.jpg").toExternalForm()));
-            //start drag and drop
-            mainDeck.setOnDragDropped(event -> {
-                System.out.println("salap");
-                if (event.getGestureSource() != mainDeck && event.getDragboard().hasString()) {
-                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                }
-                System.out.println(event.getAcceptingObject());
-                event.consume();
-            });
-            //end drag and drop
+            setDragAndDropMethodsForScrollPanes();
         } catch (IOException exception) {
             exception.printStackTrace();
         }
     }
 
-    private void addAvailableCardsToVBox() {
-        playerCardsVBox.getChildren().clear();
+    private void addAllCardImages() {
+        fillVBox(mainDeckVBox, 9, 90, 60, selectedDeck.getAllCardsInMainDeck(), MAIN_DECK);
+        fillVBox(sideDeckVBox, 9, 90,60, selectedDeck.getAllCardsInSideDeck(), SIDE_DECK);
+        fillVBox(playerCardsVBox, 2, 180, 120, controller.getUser().getAllCardsOutOfThisDeck(selectedDeck), AVAILABLE_CARDS);
+    }
+
+    private void fillVBox(VBox vbox, int size, int imageHeight, int imageWidth, ArrayList<Card> cardsToAdd, ScrollPaneEnum scrollPaneEnum){
+        vbox.getChildren().clear();
         HBox row = new HBox();
-        int i=0;
-        for (Card card : controller.getUser().getAllCardsOutOfThisDeck(selectedDeck)){
-            if(i%2==0){
+        int i = 0;
+        for (Card card : cardsToAdd) {
+            if (i % size == 0) {
                 row = new HBox();
                 row.setSpacing(7);
-                playerCardsVBox.getChildren().add(row);
+                vbox.getChildren().add(row);
             }
             ImageView view = new ImageView(Card.getCardImageByName(card.getName()));
-            view.setFitHeight(180);
-            view.setFitWidth(120);
-            //start drag and drop
-            view.setOnDragDetected(mouseEvent -> {
-                System.out.println("salam");
-                Dragboard db = view.startDragAndDrop(TransferMode.ANY);
-                ClipboardContent content = new ClipboardContent();
-                db.setContent(content);
-            });
-            view.setOnMouseDragged(mouseEvent -> mouseEvent.setDragDetect(true));
-            view.setOnMouseDragReleased(mouseDragEvent -> System.out.println("salamp"));
-            view.setOnDragDropped(mouseDragEvent -> System.out.println("salamp"));
-            view.setOnDragOver(mouseDragEvent -> System.out.println("salamp"));
-            view.setOnDragDone(mouseDragEvent -> System.out.println("salamp"));
-            //end drag and drop
-            view.setOnMouseClicked(mouseEvent -> {
-                selectedCardImageView.setImage(view.getImage());
-                String description = null;
-                try {
-                    Card card1 = Card.getCardByName(Card.getAllCards(), Card.getCardNameByImage(view.getImage()));
-                    description = card1.getName() + ": " + card1.getDescription();
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
-                selectedCardToString.setText(description);
-            });
+            view.setFitHeight(imageHeight);
+            view.setFitWidth(imageWidth);
+            setDragAndDropForImageViews(view, scrollPaneEnum);
+            view.setOnMouseClicked(mouseEvent -> showPictureAndDescription(view));
             row.getChildren().add(view);
             i++;
         }
     }
 
+    private void showPictureAndDescription(ImageView view) {
+        selectedCardImageView.setImage(view.getImage());
+        String description = null;
+        try {
+            Card card1 = Card.getCardByName(Card.getAllCards(), Card.getCardNameByImage(view.getImage()));
+            description = card1.getName() + ": " + card1.getDescription();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        selectedCardToString.setText(description);
+    }
+
+    private void setDragAndDropMethodsForScrollPanes() {
+        mainDeck.setOnDragOver(dragEvent -> {
+            Dragboard db = dragEvent.getDragboard();
+            if (db.hasImage() && db.hasString()) {
+                dragEvent.acceptTransferModes(TransferMode.MOVE);
+            }
+            dragEvent.consume();
+        });
+        mainDeck.setOnDragDropped(dragEvent -> {
+            Dragboard db = dragEvent.getDragboard();
+            if (db.hasImage() && db.hasString()) {
+                dragEvent.setDropCompleted(true);
+            } else {
+                dragEvent.setDropCompleted(false);
+            }
+            dragEvent.consume();
+        });
+    }
+
+    private void setDragAndDropForImageViews(ImageView source, ScrollPaneEnum scrollPaneEnum){
+        source.setOnDragDetected(event -> {
+            Dragboard db = source.startDragAndDrop(TransferMode.MOVE);
+            ClipboardContent content = new ClipboardContent();
+            Image sourceImage = source.getImage();
+            content.putImage(sourceImage);
+            content.putString(scrollPaneEnum.getName());
+            db.setContent(content);
+            event.consume();
+        });
+    }
+
     public void back() {
         try {
-            if(isInEditMode){
+            if (isInEditMode) {
                 isInEditMode = false;
                 new DeckMenuController(controller.getUser()).run();
             } else {
