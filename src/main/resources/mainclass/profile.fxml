@@ -44,11 +44,14 @@
             <String fx:value="text-field2" />
             <String fx:value="wiezdemin" />
          </styleClass></TextField>
-      <Button fx:id="changeNickname" layoutX="213.0" layoutY="625.0" mnemonicParsing="false" onMouseClicked="#changeNickname" prefHeight="34.0" prefWidth="120.0" text="Change nickname">
+      <Button fx:id="changeNickname" layoutX="196.0" layoutY="625.0" mnemonicParsing="false" onMouseClicked="#changeNickname" prefHeight="34.0" prefWidth="154.0" text="Change nickname">
          <styleClass>
             <String fx:value="button3" />
             <String fx:value="wiezdemin" />
-         </styleClass></Button>
+         </styleClass>
+         <font>
+            <Font size="15.0" />
+         </font></Button>
       <Label fx:id="nicknameChangeNotifyLabel" layoutX="123.0" layoutY="471.0" prefHeight="34.0" prefWidth="300.0" text="Enter new nickname to change">
          <styleClass>
             <String fx:value="wiezdemin" />
@@ -64,11 +67,14 @@
             <String fx:value="wiezdemin" />
             <String fx:value="text-field2" />
          </styleClass></PasswordField>
-      <Button fx:id="changePassword" layoutX="580.0" layoutY="625.0" mnemonicParsing="false" onMouseClicked="#changePassword" prefHeight="34.0" prefWidth="120.0" text="Change password">
+      <Button fx:id="changePassword" layoutX="563.0" layoutY="625.0" mnemonicParsing="false" onMouseClicked="#changePassword" prefHeight="34.0" prefWidth="153.0" text="Change password">
          <styleClass>
             <String fx:value="button3" />
             <String fx:value="wiezdemin" />
-         </styleClass></Button>
+         </styleClass>
+         <font>
+            <Font size="15.0" />
+         </font></Button>
       <Label fx:id="passwordChangeNotifyLabel" layoutX="445.0" layoutY="471.0" prefHeight="34.0" prefWidth="333.0" text="Enter current password and new password to change">
          <styleClass>
             <String fx:value="wiezdemin" />
