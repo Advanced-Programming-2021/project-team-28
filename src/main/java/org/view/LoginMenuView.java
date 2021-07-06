@@ -1,12 +1,16 @@
 package org.view;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.controller.LoginMenuController;
@@ -31,6 +35,12 @@ public class LoginMenuView extends Application {
     private TextField username;
     @FXML
     private TextField nickname;
+    @FXML
+    private Button registerButton;
+    @FXML
+    private Button loginButton;
+    @FXML
+    private Button exit;
 
     private final LoginMenuController CONTROLLER;
 
@@ -82,10 +92,60 @@ public class LoginMenuView extends Application {
         stage.setScene(scene);
         stage.setTitle("Register Menu");
         stage.show();
+
         stage.getIcons().add(new Image(getClass().getResource("/logos/yugioh.jpg").toExternalForm()));
         Card.getCardsAndImages().clear();
         AllCardsInitiator.addMonstersToImageArrayList();
         AllCardsInitiator.addSpellTrapToImageArrayList();
+    }
+
+    public void initialize(){
+        buttonSet();
+    }
+
+    private void buttonSet() {
+        loginButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                loginButton.setEffect(new Lighting());
+            }
+        });
+
+        loginButton.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                    loginButton.setEffect(null);
+            }
+        });
+
+        registerButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                registerButton.setEffect(new Lighting());
+            }
+        });
+
+        registerButton.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                registerButton.setEffect(null);
+            }
+        });
+
+        exit.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                exit.setEffect(new Lighting());
+            }
+        });
+
+        exit.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                exit.setEffect(null);
+            }
+        });
+
     }
 
     public void signup() {
