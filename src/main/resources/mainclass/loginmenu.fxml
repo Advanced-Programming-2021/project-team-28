@@ -21,7 +21,7 @@
          <String fx:value="button1" />
          <String fx:value="wiezdemin" />
       </styleClass></Button>
-    <Button fx:id="loginButton" alignment="CENTER" layoutX="1029.0" layoutY="429.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="34.0" prefWidth="111.0" text="Login">
+    <Button fx:id="loginButton" alignment="CENTER" layoutX="1029.0" layoutY="490.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="34.0" prefWidth="111.0" text="Login">
       <styleClass>
          <String fx:value="button1" />
          <String fx:value="wiezdemin" />
@@ -46,12 +46,12 @@
          <String fx:value="text-field1" />
          <String fx:value="wiezdemin" />
       </styleClass></TextField>
-    <TextField fx:id="usernameForLogin" alignment="CENTER" layoutX="1005.0" layoutY="302.0" prefHeight="34.0" prefWidth="160.0" promptText="Username">
+    <TextField fx:id="usernameForLogin" alignment="CENTER" layoutX="1005.0" layoutY="365.0" prefHeight="34.0" prefWidth="160.0" promptText="Username">
       <styleClass>
          <String fx:value="text-field1" />
          <String fx:value="wiezdemin" />
       </styleClass></TextField>
-    <PasswordField fx:id="passwordForLogin" alignment="CENTER" layoutX="1005.0" layoutY="365.0" prefHeight="34.0" prefWidth="160.0" promptText="Password">
+    <PasswordField fx:id="passwordForLogin" alignment="CENTER" layoutX="1005.0" layoutY="429.0" prefHeight="34.0" prefWidth="160.0" promptText="Password">
       <styleClass>
          <String fx:value="text-field1" />
          <String fx:value="wiezdemin" />
