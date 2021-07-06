@@ -1,75 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import java.net.URL?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="anchor" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.view.LoginMenuView">
+<AnchorPane fx:id="anchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="anchor" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.view.LoginMenuView">
     <Text fill="#bfafaf" layoutX="516.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="wiezdemin" text="TEAM 28 PRESENTS " textAlignment="CENTER" wrappingWidth="246.39995117187505">
         <font>
             <Font name="Eras Medium ITC" size="26.0" />
         </font>
     </Text>
-    <Button fx:id="registerButton" alignment="CENTER" layoutX="156.0" layoutY="490.0" mnemonicParsing="false" onMouseClicked="#signup" prefHeight="34.0" prefWidth="111.0" stylesheets="@../menuStyles.css" text="Register">
-      <styleClass>
-         <String fx:value="button1" />
-         <String fx:value="button1" />
-         <String fx:value="wiezdemin" />
-      </styleClass>
-      <font>
-         <Font size="18.0" />
-      </font></Button>
-    <Button fx:id="loginButton" alignment="CENTER" layoutX="1029.0" layoutY="490.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="34.0" prefWidth="111.0" text="Login">
-      <styleClass>
-         <String fx:value="button1" />
-         <String fx:value="wiezdemin" />
-      </styleClass>
-      <font>
-         <Font size="18.0" />
-      </font></Button>
-    <Button fx:id="exit" alignment="CENTER" layoutX="568.0" layoutY="652.0" mnemonicParsing="false" onMouseClicked="#exitGame" prefHeight="34.0" prefWidth="160.0" text="Exit">
-      <styleClass>
-         <String fx:value="wiezdemin" />
-         <String fx:value="button1" />
-      </styleClass>
-      <font>
-         <Font size="18.0" />
-      </font></Button>
-    <PasswordField fx:id="password" alignment="CENTER" layoutX="132.0" layoutY="429.0" prefHeight="34.0" prefWidth="160.0" promptText="Password">
-      <styleClass>
-         <String fx:value="text-field1" />
-         <String fx:value="wiezdemin" />
-      </styleClass></PasswordField>
-    <TextField fx:id="username" alignment="CENTER" layoutX="132.0" layoutY="302.0" prefHeight="34.0" prefWidth="160.0" promptText="Username">
-      <styleClass>
-         <String fx:value="text-field1" />
-         <String fx:value="wiezdemin" />
-      </styleClass></TextField>
-    <TextField fx:id="nickname" alignment="CENTER" layoutX="132.0" layoutY="365.0" prefHeight="34.0" prefWidth="160.0" promptText="Nickname">
-      <styleClass>
-         <String fx:value="text-field1" />
-         <String fx:value="wiezdemin" />
-      </styleClass></TextField>
-    <TextField fx:id="usernameForLogin" alignment="CENTER" layoutX="1005.0" layoutY="365.0" prefHeight="34.0" prefWidth="160.0" promptText="Username">
-      <styleClass>
-         <String fx:value="text-field1" />
-         <String fx:value="wiezdemin" />
-      </styleClass></TextField>
-    <PasswordField fx:id="passwordForLogin" alignment="CENTER" layoutX="1005.0" layoutY="429.0" prefHeight="34.0" prefWidth="160.0" promptText="Password">
-      <styleClass>
-         <String fx:value="text-field1" />
-         <String fx:value="wiezdemin" />
-      </styleClass></PasswordField>
-   <Text fill="#d4c7c7" layoutX="444.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="wiezdemin" text="Yu-Gi-Oh" textAlignment="CENTER" wrappingWidth="389.59989013671884">
-      <font>
-         <Font size="83.0" />
-      </font>
-   </Text>
+    <Button fx:id="registerButton" alignment="CENTER" layoutX="156.0" layoutY="490.0" mnemonicParsing="false" onMouseClicked="#signup" opacity="0.55" prefHeight="34.0" prefWidth="111.0" stylesheets="@../menuStyles.css" text="Register">
+        <styleClass>
+            <String fx:value="button1" />
+            <String fx:value="button1" />
+            <String fx:value="wiezdemin" />
+        </styleClass>
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Button>
+    <Button fx:id="loginButton" alignment="CENTER" layoutX="1029.0" layoutY="490.0" mnemonicParsing="false" onMouseClicked="#login" opacity="0.55" prefHeight="34.0" prefWidth="111.0" text="Login">
+        <styleClass>
+            <String fx:value="button1" />
+            <String fx:value="wiezdemin" />
+        </styleClass>
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Button>
+    <Button fx:id="exit" alignment="CENTER" layoutX="568.0" layoutY="652.0" mnemonicParsing="false" onMouseClicked="#exitGame" opacity="0.7" prefHeight="34.0" prefWidth="160.0" text="Exit">
+        <styleClass>
+            <String fx:value="wiezdemin" />
+            <String fx:value="button1" />
+        </styleClass>
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Button>
+    <PasswordField fx:id="password" alignment="CENTER" layoutX="132.0" layoutY="429.0" opacity="0.44" prefHeight="34.0" prefWidth="160.0" promptText="Password">
+        <styleClass>
+            <String fx:value="text-field1" />
+            <String fx:value="wiezdemin" />
+        </styleClass>
+    </PasswordField>
+    <TextField fx:id="username" alignment="CENTER" layoutX="132.0" layoutY="302.0" opacity="0.44" prefHeight="34.0" prefWidth="160.0" promptText="Username">
+        <styleClass>
+            <String fx:value="text-field1" />
+            <String fx:value="wiezdemin" />
+        </styleClass>
+    </TextField>
+    <TextField fx:id="nickname" alignment="CENTER" layoutX="132.0" layoutY="365.0" opacity="0.44" prefHeight="34.0" prefWidth="160.0" promptText="Nickname">
+        <styleClass>
+            <String fx:value="text-field1" />
+            <String fx:value="wiezdemin" />
+        </styleClass>
+    </TextField>
+    <TextField fx:id="usernameForLogin" alignment="CENTER" layoutX="1005.0" layoutY="365.0" opacity="0.44" prefHeight="34.0" prefWidth="160.0" promptText="Username">
+        <styleClass>
+            <String fx:value="text-field1" />
+            <String fx:value="wiezdemin" />
+        </styleClass>
+    </TextField>
+    <PasswordField fx:id="passwordForLogin" alignment="CENTER" layoutX="1005.0" layoutY="429.0" opacity="0.44" prefHeight="34.0" prefWidth="160.0" promptText="Password">
+        <styleClass>
+            <String fx:value="text-field1" />
+            <String fx:value="wiezdemin" />
+        </styleClass>
+    </PasswordField>
+    <Text fill="#d4c7c7" layoutX="444.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="wiezdemin" text="Yu-Gi-Oh" textAlignment="CENTER" wrappingWidth="389.59989013671884">
+        <font>
+            <Font size="83.0" />
+        </font>
+    </Text>
     <stylesheets>
         <URL value="@../menuStyles.css" />
     </stylesheets>
