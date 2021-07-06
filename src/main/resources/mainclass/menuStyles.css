@@ -24,7 +24,7 @@
 
 .button1 {
     -fx-background-radius: 30;
-    -fx-background-color: #503970;
+    -fx-background-color: #3e2354;
     -fx-text-fill: #ae9f76;
 
 }
@@ -45,8 +45,9 @@
 
 .text-field1 {
     -fx-background-radius: 10;
-    -fx-background-color: #8672a5;
-    -fx-text-fill: #edd7cc;
+    -fx-background-color: #504879;
+    -fx-text-fill: #e9cdc8;
+    -fx-prompt-text-fill: #e9cdc8;
 
 }
 
