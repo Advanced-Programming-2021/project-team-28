@@ -1,0 +1,27 @@
+.anchor {
+    -fx-background-image:url('LoginBg.jpg');
+    -fx-background-size: cover;
+}
+
+.wiezdemin {
+    -fx-font-family: thewitcher;
+}
+
+@font-face {
+    -fx-font-family: 'thewitcher'; /*a name to be used later*/
+    src: url('../fonts/Thewitcher.ttf'); /*URL to font*/
+}
+
+.button1 {
+    -fx-background-radius: 30;
+    -fx-background-color: #503970;
+    -fx-text-fill: #94825a;
+
+}
+
+.text-field1 {
+    -fx-background-radius: 10;
+    -fx-background-color: #8672a5;
+    -fx-text-fill: #94825a;
+
+}
