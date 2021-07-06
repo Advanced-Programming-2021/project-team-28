@@ -6,11 +6,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -20,13 +21,14 @@ import org.controller.DeckMenuController;
 import org.controller.MainMenuController;
 import org.model.Card;
 import org.model.Deck;
-import jfxtras.labs.util.*;
 
 import javax.swing.*;
 import java.io.IOException;
 
 public class DeckMenuView extends Application {
     DeckMenuController controller;
+    @FXML
+    private ImageView descriptionBackground;
     @FXML
     private VBox vBox;
     @FXML
@@ -39,6 +41,10 @@ public class DeckMenuView extends Application {
     private Text selectedCardToString;
     @FXML
     private VBox playerCardsVBox;
+    @FXML
+    private ScrollPane mainDeck;
+    @FXML
+    private ScrollPane sideDeck;
     private boolean isInEditMode = false;
     private Deck selectedDeck;
 
@@ -211,13 +217,25 @@ public class DeckMenuView extends Application {
             LoginMenuView.getPrimaryStage().getScene().setRoot(loader.load());
             selectedDeckText.setText("Deck name: " + selectedDeck.getDeckName());
             selectedCardImageView.setImage(Card.getCardImageByName("Unknown"));
-            addCardsToGridPane();
+            addAvailableCardsToVBox();
+            descriptionBackground.setImage(new Image(getClass().getResource("/mainclass/description.jpg").toExternalForm()));
+            //start drag and drop
+            mainDeck.setOnDragDropped(event -> {
+                System.out.println("salap");
+                if (event.getGestureSource() != mainDeck && event.getDragboard().hasString()) {
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                }
+                System.out.println(event.getAcceptingObject());
+                event.consume();
+            });
+            //end drag and drop
         } catch (IOException exception) {
             exception.printStackTrace();
         }
     }
 
-    private void addCardsToGridPane() {
+    private void addAvailableCardsToVBox() {
+        playerCardsVBox.getChildren().clear();
         HBox row = new HBox();
         int i=0;
         for (Card card : controller.getUser().getAllCardsOutOfThisDeck(selectedDeck)){
@@ -229,11 +247,25 @@ public class DeckMenuView extends Application {
             ImageView view = new ImageView(Card.getCardImageByName(card.getName()));
             view.setFitHeight(180);
             view.setFitWidth(120);
+            //start drag and drop
+            view.setOnDragDetected(mouseEvent -> {
+                System.out.println("salam");
+                Dragboard db = view.startDragAndDrop(TransferMode.ANY);
+                ClipboardContent content = new ClipboardContent();
+                db.setContent(content);
+            });
+            view.setOnMouseDragged(mouseEvent -> mouseEvent.setDragDetect(true));
+            view.setOnMouseDragReleased(mouseDragEvent -> System.out.println("salamp"));
+            view.setOnDragDropped(mouseDragEvent -> System.out.println("salamp"));
+            view.setOnDragOver(mouseDragEvent -> System.out.println("salamp"));
+            view.setOnDragDone(mouseDragEvent -> System.out.println("salamp"));
+            //end drag and drop
             view.setOnMouseClicked(mouseEvent -> {
                 selectedCardImageView.setImage(view.getImage());
                 String description = null;
                 try {
-                    description = Card.getCardByName(Card.getAllCards(), Card.getCardNameByImage(view.getImage())).getDescription();
+                    Card card1 = Card.getCardByName(Card.getAllCards(), Card.getCardNameByImage(view.getImage()));
+                    description = card1.getName() + ": " + card1.getDescription();
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
