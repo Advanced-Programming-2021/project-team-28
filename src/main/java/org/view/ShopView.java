@@ -67,6 +67,7 @@ public class ShopView extends Application {
 
     private void fillShopCards() {
         vBox.getChildren().clear();
+        buyButton.setDisable(true);
         ArrayList<CardAndImage> cardAndImages = Card.getCardsAndImages();
         money.setText("Your current balance is : " + controller.getUser().getBalance());
         cardImage.setImage(Card.getCardImageByName("Unknown"));
@@ -119,6 +120,7 @@ public class ShopView extends Application {
                 if (Card.getPrices().get(selectedCardName) > controller.getUser().getBalance()) {
                     buyButton.setDisable(true);
                 }
+                else buyButton.setDisable(false);
             }
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
