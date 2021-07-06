@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="720" prefWidth="1280" styleClass="anchor2" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <Text fill="black" layoutX="476.0" layoutY="46.0" text="Welcome to MainMenu" textAlignment="CENTER" wrappingWidth="378.19921875">
         <font>
             <Font name="Eras Medium ITC" size="32.0" />
@@ -16,32 +19,59 @@
         </font>
     </Text>
 
-    <Button layoutX="28.0" layoutY="631.0" onMouseClicked="#logout" prefHeight="57.0" prefWidth="269.0" text="Logout">
+    <Button layoutX="106.0" layoutY="641.0" onMouseClicked="#logout" prefHeight="50.0" prefWidth="160.0" text="Logout">
       <font>
          <Font size="25.0" />
-      </font></Button>
-    <Button layoutX="402.0" layoutY="159.0" mnemonicParsing="false" onMouseClicked="#newDuel" prefHeight="65.0" prefWidth="522.0" text="Start a new duel!">
+      </font>
+      <styleClass>
+         <String fx:value="button2" />
+         <String fx:value="wiezdemin" />
+      </styleClass></Button>
+    <Button layoutX="88.0" layoutY="123.0" mnemonicParsing="false" onMouseClicked="#newDuel" prefHeight="65.0" prefWidth="370.0" text="Start a new duel!">
       <font>
          <Font size="20.0" />
-      </font></Button>
-    <Button layoutX="461.0" layoutY="241.0" mnemonicParsing="false" onMouseClicked="#shop" prefHeight="66.0" prefWidth="408.0" text="Shop Menu">
+      </font>
+      <styleClass>
+         <String fx:value="button2" />
+         <String fx:value="wiezdemin" />
+      </styleClass></Button>
+    <Button layoutX="158.0" layoutY="323.0" mnemonicParsing="false" onMouseClicked="#shop" prefHeight="66.0" prefWidth="230.0" text="Shop Menu">
       <font>
          <Font size="20.0" />
-      </font></Button>
-    <Button layoutX="517.0" layoutY="326.0" mnemonicParsing="false" onMouseClicked="#deck" prefHeight="66.0" prefWidth="291.0" text="Deck Menu">
+      </font>
+      <styleClass>
+         <String fx:value="button2" />
+         <String fx:value="wiezdemin" />
+      </styleClass></Button>
+    <Button layoutX="123.0" layoutY="223.0" mnemonicParsing="false" onMouseClicked="#deck" prefHeight="66.0" prefWidth="300.0" text="Deck Menu">
       <font>
          <Font size="20.0" />
-      </font></Button>
-    <Button layoutX="561.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#scoreBoard" prefHeight="66.0" prefWidth="202.0" text="Score Board">
+      </font>
+      <styleClass>
+         <String fx:value="wiezdemin" />
+         <String fx:value="button2" />
+      </styleClass></Button>
+    <Button layoutX="193.0" layoutY="423.0" mnemonicParsing="false" onMouseClicked="#scoreBoard" prefHeight="66.0" prefWidth="160.0" text="Score Board">
       <font>
          <Font size="20.0" />
-      </font></Button>
-    <Button layoutX="596.0" layoutY="506.0" mnemonicParsing="false" onMouseClicked="#profile" prefHeight="66.0" prefWidth="138.0" text="Your Profile">
+      </font>
+      <styleClass>
+         <String fx:value="button2" />
+         <String fx:value="wiezdemin" />
+      </styleClass></Button>
+    <Button layoutX="281.0" layoutY="640.0" mnemonicParsing="false" onMouseClicked="#profile" prefHeight="52.0" prefWidth="160.0" text="Your Profile">
       <font>
          <Font size="20.0" />
-      </font></Button>
+      </font>
+      <styleClass>
+         <String fx:value="button2" />
+         <String fx:value="wiezdemin" />
+      </styleClass></Button>
     <Button layoutX="975.0" layoutY="630.0" mnemonicParsing="false" onMouseClicked="#importExport" prefHeight="58.0" prefWidth="270.0" text="Import/Export">
       <font>
          <Font size="25.0" />
       </font></Button>
+    <stylesheets>
+        <URL value="@menuStyles.css" />
+    </stylesheets>
 </AnchorPane>
