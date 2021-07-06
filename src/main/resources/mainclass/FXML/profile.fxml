@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -57,17 +58,17 @@
             <String fx:value="wiezdemin" />
             <String fx:value="Label1" />
          </styleClass></Label>
-      <PasswordField fx:id="currentPasswordField" layoutX="479.0" layoutY="515.0" prefHeight="34.0" prefWidth="300.0" promptText="Current password">
+      <PasswordField fx:id="currentPasswordField" layoutX="446.0" layoutY="515.0" prefHeight="34.0" prefWidth="300.0" promptText="Current password">
          <styleClass>
             <String fx:value="text-field2" />
             <String fx:value="wiezdemin" />
          </styleClass></PasswordField>
-      <PasswordField fx:id="newPasswordField" layoutX="479.0" layoutY="566.0" prefHeight="34.0" prefWidth="300.0" promptText="New password">
+      <PasswordField fx:id="newPasswordField" layoutX="446.0" layoutY="566.0" prefHeight="34.0" prefWidth="300.0" promptText="New password">
          <styleClass>
             <String fx:value="wiezdemin" />
             <String fx:value="text-field2" />
          </styleClass></PasswordField>
-      <Button fx:id="changePassword" layoutX="563.0" layoutY="625.0" mnemonicParsing="false" onMouseClicked="#changePassword" prefHeight="34.0" prefWidth="153.0" text="Change password">
+      <Button fx:id="changePassword" layoutX="519.0" layoutY="625.0" mnemonicParsing="false" onMouseClicked="#changePassword" prefHeight="34.0" prefWidth="153.0" text="Change password">
          <styleClass>
             <String fx:value="button3" />
             <String fx:value="wiezdemin" />
@@ -75,7 +76,7 @@
          <font>
             <Font size="15.0" />
          </font></Button>
-      <Label fx:id="passwordChangeNotifyLabel" layoutX="445.0" layoutY="471.0" prefHeight="34.0" prefWidth="333.0" text="Enter current password and new password to change">
+      <Label fx:id="passwordChangeNotifyLabel" layoutX="446.0" layoutY="471.0" prefHeight="34.0" prefWidth="333.0" text="Enter current password and new password to change">
          <styleClass>
             <String fx:value="wiezdemin" />
             <String fx:value="Label1" />
@@ -90,4 +91,8 @@
          </styleClass>
       </Button>
    </children>
+
+   <stylesheets>
+      <URL value="@../menuStyles.css" />
+   </stylesheets>
 </AnchorPane>
