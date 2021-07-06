@@ -12,17 +12,20 @@
       <font>
          <Font name="System Bold" size="25.0" />
       </font></Text>
-   <ImageView fx:id="selectedCardImageView" fitHeight="367.0" fitWidth="270.0" layoutX="14.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
-   <Text fx:id="selectedCardToString" layoutX="8.0" layoutY="442.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="281.0">
-      <font>
-         <Font size="16.0" />
-      </font>
-   </Text>
-   <ScrollPane layoutX="300.0" layoutY="92.0" prefHeight="391.0" prefWidth="613.0" styleClass="deckEditScrollPane" />
-   <ScrollPane layoutX="300.0" layoutY="491.0" prefHeight="146.0" prefWidth="613.0" styleClass="sideEditScrollPane" />
+   <ImageView fx:id="selectedCardImageView" fitHeight="360.0" fitWidth="282.0" layoutX="14.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+   <ScrollPane fx:id="mainDeck" layoutX="300.0" layoutY="92.0" prefHeight="391.0" prefWidth="613.0" styleClass="deckEditScrollPane" />
+   <ScrollPane fx:id="sideDeck" layoutX="300.0" layoutY="491.0" prefHeight="146.0" prefWidth="613.0" styleClass="sideEditScrollPane" />
     <ScrollPane layoutX="929.0" layoutY="92.0" prefHeight="544.0" prefWidth="281.0" styleClass="playerCardsScrollPane">
         <VBox fx:id="playerCardsVBox" prefHeight="540.0" prefWidth="279.0" spacing="7" />
     </ScrollPane>
+    <StackPane layoutX="4.0" layoutY="410.0" prefHeight="227.0" prefWidth="268.0">
+        <ImageView fx:id="descriptionBackground" fitHeight="227.0" fitWidth="251.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" />
+        <Text fx:id="selectedCardToString" layoutX="20.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="244.99999856948853">
+           <font>
+               <Font size="16.0" />
+           </font>
+        </Text>
+    </StackPane>
    <stylesheets>
       <URL value="@deckEdit.css" />
    </stylesheets>

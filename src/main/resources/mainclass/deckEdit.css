@@ -10,3 +10,7 @@
     -fx-background-image: url('playerCardsBackground.jpg');
 }
 
+.descriptionStackPane .viewport {
+    -fx-background-image: url('description.jpg');
+}
+
