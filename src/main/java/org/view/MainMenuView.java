@@ -66,7 +66,7 @@ public class MainMenuView extends Application {
         primaryStage = stage;
         FXMLLoader loader = new FXMLLoader();
         loader.setController(this);
-        loader.setLocation(getClass().getResource("/mainclass/FXML/mainmenu.fxml"));
+        loader.setLocation(getClass().getResource("/mainclass/FXML/mainmenu2.fxml"));
         Scene scene = new Scene(loader.load(), 1280, 720);
         stage.setTitle("Main Menu");
         buttonSet();
@@ -227,7 +227,7 @@ public class MainMenuView extends Application {
     }
 
     public void setUserText() {
-        userText.setText("User Logged In: " + "\n" +controller.getUser().getUsername() + "\nKnown as: " + "\n" + controller.getUser().getNickname());
+        userText.setText("User Logged In: " + "\n" +controller.getUser().getUsername() + "\n\nKnown as: " + "\n" + controller.getUser().getNickname());
 
     }
 }

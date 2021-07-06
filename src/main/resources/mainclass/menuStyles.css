@@ -30,9 +30,11 @@
 }
 
 .button2 {
-    -fx-background-radius: 30;
+
     -fx-background-color: #240303;
     -fx-text-fill: #bfb18b;
+    -fx-background-image:url('background1.2.jpg');
+    -fx-background-size: cover;
 
 }
 
