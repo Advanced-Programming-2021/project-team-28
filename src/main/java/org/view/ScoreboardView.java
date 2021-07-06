@@ -69,7 +69,7 @@ public class ScoreboardView extends Application {
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         loader.setController(this);
-        loader.setLocation(getClass().getResource("/mainclass/scoreboard.fxml"));
+        loader.setLocation(getClass().getResource("/mainclass/FXML/scoreboard.fxml"));
         Scene scene = new Scene(loader.load());
         fillLabels();
         setUpScoreboard();

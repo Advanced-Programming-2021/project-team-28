@@ -80,6 +80,6 @@
          <String fx:value="wiezdemin" />
       </styleClass></Button>
     <stylesheets>
-        <URL value="@menuStyles.css" />
+        <URL value="@../menuStyles.css" />
     </stylesheets>
 </AnchorPane>

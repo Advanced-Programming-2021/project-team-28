@@ -27,6 +27,6 @@
         </Text>
     </StackPane>
    <stylesheets>
-      <URL value="@deckEdit.css" />
+      <URL value="@../deckEdit.css" />
    </stylesheets>
 </Pane>

@@ -20,7 +20,6 @@ import org.controller.ShopController;
 import org.model.*;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Scanner;
 
 public class ShopView extends Application {
@@ -58,7 +57,7 @@ public class ShopView extends Application {
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         loader.setController(this);
-        loader.setLocation(getClass().getResource("/mainclass/shopMenu.fxml"));
+        loader.setLocation(getClass().getResource("/mainclass/FXML/shopMenu.fxml"));
         Scene scene = new Scene(loader.load());
         vBox.getChildren().clear();
         fillShopCards();

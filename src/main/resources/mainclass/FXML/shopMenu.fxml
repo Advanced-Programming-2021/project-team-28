@@ -23,7 +23,7 @@
       </Label>
       <ImageView fx:id="cardImage" fitHeight="491.2" fitWidth="336.8" layoutX="892.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../cards/Monsters/SilverFang.jpg" />
+            <Image url="@../../cards/Monsters/SilverFang.jpg" />
          </image></ImageView>
       <Label fx:id="ownedNumber" layoutX="648.0" layoutY="109.0" prefHeight="35.0" prefWidth="234.0" text="Label" />
       <Button fx:id="buyButton" layoutX="1025.0" layoutY="630.0" mnemonicParsing="false" onMouseClicked="#buyCard" prefHeight="46.0" prefWidth="71.0" text="Buy" />

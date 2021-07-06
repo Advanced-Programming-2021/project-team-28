@@ -61,7 +61,7 @@ public class ProfileMenuView extends Application {
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         loader.setController(this);
-        loader.setLocation(getClass().getResource("/mainclass/profile.fxml"));
+        loader.setLocation(getClass().getResource("/mainclass/FXML/profile.fxml"));
         Scene scene = new Scene(loader.load());
         fillProfileMenu();
         setButtonsAnimation();

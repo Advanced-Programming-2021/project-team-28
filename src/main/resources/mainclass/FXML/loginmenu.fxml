@@ -15,7 +15,7 @@
             <Font name="Eras Medium ITC" size="26.0" />
         </font>
     </Text>
-    <Button fx:id="registerButton" alignment="CENTER" layoutX="156.0" layoutY="490.0" mnemonicParsing="false" onMouseClicked="#signup" prefHeight="34.0" prefWidth="111.0" stylesheets="@menuStyles.css" text="Register">
+    <Button fx:id="registerButton" alignment="CENTER" layoutX="156.0" layoutY="490.0" mnemonicParsing="false" onMouseClicked="#signup" prefHeight="34.0" prefWidth="111.0" stylesheets="@../menuStyles.css" text="Register">
       <styleClass>
          <String fx:value="button1" />
          <String fx:value="button1" />
@@ -71,6 +71,6 @@
       </font>
    </Text>
     <stylesheets>
-        <URL value="@menuStyles.css" />
+        <URL value="@../menuStyles.css" />
     </stylesheets>
 </AnchorPane>

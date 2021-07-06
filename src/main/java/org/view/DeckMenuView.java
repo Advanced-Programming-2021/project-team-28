@@ -1,7 +1,6 @@
 package org.view;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,7 +15,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import jfxtras.labs.util.event.MouseControlUtil;
 import org.controller.DeckMenuController;
 import org.controller.MainMenuController;
 import org.model.Card;
@@ -122,7 +120,7 @@ public class DeckMenuView extends Application {
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         loader.setController(this);
-        loader.setLocation(getClass().getResource("/mainclass/deckmenu.fxml"));
+        loader.setLocation(getClass().getResource("/mainclass/FXML/deckmenu.fxml"));
         Scene scene = new Scene(loader.load(), 1280, 720);
         stage.setScene(scene);
         stage.setTitle("Deck Menu");
@@ -212,7 +210,7 @@ public class DeckMenuView extends Application {
     private void loadEditMenu() {
         FXMLLoader loader = new FXMLLoader();
         loader.setController(this);
-        loader.setLocation(getClass().getResource("/mainclass/deckEdit.fxml"));
+        loader.setLocation(getClass().getResource("/mainclass/FXML/deckEdit.fxml"));
         try {
             LoginMenuView.getPrimaryStage().getScene().setRoot(loader.load());
             selectedDeckText.setText("Deck name: " + selectedDeck.getDeckName());
