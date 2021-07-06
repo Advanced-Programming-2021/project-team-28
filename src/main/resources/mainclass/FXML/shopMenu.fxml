@@ -50,7 +50,7 @@
          <font>
             <Font size="25.0" />
          </font></Label>
-      <Label fx:id="resultOfPurchase" layoutX="478.0" layoutY="584.0" prefHeight="25.0" prefWidth="338.0" styleClass="wiezdemin" textFill="#d7caca">
+      <Label fx:id="resultOfPurchase" layoutX="478.0" layoutY="584.0" prefHeight="26.0" prefWidth="3.0" styleClass="wiezdemin" textFill="#d7caca">
          <font>
             <Font size="15.0" />
          </font></Label>
