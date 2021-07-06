@@ -130,7 +130,6 @@ public class DeckMenuView extends Application {
         loader.setLocation(getClass().getResource("/mainclass/FXML/deckmenu.fxml"));
         Scene scene = new Scene(loader.load(), 1280, 720);
         stage.setScene(scene);
-        stage.setTitle("Deck Menu");
         stage.show();
         refreshDecksList();
         showActiveDeck();

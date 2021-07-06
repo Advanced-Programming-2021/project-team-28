@@ -68,7 +68,6 @@ public class MainMenuView extends Application {
         loader.setController(this);
         loader.setLocation(getClass().getResource("/mainclass/FXML/mainmenu2.fxml"));
         Scene scene = new Scene(loader.load(), 1280, 720);
-        stage.setTitle("Main Menu");
         buttonSet();
         setUserText();
         stage.setScene(scene);
