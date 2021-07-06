@@ -59,6 +59,15 @@ public abstract class Card {
         return null;
     }
 
+    public static String getCardNameByUrl(String url) {
+        for (CardAndImage cardAndImage : cardsAndImages) {
+            if(cardAndImage.getImage().getUrl().equals(url)){
+                return cardAndImage.getCardName();
+            }
+        }
+        return null;
+    }
+
     public static HashMap<String, Integer> getPrices() {
         return prices;
     }

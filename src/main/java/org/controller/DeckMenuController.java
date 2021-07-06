@@ -131,7 +131,7 @@ public class DeckMenuController {
         }
     }
 
-    private void controlAddCardCommand(String cardName, String deckName, boolean isToSideDeck) {
+    public void controlAddCardCommand(String cardName, String deckName, boolean isToSideDeck) {
         if (user.numOfCardsWithThisName(cardName) == 0) {
             view.cardDoesNotExist(cardName);
             return;
@@ -154,7 +154,7 @@ public class DeckMenuController {
         }
     }
 
-    private void controlRemoveCardCommand(String cardName, String deckName, boolean isFromSideDeck) {
+    public void controlRemoveCardCommand(String cardName, String deckName, boolean isFromSideDeck) {
         if (!user.doesUserHaveThisDeck(deckName)) {
             view.deckDoesNotExist(deckName);
             return;
@@ -269,5 +269,23 @@ public class DeckMenuController {
         commandMatchers[46] = patternForShowMainDeck2.matcher(command);
         commandMatchers[47] = patternForImpossibleMenuNavigation.matcher(command);
         return commandMatchers;
+    }
+
+    public void controlAddCardFromSideToMain(String cardName, String deckName) {
+        if(user.getDeckByDeckName(deckName).isMainDeckFull()){
+            view.mainOrSideDeckIsFull(false);
+        } else {
+            controlRemoveCardCommand(cardName, deckName, true);
+            controlAddCardCommand(cardName, deckName, false);
+        }
+    }
+
+    public void controlAddCardFromMainToSide(String cardName, String deckName){
+        if(user.getDeckByDeckName(deckName).isSideDeckFull()){
+            view.mainOrSideDeckIsFull(true);
+        } else {
+            controlRemoveCardCommand(cardName, deckName, false);
+            controlAddCardCommand(cardName, deckName, true);
+        }
     }
 }

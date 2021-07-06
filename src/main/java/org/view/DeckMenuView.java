@@ -41,7 +41,7 @@ public class DeckMenuView extends Application {
     @FXML
     private Text selectedCardToString;
     @FXML
-    private VBox playerCardsVBox;
+    private VBox availableCardsVBox;
     @FXML
     private VBox mainDeckVBox;
     @FXML
@@ -50,6 +50,10 @@ public class DeckMenuView extends Application {
     private ScrollPane mainDeck;
     @FXML
     private ScrollPane sideDeck;
+    @FXML
+    private ScrollPane availableCards;
+    @FXML
+    private Text errorText;
     private boolean isInEditMode = false;
     private Deck selectedDeck;
 
@@ -95,15 +99,15 @@ public class DeckMenuView extends Application {
 
     public void mainOrSideDeckIsFull(boolean isSideDeckFull) {
         String mainOrSide = isSideDeckFull ? "Side" : "Main";
-        System.out.println(mainOrSide + " deck is full");
+        errorText.setText("Error, " + mainOrSide + " deck is full");
     }
 
     public void threeSimilarCardInADeck(String cardName, String deckName) {
-        System.out.println("there are already three cards with name " + cardName + " in deck " + deckName);
+        errorText.setText("Error, there are already three cards with name " + cardName + " in deck " + deckName);
     }
 
     public void cardAddedToDeck() {
-        System.out.println("card added to deck successfully");
+        errorText.setText("");
     }
 
     public void cardDoesNotExistInSideOrMainDeck(String cardName, boolean isInSideDeck) {
@@ -112,7 +116,7 @@ public class DeckMenuView extends Application {
     }
 
     public void cardRemovedFromDeck() {
-        System.out.println("card removed from deck successfully");
+        errorText.setText("");
     }
 
     public void impossibleMenuNavigation() {
@@ -232,7 +236,7 @@ public class DeckMenuView extends Application {
     private void addAllCardImages() {
         fillVBox(mainDeckVBox, 9, 90, 60, selectedDeck.getAllCardsInMainDeck(), MAIN_DECK);
         fillVBox(sideDeckVBox, 9, 90,60, selectedDeck.getAllCardsInSideDeck(), SIDE_DECK);
-        fillVBox(playerCardsVBox, 2, 180, 120, controller.getUser().getAllCardsOutOfThisDeck(selectedDeck), AVAILABLE_CARDS);
+        fillVBox(availableCardsVBox, 2, 180, 120, controller.getUser().getAllCardsOutOfThisDeck(selectedDeck), AVAILABLE_CARDS);
     }
 
     private void fillVBox(VBox vbox, int size, int imageHeight, int imageWidth, ArrayList<Card> cardsToAdd, ScrollPaneEnum scrollPaneEnum){
@@ -268,22 +272,68 @@ public class DeckMenuView extends Application {
     }
 
     private void setDragAndDropMethodsForScrollPanes() {
-        mainDeck.setOnDragOver(dragEvent -> {
-            Dragboard db = dragEvent.getDragboard();
-            if (db.hasImage() && db.hasString()) {
-                dragEvent.acceptTransferModes(TransferMode.MOVE);
-            }
-            dragEvent.consume();
-        });
-        mainDeck.setOnDragDropped(dragEvent -> {
-            Dragboard db = dragEvent.getDragboard();
-            if (db.hasImage() && db.hasString()) {
-                dragEvent.setDropCompleted(true);
+
+        mainDeck.setOnDragOver(this::setDragOverForScrollPanes);
+        sideDeck.setOnDragOver(this::setDragOverForScrollPanes);
+        availableCards.setOnDragOver(this::setDragOverForScrollPanes);
+        mainDeck.setOnDragDropped(dragEvent -> dragDropped(dragEvent, MAIN_DECK));
+        sideDeck.setOnDragDropped(dragEvent -> dragDropped(dragEvent, SIDE_DECK));
+        availableCards.setOnDragDropped(dragEvent -> dragDropped(dragEvent, AVAILABLE_CARDS));
+    }
+
+    private void dragDropped(DragEvent dragEvent, ScrollPaneEnum scrollPaneEnum) {
+        Dragboard db = dragEvent.getDragboard();
+        if (db.hasUrl() && db.hasString()) {
+            String whereIsThisCard = db.getString();
+            String cardName = Card.getCardNameByUrl(db.getUrl());
+            String deckName = selectedDeck.getDeckName();
+            if(scrollPaneEnum == MAIN_DECK){
+                moveDraggedInMainCard(whereIsThisCard, cardName, deckName);
+            } else if (scrollPaneEnum == SIDE_DECK){
+                moveDraggedInSideCard(whereIsThisCard, cardName, deckName);
             } else {
-                dragEvent.setDropCompleted(false);
+                moveDraggedInAvailableCards(whereIsThisCard, cardName, deckName);
             }
-            dragEvent.consume();
-        });
+            dragEvent.setDropCompleted(true);
+        } else {
+            dragEvent.setDropCompleted(false);
+        }
+        dragEvent.consume();
+    }
+
+    private void moveDraggedInAvailableCards(String whereIsThisCard, String cardName, String deckName) {
+        if(whereIsThisCard.equals("0")){
+            controller.controlRemoveCardCommand(cardName, deckName, false);
+        } else if (whereIsThisCard.equals("1")){
+            controller.controlRemoveCardCommand(cardName, deckName, true);
+        }
+        addAllCardImages();
+    }
+
+    private void moveDraggedInSideCard(String whereIsThisCard, String cardName, String deckName){
+        if(whereIsThisCard.equals("0")){
+            controller.controlAddCardFromMainToSide(cardName, deckName);
+        } else if (whereIsThisCard.equals("2")){
+            controller.controlAddCardCommand(cardName, deckName, true);
+        }
+        addAllCardImages();
+    }
+
+    private void moveDraggedInMainCard(String whereIsThisCard, String cardName, String deckName) {
+        if(whereIsThisCard.equals("1")){
+            controller.controlAddCardFromSideToMain(cardName, deckName);
+        } else if (whereIsThisCard.equals("2")){
+            controller.controlAddCardCommand(cardName, deckName, false);
+        }
+        addAllCardImages();
+    }
+
+    private void setDragOverForScrollPanes(DragEvent dragEvent) {
+        Dragboard db = dragEvent.getDragboard();
+        if (db.hasUrl() && db.hasString()) {
+            dragEvent.acceptTransferModes(TransferMode.MOVE);
+        }
+        dragEvent.consume();
     }
 
     private void setDragAndDropForImageViews(ImageView source, ScrollPaneEnum scrollPaneEnum){
@@ -291,6 +341,7 @@ public class DeckMenuView extends Application {
             Dragboard db = source.startDragAndDrop(TransferMode.MOVE);
             ClipboardContent content = new ClipboardContent();
             Image sourceImage = source.getImage();
+            content.putUrl(sourceImage.getUrl());
             content.putImage(sourceImage);
             content.putString(scrollPaneEnum.getName());
             db.setContent(content);
