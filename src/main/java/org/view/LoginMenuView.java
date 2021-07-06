@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.controller.LoginMenuController;
 import org.model.AllCardsInitiator;
+import org.model.Card;
 
 import javax.swing.*;
 
@@ -82,6 +83,7 @@ public class LoginMenuView extends Application {
         stage.setTitle("Register Menu");
         stage.show();
         stage.getIcons().add(new Image(getClass().getResource("/logos/yugioh.jpg").toExternalForm()));
+        Card.getCardsAndImages().clear();
         AllCardsInitiator.addMonstersToImageArrayList();
         AllCardsInitiator.addSpellTrapToImageArrayList();
     }

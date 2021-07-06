@@ -58,48 +58,51 @@ public class ShopView extends Application {
         loader.setController(this);
         loader.setLocation(getClass().getResource("/mainclass/shopMenu.fxml"));
         Scene scene = new Scene(loader.load());
+        vBox.getChildren().clear();
         fillShopCards();
         stage.setScene(scene);
         stage.show();
     }
 
     private void fillShopCards() {
+        vBox.getChildren().clear();
         ArrayList<CardAndImage> cardAndImages = Card.getCardsAndImages();
         money.setText("Your current balance is : " + controller.getUser().getBalance());
         cardImage.setImage(Card.getCardImageByName("Unknown"));
         for (CardAndImage cardAndImage : cardAndImages) {
-            Rectangle rectangle = new Rectangle();
-            rectangle.setWidth(168.4);
-            rectangle.setHeight(245.6);
-            rectangle.setFill(new ImagePattern(cardAndImage.getImage()));
-            rectangle.setOnMouseEntered(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    rectangle.setEffect(new DropShadow());
-                }
-            });
-
-            rectangle.setOnMouseExited(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    rectangle.setEffect(null);
-                }
-            });
-
-            rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    cardImage.setImage(cardAndImage.getImage());
-                    ownedNumber.setText("You have : " + controller.getUser().numOfCardsWithThisName(cardAndImage.getCardName()) + " card of this type");
-                    selectedCardName = cardAndImage.getCardName();
-                    priceBar.setText("Price : " + Card.getPrices().get(cardAndImage.getCardName()));
-                    if(Card.getPrices().get(cardAndImage.getCardName()) > controller.getUser().getBalance()){
-                        buyButton.setDisable(true);
+            if (!cardAndImage.getCardName().equals("Unknown")) {
+                Rectangle rectangle = new Rectangle();
+                rectangle.setWidth(168.4);
+                rectangle.setHeight(245.6);
+                rectangle.setFill(new ImagePattern(cardAndImage.getImage()));
+                rectangle.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        rectangle.setEffect(new DropShadow());
                     }
-                    else buyButton.setDisable(false);
-                }
-            });
-            vBox.getChildren().add(rectangle);
+                });
+
+                rectangle.setOnMouseExited(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        rectangle.setEffect(null);
+                    }
+                });
+
+                rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        cardImage.setImage(cardAndImage.getImage());
+                        ownedNumber.setText("You have : " + controller.getUser().numOfCardsWithThisName(cardAndImage.getCardName()) + " card of this type");
+                        selectedCardName = cardAndImage.getCardName();
+                        priceBar.setText("Price : " + Card.getPrices().get(cardAndImage.getCardName()));
+                        if (Card.getPrices().get(cardAndImage.getCardName()) > controller.getUser().getBalance()) {
+                            buyButton.setDisable(true);
+                        } else buyButton.setDisable(false);
+                    }
+                });
+                vBox.getChildren().add(rectangle);
+            }
         }
     }
 

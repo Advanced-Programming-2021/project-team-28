@@ -75,9 +75,9 @@ public class ShopController {
 
     public void sellCard(String cardName){
         String cardNumber = UUID.randomUUID().toString();
-        if(cardName.equals("Command knight")){
+        if(cardName.equals("Command Knight")){
             if(receiveMoneyFromCustomer(2100)) {
-                MonsterCard card = new MonsterCard(MonsterType.WARRIOR , user.getUsername() ,"Command knight", cardNumber, MonstersDescriptions.commandKnight, 1000, 1000,
+                MonsterCard card = new MonsterCard(MonsterType.WARRIOR , user.getUsername() ,"Command Knight", cardNumber, MonstersDescriptions.commandKnight, 1000, 1000,
                         MonsterPower.COMMAND_KNIGHT, 4, Attribute.FIRE);
                 user.addToCards(card);
             }
@@ -131,7 +131,7 @@ public class ShopController {
                 user.addToCards(card);
             }
         }
-        else if(cardName.equals("Curtain of Dark Ones")){
+        else if(cardName.equals("Curtain Of The Dark Ones")){
             if(receiveMoneyFromCustomer(700)) {
                 MonsterCard card = new MonsterCard(MonsterType.SPELL_CASTER , user.getUsername() , cardName, cardNumber, MonstersDescriptions.curtainOfTheDarkOnes, 600, 500,
                         MonsterPower.NONE, 2, Attribute.DARK);
@@ -166,7 +166,7 @@ public class ShopController {
                 user.addToCards(card);
             }
         }
-        else if(cardName.equals("Hero of the East")){
+        else if(cardName.equals("Hero Of The East")){
             if(receiveMoneyFromCustomer(1700)) {
                 MonsterCard card = new MonsterCard(MonsterType.WARRIOR , user.getUsername() , cardName, cardNumber, MonstersDescriptions.heroOfTheEast, 1100, 1000,
                         MonsterPower.NONE, 3, Attribute.EARTH);
@@ -180,7 +180,7 @@ public class ShopController {
                 user.addToCards(card);
             }
         }
-        else if(cardName.equals("Crawling dragon")){
+        else if(cardName.equals("Crawling Dragon")){
             if(receiveMoneyFromCustomer(3900)) {
                 MonsterCard card = new MonsterCard(MonsterType.DRAGON , user.getUsername() , cardName, cardNumber, MonstersDescriptions.crawlingDragon, 1600, 1400,
                         MonsterPower.NONE, 5, Attribute.EARTH);
@@ -313,7 +313,7 @@ public class ShopController {
                 user.addToCards(card);
             }
         }
-        else if(cardName.equals("Herald of Creation")){
+        else if(cardName.equals("Herald Of Creation")){
             if(receiveMoneyFromCustomer(2700)) {
                 MonsterCard card = new MonsterCard(MonsterType.SPELL_CASTER , user.getUsername() , cardName, cardNumber, MonstersDescriptions.heraldOfTheCreation, 1800, 600,
                         MonsterPower.HERALD_OF_CREATION, 4, Attribute.LIGHT);

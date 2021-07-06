@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class AllCardsInitiator {
     public static void fillAllCards() {
-        Card.addToAllCards(new MonsterCard(MonsterType.WARRIOR, null, "Command knight", "", MonstersDescriptions.commandKnight, 1000, 1000,
+        Card.addToAllCards(new MonsterCard(MonsterType.WARRIOR, null, "Command Knight", "", MonstersDescriptions.commandKnight, 1000, 1000,
                 MonsterPower.COMMAND_KNIGHT, 4, Attribute.FIRE));
         Card.addToAllCards(new MonsterCard(MonsterType.BEAST_WARRIOR, null, "Battle Ox", "", MonstersDescriptions.battleOX, 1700, 1000,
                 MonsterPower.NONE, 4, Attribute.EARTH));
@@ -38,7 +38,7 @@ public class AllCardsInitiator {
                 MonsterPower.NONE, 3, Attribute.EARTH));
         Card.addToAllCards(new MonsterCard(MonsterType.WARRIOR, null, "Battle Warrior", "", MonstersDescriptions.battleWarrior, 700, 1000,
                 MonsterPower.NONE, 3, Attribute.EARTH));
-        Card.addToAllCards(new MonsterCard(MonsterType.DRAGON, null, "Crawling dragon", "", MonstersDescriptions.crawlingDragon, 1600, 1400,
+        Card.addToAllCards(new MonsterCard(MonsterType.DRAGON, null, "Crawling Dragon", "", MonstersDescriptions.crawlingDragon, 1600, 1400,
                 MonsterPower.NONE, 5, Attribute.EARTH));
         Card.addToAllCards(new MonsterCard(MonsterType.SPELL_CASTER, null, "Flame Manipulator", "", MonstersDescriptions.flameManipulator, 900, 100,
                 MonsterPower.NONE, 3, Attribute.FIRE));
@@ -206,7 +206,7 @@ public class AllCardsInitiator {
 
     public static void setPrices() {
         HashMap<String, Integer> prices = Card.getPrices();
-        prices.put("Command knight", 2100);
+        prices.put("Command Knight", 2100);
         prices.put("Battle Ox", 2900);
         prices.put("Axe Raider", 3100);
         prices.put("Horn Imp", 2500);
@@ -214,14 +214,14 @@ public class AllCardsInitiator {
         prices.put("Yomi Ship", 1700);
         prices.put("Suijin", 8700);
         prices.put("Fireyarou", 2500);
-        prices.put("Curtain of Dark Ones", 700);
+        prices.put("Curtain Of The Dark Ones", 700);
         prices.put("Feral Imp", 2800);
         prices.put("Dark Magician", 8300);
         prices.put("Wattkid", 1300);
         prices.put("Baby Dragon", 1600);
-        prices.put("Hero of the East", 1700);
+        prices.put("Hero Of The East", 1700);
         prices.put("Battle Warrior", 1300);
-        prices.put("Crawling dragon", 3900);
+        prices.put("Crawling Dragon", 3900);
         prices.put("Flame Manipulator", 1500);
         prices.put("Blue-Eyes White Dragon", 11300);
         prices.put("Crab Turtle", 10200);
@@ -240,7 +240,7 @@ public class AllCardsInitiator {
         prices.put("The Calculator", 8000);
         prices.put("Alexandrite Dragon", 2600);
         prices.put("Mirage Dragon", 2500);
-        prices.put("Herald of Creation", 2700);
+        prices.put("Herald Of Creation", 2700);
         prices.put("Exploder Dragon", 1000);
         prices.put("Warrior Dai Grepher", 3400);
         prices.put("Dark Blade", 3500);
