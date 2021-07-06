@@ -252,7 +252,7 @@ public class DeckMenuView extends Application {
             ImageView view = new ImageView(Card.getCardImageByName(card.getName()));
             view.setFitHeight(imageHeight);
             view.setFitWidth(imageWidth);
-            setDragAndDropForImageViews(view, scrollPaneEnum);
+            setDragAndDropForImageViews(view, scrollPaneEnum, card.getName());
             view.setOnMouseClicked(mouseEvent -> showPictureAndDescription(view));
             row.getChildren().add(view);
             i++;
@@ -285,7 +285,7 @@ public class DeckMenuView extends Application {
         Dragboard db = dragEvent.getDragboard();
         if (db.hasUrl() && db.hasString()) {
             String whereIsThisCard = db.getString();
-            String cardName = Card.getCardNameByUrl(db.getUrl());
+            String cardName = db.getUrl();
             String deckName = selectedDeck.getDeckName();
             if(scrollPaneEnum == MAIN_DECK){
                 moveDraggedInMainCard(whereIsThisCard, cardName, deckName);
@@ -336,12 +336,12 @@ public class DeckMenuView extends Application {
         dragEvent.consume();
     }
 
-    private void setDragAndDropForImageViews(ImageView source, ScrollPaneEnum scrollPaneEnum){
+    private void setDragAndDropForImageViews(ImageView source, ScrollPaneEnum scrollPaneEnum, String cardName){
         source.setOnDragDetected(event -> {
             Dragboard db = source.startDragAndDrop(TransferMode.MOVE);
             ClipboardContent content = new ClipboardContent();
             Image sourceImage = source.getImage();
-            content.putUrl(sourceImage.getUrl());
+            content.putUrl(cardName);
             content.putImage(sourceImage);
             content.putString(scrollPaneEnum.getName());
             db.setContent(content);

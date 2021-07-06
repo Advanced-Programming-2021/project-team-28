@@ -97,7 +97,7 @@ public class Deck {
             for (Card card : allCardsInMainDeck) {
                 if (card.getName().equals(cardName)) {
                     allCardsInMainDeck.remove(card);
-                    allCardsNameInSideDeck.remove(card.getName());
+                    allCardsNameInMainDeck.remove(card.getName());
                     return;
                 }
             }
@@ -212,8 +212,6 @@ public class Deck {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
         Deck[] decks = gson.fromJson(reader, Deck[].class);
         for (Deck deck : decks) {
             deck.allCardsInMainDeck = new ArrayList<>();
