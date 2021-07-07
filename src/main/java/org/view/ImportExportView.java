@@ -1,11 +1,15 @@
 package org.view;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import org.controller.ImportExportController;
 import org.controller.MenuEnum;
 
 import java.util.Scanner;
 
-public class ImportExportView {
+public class ImportExportView extends Application {
     ImportExportController controller;
 
     public ImportExportView (ImportExportController controller){
@@ -13,14 +17,21 @@ public class ImportExportView {
     }
 
     public void run(){
-        Scanner scanner = ScannerInstance.getInstance().getScanner();
-        String command;
-        while(true){
-            command = scanner.nextLine();
-            if(controller.processCommand(command) == MenuEnum.BACK){
-                return;
-            }
+        try {
+            start(LoginMenuView.getPrimaryStage());
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setController(this);
+        loader.setLocation(getClass().getResource("/mainclass/FXML/importExportMenu.fxml"));
+        Scene scene = new Scene(loader.load(), 1280, 720);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void menuShowCurrent(){

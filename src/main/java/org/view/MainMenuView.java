@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controller.DeckMenuController;
+import org.controller.ImportExportController;
 import org.controller.MainMenuController;
 
 import java.util.Scanner;
@@ -75,104 +76,18 @@ public class MainMenuView extends Application {
     }
 
     private void buttonSet() {
-        logout.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                logout.setEffect(new Lighting());
-            }
-        });
+        setEffectForButton(logout);
+        setEffectForButton(export);
+        setEffectForButton(start);
+        setEffectForButton(score);
+        setEffectForButton(profile);
+        setEffectForButton(deck);
+        setEffectForButton(shop);
+    }
 
-        logout.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                logout.setEffect(null);
-            }
-        });
-
-        export.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                export.setEffect(new Lighting());
-            }
-        });
-
-        export.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                export.setEffect(null);
-            }
-        });
-
-        start.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                start.setEffect(new Lighting());
-            }
-        });
-
-        start.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                start.setEffect(null);
-            }
-        });
-
-        score.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                score.setEffect(new Lighting());
-            }
-        });
-
-        score.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                score.setEffect(null);
-            }
-        });
-
-        profile.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                profile.setEffect(new Lighting());
-            }
-        });
-
-        profile.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                profile.setEffect(null);
-            }
-        });
-
-        deck.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                deck.setEffect(new Lighting());
-            }
-        });
-
-        deck.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                deck.setEffect(null);
-            }
-        });
-
-        shop.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                shop.setEffect(new Lighting());
-            }
-        });
-
-        shop.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                shop.setEffect(null);
-            }
-        });
-
+    public void setEffectForButton(Button button){
+        button.setOnMouseEntered(mouseEvent -> button.setEffect(new Lighting()));
+        button.setOnMouseExited(mouseEvent -> button.setEffect(null));
     }
 
     public void logout() {
@@ -223,6 +138,7 @@ public class MainMenuView extends Application {
     }
 
     public void importExport() {
+        new ImportExportController(controller.getUser()).run();
     }
 
     public void setUserText() {

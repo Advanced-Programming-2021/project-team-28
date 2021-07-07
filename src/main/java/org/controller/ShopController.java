@@ -133,21 +133,21 @@ public class ShopController {
         }
         else if(cardName.equals("SPN The Sage")){
             if(receiveMoneyFromCustomer(12000)) {
-                MonsterCard card = new MonsterCard(MonsterType.SUT, null, "SPN The Sage", "", MonstersDescriptions.SPN, 5000, 3000,
+                MonsterCard card = new MonsterCard(MonsterType.SUT, null, "SPN The Sage", cardNumber, MonstersDescriptions.SPN, 5000, 3000,
                         MonsterPower.NONE, 7, Attribute.LIGHT);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Team-28 Cerberus")){
             if(receiveMoneyFromCustomer(20000)) {
-                MonsterCard card = new MonsterCard(MonsterType.SUT, null, "Team-28 Cerberus", "", MonstersDescriptions.cerberus, 9000, 9000,
+                MonsterCard card = new MonsterCard(MonsterType.SUT, null, "Team-28 Cerberus", cardNumber, MonstersDescriptions.cerberus, 9000, 9000,
                         MonsterPower.RITUAL, 10, Attribute.DARK);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("The Graphic Lord")){
             if(receiveMoneyFromCustomer(12000)) {
-                MonsterCard card = new MonsterCard(MonsterType.SUT, null, "The Graphic Lord", "", MonstersDescriptions.graphicLord, 5000, 3000,
+                MonsterCard card = new MonsterCard(MonsterType.SUT, null, "The Graphic Lord", cardNumber, MonstersDescriptions.graphicLord, 5000, 3000,
                         MonsterPower.NONE, 7, Attribute.LIGHT);
                 user.addToCards(card);
             }
@@ -217,14 +217,14 @@ public class ShopController {
         }
         else if(cardName.equals("The Master")){
             if(receiveMoneyFromCustomer(20000)) {
-                MonsterCard card = new MonsterCard(MonsterType.SUT, null, "The Master", "", MonstersDescriptions.TheMaster, 9000, 9000,
+                MonsterCard card = new MonsterCard(MonsterType.SUT, null, "The Master", cardNumber, MonstersDescriptions.TheMaster, 9000, 9000,
                         MonsterPower.RITUAL, 12, Attribute.LIGHT);
                 user.addToCards(card);
             }
         }
         else if(cardName.equals("Geralt Of Rivia")){
             if(receiveMoneyFromCustomer(20000)) {
-                MonsterCard card = new MonsterCard(MonsterType.WITCHER, null, "Geralt Of Rivia", "", MonstersDescriptions.Geralt, 9000, 9000,
+                MonsterCard card = new MonsterCard(MonsterType.WITCHER, null, "Geralt Of Rivia", cardNumber, MonstersDescriptions.Geralt, 9000, 9000,
                         MonsterPower.RITUAL, 12, Attribute.DARK);
                 user.addToCards(card);
             }

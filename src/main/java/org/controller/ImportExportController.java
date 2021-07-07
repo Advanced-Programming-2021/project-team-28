@@ -51,18 +51,22 @@ public class ImportExportController {
                 view.youDoNotHaveThisCard();
             } else {
                 Card cardToExport = Card.getCardByName(user.getAllCards(), cardName);
-                File cardsFolder = new File("src/ExportedCards");
-                cardsFolder.mkdir();
-                File cardToExportFile = new File("src/ExportedCards/" + cardName +"_"+ cardToExport.getNumber()+ ".json");
-                cardToExportFile.createNewFile();
-                FileWriter writer = new FileWriter(cardToExportFile);
-                writer.write(new Gson().toJson(cardToExport));
-                writer.close();
-                view.exportedSuccessfully();
+                importThisCard(cardName, cardToExport);
             }
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+    }
+
+    private void importThisCard(String cardName, Card cardToExport) throws IOException {
+        File cardsFolder = new File("src/ExportedCards");
+        cardsFolder.mkdir();
+        File cardToExportFile = new File("src/ExportedCards/" + cardName +"_"+ cardToExport.getNumber()+ ".json");
+        cardToExportFile.createNewFile();
+        FileWriter writer = new FileWriter(cardToExportFile);
+        writer.write(new Gson().toJson(cardToExport));
+        writer.close();
+        view.exportedSuccessfully();
     }
 
     private void controlImportCardCommand(String cardName) {

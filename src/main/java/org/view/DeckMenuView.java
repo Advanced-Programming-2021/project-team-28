@@ -62,6 +62,18 @@ public class DeckMenuView extends Application {
         start(LoginMenuView.getPrimaryStage());
     }
 
+    @Override
+    public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setController(this);
+        loader.setLocation(getClass().getResource("/mainclass/FXML/deckmenu.fxml"));
+        Scene scene = new Scene(loader.load(), 1280, 720);
+        stage.setScene(scene);
+        stage.show();
+        refreshDecksList();
+        showActiveDeck();
+    }
+
     public void thisDeckAlreadyExists(String deckName) {
         JOptionPane.showMessageDialog(null, "deck with name " + deckName + " already exists");
     }
@@ -122,18 +134,6 @@ public class DeckMenuView extends Application {
 
     public void invalidCommand() {
         System.out.println("invalid command");
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setController(this);
-        loader.setLocation(getClass().getResource("/mainclass/FXML/deckmenu.fxml"));
-        Scene scene = new Scene(loader.load(), 1280, 720);
-        stage.setScene(scene);
-        stage.show();
-        refreshDecksList();
-        showActiveDeck();
     }
 
     private void showActiveDeck() {

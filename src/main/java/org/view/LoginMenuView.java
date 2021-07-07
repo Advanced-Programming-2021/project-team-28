@@ -10,7 +10,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.controller.LoginMenuController;
@@ -88,7 +87,7 @@ public class LoginMenuView extends Application {
         Scene scene = new Scene(parent, 1280, 720);
         primaryStage = stage;
         stage.setScene(scene);
-        stage.setTitle("Register Menu");
+        stage.setTitle("Yu-Gi-Oh");
         stage.show();
 
         stage.getIcons().add(new Image(getClass().getResource("/logos/yugioh.jpg").toExternalForm()));
