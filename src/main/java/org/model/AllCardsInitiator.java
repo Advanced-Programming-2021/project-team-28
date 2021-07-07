@@ -246,7 +246,6 @@ public class AllCardsInitiator {
         prices.put("Blue-Eyes White Dragon", 11300);
         prices.put("Crab Turtle", 10200);
         prices.put("Skull Guardian", 7900);
-        prices.put("Professor Fazli", 0);
         prices.put("Slot Machine", 7500);
         prices.put("Haniwa", 600);
         prices.put("Man-Eater Bug", 600);
