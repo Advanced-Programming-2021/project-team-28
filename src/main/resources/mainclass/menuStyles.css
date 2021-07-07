@@ -18,6 +18,36 @@
     -fx-background-size: cover;
 }
 
+.anchor5 {
+    -fx-background-image:url('background6.jpg');
+    -fx-background-size: cover;
+}
+
+.anchor6 {
+    -fx-background-color: #121212;
+    -fx-background-size: cover;
+}
+
+.anchor7 .viewport{
+    -fx-background-color: #1C1F32;
+    -fx-background-size: cover;
+}
+
+.anchor8 .viewport {
+    -fx-background-image:url('background1.2.jpg');
+    -fx-background-size: cover;
+}
+
+.anchor9 {
+    -fx-background-color: #121325;
+    -fx-background-size: cover;
+}
+
+.anchor10 .viewport{
+    -fx-background-image:url('LoginBg.jpg');
+    -fx-background-size: cover;
+}
+
 .wiezdemin {
     -fx-font-family: thewitcher;
 }

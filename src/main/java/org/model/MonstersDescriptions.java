@@ -1,6 +1,11 @@
 package org.model;
 
 public class MonstersDescriptions {
+    public static String Geralt = "“Evil is Evil. Lesser, greater, middling… Makes no difference. The degree is arbitary. The definition’s blurred. If I’m to choose between one evil and another… I’d rather not choose at all.”";
+    public static String cerberus = "Those banished from heavens to guard the HELL";
+    public static String graphicLord = "The one and only who knows about the dark secrets of javaFX";
+    public static String SPN = "ONE may know many secrets but he is the ONE who know them all .";
+    public static String TheMaster = "He who knows all the secrets.\nHe who taught us all we know.";
     public static String commandKnight = "All Warrior-Type monsters you control gain 400 ATK. If you control another monster, monsters your opponent controls cannot target this card for an attack.";
     public static String battleOX  = "A monster with tremendous power, it destroys enemies with a swing of its axe.";
     public static String axeRaider = "An axe-wielding monster of tremendous strength and agility.";

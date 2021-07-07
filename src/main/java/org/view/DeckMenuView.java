@@ -28,8 +28,6 @@ import static org.view.ScrollPaneEnum.*;
 public class DeckMenuView extends Application {
     DeckMenuController controller;
     @FXML
-    private ImageView descriptionBackground;
-    @FXML
     private VBox vBox;
     @FXML
     private Text activeDeckText;
@@ -153,7 +151,7 @@ public class DeckMenuView extends Application {
             row.setSpacing(8);
             addNameAndButtonsToRow(deck, row);
             StackPane stackPane = new StackPane();
-            Rectangle rectangle = getRectangle(40, 100, Color.KHAKI);
+            Rectangle rectangle = getRectangle(40, 100, Color.web("#888ECA"));
             stackPane.getChildren().add(rectangle);
             HBox mainAndSideDeckSizeTexts = new HBox();
             mainAndSideDeckSizeTexts.setSpacing(10);
@@ -173,7 +171,7 @@ public class DeckMenuView extends Application {
     }
 
     private void addNameAndButtonsToRow(Deck deck, HBox row) {
-        Rectangle rectangle = getRectangle(40, 660, Color.MOCCASIN);
+        Rectangle rectangle = getRectangle(40, 660, Color.web("#D1C2A9"));
         StackPane stackPane = new StackPane();
         stackPane.getChildren().add(rectangle);
         HBox nameAndButtons = new HBox();
@@ -195,25 +193,38 @@ public class DeckMenuView extends Application {
     private void addButtons(HBox hBox, Deck deck) {
         addRegionToHBox(hBox);
         Button activateButton = new Button("Activate");
+        setStyleForButton(activateButton);
         activateButton.setOnMouseClicked(mouseEvent -> {
             controller.processCommand("deck set-activate " + ((Text) hBox.getChildren().get(0)).getText());
             showActiveDeck();
         });
+        activateButton.setPrefSize(80 , 30);
         hBox.getChildren().add(activateButton);
-        Button editDeckButton = new Button("Show deck details and edit");
+        Button editDeckButton = new Button("Details/Edit");
         editDeckButton.setOnMouseClicked(mouseEvent -> {
             isInEditMode = true;
             selectedDeck = deck;
             loadEditMenu();
         });
+        editDeckButton.setPrefSize(120  , 30);
+        setStyleForButton(editDeckButton);
         hBox.getChildren().add(editDeckButton);
         Button deleteDeckButton = new Button("Delete");
         deleteDeckButton.setOnMouseClicked(mouseEvent -> {
             controller.processCommand("deck delete " + ((Text) hBox.getChildren().get(0)).getText());
             refreshDecksList();
         });
+        deleteDeckButton.setPrefSize(80 , 30);
+        setStyleForButton(deleteDeckButton);
         hBox.getChildren().add(deleteDeckButton);
 
+    }
+
+    private void setStyleForButton(Button button) {
+        button.setStyle("-fx-background-radius: 30;\n" +
+                "    -fx-background-color: #edd9ce;\n" +
+                "    -fx-text-fill: #313335;" +
+                "-fx-font-family: thewitcher");
     }
 
     private void loadEditMenu() {
@@ -225,7 +236,7 @@ public class DeckMenuView extends Application {
             selectedDeckText.setText("Deck name: " + selectedDeck.getDeckName());
             selectedCardImageView.setImage(Card.getCardImageByName("Unknown"));
             addAllCardImages();
-            descriptionBackground.setImage(new Image(getClass().getResource("/mainclass/description.jpg").toExternalForm()));
+            //descriptionBackground.setImage(new Image(getClass().getResource("/mainclass/description.jpg").toExternalForm()));
             setDragAndDropMethodsForScrollPanes();
         } catch (IOException exception) {
             exception.printStackTrace();
@@ -392,8 +403,8 @@ public class DeckMenuView extends Application {
 
     public Text getText(String text) {
         Text text1 = new Text(text);
+        text1.setStyle("-fx-font-family: thewitcher; -fx-text-fill: #e1c5c5 ; -fx-font-size: 35 "  );
         text1.setFill(Color.BLACK);
-        text1.setFont(Font.font("Verdana", 30));
         return text1;
     }
 }

@@ -45,11 +45,21 @@ public class AllCardsInitiator {
         Card.addToAllCards(new MonsterCard(MonsterType.DRAGON, null, "Blue-Eyes White Dragon", "", MonstersDescriptions.blueEyesDragon, 3000, 2500,
                 MonsterPower.NONE, 8, Attribute.LIGHT));
         Card.addToAllCards(new MonsterCard(MonsterType.AQUA, null, "Crab Turtle", "", MonstersDescriptions.crabTurtle, 2550, 2500,
-                MonsterPower.CRAB_TURTLE, 7, Attribute.WATER));
+                MonsterPower.RITUAL, 7, Attribute.WATER));
         Card.addToAllCards(new MonsterCard(MonsterType.WARRIOR, null, "Skull Guardian", "", MonstersDescriptions.skullGuardian, 2050, 2500,
-                MonsterPower.SKULL_GUARDIAN, 7, Attribute.LIGHT));
-        Card.addToAllCards(new MonsterCard(MonsterType.SUT, null, "Professor Fazli", "", MonstersDescriptions.professorFazli, 10500, 9000,
-                MonsterPower.SKULL_GUARDIAN, 7, Attribute.LIGHT));
+                MonsterPower.RITUAL, 7, Attribute.LIGHT));
+        Card.addToAllCards(new MonsterCard(MonsterType.SUT, null, "The Master", "", MonstersDescriptions.TheMaster, 9000, 9000,
+                MonsterPower.RITUAL, 12, Attribute.LIGHT));
+        Card.addToAllCards(new MonsterCard(MonsterType.SUT, null, "Team-28 Cerberus", "", MonstersDescriptions.cerberus, 9000, 9000,
+                MonsterPower.RITUAL, 10, Attribute.DARK));
+        Card.addToAllCards(new MonsterCard(MonsterType.WITCHER, null, "Geralt Of Rivia", "", MonstersDescriptions.Geralt, 9000, 9000,
+                MonsterPower.RITUAL, 12, Attribute.DARK));
+        Card.addToAllCards(new MonsterCard(MonsterType.SUT, null, "SPN The Sage", "", MonstersDescriptions.SPN, 5000, 3000,
+                MonsterPower.NONE, 7, Attribute.LIGHT));
+        Card.addToAllCards(new MonsterCard(MonsterType.SUT, null, "The Graphic Lord", "", MonstersDescriptions.graphicLord, 5000, 3000,
+                MonsterPower.NONE, 7, Attribute.LIGHT));
+//        Card.addToAllCards(new MonsterCard(MonsterType.SUT, null, "Professor Fazli", "", MonstersDescriptions.professorFazli, 10500, 9000,
+//                MonsterPower.SKULL_GUARDIAN, 7, Attribute.LIGHT));
         Card.addToAllCards(new MonsterCard(MonsterType.MACHINE, null, "Slot Machine", "", MonstersDescriptions.slotMachine, 2000, 2300,
                 MonsterPower.NONE, 7, Attribute.DARK));
         Card.addToAllCards(new MonsterCard(MonsterType.ROCK, null, "Haniwa", "", MonstersDescriptions.haniwa, 500, 500,
@@ -130,6 +140,11 @@ public class AllCardsInitiator {
 
     public static void addMonstersToImageArrayList() {
         ArrayList<CardAndImage> cardsAndImages = Card.getCardsAndImages();
+        cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/Geralt.png").toExternalForm()), "Geralt Of Rivia"));
+        cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/Cerberus.png").toExternalForm()), "Team-28 Cerberus"));
+        cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/GraphicLord.png").toExternalForm()), "The Graphic Lord"));
+        cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/TheSage.png").toExternalForm()), "SPN The Sage"));
+        cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/TheMaster.png").toExternalForm()), "The Master"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/AlexandriteDragon.jpg").toExternalForm()), "Alexandrite Dragon"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/AxeRaider.jpg").toExternalForm()), "Axe Raider"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/BabyDragon.jpg").toExternalForm()), "Baby Dragon"));
@@ -206,6 +221,11 @@ public class AllCardsInitiator {
 
     public static void setPrices() {
         HashMap<String, Integer> prices = Card.getPrices();
+        prices.put("Geralt Of Rivia" , 20000);
+        prices.put("Team-28 Cerberus" , 20000);
+        prices.put("The Graphic Lord", 12000);
+        prices.put("SPN The Sage", 12000);
+        prices.put("The Master", 20000);
         prices.put("Command Knight", 2100);
         prices.put("Battle Ox", 2900);
         prices.put("Axe Raider", 3100);
