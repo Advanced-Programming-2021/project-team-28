@@ -74,6 +74,7 @@ public class ScoreboardView extends Application {
         loader.setLocation(getClass().getResource("/mainclass/FXML/scoreboard.fxml"));
         Scene scene = new Scene(loader.load());
         fillLabels();
+        ShopView.setMusic(back);
         setUpScoreboard();
         stage.setScene(scene);
         stage.show();

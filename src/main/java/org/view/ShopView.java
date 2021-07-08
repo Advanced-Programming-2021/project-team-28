@@ -12,6 +12,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -63,6 +65,8 @@ public class ShopView extends Application {
         loader.setLocation(getClass().getResource("/mainclass/FXML/shopMenu.fxml"));
         Scene scene = new Scene(loader.load());
         vBox.getChildren().clear();
+        setMusic(buyButton);
+        setMusic(backButton);
         fillShopCards();
         stage.setScene(scene);
         stage.show();
@@ -120,6 +124,16 @@ public class ShopView extends Application {
                 vBox.getChildren().add(rectangle);
             }
         }
+    }
+
+    public static void setMusic(Button button){
+        button.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("/sound/gga.mp3").toExternalForm()));
+                player.play();
+            }
+        });
     }
 
     public void buyCard() {

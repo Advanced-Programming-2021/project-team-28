@@ -40,6 +40,8 @@ public class ProfileMenuView extends Application {
     @FXML
     private Button changePassword;
     @FXML
+    private Button change;
+    @FXML
     private Button changeNickname;
     @FXML
     private TextField currentPasswordField;
@@ -76,10 +78,16 @@ public class ProfileMenuView extends Application {
     private void setButtonsAnimation() {
         back.setOnMouseEntered(mouseEvent -> back.setEffect(new Glow()));
         back.setOnMouseExited(mouseEvent -> back.setEffect(null));
+        change.setOnMouseEntered(mouseEvent -> change.setEffect(new Glow()));
+        change.setOnMouseExited(mouseEvent -> change.setEffect(null));
         changePassword.setOnMouseEntered(mouseEvent -> changePassword.setEffect(new Glow()));
         changePassword.setOnMouseExited(mouseEvent -> changePassword.setEffect(null));
         changeNickname.setOnMouseEntered(mouseEvent -> changeNickname.setEffect(new Glow()));
         changeNickname.setOnMouseExited(mouseEvent -> changeNickname.setEffect(null));
+        ShopView.setMusic(back);
+        ShopView.setMusic(change);
+        ShopView.setMusic(changeNickname);
+        ShopView.setMusic(changePassword);
     }
 
     private void fillProfileMenu() {
