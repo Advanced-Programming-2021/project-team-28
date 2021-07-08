@@ -31,6 +31,12 @@ public class ImportExportView extends Application {
     private Text successAndErrorText;
     @FXML
     private Button exportButton;
+    @FXML
+    private Button importBtn;
+    @FXML
+    private Button back;
+
+
     private Card cardToExport;
 
     public ImportExportView (ImportExportController controller){
@@ -53,6 +59,9 @@ public class ImportExportView extends Application {
         Scene scene = new Scene(loader.load(), 1280, 720);
         stage.setScene(scene);
         stage.show();
+        ShopView.setMusic(back);
+        ShopView.setMusic(importBtn);
+        ShopView.setMusic(exportButton);
         selectedCardImageView.setImage(Card.getCardImageByName("Unknown"));
         setCardImages();
     }

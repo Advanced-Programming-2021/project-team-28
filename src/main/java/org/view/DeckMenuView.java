@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
@@ -50,6 +51,13 @@ public class DeckMenuView extends Application {
     private ScrollPane availableCards;
     @FXML
     private Text errorText;
+    @FXML
+    private Button create;
+    @FXML
+    private Button back;
+    @FXML
+    private Button back2;
+
     private boolean isInEditMode = false;
     private Deck selectedDeck;
 
@@ -67,10 +75,20 @@ public class DeckMenuView extends Application {
         loader.setController(this);
         loader.setLocation(getClass().getResource("/mainclass/FXML/deckmenu.fxml"));
         Scene scene = new Scene(loader.load(), 1280, 720);
+        setButtons();
         stage.setScene(scene);
         stage.show();
         refreshDecksList();
         showActiveDeck();
+    }
+
+    private void setButtons() {
+        back.setOnMouseEntered(mouseEvent -> back.setEffect(new Glow()));
+        back.setOnMouseExited(mouseEvent -> back.setEffect(null));
+        ShopView.setMusic(back);
+        create.setOnMouseEntered(mouseEvent -> create.setEffect(new Glow()));
+        create.setOnMouseExited(mouseEvent -> create.setEffect(null));
+        ShopView.setMusic(create);
     }
 
     public void thisDeckAlreadyExists(String deckName) {
@@ -230,6 +248,7 @@ public class DeckMenuView extends Application {
         FXMLLoader loader = new FXMLLoader();
         loader.setController(this);
         loader.setLocation(getClass().getResource("/mainclass/FXML/deckEdit.fxml"));
+
         try {
             LoginMenuView.getPrimaryStage().getScene().setRoot(loader.load());
             selectedDeckText.setText("Deck name: " + selectedDeck.getDeckName());

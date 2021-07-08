@@ -25,13 +25,13 @@
             <Font name="Book Antiqua Italic" size="19.0" />
         </font>
     </TextField>
-    <TextField id="cardName" fx:id="defText" alignment="CENTER" layoutX="1016.0" layoutY="253.0" prefHeight="51.0" prefWidth="224.0" promptText="DEF power(Monsters)">
+    <TextField fx:id="defText" alignment="CENTER" layoutX="1016.0" layoutY="253.0" prefHeight="51.0" prefWidth="224.0" promptText="DEF power(Monsters)">
         <font>
             <Font name="Book Antiqua Italic" size="19.0" />
         </font>
     </TextField>
     <Label layoutX="37.0" layoutY="224.0" prefHeight="40.0" prefWidth="76.0" text="choose type" />
-    <ChoiceBox fx:id="level" layoutX="135.0" layoutY="156.0" prefHeight="40.0" prefWidth="224.0" />
+    <ChoiceBox fx:id="levelChoices" layoutX="135.0" layoutY="156.0" prefHeight="40.0" prefWidth="224.0" />
     <Label layoutX="27.0" layoutY="155.0" prefHeight="40.0" prefWidth="76.0" text="choose level" />
     <Text fx:id="priceText" layoutX="551.0" layoutY="681.0" text="its price will be: " wrappingWidth="223.99999999999994">
         <font>
@@ -39,28 +39,63 @@
         </font>
     </Text>
     <Button fx:id="getPrice" layoutX="401.0" layoutY="657.0" mnemonicParsing="false" onMouseClicked="#calculatePrice" prefHeight="26.0" prefWidth="116.0" text="calculate price" />
-    <Button fx:id="create" layoutX="447.0" layoutY="553.0" mnemonicParsing="false" onMouseClicked="#create" prefHeight="80.0" prefWidth="262.0" text="CREATE!">
+    <Button fx:id="create" layoutX="448.0" layoutY="552.0" mnemonicParsing="false" onMouseClicked="#create" prefHeight="80.0" prefWidth="262.0" text="CREATE!">
         <font>
             <Font name="Gill Sans Ultra Bold Condensed" size="37.0" />
         </font>
     </Button>
-   <TextArea fx:id="description" layoutX="76.0" layoutY="292.0" prefHeight="222.0" prefWidth="348.0" promptText="Description">
-      <font>
-         <Font size="54.0" />
-      </font>
-      <cursor>
-         <Cursor fx:constant="TEXT" />
-      </cursor>
-   </TextArea>
-   <ScrollPane layoutX="434.0" layoutY="122.0" prefHeight="392.0" prefWidth="528.0">
+    <TextArea fx:id="description" layoutX="76.0" layoutY="292.0" prefHeight="222.0" prefWidth="348.0" promptText="Description">
+        <font>
+            <Font size="25.0" />
+        </font>
+        <cursor>
+            <Cursor fx:constant="TEXT" />
+        </cursor>
+    </TextArea>
+    <Label layoutX="443.0" layoutY="87.0" prefHeight="40.0" prefWidth="272.0" text="choose a power if you want:" textAlignment="CENTER">
+        <font>
+            <Font name="Gill Sans Ultra Bold" size="15.0" />
+        </font>
+    </Label>
+    <ChoiceBox fx:id="monsterTypeChoices" layoutX="1046.0" layoutY="376.0" prefHeight="26.0" prefWidth="163.0" />
+    <Label layoutX="1046.0" layoutY="323.0" prefHeight="34.0" prefWidth="163.0" text="choose Monster type:">
+        <font>
+            <Font name="Gill Sans Ultra Bold" size="12.0" />
+        </font>
+    </Label>
+    <Button fx:id="clearPower" layoutX="748.0" layoutY="107.0" mnemonicParsing="false" onMouseClicked="#clearPower" prefHeight="0.0" prefWidth="179.0" text="don't want any power" />
+    <Label layoutX="766.0" layoutY="389.0" prefHeight="34.0" prefWidth="150.0" text="choose Trap effect:">
+        <font>
+            <Font name="Gill Sans Ultra Bold" size="12.0" />
+        </font>
+    </Label>
+    <Label layoutX="762.0" layoutY="271.0" prefHeight="34.0" prefWidth="150.0" text="choose Spell effect:">
+        <font>
+            <Font name="Gill Sans Ultra Bold" size="12.0" />
+        </font>
+    </Label>
+    <Label layoutX="749.0" layoutY="159.0" prefHeight="34.0" prefWidth="179.0" text="choose Monster power:">
+        <font>
+            <Font name="Gill Sans Ultra Bold" size="12.0" />
+        </font>
+    </Label>
+    <ChoiceBox fx:id="monsterPowerChoices" layoutX="763.0" layoutY="201.0" prefWidth="150.0" />
+    <ChoiceBox fx:id="spellEffectChoices" layoutX="763.0" layoutY="311.0" prefWidth="150.0" />
+    <ChoiceBox fx:id="trapEffectChoices" layoutX="765.0" layoutY="423.0" prefWidth="150.0" />
+
+    <Label layoutX="453.0" layoutY="144.0" text="Power/EffectDescription: ">
+        <font>
+            <Font name="Gill Sans MT" size="25.0" />
+        </font>
+    </Label>
+   <ScrollPane layoutX="434.0" layoutY="186.0" prefHeight="271.0" prefWidth="299.0">
       <content>
-       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="389.0" prefWidth="526.0" />
+           <Text fx:id="powerDescription" stroke="BLACK" text="Description" wrappingWidth="259.45703125">
+               <font>
+                   <Font name="Gill Sans MT" size="25.0" />
+               </font>
+           </Text>
       </content>
    </ScrollPane>
-   <Label layoutX="938.0" layoutY="36.0" prefHeight="40.0" prefWidth="272.0" text="choose a power if you want:" textAlignment="CENTER">
-      <font>
-         <Font name="Gill Sans Ultra Bold" size="15.0" />
-      </font>
-   </Label>
 
 </AnchorPane>
