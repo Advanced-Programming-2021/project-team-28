@@ -45,6 +45,8 @@ public class LoginMenuView extends Application {
 
     private static MediaPlayer player;
 
+    private static boolean isMusicStarted = false;
+
     private final LoginMenuController CONTROLLER;
 
     public static Stage getPrimaryStage() {
@@ -89,27 +91,32 @@ public class LoginMenuView extends Application {
 
     @Override
     public  void start(Stage stage) throws Exception {
-        if(player != null)
-        player.stop();
+
         AnchorPane parent = FXMLLoader.load(getClass().getResource("/mainclass/FXML/loginmenu.fxml"));
         Scene scene = new Scene(parent, 1280, 720);
         primaryStage = stage;
         stage.setScene(scene);
         stage.setTitle("Yu-Gi-Oh");
-        player = new MediaPlayer(new Media(getClass().getResource("/sound/SanAndreas.mp3").toExternalForm()));
-        player.setOnEndOfMedia(new Runnable() {
-            public void run() {
-                player.seek(Duration.ZERO);
-            }
-        });
-        player.setVolume(0.2);
-        player.play();
+        musicStarter();
         stage.show();
-
         stage.getIcons().add(new Image(getClass().getResource("/logos/yugioh.jpg").toExternalForm()));
         Card.getCardsAndImages().clear();
         AllCardsInitiator.addMonstersToImageArrayList();
         AllCardsInitiator.addSpellTrapToImageArrayList();
+    }
+
+    private void musicStarter() {
+        if(!isMusicStarted) {
+            player = new MediaPlayer(new Media(getClass().getResource("/sound/SanAndreas.mp3").toExternalForm()));
+            player.setOnEndOfMedia(new Runnable() {
+                public void run() {
+                    player.seek(Duration.ZERO);
+                }
+            });
+            player.setVolume(0.2);
+            player.play();
+            isMusicStarted = true;
+        }
     }
 
     public void initialize(){
