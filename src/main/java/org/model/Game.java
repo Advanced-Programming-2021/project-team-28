@@ -1,12 +1,18 @@
 package org.model;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import org.controller.LoginMenuController;
 import org.model.enums.NumberOfRounds;
 import org.model.enums.Turn;
 import org.view.GameView;
+import org.view.LoginMenuView;
 
-public class Game extends Application {
+public class Game extends Application{
     GameView view = new GameView(this);
 
     Player player1;
@@ -29,6 +35,11 @@ public class Game extends Application {
     }
 
     public void run() {
+        try {
+            start(LoginMenuView.getPrimaryStage());
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
         /*
         if (this.numberOfRounds == NumberOfRounds.ONE_ROUND_MATCH) {
             Round round = new Round(player1, player2, Turn.FIRST_PLAYER);
@@ -157,9 +168,15 @@ public class Game extends Application {
         return player1.isSurrenderedOrLostByCheat() || player2.isSurrenderedOrLostByCheat();
     }
 
-    //haaji added this to run app
     @Override
     public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/mainclass/FXML/game.fxml"));
+        loader.setController(this);
+        Parent root = loader.load();
+        Scene scene = new Scene(root, 1280, 720);
+        stage.setScene(scene);
+        stage.show();
 
     }
 }
