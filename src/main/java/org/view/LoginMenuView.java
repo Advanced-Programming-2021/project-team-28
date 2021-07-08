@@ -10,6 +10,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -41,6 +42,8 @@ public class LoginMenuView extends Application {
     private Button loginButton;
     @FXML
     private Button exit;
+
+    private static MediaPlayer player;
 
     private final LoginMenuController CONTROLLER;
 
@@ -86,18 +89,20 @@ public class LoginMenuView extends Application {
 
     @Override
     public  void start(Stage stage) throws Exception {
+        if(player != null)
+        player.stop();
         AnchorPane parent = FXMLLoader.load(getClass().getResource("/mainclass/FXML/loginmenu.fxml"));
         Scene scene = new Scene(parent, 1280, 720);
         primaryStage = stage;
         stage.setScene(scene);
         stage.setTitle("Yu-Gi-Oh");
-        MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("/sound/SanAndreas.mp3").toExternalForm()));
+        player = new MediaPlayer(new Media(getClass().getResource("/sound/SanAndreas.mp3").toExternalForm()));
         player.setOnEndOfMedia(new Runnable() {
             public void run() {
                 player.seek(Duration.ZERO);
             }
         });
-        player.setVolume(0.1);
+        player.setVolume(0.2);
         player.play();
         stage.show();
 
@@ -118,6 +123,27 @@ public class LoginMenuView extends Application {
         registerButton.setOnMouseExited(mouseEvent -> registerButton.setEffect(null));
         exit.setOnMouseEntered(mouseEvent -> exit.setEffect(new Lighting()));
         exit.setOnMouseExited(mouseEvent -> exit.setEffect(null));
+        loginButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("/sound/gga.mp3").toExternalForm()));
+                player.play();
+            }
+        });
+        registerButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("/sound/gga.mp3").toExternalForm()));
+                player.play();
+            }
+        });
+        exit.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("/sound/gga.mp3").toExternalForm()));
+                player.play();
+            }
+        });
     }
 
     public void signup() {
