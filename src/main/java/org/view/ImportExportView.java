@@ -9,10 +9,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controller.ImportExportController;
+import org.controller.MainMenuController;
 import org.model.Card;
 
+import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 
 public class ImportExportView extends Application {
@@ -60,7 +64,7 @@ public class ImportExportView extends Application {
         int i = 0;
         Card.sortCardsWithImage(controller.getUser().getAllCards());
         for (Card card : controller.getUser().getAllCards()) {
-            if (i % 3 == 0) {
+            if (i % 4 == 0) {
                 row = new HBox();
                 row.setSpacing(7);
                 playerCards.getChildren().add(row);
@@ -105,6 +109,15 @@ public class ImportExportView extends Application {
         }
     }
 
+    public void importACard(){
+        FileChooser fileChooser =  new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JSON Files", "*.json")
+        );
+        File selectedFile = fileChooser.showOpenDialog(LoginMenuView.getPrimaryStage());
+        controller.importThisJsonFile(selectedFile);
+    }
+
     public void menuShowCurrent(){
         System.out.println("Import/Export Menu");
     }
@@ -127,6 +140,9 @@ public class ImportExportView extends Application {
 
     public void exportedSuccessfully(){
         successAndErrorText.setText("Card exported successfully");
+        selectedCardImageView.setImage(Card.getCardImageByName("Unknown"));
+        exportButton.setDisable(true);
+        selectedCardToString.setText("");
     }
 
     public void youDoNotHaveThisCardForImport(){
@@ -143,5 +159,25 @@ public class ImportExportView extends Application {
 
     public void cardFolderNotFound(){
         System.out.println("Cards folder not found");
+    }
+
+    public void setError(String error) {
+        successAndErrorText.setText(error);
+    }
+
+    public void importedSuccessfully(Card card) {
+        successAndErrorText.setText("Imported successfully");
+        exportButton.setDisable(true);
+        selectedCardImageView.setImage(Card.getCardImageByName(card.getName()));
+        selectedCardToString.setText(card.getName() + ": " + card.getDescription());
+        setCardImages();
+    }
+
+    public void back(){
+        try {
+            new MainMenuController(controller.getUser()).run();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 }
