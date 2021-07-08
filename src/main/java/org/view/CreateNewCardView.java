@@ -17,6 +17,8 @@ import org.model.enums.MonsterType;
 import org.model.enums.SpellEffect;
 import org.model.enums.TrapEffect;
 
+import javax.swing.*;
+
 
 public class CreateNewCardView extends Application {
     private CreateNewCardController controller;
@@ -49,14 +51,20 @@ public class CreateNewCardView extends Application {
     private ChoiceBox spellEffectChoices;
     @FXML
     private ChoiceBox trapEffectChoices;
+    @FXML
+    private Text priceText;
 
-    private String type;
-    private String name;
-    private int level;
-    private MonsterType monsterType;
-    private MonsterPower monsterPower;
-    private SpellEffect spellEffect;
-    private TrapEffect trapEffect;
+
+    private String type = null;
+    private String name = null;
+    private int level = 0;
+    private MonsterType monsterType = null;
+    private MonsterPower monsterPower = null;
+    private SpellEffect spellEffect = null;
+    private TrapEffect trapEffect = null;
+    private int price = 0;
+    private int monsterDef = 0;
+    private int monsterAtk = 0;
 
     public CreateNewCardView(CreateNewCardController controller) {
         this.controller = controller;
@@ -141,6 +149,7 @@ public class CreateNewCardView extends Application {
             powerDescription.setText(spellEffect.description);
         });
 
+
     }
 
 
@@ -184,11 +193,87 @@ public class CreateNewCardView extends Application {
     }
 
     public void calculatePrice() {
+        if (level == 0) {
+            JOptionPane.showMessageDialog(null, "please select a level first");
+        } else if (type == null) {
+            JOptionPane.showMessageDialog(null, "you hae to select a type for your card");
+        } else if (type.equals("Trap") || type.equals("Spell")) {
+            if (spellEffect == null || trapEffect == null) {
+                price = 2000;
+            } else {
+                price = 3000;
+                priceText.setText("its price will be: " + price);
+                return;
+            }
+        } else {
+            if (atkText.getText().equals("") || defText.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "please inter to integers for atk & def");
+            } else {
+                try {
+                    monsterAtk = Integer.parseInt(atkText.getText());
+                    monsterDef = Integer.parseInt(defText.getText());
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "enter two valid integer number for ATK & DEF");
+                    return;
+                }
+
+                if (monsterType == null) {
+                    JOptionPane.showMessageDialog(null, "please select your Monster type");
+                } else {
+                    if (monsterPower == null) {
+                        price = monsterAtk + monsterDef;
+                    } else {
+                        price = monsterAtk + monsterDef + 500;
+                    }
+                    priceText.setText("its price will be: " + price);
+                    return;
+                }
+            }
+        }
 
     }
 
     public void create() {
-        System.out.println(description.getText());
+        if (cardName.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "please enter card name to crate a card");
+        } else if (description.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "please enter a description for your card");
+        } else if (level == 0) {
+            JOptionPane.showMessageDialog(null, "please select a level first");
+        } else if (type == null) {
+            JOptionPane.showMessageDialog(null, "you hae to select a type for your card");
+        } else {
+            type = (String) cardType.getValue();
+            switch (type) {
+                case "Spell": {
+                    createSpell();
+                    break;
+                }
+
+                case "Trap": {
+                    createTrap();
+                    break;
+                }
+
+                default: {
+                    createMonster();
+                    break;
+                }
+            }
+        }
+    }
+
+    public void createMonster() {
+        System.out.println(type);
+
+    }
+
+    public void createSpell() {
+        System.out.println(type);
+    }
+
+    public void createTrap() {
+        System.out.println(type);
     }
 
     public void clearPower() {
