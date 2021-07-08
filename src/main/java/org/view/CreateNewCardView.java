@@ -8,9 +8,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controller.CreateNewCardController;
 import org.controller.ShopController;
+import org.model.enums.MonsterPower;
+import org.model.enums.MonsterType;
+import org.model.enums.SpellEffect;
+import org.model.enums.TrapEffect;
 
 
 public class CreateNewCardView extends Application {
@@ -19,7 +24,7 @@ public class CreateNewCardView extends Application {
     @FXML
     private ChoiceBox cardType;
     @FXML
-    private ChoiceBox level;
+    private ChoiceBox levelChoices;
     @FXML
     private TextField cardName;
     @FXML
@@ -32,7 +37,26 @@ public class CreateNewCardView extends Application {
     private Button getPrice;
     @FXML
     private TextArea description;
+    @FXML
+    private ChoiceBox monsterTypeChoices;
+    @FXML
+    private Button clearPower;
+    @FXML
+    private Text powerDescription;
+    @FXML
+    private ChoiceBox monsterPowerChoices;
+    @FXML
+    private ChoiceBox spellEffectChoices;
+    @FXML
+    private ChoiceBox trapEffectChoices;
+
     private String type;
+    private String name;
+    private int level;
+    private MonsterType monsterType;
+    private MonsterPower monsterPower;
+    private SpellEffect spellEffect;
+    private TrapEffect trapEffect;
 
     public CreateNewCardView(CreateNewCardController controller) {
         this.controller = controller;
@@ -58,6 +82,62 @@ public class CreateNewCardView extends Application {
         stage.setScene(scene);
         stage.show();
         setChoices();
+        cardType.setDisable(true);
+        atkText.setDisable(true);
+        defText.setDisable(true);
+        monsterTypeChoices.setDisable(true);
+        monsterPowerChoices.setDisable(true);
+        spellEffectChoices.setDisable(true);
+        trapEffectChoices.setDisable(true);
+
+
+        cardType.setOnAction((event) -> {
+            type = (String) cardType.getValue();
+            if (!type.equals("Spell") && !type.equals("Trap")) {
+                atkText.setDisable(false);
+                defText.setDisable(false);
+                monsterTypeChoices.setDisable(false);
+                monsterPowerChoices.setDisable(false);
+                spellEffectChoices.setDisable(true);
+                spellEffectChoices.getSelectionModel().clearSelection();
+                trapEffectChoices.setDisable(true);
+                trapEffectChoices.getSelectionModel().clearSelection();
+            } else {
+                atkText.setDisable(true);
+                atkText.clear();
+                defText.setDisable(true);
+                defText.clear();
+                monsterTypeChoices.setDisable(true);
+                monsterTypeChoices.getSelectionModel().clearSelection();
+                monsterPowerChoices.setDisable(true);
+                monsterPowerChoices.getSelectionModel().clearSelection();
+                if (type.equals("Spell")) {
+                    spellEffectChoices.setDisable(false);
+                }
+                if (type.equals("Trap")) {
+                    trapEffectChoices.setDisable(false);
+                }
+            }
+
+        });
+        levelChoices.setOnAction((event) -> {
+            cardType.setDisable(false);
+            level = (int) levelChoices.getValue();
+
+        });
+        monsterTypeChoices.setOnAction((event) -> {
+            monsterType = (MonsterType) monsterTypeChoices.getValue();
+        });
+        monsterPowerChoices.setOnAction((event) -> {
+            monsterPower = (MonsterPower) monsterPowerChoices.getValue();
+            powerDescription.setText(monsterPower.description);
+        });
+        trapEffectChoices.setOnAction((event) -> {
+            trapEffect = (TrapEffect) trapEffectChoices.getValue();
+        });
+        spellEffectChoices.setOnAction((event) -> {
+            spellEffect = (SpellEffect) spellEffectChoices.getValue();
+        });
 
     }
 
@@ -80,27 +160,39 @@ public class CreateNewCardView extends Application {
         cardType.getItems().add("Master");
         cardType.getItems().add("TA");
 
-        level.getItems().add(1);
-        level.getItems().add(2);
-        level.getItems().add(3);
-        level.getItems().add(4);
-        level.getItems().add(5);
-        level.getItems().add(6);
-        level.getItems().add(7);
-        level.getItems().add(8);
-        level.getItems().add(9);
-        level.getItems().add(10);
-        level.getItems().add(11);
-        level.getItems().add(12);
+        for (int i = 1; i <= 12; i++) {
+            levelChoices.getItems().add(i);
+        }
 
-
-    }
-    public void calculatePrice(){
-
-    }
-
-    public void create(){
+        for (MonsterType type : MonsterType.values()) {
+            monsterTypeChoices.getItems().add(type);
+        }
+        for (MonsterPower power : MonsterPower.values()) {
+            if (power.equals(MonsterPower.NONE) || power.equals(MonsterPower.RITUAL))
+                continue;
+            monsterPowerChoices.getItems().add(power);
+        }
+        for (TrapEffect effect : TrapEffect.values()) {
+            trapEffectChoices.getItems().add(effect);
+        }
+        for (SpellEffect effect : SpellEffect.values()) {
+            spellEffectChoices.getItems().add(effect);
+        }
 
     }
 
+    public void calculatePrice() {
+
+    }
+
+    public void create() {
+
+    }
+
+    public void clearPower() {
+        monsterPowerChoices.getSelectionModel().clearSelection();
+        spellEffectChoices.getSelectionModel().clearSelection();
+        trapEffectChoices.getSelectionModel().clearSelection();
+        powerDescription.setText("");
+    }
 }
