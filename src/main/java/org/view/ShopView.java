@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controller.CreateNewCardController;
 import org.controller.MainMenuController;
@@ -45,7 +46,8 @@ public class ShopView extends Application {
     private AnchorPane parent;
     @FXML
     private Button createCard;
-
+    @FXML
+    private Text description;
     Scanner scanner = ScannerInstance.getInstance().getScanner();
     ShopController controller;
     String selectedCardName;
@@ -106,6 +108,13 @@ public class ShopView extends Application {
                         if (Card.getPrices().get(cardAndImage.getCardName()) > controller.getUser().getBalance()) {
                             buyButton.setDisable(true);
                         } else buyButton.setDisable(false);
+
+                        try {
+                            description.setText("Description :\n" + Card.getCardByName(Card.getAllCards() , cardAndImage.getCardName()).getDescription());
+                        } catch (CloneNotSupportedException e) {
+                            e.printStackTrace();
+                        }
+
                     }
                 });
                 vBox.getChildren().add(rectangle);

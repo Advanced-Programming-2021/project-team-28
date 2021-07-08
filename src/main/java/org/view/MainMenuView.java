@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.Lighting;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controller.DeckMenuController;
@@ -87,6 +89,13 @@ public class MainMenuView extends Application {
 
     public void setEffectForButton(Button button){
         button.setOnMouseEntered(mouseEvent -> button.setEffect(new Lighting()));
+        button.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("/sound/gga.mp3").toExternalForm()));
+                player.play();
+            }
+        });
         button.setOnMouseExited(mouseEvent -> button.setEffect(null));
     }
 
