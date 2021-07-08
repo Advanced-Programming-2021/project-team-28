@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.Lighting;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
@@ -16,6 +18,7 @@ import org.controller.DeckMenuController;
 import org.controller.ImportExportController;
 import org.controller.MainMenuController;
 
+import javax.swing.*;
 import java.util.Scanner;
 
 public class MainMenuView extends Application {
@@ -34,7 +37,12 @@ public class MainMenuView extends Application {
     private Button score;
     @FXML
     private Button export;
-
+    @FXML
+    private CheckBox oneRound;
+    @FXML
+    private CheckBox threeRound;
+    @FXML
+    private TextField opponentUsername;
 
     private static Stage primaryStage;
     MainMenuController controller;
@@ -75,6 +83,13 @@ public class MainMenuView extends Application {
         setUserText();
         stage.setScene(scene);
         stage.show();
+        setNumberOfRoundBoxes();
+    }
+
+    private void setNumberOfRoundBoxes() {
+        oneRound.setSelected(true);
+        oneRound.setOnMouseClicked(mouseEvent -> threeRound.setSelected(false));
+        threeRound.setOnMouseClicked(mouseEvent -> oneRound.setSelected(false));
     }
 
     private void buttonSet() {
@@ -110,7 +125,18 @@ public class MainMenuView extends Application {
     }
 
     public void newDuel() {
-
+        if(opponentUsername.getText() == null || opponentUsername.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Enter opponent username first");
+        } else if ((!oneRound.isSelected()) && (!threeRound.isSelected())){
+            JOptionPane.showMessageDialog(null, "Select number of rounds first");
+        } else {
+            int numberOfRounds = oneRound.isSelected() ? 1 : 3;
+            try {
+                controller.processCommand("duel --new --second-player " + opponentUsername.getText() + " --rounds " + numberOfRounds);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
     }
 
     public void shop() {

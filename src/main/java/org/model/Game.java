@@ -1,10 +1,11 @@
 package org.model;
 
+import javafx.application.Application;
 import org.model.enums.NumberOfRounds;
 import org.model.enums.Turn;
 import org.view.GameView;
 
-public class Game {
+public class Game extends Application {
     GameView view = new GameView(this);
 
     Player player1;
@@ -27,6 +28,7 @@ public class Game {
     }
 
     public void run() {
+        /*
         if (this.numberOfRounds == NumberOfRounds.ONE_ROUND_MATCH) {
             Round round = new Round(player1, player2, Turn.FIRST_PLAYER);
             round.run();
@@ -82,6 +84,7 @@ public class Game {
                 view.showMatchWinner(round3Winner.getUser(), 2, 1);
             }
         }
+        */
     }
 
     private void setPlayerCardsForGame() {
