@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -60,17 +61,6 @@ public class ImportExportController {
         } catch (Exception exception) {
             exception.printStackTrace();
         }
-    }
-
-    public void exportThisCard(Card cardToExport) throws IOException {
-        File cardsFolder = new File("src/ExportedCards");
-        cardsFolder.mkdir();
-        File cardToExportFile = new File("src/ExportedCards/" + cardToExport.getName() +"_"+ cardToExport.getNumber()+ ".json");
-        cardToExportFile.createNewFile();
-        FileWriter writer = new FileWriter(cardToExportFile);
-        writer.write(new Gson().toJson(cardToExport));
-        writer.close();
-        view.exportedSuccessfully();
     }
 
     private void controlImportCardCommand(String cardName) {
@@ -162,4 +152,45 @@ public class ImportExportController {
         return matchers;
     }
 
+    public void exportThisCard(Card cardToExport) throws IOException {
+        File cardsFolder = new File("src/ExportedCards");
+        cardsFolder.mkdir();
+        if(cardToExport.getNumber() == null || cardToExport.getNumber().equals("")){
+            cardToExport.setNumber(UUID.randomUUID().toString());
+        }
+        File cardToExportFile = new File("src/ExportedCards/" + cardToExport.getName() +"_"+ cardToExport.getNumber()+ ".json");
+        cardToExportFile.createNewFile();
+        FileWriter writer = new FileWriter(cardToExportFile);
+        writer.write(new Gson().toJson(cardToExport));
+        writer.close();
+        view.exportedSuccessfully();
+    }
+
+    public void importThisJsonFile(File selectedFile) {
+        String json;
+        try {
+            json = new String(Files.readAllBytes(selectedFile.toPath()));
+        } catch (Exception exception){
+            view.setError("Can't open the file");
+            return;
+        }
+        MonsterCard card = new Gson().fromJson(json, MonsterCard.class);
+        if(user.doesHaveCardWithThisNumber(card.getNumber())){
+            view.setError("Error, You already have this card");
+            return;
+        }
+        try {
+            Card originalCard = Card.getCardByName(Card.getAllCards(), card.getName());
+            if(originalCard instanceof MonsterCard){
+                user.addToCards(card);
+            } else if (originalCard instanceof SpellCard){
+                user.addToCards(new Gson().fromJson(json, SpellCard.class));
+            } else {
+                user.addToCards(new Gson().fromJson(json, TrapCard.class));
+            }
+            view.importedSuccessfully(originalCard);
+        } catch (Exception exception) {
+            view.setError("Can't open the file");
+        }
+    }
 }

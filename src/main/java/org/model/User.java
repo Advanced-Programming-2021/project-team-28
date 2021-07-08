@@ -40,6 +40,8 @@ public class User {
 
     @Expose
     private static ArrayList<User> users = new ArrayList<>();
+    @Expose
+    private boolean hasChangedProfilePicture = false;
 
     public User(String username, String password, String nickname) {
         setUsername(username);
@@ -132,6 +134,14 @@ public class User {
 
     public void setProfilePicturePath(String profilePicturePath) {
         this.profilePicturePath = profilePicturePath;
+    }
+
+    public boolean hasChangedProfilePicture() {
+        return hasChangedProfilePicture;
+    }
+
+    public void setHasChangedProfilePicture(boolean hasChangedProfilePicture) {
+        this.hasChangedProfilePicture = hasChangedProfilePicture;
     }
 
     public static User getUserByUsername(String username) {

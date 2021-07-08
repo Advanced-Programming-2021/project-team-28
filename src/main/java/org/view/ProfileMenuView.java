@@ -12,12 +12,15 @@ import javafx.scene.effect.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controller.MainMenuController;
 import org.controller.ProfileMenuController;
 import org.model.enums.Status;
 
 
+import javax.swing.*;
+import java.io.File;
 import java.util.Scanner;
 
 public class ProfileMenuView extends Application {
@@ -43,8 +46,9 @@ public class ProfileMenuView extends Application {
     @FXML
     private TextField newPasswordField;
     @FXML
-    private TextField nicknameFiled;
-
+    private TextField nicknameField;
+    @FXML
+    private Label changeProfile;
 
 
     ProfileMenuController controller;
@@ -70,51 +74,24 @@ public class ProfileMenuView extends Application {
     }
 
     private void setButtonsAnimation() {
-        back.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                back.setEffect(new Glow());
-            }
-        });
-
-        back.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                back.setEffect(null);
-            }
-        });
-        changePassword.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                changePassword.setEffect(new Glow());
-            }
-        });
-
-        changePassword.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                changePassword.setEffect(null);
-            }
-        });
-        changeNickname.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                changeNickname.setEffect(new Glow());
-            }
-        });
-
-        changeNickname.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                changeNickname.setEffect(null);
-            }
-        });
+        back.setOnMouseEntered(mouseEvent -> back.setEffect(new Glow()));
+        back.setOnMouseExited(mouseEvent -> back.setEffect(null));
+        changePassword.setOnMouseEntered(mouseEvent -> changePassword.setEffect(new Glow()));
+        changePassword.setOnMouseExited(mouseEvent -> changePassword.setEffect(null));
+        changeNickname.setOnMouseEntered(mouseEvent -> changeNickname.setEffect(new Glow()));
+        changeNickname.setOnMouseExited(mouseEvent -> changeNickname.setEffect(null));
     }
 
     private void fillProfileMenu() {
         username.setText("Username : " + controller.getUser().getUsername());
         nickname.setText("Nickname : " + controller.getUser().getNickname());
-        profilePicture.setImage(new Image(getClass().getResource(controller.getUser().getProfilePicturePath()).toExternalForm()));
+        try {
+            if(controller.getUser().hasChangedProfilePicture()){
+                profilePicture.setImage(new Image(controller.getUser().getProfilePicturePath()));
+            } else {
+                profilePicture.setImage(new Image(getClass().getResource(controller.getUser().getProfilePicturePath()).toExternalForm()));
+            }
+        } catch (Exception e){}
     }
 
     public void run()  {
@@ -123,17 +100,10 @@ public class ProfileMenuView extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        while (true){
-//            command = scanner.nextLine();
-//            command = command.trim();
-//            if (command.equals("menu exit"))
-//                break;
-//            controller.processCommand(command);
-//
-//        }
     }
 
     public void changePassword(){
+        changeProfile.setText("");
         Status result = controller.controlChangePassword(currentPasswordField.getText() , newPasswordField.getText());
         switch (result){
             case WRONG_PASSWORD:{
@@ -158,7 +128,8 @@ public class ProfileMenuView extends Application {
     }
 
     public void changeNickname(){
-        Status result = controller.controlChangeNickName(nicknameFiled.getText());
+        changeProfile.setText("");
+        Status result = controller.controlChangeNickName(nicknameField.getText());
         switch (result){
             case SUCCESS:{
                 nicknameChangeNotifyLabel.setText("Nickname changed successfully");
@@ -222,4 +193,15 @@ public class ProfileMenuView extends Application {
         }catch (Exception e){}
     }
 
+    public void changeProfilePicture(){
+        changeProfile.setText("");
+        FileChooser fileChooser =  new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JPG Files", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG Files", "*.png"));
+        File selectedFile = fileChooser.showOpenDialog(LoginMenuView.getPrimaryStage());
+        profilePicture.setImage(new Image(selectedFile.toURI().toString()));
+        changeProfile.setText("Profile changed successfully");
+        controller.changeProfilePic(selectedFile);
+    }
 }

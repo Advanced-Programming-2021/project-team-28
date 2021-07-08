@@ -4,6 +4,7 @@ import org.model.User;
 import org.model.enums.Status;
 import org.view.ProfileMenuView;
 
+import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -126,5 +127,10 @@ public class ProfileMenuController {
 
     public User getUser() {
         return user;
+    }
+
+    public void changeProfilePic(File selectedFile){
+        user.setProfilePicturePath(selectedFile.toURI().toString());
+        user.setHasChangedProfilePicture(true);
     }
 }
