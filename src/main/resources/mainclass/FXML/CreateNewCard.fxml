@@ -1,12 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <Text layoutX="523.0" layoutY="226.0" text="Hello!" textAlignment="CENTER" wrappingWidth="234.04879760742188">
+    <ChoiceBox fx:id="cardType" layoutX="138.0" layoutY="224.0" prefHeight="40.0" prefWidth="224.0">
+
+    </ChoiceBox>
+    <Text layoutX="362.0" layoutY="72.0" text="Create your own!" textAlignment="CENTER" wrappingWidth="528.048828125">
+        <font>
+            <Font name="Gill Sans Ultra Bold" size="43.0" />
+        </font>
+    </Text>
+    <TextField fx:id="cardName" alignment="CENTER" layoutX="135.0" layoutY="76.0" prefHeight="51.0" prefWidth="224.0" promptText="CardName">
+        <font>
+            <Font name="Book Antiqua Italic" size="19.0" />
+        </font>
+    </TextField>
+    <Button layoutX="27.0" layoutY="645.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="51.0" prefWidth="224.0" text="back" />
+    <TextField id="cardName" fx:id="atkText" alignment="CENTER" layoutX="1016.0" layoutY="150.0" prefHeight="51.0" prefWidth="224.0" promptText="ATK power(Monsters)">
+        <font>
+            <Font name="Book Antiqua Italic" size="19.0" />
+        </font>
+    </TextField>
+    <TextField id="cardName" fx:id="defText" alignment="CENTER" layoutX="1016.0" layoutY="253.0" prefHeight="51.0" prefWidth="224.0" promptText="DEF power(Monsters)">
+        <font>
+            <Font name="Book Antiqua Italic" size="19.0" />
+        </font>
+    </TextField>
+    <Label layoutX="37.0" layoutY="224.0" prefHeight="40.0" prefWidth="76.0" text="choose type" />
+    <ChoiceBox fx:id="level" layoutX="135.0" layoutY="156.0" prefHeight="40.0" prefWidth="224.0" />
+    <Label layoutX="27.0" layoutY="155.0" prefHeight="40.0" prefWidth="76.0" text="choose level" />
+    <Text fx:id="priceText" layoutX="551.0" layoutY="681.0" text="its price will be: " wrappingWidth="223.99999999999994">
+        <font>
+            <Font size="25.0" />
+        </font>
+    </Text>
+    <Button fx:id="getPrice" layoutX="401.0" layoutY="657.0" mnemonicParsing="false" onMouseClicked="#calculatePrice" prefHeight="26.0" prefWidth="116.0" text="calculate price" />
+    <Button fx:id="create" layoutX="447.0" layoutY="553.0" mnemonicParsing="false" onMouseClicked="#create" prefHeight="80.0" prefWidth="262.0" text="CREATE!">
+        <font>
+            <Font name="Gill Sans Ultra Bold Condensed" size="37.0" />
+        </font>
+    </Button>
+   <TextArea fx:id="description" layoutX="76.0" layoutY="292.0" prefHeight="222.0" prefWidth="348.0" promptText="Description">
       <font>
-         <Font size="67.0" />
-      </font></Text>
+         <Font size="54.0" />
+      </font>
+      <cursor>
+         <Cursor fx:constant="TEXT" />
+      </cursor>
+   </TextArea>
+   <ScrollPane layoutX="434.0" layoutY="122.0" prefHeight="392.0" prefWidth="528.0">
+      <content>
+       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="389.0" prefWidth="526.0" />
+      </content>
+   </ScrollPane>
+   <Label layoutX="938.0" layoutY="36.0" prefHeight="40.0" prefWidth="272.0" text="choose a power if you want:" textAlignment="CENTER">
+      <font>
+         <Font name="Gill Sans Ultra Bold" size="15.0" />
+      </font>
+   </Label>
 
 </AnchorPane>

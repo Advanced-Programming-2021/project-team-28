@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import org.controller.CreateNewCardController;
 import org.controller.MainMenuController;
 import org.controller.ShopController;
 import org.model.*;
@@ -123,8 +124,7 @@ public class ShopView extends Application {
                 ownedNumber.setText("You have : " + controller.getUser().numOfCardsWithThisName(selectedCardName) + " card of this type");
                 if (Card.getPrices().get(selectedCardName) > controller.getUser().getBalance()) {
                     buyButton.setDisable(true);
-                }
-                else buyButton.setDisable(false);
+                } else buyButton.setDisable(false);
             }
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
@@ -251,7 +251,10 @@ public class ShopView extends Application {
     public void cheatActivated() {
         System.out.println("Cheat activated");
     }
-    public void createCard(){
 
+    public void createCard() {
+        CreateNewCardController createNewCardController = new CreateNewCardController(controller.getUser());
+        createNewCardController.run();
     }
+
 }
