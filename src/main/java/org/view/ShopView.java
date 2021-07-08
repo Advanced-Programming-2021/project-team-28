@@ -12,8 +12,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controller.CreateNewCardController;
 import org.controller.MainMenuController;
@@ -45,7 +48,8 @@ public class ShopView extends Application {
     private AnchorPane parent;
     @FXML
     private Button createCard;
-
+    @FXML
+    private Text description;
     Scanner scanner = ScannerInstance.getInstance().getScanner();
     ShopController controller;
     String selectedCardName;
@@ -61,6 +65,8 @@ public class ShopView extends Application {
         loader.setLocation(getClass().getResource("/mainclass/FXML/shopMenu.fxml"));
         Scene scene = new Scene(loader.load());
         vBox.getChildren().clear();
+        setMusic(buyButton);
+        setMusic(backButton);
         fillShopCards();
         stage.setScene(scene);
         stage.show();
@@ -106,11 +112,28 @@ public class ShopView extends Application {
                         if (Card.getPrices().get(cardAndImage.getCardName()) > controller.getUser().getBalance()) {
                             buyButton.setDisable(true);
                         } else buyButton.setDisable(false);
+
+                        try {
+                            description.setText("Description :\n" + Card.getCardByName(Card.getAllCards() , cardAndImage.getCardName()).getDescription());
+                        } catch (CloneNotSupportedException e) {
+                            e.printStackTrace();
+                        }
+
                     }
                 });
                 vBox.getChildren().add(rectangle);
             }
         }
+    }
+
+    public static void setMusic(Button button){
+        button.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("/sound/gga.mp3").toExternalForm()));
+                player.play();
+            }
+        });
     }
 
     public void buyCard() {

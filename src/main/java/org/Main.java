@@ -1,5 +1,7 @@
 package org;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import org.model.*;
 import org.view.LoginMenuView;
 

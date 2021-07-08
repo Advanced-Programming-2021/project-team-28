@@ -2,9 +2,11 @@ package org.controller;
 
 import org.model.Scoreboard;
 import org.model.User;
+import org.model.Utilities;
 import org.view.ScoreboardView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,13 +47,13 @@ public class ScoreboardController {
 
     public ArrayList<User> getSortedUsers() {
         ArrayList<User> sortedUsers = User.getUsers();
-        sortedUsers.sort(new Comparator<User>() {
-            @Override
-            public int compare(User o1, User o2) {
-                return Integer.compare( o2.getScore() , o1.getScore() );
-            }
+        sortedUsers.sort((o1, o2) -> {
+            int result = Integer.compare( o2.getScore() , o1.getScore());
+            if(result != 0) return result;
+            else return Utilities.compareAlphabetical(o1.getUsername(), o2.getUsername());
         });
         return sortedUsers;
+
     }
 
     public User getUser() {

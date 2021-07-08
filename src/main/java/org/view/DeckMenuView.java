@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
@@ -50,6 +51,13 @@ public class DeckMenuView extends Application {
     private ScrollPane availableCards;
     @FXML
     private Text errorText;
+    @FXML
+    private Button create;
+    @FXML
+    private Button back;
+    @FXML
+    private Button back2;
+
     private boolean isInEditMode = false;
     private Deck selectedDeck;
 
@@ -67,10 +75,20 @@ public class DeckMenuView extends Application {
         loader.setController(this);
         loader.setLocation(getClass().getResource("/mainclass/FXML/deckmenu.fxml"));
         Scene scene = new Scene(loader.load(), 1280, 720);
+        setButtons();
         stage.setScene(scene);
         stage.show();
         refreshDecksList();
         showActiveDeck();
+    }
+
+    private void setButtons() {
+        back.setOnMouseEntered(mouseEvent -> back.setEffect(new Glow()));
+        back.setOnMouseExited(mouseEvent -> back.setEffect(null));
+        ShopView.setMusic(back);
+        create.setOnMouseEntered(mouseEvent -> create.setEffect(new Glow()));
+        create.setOnMouseExited(mouseEvent -> create.setEffect(null));
+        ShopView.setMusic(create);
     }
 
     public void thisDeckAlreadyExists(String deckName) {
@@ -197,7 +215,7 @@ public class DeckMenuView extends Application {
             controller.processCommand("deck set-activate " + ((Text) hBox.getChildren().get(0)).getText());
             showActiveDeck();
         });
-        activateButton.setPrefSize(80 , 30);
+        activateButton.setPrefSize(80, 30);
         hBox.getChildren().add(activateButton);
         Button editDeckButton = new Button("Details/Edit");
         editDeckButton.setOnMouseClicked(mouseEvent -> {
@@ -205,7 +223,7 @@ public class DeckMenuView extends Application {
             selectedDeck = deck;
             loadEditMenu();
         });
-        editDeckButton.setPrefSize(120  , 30);
+        editDeckButton.setPrefSize(120, 30);
         setStyleForButton(editDeckButton);
         hBox.getChildren().add(editDeckButton);
         Button deleteDeckButton = new Button("Delete");
@@ -213,7 +231,7 @@ public class DeckMenuView extends Application {
             controller.processCommand("deck delete " + ((Text) hBox.getChildren().get(0)).getText());
             refreshDecksList();
         });
-        deleteDeckButton.setPrefSize(80 , 30);
+        deleteDeckButton.setPrefSize(80, 30);
         setStyleForButton(deleteDeckButton);
         hBox.getChildren().add(deleteDeckButton);
 
@@ -230,6 +248,7 @@ public class DeckMenuView extends Application {
         FXMLLoader loader = new FXMLLoader();
         loader.setController(this);
         loader.setLocation(getClass().getResource("/mainclass/FXML/deckEdit.fxml"));
+
         try {
             LoginMenuView.getPrimaryStage().getScene().setRoot(loader.load());
             selectedDeckText.setText("Deck name: " + selectedDeck.getDeckName());
@@ -243,11 +262,11 @@ public class DeckMenuView extends Application {
 
     private void addAllCardImages() {
         fillVBox(mainDeckVBox, 9, 90, 60, selectedDeck.getAllCardsInMainDeck(), MAIN_DECK);
-        fillVBox(sideDeckVBox, 9, 90,60, selectedDeck.getAllCardsInSideDeck(), SIDE_DECK);
+        fillVBox(sideDeckVBox, 9, 90, 60, selectedDeck.getAllCardsInSideDeck(), SIDE_DECK);
         fillVBox(availableCardsVBox, 2, 180, 120, controller.getUser().getAllCardsOutOfThisDeck(selectedDeck), AVAILABLE_CARDS);
     }
 
-    private void fillVBox(VBox vbox, int size, int imageHeight, int imageWidth, ArrayList<Card> cardsToAdd, ScrollPaneEnum scrollPaneEnum){
+    private void fillVBox(VBox vbox, int size, int imageHeight, int imageWidth, ArrayList<Card> cardsToAdd, ScrollPaneEnum scrollPaneEnum) {
         vbox.getChildren().clear();
         HBox row = new HBox();
         int i = 0;
@@ -287,9 +306,9 @@ public class DeckMenuView extends Application {
             String whereIsThisCard = db.getString();
             String cardName = db.getUrl();
             String deckName = selectedDeck.getDeckName();
-            if(scrollPaneEnum == MAIN_DECK){
+            if (scrollPaneEnum == MAIN_DECK) {
                 moveDraggedInMainCard(whereIsThisCard, cardName, deckName);
-            } else if (scrollPaneEnum == SIDE_DECK){
+            } else if (scrollPaneEnum == SIDE_DECK) {
                 moveDraggedInSideCard(whereIsThisCard, cardName, deckName);
             } else {
                 moveDraggedInAvailableCards(whereIsThisCard, cardName, deckName);
@@ -302,27 +321,27 @@ public class DeckMenuView extends Application {
     }
 
     private void moveDraggedInAvailableCards(String whereIsThisCard, String cardName, String deckName) {
-        if(whereIsThisCard.equals("0")){
+        if (whereIsThisCard.equals("0")) {
             controller.controlRemoveCardCommand(cardName, deckName, false);
-        } else if (whereIsThisCard.equals("1")){
+        } else if (whereIsThisCard.equals("1")) {
             controller.controlRemoveCardCommand(cardName, deckName, true);
         }
         addAllCardImages();
     }
 
-    private void moveDraggedInSideCard(String whereIsThisCard, String cardName, String deckName){
-        if(whereIsThisCard.equals("0")){
+    private void moveDraggedInSideCard(String whereIsThisCard, String cardName, String deckName) {
+        if (whereIsThisCard.equals("0")) {
             controller.controlAddCardFromMainToSide(cardName, deckName);
-        } else if (whereIsThisCard.equals("2")){
+        } else if (whereIsThisCard.equals("2")) {
             controller.controlAddCardCommand(cardName, deckName, true);
         }
         addAllCardImages();
     }
 
     private void moveDraggedInMainCard(String whereIsThisCard, String cardName, String deckName) {
-        if(whereIsThisCard.equals("1")){
+        if (whereIsThisCard.equals("1")) {
             controller.controlAddCardFromSideToMain(cardName, deckName);
-        } else if (whereIsThisCard.equals("2")){
+        } else if (whereIsThisCard.equals("2")) {
             controller.controlAddCardCommand(cardName, deckName, false);
         }
         addAllCardImages();
@@ -336,7 +355,7 @@ public class DeckMenuView extends Application {
         dragEvent.consume();
     }
 
-    private void setDragAndDropForImageViews(ImageView source, ScrollPaneEnum scrollPaneEnum, String cardName){
+    private void setDragAndDropForImageViews(ImageView source, ScrollPaneEnum scrollPaneEnum, String cardName) {
         source.setOnDragDetected(event -> {
             Dragboard db = source.startDragAndDrop(TransferMode.MOVE);
             ClipboardContent content = new ClipboardContent();
@@ -382,7 +401,7 @@ public class DeckMenuView extends Application {
 
     public Text getText(String text) {
         Text text1 = new Text(text);
-        text1.setStyle("-fx-font-family: thewitcher; -fx-text-fill: #e1c5c5 ; -fx-font-size: 35 "  );
+        text1.setStyle("-fx-font-family: thewitcher; -fx-text-fill: #e1c5c5 ; -fx-font-size: 35 ");
         text1.setFill(Color.BLACK);
         return text1;
     }

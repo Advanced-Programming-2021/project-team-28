@@ -48,6 +48,11 @@
     -fx-background-size: cover;
 }
 
+.anchor11 {
+    -fx-background-color: #131313;
+    -fx-background-size: cover;
+}
+
 .wiezdemin {
     -fx-font-family: thewitcher;
 }
