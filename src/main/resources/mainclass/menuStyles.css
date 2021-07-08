@@ -107,6 +107,6 @@
 }
 
 .battlefield {
-    -fx-background-image:url('../Field/fie_normal.bmp');
+    -fx-background-image:url('../mainclass/Field/fie_normal.bmp');
     -fx-background-size: cover;
 }
