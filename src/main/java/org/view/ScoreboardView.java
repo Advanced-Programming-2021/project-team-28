@@ -83,15 +83,21 @@ public class ScoreboardView extends Application {
 
     private void setUpScoreboard() {
         ArrayList<User> users = controller.getSortedUsers();
-        for (int i = 0; i < Math.min(20 , users.size()); i++) {
-            if(users.get(i) != null) {
-                User user = users.get(i);
-                if(!controller.getUser().getUsername().equals(users.get(i).getUsername())) {
-                    labels.get(i).setText((i + 1) + " - " + user.getUsername() + "   Score : " + user.getScore());
-                }else {
-                    labels.get(i).setText((i + 1) + " - " + user.getUsername() + "   Score : " + user.getScore());
-                    labels.get(i).setTextFill(Color.web("#1D7127"));
+        int rank = 1;
+        int upperTeamScore = -1;
+        for (int i = 1; i <= Math.min(20 , users.size()); i++) {
+            if(users.get(i-1) != null) {
+                User user = users.get(i-1);
+                if(user.getScore() != upperTeamScore){
+                    rank = i;
                 }
+                if(!controller.getUser().getUsername().equals(users.get(i-1).getUsername())) {
+                    labels.get(i-1).setText((rank) + " - " + user.getUsername() + "   Score : " + user.getScore());
+                } else {
+                    labels.get(i-1).setText((rank) + " - " + user.getUsername() + "   Score : " + user.getScore());
+                    labels.get(i-1).setTextFill(Color.web("#1D7127"));
+                }
+                upperTeamScore = user.getScore();
             }
         }
 
@@ -103,15 +109,6 @@ public class ScoreboardView extends Application {
 
     public void run () throws Exception {
         start(LoginMenuView.getPrimaryStage());
-//        Scanner scanner = ScannerInstance.getInstance().getScanner();
-//        String command;
-//        while(true){
-//            command = scanner.nextLine();
-//            if(controller.processCommand(command).equals(MenuEnum.BACK)){
-//                return;
-//            }
-//        }
-
     }
 
     public void printScoreboard(String scoreboard){
