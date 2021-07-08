@@ -11,7 +11,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.controller.LoginMenuController;
 import org.model.AllCardsInitiator;
 import org.model.Card;
@@ -88,6 +91,14 @@ public class LoginMenuView extends Application {
         primaryStage = stage;
         stage.setScene(scene);
         stage.setTitle("Yu-Gi-Oh");
+        MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("/sound/SanAndreas.mp3").toExternalForm()));
+        player.setOnEndOfMedia(new Runnable() {
+            public void run() {
+                player.seek(Duration.ZERO);
+            }
+        });
+        player.setVolume(0.1);
+        player.play();
         stage.show();
 
         stage.getIcons().add(new Image(getClass().getResource("/logos/yugioh.jpg").toExternalForm()));
