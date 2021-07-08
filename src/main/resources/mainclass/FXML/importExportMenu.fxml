@@ -16,14 +16,14 @@
     </ScrollPane>
     <ImageView fx:id="selectedCardImageView" fitHeight="360.0" fitWidth="282.0" layoutX="23.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
     </ImageView>
-    <Text fx:id="selectedCardToString" fill="#dfdfdf" layoutX="15.0" layoutY="413.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="wiezdemin" wrappingWidth="282.0">
+    <Text fx:id="selectedCardToString" fill="#dfdfdf" layoutX="14.0" layoutY="442.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="wiezdemin" wrappingWidth="282.0">
         <font>
             <Font size="17.0" />
         </font>
     </Text>
-    <Text fx:id="successAndErrorText" fill="#bf2323" layoutX="296.0" layoutY="656.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="601.0000000000002">
+    <Text fx:id="successAndErrorText" fill="#bf2323" layoutX="655.0" layoutY="689.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="601.0000000000002">
         <font>
-            <Font name="thewitcher" size="22.0" />
+            <Font name="thewitcher" size="18.0" />
         </font>
     </Text>
     <Text fill="#dfdfdf" layoutX="808.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Cards" textAlignment="CENTER" wrappingWidth="233.13671875">
