@@ -21,6 +21,10 @@ public class ImportExportController {
         this.user = user;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     public void run() {
         view.run();
     }
@@ -51,17 +55,17 @@ public class ImportExportController {
                 view.youDoNotHaveThisCard();
             } else {
                 Card cardToExport = Card.getCardByName(user.getAllCards(), cardName);
-                importThisCard(cardName, cardToExport);
+                exportThisCard(cardToExport);
             }
         } catch (Exception exception) {
             exception.printStackTrace();
         }
     }
 
-    private void importThisCard(String cardName, Card cardToExport) throws IOException {
+    public void exportThisCard(Card cardToExport) throws IOException {
         File cardsFolder = new File("src/ExportedCards");
         cardsFolder.mkdir();
-        File cardToExportFile = new File("src/ExportedCards/" + cardName +"_"+ cardToExport.getNumber()+ ".json");
+        File cardToExportFile = new File("src/ExportedCards/" + cardToExport.getName() +"_"+ cardToExport.getNumber()+ ".json");
         cardToExportFile.createNewFile();
         FileWriter writer = new FileWriter(cardToExportFile);
         writer.write(new Gson().toJson(cardToExport));

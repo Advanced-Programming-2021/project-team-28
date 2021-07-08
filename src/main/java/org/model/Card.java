@@ -2,7 +2,6 @@ package org.model;
 
 import com.google.gson.annotations.Expose;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -72,8 +71,8 @@ public abstract class Card {
         ArrayList<Card> monsterCards = new ArrayList<>();
         ArrayList<Card> spellAndTrapCards = new ArrayList<>();
         divideCardsByType(cards, monsterCards, spellAndTrapCards);
-        sortCards(monsterCards);
-        sortCards(spellAndTrapCards);
+        sortCardsWithName(monsterCards);
+        sortCardsWithName(spellAndTrapCards);
         StringBuilder cardsToStringBuilder = new StringBuilder("Monsters:\n");
         for (Card monsterCard : monsterCards) {
             cardsToStringBuilder.append(monsterCard.getName());
@@ -103,7 +102,7 @@ public abstract class Card {
 
     }
 
-    private static void sortCards(ArrayList<Card> cards) {
+    private static void sortCardsWithName(ArrayList<Card> cards) {
         for (int i = 0; i < cards.size(); i++) {
             for (int j = 0; j < cards.size() - 1; j++) {
                 if (Utilities.compareAlphabetical(cards.get(j).getName(), cards.get(j + 1).getName()) > 0) {
@@ -111,6 +110,16 @@ public abstract class Card {
                 }
             }
         }
+    }
+    public static void sortCardsWithImage(ArrayList<Card> cardsToAdd) {
+        cardsToAdd.sort((o1, o2) -> {
+            int classCompare = o1.getClassID() - o2.getClassID();
+            if(classCompare != 0){
+                return -classCompare;
+            } else {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
     }
 
     public static ArrayList<Card> getAllCards() {

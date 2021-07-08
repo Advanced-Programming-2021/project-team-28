@@ -24,10 +24,8 @@
       <font>
          <Font name="thewitcher" size="25.0" />
       </font></Text>
-   <ImageView fx:id="selectedCardImageView" fitHeight="360.0" fitWidth="282.0" layoutX="14.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../../cards/Monsters/BeastKingBarbaros.jpg" />
-      </image></ImageView>
+    <ImageView fx:id="selectedCardImageView" fitHeight="360.0" fitWidth="282.0" layoutX="14.0" layoutY="50.0"
+               pickOnBounds="true" preserveRatio="true"/>
     <ScrollPane fx:id="mainDeck" layoutX="300.0" layoutY="92.0" prefHeight="391.0" prefWidth="613.0" styleClass="anchor8">
         <VBox fx:id="mainDeckVBox" prefHeight="380.0" prefWidth="601.0" />
     </ScrollPane>
@@ -37,7 +35,7 @@
     <ScrollPane fx:id="availableCards" layoutX="929.0" layoutY="92.0" prefHeight="544.0" prefWidth="281.0" styleClass="anchor7">
         <VBox fx:id="availableCardsVBox" prefHeight="540.0" prefWidth="279.0" spacing="7" />
     </ScrollPane>
-    <Text fx:id="selectedCardToString" fill="#d9cccc" layoutX="15.0" layoutY="443.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="wiezdemin" text="asd" wrappingWidth="244.99999856948853">
+    <Text fx:id="selectedCardToString" fill="#d9cccc" layoutX="15.0" layoutY="443.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="wiezdemin" wrappingWidth="244.99999856948853">
         <font>
             <Font size="17.0" />
         </font>

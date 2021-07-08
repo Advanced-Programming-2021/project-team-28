@@ -12,7 +12,6 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controller.DeckMenuController;
@@ -236,7 +235,6 @@ public class DeckMenuView extends Application {
             selectedDeckText.setText("Deck name: " + selectedDeck.getDeckName());
             selectedCardImageView.setImage(Card.getCardImageByName("Unknown"));
             addAllCardImages();
-            //descriptionBackground.setImage(new Image(getClass().getResource("/mainclass/description.jpg").toExternalForm()));
             setDragAndDropMethodsForScrollPanes();
         } catch (IOException exception) {
             exception.printStackTrace();
@@ -253,7 +251,7 @@ public class DeckMenuView extends Application {
         vbox.getChildren().clear();
         HBox row = new HBox();
         int i = 0;
-        sortCards(cardsToAdd);
+        Card.sortCardsWithImage(cardsToAdd);
         for (Card card : cardsToAdd) {
             if (i % size == 0) {
                 row = new HBox();
@@ -270,27 +268,8 @@ public class DeckMenuView extends Application {
         }
     }
 
-    private void sortCards(ArrayList<Card> cardsToAdd) {
-        cardsToAdd.sort((o1, o2) -> {
-            int classCompare = o1.getClassID() - o2.getClassID();
-            if(classCompare != 0){
-                return -classCompare;
-            } else {
-                return o1.getName().compareTo(o2.getName());
-            }
-        });
-    }
-
     private void showPictureAndDescription(ImageView view) {
-        selectedCardImageView.setImage(view.getImage());
-        String description = null;
-        try {
-            Card card1 = Card.getCardByName(Card.getAllCards(), Card.getCardNameByImage(view.getImage()));
-            description = card1.getName() + ": " + card1.getDescription();
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-        selectedCardToString.setText(description);
+        ImportExportView.showCardDetails(view, selectedCardImageView, selectedCardToString);
     }
 
     private void setDragAndDropMethodsForScrollPanes() {
