@@ -1,6 +1,7 @@
 package org.model;
 
 import javafx.application.Application;
+import javafx.stage.Stage;
 import org.model.enums.NumberOfRounds;
 import org.model.enums.Turn;
 import org.view.GameView;
@@ -154,5 +155,11 @@ public class Game extends Application {
 
     private boolean isSomeoneSurrenderedOrLostByCheat(){
         return player1.isSurrenderedOrLostByCheat() || player2.isSurrenderedOrLostByCheat();
+    }
+
+    //haaji added this to run app
+    @Override
+    public void start(Stage stage) throws Exception {
+
     }
 }

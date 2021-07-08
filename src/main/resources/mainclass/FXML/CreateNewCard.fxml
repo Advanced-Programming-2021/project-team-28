@@ -90,7 +90,7 @@
     </Label>
    <ScrollPane layoutX="434.0" layoutY="186.0" prefHeight="271.0" prefWidth="299.0">
       <content>
-           <Text fx:id="powerDescription" stroke="BLACK" text="Description" wrappingWidth="259.45703125">
+           <Text fx:id="powerDescription" stroke="BLACK" wrappingWidth="259.45703125">
                <font>
                    <Font name="Gill Sans MT" size="25.0" />
                </font>

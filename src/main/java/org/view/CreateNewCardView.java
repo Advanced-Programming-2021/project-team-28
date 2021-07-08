@@ -134,9 +134,11 @@ public class CreateNewCardView extends Application {
         });
         trapEffectChoices.setOnAction((event) -> {
             trapEffect = (TrapEffect) trapEffectChoices.getValue();
+            powerDescription.setText(trapEffect.description);
         });
         spellEffectChoices.setOnAction((event) -> {
             spellEffect = (SpellEffect) spellEffectChoices.getValue();
+            powerDescription.setText(spellEffect.description);
         });
 
     }
@@ -186,7 +188,7 @@ public class CreateNewCardView extends Application {
     }
 
     public void create() {
-
+        System.out.println(description.getText());
     }
 
     public void clearPower() {
