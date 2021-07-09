@@ -8,19 +8,27 @@ import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controller.GameController;
 import org.model.Card;
+import org.model.DrawPhase;
 import org.model.Player;
 import org.model.User;
 import org.model.enums.PhaseName;
 
+import javax.swing.*;
+
+import static org.model.enums.PhaseName.*;
+
 
 public class GameView extends Application {
-    GameController game;
-    PhaseName phase = PhaseName.MAIN_PHASE_1;
+    private GameController game;
+    private PhaseName phase = PhaseName.MAIN_PHASE_1;
+    private DrawPhase drawPhase;
     @FXML
     private Text result;
     @FXML
@@ -49,6 +57,20 @@ public class GameView extends Application {
     private VBox playerCardsInHand;
     @FXML
     private VBox rivalCardsInHand;
+    @FXML
+    private Text rivalNumberOfCardsRemaining;
+    @FXML
+    private Text playerNumberOfCardsRemaining;
+    @FXML
+    private Rectangle playerLifePointBar;
+    @FXML
+    private Rectangle rivalLifePointBar;
+    @FXML
+    private ImageView playerGraveyard;
+    @FXML
+    private ImageView rivalGraveyard;
+    @FXML
+    private VBox graveyardVBox;
 
     public GameView(GameController game){
         this.game = game;
@@ -71,6 +93,8 @@ public class GameView extends Application {
         Scene scene = new Scene(root, 1280, 720);
         stage.setScene(scene);
         stage.show();
+        drawPhase = new DrawPhase(game.getRound());
+        drawPhase.run();
         setInfo();
     }
 
@@ -89,8 +113,60 @@ public class GameView extends Application {
         setProfilePicture(rivalPlayer, rivalPlayerProfilePicture);
         selectedCardImageView.setImage(Card.getCardImageByName("Unknown"));
         phaseName.setText("Phase: " + phase.getPhaseName());
-        playerCardsInHand.getChildren().clear();
-        rivalCardsInHand.getChildren().clear();
+        setCardsInHand(player, playerCardsInHand, false);
+        setCardsInHand(rivalPlayer, rivalCardsInHand, true);
+        playerNumberOfCardsRemaining.setText(String.valueOf(player.getRemainingPlayerCardsInGame().size()));
+        rivalNumberOfCardsRemaining.setText(String.valueOf(rivalPlayer.getRemainingPlayerCardsInGame().size()));
+        playerLifePointBar.setWidth(((double)player.getLifePoint() / 8000) * 272.0);
+        rivalLifePointBar.setWidth(((double)rivalPlayer.getLifePoint() / 8000) * 272.0);
+        setGraveyard(player, playerGraveyard);
+        setGraveyard(rivalPlayer, rivalGraveyard);
+    }
+
+    private void setGraveyard(Player player, ImageView playerGraveyard) {
+        graveyardVBox.getChildren().clear();
+        if(player.getCardsInGraveyard().size() > 0){
+            int size = player.getCardsInGraveyard().size();
+            Card lastCard = player.getCardsInGraveyard().get(size - 1);
+            playerGraveyard.setImage(Card.getCardImageByName(lastCard.getName()));
+            playerGraveyard.setOnMouseClicked(mouseEvent -> {
+                selectedCardImageView.setImage(Card.getCardImageByName(lastCard.getName()));
+                for (Card card : player.getCardsInGraveyard()){
+                    ImageView view = new ImageView(Card.getCardImageByName(card.getName()));
+                    graveyardVBox.getChildren().add(view);
+                    view.setOnMouseClicked(mouseEvent2 -> selectedCardImageView.setImage(Card.getCardImageByName(card.getName())));
+                }
+            });
+        }
+    }
+
+    private void setCardsInHand(Player player, VBox cardsInHand, boolean isRival) {
+        cardsInHand.getChildren().clear();
+        HBox row = new HBox();
+        int i = 0;
+        for (Card card : player.getCardsInHand()) {
+            if (i % 6 == 0) {
+                row = new HBox();
+                row.setSpacing(7);
+                cardsInHand.getChildren().add(row);
+            }
+            ImageView view;
+            if(isRival){
+                view = new ImageView(Card.getCardImageByName("Unknown"));
+            } else {
+                view = new ImageView(Card.getCardImageByName(card.getName()));
+            }
+            view.setFitHeight(100);
+            view.setFitWidth(75);
+            if(!isRival){
+                view.setOnMouseClicked(mouseEvent -> {
+                selectedCardImageView.setImage(Card.getCardImageByName(card.getName()));
+                selectedCardDescription.setText(card.getName() + ": " + card.getDescription());
+            });
+            }
+            row.getChildren().add(view);
+            i++;
+        }
     }
 
     private void setProfilePicture(Player player, ImageView profilePicture) {
@@ -103,6 +179,29 @@ public class GameView extends Application {
         } catch (Exception e){}
     }
 
+    public void settings(){
+        if(phase == MAIN_PHASE_1){
+            phase = BATTLE_PHASE;
+        } else if (phase == BATTLE_PHASE){
+            phase = MAIN_PHASE_2;
+        } else if (phase == MAIN_PHASE_2){
+            phase = END_PHASE;
+            settings();
+        } else if (phase == END_PHASE){
+            JOptionPane.showMessageDialog(null, "It's now "
+                    + game.getRound().getPlayerByTurn().getUser().getNickname() + " 's turn");
+            game.getRound().changeTurn();
+            phase = DRAW_PHASE;
+            settings();
+        } else if(phase == DRAW_PHASE){
+            new DrawPhase(game.getRound()).run();
+            phase = STANDBY_PHASE;
+            settings();
+        } else if (phase == STANDBY_PHASE){
+            phase = MAIN_PHASE_1;
+        }
+        setInfo();
+    }
 
     public void showMatchWinner(User winner , int winnerScore , int loserScore){
         System.out.println(winner.getUsername() + " won the whole match with score: " + winnerScore + "-" + loserScore);
