@@ -13,7 +13,7 @@ import org.model.MainPhase;
 
 import java.util.Scanner;
 
-public class PhaseView extends Application {
+public class PhaseView {
 
     PhaseController controller;
     Scanner scanner = ScannerInstance.getInstance().getScanner();
@@ -27,32 +27,16 @@ public class PhaseView extends Application {
     }
 
     public void run(){
-        try {
-            start(LoginMenuView.getPrimaryStage());
-        } catch (Exception exception) {
-            exception.printStackTrace();
+        printPhaseName();
+        String command;
+        while(true){
+            command = scanner.nextLine();
+            if(controller.processCommand(command).equals(MenuEnum.BACK)){
+                return;
+            }
         }
-//        printPhaseName();
-//
-//        String command;
-//        while(true){
-//            command = scanner.nextLine();
-//            if(controller.processCommand(command).equals(MenuEnum.BACK)){
-//                return;
-//            }
-//        }
     }
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/mainclass/FXML/game.fxml"));
-        loader.setController(this);
-        Parent root = loader.load();
-        Scene scene = new Scene(root, 1280, 720);
-        stage.setScene(scene);
-        stage.show();
-    }
     public void doYouWantToActiveSpellOrTrap(){
         System.out.print("do you want to activate your trap and spell? enter \"yes\" or \"no\"");
     }

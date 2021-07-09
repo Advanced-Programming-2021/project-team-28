@@ -1,52 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Pane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-    <ImageView fx:id="selectedCardImageView" fitHeight="340.0" fitWidth="273.0" layoutX="14.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" />
-   <Text layoutX="14.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LP: 8000" textAlignment="CENTER" wrappingWidth="273.0">
+<Pane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <ImageView fx:id="selectedCardImageView" fitHeight="337.0" fitWidth="273.0" layoutX="14.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" />
+   <Text fx:id="rivalLifePoint" layoutX="14.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LP: 8000" textAlignment="CENTER" wrappingWidth="273.0">
       <font>
          <Font size="22.0" />
       </font>
    </Text>
-   <StackPane layoutX="14.0" layoutY="80.0" prefHeight="29.0" prefWidth="273.0" style="-fx-border-width: 1; -fx-border-color: red;" />
-   <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname: " textAlignment="CENTER" wrappingWidth="272.99999999999994">
+   <StackPane fx:id="rivalLifePointBar" layoutX="14.0" layoutY="104.0" prefHeight="29.0" prefWidth="273.0" style="-fx-border-width: 1; -fx-border-color: red;" />
+   <Text fx:id="rivalNickname" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname: " textAlignment="CENTER" wrappingWidth="272.99999999999994">
       <font>
          <Font size="20.0" />
       </font>
    </Text>
-   <Text layoutX="14.0" layoutY="652.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LP: 8000" textAlignment="CENTER" wrappingWidth="273.0">
+   <Text fx:id="playerLifePoint" layoutX="14.0" layoutY="679.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LP: 8000" textAlignment="CENTER" wrappingWidth="273.0">
       <font>
          <Font size="22.0" />
       </font>
    </Text>
-   <Text layoutX="14.0" layoutY="622.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname: " textAlignment="CENTER" wrappingWidth="272.99999999999994">
+   <Text fx:id="playerNickname" layoutX="14.0" layoutY="622.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname: " textAlignment="CENTER" wrappingWidth="272.99999999999994">
       <font>
          <Font size="20.0" />
       </font>
    </Text>
-   <StackPane layoutX="14.0" layoutY="658.0" prefHeight="29.0" prefWidth="273.0" style="-fx-border-width: 1; -fx-border-color: red;" />
+   <StackPane fx:id="playerLifePointBar" layoutX="14.0" layoutY="688.0" prefHeight="29.0" prefWidth="273.0" style="-fx-border-width: 1; -fx-border-color: red;" />
    <ScrollPane layoutX="14.0" layoutY="483.0" prefHeight="117.0" prefWidth="273.0">
       <content>
-         <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="269.33675384521484">
+         <Text fx:id="selectedCardDescription" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="269.33675384521484">
             <font>
                <Font size="20.0" />
             </font>
          </Text>
       </content>
    </ScrollPane>
-   <Text layoutX="939.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phase: " textAlignment="CENTER" wrappingWidth="273.0">
+   <Text fx:id="phaseName" layoutX="1038.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phase: " wrappingWidth="241.7999267578125">
       <font>
          <Font size="22.0" />
       </font>
    </Text>
-   <Pane layoutX="364.0" layoutY="71.0" prefHeight="600.0" prefWidth="540.0" styleClass="battlefield">
+   <Pane layoutX="483.0" layoutY="60.0" prefHeight="600.0" prefWidth="540.0" styleClass="battlefield">
       <children>
          <ImageView fitHeight="91.0" fitWidth="68.0" layoutX="107.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true" />
          <ImageView fitHeight="91.0" fitWidth="68.0" layoutX="186.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
@@ -68,11 +66,22 @@
          <ImageView fitHeight="91.0" fitWidth="68.0" layoutX="265.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true" />
          <ImageView fitHeight="91.0" fitWidth="68.0" layoutX="338.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true" />
          <ImageView fitHeight="91.0" fitWidth="68.0" layoutX="423.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true" />
-         <ScrollPane layoutX="25.0" layoutY="-66.0" prefHeight="117.0" prefWidth="514.0" />
-         <ScrollPane layoutX="24.0" layoutY="528.0" prefHeight="117.0" prefWidth="514.0" />
+         <ScrollPane layoutX="25.0" layoutY="-66.0" prefHeight="117.0" prefWidth="514.0">
+            <VBox fx:id="rivalCardsInHand" prefHeight="114.0" prefWidth="510.0"/>
+         </ScrollPane>
+         <ScrollPane layoutX="24.0" layoutY="528.0" prefHeight="117.0" prefWidth="514.0">
+            <VBox fx:id="playerCardsInHand" prefHeight="114.0" prefWidth="512.0"/>
+         </ScrollPane>
       </children></Pane>
-   <ImageView fitHeight="127.0" fitWidth="104.0" layoutX="939.0" layoutY="550.0" pickOnBounds="true" preserveRatio="true" />
-   <ImageView fitHeight="127.0" fitWidth="104.0" layoutX="939.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="playerDeck" fitHeight="127.0" fitWidth="104.0" layoutX="939.0" layoutY="550.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="rivalDeck" fitHeight="127.0" fitWidth="104.0" layoutX="939.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
+   <Text fx:id="result" layoutX="925.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="319.13671875">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Text>
+   <ImageView fx:id="playerProfilePicture" fitHeight="150.0" fitWidth="180.0" layoutX="293.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="rivalPlayerProfilePicture" fitHeight="150.0" fitWidth="180.0" layoutX="293.0" layoutY="552.0" pickOnBounds="true" preserveRatio="true" />
    <stylesheets>
       <URL value="@../menuStyles.css" />
    </stylesheets>

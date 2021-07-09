@@ -1,7 +1,5 @@
 package org.controller;
 
-import javafx.fxml.FXMLLoader;
-import org.model.Game;
 import org.model.enums.NumberOfRounds;
 import org.model.User;
 import org.view.MainMenuView;
@@ -52,7 +50,7 @@ public class MainMenuController {
             for (int i = 0; i < 12; i++) {
                 if (duelCommandMatchers[i].find()) {
                     if (validateMatch(duelCommandMatchers[i]) != NumberOfRounds.OTHERS) {
-                        new Game(user, User.getUserByUsername(duelCommandMatchers[i].group("secondPlayer")), validateMatch(duelCommandMatchers[i])).run();
+                        new GameController(user, User.getUserByUsername(duelCommandMatchers[i].group("secondPlayer")), validateMatch(duelCommandMatchers[i])).run();
                     }
                     return;
                 }
