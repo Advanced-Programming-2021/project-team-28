@@ -61,6 +61,8 @@ public class AllCardsInitiator {
                 MonsterPower.RITUAL, 12, Attribute.DARK));
         Card.addToAllCards(new MonsterCard(MonsterType.SUT, null, "SPN The Sage", "", MonstersDescriptions.SPN, 5000, 3000,
                 MonsterPower.NONE, 7, Attribute.LIGHT));
+        Card.addToAllCards(new MonsterCard(MonsterType.WARRIOR, null, "Abbas Boua'zar", "", MonstersDescriptions.abbas, 5000, 3000,
+                MonsterPower.NONE, 10, Attribute.LIGHT));
         Card.addToAllCards(new MonsterCard(MonsterType.SUT, null, "The Graphic Lord", "", MonstersDescriptions.graphicLord, 5000, 3000,
                 MonsterPower.NONE, 7, Attribute.LIGHT));
         Card.addToAllCards(new MonsterCard(MonsterType.MACHINE, null, "Slot Machine", "", MonstersDescriptions.slotMachine, 2000, 2300,
