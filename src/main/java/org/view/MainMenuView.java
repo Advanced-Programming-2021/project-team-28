@@ -104,7 +104,7 @@ public class MainMenuView extends Application {
 
     public void setEffectForButton(Button button){
         button.setOnMouseEntered(mouseEvent -> button.setEffect(new Lighting()));
-        button.setOnMouseEntered(new EventHandler<MouseEvent>() {
+        button.setOnMouseEntered(new EventHandler<>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("/sound/gga.mp3").toExternalForm()));

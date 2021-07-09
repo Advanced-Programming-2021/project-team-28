@@ -12,7 +12,7 @@ import org.model.enums.Turn;
 import org.view.GameView;
 import org.view.LoginMenuView;
 
-public class Game extends Application{
+public class Game{
     GameView view = new GameView(this);
 
     Player player1;
@@ -35,12 +35,6 @@ public class Game extends Application{
     }
 
     public void run() {
-        try {
-            start(LoginMenuView.getPrimaryStage());
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-        /*
         if (this.numberOfRounds == NumberOfRounds.ONE_ROUND_MATCH) {
             Round round = new Round(player1, player2, Turn.FIRST_PLAYER);
             round.run();
@@ -96,7 +90,7 @@ public class Game extends Application{
                 view.showMatchWinner(round3Winner.getUser(), 2, 1);
             }
         }
-        */
+
     }
 
     private void setPlayerCardsForGame() {
@@ -166,17 +160,5 @@ public class Game extends Application{
 
     private boolean isSomeoneSurrenderedOrLostByCheat(){
         return player1.isSurrenderedOrLostByCheat() || player2.isSurrenderedOrLostByCheat();
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/mainclass/FXML/game.fxml"));
-        loader.setController(this);
-        Parent root = loader.load();
-        Scene scene = new Scene(root, 1280, 720);
-        stage.setScene(scene);
-        stage.show();
-
     }
 }

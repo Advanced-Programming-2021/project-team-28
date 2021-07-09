@@ -1,5 +1,10 @@
 package org.view;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import org.controller.PhaseController;
 import org.controller.MenuEnum;
 import org.model.enums.PhaseName;
@@ -8,7 +13,7 @@ import org.model.MainPhase;
 
 import java.util.Scanner;
 
-public class PhaseView {
+public class PhaseView extends Application {
 
     PhaseController controller;
     Scanner scanner = ScannerInstance.getInstance().getScanner();
@@ -22,17 +27,32 @@ public class PhaseView {
     }
 
     public void run(){
-        printPhaseName();
-        String command;
-        while(true){
-            command = scanner.nextLine();
-            if(controller.processCommand(command).equals(MenuEnum.BACK)){
-                return;
-            }
+        try {
+            start(LoginMenuView.getPrimaryStage());
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
-
+//        printPhaseName();
+//
+//        String command;
+//        while(true){
+//            command = scanner.nextLine();
+//            if(controller.processCommand(command).equals(MenuEnum.BACK)){
+//                return;
+//            }
+//        }
     }
 
+    @Override
+    public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/mainclass/FXML/game.fxml"));
+        loader.setController(this);
+        Parent root = loader.load();
+        Scene scene = new Scene(root, 1280, 720);
+        stage.setScene(scene);
+        stage.show();
+    }
     public void doYouWantToActiveSpellOrTrap(){
         System.out.print("do you want to activate your trap and spell? enter \"yes\" or \"no\"");
     }
