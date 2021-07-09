@@ -12,10 +12,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controller.CreateNewCardController;
 import org.controller.ShopController;
-import org.model.Card;
-import org.model.MonsterCard;
-import org.model.SpellCard;
-import org.model.TrapCard;
+import org.model.*;
 import org.model.enums.*;
 
 import javax.swing.*;
@@ -344,14 +341,17 @@ public class CreateNewCardView extends Application {
                     newMonster = new MonsterCard(monsterType, controller.getUser().getUsername(), cardName.getText(),
                             "0", description.getText(), monsterAtk, monsterDef, MonsterPower.NONE, level, monsterAttribute);
                     newMonster.setPrice(price);
+
                 } else {
                     newMonster = new MonsterCard(monsterType, controller.getUser().getUsername(), cardName.getText(),
                             "0", description.getText(), monsterAtk, monsterDef, monsterPower, level, monsterAttribute);
                     newMonster.setPrice(price);
                 }
                 CreateNewCardController.addNewMonster(newMonster);
-
-
+                //TODO
+                //set an image for it
+                Card.addToAllCards(newMonster);
+                AllCardsInitiator.prices.put(cardName.getText(), price);
             }
         }
     }
@@ -373,6 +373,10 @@ public class CreateNewCardView extends Application {
                 controller.creationCommission(price);
                 spellCard.setPrice(price);
                 CreateNewCardController.addNewSpell(spellCard);
+                AllCardsInitiator.prices.put(cardName.getText(), price);
+                Card.addToAllCards(spellCard);
+                //TODO
+                //set an image for it
 
             }
 
@@ -395,6 +399,10 @@ public class CreateNewCardView extends Application {
                 controller.creationCommission(price);
                 trapCard.setPrice(price);
                 CreateNewCardController.addNewTrap(trapCard);
+                //TODO
+                //set an image for it
+                AllCardsInitiator.prices.put(cardName.getText(), price);
+                Card.addToAllCards(trapCard);
             }
         }
     }

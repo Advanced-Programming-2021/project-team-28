@@ -7,6 +7,9 @@ import java.util.HashMap;
 
 
 public class AllCardsInitiator {
+    public static HashMap<String, Integer> prices = Card.getPrices();
+    public static ArrayList<CardAndImage> cardsAndImages = Card.getCardsAndImages();
+
     public static void fillAllCards() {
         Card.addToAllCards(new MonsterCard(MonsterType.WARRIOR, null, "Command Knight", "", MonstersDescriptions.commandKnight, 1000, 1000,
                 MonsterPower.COMMAND_KNIGHT, 4, Attribute.FIRE));
@@ -149,7 +152,7 @@ public class AllCardsInitiator {
     }
 
     public static void addMonstersToImageArrayList() {
-        ArrayList<CardAndImage> cardsAndImages = Card.getCardsAndImages();
+
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/TheAngry.png").toExternalForm()), "The Angry Cobbler"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/Geralt.png").toExternalForm()), "Geralt Of Rivia"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/Cerberus.png").toExternalForm()), "Team-28 Cerberus"));
@@ -202,7 +205,7 @@ public class AllCardsInitiator {
     }
 
     public static void addSpellTrapToImageArrayList() {
-        ArrayList<CardAndImage> cardsAndImages = Card.getCardsAndImages();
+
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/SpellTrap/AdvancedRitualArt.jpg").toExternalForm()), "Advanced Ritual Art"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/SpellTrap/BlackPendant.jpg").toExternalForm()), "Black Pendant"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/SpellTrap/Call of the Hunted.jpg").toExternalForm()), "Call of The Haunted"));
@@ -231,7 +234,7 @@ public class AllCardsInitiator {
     }
 
     public static void setPrices() {
-        HashMap<String, Integer> prices = Card.getPrices();
+
         prices.put("The Angry Cobbler" , 12345);
         prices.put("Geralt Of Rivia" , 20000);
         prices.put("Team-28 Cerberus" , 20000);

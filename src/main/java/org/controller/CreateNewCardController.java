@@ -28,6 +28,7 @@ public class CreateNewCardController {
         CreateNewCard.newMonsters.add(card);
         addNewCard(card);
 
+
     }
 
     public static void addNewSpell(SpellCard card) {
