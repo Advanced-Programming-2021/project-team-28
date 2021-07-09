@@ -19,6 +19,17 @@ public abstract class Card {
     protected boolean isGoingToGraveyard = false;
     @Expose
     protected String ownerUsername;
+    @Expose
+    protected int price;
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     protected int classID;
 
     private static ArrayList<CardAndImage> cardsAndImages = new ArrayList<>();

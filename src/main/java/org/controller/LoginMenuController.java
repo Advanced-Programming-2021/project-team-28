@@ -20,6 +20,7 @@ public class LoginMenuController {
     public void run() throws Exception {
 
         this.loginMenuView.run();
+        CreateNewCard.serialize();
         MonsterCard.serialize();
         SpellCard.serialize();
         TrapCard.serialize();
@@ -120,6 +121,7 @@ public class LoginMenuController {
     }
 
     public void saveDatabase() {
+        CreateNewCard.serialize();
         MonsterCard.serialize();
         SpellCard.serialize();
         TrapCard.serialize();

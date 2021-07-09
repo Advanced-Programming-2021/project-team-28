@@ -286,6 +286,8 @@ public class CreateNewCardView extends Application {
                     break;
                 }
             }
+            JOptionPane.showMessageDialog(null, "congratulations! Your card created successfully!" +
+                    " You can by it from Shop menu");
             clearAll();
 
 
@@ -293,11 +295,13 @@ public class CreateNewCardView extends Application {
     }
 
     private void clearAll() {
+        cardName.clear();
         clearPower();
         clearMonsterFields();
         clearSpellTrapFields();
         monsterGraphicClear();
         trapSpellGraphicClear();
+        cardType.setDisable(false);
     }
 
     private void trapSpellGraphicClear() {
@@ -339,9 +343,11 @@ public class CreateNewCardView extends Application {
                 if (monsterPower == null) {
                     newMonster = new MonsterCard(monsterType, controller.getUser().getUsername(), cardName.getText(),
                             "0", description.getText(), monsterAtk, monsterDef, MonsterPower.NONE, level, monsterAttribute);
+                    newMonster.setPrice(price);
                 } else {
                     newMonster = new MonsterCard(monsterType, controller.getUser().getUsername(), cardName.getText(),
                             "0", description.getText(), monsterAtk, monsterDef, monsterPower, level, monsterAttribute);
+                    newMonster.setPrice(price);
                 }
                 CreateNewCardController.addNewMonster(newMonster);
 
@@ -365,6 +371,7 @@ public class CreateNewCardView extends Application {
                 SpellCard spellCard = new SpellCard(controller.getUser().getUsername(), cardName.getText(), "0", description.getText()
                         , spellIcon, spellEffect);
                 controller.creationCommission(price);
+                spellCard.setPrice(price);
                 CreateNewCardController.addNewSpell(spellCard);
 
             }
@@ -386,6 +393,7 @@ public class CreateNewCardView extends Application {
                 TrapCard trapCard = new TrapCard(controller.getUser().getUsername(), cardName.getText(), "0", description.getText(),
                         trapIcon, trapEffect);
                 controller.creationCommission(price);
+                trapCard.setPrice(price);
                 CreateNewCardController.addNewTrap(trapCard);
             }
         }
