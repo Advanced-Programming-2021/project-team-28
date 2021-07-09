@@ -1,119 +1,157 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <ChoiceBox fx:id="cardType" layoutX="138.0" layoutY="224.0" prefHeight="40.0" prefWidth="224.0">
+<AnchorPane prefHeight="720" prefWidth="1280" styleClass="anchor12" stylesheets="@../menuStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+    <ChoiceBox fx:id="cardType" layoutX="142.0" layoutY="210.0" prefHeight="26.0" prefWidth="163.0" styleClass="button1">
 
     </ChoiceBox>
-    <Text layoutX="362.0" layoutY="72.0" text="Create your own!" textAlignment="CENTER" wrappingWidth="528.048828125">
+    <Text fill="#cccbcb" layoutX="375.0" layoutY="70.0" styleClass="wiezdemin" text="Card Creator" textAlignment="CENTER" wrappingWidth="528.048828125">
         <font>
             <Font name="Gill Sans Ultra Bold" size="43.0" />
         </font>
     </Text>
-    <TextField fx:id="cardName" alignment="CENTER" layoutX="135.0" layoutY="76.0" prefHeight="51.0" prefWidth="224.0" promptText="CardName">
+    <TextField fx:id="cardName" alignment="CENTER" layoutX="112.0" layoutY="121.0" prefHeight="40.0" prefWidth="224.0" promptText="Enter Card Name">
         <font>
             <Font name="Book Antiqua Italic" size="19.0" />
         </font>
+      <styleClass>
+         <String fx:value="text-field3" />
+         <String fx:value="wiezdemin" />
+      </styleClass>
     </TextField>
-    <Button layoutX="27.0" layoutY="645.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="51.0" prefWidth="224.0" text="back" />
-    <TextField id="cardName" fx:id="atkText" alignment="CENTER" layoutX="1016.0" layoutY="150.0" prefHeight="51.0" prefWidth="224.0" promptText="ATK power(Monsters)">
+    <Button layoutX="27.0" layoutY="662.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="34.0" prefWidth="116.0" text="back">
+      <styleClass>
+         <String fx:value="button3" />
+         <String fx:value="wiezdemin" />
+      </styleClass></Button>
+    <TextField id="cardName" fx:id="atkText" alignment="CENTER" layoutX="1076.0" layoutY="237.0" prefHeight="30.0" prefWidth="163.0" promptText="ATK power(Monsters(">
         <font>
-            <Font name="Book Antiqua Italic" size="19.0" />
+            <Font name="Book Antiqua Italic" size="12.0" />
         </font>
+      <styleClass>
+         <String fx:value="text-field3" />
+         <String fx:value="wiezdemin" />
+      </styleClass>
     </TextField>
-    <TextField fx:id="defText" alignment="CENTER" layoutX="1016.0" layoutY="253.0" prefHeight="51.0" prefWidth="224.0" promptText="DEF power(Monsters)">
+    <TextField fx:id="defText" alignment="CENTER" layoutX="1077.0" layoutY="275.0" prefHeight="30.0" prefWidth="163.0" promptText="DEF power(Monsters(">
         <font>
-            <Font name="Book Antiqua Italic" size="19.0" />
+            <Font name="Book Antiqua Italic" size="12.0" />
         </font>
+      <styleClass>
+         <String fx:value="text-field3" />
+         <String fx:value="wiezdemin" />
+      </styleClass>
     </TextField>
-    <Label layoutX="37.0" layoutY="224.0" prefHeight="40.0" prefWidth="76.0" text="choose type" />
-    <ChoiceBox fx:id="levelChoices" layoutX="135.0" layoutY="156.0" prefHeight="40.0" prefWidth="224.0" />
-    <Label layoutX="27.0" layoutY="155.0" prefHeight="40.0" prefWidth="76.0" text="choose level" />
-    <Text fx:id="priceText" layoutX="551.0" layoutY="681.0" text="its price will be: " wrappingWidth="223.99999999999994">
+    <Label layoutX="175.0" layoutY="169.0" prefHeight="40.0" prefWidth="98.0" styleClass="wiezdemin" text="choose type" textAlignment="CENTER" textFill="#cccbcb">
+      <font>
+         <Font size="15.0" />
+      </font></Label>
+    <ChoiceBox fx:id="levelChoices" layoutX="1077.0" layoutY="195.0" prefHeight="26.0" prefWidth="163.0" styleClass="button1" />
+    <Label layoutX="1121.0" layoutY="155.0" prefHeight="34.0" prefWidth="76.0" styleClass="wiezdemin" text="choose level" textFill="#cccbcb" />
+    <Text fx:id="priceText" fill="#cccbcb" layoutX="790.0" layoutY="522.0" styleClass="wiezdemin" text="its price will be: " textAlignment="CENTER" wrappingWidth="223.99999999999994">
         <font>
             <Font size="25.0" />
         </font>
     </Text>
-    <Button fx:id="getPrice" layoutX="401.0" layoutY="657.0" mnemonicParsing="false" onMouseClicked="#calculatePrice" prefHeight="26.0" prefWidth="116.0" text="calculate price" />
-    <Button fx:id="create" layoutX="448.0" layoutY="552.0" mnemonicParsing="false" onMouseClicked="#create" prefHeight="80.0" prefWidth="262.0" text="CREATE!">
+    <Button fx:id="getPrice" layoutX="845.0" layoutY="588.0" mnemonicParsing="false" onMouseClicked="#calculatePrice" prefHeight="26.0" prefWidth="116.0" text="calculate price">
+      <styleClass>
+         <String fx:value="wiezdemin" />
+         <String fx:value="button3" />
+      </styleClass></Button>
+    <Button fx:id="create" layoutX="565.0" layoutY="637.0" mnemonicParsing="false" onMouseClicked="#create" prefHeight="30.0" prefWidth="150.0" text="CREATE!">
         <font>
-            <Font name="Gill Sans Ultra Bold Condensed" size="37.0" />
+            <Font name="Gill Sans Ultra Bold Condensed" size="15.0" />
         </font>
+      <styleClass>
+         <String fx:value="wiezdemin" />
+         <String fx:value="button3" />
+      </styleClass>
     </Button>
-    <TextArea fx:id="description" layoutX="76.0" layoutY="292.0" prefHeight="222.0" prefWidth="348.0" promptText="Description">
+    <TextArea fx:id="description" layoutX="50.0" layoutY="263.0" prefHeight="138.0" prefWidth="348.0" promptText="Description" styleClass="wiezdemin">
         <font>
-            <Font size="25.0" />
+            <Font size="15.0" />
         </font>
         <cursor>
             <Cursor fx:constant="TEXT" />
         </cursor>
     </TextArea>
-    <Label layoutX="443.0" layoutY="87.0" prefHeight="40.0" prefWidth="272.0" text="choose a power if you want:" textAlignment="CENTER">
+    <Label layoutX="443.0" layoutY="87.0" prefHeight="40.0" prefWidth="272.0" textAlignment="CENTER">
         <font>
             <Font name="Gill Sans Ultra Bold" size="15.0" />
         </font>
     </Label>
-    <ChoiceBox fx:id="monsterTypeChoices" layoutX="1046.0" layoutY="361.0" prefHeight="26.0" prefWidth="163.0" />
-    <Label layoutX="1046.0" layoutY="323.0" prefHeight="34.0" prefWidth="163.0" text="choose Monster type:">
+    <ChoiceBox fx:id="monsterTypeChoices" layoutX="1076.0" layoutY="435.0" prefHeight="26.0" prefWidth="163.0" styleClass="button1" />
+    <Label layoutX="1089.0" layoutY="395.0" prefHeight="34.0" prefWidth="139.0" styleClass="wiezdemin" text="choose Monster type:" textAlignment="CENTER" textFill="#cccbcb">
         <font>
             <Font name="Gill Sans Ultra Bold" size="12.0" />
         </font>
     </Label>
-    <Button fx:id="clearPower" layoutX="748.0" layoutY="107.0" mnemonicParsing="false" onMouseClicked="#clearPower" prefHeight="0.0" prefWidth="179.0" text="don't want any power" />
-    <Label layoutX="766.0" layoutY="389.0" prefHeight="34.0" prefWidth="150.0" text="choose Trap effect:">
+    <Button fx:id="clearPower" layoutX="1076.0" layoutY="575.0" mnemonicParsing="false" onMouseClicked="#clearPower" prefHeight="26.0" prefWidth="163.0" text="don't want any power">
+      <styleClass>
+         <String fx:value="wiezdemin" />
+         <String fx:value="button3" />
+      </styleClass></Button>
+    <Label layoutX="577.0" layoutY="395.0" prefHeight="34.0" prefWidth="126.0" styleClass="wiezdemin" text="choose Trap effect:" textFill="#cccbcb">
         <font>
             <Font name="Gill Sans Ultra Bold" size="12.0" />
         </font>
     </Label>
-    <Label layoutX="762.0" layoutY="271.0" prefHeight="34.0" prefWidth="150.0" text="choose Spell effect:">
+    <Label layoutX="574.0" layoutY="235.0" prefHeight="34.0" prefWidth="132.0" styleClass="wiezdemin" text="choose Spell effect:" textFill="#cccbcb">
         <font>
             <Font name="Gill Sans Ultra Bold" size="12.0" />
         </font>
     </Label>
-    <Label layoutX="749.0" layoutY="159.0" prefHeight="34.0" prefWidth="179.0" text="choose Monster power:">
+    <Label layoutX="1083.0" layoutY="481.0" prefHeight="34.0" prefWidth="150.0" styleClass="wiezdemin" text="choose Monster power:" textFill="#cccbcb">
         <font>
             <Font name="Gill Sans Ultra Bold" size="12.0" />
         </font>
     </Label>
-    <ChoiceBox fx:id="monsterPowerChoices" layoutX="763.0" layoutY="201.0" prefWidth="150.0" />
-    <ChoiceBox fx:id="spellEffectChoices" layoutX="763.0" layoutY="311.0" prefWidth="150.0" />
-    <ChoiceBox fx:id="trapEffectChoices" layoutX="765.0" layoutY="423.0" prefWidth="150.0" />
+    <ChoiceBox fx:id="monsterPowerChoices" layoutX="1076.0" layoutY="515.0" prefHeight="26.0" prefWidth="163.0" styleClass="button1" />
+    <ChoiceBox fx:id="spellEffectChoices" layoutX="556.0" layoutY="275.0" prefHeight="26.0" prefWidth="163.0" styleClass="button1" />
+    <ChoiceBox fx:id="trapEffectChoices" layoutX="556.0" layoutY="435.0" prefHeight="26.0" prefWidth="163.0" styleClass="button1" />
 
-    <Label layoutX="453.0" layoutY="144.0" text="Power/EffectDescription: ">
+    <Label layoutX="772.0" layoutY="126.0" styleClass="wiezdemin" text="Power/Effect Description: " textFill="#cccbcb">
         <font>
-            <Font name="Gill Sans MT" size="25.0" />
+            <Font name="Gill Sans MT" size="20.0" />
         </font>
     </Label>
-   <ScrollPane layoutX="434.0" layoutY="186.0" prefHeight="271.0" prefWidth="299.0">
+   <ScrollPane layoutX="753.0" layoutY="179.0" prefHeight="271.0" prefWidth="299.0" styleClass="anchor13">
       <content>
-           <Text fx:id="powerDescription" stroke="BLACK" wrappingWidth="259.45703125">
+           <Text fx:id="powerDescription" fill="#cccbcb" stroke="BLACK" styleClass="wiezdemin" wrappingWidth="296.25714111328125">
                <font>
-                   <Font name="Gill Sans MT" size="25.0" />
+                   <Font name="Gill Sans MT" size="15.0" />
                </font>
            </Text>
       </content>
    </ScrollPane>
-   <Label layoutX="1062.0" layoutY="431.0" prefHeight="34.0" prefWidth="132.0" text="choose Spell icon:">
+   <Label layoutX="582.0" layoutY="155.0" prefHeight="34.0" prefWidth="116.0" styleClass="wiezdemin" text="choose Spell icon:" textFill="#cccbcb">
       <font>
          <Font name="Gill Sans Ultra Bold" size="12.0" />
       </font>
    </Label>
-   <Label layoutX="1062.0" layoutY="535.0" prefHeight="34.0" prefWidth="132.0" text="choose Trap icon:">
+   <Label layoutX="586.0" layoutY="315.0" prefHeight="34.0" prefWidth="108.0" styleClass="wiezdemin" text="choose Trap icon:" textFill="#cccbcb">
       <font>
          <Font name="Gill Sans Ultra Bold" size="12.0" />
       </font>
    </Label>
-   <ChoiceBox fx:id="spellIconChoices" layoutX="1046.0" layoutY="465.0" prefHeight="26.0" prefWidth="163.0" />
-   <ChoiceBox fx:id="trapIconChoices" layoutX="1046.0" layoutY="569.0" prefHeight="26.0" prefWidth="163.0" />
-   <Label layoutX="1025.0" layoutY="56.0" prefHeight="34.0" prefWidth="198.0" text="choose Monster attribute:">
+   <ChoiceBox fx:id="spellIconChoices" layoutX="556.0" layoutY="195.0" prefHeight="26.0" prefWidth="163.0" styleClass="button1" />
+   <ChoiceBox fx:id="trapIconChoices" layoutX="557.0" layoutY="355.0" prefHeight="26.0" prefWidth="163.0" styleClass="button1" />
+   <Label layoutX="1074.0" layoutY="315.0" prefHeight="34.0" prefWidth="170.0" styleClass="wiezdemin" text="choose Monster attribute:" textAlignment="CENTER" textFill="#cccbcb">
       <font>
          <Font name="Gill Sans Ultra Bold" size="12.0" />
       </font>
    </Label>
-   <ChoiceBox fx:id="monsterAttributeChoices" layoutX="1046.0" layoutY="94.0" prefHeight="26.0" prefWidth="163.0" />
+   <ChoiceBox fx:id="monsterAttributeChoices" layoutX="1076.0" layoutY="355.0" prefHeight="26.0" prefWidth="163.0" styleClass="button1" />
 
 </AnchorPane>

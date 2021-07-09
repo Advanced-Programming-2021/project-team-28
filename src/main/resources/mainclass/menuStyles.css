@@ -53,6 +53,21 @@
     -fx-background-size: cover;
 }
 
+.anchor12 {
+    -fx-background-image:url('background9.jpg');
+    -fx-background-size: cover;
+}
+
+.anchor13 .viewport {
+    -fx-background-color: #121212;
+    -fx-background-size: cover;
+}
+
+.anchor14 {
+    -fx-background-color: #404040;
+    -fx-background-size: cover;
+}
+
 .wiezdemin {
     -fx-font-family: thewitcher;
 }
@@ -97,6 +112,14 @@
     -fx-background-radius: 10;
     -fx-background-color: #020111;
     -fx-text-fill: #ead6cb;
+
+}
+
+.text-field3 {
+    -fx-background-radius: 5;
+    -fx-background-color: #755a77;
+    -fx-text-fill: #e9cdc8;
+    -fx-prompt-text-fill: #e9cdc8;
 
 }
 
