@@ -178,6 +178,5 @@ public class MainMenuView extends Application {
 
     public void setUserText() {
         userText.setText("User Logged In: " + "\n" +controller.getUser().getUsername() + "\n\nKnown as: " + "\n" + controller.getUser().getNickname());
-
     }
 }

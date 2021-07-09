@@ -9,6 +9,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -25,6 +27,7 @@ import static org.model.enums.PhaseName.*;
 
 
 public class GameView extends Application {
+    private static MediaPlayer backgroundMusic = new MediaPlayer(new Media(GameView.class.getResource("/sound/2 - Riot.mp3").toExternalForm()));
     private GameController game;
     private PhaseName phase = MAIN_PHASE_1;
     @FXML
@@ -93,6 +96,8 @@ public class GameView extends Application {
         stage.show();
         game.getDrawPhase().run();
         setInfo();
+        backgroundMusic.setCycleCount(-1);
+        backgroundMusic.play();
     }
 
     private void setInfo() {
@@ -179,24 +184,29 @@ public class GameView extends Application {
     public void nextPhase(){
         if(phase == MAIN_PHASE_1){
             phase = BATTLE_PHASE;
+            phaseName.setText("Phase: " + phase.getPhaseName());
         } else if (phase == BATTLE_PHASE){
             phase = MAIN_PHASE_2;
+            phaseName.setText("Phase: " + phase.getPhaseName());
         } else if (phase == MAIN_PHASE_2){
             phase = END_PHASE;
+            phaseName.setText("Phase: " + phase.getPhaseName());
             nextPhase();
         } else if (phase == END_PHASE){
             JOptionPane.showMessageDialog(null, "It's now "
                     + game.getRound().getPlayerByTurn().getUser().getNickname() + " 's turn");
             changeTurnForAllControllers();
             phase = DRAW_PHASE;
+            phaseName.setText("Phase: " + phase.getPhaseName());
             nextPhase();
         } else if(phase == DRAW_PHASE){
             game.getDrawPhase().run();
             phase = STANDBY_PHASE;
+            phaseName.setText("Phase: " + phase.getPhaseName());
             nextPhase();
         } else if (phase == STANDBY_PHASE){
-            setInfo();
             phase = MAIN_PHASE_1;
+            setInfo();
         }
 
     }
