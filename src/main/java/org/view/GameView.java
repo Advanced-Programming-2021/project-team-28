@@ -89,7 +89,8 @@ public class GameView extends Application {
         setProfilePicture(rivalPlayer, rivalPlayerProfilePicture);
         selectedCardImageView.setImage(Card.getCardImageByName("Unknown"));
         phaseName.setText("Phase: " + phase.getPhaseName());
-        playerCardsInHand
+        playerCardsInHand.getChildren().clear();
+        rivalCardsInHand.getChildren().clear();
     }
 
     private void setProfilePicture(Player player, ImageView profilePicture) {
