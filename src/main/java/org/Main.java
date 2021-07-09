@@ -18,9 +18,10 @@ public class Main {
     }
 
     private static void restoreDatabase() throws Exception {
+        createResourceFileIfNeeded();
+        CreateNewCard.deserialize();
         AllCardsInitiator.fillAllCards();
         AllCardsInitiator.setPrices();
-        createResourceFileIfNeeded();
         MonsterCard.deserialize();
         SpellCard.deserialize();
         TrapCard.deserialize();
@@ -34,6 +35,9 @@ public class Main {
         files.add(new File("src/SpellCardsOutput.json"));
         files.add(new File("src/TrapCardsOutput.json"));
         files.add(new File("src/DecksOutput.json"));
+        files.add(new File("src/NewMonsterOutput.json"));
+        files.add(new File("src/NewTrapOutput.json"));
+        files.add(new File("src/NewSpellOutput.json"));
         File cardsFolder = new File("src/ExportedCards");
         cardsFolder.mkdir();
         for (File file : files)

@@ -136,6 +136,16 @@ public class AllCardsInitiator {
         Card.addToAllCards(new TrapCard(null, "Magic Jammer", "", TrapsDescription.magicJammer, TrapIcon.COUNTER, TrapEffect.MAGIC_JAMMER));
         Card.addToAllCards(new TrapCard(null, "Call of The Haunted", "", TrapsDescription.callOfTheHaunted, TrapIcon.CONTINUOUS, TrapEffect.CALL_OF_THE_HAUNTED));
 
+        //new cards:
+        for (MonsterCard monsterCard: CreateNewCard.newMonsters){
+            Card.addToAllCards(monsterCard);
+        }
+        for (SpellCard spellCard: CreateNewCard.newSpells){
+            Card.addToAllCards(spellCard);
+        }
+        for (TrapCard trapCard : CreateNewCard.newTraps){
+            Card.addToAllCards(trapCard);
+        }
     }
 
     public static void addMonstersToImageArrayList() {
@@ -302,6 +312,9 @@ public class AllCardsInitiator {
         prices.put("Solemn Warning", 3000);
         prices.put("Magic Jammer", 3000);
         prices.put("Call of The Haunted", 3500);
+        for (Card card: CreateNewCard.newCards){
+            prices.put(card.getName(), card.getPrice());
+        }
     }
 
 }

@@ -26,17 +26,21 @@ public class CreateNewCardController {
 
     public static void addNewMonster(MonsterCard card) {
         CreateNewCard.newMonsters.add(card);
-        CreateNewCard.newCards.add(card);
+        addNewCard(card);
 
     }
 
     public static void addNewSpell(SpellCard card) {
         CreateNewCard.newSpells.add(card);
-        CreateNewCard.newCards.add(card);
+        addNewCard(card);
     }
 
     public static void addNewTrap(TrapCard card) {
         CreateNewCard.newTraps.add(card);
+        addNewCard(card);
+    }
+
+    public static void addNewCard(Card card){
         CreateNewCard.newCards.add(card);
     }
 
