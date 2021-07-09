@@ -1,6 +1,7 @@
 package org.model;
 
 public class MonstersDescriptions {
+    public static String theAngry = "Ay hamin charkho ...";
     public static String Geralt = "“Evil is Evil. Lesser, greater, middling… Makes no difference. The degree is arbitary. The definition’s blurred. If I’m to choose between one evil and another… I’d rather not choose at all.”";
     public static String cerberus = "Those banished from heavens to guard the HELL";
     public static String graphicLord = "The one and only who knows about the dark secrets of javaFX";

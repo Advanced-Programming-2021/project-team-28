@@ -145,6 +145,13 @@ public class ShopController {
                 user.addToCards(card);
             }
         }
+        else if(cardName.equals("The Angry Cobbler")){
+            if(receiveMoneyFromCustomer(12345)) {
+                MonsterCard card = new MonsterCard(MonsterType.DRAGON, null, "The Angry Cobbler", "", MonstersDescriptions.theAngry, 9999, 9999,
+                        MonsterPower.NONE, 12, Attribute.DARK);
+                user.addToCards(card);
+            }
+        }
         else if(cardName.equals("The Graphic Lord")){
             if(receiveMoneyFromCustomer(12000)) {
                 MonsterCard card = new MonsterCard(MonsterType.SUT, null, "The Graphic Lord", cardNumber, MonstersDescriptions.graphicLord, 5000, 3000,
