@@ -97,7 +97,7 @@ public class LoginMenuView extends Application {
         primaryStage = stage;
         stage.setScene(scene);
         stage.setTitle("Yu-Gi-Oh");
-        musicStarter();
+        //musicStarter();
         stage.show();
         stage.getIcons().add(new Image(getClass().getResource("/logos/yugioh.jpg").toExternalForm()));
         Card.getCardsAndImages().clear();

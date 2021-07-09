@@ -118,7 +118,10 @@ public class ShopView extends Application {
                         } catch (CloneNotSupportedException e) {
                             e.printStackTrace();
                         }
-
+                        if(cardAndImage.getCardName().equals("The Angry Cobbler")){
+                            MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("/sound/angryy.mp3").toExternalForm()));
+                            player.play();
+                        }
                     }
                 });
                 vBox.getChildren().add(rectangle);
