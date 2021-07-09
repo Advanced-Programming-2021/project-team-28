@@ -122,11 +122,35 @@ public class ShopView extends Application {
                             MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("/sound/angryy.mp3").toExternalForm()));
                             player.play();
                         }
+                        if(cardAndImage.getCardName().equals("Abbas Boua'zar")){
+                            MediaPlayer player = new MediaPlayer(new Media(getClass().getResource(abbasInitiator()).toExternalForm()));
+                            player.setAutoPlay(true);
+                            player.play();
+                        }
                     }
                 });
                 vBox.getChildren().add(rectangle);
             }
         }
+    }
+
+    private String abbasInitiator() {
+        int random = (int)Math.floor(Math.random()*(4)+2);
+        switch (random){
+            case 2 : {
+                return "/sound/abas2.mp3";
+            }
+            case 3 : {
+                return "/sound/abas3.mp3";
+            }
+            case 4 : {
+                return "/sound/abas4.mp3";
+            }
+            case 5 : {
+                return "/sound/abas5.mp3";
+            }
+        }
+        return "/sound/abas2.mp3";
     }
 
     public static void setMusic(Button button){
