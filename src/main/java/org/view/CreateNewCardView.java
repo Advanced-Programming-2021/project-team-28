@@ -14,6 +14,8 @@ import org.controller.CreateNewCardController;
 import org.controller.ShopController;
 import org.model.Card;
 import org.model.MonsterCard;
+import org.model.SpellCard;
+import org.model.TrapCard;
 import org.model.enums.*;
 
 import javax.swing.*;
@@ -100,16 +102,7 @@ public class CreateNewCardView extends Application {
         stage.setScene(scene);
         stage.show();
         setChoices();
-        levelChoices.setDisable(true);
-        atkText.setDisable(true);
-        defText.setDisable(true);
-        monsterTypeChoices.setDisable(true);
-        monsterPowerChoices.setDisable(true);
-        monsterAttributeChoices.setDisable(true);
-        spellEffectChoices.setDisable(true);
-        trapEffectChoices.setDisable(true);
-        trapIconChoices.setDisable(true);
-        spellIconChoices.setDisable(true);
+        clearAll();
 
 
         cardType.setOnAction((event) -> {
@@ -124,29 +117,11 @@ public class CreateNewCardView extends Application {
                 levelChoices.setDisable(false);
                 monsterAttributeChoices.setDisable(false);
 
-                spellEffectChoices.setDisable(true);
-                spellEffectChoices.getSelectionModel().clearSelection();
-                trapEffectChoices.setDisable(true);
-                trapEffectChoices.getSelectionModel().clearSelection();
-                spellIconChoices.setDisable(true);
-                spellIconChoices.getSelectionModel().clearSelection();
-                trapIconChoices.setDisable(true);
-                trapIconChoices.getSelectionModel().clearSelection();
+                trapSpellGraphicClear();
                 clearSpellTrapFields();
 
             } else {
-                levelChoices.setDisable(true);
-                levelChoices.getSelectionModel().clearSelection();
-                atkText.setDisable(true);
-                atkText.clear();
-                defText.setDisable(true);
-                defText.clear();
-                monsterTypeChoices.setDisable(true);
-                monsterTypeChoices.getSelectionModel().clearSelection();
-                monsterPowerChoices.setDisable(true);
-                monsterPowerChoices.getSelectionModel().clearSelection();
-                monsterAttributeChoices.setDisable(true);
-                monsterAttributeChoices.getSelectionModel().clearSelection();
+                monsterGraphicClear();
                 clearMonsterFields();
                 if (type.equals("Spell")) {
                     spellEffectChoices.setDisable(false);
@@ -272,12 +247,11 @@ public class CreateNewCardView extends Application {
         if (type == null) {
             JOptionPane.showMessageDialog(null, "you hae to select a type for your card");
         } else if (type.equals("Trap") || type.equals("Spell")) {
-            if (spellEffect == null || trapEffect == null) {
-                price = 2000;
+            if (spellEffect == null && trapEffect == null) {
+                JOptionPane.showMessageDialog(null, "please select an effect for your card");
             } else {
                 price = 3000;
                 priceText.setText("its price will be: " + price);
-                return;
             }
         } else {
             monsterHandel();
@@ -295,7 +269,6 @@ public class CreateNewCardView extends Application {
         } else if (type == null) {
             JOptionPane.showMessageDialog(null, "you hae to select a type for your card");
         } else {
-
             type = (String) cardType.getValue();
             switch (type) {
                 case "Spell": {
@@ -313,40 +286,109 @@ public class CreateNewCardView extends Application {
                     break;
                 }
             }
+            clearAll();
+
+
         }
+    }
+
+    private void clearAll() {
+        clearPower();
+        clearMonsterFields();
+        clearSpellTrapFields();
+        monsterGraphicClear();
+        trapSpellGraphicClear();
+    }
+
+    private void trapSpellGraphicClear() {
+        spellEffectChoices.setDisable(true);
+        spellEffectChoices.getSelectionModel().clearSelection();
+        trapEffectChoices.setDisable(true);
+        trapEffectChoices.getSelectionModel().clearSelection();
+        trapIconChoices.setDisable(true);
+        trapIconChoices.getSelectionModel().clearSelection();
+        spellIconChoices.setDisable(true);
+        spellIconChoices.getSelectionModel().clearSelection();
+    }
+
+    private void monsterGraphicClear() {
+        levelChoices.setDisable(true);
+        levelChoices.getSelectionModel().clearSelection();
+        atkText.setDisable(true);
+        atkText.clear();
+        defText.setDisable(true);
+        defText.clear();
+        monsterTypeChoices.setDisable(true);
+        monsterTypeChoices.getSelectionModel().clearSelection();
+        monsterPowerChoices.setDisable(true);
+        monsterPowerChoices.getSelectionModel().clearSelection();
+        monsterAttributeChoices.setDisable(true);
+        monsterAttributeChoices.getSelectionModel().clearSelection();
     }
 
     public void createMonster() {
         if (monsterHandel()) {
 
             calculatePrice();
-            controller.creationCommission(price);
-
-            MonsterCard newMonster;
-            if (monsterPower == null) {
-                newMonster = new MonsterCard(monsterType, controller.getUser().getUsername(), cardName.getText(),
-                        "0", description.getText(), monsterAtk, monsterDef, MonsterPower.NONE, level, monsterAttribute);
+            if (controller.getUser().getBalance() < (price / 10)) {
+                JOptionPane.showMessageDialog(null, "unfortunately the creation commission to create this card is more than your balance");
             } else {
-                newMonster = new MonsterCard(monsterType, controller.getUser().getUsername(), cardName.getText(),
-                        "0", description.getText(), monsterAtk, monsterDef, monsterPower, level, monsterAttribute);
+                controller.creationCommission(price);
+
+                MonsterCard newMonster;
+                if (monsterPower == null) {
+                    newMonster = new MonsterCard(monsterType, controller.getUser().getUsername(), cardName.getText(),
+                            "0", description.getText(), monsterAtk, monsterDef, MonsterPower.NONE, level, monsterAttribute);
+                } else {
+                    newMonster = new MonsterCard(monsterType, controller.getUser().getUsername(), cardName.getText(),
+                            "0", description.getText(), monsterAtk, monsterDef, monsterPower, level, monsterAttribute);
+                }
+                CreateNewCardController.addNewMonster(newMonster);
+
+
             }
-            CreateNewCardController.addNewMonster(newMonster);
-
-
         }
     }
 
     public void createSpell() {
         if (spellIcon == null) {
             JOptionPane.showMessageDialog(null, "please select a icon for your spell care");
+        } else if (spellEffect == null) {
+            JOptionPane.showMessageDialog(null, "please select an effect for your card");
+
         } else {
+            calculatePrice();
+            if (controller.getUser().getBalance() < price) {
+                JOptionPane.showMessageDialog(null, "unfortunately the creation commission to create this card is more than your balance");
+            } else {
+
+                SpellCard spellCard = new SpellCard(controller.getUser().getUsername(), cardName.getText(), "0", description.getText()
+                        , spellIcon, spellEffect);
+                controller.creationCommission(price);
+                CreateNewCardController.addNewSpell(spellCard);
+
+            }
 
         }
 
     }
 
     public void createTrap() {
-        System.out.println(type);
+        if (trapIcon == null) {
+            JOptionPane.showMessageDialog(null, "please select a icon for your spell care");
+        } else if (trapEffect == null) {
+            JOptionPane.showMessageDialog(null, "please select an effect for your card");
+        } else {
+            calculatePrice();
+            if (controller.getUser().getBalance() < price) {
+                JOptionPane.showMessageDialog(null, "unfortunately the creation commission to create this card is more than your balance");
+            } else {
+                TrapCard trapCard = new TrapCard(controller.getUser().getUsername(), cardName.getText(), "0", description.getText(),
+                        trapIcon, trapEffect);
+                controller.creationCommission(price);
+                CreateNewCardController.addNewTrap(trapCard);
+            }
+        }
     }
 
     public void clearPower() {
