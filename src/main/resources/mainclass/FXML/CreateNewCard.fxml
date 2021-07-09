@@ -57,7 +57,7 @@
             <Font name="Gill Sans Ultra Bold" size="15.0" />
         </font>
     </Label>
-    <ChoiceBox fx:id="monsterTypeChoices" layoutX="1046.0" layoutY="376.0" prefHeight="26.0" prefWidth="163.0" />
+    <ChoiceBox fx:id="monsterTypeChoices" layoutX="1046.0" layoutY="361.0" prefHeight="26.0" prefWidth="163.0" />
     <Label layoutX="1046.0" layoutY="323.0" prefHeight="34.0" prefWidth="163.0" text="choose Monster type:">
         <font>
             <Font name="Gill Sans Ultra Bold" size="12.0" />
@@ -97,5 +97,23 @@
            </Text>
       </content>
    </ScrollPane>
+   <Label layoutX="1062.0" layoutY="431.0" prefHeight="34.0" prefWidth="132.0" text="choose Spell icon:">
+      <font>
+         <Font name="Gill Sans Ultra Bold" size="12.0" />
+      </font>
+   </Label>
+   <Label layoutX="1062.0" layoutY="535.0" prefHeight="34.0" prefWidth="132.0" text="choose Trap icon:">
+      <font>
+         <Font name="Gill Sans Ultra Bold" size="12.0" />
+      </font>
+   </Label>
+   <ChoiceBox fx:id="spellIconChoices" layoutX="1046.0" layoutY="465.0" prefHeight="26.0" prefWidth="163.0" />
+   <ChoiceBox fx:id="trapIconChoices" layoutX="1046.0" layoutY="569.0" prefHeight="26.0" prefWidth="163.0" />
+   <Label layoutX="1025.0" layoutY="56.0" prefHeight="34.0" prefWidth="198.0" text="choose Monster attribute:">
+      <font>
+         <Font name="Gill Sans Ultra Bold" size="12.0" />
+      </font>
+   </Label>
+   <ChoiceBox fx:id="monsterAttributeChoices" layoutX="1046.0" layoutY="94.0" prefHeight="26.0" prefWidth="163.0" />
 
 </AnchorPane>

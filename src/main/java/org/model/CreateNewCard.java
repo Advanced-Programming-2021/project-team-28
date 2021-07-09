@@ -1,9 +1,16 @@
 package org.model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.controller.CreateNewCardController;
 import org.model.enums.Attribute;
 import org.model.enums.MonsterPower;
 import org.model.enums.MonsterType;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
 
 public class CreateNewCard {
     private CreateNewCardController controller;
@@ -12,7 +19,35 @@ public class CreateNewCard {
         this.controller = controller;
     }
 
-    public void MonsterCreate(String cardName, MonsterType type, int level, int atk, int def, MonsterPower power, Attribute attribute) {
+
+    public static ArrayList<MonsterCard> newMonsters = new ArrayList<>();
+    public static ArrayList<SpellCard> newSpells = new ArrayList<>();
+    public static ArrayList<TrapCard> newTraps = new ArrayList<>();
+    public static ArrayList<Card> newCards = new ArrayList<>();
+
+    public static void serialize(){
+        try (Writer writer = new FileWriter("src/NewMonsterOutput.json")) {
+            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+            gson.toJson(CreateNewCard.newMonsters, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try (Writer writer = new FileWriter("src/NewTrapOutput.json")) {
+            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+            gson.toJson(CreateNewCard.newTraps, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try (Writer writer = new FileWriter("src/NewSpellOutput.json")) {
+            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+            gson.toJson(CreateNewCard.newSpells, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deserialize(){
 
     }
+
 }

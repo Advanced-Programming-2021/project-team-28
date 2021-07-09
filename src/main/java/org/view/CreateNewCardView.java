@@ -12,10 +12,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controller.CreateNewCardController;
 import org.controller.ShopController;
-import org.model.enums.MonsterPower;
-import org.model.enums.MonsterType;
-import org.model.enums.SpellEffect;
-import org.model.enums.TrapEffect;
+import org.model.Card;
+import org.model.MonsterCard;
+import org.model.enums.*;
 
 import javax.swing.*;
 
@@ -23,6 +22,8 @@ import javax.swing.*;
 public class CreateNewCardView extends Application {
     private CreateNewCardController controller;
     public static Stage primaryStage;
+
+
     @FXML
     private ChoiceBox cardType;
     @FXML
@@ -53,6 +54,12 @@ public class CreateNewCardView extends Application {
     private ChoiceBox trapEffectChoices;
     @FXML
     private Text priceText;
+    @FXML
+    private ChoiceBox spellIconChoices;
+    @FXML
+    private ChoiceBox trapIconChoices;
+    @FXML
+    private ChoiceBox monsterAttributeChoices;
 
 
     private String type = null;
@@ -65,6 +72,9 @@ public class CreateNewCardView extends Application {
     private int price = 0;
     private int monsterDef = 0;
     private int monsterAtk = 0;
+    private SpellIcon spellIcon = null;
+    private TrapIcon trapIcon = null;
+    private Attribute monsterAttribute = null;
 
     public CreateNewCardView(CreateNewCardController controller) {
         this.controller = controller;
@@ -90,27 +100,43 @@ public class CreateNewCardView extends Application {
         stage.setScene(scene);
         stage.show();
         setChoices();
-        cardType.setDisable(true);
+        levelChoices.setDisable(true);
         atkText.setDisable(true);
         defText.setDisable(true);
         monsterTypeChoices.setDisable(true);
         monsterPowerChoices.setDisable(true);
+        monsterAttributeChoices.setDisable(true);
         spellEffectChoices.setDisable(true);
         trapEffectChoices.setDisable(true);
+        trapIconChoices.setDisable(true);
+        spellIconChoices.setDisable(true);
 
 
         cardType.setOnAction((event) -> {
             type = (String) cardType.getValue();
+
             if (!type.equals("Spell") && !type.equals("Trap")) {
+                levelChoices.setDisable(false);
                 atkText.setDisable(false);
                 defText.setDisable(false);
                 monsterTypeChoices.setDisable(false);
                 monsterPowerChoices.setDisable(false);
+                levelChoices.setDisable(false);
+                monsterAttributeChoices.setDisable(false);
+
                 spellEffectChoices.setDisable(true);
                 spellEffectChoices.getSelectionModel().clearSelection();
                 trapEffectChoices.setDisable(true);
                 trapEffectChoices.getSelectionModel().clearSelection();
+                spellIconChoices.setDisable(true);
+                spellIconChoices.getSelectionModel().clearSelection();
+                trapIconChoices.setDisable(true);
+                trapIconChoices.getSelectionModel().clearSelection();
+                clearSpellTrapFields();
+
             } else {
+                levelChoices.setDisable(true);
+                levelChoices.getSelectionModel().clearSelection();
                 atkText.setDisable(true);
                 atkText.clear();
                 defText.setDisable(true);
@@ -119,17 +145,26 @@ public class CreateNewCardView extends Application {
                 monsterTypeChoices.getSelectionModel().clearSelection();
                 monsterPowerChoices.setDisable(true);
                 monsterPowerChoices.getSelectionModel().clearSelection();
+                monsterAttributeChoices.setDisable(true);
+                monsterAttributeChoices.getSelectionModel().clearSelection();
+                clearMonsterFields();
                 if (type.equals("Spell")) {
                     spellEffectChoices.setDisable(false);
+                    spellIconChoices.setDisable(false);
+                    trapIconChoices.setDisable(true);
+                    trapIconChoices.getSelectionModel().clearSelection();
                 }
                 if (type.equals("Trap")) {
                     trapEffectChoices.setDisable(false);
+                    trapIconChoices.setDisable(false);
+                    spellIconChoices.setDisable(true);
+                    spellIconChoices.getSelectionModel().clearSelection();
                 }
             }
 
         });
         levelChoices.setOnAction((event) -> {
-            cardType.setDisable(false);
+
             level = (int) levelChoices.getValue();
 
         });
@@ -147,6 +182,15 @@ public class CreateNewCardView extends Application {
         spellEffectChoices.setOnAction((event) -> {
             spellEffect = (SpellEffect) spellEffectChoices.getValue();
             powerDescription.setText(spellEffect.description);
+        });
+        spellIconChoices.setOnAction((event) -> {
+            spellIcon = (SpellIcon) spellIconChoices.getValue();
+        });
+        trapIconChoices.setOnAction((event) -> {
+            trapIcon = (TrapIcon) trapIconChoices.getValue();
+        });
+        monsterAttributeChoices.setOnAction((event) -> {
+            monsterAttribute = (Attribute) monsterAttributeChoices.getValue();
         });
 
 
@@ -189,13 +233,21 @@ public class CreateNewCardView extends Application {
         for (SpellEffect effect : SpellEffect.values()) {
             spellEffectChoices.getItems().add(effect);
         }
+        for (SpellIcon icon : SpellIcon.values()) {
+            spellIconChoices.getItems().add(icon);
+        }
+        for (TrapIcon icon : TrapIcon.values()) {
+            trapIconChoices.getItems().add(icon);
+        }
+        for (Attribute attribute : Attribute.values()) {
+            monsterAttributeChoices.getItems().add(attribute);
+        }
 
     }
 
     public void calculatePrice() {
-        if (level == 0) {
-            JOptionPane.showMessageDialog(null, "please select a level first");
-        } else if (type == null) {
+
+        if (type == null) {
             JOptionPane.showMessageDialog(null, "you hae to select a type for your card");
         } else if (type.equals("Trap") || type.equals("Spell")) {
             if (spellEffect == null || trapEffect == null) {
@@ -206,29 +258,7 @@ public class CreateNewCardView extends Application {
                 return;
             }
         } else {
-            if (atkText.getText().equals("") || defText.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "please inter to integers for atk & def");
-            } else {
-                try {
-                    monsterAtk = Integer.parseInt(atkText.getText());
-                    monsterDef = Integer.parseInt(defText.getText());
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "enter two valid integer number for ATK & DEF");
-                    return;
-                }
-
-                if (monsterType == null) {
-                    JOptionPane.showMessageDialog(null, "please select your Monster type");
-                } else {
-                    if (monsterPower == null) {
-                        price = monsterAtk + monsterDef;
-                    } else {
-                        price = monsterAtk + monsterDef + 500;
-                    }
-                    priceText.setText("its price will be: " + price);
-                    return;
-                }
-            }
+            monsterHandel();
         }
 
     }
@@ -236,13 +266,14 @@ public class CreateNewCardView extends Application {
     public void create() {
         if (cardName.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "please enter card name to crate a card");
+        } else if (Card.isThisCardNameValid(cardName.getText())) {
+            JOptionPane.showMessageDialog(null, "card by this name exist, please change your card name");
         } else if (description.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "please enter a description for your card");
-        } else if (level == 0) {
-            JOptionPane.showMessageDialog(null, "please select a level first");
         } else if (type == null) {
             JOptionPane.showMessageDialog(null, "you hae to select a type for your card");
         } else {
+
             type = (String) cardType.getValue();
             switch (type) {
                 case "Spell": {
@@ -264,12 +295,32 @@ public class CreateNewCardView extends Application {
     }
 
     public void createMonster() {
-        System.out.println(type);
+        if (monsterHandel()) {
 
+            calculatePrice();
+            controller.creationCommission(price);
+
+            MonsterCard newMonster;
+            if (monsterPower == null) {
+                newMonster = new MonsterCard(monsterType, controller.getUser().getUsername(), cardName.getText(),
+                        "0", description.getText(), monsterAtk, monsterDef, MonsterPower.NONE, level, monsterAttribute);
+            } else {
+                newMonster = new MonsterCard(monsterType, controller.getUser().getUsername(), cardName.getText(),
+                        "0", description.getText(), monsterAtk, monsterDef, monsterPower, level, monsterAttribute);
+            }
+            CreateNewCardController.addNewMonster(newMonster);
+
+
+        }
     }
 
     public void createSpell() {
-        System.out.println(type);
+        if (spellIcon == null) {
+            JOptionPane.showMessageDialog(null, "please select a icon for your spell care");
+        } else {
+
+        }
+
     }
 
     public void createTrap() {
@@ -282,4 +333,54 @@ public class CreateNewCardView extends Application {
         trapEffectChoices.getSelectionModel().clearSelection();
         powerDescription.setText("");
     }
+
+    public boolean monsterHandel() {
+        if (level == 0) {
+            JOptionPane.showMessageDialog(null, "please select a level first");
+        } else if (atkText.getText().equals("") || defText.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "please inter to integers for atk & def");
+        } else {
+            try {
+                monsterAtk = Integer.parseInt(atkText.getText());
+                monsterDef = Integer.parseInt(defText.getText());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "enter two valid integer number for ATK & DEF");
+                return false;
+            }
+
+            if (monsterType == null) {
+                JOptionPane.showMessageDialog(null, "please select your Monster type");
+            } else if (monsterAttribute == null) {
+                JOptionPane.showMessageDialog(null, "please select your Monster attribute");
+
+            } else {
+                if (monsterPower == null) {
+                    price = monsterAtk + monsterDef;
+                } else {
+                    price = monsterAtk + monsterDef + 500;
+                }
+                priceText.setText("its price will be: " + price);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void clearMonsterFields() {
+        level = 0;
+        monsterType = null;
+        monsterPower = null;
+        monsterDef = 0;
+        monsterAtk = 0;
+        monsterAttribute = null;
+    }
+
+    public void clearSpellTrapFields() {
+        trapIcon = null;
+        spellIcon = null;
+        spellEffect = null;
+        trapEffect = null;
+
+    }
+
 }
