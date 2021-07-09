@@ -2,6 +2,7 @@ package org.model;
 
 import javafx.scene.image.Image;
 import org.model.enums.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -142,13 +143,13 @@ public class AllCardsInitiator {
         Card.addToAllCards(new TrapCard(null, "Call of The Haunted", "", TrapsDescription.callOfTheHaunted, TrapIcon.CONTINUOUS, TrapEffect.CALL_OF_THE_HAUNTED));
 
         //new cards:
-        for (MonsterCard monsterCard: CreateNewCard.newMonsters){
+        for (MonsterCard monsterCard : CreateNewCard.newMonsters) {
             Card.addToAllCards(monsterCard);
         }
-        for (SpellCard spellCard: CreateNewCard.newSpells){
+        for (SpellCard spellCard : CreateNewCard.newSpells) {
             Card.addToAllCards(spellCard);
         }
-        for (TrapCard trapCard : CreateNewCard.newTraps){
+        for (TrapCard trapCard : CreateNewCard.newTraps) {
             Card.addToAllCards(trapCard);
         }
     }
@@ -237,9 +238,9 @@ public class AllCardsInitiator {
 
     public static void setPrices() {
 
-        prices.put("The Angry Cobbler" , 12345);
-        prices.put("Geralt Of Rivia" , 20000);
-        prices.put("Team-28 Cerberus" , 20000);
+        prices.put("The Angry Cobbler", 12345);
+        prices.put("Geralt Of Rivia", 20000);
+        prices.put("Team-28 Cerberus", 20000);
         prices.put("The Graphic Lord", 12000);
         prices.put("SPN The Sage", 12000);
         prices.put("The Master", 20000);
@@ -317,7 +318,7 @@ public class AllCardsInitiator {
         prices.put("Solemn Warning", 3000);
         prices.put("Magic Jammer", 3000);
         prices.put("Call of The Haunted", 3500);
-        for (Card card: CreateNewCard.newCards){
+        for (Card card : CreateNewCard.newCards) {
             prices.put(card.getName(), card.getPrice());
         }
     }

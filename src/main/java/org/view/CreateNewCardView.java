@@ -283,9 +283,6 @@ public class CreateNewCardView extends Application {
                     break;
                 }
             }
-            JOptionPane.showMessageDialog(null, "congratulations! Your card created successfully!" +
-                    " You can by it from Shop menu");
-            clearAll();
 
 
         }
@@ -352,6 +349,9 @@ public class CreateNewCardView extends Application {
                 //set an image for it
                 Card.addToAllCards(newMonster);
                 AllCardsInitiator.prices.put(cardName.getText(), price);
+                JOptionPane.showMessageDialog(null, "congratulations! Your card created successfully!" +
+                        " You can by it from Shop menu");
+                clearAll();
             }
         }
     }
@@ -377,7 +377,9 @@ public class CreateNewCardView extends Application {
                 Card.addToAllCards(spellCard);
                 //TODO
                 //set an image for it
-
+                JOptionPane.showMessageDialog(null, "congratulations! Your card created successfully!" +
+                        " You can by it from Shop menu");
+                clearAll();
             }
 
         }
@@ -403,6 +405,9 @@ public class CreateNewCardView extends Application {
                 //set an image for it
                 AllCardsInitiator.prices.put(cardName.getText(), price);
                 Card.addToAllCards(trapCard);
+                JOptionPane.showMessageDialog(null, "congratulations! Your card created successfully!" +
+                        " You can by it from Shop menu");
+                clearAll();
             }
         }
     }
