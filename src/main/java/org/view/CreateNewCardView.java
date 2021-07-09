@@ -164,33 +164,55 @@ public class CreateNewCardView extends Application {
 
         });
         levelChoices.setOnAction((event) -> {
+            if (levelChoices.getValue() != null) {
+                level = (int) levelChoices.getValue();
+            }
 
-            level = (int) levelChoices.getValue();
 
         });
         monsterTypeChoices.setOnAction((event) -> {
-            monsterType = (MonsterType) monsterTypeChoices.getValue();
+            if (monsterTypeChoices.getValue() != null) {
+                monsterType = (MonsterType) monsterTypeChoices.getValue();
+            }
+
         });
         monsterPowerChoices.setOnAction((event) -> {
-            monsterPower = (MonsterPower) monsterPowerChoices.getValue();
-            powerDescription.setText(monsterPower.description);
+            if (monsterPowerChoices.getValue() != null) {
+                monsterPower = (MonsterPower) monsterPowerChoices.getValue();
+                powerDescription.setText(monsterPower.description);
+            }
         });
         trapEffectChoices.setOnAction((event) -> {
-            trapEffect = (TrapEffect) trapEffectChoices.getValue();
-            powerDescription.setText(trapEffect.description);
+            if (trapEffectChoices.getValue() != null) {
+                trapEffect = (TrapEffect) trapEffectChoices.getValue();
+                powerDescription.setText(trapEffect.description);
+            }
+
         });
         spellEffectChoices.setOnAction((event) -> {
-            spellEffect = (SpellEffect) spellEffectChoices.getValue();
-            powerDescription.setText(spellEffect.description);
+            if (spellEffectChoices.getValue() != null) {
+                spellEffect = (SpellEffect) spellEffectChoices.getValue();
+                powerDescription.setText(spellEffect.description);
+            }
         });
         spellIconChoices.setOnAction((event) -> {
-            spellIcon = (SpellIcon) spellIconChoices.getValue();
+            if (spellIconChoices.getValue() != null) {
+                spellIcon = (SpellIcon) spellIconChoices.getValue();
+            }
+
         });
+
         trapIconChoices.setOnAction((event) -> {
-            trapIcon = (TrapIcon) trapIconChoices.getValue();
+            if (trapIconChoices.getValue() != null) {
+                trapIcon = (TrapIcon) trapIconChoices.getValue();
+            }
+
         });
         monsterAttributeChoices.setOnAction((event) -> {
-            monsterAttribute = (Attribute) monsterAttributeChoices.getValue();
+            if (monsterAttributeChoices.getValue() != null) {
+                monsterAttribute = (Attribute) monsterAttributeChoices.getValue();
+            }
+
         });
 
 
@@ -332,6 +354,9 @@ public class CreateNewCardView extends Application {
         spellEffectChoices.getSelectionModel().clearSelection();
         trapEffectChoices.getSelectionModel().clearSelection();
         powerDescription.setText("");
+        monsterPower = null;
+        trapEffect = null;
+        spellEffect = null;
     }
 
     public boolean monsterHandel() {
