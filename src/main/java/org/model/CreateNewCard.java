@@ -14,6 +14,7 @@ import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CreateNewCard {
     private CreateNewCardController controller;
@@ -53,7 +54,6 @@ public class CreateNewCard {
         Gson gson = new Gson();
         Reader reader = null;
 
-
         try {
             reader = Files.newBufferedReader(Paths.get("src/NewMonsterOutput.json"));
         } catch (IOException e) {
@@ -77,19 +77,13 @@ public class CreateNewCard {
         SpellCard[] spellCards = gson.fromJson(reader, SpellCard[].class);
 
         CreateNewCard.newMonsters = new ArrayList<>();
-        for (MonsterCard monsterCard: monsterCards){
-            CreateNewCard.newMonsters.add(monsterCard);
-        }
+        CreateNewCard.newMonsters.addAll(Arrays.asList(monsterCards));
 
         CreateNewCard.newTraps = new ArrayList<>();
-        for (TrapCard trapCard: trapCards){
-            CreateNewCard.newTraps.add(trapCard);
-        }
+        CreateNewCard.newTraps.addAll(Arrays.asList(trapCards));
 
         CreateNewCard.newSpells = new ArrayList<>();
-        for (SpellCard spellCard: spellCards){
-            CreateNewCard.newSpells.add(spellCard);
-        }
+        CreateNewCard.newSpells.addAll(Arrays.asList(spellCards));
 
         newCards.addAll(newTraps);
         newCards.addAll(newMonsters);

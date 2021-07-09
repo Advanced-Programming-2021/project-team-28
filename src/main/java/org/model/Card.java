@@ -37,7 +37,7 @@ public abstract class Card {
     private static ArrayList<Card> allCards = new ArrayList<>();
 
     public static ArrayList<CardAndImage> getCardsAndImages() {
-        cardsAndImages.sort(Comparator.comparing(CardAndImage::getCardName));
+        cardsAndImages.sort((o1, o2) -> Utilities.compareAlphabetical(o1.getCardName(), o2.getCardName()));
         return cardsAndImages;
     }
 
@@ -58,7 +58,20 @@ public abstract class Card {
                 return cardAndImage.getImage();
             }
         }
-        return null;
+        try {
+            Card card = Card.getCardByName(allCards, cardName);
+            if(card instanceof MonsterCard){
+                return new Image(Card.class.getResource("/cards/Monsters/newMonster.jpg").toExternalForm());
+            } else if (card instanceof SpellCard){
+                return new Image(Card.class.getResource("/cards/SpellTrap/newSpell.jpg").toExternalForm());
+            } else {
+                return new Image(Card.class.getResource("/cards/SpellTrap/newTrap.jpg").toExternalForm());
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
     public static String getCardNameByImage(Image image){

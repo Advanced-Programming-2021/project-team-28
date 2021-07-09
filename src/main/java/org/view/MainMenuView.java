@@ -65,7 +65,7 @@ public class MainMenuView extends Application {
     }
 
     public void showError(String error) {
-        System.out.println(error);
+        JOptionPane.showMessageDialog(null, error);
     }
 
     public void cheatActivated() {

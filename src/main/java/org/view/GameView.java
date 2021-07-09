@@ -27,7 +27,6 @@ import static org.model.enums.PhaseName.*;
 public class GameView extends Application {
     private GameController game;
     private PhaseName phase = MAIN_PHASE_1;
-    private DrawPhase drawPhase;
     @FXML
     private Text result;
     @FXML
@@ -92,8 +91,7 @@ public class GameView extends Application {
         Scene scene = new Scene(root, 1280, 720);
         stage.setScene(scene);
         stage.show();
-        drawPhase = new DrawPhase(game.getRound());
-        drawPhase.run();
+        game.getDrawPhase().run();
         setInfo();
     }
 
@@ -189,18 +187,28 @@ public class GameView extends Application {
         } else if (phase == END_PHASE){
             JOptionPane.showMessageDialog(null, "It's now "
                     + game.getRound().getPlayerByTurn().getUser().getNickname() + " 's turn");
-            game.getRound().changeTurn();
+            changeTurnForAllControllers();
             phase = DRAW_PHASE;
             nextPhase();
         } else if(phase == DRAW_PHASE){
-            new DrawPhase(game.getRound()).run();
+            game.getDrawPhase().run();
             phase = STANDBY_PHASE;
             nextPhase();
         } else if (phase == STANDBY_PHASE){
+            setInfo();
             phase = MAIN_PHASE_1;
         }
-        setInfo();
+
     }
+
+    private void changeTurnForAllControllers() {
+        game.getMainController().getPhase().changeTurn();
+        System.out.println();
+        game.getBattleController().getPhase().changeTurn();
+        game.getRound().changeTurn();
+        game.getDrawPhase().changeTurn();
+    }
+
 
     public void showMatchWinner(User winner , int winnerScore , int loserScore){
         System.out.println(winner.getUsername() + " won the whole match with score: " + winnerScore + "-" + loserScore);
@@ -209,5 +217,4 @@ public class GameView extends Application {
     public void showRoundWinner(User winner , int winnerScore , int loserScore){
         System.out.println(winner.getUsername() + " won the game and the score is: " + winnerScore + "-" + loserScore);
     }
-
 }

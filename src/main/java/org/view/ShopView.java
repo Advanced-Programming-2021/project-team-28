@@ -114,7 +114,7 @@ public class ShopView extends Application {
                         } else buyButton.setDisable(false);
 
                         try {
-                            description.setText("Description :\n" + Card.getCardByName(Card.getAllCards() , cardAndImage.getCardName()).getDescription());
+                            description.setText("Name: " + cardAndImage.getCardName() + "\nDescription :\n" + Card.getCardByName(Card.getAllCards() , cardAndImage.getCardName()).getDescription());
                         } catch (CloneNotSupportedException e) {
                             e.printStackTrace();
                         }

@@ -609,7 +609,32 @@ public class ShopController {
                 TrapCard card = new TrapCard(user.getUsername() , cardName, cardNumber, TrapsDescription.callOfTheHaunted , TrapIcon.CONTINUOUS , TrapEffect.CALL_OF_THE_HAUNTED);
                 user.addToCards(card);
             }
-        } else view.cardNotFound();
+        } else if(Card.isThisCardNameValid(cardName)){
+            try{
+                for (MonsterCard monsterCard : CreateNewCard.newMonsters){
+                    if(monsterCard.getName().equals(cardName)){
+                        user.addToCards(Card.getCardByName(Card.getAllCards(), cardName));
+                        user.changeBalance(-monsterCard.getPrice());
+                    }
+                }
+                for (SpellCard spellCard : CreateNewCard.newSpells){
+                    if(spellCard.getName().equals(cardName)){
+                        user.addToCards(Card.getCardByName(Card.getAllCards(), cardName));
+                        user.changeBalance(-spellCard.getPrice());
+                    }
+                }
+                for (TrapCard trapCard : CreateNewCard.newTraps){
+                    if(trapCard.getName().equals(cardName)){
+                        user.addToCards(Card.getCardByName(Card.getAllCards(), cardName));
+                        user.changeBalance(-trapCard.getPrice());
+                    }
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        } else {
+            view.cardNotFound();
+        }
     }
 
     public boolean checkUserMoney(int price) {

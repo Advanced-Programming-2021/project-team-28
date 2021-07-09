@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controller.CreateNewCardController;
@@ -334,20 +335,24 @@ public class CreateNewCardView extends Application {
                 controller.creationCommission(price);
 
                 MonsterCard newMonster;
+                String cardDescription = description.getText() + "\nLevel: "
+                        + level + " ATK: " + monsterAtk + " DEF: " + monsterDef + " Attribute: " + monsterAttribute.name;
+
                 if (monsterPower == null) {
                     newMonster = new MonsterCard(monsterType, controller.getUser().getUsername(), cardName.getText(),
-                            "", description.getText(), monsterAtk, monsterDef, MonsterPower.NONE, level, monsterAttribute);
+                            "", cardDescription, monsterAtk, monsterDef, MonsterPower.NONE, level, monsterAttribute);
                     newMonster.setPrice(price);
 
                 } else {
                     newMonster = new MonsterCard(monsterType, controller.getUser().getUsername(), cardName.getText(),
-                            "", description.getText(), monsterAtk, monsterDef, monsterPower, level, monsterAttribute);
+                            "", cardDescription, monsterAtk, monsterDef, monsterPower, level, monsterAttribute);
                     newMonster.setPrice(price);
                 }
                 CreateNewCardController.addNewMonster(newMonster);
-                //TODO
-                //set an image for it
+                Card.getCardsAndImages().add(new CardAndImage(
+                        new Image(getClass().getResource("/cards/Monsters/newMonster.jpg").toExternalForm()), newMonster.getName()));
                 Card.addToAllCards(newMonster);
+                System.out.println(newMonster.getName());
                 AllCardsInitiator.prices.put(cardName.getText(), price);
                 JOptionPane.showMessageDialog(null, "congratulations! Your card created successfully!" +
                         " You can by it from Shop menu");
@@ -367,16 +372,16 @@ public class CreateNewCardView extends Application {
             if (controller.getUser().getBalance() < price) {
                 JOptionPane.showMessageDialog(null, "unfortunately the creation commission to create this card is more than your balance");
             } else {
-
-                SpellCard spellCard = new SpellCard(controller.getUser().getUsername(), cardName.getText(), "", description.getText()
+                String cardDescription = description.getText() + "\nIcon: " + spellIcon.getName();
+                SpellCard spellCard = new SpellCard(controller.getUser().getUsername(), cardName.getText(), "", cardDescription
                         , spellIcon, spellEffect);
                 controller.creationCommission(price);
                 spellCard.setPrice(price);
                 CreateNewCardController.addNewSpell(spellCard);
                 AllCardsInitiator.prices.put(cardName.getText(), price);
                 Card.addToAllCards(spellCard);
-                //TODO
-                //set an image for it
+                Card.getCardsAndImages().add(new CardAndImage(
+                        new Image(getClass().getResource("/cards/SpellTrap/newSpell.jpg").toExternalForm()), spellCard.getName()));
                 JOptionPane.showMessageDialog(null, "congratulations! Your card created successfully!" +
                         " You can by it from Shop menu");
                 clearAll();
@@ -396,13 +401,14 @@ public class CreateNewCardView extends Application {
             if (controller.getUser().getBalance() < price) {
                 JOptionPane.showMessageDialog(null, "unfortunately the creation commission to create this card is more than your balance");
             } else {
-                TrapCard trapCard = new TrapCard(controller.getUser().getUsername(), cardName.getText(), "", description.getText(),
+                String cardDescription = description.getText() + "\nIcon: " + trapIcon.getName();
+                TrapCard trapCard = new TrapCard(controller.getUser().getUsername(), cardName.getText(), "",cardDescription,
                         trapIcon, trapEffect);
                 controller.creationCommission(price);
                 trapCard.setPrice(price);
                 CreateNewCardController.addNewTrap(trapCard);
-                //TODO
-                //set an image for it
+                Card.getCardsAndImages().add(new CardAndImage(
+                        new Image(getClass().getResource("/cards/SpellTrap/newTrap.jpg").toExternalForm()), trapCard.getName()));
                 AllCardsInitiator.prices.put(cardName.getText(), price);
                 Card.addToAllCards(trapCard);
                 JOptionPane.showMessageDialog(null, "congratulations! Your card created successfully!" +

@@ -6,5 +6,16 @@ public enum Attribute {
     EARTH,
     WATER,
     FIRE,
-    WIND
+    WIND;
+
+    public String name;
+
+    static {
+        DARK.name = "Dark";
+        LIGHT.name = "Light";
+        EARTH.name = "Earth";
+        WATER.name = "Water";
+        FIRE.name = "Fire";
+        WIND.name = "Wind";
+    }
 }

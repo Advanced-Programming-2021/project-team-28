@@ -142,7 +142,7 @@ public class AllCardsInitiator {
         Card.addToAllCards(new TrapCard(null, "Magic Jammer", "", TrapsDescription.magicJammer, TrapIcon.COUNTER, TrapEffect.MAGIC_JAMMER));
         Card.addToAllCards(new TrapCard(null, "Call of The Haunted", "", TrapsDescription.callOfTheHaunted, TrapIcon.CONTINUOUS, TrapEffect.CALL_OF_THE_HAUNTED));
 
-        //new cards:
+
         for (MonsterCard monsterCard : CreateNewCard.newMonsters) {
             Card.addToAllCards(monsterCard);
         }
@@ -205,6 +205,9 @@ public class AllCardsInitiator {
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/YomiShip.jpg").toExternalForm()), "Yomi Ship"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/Unknown.jpg").toExternalForm()), "Unknown"));
 
+        for (MonsterCard monsterCard : CreateNewCard.newMonsters) {
+            cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/newMonster.jpg").toExternalForm()), monsterCard.getName()));
+        }
     }
 
     public static void addSpellTrapToImageArrayList() {
@@ -234,6 +237,13 @@ public class AllCardsInitiator {
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/SpellTrap/TrapHole.jpg").toExternalForm()), "Trap Hole"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/SpellTrap/Umiiruka.jpg").toExternalForm()), "Umiiruka"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/SpellTrap/Yami.jpg").toExternalForm()), "Yami"));
+
+        for (SpellCard spellCard : CreateNewCard.newSpells) {
+            cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/SpellTrap/newSpell.jpg").toExternalForm()), spellCard.getName()));
+        }
+        for (TrapCard trapCard : CreateNewCard.newTraps) {
+            cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/SpellTrap/newTrap.jpg").toExternalForm()), trapCard.getName()));
+        }
     }
 
     public static void setPrices() {
