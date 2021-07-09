@@ -1,10 +1,5 @@
 package org.view;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import org.controller.PhaseController;
 import org.controller.MenuEnum;
 import org.model.enums.PhaseName;

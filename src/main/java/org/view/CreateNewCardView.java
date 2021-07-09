@@ -247,7 +247,7 @@ public class CreateNewCardView extends Application {
             if (spellEffect == null && trapEffect == null) {
                 JOptionPane.showMessageDialog(null, "please select an effect for your card");
             } else {
-                price = 3000;
+                price = 4500;
                 priceText.setText("its price will be: " + price);
             }
         } else {
@@ -336,12 +336,12 @@ public class CreateNewCardView extends Application {
                 MonsterCard newMonster;
                 if (monsterPower == null) {
                     newMonster = new MonsterCard(monsterType, controller.getUser().getUsername(), cardName.getText(),
-                            "0", description.getText(), monsterAtk, monsterDef, MonsterPower.NONE, level, monsterAttribute);
+                            "", description.getText(), monsterAtk, monsterDef, MonsterPower.NONE, level, monsterAttribute);
                     newMonster.setPrice(price);
 
                 } else {
                     newMonster = new MonsterCard(monsterType, controller.getUser().getUsername(), cardName.getText(),
-                            "0", description.getText(), monsterAtk, monsterDef, monsterPower, level, monsterAttribute);
+                            "", description.getText(), monsterAtk, monsterDef, monsterPower, level, monsterAttribute);
                     newMonster.setPrice(price);
                 }
                 CreateNewCardController.addNewMonster(newMonster);
@@ -368,7 +368,7 @@ public class CreateNewCardView extends Application {
                 JOptionPane.showMessageDialog(null, "unfortunately the creation commission to create this card is more than your balance");
             } else {
 
-                SpellCard spellCard = new SpellCard(controller.getUser().getUsername(), cardName.getText(), "0", description.getText()
+                SpellCard spellCard = new SpellCard(controller.getUser().getUsername(), cardName.getText(), "", description.getText()
                         , spellIcon, spellEffect);
                 controller.creationCommission(price);
                 spellCard.setPrice(price);
@@ -396,7 +396,7 @@ public class CreateNewCardView extends Application {
             if (controller.getUser().getBalance() < price) {
                 JOptionPane.showMessageDialog(null, "unfortunately the creation commission to create this card is more than your balance");
             } else {
-                TrapCard trapCard = new TrapCard(controller.getUser().getUsername(), cardName.getText(), "0", description.getText(),
+                TrapCard trapCard = new TrapCard(controller.getUser().getUsername(), cardName.getText(), "", description.getText(),
                         trapIcon, trapEffect);
                 controller.creationCommission(price);
                 trapCard.setPrice(price);

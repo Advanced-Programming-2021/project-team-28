@@ -26,7 +26,7 @@ import static org.model.enums.PhaseName.*;
 
 public class GameView extends Application {
     private GameController game;
-    private PhaseName phase = PhaseName.MAIN_PHASE_1;
+    private PhaseName phase = MAIN_PHASE_1;
     private DrawPhase drawPhase;
     @FXML
     private Text result;
@@ -178,24 +178,24 @@ public class GameView extends Application {
         } catch (Exception e){}
     }
 
-    public void settings(){
+    public void nextPhase(){
         if(phase == MAIN_PHASE_1){
             phase = BATTLE_PHASE;
         } else if (phase == BATTLE_PHASE){
             phase = MAIN_PHASE_2;
         } else if (phase == MAIN_PHASE_2){
             phase = END_PHASE;
-            settings();
+            nextPhase();
         } else if (phase == END_PHASE){
             JOptionPane.showMessageDialog(null, "It's now "
                     + game.getRound().getPlayerByTurn().getUser().getNickname() + " 's turn");
             game.getRound().changeTurn();
             phase = DRAW_PHASE;
-            settings();
+            nextPhase();
         } else if(phase == DRAW_PHASE){
             new DrawPhase(game.getRound()).run();
             phase = STANDBY_PHASE;
-            settings();
+            nextPhase();
         } else if (phase == STANDBY_PHASE){
             phase = MAIN_PHASE_1;
         }

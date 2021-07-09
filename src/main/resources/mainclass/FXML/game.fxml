@@ -107,7 +107,7 @@
    </Text>
    <ImageView fx:id="rivalGraveyard" fitHeight="107.0" fitWidth="78.0" layoutX="1041.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true" />
    <ImageView fx:id="playerGraveyard" fitHeight="107.0" fitWidth="78.0" layoutX="1041.0" layoutY="373.0" pickOnBounds="true" preserveRatio="true" />
-   <Button layoutX="1136.0" layoutY="495.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="141.0" text="Settings" onMouseClicked="#settings"/>
+   <Button layoutX="1136.0" layoutY="495.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="141.0" text="Next Phase" onMouseClicked="#nextPhase"/>
    <ScrollPane layoutX="1134.0" layoutY="104.0" prefHeight="376.0" prefWidth="141.0">
       <content>
          <VBox fx:id="graveyardVBox" prefHeight="374.0" prefWidth="138.0" />
