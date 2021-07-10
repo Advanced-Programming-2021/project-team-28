@@ -411,67 +411,77 @@ public class GameView extends Application {
             }
         });
         set.setOnMouseClicked(mouseEvent -> {
-            sendCommandToProperController("set");
-            setInfo();
+            if(!isPaused){
+                sendCommandToProperController("set");
+                setInfo();
+            }
         });
         flipSummon.setOnMouseClicked(mouseEvent -> {
-            sendCommandToProperController("flip-summon");
-            setInfo();
+            if(!isPaused){
+                sendCommandToProperController("flip-summon");
+                setInfo();
+            }
         });
         changePosition.setOnMouseClicked(mouseEvent -> {
-            if (card.getPosition() == DEFENSIVE_OCCUPIED ||
-                    card.getPosition() == DEFENSIVE_HIDDEN) {
-                sendCommandToProperController("set -p attack");
-            } else {
-                sendCommandToProperController("set -p defense");
+            if(!isPaused){
+                if (card.getPosition() == DEFENSIVE_OCCUPIED ||
+                        card.getPosition() == DEFENSIVE_HIDDEN) {
+                    sendCommandToProperController("set -p attack");
+                } else {
+                    sendCommandToProperController("set -p defense");
+                }
+                setInfo();
             }
-            setInfo();
         });
         attackToCard.setOnMouseClicked(mouseEvent -> {
-            isInAttackMode = true;
-            errorBox.setText("Select a monster card from rival zone");
-            Player rivalPlayer = game.getRound().getRivalPlayerByTurn();
-            for (int i = 1; i <= 5; i++) {
-                ImageView cardView = cardsInZone.get(i + 4);
-                if (rivalPlayer.getMonsterCardsInZone().containsKey(i)) {
-                    MonsterCard card3 = rivalPlayer.getMonsterCardByLocationFromZone(i);
-                    int location = i;
-                    if (card3.getPosition() == DEFENSIVE_HIDDEN) {
-                        cardView.setOnMouseClicked(mouseEvent3 -> {
-                            sendCommandToProperController("attack " + location);
-                            checkGameStatus();
-                            setInfo();
-                            buttonBar.getChildren().clear();
-                            isInAttackMode = false;
-                        });
-                        cardView.setImage(Card.getCardImageByName("Unknown"));
-                    } else {
-                        cardView.setImage(Card.getCardImageByName(card3.getName()));
-                        cardView.setOnMouseClicked(mouseEvent2 -> {
-                            sendCommandToProperController("attack " + location);
-                            checkGameStatus();
-                            setInfo();
-                            buttonBar.getChildren().clear();
-                            isInAttackMode = false;
-                        });
-                    }
-                    if (card3.getPosition() == DEFENSIVE_HIDDEN || card3.getPosition() == DEFENSIVE_OCCUPIED) {
-                        cardView.setRotate(90);
-                    } else {
-                        cardView.setRotate(0);
-                    }
+            if(!isPaused){
+                isInAttackMode = true;
+                errorBox.setText("Select a monster card from rival zone");
+                Player rivalPlayer = game.getRound().getRivalPlayerByTurn();
+                for (int i = 1; i <= 5; i++) {
+                    ImageView cardView = cardsInZone.get(i + 4);
+                    if (rivalPlayer.getMonsterCardsInZone().containsKey(i)) {
+                        MonsterCard card3 = rivalPlayer.getMonsterCardByLocationFromZone(i);
+                        int location = i;
+                        if (card3.getPosition() == DEFENSIVE_HIDDEN) {
+                            cardView.setOnMouseClicked(mouseEvent3 -> {
+                                sendCommandToProperController("attack " + location);
+                                checkGameStatus();
+                                setInfo();
+                                buttonBar.getChildren().clear();
+                                isInAttackMode = false;
+                            });
+                            cardView.setImage(Card.getCardImageByName("Unknown"));
+                        } else {
+                            cardView.setImage(Card.getCardImageByName(card3.getName()));
+                            cardView.setOnMouseClicked(mouseEvent2 -> {
+                                sendCommandToProperController("attack " + location);
+                                checkGameStatus();
+                                setInfo();
+                                buttonBar.getChildren().clear();
+                                isInAttackMode = false;
+                            });
+                        }
+                        if (card3.getPosition() == DEFENSIVE_HIDDEN || card3.getPosition() == DEFENSIVE_OCCUPIED) {
+                            cardView.setRotate(90);
+                        } else {
+                            cardView.setRotate(0);
+                        }
 
-                } else {
-                    cardView.setImage(null);
-                    cardView.setOnMouseClicked(mouseEvent4 -> {
-                    });
+                    } else {
+                        cardView.setImage(null);
+                        cardView.setOnMouseClicked(mouseEvent4 -> {
+                        });
+                    }
                 }
             }
         });
         attackDirect.setOnMouseClicked(mouseEvent -> {
-            sendCommandToProperController("attack direct");
-            checkGameStatus();
-            setInfo();
+            if (!isPaused){
+                sendCommandToProperController("attack direct");
+                checkGameStatus();
+                setInfo();
+            }
         });
     }
 
@@ -700,6 +710,7 @@ public class GameView extends Application {
         if (isPaused)
             return;
         System.out.println("Paused");
+        buttonBar.getChildren().clear();
         isPaused = true;
         popStage = new Stage();
         FXMLLoader loader = new FXMLLoader();
