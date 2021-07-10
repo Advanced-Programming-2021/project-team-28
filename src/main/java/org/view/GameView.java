@@ -36,7 +36,7 @@ public class GameView extends Application {
     private ArrayList<ImageView> cardsInZone = new ArrayList<>();
     private boolean isPaused = false;
     private boolean isMuted = false;
-    public static String primaryStage;
+    public static Stage primaryStage;
     public Stage popStage;
     @FXML
     private Pane gameBoard;
@@ -151,6 +151,7 @@ public class GameView extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        primaryStage = stage;
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/mainclass/FXML/game.fxml"));
         loader.setController(this);
@@ -628,6 +629,9 @@ public class GameView extends Application {
 
     public void pause() {
 
+
+        if (isPaused)
+            return;
         System.out.println("paused");
         isPaused = true;
         popStage = new Stage();
@@ -643,11 +647,16 @@ public class GameView extends Application {
         Scene scene = new Scene(root, 600, 400);
         popStage.setScene(scene);
         popStage.initStyle(StageStyle.UNDECORATED);
+        popStage.toFront();
+        popStage.centerOnScreen();
+        popStage.setAlwaysOnTop(true);
         popStage.show();
 
     }
 
     public void hidePopup() {
+        popStage.toFront();
+        isPaused = false;
         popStage.hide();
     }
 
