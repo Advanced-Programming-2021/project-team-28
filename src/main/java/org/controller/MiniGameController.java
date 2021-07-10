@@ -1,16 +1,38 @@
 package org.controller;
 
+import org.model.User;
 import org.model.enums.MiniGame;
+import org.model.enums.NumberOfRounds;
 import org.model.enums.Status;
 import org.view.MiniGameView;
 
 public class MiniGameController {
 
-    MiniGameView view;
+    private MiniGameView view;
 
-    public MiniGameController(MiniGameView view) {
-        this.view = view;
+    private User user1;
+    private User user2;
+
+    private NumberOfRounds numberOfRounds;
+
+    public MiniGameController(User user1 , User user2 , NumberOfRounds numberOfRounds) {
+        this.view = new MiniGameView(this);
+        this.user1 = user1;
+        this.user2 = user2;
+        this.numberOfRounds = numberOfRounds;
     }
+
+    private void run(){
+        try {
+            view.run();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
 
     public Status winnerSelection(MiniGame p1, MiniGame p2){
         if(p1 == MiniGame.SCISSORS && p2 == MiniGame.SCISSORS){return Status.DRAW;}

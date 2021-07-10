@@ -41,7 +41,7 @@ public class MiniGameView extends Application {
     @FXML
     private Button start;
 
-    MiniGameController controller = new MiniGameController(this);
+    MiniGameController controller;
 
     private Boolean hasP1Selected = Boolean.FALSE;
     private Boolean hasP2Selected = Boolean.FALSE;
@@ -52,6 +52,10 @@ public class MiniGameView extends Application {
     private MiniGame P2Selection = null;
 
     private Status winner = null;
+
+    public MiniGameView(MiniGameController controller) {
+        this.controller = controller;
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -65,6 +69,9 @@ public class MiniGameView extends Application {
     }
 
 
+    public void run() throws Exception {
+        start(LoginMenuView.getPrimaryStage());
+    }
 
     private void fillBoard() {
         setOptions();
