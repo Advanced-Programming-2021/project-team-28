@@ -165,8 +165,8 @@ public class GameView extends Application {
         game.getDrawPhase().run();
         fillCardsInZoneImageViewArrayList();
         setInfo();
-//        backgroundMusic.setCycleCount(-1);
-//        backgroundMusic.play();
+        backgroundMusic.setCycleCount(-1);
+        backgroundMusic.play();
     }
 
 
