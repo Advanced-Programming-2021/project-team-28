@@ -17,7 +17,7 @@
       <Rectangle fx:id="P2P" arcHeight="5.0" arcWidth="5.0" fill="#348ee1" height="200.0" layoutX="479.0" layoutY="51.0" stroke="BLACK" strokeType="INSIDE" width="206.0" />
       <Rectangle fx:id="P1res" arcHeight="5.0" arcWidth="5.0" fill="#131313" height="223.0" layoutX="267.0" layoutY="453.0" stroke="BLACK" strokeType="INSIDE" width="122.0" />
       <Rectangle fx:id="P2res" arcHeight="5.0" arcWidth="5.0" fill="#131313" height="223.0" layoutX="267.0" layoutY="51.0" stroke="BLACK" strokeType="INSIDE" width="122.0" />
-      <Text fx:id="text" fill="#d1c4c4" layoutX="685.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="wiezdemin" text="Text" textAlignment="CENTER" wrappingWidth="321.33673095703125">
+      <Text fx:id="text" fill="#d1c4c4" layoutX="685.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="wiezdemin" textAlignment="CENTER" wrappingWidth="321.33673095703125">
          <font>
             <Font size="20.0" />
          </font>
