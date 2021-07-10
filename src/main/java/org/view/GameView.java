@@ -204,9 +204,6 @@ public class GameView extends Application {
     }
 
     private void setMonsterZone(Player player, boolean isRival) {
-//        for (ImageView view : cardsInZone){
-//            view.setOpacity(0);
-//        }
         int firstLoop = isRival ? 4 : 14;
         int secondLoop = isRival ? -1 : 9;
         for (int i = 1; i <= 5; i++) {
@@ -214,14 +211,14 @@ public class GameView extends Application {
                 MonsterCard card = player.getMonsterCardByLocationFromZone(i);
                 if (card.getPosition() == DEFENSIVE_HIDDEN) {
                     cardsInZone.get(i + firstLoop).setImage(Card.getCardImageByName("Unknown"));
-                    cardsInZone.get(i + firstLoop).setOpacity(1);
                 } else {
                     cardsInZone.get(i + firstLoop).setImage(Card.getCardImageByName(card.getName()));
-                    cardsInZone.get(i + firstLoop).setOpacity(1);
                 }
                 if(card.getPosition() == DEFENSIVE_HIDDEN || card.getPosition() == DEFENSIVE_OCCUPIED){
                     cardsInZone.get(i + firstLoop).setRotate(90);
                 }
+            } else {
+                cardsInZone.get(i + firstLoop).setImage(null);
             }
         }
         for (int i=1; i<=5; i++){
@@ -229,11 +226,11 @@ public class GameView extends Application {
                 Card card = player.getSpellOrTrapCardsInZone().get(i);
                 if((card instanceof SpellCard && ((SpellCard) card).getPosition() == HIDDEN) || (card instanceof TrapCard && ((TrapCard) card).getPosition() == HIDDEN)){
                     cardsInZone.get(i + secondLoop).setImage(Card.getCardImageByName("Unknown"));
-                    cardsInZone.get(i + secondLoop).setOpacity(1);
                 } else {
                     cardsInZone.get(i + secondLoop).setImage(Card.getCardImageByName(card.getName()));
-                    cardsInZone.get(i + secondLoop).setOpacity(1);
                 }
+            } else {
+                cardsInZone.get(i + secondLoop).setImage(null);
             }
         }
 
