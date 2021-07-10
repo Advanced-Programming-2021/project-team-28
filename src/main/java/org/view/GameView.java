@@ -16,7 +16,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.controller.GameController;
+import org.controller.MainMenuController;
 import org.model.*;
+import org.model.enums.NumberOfRounds;
 import org.model.enums.PhaseName;
 
 import javax.swing.*;
@@ -162,8 +164,8 @@ public class GameView extends Application {
         game.getDrawPhase().run();
         fillCardsInZoneImageViewArrayList();
         setInfo();
-        //backgroundMusic.setCycleCount(-1);
-        //backgroundMusic.play();
+//        backgroundMusic.setCycleCount(-1);
+//        backgroundMusic.play();
     }
 
 
@@ -418,7 +420,6 @@ public class GameView extends Application {
         attackToCard.setOnMouseClicked(mouseEvent -> {
             isInAttackMode = true;
             errorBox.setText("Select a monster card from rival zone");
-            //TODO
             Player rivalPlayer = game.getRound().getRivalPlayerByTurn();
             for (int i = 1; i <= 5; i++) {
                 ImageView cardView = cardsInZone.get(i + 4);
@@ -428,16 +429,20 @@ public class GameView extends Application {
                     if (card3.getPosition() == DEFENSIVE_HIDDEN) {
                         cardView.setOnMouseClicked(mouseEvent3 -> {
                             sendCommandToProperController("attack " + location);
+                            checkGameStatus();
                             setInfo();
                             buttonBar.getChildren().clear();
+                            isInAttackMode = false;
                         });
                         cardView.setImage(Card.getCardImageByName("Unknown"));
                     } else {
                         cardView.setImage(Card.getCardImageByName(card3.getName()));
                         cardView.setOnMouseClicked(mouseEvent2 -> {
                             sendCommandToProperController("attack " + location);
+                            checkGameStatus();
                             setInfo();
                             buttonBar.getChildren().clear();
+                            isInAttackMode = false;
                         });
                     }
                     if (card3.getPosition() == DEFENSIVE_HIDDEN || card3.getPosition() == DEFENSIVE_OCCUPIED) {
@@ -452,12 +457,28 @@ public class GameView extends Application {
                     });
                 }
             }
-            //TODO
         });
         attackDirect.setOnMouseClicked(mouseEvent -> {
             sendCommandToProperController("attack direct");
+            checkGameStatus();
             setInfo();
         });
+    }
+
+    private void checkGameStatus() {
+        game.getRound().checkTheWinner();
+        if( game.getRound().isSomeOneWon()){
+           game.getRound().getWinner().increaseNumberOfRoundsWon();
+           if(game.getNumberOfRounds() == NumberOfRounds.ONE_ROUND_MATCH){
+               game.giveOneRoundWinnerPrize(game.getRound().getWinner());
+               showMatchWinner(game.getRound().getWinner().getUser(), 1, 0);
+               try {
+                   new MainMenuController(game.getRound().getFirstPlayer().getUser()).run();
+               } catch (Exception e) {
+                   e.printStackTrace();
+               }
+           }
+        }
     }
 
     private void setProfilePicture(Player player, ImageView profilePicture) {
@@ -528,7 +549,7 @@ public class GameView extends Application {
 
 
     public void showMatchWinner(User winner, int winnerScore, int loserScore) {
-        System.out.println(winner.getUsername() + " won the whole match with score: " + winnerScore + "-" + loserScore);
+        JOptionPane.showMessageDialog(null, winner.getUsername() + " won the whole match with score: " + winnerScore + "-" + loserScore);
     }
 
     public void showRoundWinner(User winner, int winnerScore, int loserScore) {
@@ -629,11 +650,9 @@ public class GameView extends Application {
 
 
     public void pause() {
-
-
         if (isPaused)
             return;
-        System.out.println("paused");
+        System.out.println("Paused");
         isPaused = true;
         popStage = new Stage();
         FXMLLoader loader = new FXMLLoader();
@@ -667,8 +686,9 @@ public class GameView extends Application {
         int isSure = JOptionPane.showConfirmDialog(null, "Are you sure you want to surrender?");
         if (isSure == JOptionPane.YES_OPTION) {
             System.out.println("surrendered");
-            //TODO
-            //controller syncing
+            hidePopup();
+            game.getRound().getPlayerByTurn().setLifePoint(0);
+            checkGameStatus();
         } else {
             System.out.println("was unSure");
         }

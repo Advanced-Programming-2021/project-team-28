@@ -36,6 +36,10 @@ public class GameController {
         drawPhase = new DrawPhase(round);
     }
 
+    public NumberOfRounds getNumberOfRounds() {
+        return numberOfRounds;
+    }
+
     public Round getRound() {
         return round;
     }

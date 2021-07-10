@@ -102,8 +102,8 @@
          <Font size="15.0" />
       </font>
    </Text>
-   <ImageView fx:id="rivalGraveyard" fitHeight="107.0" fitWidth="78.0" layoutX="1041.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true" />
-   <ImageView fx:id="playerGraveyard" fitHeight="107.0" fitWidth="78.0" layoutX="1041.0" layoutY="373.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="rivalGraveyard" fitHeight="99.0" fitWidth="78.0" layoutX="1041.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="playerGraveyard" fitHeight="99.0" fitWidth="78.0" layoutX="1041.0" layoutY="381.0" pickOnBounds="true" preserveRatio="true" />
    <Button layoutX="1136.0" layoutY="495.0" mnemonicParsing="false" onMouseClicked="#nextPhase" prefHeight="37.0" prefWidth="141.0" text="Next Phase" />
    <ScrollPane layoutX="1134.0" layoutY="104.0" prefHeight="376.0" prefWidth="141.0">
       <content>
@@ -116,7 +116,7 @@
       </font>
    </Text>
    <VBox fx:id="buttonBar" layoutX="265.0" layoutY="213.0" prefHeight="256.0" prefWidth="200.0" spacing="7" />
-   <ImageView fitHeight="59.0" fitWidth="68.0" layoutX="1172.0" layoutY="542.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#pause">
+   <ImageView fitHeight="59.0" fitWidth="68.0" layoutX="1172.0" layoutY="542.0" onMouseClicked="#pause" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../icons8-settings-48.png" />
       </image>
