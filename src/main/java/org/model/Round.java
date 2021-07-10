@@ -66,7 +66,7 @@ public class Round {
         view.itIsRivalTurn(getRivalPlayerByTurn().getUser().getUsername());
     }
 
-    private void resetPlayersData() {
+    public void resetPlayersData() {
         resetPlayerData(firstPlayer);
         resetPlayerData(secondPlayer);
     }
@@ -189,4 +189,5 @@ public class Round {
             }
         }
     }
+
 }

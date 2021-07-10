@@ -490,17 +490,42 @@ public class GameView extends Application {
                backgroundMusic.stop();
            } else {
                int numberOfRoundsBefore = game.getRound().getFirstPlayer().getNumberOfRoundsWon() + game.getRound().getSecondPlayer().getNumberOfRoundsWon();
-               if(numberOfRoundsBefore == 0){
+               if(numberOfRoundsBefore == 1){
                    showRoundWinner(game.getRound().getWinner().getUser(), 1, 0);
                    Player winner = game.getRound().getWinner();
-                   Turn turn = winner.equals(game.getRound().getFirstPlayer()) ? Turn.SECOND_PLAYER : Turn.FIRST_PLAYER;
-                   game.setRound(new Round(game.getMainController().getPhase().getFirstPlayer(),
-                           game.getMainController().getPhase().getSecondPlayer(), turn));
-                   game.setPlayerCardsForGame();
+                   game.setRound1Winner(winner);
+                   startANewGame(winner);
                    setInfo();
+               } else if (numberOfRoundsBefore == 2){
+                   showRoundWinner(game.getRound().getWinner().getUser(), 1, 1);
+                   Player winner = game.getRound().getWinner();
+                   game.setRound2Winner(winner);
+                   startANewGame(winner);
+                   setInfo();
+               } else {
+                   showMatchWinner(game.getRound().getWinner().getUser(), 2, 1);
+                   Player winner = game.getRound().getWinner();
+                   Player loser = game.getRound().getFirstPlayer().equals(winner) ? game.getRound().getSecondPlayer() : game.getRound().getFirstPlayer();
+                   game.setRound3Winner(winner);
+                   game.giveThreeRoundWinnerPrize1(winner, loser);
+                   try {
+                       new MainMenuController(game.getRound().getFirstPlayer().getUser()).run();
+                   } catch (Exception e) {
+                       e.printStackTrace();
+                   }
                }
            }
         }
+    }
+
+    private void startANewGame(Player winner) {
+        Turn turn = winner.equals(game.getRound().getFirstPlayer()) ? Turn.SECOND_PLAYER : Turn.FIRST_PLAYER;
+        game.setRound(new Round(game.getMainController().getPhase().getFirstPlayer(),
+                game.getMainController().getPhase().getSecondPlayer(), turn));
+        game.getRound().resetPlayersData();
+        game.setPlayerCardsForGame();
+        game.getDrawPhase().run();
+        setInfo();
     }
 
     private void setProfilePicture(Player player, ImageView profilePicture) {
@@ -575,7 +600,7 @@ public class GameView extends Application {
     }
 
     public void showRoundWinner(User winner, int winnerScore, int loserScore) {
-        System.out.println(winner.getUsername() + " won the game and the score is: " + winnerScore + "-" + loserScore);
+         JOptionPane.showMessageDialog(null, winner.getUsername() + " won the game and the score is: " + winnerScore + "-" + loserScore);
     }
 
     public void printString(String text) {
@@ -707,6 +732,7 @@ public class GameView extends Application {
         popStage.setAlwaysOnTop(false);
         int isSure = JOptionPane.showConfirmDialog(null, "Are you sure you want to surrender?");
         if (isSure == JOptionPane.YES_OPTION) {
+            game.getRound().getPlayerByTurn().setSurrenderedOrLostByCheat(true);
             System.out.println("surrendered");
             hidePopup();
             game.getRound().getPlayerByTurn().setLifePoint(0);

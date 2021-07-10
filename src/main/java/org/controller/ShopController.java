@@ -175,7 +175,7 @@ public class ShopController {
         }
         else if(cardName.equals("Feral Imp")){
             if(receiveMoneyFromCustomer(2800)) {
-                MonsterCard card = new MonsterCard(MonsterType.FIEND , user.getUsername() , cardName, cardNumber, MonstersDescriptions.feralImp, 1400, 1300,
+                MonsterCard card = new MonsterCard(MonsterType.FIEND , user.getUsername() , cardName, cardNumber, MonstersDescriptions.feralImp, 1300, 1400,
                         MonsterPower.NONE, 4, Attribute.DARK);
                 user.addToCards(card);
             }
