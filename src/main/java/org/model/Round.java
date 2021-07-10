@@ -44,12 +44,16 @@ public class Round {
             checkTheWinner();
             if (isSomeOneWon() || isDrawHappened) break;
             endPhase();
-            setAllHasBattledInThisTurnFalse();
-            setAllHasSetInTHisTurnFalseForTwoPlayers();
-            ++turnsPlayed;
+            tasksAfterChangingTurn();
             changeTurn();
         }
         resetPlayersData();
+    }
+
+    public void tasksAfterChangingTurn() {
+        setAllHasBattledInThisTurnFalse();
+        setAllHasSetInTHisTurnFalseForTwoPlayers();
+        ++turnsPlayed;
     }
 
     private void standbyPhase() {
@@ -163,9 +167,13 @@ public class Round {
     public void setAllHasBattledInThisTurnFalse(){
         for(Map.Entry<Integer, MonsterCard> locationCard : getPlayerByTurn().getMonsterCardsInZone().entrySet()){
             locationCard.getValue().setHasBattledInBattlePhase(false);
+            locationCard.getValue().setPositionChangedInThisTurn(false);
+            locationCard.getValue().setSummonedInThisTurn(false);
         }
         for(Map.Entry<Integer, MonsterCard> locationCard : getRivalPlayerByTurn().getMonsterCardsInZone().entrySet()){
             locationCard.getValue().setHasBattledInBattlePhase(false);
+            locationCard.getValue().setPositionChangedInThisTurn(false);
+            locationCard.getValue().setSummonedInThisTurn(false);
         }
     }
 

@@ -295,8 +295,7 @@ public class MainPhaseController extends PhaseController {
         this.isSummonOrSetMonsterCard = true;
         runFieldZoneSpells(player);
         runAllMonsterPowersInZone(player);
-        gameView.printString("summoned successfully");
-
+        gameView.summonedSuccessfully();
     }
 
     public void runFieldZoneSpells(Player player) {
@@ -355,7 +354,7 @@ public class MainPhaseController extends PhaseController {
         this.isSummonOrSetMonsterCard = true;
         runFieldZoneSpells(player);
         runAllMonsterPowersInZone(player);
-        gameView.printString("set successfully");
+        gameView.setSuccessfully();
     }
 
     protected void setTrapOrSpellCard(Player player, Card card) {
@@ -375,7 +374,7 @@ public class MainPhaseController extends PhaseController {
             player.addCardToCardsInZone(card);
             player.removeCardFromHand(card);
             player.setSelectedCard(null);
-            gameView.printString("set successfully");
+            gameView.setSuccessfully();
         }
     }
 
@@ -413,7 +412,7 @@ public class MainPhaseController extends PhaseController {
                 ((MonsterCard) player.getSelectedCard()).setFlipped(true);
             }
             runAllMonsterPowersInZone(phase.getPlayerByTurn());
-            gameView.printString("monster card position changed successfully");
+            gameView.changedPositionSuccessfully();
         }
     }
 
@@ -437,7 +436,7 @@ public class MainPhaseController extends PhaseController {
             flipSummonedCard.setSpecialSummoned(false);
             checkTrapActionsAfterSummon(flipSummonedCard);
             player.setSelectedCard(null);
-            gameView.printString("flip summoned successfully");
+            gameView.flipSummonedSuccessfully();
             flipSummonedCard.setSummoned(false);
         }
     }

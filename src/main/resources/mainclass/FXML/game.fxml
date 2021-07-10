@@ -8,118 +8,115 @@
 <?import javafx.scene.text.*?>
 
 <Pane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <ImageView fx:id="selectedCardImageView" fitHeight="337.0" fitWidth="273.0" layoutX="14.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@../../cards/Monsters/Unknown.jpg" />
-    </ImageView>
-    <Text fx:id="rivalLifePoint" layoutX="14.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LP: 8000" textAlignment="CENTER" wrappingWidth="273.0">
-        <font>
-            <Font size="22.0" />
-        </font>
-    </Text>
-    <StackPane layoutX="14.0" layoutY="104.0" prefHeight="29.0" prefWidth="273.0" style="-fx-border-width: 1; -fx-border-color: red;">
-        <Rectangle fx:id="rivalLifePointBar" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="27.0" stroke="RED" strokeType="INSIDE" width="272.0" StackPane.alignment="CENTER_LEFT" />
-    </StackPane>
-    <Text fx:id="rivalNickname" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname: " textAlignment="CENTER" wrappingWidth="272.99999999999994">
-        <font>
+   <ImageView fx:id="selectedCardImageView" fitHeight="337.0" fitWidth="273.0" layoutX="14.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../cards/Monsters/Unknown.jpg" />
+   </ImageView>
+   <Text fx:id="rivalLifePoint" layoutX="14.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LP: 8000" textAlignment="CENTER" wrappingWidth="273.0">
+      <font>
+         <Font size="22.0" />
+      </font>
+   </Text>
+   <StackPane layoutX="14.0" layoutY="104.0" prefHeight="29.0" prefWidth="273.0" style="-fx-border-width: 1; -fx-border-color: red;">
+      <Rectangle fx:id="rivalLifePointBar" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="27.0" stroke="RED" strokeType="INSIDE" width="272.0" StackPane.alignment="CENTER_LEFT" />
+   </StackPane>
+   <Text fx:id="rivalNickname" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname: " textAlignment="CENTER" wrappingWidth="272.99999999999994">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Text>
+   <Text fx:id="playerLifePoint" layoutX="14.0" layoutY="679.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LP: 8000" textAlignment="CENTER" wrappingWidth="273.0">
+      <font>
+         <Font size="22.0" />
+      </font>
+   </Text>
+   <Text fx:id="playerNickname" layoutX="14.0" layoutY="622.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname: " textAlignment="CENTER" wrappingWidth="272.99999999999994">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Text>
+   <StackPane layoutX="14.0" layoutY="688.0" prefHeight="29.0" prefWidth="273.0" style="-fx-border-width: 1; -fx-border-color: red;">
+      <Rectangle fx:id="playerLifePointBar" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="27.0" stroke="RED" strokeType="INSIDE" width="272.0" StackPane.alignment="CENTER_LEFT" />
+   </StackPane>
+   <ScrollPane layoutX="14.0" layoutY="483.0" prefHeight="117.0" prefWidth="273.0">
+      <Text fx:id="selectedCardDescription" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="264.33675384521484">
+         <font>
             <Font size="20.0" />
-        </font>
-    </Text>
-    <Text fx:id="playerLifePoint" layoutX="14.0" layoutY="679.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LP: 8000" textAlignment="CENTER" wrappingWidth="273.0">
-        <font>
-            <Font size="22.0" />
-        </font>
-    </Text>
-    <Text fx:id="playerNickname" layoutX="14.0" layoutY="622.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname: " textAlignment="CENTER" wrappingWidth="272.99999999999994">
-        <font>
-            <Font size="20.0" />
-        </font>
-    </Text>
-    <StackPane layoutX="14.0" layoutY="688.0" prefHeight="29.0" prefWidth="273.0" style="-fx-border-width: 1; -fx-border-color: red;">
-        <Rectangle fx:id="playerLifePointBar" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="27.0" stroke="RED" strokeType="INSIDE" width="272.0" StackPane.alignment="CENTER_LEFT" />
-    </StackPane>
-    <ScrollPane layoutX="14.0" layoutY="483.0" prefHeight="117.0" prefWidth="273.0">
-        <Text fx:id="selectedCardDescription" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="264.33675384521484">
-            <font>
-                <Font size="20.0" />
-            </font>
-        </Text>
-    </ScrollPane>
-    <Text fx:id="phaseName" layoutX="1038.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phase: " wrappingWidth="241.7999267578125">
-        <font>
-            <Font size="22.0" />
-        </font>
-    </Text>
-    <Pane layoutX="483.0" layoutY="60.0" prefHeight="600.0" prefWidth="540.0" styleClass="battlefield">
-        <ImageView fx:id="rivalSpell5" fitHeight="91.0" fitWidth="68.0" layoutX="107.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="rivalSpell3" fitHeight="91.0" fitWidth="68.0" layoutX="186.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="rivalSpell1" fitHeight="91.0" fitWidth="68.0" layoutX="265.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="rivalSpell2" fitHeight="91.0" fitWidth="68.0" layoutX="338.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="rivalSpell4" fitHeight="91.0" fitWidth="68.0" layoutX="423.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="rivalMonster5" fitHeight="91.0" fitWidth="68.0" layoutX="107.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="rivalMonster3" fitHeight="91.0" fitWidth="68.0" layoutX="186.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="rivalMonster1" fitHeight="91.0" fitWidth="68.0" layoutX="265.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="rivalMonster2" fitHeight="91.0" fitWidth="68.0" layoutX="338.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="rivalMonster4" fitHeight="91.0" fitWidth="68.0" layoutX="423.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="playerMonster5" fitHeight="91.0" fitWidth="68.0" layoutX="107.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="playerMonster3" fitHeight="91.0" fitWidth="68.0" layoutX="186.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="playerMonster1" fitHeight="91.0" fitWidth="68.0" layoutX="265.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="playerMonster2" fitHeight="91.0" fitWidth="68.0" layoutX="338.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="playerMonster4" fitHeight="91.0" fitWidth="68.0" layoutX="423.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="playerSpell5" fitHeight="91.0" fitWidth="68.0" layoutX="107.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="playerSpell3" fitHeight="91.0" fitWidth="68.0" layoutX="186.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="playerSpell1" fitHeight="91.0" fitWidth="68.0" layoutX="265.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="playerSpell2" fitHeight="91.0" fitWidth="68.0" layoutX="338.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="playerSpell4" fitHeight="91.0" fitWidth="68.0" layoutX="423.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true" />
-        <ScrollPane layoutX="25.0" layoutY="-66.0" prefHeight="117.0" prefWidth="514.0">
-            <VBox fx:id="rivalCardsInHand" prefHeight="114.0" prefWidth="510.0" />
-        </ScrollPane>
-        <ScrollPane layoutX="24.0" layoutY="528.0" prefHeight="117.0" prefWidth="514.0">
-            <VBox fx:id="playerCardsInHand" prefHeight="114.0" prefWidth="512.0" />
-        </ScrollPane>
-    </Pane>
-    <ImageView fx:id="playerDeck" fitHeight="127.0" fitWidth="104.0" layoutX="1033.0" layoutY="488.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@../ourCards.png" />
-    </ImageView>
-    <ImageView fx:id="rivalDeck" fitHeight="127.0" fitWidth="104.0" layoutX="1033.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@../rivalCards.png" />
-    </ImageView>
-    <Text fx:id="result" layoutX="920.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="319.13671875">
-        <font>
-            <Font size="20.0" />
-        </font>
-    </Text>
-    <ImageView fx:id="playerProfilePicture" fitHeight="150.0" fitWidth="180.0" layoutX="293.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
-    <ImageView fx:id="rivalPlayerProfilePicture" fitHeight="150.0" fitWidth="180.0" layoutX="293.0" layoutY="552.0" pickOnBounds="true" preserveRatio="true" />
-    <Text fx:id="rivalNumberOfCardsRemaining" layoutX="1058.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="43.7366943359375">
-        <font>
-            <Font size="15.0" />
-        </font>
-    </Text>
-    <Text fx:id="playerNumberOfCardsRemaining" layoutX="1058.0" layoutY="643.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="43.7366943359375">
-        <font>
-            <Font size="15.0" />
-        </font>
-    </Text>
-    <ImageView fx:id="rivalGraveyard" fitHeight="107.0" fitWidth="78.0" layoutX="1041.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true" />
-    <ImageView fx:id="playerGraveyard" fitHeight="107.0" fitWidth="78.0" layoutX="1041.0" layoutY="373.0" pickOnBounds="true" preserveRatio="true" />
-    <Button layoutX="1136.0" layoutY="495.0" mnemonicParsing="false" onMouseClicked="#nextPhase" prefHeight="37.0" prefWidth="141.0" text="Next Phase" />
-    <ScrollPane layoutX="1134.0" layoutY="104.0" prefHeight="376.0" prefWidth="141.0">
-        <content>
-            <VBox fx:id="graveyardVBox" prefHeight="374.0" prefWidth="138.0" />
-        </content>
-    </ScrollPane>
-    <Text fx:id="errorBox" layoutX="1033.0" layoutY="668.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="241.7999267578125">
-        <font>
-            <Font size="20.0" />
-        </font>
-    </Text>
-    <VBox fx:id="buttonBar" layoutX="265.0" layoutY="213.0" prefHeight="256.0" prefWidth="200.0" spacing="7" />
-    <ImageView fx:id="settingButton" fitHeight="54.0" fitWidth="68.0" layoutX="1180.0" layoutY="532.0" onMouseClicked="#pause" pickOnBounds="true" preserveRatio="true">
-        <image>
-            <Image url="@../icons8-settings-48.png" />
-        </image>
-    </ImageView>
-    <stylesheets>
-        <URL value="@../menuStyles.css" />
-    </stylesheets>
+         </font>
+      </Text>
+   </ScrollPane>
+   <Text fx:id="phaseName" layoutX="1038.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phase: " wrappingWidth="241.7999267578125">
+      <font>
+         <Font size="22.0" />
+      </font>
+   </Text>
+   <Pane fx:id="gameBoard" layoutX="483.0" layoutY="60.0" prefHeight="600.0" prefWidth="540.0" styleClass="battlefield">
+      <ImageView fx:id="rivalSpell5" fitHeight="91.0" fitWidth="68.0" layoutX="107.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="rivalSpell3" fitHeight="91.0" fitWidth="68.0" layoutX="186.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="rivalSpell1" fitHeight="91.0" fitWidth="68.0" layoutX="265.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="rivalSpell2" fitHeight="91.0" fitWidth="68.0" layoutX="338.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="rivalSpell4" fitHeight="91.0" fitWidth="68.0" layoutX="423.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="rivalMonster5" fitHeight="91.0" fitWidth="68.0" layoutX="107.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="rivalMonster3" fitHeight="91.0" fitWidth="68.0" layoutX="186.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="rivalMonster1" fitHeight="91.0" fitWidth="68.0" layoutX="265.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="rivalMonster2" fitHeight="91.0" fitWidth="68.0" layoutX="338.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="rivalMonster4" fitHeight="91.0" fitWidth="68.0" layoutX="423.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerMonster4" fitHeight="91.0" fitWidth="68.0" layoutX="107.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerMonster2" fitHeight="91.0" fitWidth="68.0" layoutX="186.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerMonster1" fitHeight="91.0" fitWidth="68.0" layoutX="265.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerMonster3" fitHeight="91.0" fitWidth="68.0" layoutX="338.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerMonster5" fitHeight="91.0" fitWidth="68.0" layoutX="423.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerSpell4" fitHeight="91.0" fitWidth="68.0" layoutX="107.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerSpell2" fitHeight="91.0" fitWidth="68.0" layoutX="186.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerSpell1" fitHeight="91.0" fitWidth="68.0" layoutX="265.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerSpell3" fitHeight="91.0" fitWidth="68.0" layoutX="338.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerSpell5" fitHeight="91.0" fitWidth="68.0" layoutX="423.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true" />
+      <ScrollPane layoutX="25.0" layoutY="-66.0" prefHeight="117.0" prefWidth="514.0">
+         <VBox fx:id="rivalCardsInHand" prefHeight="114.0" prefWidth="510.0" />
+      </ScrollPane>
+      <ScrollPane layoutX="24.0" layoutY="528.0" prefHeight="117.0" prefWidth="514.0">
+         <VBox fx:id="playerCardsInHand" prefHeight="114.0" prefWidth="512.0" />
+      </ScrollPane>
+      <ImageView fx:id="rivalFieldZone" fitHeight="91.0" fitWidth="68.0" layoutX="19.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerFieldZone" fitHeight="91.0" fitWidth="68.0" layoutX="19.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true" />
+   </Pane>
+   <ImageView fx:id="playerDeck" fitHeight="127.0" fitWidth="104.0" layoutX="1033.0" layoutY="488.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../ourCards.png" />
+   </ImageView>
+   <ImageView fx:id="rivalDeck" fitHeight="127.0" fitWidth="104.0" layoutX="1033.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../rivalCards.png" />
+   </ImageView>
+   <Text fx:id="result" layoutX="920.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="319.13671875">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Text>
+   <ImageView fx:id="playerProfilePicture" fitHeight="150.0" fitWidth="180.0" layoutX="293.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="rivalPlayerProfilePicture" fitHeight="150.0" fitWidth="180.0" layoutX="293.0" layoutY="552.0" pickOnBounds="true" preserveRatio="true" />
+   <Text fx:id="rivalNumberOfCardsRemaining" layoutX="1058.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="43.7366943359375">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <Text fx:id="playerNumberOfCardsRemaining" layoutX="1058.0" layoutY="643.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="43.7366943359375">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <ImageView fx:id="rivalGraveyard" fitHeight="107.0" fitWidth="78.0" layoutX="1041.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="playerGraveyard" fitHeight="107.0" fitWidth="78.0" layoutX="1041.0" layoutY="373.0" pickOnBounds="true" preserveRatio="true" />
+   <Button layoutX="1136.0" layoutY="495.0" mnemonicParsing="false" onMouseClicked="#nextPhase" prefHeight="37.0" prefWidth="141.0" text="Next Phase" />
+   <ScrollPane layoutX="1134.0" layoutY="104.0" prefHeight="376.0" prefWidth="141.0">
+      <content>
+         <VBox fx:id="graveyardVBox" prefHeight="374.0" prefWidth="138.0" />
+      </content>
+   </ScrollPane>
+   <Text fx:id="errorBox" layoutX="1033.0" layoutY="668.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="241.7999267578125">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Text>
+   <VBox fx:id="buttonBar" layoutX="265.0" layoutY="213.0" prefHeight="256.0" prefWidth="200.0" spacing="7" />
+   <stylesheets>
+      <URL value="@../menuStyles.css" />
+   </stylesheets>
 </Pane>

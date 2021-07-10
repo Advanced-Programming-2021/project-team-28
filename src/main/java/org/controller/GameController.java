@@ -26,11 +26,11 @@ public class GameController {
     MainPhaseController mainController;
     BattlePhaseController battleController;
 
-    public GameController(User user1, User user2, NumberOfRounds numberOfRounds) throws CloneNotSupportedException {
+    public GameController(User user1, User user2, NumberOfRounds numberOfRounds, Turn turn) throws CloneNotSupportedException {
         this.player1 = new Player(user1);
         this.player2 = new Player(user2);
         this.numberOfRounds = numberOfRounds;
-        round = new Round(player1, player2, Turn.FIRST_PLAYER);
+        round = new Round(player1, player2, turn);
         mainController = new MainPhaseController(new MainPhase(round), view);
         battleController = new BattlePhaseController(new BattlePhase(round), view);
         drawPhase = new DrawPhase(round);
@@ -40,32 +40,16 @@ public class GameController {
         return round;
     }
 
-    public void setRound(Round round) {
-        this.round = round;
-    }
-
     public DrawPhase getDrawPhase() {
         return drawPhase;
-    }
-
-    public void setDrawPhase(DrawPhase drawPhase) {
-        this.drawPhase = drawPhase;
     }
 
     public MainPhaseController getMainController() {
         return mainController;
     }
 
-    public void setMainController(MainPhaseController mainController) {
-        this.mainController = mainController;
-    }
-
     public BattlePhaseController getBattleController() {
         return battleController;
-    }
-
-    public void setBattleController(BattlePhaseController battleController) {
-        this.battleController = battleController;
     }
 
     public void run() {
