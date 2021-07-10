@@ -116,6 +116,11 @@
       </font>
    </Text>
    <VBox fx:id="buttonBar" layoutX="265.0" layoutY="213.0" prefHeight="256.0" prefWidth="200.0" spacing="7" />
+   <ImageView fitHeight="59.0" fitWidth="68.0" layoutX="1172.0" layoutY="542.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#pause">
+      <image>
+         <Image url="@../icons8-settings-48.png" />
+      </image>
+   </ImageView>
    <stylesheets>
       <URL value="@../menuStyles.css" />
    </stylesheets>

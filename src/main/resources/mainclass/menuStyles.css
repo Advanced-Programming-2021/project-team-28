@@ -154,3 +154,23 @@
     -fx-background-image:url('../mainclass/Field/fie_umi.bmp');
     -fx-background-size: cover;
 }
+
+.battlefieldYami {
+    -fx-background-image:url('../mainclass/Field/fie_yami.bmp');
+    -fx-background-size: cover;
+}
+
+.battlefieldForest {
+    -fx-background-image:url('../mainclass/Field/fie_sougen.bmp');
+    -fx-background-size: cover;
+}
+
+.battlefieldClosedForest {
+    -fx-background-image:url('../mainclass/Field/fie_mori.bmp');
+    -fx-background-size: cover;
+}
+
+.battlefieldUmiiruka {
+    -fx-background-image:url('../mainclass/Field/fie_umi.bmp');
+    -fx-background-size: cover;
+}

@@ -14,11 +14,13 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.controller.GameController;
 import org.model.*;
 import org.model.enums.PhaseName;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.model.enums.PhaseName.*;
@@ -31,6 +33,10 @@ public class GameView extends Application {
     private GameController game;
     private PhaseName phase = MAIN_PHASE_1;
     private ArrayList<ImageView> cardsInZone = new ArrayList<>();
+    private boolean isPaused = false;
+    private boolean isMuted = false;
+    public static String primaryStage;
+    public Stage popStage;
     @FXML
     private Pane gameBoard;
     @FXML
@@ -123,6 +129,8 @@ public class GameView extends Application {
     private ImageView playerFieldZone;
     @FXML
     private ImageView rivalFieldZone;
+    @FXML
+    private ImageView muteButton;
 
     public GameView(GameController game) {
         this.game = game;
@@ -155,7 +163,6 @@ public class GameView extends Application {
         //backgroundMusic.setCycleCount(-1);
         //backgroundMusic.play();
     }
-
 
 
     private void fillCardsInZoneImageViewArrayList() {
@@ -218,7 +225,7 @@ public class GameView extends Application {
             if (player.getMonsterCardsInZone().containsKey(i)) {
                 MonsterCard card = player.getMonsterCardByLocationFromZone(i);
                 if (card.getPosition() == DEFENSIVE_HIDDEN) {
-                    if(isRival){
+                    if (isRival) {
                         cardView.setOnMouseClicked(mouseEvent -> onMouseClickForInvisibleCards(card));
                     } else {
                         cardView.setOnMouseClicked(mouseEvent -> onMouseClickForVisibleCards(card));
@@ -228,7 +235,7 @@ public class GameView extends Application {
                     cardView.setImage(Card.getCardImageByName(card.getName()));
                     cardView.setOnMouseClicked(mouseEvent -> onMouseClickForVisibleCards(card));
                 }
-                if(card.getPosition() == DEFENSIVE_HIDDEN || card.getPosition() == DEFENSIVE_OCCUPIED){
+                if (card.getPosition() == DEFENSIVE_HIDDEN || card.getPosition() == DEFENSIVE_OCCUPIED) {
                     cardView.setRotate(90);
                 } else {
                     cardView.setRotate(0);
@@ -236,16 +243,17 @@ public class GameView extends Application {
 
             } else {
                 cardView.setImage(null);
-                cardView.setOnMouseClicked(mouseEvent -> {});
+                cardView.setOnMouseClicked(mouseEvent -> {
+                });
             }
         }
-        for (int i=1; i<=5; i++){
+        for (int i = 1; i <= 5; i++) {
             ImageView cardView = cardsInZone.get(i + secondLoop);
-            if(player.getSpellOrTrapCardsInZone().containsKey(i)){
+            if (player.getSpellOrTrapCardsInZone().containsKey(i)) {
                 Card card = player.getSpellOrTrapCardsInZone().get(i);
-                if((card instanceof SpellCard && ((SpellCard) card).getPosition() == HIDDEN) || (card instanceof TrapCard && ((TrapCard) card).getPosition() == HIDDEN)){
+                if ((card instanceof SpellCard && ((SpellCard) card).getPosition() == HIDDEN) || (card instanceof TrapCard && ((TrapCard) card).getPosition() == HIDDEN)) {
                     cardView.setImage(Card.getCardImageByName("Unknown"));
-                    if(isRival){
+                    if (isRival) {
                         cardView.setOnMouseClicked(mouseEvent -> onMouseClickForInvisibleCards(card));
                     } else {
                         cardView.setOnMouseClicked(mouseEvent -> onMouseClickForVisibleCards(card));
@@ -256,26 +264,30 @@ public class GameView extends Application {
                 }
             } else {
                 cardView.setImage(null);
-                cardView.setOnMouseClicked(mouseEvent -> {});
+                cardView.setOnMouseClicked(mouseEvent -> {
+                });
             }
         }
     }
 
     private void setFieldZone(Player player, Player rivalPlayer) {
-        if(rivalPlayer.hasFieldSpellCardInZone()){
+        if (rivalPlayer.hasFieldSpellCardInZone()) {
             rivalFieldZone.setImage(Card.getCardImageByName(rivalPlayer.getFieldZoneCard().getName()));
             rivalFieldZone.setOnMouseClicked(mouseEvent -> onMouseClickForVisibleCards(rivalPlayer.getFieldZoneCard()));
         } else {
             rivalFieldZone.setImage(null);
-            rivalFieldZone.setOnMouseClicked(mouseEvent -> {});
+            rivalFieldZone.setOnMouseClicked(mouseEvent -> {
+            });
         }
-        if(player.hasFieldSpellCardInZone()){
+        if (player.hasFieldSpellCardInZone()) {
             playerFieldZone.setImage(Card.getCardImageByName(player.getFieldZoneCard().getName()));
             playerFieldZone.setOnMouseClicked(mouseEvent -> onMouseClickForVisibleCards(player.getFieldZoneCard()));
         } else {
             playerFieldZone.setImage(null);
-            playerFieldZone.setOnMouseClicked(mouseEvent -> {});
+            playerFieldZone.setOnMouseClicked(mouseEvent -> {
+            });
         }
+
     }
 
 
@@ -294,7 +306,8 @@ public class GameView extends Application {
                 }
             });
         } else {
-            playerGraveyard.setOnMouseClicked(mouseEvent -> {});
+            playerGraveyard.setOnMouseClicked(mouseEvent -> {
+            });
         }
     }
 
@@ -485,12 +498,12 @@ public class GameView extends Application {
         buttonBar.getChildren().clear();
     }
 
-    public void setSuccessfully(){
+    public void setSuccessfully() {
         errorBox.setText("Set successfully");
         buttonBar.getChildren().clear();
     }
 
-    public void changedPositionSuccessfully(){
+    public void changedPositionSuccessfully() {
         errorBox.setText("monster card position changed successfully");
     }
 
@@ -551,6 +564,7 @@ public class GameView extends Application {
         errorBox.setText("you can’t attack the opponent directly");
     }
 
+
     public void attackDirectResult(int damage) {
         errorBox.setText("your opponent receives " + damage + " battle damage");
     }
@@ -565,5 +579,63 @@ public class GameView extends Application {
 
     public void flipSummonedSuccessfully() {
         errorBox.setText("Flip summoned successfully");
+    }
+
+
+    public void pause() {
+
+        System.out.println("paused");
+        isPaused = true;
+        popStage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/mainclass/FXML/settingPopup.fxml"));
+        loader.setController(this);
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene scene = new Scene(root, 600, 400);
+        popStage.setScene(scene);
+        popStage.initStyle(StageStyle.UNDECORATED);
+        popStage.show();
+
+    }
+
+    public void hidePopup() {
+        popStage.hide();
+    }
+
+    public void surrendering() {
+        int isSure = JOptionPane.showConfirmDialog(null, "Are you sure you want to surrender?");
+        if (isSure == JOptionPane.YES_OPTION) {
+            System.out.println("surrendered");
+            //TODO
+            //controller syncing
+        } else {
+            System.out.println("was unSure");
+        }
+    }
+
+    public void muteUnmute() {
+        if (!isMuted) {
+            isMuted = true;
+            try {
+                muteButton.setImage(new Image(this.getClass().getResource("/mainclass/icons8-mute-100.png").toExternalForm()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println("now you see muted icon");
+        } else {
+            isMuted = false;
+            try {
+                muteButton.setImage(new Image(this.getClass().getResource("/mainclass/icons8-sound-100.png").toExternalForm()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println("now you see sound icon");
+        }
+
     }
 }
