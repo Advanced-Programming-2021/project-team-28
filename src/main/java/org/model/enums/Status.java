@@ -5,5 +5,8 @@ public enum Status {
     REPEATED_PASSWORD,
     WRONG_PASSWORD,
     PLEASE_ENTER_DATA_FIRST,
-    REPEATED_NICKNAME
+    REPEATED_NICKNAME,
+    P1,
+    P2,
+    DRAW,
 }

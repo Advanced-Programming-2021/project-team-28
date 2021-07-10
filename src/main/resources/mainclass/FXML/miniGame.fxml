@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" styleClass="anchor12" stylesheets="@../menuStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle fx:id="P1R" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="479.0" layoutY="476.0" stroke="BLACK" strokeType="INSIDE" width="206.0" />
+      <Rectangle fx:id="P1S" arcHeight="5.0" arcWidth="5.0" fill="#348ee1" height="200.0" layoutX="743.0" layoutY="476.0" stroke="BLACK" strokeType="INSIDE" width="206.0" />
+      <Rectangle fx:id="P2R" arcHeight="5.0" arcWidth="5.0" fill="#348ee1" height="200.0" layoutX="1004.0" layoutY="51.0" stroke="BLACK" strokeType="INSIDE" width="206.0" />
+      <Rectangle fx:id="P2S" arcHeight="5.0" arcWidth="5.0" fill="#348ee1" height="200.0" layoutX="743.0" layoutY="51.0" stroke="BLACK" strokeType="INSIDE" width="206.0" />
+      <Rectangle fx:id="P1P" arcHeight="5.0" arcWidth="5.0" fill="#348ee1" height="200.0" layoutX="1004.0" layoutY="476.0" stroke="BLACK" strokeType="INSIDE" width="206.0" />
+      <Rectangle fx:id="P2P" arcHeight="5.0" arcWidth="5.0" fill="#348ee1" height="200.0" layoutX="479.0" layoutY="51.0" stroke="BLACK" strokeType="INSIDE" width="206.0" />
+      <Rectangle fx:id="P1res" arcHeight="5.0" arcWidth="5.0" fill="#131313" height="223.0" layoutX="267.0" layoutY="453.0" stroke="BLACK" strokeType="INSIDE" width="122.0" />
+      <Rectangle fx:id="P2res" arcHeight="5.0" arcWidth="5.0" fill="#131313" height="223.0" layoutX="267.0" layoutY="51.0" stroke="BLACK" strokeType="INSIDE" width="122.0" />
+      <Text fx:id="text" fill="#d1c4c4" layoutX="685.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="wiezdemin" text="Text" textAlignment="CENTER" wrappingWidth="321.33673095703125">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Button fx:id="start" layoutX="789.0" layoutY="380.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="114.0" text="STart DUEL!">
+         <styleClass>
+            <String fx:value="wiezdemin" />
+            <String fx:value="button1" />
+         </styleClass>
+      </Button>
+   </children>
+</AnchorPane>
