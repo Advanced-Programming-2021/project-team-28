@@ -14,13 +14,19 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.controller.GameController;
 import org.model.*;
 import org.model.enums.MonsterCardPosition;
 import org.model.enums.PhaseName;
 
 import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 
 import static org.model.enums.PhaseName.*;
@@ -33,6 +39,10 @@ public class GameView extends Application {
     private GameController game;
     private PhaseName phase = MAIN_PHASE_1;
     private ArrayList<ImageView> cardsInZone = new ArrayList<>();
+    private boolean isPaused = false;
+    private Stage popStage;
+    public static Stage primaryStage;
+    private boolean isMuted = false;
     @FXML
     private Text result;
     @FXML
@@ -119,6 +129,14 @@ public class GameView extends Application {
     private ImageView playerMonster4;
     @FXML
     private ImageView playerMonster5;
+    @FXML
+    private ImageView settingButton;
+    @FXML
+    private Button resume;
+    @FXML
+    private ImageView surrenderButton;
+    @FXML
+    private ImageView muteButton;
 
     public GameView(GameController game) {
         this.game = game;
@@ -138,6 +156,7 @@ public class GameView extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        primaryStage = stage;
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/mainclass/FXML/game.fxml"));
         loader.setController(this);
@@ -214,17 +233,17 @@ public class GameView extends Application {
                 } else {
                     cardsInZone.get(i + firstLoop).setImage(Card.getCardImageByName(card.getName()));
                 }
-                if(card.getPosition() == DEFENSIVE_HIDDEN || card.getPosition() == DEFENSIVE_OCCUPIED){
+                if (card.getPosition() == DEFENSIVE_HIDDEN || card.getPosition() == DEFENSIVE_OCCUPIED) {
                     cardsInZone.get(i + firstLoop).setRotate(90);
                 }
             } else {
                 cardsInZone.get(i + firstLoop).setImage(null);
             }
         }
-        for (int i=1; i<=5; i++){
-            if(player.getSpellOrTrapCardsInZone().containsKey(i)){
+        for (int i = 1; i <= 5; i++) {
+            if (player.getSpellOrTrapCardsInZone().containsKey(i)) {
                 Card card = player.getSpellOrTrapCardsInZone().get(i);
-                if((card instanceof SpellCard && ((SpellCard) card).getPosition() == HIDDEN) || (card instanceof TrapCard && ((TrapCard) card).getPosition() == HIDDEN)){
+                if ((card instanceof SpellCard && ((SpellCard) card).getPosition() == HIDDEN) || (card instanceof TrapCard && ((TrapCard) card).getPosition() == HIDDEN)) {
                     cardsInZone.get(i + secondLoop).setImage(Card.getCardImageByName("Unknown"));
                 } else {
                     cardsInZone.get(i + secondLoop).setImage(Card.getCardImageByName(card.getName()));
@@ -498,4 +517,62 @@ public class GameView extends Application {
         errorBox.setText("there is no card to attack here");
     }
 
+
+
+    public void pause() {
+
+        System.out.println("paused");
+        isPaused = true;
+        popStage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/mainclass/FXML/settingPopup.fxml"));
+        loader.setController(this);
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene scene = new Scene(root, 600, 400);
+        popStage.setScene(scene);
+        popStage.initStyle(StageStyle.UNDECORATED);
+        popStage.show();
+
+    }
+
+    public void hidePopup() {
+        popStage.hide();
+    }
+
+    public void surrendering(){
+        int isSure = JOptionPane.showConfirmDialog(null, "Are you sure you want to surrender?");
+        if (isSure == JOptionPane.YES_OPTION){
+            System.out.println("surrendered");
+            //TODO
+            //controller syncing
+        } else {
+            System.out.println("was unSure");
+        }
+    }
+
+    public void muteUnmute(){
+        if (!isMuted){
+            isMuted = true;
+            try {
+                muteButton.setImage(new Image(this.getClass().getResource("/mainclass/icons8-mute-100.png").toExternalForm()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println("now you see muted icon");
+        } else {
+            isMuted = false;
+            try {
+                muteButton.setImage(new Image(this.getClass().getResource("/mainclass/icons8-sound-100.png").toExternalForm()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println("now you see sound icon");
+        }
+
+    }
 }
