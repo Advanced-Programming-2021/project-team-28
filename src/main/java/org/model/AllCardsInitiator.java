@@ -30,7 +30,7 @@ public class AllCardsInitiator {
                 MonsterPower.NONE, 4, Attribute.FIRE));
         Card.addToAllCards(new MonsterCard(MonsterType.SPELL_CASTER, null, "Curtain Of The Dark Ones", "", MonstersDescriptions.curtainOfTheDarkOnes, 600, 500,
                 MonsterPower.NONE, 2, Attribute.DARK));
-        Card.addToAllCards(new MonsterCard(MonsterType.FIEND, null, "Feral Imp", "", MonstersDescriptions.feralImp, 1400, 1300,
+        Card.addToAllCards(new MonsterCard(MonsterType.FIEND, null, "Feral Imp", "", MonstersDescriptions.feralImp, 1300, 1400,
                 MonsterPower.NONE, 4, Attribute.DARK));
         Card.addToAllCards(new MonsterCard(MonsterType.SPELL_CASTER, null, "Dark Magician", "", MonstersDescriptions.darkMagician, 2500, 2100,
                 MonsterPower.NONE, 7, Attribute.DARK));
