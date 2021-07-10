@@ -3,6 +3,11 @@
     -fx-background-size: cover;
 }
 
+.anchor20 {
+    -fx-background-color:#1C1F32;
+    -fx-background-size: cover;
+}
+
 .anchor2 {
     -fx-background-image:url('background8.jpg');
     -fx-background-size: cover;
