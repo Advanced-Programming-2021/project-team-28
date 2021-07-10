@@ -118,6 +118,10 @@ public class GameView extends Application {
     private ImageView playerMonster4;
     @FXML
     private ImageView playerMonster5;
+    @FXML
+    private ImageView playerFieldZone;
+    @FXML
+    private ImageView rivalFieldZone;
 
     public GameView(GameController game) {
         this.game = game;
@@ -150,6 +154,8 @@ public class GameView extends Application {
         //backgroundMusic.setCycleCount(-1);
         //backgroundMusic.play();
     }
+
+
 
     private void fillCardsInZoneImageViewArrayList() {
         cardsInZone.clear();
@@ -198,11 +204,12 @@ public class GameView extends Application {
         rivalLifePointBar.setWidth(((double) rivalPlayer.getLifePoint() / 8000) * 272.0);
         setGraveyard(player, playerGraveyard);
         setGraveyard(rivalPlayer, rivalGraveyard);
-        setMonsterZone(player, false);
-        setMonsterZone(rivalPlayer, true);
+        setZone(player, false);
+        setZone(rivalPlayer, true);
+        setFieldZone(player, rivalPlayer);
     }
 
-    private void setMonsterZone(Player player, boolean isRival) {
+    private void setZone(Player player, boolean isRival) {
         int firstLoop = isRival ? 4 : 14;
         int secondLoop = isRival ? -1 : 9;
         for (int i = 1; i <= 5; i++) {
@@ -228,6 +235,7 @@ public class GameView extends Application {
 
             } else {
                 cardView.setImage(null);
+                cardView.setOnMouseClicked(mouseEvent -> {});
             }
         }
         for (int i=1; i<=5; i++){
@@ -247,9 +255,27 @@ public class GameView extends Application {
                 }
             } else {
                 cardView.setImage(null);
+                cardView.setOnMouseClicked(mouseEvent -> {});
             }
         }
+    }
 
+
+    private void setFieldZone(Player player, Player rivalPlayer) {
+        if(rivalPlayer.hasFieldSpellCardInZone()){
+            rivalFieldZone.setImage(Card.getCardImageByName(player.getFieldZoneCard().getName()));
+            rivalFieldZone.setOnMouseClicked(mouseEvent -> onMouseClickForVisibleCards(player.getFieldZoneCard()));
+        } else {
+            rivalFieldZone.setImage(null);
+            rivalFieldZone.setOnMouseClicked(mouseEvent -> {});
+        }
+        if(player.hasFieldSpellCardInZone()){
+            playerFieldZone.setImage(Card.getCardImageByName(player.getFieldZoneCard().getName()));
+            playerFieldZone.setOnMouseClicked(mouseEvent -> onMouseClickForVisibleCards(player.getFieldZoneCard()));
+        } else {
+            playerFieldZone.setImage(null);
+            playerFieldZone.setOnMouseClicked(mouseEvent -> {});
+        }
     }
 
 
@@ -267,6 +293,8 @@ public class GameView extends Application {
                     view.setOnMouseClicked(mouseEvent2 -> selectedCardImageView.setImage(Card.getCardImageByName(card.getName())));
                 }
             });
+        } else {
+            playerGraveyard.setOnMouseClicked(mouseEvent -> {});
         }
     }
 
@@ -407,9 +435,9 @@ public class GameView extends Application {
             phaseName.setText("Phase: " + phase.getPhaseName());
             nextPhase();
         } else if (phase == END_PHASE) {
+            changeTurnForAllControllers();
             JOptionPane.showMessageDialog(null, "It's now "
                     + game.getRound().getPlayerByTurn().getUser().getNickname() + " 's turn");
-            changeTurnForAllControllers();
             phase = DRAW_PHASE;
             phaseName.setText("Phase: " + phase.getPhaseName());
             nextPhase();
