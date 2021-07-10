@@ -2,11 +2,13 @@ package org.controller;
 
 import org.model.enums.*;
 import org.model.*;
+import org.view.GameView;
 import org.view.MainPhaseView;
 
 import static org.model.enums.MonsterCardPosition.*;
 
 public class MainPhaseController extends PhaseController {
+    GameView gameView;
 
     protected boolean isSummonOrSetMonsterCard;
 
@@ -20,25 +22,42 @@ public class MainPhaseController extends PhaseController {
             card.setPositionChangedInThisTurn(false);
             card.setSummonedInThisTurn(false);
         }
+    }
 
+    public MainPhaseController(MainPhase mainPhase, GameView view){
+        super(mainPhase);
+        this.isSummonOrSetMonsterCard = false;
+        for (MonsterCard card : phase.getPlayerByTurn().getMonsterCardsInZone().values()){
+            card.setPositionChangedInThisTurn(false);
+            card.setSummonedInThisTurn(false);
+        }
+        this.gameView = view;
     }
 
     private MainPhaseView mainPhaseView = new MainPhaseView(this);
+
+    public GameView getGameView() {
+        return gameView;
+    }
+
+    public void setSummonOrSetMonsterCard(boolean summonOrSetMonsterCard) {
+        isSummonOrSetMonsterCard = summonOrSetMonsterCard;
+    }
 
     @Override
     protected void controlSummonCommand() {
         Player player = phase.getPlayerByTurn();
         if (!player.hasSelectedCard()) {
-            mainPhaseView.noCardSelectedYet();
+            gameView.noCardSelectedYet();
         } else if (!player.isSelectedCardFromHand() || !(player.getSelectedCard() instanceof MonsterCard)) {
-            mainPhaseView.canNotSummonCard();
+            gameView.canNotSummonCard();
         } else if ((((MonsterCard) player.getSelectedCard()).getLevel() <= 4 || player.getSelectedCard().getName().equals("The Tricky"))
                 && player.isMonsterCardZoneFull()) {
-            mainPhaseView.monsterZoneIsFull();
+            gameView.monsterZoneIsFull();
         } else if (isCardSpecial(player.getSelectedCard())) {
             specialSummon((MonsterCard) player.getSelectedCard());
         } else if (isSummonOrSetMonsterCard) {
-            mainPhaseView.printString("you already summoned/set on this turn");
+            gameView.printString("you already summoned/set on this turn");
         } else if (((MonsterCard) player.getSelectedCard()).getSpecialPower() == MonsterPower.RITUAL) {
             ritualSummon((MonsterCard) player.getSelectedCard());
         } else if (((MonsterCard) player.getSelectedCard()).getLevel() <= 4) {
@@ -276,7 +295,7 @@ public class MainPhaseController extends PhaseController {
         this.isSummonOrSetMonsterCard = true;
         runFieldZoneSpells(player);
         runAllMonsterPowersInZone(player);
-        mainPhaseView.printString("summoned successfully");
+        gameView.printString("summoned successfully");
 
     }
 
@@ -307,9 +326,9 @@ public class MainPhaseController extends PhaseController {
     protected void controlSetCommand() {
         Player player = phase.getPlayerByTurn();
         if (!player.hasSelectedCard()) {
-            mainPhaseView.noCardSelectedYet();
+            gameView.noCardSelectedYet();
         } else if (!player.isSelectedCardFromHand()) {
-            mainPhaseView.canNotSetCard();
+            gameView.canNotSetCard();
         }
         if (player.getSelectedCard() instanceof MonsterCard) {
             controlSetMonsterCard(player, (MonsterCard) player.getSelectedCard());
@@ -318,9 +337,9 @@ public class MainPhaseController extends PhaseController {
 
     protected void controlSetMonsterCard(Player player, MonsterCard card) {
         if (player.isMonsterCardZoneFull()) {
-            mainPhaseView.monsterZoneIsFull();
+            gameView.monsterZoneIsFull();
         } else if (isSummonOrSetMonsterCard) {
-            mainPhaseView.printString("you already summoned/set on this turn");
+            gameView.printString("you already summoned/set on this turn");
         } else if (((MonsterCard) player.getSelectedCard()).getLevel() <= 4) {
             setMonsterCard(player, ((MonsterCard) player.getSelectedCard()));
         } else controlTributeSummonOrSet(player, false);
@@ -336,19 +355,19 @@ public class MainPhaseController extends PhaseController {
         this.isSummonOrSetMonsterCard = true;
         runFieldZoneSpells(player);
         runAllMonsterPowersInZone(player);
-        mainPhaseView.printString("set successfully");
+        gameView.printString("set successfully");
     }
 
     protected void setTrapOrSpellCard(Player player, Card card) {
         if (player.isSpellCardZoneFull()) {
-            mainPhaseView.printString("spell card zone is full");
+            gameView.printString("spell card zone is full");
         } else {
             if (card instanceof TrapCard) {
                 ((TrapCard) card).setPosition(SpellOrTrapCardPosition.HIDDEN);
                 ((TrapCard) card).setHasSetInThisTurn(true);
             } else if (card instanceof SpellCard) {
                 if (((SpellCard) card).getIcon() == SpellIcon.FIELD || ((SpellCard) card).getIcon() == SpellIcon.EQUIP) {
-                    view.canNotSetCard();
+                    gameView.canNotSetCard();
                     return;
                 }
                 ((SpellCard) card).setPosition(SpellOrTrapCardPosition.HIDDEN);
@@ -356,13 +375,12 @@ public class MainPhaseController extends PhaseController {
             player.addCardToCardsInZone(card);
             player.removeCardFromHand(card);
             player.setSelectedCard(null);
-            mainPhaseView.printString("set successfully");
+            gameView.printString("set successfully");
         }
     }
 
     @Override
     protected void controlSetPositionAttackCommand() {
-
         changePositionHandler(OFFENSIVE_OCCUPIED);
     }
 
@@ -374,15 +392,15 @@ public class MainPhaseController extends PhaseController {
     private void changePositionHandler(MonsterCardPosition position) {
         Player player = phase.getPlayerByTurn();
         if (!player.hasSelectedCard()) {
-            mainPhaseView.noCardSelectedYet();
+            gameView.noCardSelectedYet();
         } else if (!player.isSelectedCardFromMonsterCardZone()) {
-            mainPhaseView.canNotChangeCardPosition();
+            gameView.printString("Can not change card position");
         } else if (((MonsterCard) player.getSelectedCard()).getPosition() == position) {
-            mainPhaseView.printString("this card is already in the wanted position");
+            gameView.printString("this card is already in the wanted position");
         } else if (((MonsterCard) player.getSelectedCard()).isPositionChangedInThisTurn()) {
-            mainPhaseView.printString("you already changed this card position in this turn");
+            gameView.printString("you already changed this card position in this turn");
         } else if (((MonsterCard) player.getSelectedCard()).getPosition() == DEFENSIVE_HIDDEN) {
-            mainPhaseView.canNotChangeDefensiveHiddenPosition();
+            gameView.printString("You can not change defensive hidden position");
         } else {
             ((MonsterCard) player.getSelectedCard()).setPosition(position);
             if (((MonsterCard) player.getSelectedCard()).getEquipCard() != null) {
@@ -395,7 +413,7 @@ public class MainPhaseController extends PhaseController {
                 ((MonsterCard) player.getSelectedCard()).setFlipped(true);
             }
             runAllMonsterPowersInZone(phase.getPlayerByTurn());
-            mainPhaseView.printString("monster card position changed successfully");
+            gameView.printString("monster card position changed successfully");
         }
     }
 
@@ -403,12 +421,12 @@ public class MainPhaseController extends PhaseController {
     protected void controlFlipSummonCommand() {
         Player player = phase.getPlayerByTurn();
         if (!player.hasSelectedCard()) {
-            mainPhaseView.noCardSelectedYet();
+            gameView.noCardSelectedYet();
         } else if (!player.isSelectedCardFromMonsterCardZone()) {
-            mainPhaseView.canNotChangeCardPosition();
+            gameView.printString("Can not flip summon this card");
         } else if (((MonsterCard) player.getSelectedCard()).isSummonedInThisTurn()
                 || ((MonsterCard) player.getSelectedCard()).getPosition() != DEFENSIVE_HIDDEN) {
-            mainPhaseView.printString("you can’t flip summon this card");
+            gameView.printString("you can’t flip summon this card");
         } else {
             MonsterCard flipSummonedCard = (MonsterCard) player.getSelectedCard();
             flipSummonedCard.setPosition(OFFENSIVE_OCCUPIED);
@@ -419,7 +437,7 @@ public class MainPhaseController extends PhaseController {
             flipSummonedCard.setSpecialSummoned(false);
             checkTrapActionsAfterSummon(flipSummonedCard);
             player.setSelectedCard(null);
-            mainPhaseView.printString("flip summoned successfully");
+            gameView.printString("flip summoned successfully");
             flipSummonedCard.setSummoned(false);
         }
     }
@@ -440,13 +458,13 @@ public class MainPhaseController extends PhaseController {
         player.setAbleToActivateTrapCard(false);
         runAllMonsterPowersInZone(player);
         if (!player.hasSelectedCard()) {
-            view.noCardSelectedYet();
+            gameView.noCardSelectedYet();
             return;
         } else if (!player.isSelectedCardFromSpellAndTrapZone() && !player.isSelectedCardFromHand() && !player.isSelectedCardFromFieldZone()) {
-            view.thisCardCanNotBeActivated();
+            gameView.thisCardCanNotBeActivated();
             return;
         } else if (player.getSelectedCard() instanceof MonsterCard) {
-            mainPhaseView.selectedCardIsMonster();
+            gameView.thisCardCanNotBeActivated();
         } else if (player.getSelectedCard() instanceof TrapCard) {
             controlActivateTrapEffect(player);
         } else if (player.getSelectedCard() instanceof SpellCard) {
@@ -470,12 +488,12 @@ public class MainPhaseController extends PhaseController {
 
     private void activateEquipSpell(Player player) {
         if (player.isSpellCardZoneFull()) {
-            mainPhaseView.printString("spell card zone is full");
+            gameView.printString("spell card zone is full");
             player.setSelectedCard(null);
             return;
         }
         if (((SpellCard) player.getSelectedCard()).getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
-            mainPhaseView.effectAlreadyActivated();
+            gameView.printString("Effect is already activated");
             return;
         }
         checkForPossibleSpellOrTrapEffect(player.getSelectedCard(), null, RecentActionsInGame.RIVAL_ACTIVATED_A_SPELL_CARD);
@@ -490,7 +508,7 @@ public class MainPhaseController extends PhaseController {
             player.addCardToCardsInZone(player.getSelectedCard());
             player.removeCardFromHand(player.getSelectedCard());
             player.setSelectedCard(null);
-            view.spellOrTrapActivated("Spell");
+            gameView.printString("Spell Activated");
         } else {
             ((SpellCard) player.getSelectedCard()).setActivationCancelled(false);
         }
@@ -499,7 +517,7 @@ public class MainPhaseController extends PhaseController {
 
     private void activateRitualSpell(Player player) {
         if (((SpellCard) player.getSelectedCard()).getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
-            mainPhaseView.effectAlreadyActivated();
+            gameView.printString("Effect is already activated");
         } else {
             checkForPossibleSpellOrTrapEffect(player.getSelectedCard(), null, RecentActionsInGame.RIVAL_ACTIVATED_A_SPELL_CARD);
             if (((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
@@ -512,23 +530,23 @@ public class MainPhaseController extends PhaseController {
                 player.removeCardFromHand(player.getSelectedCard());
             }
             ((SpellCard) player.getSelectedCard()).setPosition(SpellOrTrapCardPosition.OCCUPIED);
-            mainPhaseView.spellActivated();
+           gameView.printString("Spell activated");
         }
     }
 
     private void activateNormalAndQuickPlaySpell(Player player) {
         if (((SpellCard) player.getSelectedCard()).getPosition() == SpellOrTrapCardPosition.OCCUPIED) {
-            mainPhaseView.effectAlreadyActivated();
+            gameView.printString("Effect is already activated");
         } else {
             if (player.getSelectedCard().getName().equals("Monster Reborn")) {
                 if (phase.getFirstPlayer().getCardsInGraveyard().isEmpty() && phase.getSecondPlayer().getCardsInGraveyard().isEmpty()) {
-                    mainPhaseView.noWayToSpecialSummon();
+                    gameView.printString("There is no way you could special summon a monster");
                     return;
                 }
             }
             if (((SpellCard) player.getSelectedCard()).getPosition() == SpellOrTrapCardPosition.NOT_IN_PLAY_ZONE
                     && phase.getPlayerByTurn().isSpellCardZoneFull()) {
-                mainPhaseView.printString("spell card zone is full");
+                gameView.printString("spell card zone is full");
                 phase.getPlayerByTurn().setSelectedCard(null);
                 return;
             }
@@ -551,7 +569,7 @@ public class MainPhaseController extends PhaseController {
                 player.removeCardFromHand(player.getSelectedCard());
             }
 
-            mainPhaseView.spellActivated();
+            gameView.printString("Spell activated");
             phase.getPlayerByTurn().addCardToGraveyard(phase.getPlayerByTurn().getSelectedCard());
             phase.getPlayerByTurn().removeCardFromCardsInZone(phase.getPlayerByTurn().getSelectedCard()
                     , phase.getPlayerByTurn().getLocationOfThisSpellOrTrapCardInZone(phase.getPlayerByTurn().getSelectedCard()));
@@ -561,9 +579,9 @@ public class MainPhaseController extends PhaseController {
 
     private void activateFieldZoneSpell(Player player) {
         if (player.getFieldZoneCard() == player.getSelectedCard()) {
-            mainPhaseView.effectAlreadyActivated();
+            gameView.printString("Effect is already activated");
         } else if (phase.getRivalPlayerByTurn().getFieldZoneCard() == player.getSelectedCard()) {
-            mainPhaseView.opponentFieldSpellSelected();
+            gameView.opponentFieldSpellSelected();
         } else {
             checkForPossibleSpellOrTrapEffect(player.getSelectedCard(), null, RecentActionsInGame.RIVAL_ACTIVATED_A_SPELL_CARD);
             if (((SpellCard) player.getSelectedCard()).isActivationCancelled()) {
@@ -587,14 +605,14 @@ public class MainPhaseController extends PhaseController {
             player.removeCardFromHand(player.getSelectedCard());
             player.setFieldZoneCard(player.getSelectedCard());
             spellEffects.run((SpellCard) player.getSelectedCard());
-            mainPhaseView.spellActivated();
+            gameView.printString("Spell activated");
         }
     }
 
     private void controlActivateTrapEffect(Player player) {
         if (player.isSelectedCardFromSpellAndTrapZone()) {
             if (((TrapCard) player.getSelectedCard()).hasSetInThisTurn()) {
-                mainPhaseView.canNotActivateCardInThisTurn();
+                gameView.canNotActivateCardInThisTurn();
             } else {
                 player.setAbleToActivateTrapCard(true);
                 runAllMonsterPowersInZone(player);
@@ -604,25 +622,25 @@ public class MainPhaseController extends PhaseController {
                         ((TrapCard) player.getSelectedCard()).setActivationCancelled(false);
                         mainPhaseView.activationCancelled();
                     } else {
-                        mainPhaseView.spellOrTrapActivated("Trap");
+                        gameView.printString("Trap activated");
                     }
                 } else {
-                    mainPhaseView.preparationsOfSpellHaveNotBeenDoneYet();
+                    gameView.preparationsOfSpellHaveNotBeenDoneYet();
                 }
             }
         } else {
-            mainPhaseView.thisCardCanNotBeActivated();
+            gameView.thisCardCanNotBeActivated();
         }
     }
 
     private void controlAttackCommand() {
         Player player = phase.getPlayerByTurn();
         if (!player.hasSelectedCard()) {
-            view.noCardSelectedYet();
+            gameView.noCardSelectedYet();
         } else if (!player.isSelectedCardFromMonsterCardZone()) {
-            view.canNotAttackWithThisCard();
+            gameView.canNotAttackWithThisCard();
         } else {
-            view.canNotDoThisActionInThisPhase();
+            gameView.canNotDoThisActionInThisPhase();
         }
     }
 

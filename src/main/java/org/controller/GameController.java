@@ -31,8 +31,8 @@ public class GameController {
         this.player2 = new Player(user2);
         this.numberOfRounds = numberOfRounds;
         round = new Round(player1, player2, Turn.FIRST_PLAYER);
-        mainController = new MainPhaseController(new MainPhase(round));
-        battleController = new BattlePhaseController(new BattlePhase(round));
+        mainController = new MainPhaseController(new MainPhase(round), view);
+        battleController = new BattlePhaseController(new BattlePhase(round), view);
         drawPhase = new DrawPhase(round);
     }
 
@@ -70,62 +70,6 @@ public class GameController {
 
     public void run() {
         view.run();
-//        if (this.numberOfRounds == NumberOfRounds.ONE_ROUND_MATCH) {
-//            Round round = new Round(player1, player2, Turn.FIRST_PLAYER);
-//            round.run();
-//            if (player1.getNumberOfRoundsWon() == 1) {
-//                giveOneRoundWinnerPrize(player1);
-//                view.showMatchWinner(player1.getUser(), 1, 0);
-//            } else {
-//                giveOneRoundWinnerPrize(player2);
-//                view.showMatchWinner(player2.getUser(), 1, 0);
-//            }
-//        } else if (this.numberOfRounds == NumberOfRounds.THREE_ROUND_MATCH) {
-//
-//            Round round1 = new Round(player1, player2, Turn.FIRST_PLAYER);
-//            round1.run();
-//            round1Winner = round1.getWinner();
-//            round1Winner.increaseNumberOfRoundsWon();
-//            round1WinnerLp = round1.getWinner().getLifePoint();
-//            if(!isSomeoneSurrenderedOrLostByCheat()){
-//                view.showRoundWinner(round1Winner.getUser(), 1, 0);
-//            }
-//            //TODO changing card
-//            setPlayerCardsForGame();
-//            Round round2 = new Round(player1, player2, Turn.FIRST_PLAYER);
-//            round2.run();
-//            round2Winner = round2.getWinner();
-//            round2Winner.increaseNumberOfRoundsWon();
-//            round2WinnerLp = round2.getWinner().getLifePoint();
-//
-//            if (player1.getNumberOfRoundsWon() == 2) {
-//                giveTwoRoundWinnerPrize(player1, player2);
-//                view.showMatchWinner(round2Winner.getUser(), 2, 0);
-//                return;
-//            } else if (player2.getNumberOfRoundsWon() == 2) {
-//                giveTwoRoundWinnerPrize(player2, player1);
-//                view.showMatchWinner(round2Winner.getUser(), 2, 0);
-//                return;
-//            }
-//            setPlayerCardsForGame();
-//            if(!isSomeoneSurrenderedOrLostByCheat()){
-//                view.showRoundWinner(round2Winner.getUser(), 1, 1);
-//            }
-//
-//            Round round3 = new Round(player1, player2, Turn.FIRST_PLAYER);
-//            round3.run();
-//            round3Winner = round3.getWinner();
-//            round3Winner.increaseNumberOfRoundsWon();
-//            round3WinnerLp = round3.getWinner().getLifePoint();
-//            if (player1.getNumberOfRoundsWon() == 2) {
-//                giveThreeRoundWinnerPrize1(player1, player2);
-//                view.showMatchWinner(round3Winner.getUser(), 2, 1);
-//            } else if (player2.getNumberOfRoundsWon() == 2) {
-//                giveThreeRoundWinnerPrize1(player2, player1);
-//                view.showMatchWinner(round3Winner.getUser(), 2, 1);
-//            }
-//        }
-
     }
 
     private void setPlayerCardsForGame() {

@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -15,21 +16,23 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controller.GameController;
-import org.model.Card;
-import org.model.DrawPhase;
-import org.model.Player;
-import org.model.User;
+import org.model.*;
+import org.model.enums.MonsterCardPosition;
 import org.model.enums.PhaseName;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 import static org.model.enums.PhaseName.*;
+import static org.model.enums.MonsterCardPosition.*;
+import static org.model.enums.SpellOrTrapCardPosition.*;
 
 
 public class GameView extends Application {
     private static MediaPlayer backgroundMusic = new MediaPlayer(new Media(GameView.class.getResource("/sound/2 - Riot.mp3").toExternalForm()));
     private GameController game;
     private PhaseName phase = MAIN_PHASE_1;
+    private ArrayList<ImageView> cardsInZone = new ArrayList<>();
     @FXML
     private Text result;
     @FXML
@@ -72,9 +75,57 @@ public class GameView extends Application {
     private ImageView rivalGraveyard;
     @FXML
     private VBox graveyardVBox;
+    @FXML
+    private Text errorBox;
+    @FXML
+    private VBox buttonBar;
+    @FXML
+    private ImageView rivalSpell1;
+    @FXML
+    private ImageView rivalSpell2;
+    @FXML
+    private ImageView rivalSpell3;
+    @FXML
+    private ImageView rivalSpell4;
+    @FXML
+    private ImageView rivalSpell5;
+    @FXML
+    private ImageView rivalMonster1;
+    @FXML
+    private ImageView rivalMonster2;
+    @FXML
+    private ImageView rivalMonster3;
+    @FXML
+    private ImageView rivalMonster4;
+    @FXML
+    private ImageView rivalMonster5;
+    @FXML
+    private ImageView playerSpell1;
+    @FXML
+    private ImageView playerSpell2;
+    @FXML
+    private ImageView playerSpell3;
+    @FXML
+    private ImageView playerSpell4;
+    @FXML
+    private ImageView playerSpell5;
+    @FXML
+    private ImageView playerMonster1;
+    @FXML
+    private ImageView playerMonster2;
+    @FXML
+    private ImageView playerMonster3;
+    @FXML
+    private ImageView playerMonster4;
+    @FXML
+    private ImageView playerMonster5;
 
-    public GameView(GameController game){
+    public GameView(GameController game) {
         this.game = game;
+    }
+
+    public Text getErrorBox() {
+        return errorBox;
     }
 
     public void run() {
@@ -95,9 +146,34 @@ public class GameView extends Application {
         stage.setScene(scene);
         stage.show();
         game.getDrawPhase().run();
+        fillCardsInZoneImageViewArrayList();
         setInfo();
         backgroundMusic.setCycleCount(-1);
         backgroundMusic.play();
+    }
+
+    private void fillCardsInZoneImageViewArrayList() {
+        cardsInZone.clear();
+        cardsInZone.add(rivalSpell1);
+        cardsInZone.add(rivalSpell2);
+        cardsInZone.add(rivalSpell3);
+        cardsInZone.add(rivalSpell4);
+        cardsInZone.add(rivalSpell5);
+        cardsInZone.add(rivalMonster1);
+        cardsInZone.add(rivalMonster2);
+        cardsInZone.add(rivalMonster3);
+        cardsInZone.add(rivalMonster4);
+        cardsInZone.add(rivalMonster5);
+        cardsInZone.add(playerSpell1);
+        cardsInZone.add(playerSpell2);
+        cardsInZone.add(playerSpell3);
+        cardsInZone.add(playerSpell4);
+        cardsInZone.add(playerSpell5);
+        cardsInZone.add(playerMonster1);
+        cardsInZone.add(playerMonster2);
+        cardsInZone.add(playerMonster3);
+        cardsInZone.add(playerMonster4);
+        cardsInZone.add(playerMonster5);
     }
 
     private void setInfo() {
@@ -119,21 +195,60 @@ public class GameView extends Application {
         setCardsInHand(rivalPlayer, rivalCardsInHand, true);
         playerNumberOfCardsRemaining.setText(String.valueOf(player.getRemainingPlayerCardsInGame().size()));
         rivalNumberOfCardsRemaining.setText(String.valueOf(rivalPlayer.getRemainingPlayerCardsInGame().size()));
-        playerLifePointBar.setWidth(((double)player.getLifePoint() / 8000) * 272.0);
-        rivalLifePointBar.setWidth(((double)rivalPlayer.getLifePoint() / 8000) * 272.0);
+        playerLifePointBar.setWidth(((double) player.getLifePoint() / 8000) * 272.0);
+        rivalLifePointBar.setWidth(((double) rivalPlayer.getLifePoint() / 8000) * 272.0);
         setGraveyard(player, playerGraveyard);
         setGraveyard(rivalPlayer, rivalGraveyard);
+        setMonsterZone(player, false);
+        setMonsterZone(rivalPlayer, true);
     }
+
+    private void setMonsterZone(Player player, boolean isRival) {
+//        for (ImageView view : cardsInZone){
+//            view.setOpacity(0);
+//        }
+        int firstLoop = isRival ? 4 : 14;
+        int secondLoop = isRival ? -1 : 9;
+        for (int i = 1; i <= 5; i++) {
+            if (player.getMonsterCardsInZone().containsKey(i)) {
+                MonsterCard card = player.getMonsterCardByLocationFromZone(i);
+                if (card.getPosition() == DEFENSIVE_HIDDEN) {
+                    cardsInZone.get(i + firstLoop).setImage(Card.getCardImageByName("Unknown"));
+                    cardsInZone.get(i + firstLoop).setOpacity(1);
+                } else {
+                    cardsInZone.get(i + firstLoop).setImage(Card.getCardImageByName(card.getName()));
+                    cardsInZone.get(i + firstLoop).setOpacity(1);
+                }
+                if(card.getPosition() == DEFENSIVE_HIDDEN || card.getPosition() == DEFENSIVE_OCCUPIED){
+                    cardsInZone.get(i + firstLoop).setRotate(90);
+                }
+            }
+        }
+        for (int i=1; i<=5; i++){
+            if(player.getSpellOrTrapCardsInZone().containsKey(i)){
+                Card card = player.getSpellOrTrapCardsInZone().get(i);
+                if((card instanceof SpellCard && ((SpellCard) card).getPosition() == HIDDEN) || (card instanceof TrapCard && ((TrapCard) card).getPosition() == HIDDEN)){
+                    cardsInZone.get(i + secondLoop).setImage(Card.getCardImageByName("Unknown"));
+                    cardsInZone.get(i + secondLoop).setOpacity(1);
+                } else {
+                    cardsInZone.get(i + secondLoop).setImage(Card.getCardImageByName(card.getName()));
+                    cardsInZone.get(i + secondLoop).setOpacity(1);
+                }
+            }
+        }
+
+    }
+
 
     private void setGraveyard(Player player, ImageView playerGraveyard) {
         graveyardVBox.getChildren().clear();
-        if(player.getCardsInGraveyard().size() > 0){
+        if (player.getCardsInGraveyard().size() > 0) {
             int size = player.getCardsInGraveyard().size();
             Card lastCard = player.getCardsInGraveyard().get(size - 1);
             playerGraveyard.setImage(Card.getCardImageByName(lastCard.getName()));
             playerGraveyard.setOnMouseClicked(mouseEvent -> {
                 selectedCardImageView.setImage(Card.getCardImageByName(lastCard.getName()));
-                for (Card card : player.getCardsInGraveyard()){
+                for (Card card : player.getCardsInGraveyard()) {
                     ImageView view = new ImageView(Card.getCardImageByName(card.getName()));
                     graveyardVBox.getChildren().add(view);
                     view.setOnMouseClicked(mouseEvent2 -> selectedCardImageView.setImage(Card.getCardImageByName(card.getName())));
@@ -153,58 +268,136 @@ public class GameView extends Application {
                 cardsInHand.getChildren().add(row);
             }
             ImageView view;
-            if(isRival){
+            if (isRival) {
                 view = new ImageView(Card.getCardImageByName("Unknown"));
             } else {
                 view = new ImageView(Card.getCardImageByName(card.getName()));
             }
             view.setFitHeight(100);
             view.setFitWidth(75);
-            if(!isRival){
+            if (!isRival) {
                 view.setOnMouseClicked(mouseEvent -> {
-                selectedCardImageView.setImage(Card.getCardImageByName(card.getName()));
-                selectedCardDescription.setText(card.getName() + ": " + card.getDescription());
-            });
+                    game.getRound().getPlayerByTurn().setSelectedCard(card);
+                    addProperButtonsForPlayerCardsInHand(card);
+                    selectedCardImageView.setImage(Card.getCardImageByName(card.getName()));
+                    selectedCardDescription.setText(card.getName() + ": " + card.getDescription());
+                });
+            } else {
+                view.setOnMouseClicked(mouseEvent -> {
+                    game.getRound().getPlayerByTurn().setSelectedCard(card);
+                    buttonBar.getChildren().clear();
+                });
             }
             row.getChildren().add(view);
             i++;
         }
     }
 
+    private void addProperButtonsForPlayerCardsInHand(Card card) {
+        buttonBar.getChildren().clear();
+        if (card instanceof MonsterCard) {
+            Button attackDirect = new Button("Attack direct");
+            Button attackToCard = new Button("Attack to card");
+            Button changePosition = new Button("Change Position");
+            Button flipSummon = new Button("Flip Summon");
+            Button summon = new Button("Summon");
+            Button set = new Button("Set");
+            setOnMouseClickedForMonsterButtons((MonsterCard) card, attackDirect, attackToCard, changePosition, flipSummon, summon, set);
+            buttonBar.getChildren().add(attackDirect);
+            buttonBar.getChildren().add(attackToCard);
+            buttonBar.getChildren().add(changePosition);
+            buttonBar.getChildren().add(flipSummon);
+            buttonBar.getChildren().add(summon);
+            buttonBar.getChildren().add(set);
+        } else {
+            Button activateEffect = new Button("Activate Effect");
+            Button set = new Button("Set");
+            activateEffect.setOnMouseClicked(mouseEvent -> {
+                sendCommandTpProperController("activate effect");
+                setInfo();
+            });
+            set.setOnMouseClicked(mouseEvent -> {
+                sendCommandTpProperController("set");
+                setInfo();
+            });
+            buttonBar.getChildren().add(activateEffect);
+            buttonBar.getChildren().add(set);
+        }
+    }
+
+    private void setOnMouseClickedForMonsterButtons(MonsterCard card, Button attackDirect, Button attackToCard, Button changePosition, Button flipSummon, Button summon, Button set) {
+        summon.setOnMouseClicked(mouseEvent -> {
+            sendCommandTpProperController("summon");
+            setInfo();
+        });
+        set.setOnMouseClicked(mouseEvent -> {
+            sendCommandTpProperController("set");
+            setInfo();
+        });
+        flipSummon.setOnMouseClicked(mouseEvent -> {
+            sendCommandTpProperController("flip-summon");
+            setInfo();
+        });
+        changePosition.setOnMouseClicked(mouseEvent -> {
+            if (card.getPosition() == DEFENSIVE_OCCUPIED ||
+                    card.getPosition() == DEFENSIVE_HIDDEN) {
+                sendCommandTpProperController("set -p attack");
+            } else {
+                sendCommandTpProperController("set -p defense");
+            }
+            setInfo();
+        });
+        attackToCard.setOnMouseClicked(mouseEvent -> {
+        });
+        attackDirect.setOnMouseClicked(mouseEvent -> {
+        });
+    }
+
     private void setProfilePicture(Player player, ImageView profilePicture) {
         try {
-            if(player.getUser().hasChangedProfilePicture()){
+            if (player.getUser().hasChangedProfilePicture()) {
                 profilePicture.setImage(new Image(player.getUser().getProfilePicturePath()));
             } else {
                 profilePicture.setImage(new Image(getClass().getResource(player.getUser().getProfilePicturePath()).toExternalForm()));
             }
-        } catch (Exception e){}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void nextPhase(){
-        if(phase == MAIN_PHASE_1){
+    private void sendCommandTpProperController(String command) {
+        if (phase == MAIN_PHASE_1 || phase == MAIN_PHASE_2) {
+            game.getMainController().processCommand(command);
+        } else if (phase == BATTLE_PHASE) {
+            game.getBattleController().processCommand(command);
+        }
+    }
+
+    public void nextPhase() {
+        errorBox.setText("");
+        if (phase == MAIN_PHASE_1) {
             phase = BATTLE_PHASE;
             phaseName.setText("Phase: " + phase.getPhaseName());
-        } else if (phase == BATTLE_PHASE){
+        } else if (phase == BATTLE_PHASE) {
             phase = MAIN_PHASE_2;
             phaseName.setText("Phase: " + phase.getPhaseName());
-        } else if (phase == MAIN_PHASE_2){
+        } else if (phase == MAIN_PHASE_2) {
             phase = END_PHASE;
             phaseName.setText("Phase: " + phase.getPhaseName());
             nextPhase();
-        } else if (phase == END_PHASE){
+        } else if (phase == END_PHASE) {
             JOptionPane.showMessageDialog(null, "It's now "
                     + game.getRound().getPlayerByTurn().getUser().getNickname() + " 's turn");
             changeTurnForAllControllers();
             phase = DRAW_PHASE;
             phaseName.setText("Phase: " + phase.getPhaseName());
             nextPhase();
-        } else if(phase == DRAW_PHASE){
+        } else if (phase == DRAW_PHASE) {
             game.getDrawPhase().run();
             phase = STANDBY_PHASE;
             phaseName.setText("Phase: " + phase.getPhaseName());
             nextPhase();
-        } else if (phase == STANDBY_PHASE){
+        } else if (phase == STANDBY_PHASE) {
             phase = MAIN_PHASE_1;
             setInfo();
         }
@@ -212,6 +405,7 @@ public class GameView extends Application {
     }
 
     private void changeTurnForAllControllers() {
+        game.getMainController().setSummonOrSetMonsterCard(false);
         game.getMainController().getPhase().changeTurn();
         System.out.println();
         game.getBattleController().getPhase().changeTurn();
@@ -220,11 +414,91 @@ public class GameView extends Application {
     }
 
 
-    public void showMatchWinner(User winner , int winnerScore , int loserScore){
+    public void showMatchWinner(User winner, int winnerScore, int loserScore) {
         System.out.println(winner.getUsername() + " won the whole match with score: " + winnerScore + "-" + loserScore);
     }
 
-    public void showRoundWinner(User winner , int winnerScore , int loserScore){
+    public void showRoundWinner(User winner, int winnerScore, int loserScore) {
         System.out.println(winner.getUsername() + " won the game and the score is: " + winnerScore + "-" + loserScore);
     }
+
+    public void printString(String text) {
+        errorBox.setText(text);
+    }
+
+    public void summonedSuccessfully() {
+        errorBox.setText("Summoned Successfully");
+        buttonBar.getChildren().clear();
+    }
+
+    public void noCardSelectedYet() {
+        errorBox.setText("No card is selected yet");
+    }
+
+    public void canNotSummonCard() {
+        errorBox.setText("You can not summon this card");
+    }
+
+    public void monsterZoneIsFull() {
+        errorBox.setText("Monster card zone is full");
+    }
+
+    public void canNotSetCard() {
+        errorBox.setText("Can not set this card");
+    }
+
+    public void canNotAttackWithThisCard() {
+        errorBox.setText("You can not attack with this card");
+    }
+
+    public void canNotDoThisActionInThisPhase() {
+        errorBox.setText("You can not do this action in this phase");
+    }
+
+    public void canNotActivateCardInThisTurn() {
+        errorBox.setText("This card can't be activated in the turn it was set");
+    }
+
+    public void preparationsOfSpellHaveNotBeenDoneYet() {
+        errorBox.setText("preparations of this spell/trap are not done yet");
+    }
+
+    public void thisCardCanNotBeActivated() {
+        errorBox.setText("This card can't be activated");
+    }
+
+
+    public void opponentFieldSpellSelected() {
+        errorBox.setText("you picked the wrong card fool.");
+    }
+
+    public void actionNotAllowedInThisPhase() {
+        errorBox.setText("action not allowed in this phase");
+    }
+
+    public void youCanNotAttackInYourFirstTurn() {
+        errorBox.setText("You can't attack in your first turn");
+    }
+
+    public void thisCardAlreadyAttacked() {
+        errorBox.setText("this card already attacked");
+    }
+
+    public void canNotAttackDirectly() {
+        errorBox.setText("you can’t attack the opponent directly");
+    }
+
+
+    public void attackDirectResult(int damage) {
+        errorBox.setText("your opponent receives " + damage + " battle damage");
+    }
+
+    public void canNotActivateOnThisTurn() {
+        errorBox.setText("you can’t activate an effect on this turn");
+    }
+
+    public void thereIsNoCardToAttackHere() {
+        errorBox.setText("there is no card to attack here");
+    }
+
 }

@@ -8,10 +8,6 @@ public class MainPhaseView extends PhaseView {
         super(mainPhaseController);
     }
 
-    public void canNotActivateCardInThisTurn(){
-        System.out.println("This card can't be activated in the turn it was set");
-    }
-
     public void chooseMonsterLocationForTribute(int numOfLocations) {
         System.out.println("Please choose " + numOfLocations + " location(s) to tribute");
     }
@@ -30,10 +26,6 @@ public class MainPhaseView extends PhaseView {
 
     public void effectAlreadyActivated() {
         System.out.println("you have already activated this card");
-    }
-
-    public void opponentFieldSpellSelected() {
-        System.out.println("you picked the wrong card fool.");
     }
 
     public void spellActivated() {
