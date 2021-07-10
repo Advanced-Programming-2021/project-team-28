@@ -661,6 +661,7 @@ public class GameView extends Application {
     }
 
     public void surrendering() {
+        popStage.setAlwaysOnTop(false);
         int isSure = JOptionPane.showConfirmDialog(null, "Are you sure you want to surrender?");
         if (isSure == JOptionPane.YES_OPTION) {
             System.out.println("surrendered");
@@ -669,6 +670,7 @@ public class GameView extends Application {
         } else {
             System.out.println("was unSure");
         }
+        popStage.setAlwaysOnTop(true);
     }
 
     public void muteUnmute() {
