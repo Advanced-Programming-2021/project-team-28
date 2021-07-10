@@ -440,7 +440,7 @@ public class GameView extends Application {
                             buttonBar.getChildren().clear();
                         });
                     }
-                    if(card3.getPosition() == DEFENSIVE_HIDDEN || card3.getPosition() == DEFENSIVE_OCCUPIED){
+                    if (card3.getPosition() == DEFENSIVE_HIDDEN || card3.getPosition() == DEFENSIVE_OCCUPIED) {
                         cardView.setRotate(90);
                     } else {
                         cardView.setRotate(0);
@@ -448,7 +448,8 @@ public class GameView extends Application {
 
                 } else {
                     cardView.setImage(null);
-                    cardView.setOnMouseClicked(mouseEvent4 -> {});
+                    cardView.setOnMouseClicked(mouseEvent4 -> {
+                    });
                 }
             }
             //TODO
@@ -655,6 +656,7 @@ public class GameView extends Application {
     }
 
     public void hidePopup() {
+        popStage.setAlwaysOnTop(false);
         popStage.toFront();
         isPaused = false;
         popStage.hide();
