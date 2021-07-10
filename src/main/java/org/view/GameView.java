@@ -487,6 +487,7 @@ public class GameView extends Application {
                } catch (Exception e) {
                    e.printStackTrace();
                }
+               backgroundMusic.stop();
            } else {
                int numberOfRoundsBefore = game.getRound().getFirstPlayer().getNumberOfRoundsWon() + game.getRound().getSecondPlayer().getNumberOfRoundsWon();
                if(numberOfRoundsBefore == 0){
@@ -720,6 +721,7 @@ public class GameView extends Application {
         if (!isMuted) {
             isMuted = true;
             try {
+                backgroundMusic.setMute(true);
                 muteButton.setImage(new Image(this.getClass().getResource("/mainclass/icons8-mute-100.png").toExternalForm()));
             } catch (Exception e) {
                 e.printStackTrace();
@@ -728,6 +730,7 @@ public class GameView extends Application {
         } else {
             isMuted = false;
             try {
+                backgroundMusic.setMute(false);
                 muteButton.setImage(new Image(this.getClass().getResource("/mainclass/icons8-sound-100.png").toExternalForm()));
             } catch (Exception e) {
                 e.printStackTrace();
