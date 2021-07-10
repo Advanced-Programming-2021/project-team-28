@@ -17,7 +17,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controller.GameController;
 import org.model.*;
-import org.model.enums.MonsterCardPosition;
 import org.model.enums.PhaseName;
 
 import javax.swing.*;
@@ -148,8 +147,8 @@ public class GameView extends Application {
         game.getDrawPhase().run();
         fillCardsInZoneImageViewArrayList();
         setInfo();
-        backgroundMusic.setCycleCount(-1);
-        backgroundMusic.play();
+        //backgroundMusic.setCycleCount(-1);
+        //backgroundMusic.play();
     }
 
     private void fillCardsInZoneImageViewArrayList() {
@@ -207,30 +206,47 @@ public class GameView extends Application {
         int firstLoop = isRival ? 4 : 14;
         int secondLoop = isRival ? -1 : 9;
         for (int i = 1; i <= 5; i++) {
+            ImageView cardView = cardsInZone.get(i + firstLoop);
             if (player.getMonsterCardsInZone().containsKey(i)) {
                 MonsterCard card = player.getMonsterCardByLocationFromZone(i);
                 if (card.getPosition() == DEFENSIVE_HIDDEN) {
-                    cardsInZone.get(i + firstLoop).setImage(Card.getCardImageByName("Unknown"));
+                    if(isRival){
+                        cardView.setOnMouseClicked(mouseEvent -> onMouseClickForInvisibleCards(card));
+                    } else {
+                        cardView.setOnMouseClicked(mouseEvent -> onMouseClickForVisibleCards(card));
+                    }
+                    cardView.setImage(Card.getCardImageByName("Unknown"));
                 } else {
-                    cardsInZone.get(i + firstLoop).setImage(Card.getCardImageByName(card.getName()));
+                    cardView.setImage(Card.getCardImageByName(card.getName()));
+                    cardView.setOnMouseClicked(mouseEvent -> onMouseClickForVisibleCards(card));
                 }
                 if(card.getPosition() == DEFENSIVE_HIDDEN || card.getPosition() == DEFENSIVE_OCCUPIED){
-                    cardsInZone.get(i + firstLoop).setRotate(90);
+                    cardView.setRotate(90);
+                } else {
+                    cardView.setRotate(0);
                 }
+
             } else {
-                cardsInZone.get(i + firstLoop).setImage(null);
+                cardView.setImage(null);
             }
         }
         for (int i=1; i<=5; i++){
+            ImageView cardView = cardsInZone.get(i + secondLoop);
             if(player.getSpellOrTrapCardsInZone().containsKey(i)){
                 Card card = player.getSpellOrTrapCardsInZone().get(i);
                 if((card instanceof SpellCard && ((SpellCard) card).getPosition() == HIDDEN) || (card instanceof TrapCard && ((TrapCard) card).getPosition() == HIDDEN)){
-                    cardsInZone.get(i + secondLoop).setImage(Card.getCardImageByName("Unknown"));
+                    cardView.setImage(Card.getCardImageByName("Unknown"));
+                    if(isRival){
+                        cardView.setOnMouseClicked(mouseEvent -> onMouseClickForInvisibleCards(card));
+                    } else {
+                        cardView.setOnMouseClicked(mouseEvent -> onMouseClickForVisibleCards(card));
+                    }
                 } else {
-                    cardsInZone.get(i + secondLoop).setImage(Card.getCardImageByName(card.getName()));
+                    cardView.setImage(Card.getCardImageByName(card.getName()));
+                    cardView.setOnMouseClicked(mouseEvent -> onMouseClickForVisibleCards(card));
                 }
             } else {
-                cardsInZone.get(i + secondLoop).setImage(null);
+                cardView.setImage(null);
             }
         }
 
@@ -274,20 +290,28 @@ public class GameView extends Application {
             view.setFitWidth(75);
             if (!isRival) {
                 view.setOnMouseClicked(mouseEvent -> {
-                    game.getRound().getPlayerByTurn().setSelectedCard(card);
-                    addProperButtonsForPlayerCardsInHand(card);
-                    selectedCardImageView.setImage(Card.getCardImageByName(card.getName()));
-                    selectedCardDescription.setText(card.getName() + ": " + card.getDescription());
+                    onMouseClickForVisibleCards(card);
                 });
             } else {
                 view.setOnMouseClicked(mouseEvent -> {
-                    game.getRound().getPlayerByTurn().setSelectedCard(card);
-                    buttonBar.getChildren().clear();
+                    onMouseClickForInvisibleCards(card);
                 });
             }
             row.getChildren().add(view);
             i++;
         }
+    }
+
+    private void onMouseClickForInvisibleCards(Card card) {
+        game.getRound().getPlayerByTurn().setSelectedCard(card);
+        buttonBar.getChildren().clear();
+    }
+
+    private void onMouseClickForVisibleCards(Card card) {
+        game.getRound().getPlayerByTurn().setSelectedCard(card);
+        addProperButtonsForPlayerCardsInHand(card);
+        selectedCardImageView.setImage(Card.getCardImageByName(card.getName()));
+        selectedCardDescription.setText(card.getName() + ": " + card.getDescription());
     }
 
     private void addProperButtonsForPlayerCardsInHand(Card card) {
@@ -310,11 +334,11 @@ public class GameView extends Application {
             Button activateEffect = new Button("Activate Effect");
             Button set = new Button("Set");
             activateEffect.setOnMouseClicked(mouseEvent -> {
-                sendCommandTpProperController("activate effect");
+                sendCommandToProperController("activate effect");
                 setInfo();
             });
             set.setOnMouseClicked(mouseEvent -> {
-                sendCommandTpProperController("set");
+                sendCommandToProperController("set");
                 setInfo();
             });
             buttonBar.getChildren().add(activateEffect);
@@ -324,23 +348,23 @@ public class GameView extends Application {
 
     private void setOnMouseClickedForMonsterButtons(MonsterCard card, Button attackDirect, Button attackToCard, Button changePosition, Button flipSummon, Button summon, Button set) {
         summon.setOnMouseClicked(mouseEvent -> {
-            sendCommandTpProperController("summon");
+            sendCommandToProperController("summon");
             setInfo();
         });
         set.setOnMouseClicked(mouseEvent -> {
-            sendCommandTpProperController("set");
+            sendCommandToProperController("set");
             setInfo();
         });
         flipSummon.setOnMouseClicked(mouseEvent -> {
-            sendCommandTpProperController("flip-summon");
+            sendCommandToProperController("flip-summon");
             setInfo();
         });
         changePosition.setOnMouseClicked(mouseEvent -> {
             if (card.getPosition() == DEFENSIVE_OCCUPIED ||
                     card.getPosition() == DEFENSIVE_HIDDEN) {
-                sendCommandTpProperController("set -p attack");
+                sendCommandToProperController("set -p attack");
             } else {
-                sendCommandTpProperController("set -p defense");
+                sendCommandToProperController("set -p defense");
             }
             setInfo();
         });
@@ -362,7 +386,7 @@ public class GameView extends Application {
         }
     }
 
-    private void sendCommandTpProperController(String command) {
+    private void sendCommandToProperController(String command) {
         if (phase == MAIN_PHASE_1 || phase == MAIN_PHASE_2) {
             game.getMainController().processCommand(command);
         } else if (phase == BATTLE_PHASE) {
@@ -394,10 +418,15 @@ public class GameView extends Application {
             phase = STANDBY_PHASE;
             phaseName.setText("Phase: " + phase.getPhaseName());
             nextPhase();
+            game.getRound().tasksAfterChangingTurn();
         } else if (phase == STANDBY_PHASE) {
             phase = MAIN_PHASE_1;
             setInfo();
         }
+        buttonBar.getChildren().clear();
+        game.getRound().getFirstPlayer().setSelectedCard(null);
+        game.getRound().getSecondPlayer().setSelectedCard(null);
+        selectedCardImageView.setImage(Card.getCardImageByName("Unknown"));
 
     }
 
@@ -426,6 +455,15 @@ public class GameView extends Application {
     public void summonedSuccessfully() {
         errorBox.setText("Summoned Successfully");
         buttonBar.getChildren().clear();
+    }
+
+    public void setSuccessfully(){
+        errorBox.setText("Set successfully");
+        buttonBar.getChildren().clear();
+    }
+
+    public void changedPositionSuccessfully(){
+        errorBox.setText("monster card position changed successfully");
     }
 
     public void noCardSelectedYet() {
@@ -485,7 +523,6 @@ public class GameView extends Application {
         errorBox.setText("you can’t attack the opponent directly");
     }
 
-
     public void attackDirectResult(int damage) {
         errorBox.setText("your opponent receives " + damage + " battle damage");
     }
@@ -498,4 +535,7 @@ public class GameView extends Application {
         errorBox.setText("there is no card to attack here");
     }
 
+    public void flipSummonedSuccessfully() {
+        errorBox.setText("Flip summoned successfully");
+    }
 }
