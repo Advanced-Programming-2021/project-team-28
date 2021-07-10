@@ -155,7 +155,7 @@ public class AllCardsInitiator {
     }
 
     public static void addMonstersToImageArrayList() {
-
+        cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/Abbas.png").toExternalForm()), "Abbas Boua'zar"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/TheAngry.png").toExternalForm()), "The Angry Cobbler"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/Geralt.png").toExternalForm()), "Geralt Of Rivia"));
         cardsAndImages.add(new CardAndImage(new Image(AllCardsInitiator.class.getResource("/cards/Monsters/Cerberus.png").toExternalForm()), "Team-28 Cerberus"));
@@ -247,7 +247,7 @@ public class AllCardsInitiator {
     }
 
     public static void setPrices() {
-
+        prices.put("Abbas Boua'zar", 12345);
         prices.put("The Angry Cobbler", 12345);
         prices.put("Geralt Of Rivia", 20000);
         prices.put("Team-28 Cerberus", 20000);
