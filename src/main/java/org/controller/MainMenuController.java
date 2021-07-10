@@ -51,8 +51,8 @@ public class MainMenuController {
             for (int i = 0; i < 12; i++) {
                 if (duelCommandMatchers[i].find()) {
                     if (validateMatch(duelCommandMatchers[i]) != NumberOfRounds.OTHERS) {
-                        new GameController(user, User.getUserByUsername(duelCommandMatchers[i].group("secondPlayer")), validateMatch(duelCommandMatchers[i]), Turn.FIRST_PLAYER).run();
-                    }
+                        new MiniGameController(user, User.getUserByUsername(duelCommandMatchers[i].group("secondPlayer")), validateMatch(duelCommandMatchers[i])).run();
+                        }
                     return;
                 }
             }

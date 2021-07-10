@@ -14,9 +14,12 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.controller.GameController;
 import org.controller.MiniGameController;
+import org.model.User;
 import org.model.enums.MiniGame;
 import org.model.enums.Status;
+import org.model.enums.Turn;
 
 public class MiniGameView extends Application {
 
@@ -79,7 +82,19 @@ public class MiniGameView extends Application {
         start.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                //TODO : add the code to start the match
+                if(winner == Status.P1){
+                    try {
+                        new GameController(controller.getUser1(), controller.getUser2(), controller.getNumberOfRounds(), Turn.FIRST_PLAYER).run();
+                    } catch (CloneNotSupportedException exception) {
+                        exception.printStackTrace();
+                    }
+                } else {
+                    try {
+                        new GameController(controller.getUser1(), controller.getUser2(), controller.getNumberOfRounds(), Turn.SECOND_PLAYER).run();
+                    } catch (CloneNotSupportedException exception) {
+                        exception.printStackTrace();
+                    }
+                }
             }
         });
 

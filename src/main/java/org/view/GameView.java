@@ -20,6 +20,7 @@ import org.controller.MainMenuController;
 import org.model.*;
 import org.model.enums.NumberOfRounds;
 import org.model.enums.PhaseName;
+import org.model.enums.Turn;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -164,8 +165,8 @@ public class GameView extends Application {
         game.getDrawPhase().run();
         fillCardsInZoneImageViewArrayList();
         setInfo();
-//        backgroundMusic.setCycleCount(-1);
-//        backgroundMusic.play();
+        backgroundMusic.setCycleCount(-1);
+        backgroundMusic.play();
     }
 
 
@@ -291,7 +292,6 @@ public class GameView extends Application {
             playerFieldZone.setOnMouseClicked(mouseEvent -> {
             });
         }
-
     }
 
 
@@ -352,15 +352,19 @@ public class GameView extends Application {
     }
 
     private void onMouseClickForInvisibleCards(Card card) {
-        game.getRound().getPlayerByTurn().setSelectedCard(card);
-        buttonBar.getChildren().clear();
+        if(!isPaused){
+            game.getRound().getPlayerByTurn().setSelectedCard(card);
+            buttonBar.getChildren().clear();
+        }
     }
 
     private void onMouseClickForVisibleCards(Card card) {
-        game.getRound().getPlayerByTurn().setSelectedCard(card);
-        addProperButtonsForPlayerCardsInHand(card);
-        selectedCardImageView.setImage(Card.getCardImageByName(card.getName()));
-        selectedCardDescription.setText(card.getName() + ": " + card.getDescription());
+        if(!isPaused){
+            game.getRound().getPlayerByTurn().setSelectedCard(card);
+            addProperButtonsForPlayerCardsInHand(card);
+            selectedCardImageView.setImage(Card.getCardImageByName(card.getName()));
+            selectedCardDescription.setText(card.getName() + ": " + card.getDescription());
+        }
     }
 
     private void addProperButtonsForPlayerCardsInHand(Card card) {
@@ -383,12 +387,16 @@ public class GameView extends Application {
             Button activateEffect = new Button("Activate Effect");
             Button set = new Button("Set");
             activateEffect.setOnMouseClicked(mouseEvent -> {
-                sendCommandToProperController("activate effect");
-                setInfo();
+                if(!isPaused){
+                    sendCommandToProperController("activate effect");
+                    setInfo();
+                }
             });
             set.setOnMouseClicked(mouseEvent -> {
-                sendCommandToProperController("set");
-                setInfo();
+                if(!isPaused){
+                    sendCommandToProperController("set");
+                    setInfo();
+                }
             });
             buttonBar.getChildren().add(activateEffect);
             buttonBar.getChildren().add(set);
@@ -397,8 +405,10 @@ public class GameView extends Application {
 
     private void setOnMouseClickedForMonsterButtons(MonsterCard card, Button attackDirect, Button attackToCard, Button changePosition, Button flipSummon, Button summon, Button set) {
         summon.setOnMouseClicked(mouseEvent -> {
-            sendCommandToProperController("summon");
-            setInfo();
+            if(!isPaused){
+                sendCommandToProperController("summon");
+                setInfo();
+            }
         });
         set.setOnMouseClicked(mouseEvent -> {
             sendCommandToProperController("set");
@@ -476,6 +486,17 @@ public class GameView extends Application {
                    new MainMenuController(game.getRound().getFirstPlayer().getUser()).run();
                } catch (Exception e) {
                    e.printStackTrace();
+               }
+           } else {
+               int numberOfRoundsBefore = game.getRound().getFirstPlayer().getNumberOfRoundsWon() + game.getRound().getSecondPlayer().getNumberOfRoundsWon();
+               if(numberOfRoundsBefore == 0){
+                   showRoundWinner(game.getRound().getWinner().getUser(), 1, 0);
+                   Player winner = game.getRound().getWinner();
+                   Turn turn = winner.equals(game.getRound().getFirstPlayer()) ? Turn.SECOND_PLAYER : Turn.FIRST_PLAYER;
+                   game.setRound(new Round(game.getMainController().getPhase().getFirstPlayer(),
+                           game.getMainController().getPhase().getSecondPlayer(), turn));
+                   game.setPlayerCardsForGame();
+                   setInfo();
                }
            }
         }

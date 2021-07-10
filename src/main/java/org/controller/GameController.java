@@ -36,6 +36,34 @@ public class GameController {
         drawPhase = new DrawPhase(round);
     }
 
+    public void setRound(Round round) {
+        this.round = round;
+    }
+
+    public Player getRound1Winner() {
+        return round1Winner;
+    }
+
+    public void setRound1Winner(Player round1Winner) {
+        this.round1Winner = round1Winner;
+    }
+
+    public Player getRound2Winner() {
+        return round2Winner;
+    }
+
+    public void setRound2Winner(Player round2Winner) {
+        this.round2Winner = round2Winner;
+    }
+
+    public Player getRound3Winner() {
+        return round3Winner;
+    }
+
+    public void setRound3Winner(Player round3Winner) {
+        this.round3Winner = round3Winner;
+    }
+
     public NumberOfRounds getNumberOfRounds() {
         return numberOfRounds;
     }
@@ -60,7 +88,7 @@ public class GameController {
         view.run();
     }
 
-    private void setPlayerCardsForGame() {
+    public void setPlayerCardsForGame() {
         try {
             resetHandAndRemainingCards(player1);
             resetHandAndRemainingCards(player2);
