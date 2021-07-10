@@ -8,8 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
@@ -32,6 +31,8 @@ public class GameView extends Application {
     private GameController game;
     private PhaseName phase = MAIN_PHASE_1;
     private ArrayList<ImageView> cardsInZone = new ArrayList<>();
+    @FXML
+    private Pane gameBoard;
     @FXML
     private Text result;
     @FXML
@@ -260,11 +261,10 @@ public class GameView extends Application {
         }
     }
 
-
     private void setFieldZone(Player player, Player rivalPlayer) {
         if(rivalPlayer.hasFieldSpellCardInZone()){
-            rivalFieldZone.setImage(Card.getCardImageByName(player.getFieldZoneCard().getName()));
-            rivalFieldZone.setOnMouseClicked(mouseEvent -> onMouseClickForVisibleCards(player.getFieldZoneCard()));
+            rivalFieldZone.setImage(Card.getCardImageByName(rivalPlayer.getFieldZoneCard().getName()));
+            rivalFieldZone.setOnMouseClicked(mouseEvent -> onMouseClickForVisibleCards(rivalPlayer.getFieldZoneCard()));
         } else {
             rivalFieldZone.setImage(null);
             rivalFieldZone.setOnMouseClicked(mouseEvent -> {});

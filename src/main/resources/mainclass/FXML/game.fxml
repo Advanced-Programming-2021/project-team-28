@@ -49,7 +49,7 @@
          <Font size="22.0" />
       </font>
    </Text>
-   <Pane layoutX="483.0" layoutY="60.0" prefHeight="600.0" prefWidth="540.0" styleClass="battlefield">
+   <Pane fx:id="gameBoard" layoutX="483.0" layoutY="60.0" prefHeight="600.0" prefWidth="540.0" styleClass="battlefield">
       <ImageView fx:id="rivalSpell5" fitHeight="91.0" fitWidth="68.0" layoutX="107.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="rivalSpell3" fitHeight="91.0" fitWidth="68.0" layoutX="186.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="rivalSpell1" fitHeight="91.0" fitWidth="68.0" layoutX="265.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
