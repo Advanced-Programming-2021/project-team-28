@@ -29,6 +29,7 @@ import static org.model.enums.SpellOrTrapCardPosition.*;
 
 
 public class GameView extends Application {
+    boolean isInAttackMode = false;
     private static MediaPlayer backgroundMusic = new MediaPlayer(new Media(GameView.class.getResource("/sound/2 - Riot.mp3").toExternalForm()));
     private GameController game;
     private PhaseName phase = MAIN_PHASE_1;
@@ -300,12 +301,16 @@ public class GameView extends Application {
             playerGraveyard.setOnMouseClicked(mouseEvent -> {
                 selectedCardImageView.setImage(Card.getCardImageByName(lastCard.getName()));
                 for (Card card : player.getCardsInGraveyard()) {
+                    graveyardVBox.getChildren().clear();
                     ImageView view = new ImageView(Card.getCardImageByName(card.getName()));
+                    view.setFitHeight(170);
+                    view.setFitWidth(120);
                     graveyardVBox.getChildren().add(view);
                     view.setOnMouseClicked(mouseEvent2 -> selectedCardImageView.setImage(Card.getCardImageByName(card.getName())));
                 }
             });
         } else {
+            playerGraveyard.setImage(null);
             playerGraveyard.setOnMouseClicked(mouseEvent -> {
             });
         }
@@ -410,8 +415,46 @@ public class GameView extends Application {
             setInfo();
         });
         attackToCard.setOnMouseClicked(mouseEvent -> {
+            isInAttackMode = true;
+            errorBox.setText("Select a monster card from rival zone");
+            //TODO
+            Player rivalPlayer = game.getRound().getRivalPlayerByTurn();
+            for (int i = 1; i <= 5; i++) {
+                ImageView cardView = cardsInZone.get(i + 4);
+                if (rivalPlayer.getMonsterCardsInZone().containsKey(i)) {
+                    MonsterCard card3 = rivalPlayer.getMonsterCardByLocationFromZone(i);
+                    int location = i;
+                    if (card3.getPosition() == DEFENSIVE_HIDDEN) {
+                        cardView.setOnMouseClicked(mouseEvent3 -> {
+                            sendCommandToProperController("attack " + location);
+                            setInfo();
+                            buttonBar.getChildren().clear();
+                        });
+                        cardView.setImage(Card.getCardImageByName("Unknown"));
+                    } else {
+                        cardView.setImage(Card.getCardImageByName(card3.getName()));
+                        cardView.setOnMouseClicked(mouseEvent2 -> {
+                            sendCommandToProperController("attack " + location);
+                            setInfo();
+                            buttonBar.getChildren().clear();
+                        });
+                    }
+                    if(card3.getPosition() == DEFENSIVE_HIDDEN || card3.getPosition() == DEFENSIVE_OCCUPIED){
+                        cardView.setRotate(90);
+                    } else {
+                        cardView.setRotate(0);
+                    }
+
+                } else {
+                    cardView.setImage(null);
+                    cardView.setOnMouseClicked(mouseEvent4 -> {});
+                }
+            }
+            //TODO
         });
         attackDirect.setOnMouseClicked(mouseEvent -> {
+            sendCommandToProperController("attack direct");
+            setInfo();
         });
     }
 
@@ -476,6 +519,7 @@ public class GameView extends Application {
         game.getMainController().getPhase().changeTurn();
         System.out.println();
         game.getBattleController().getPhase().changeTurn();
+        game.getBattleController().getPhase().setTurnsPlayed(game.getBattleController().getPhase().getTurnsPlayed() + 1);
         game.getRound().changeTurn();
         game.getDrawPhase().changeTurn();
     }
