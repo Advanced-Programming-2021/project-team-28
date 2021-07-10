@@ -522,8 +522,9 @@ public class GameView extends Application {
         Turn turn = winner.equals(game.getRound().getFirstPlayer()) ? Turn.SECOND_PLAYER : Turn.FIRST_PLAYER;
         game.setRound(new Round(game.getMainController().getPhase().getFirstPlayer(),
                 game.getMainController().getPhase().getSecondPlayer(), turn));
-        game.setPlayerCardsForGame();
         game.getRound().resetPlayersData();
+        game.setPlayerCardsForGame();
+        game.getDrawPhase().run();
         setInfo();
     }
 
