@@ -158,8 +158,7 @@ public class LoginMenuView extends Application {
             if (password.getText().equals("") || username.getText().equals("") || nickname.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Please enter username, password and nickname first.");
             } else {
-                CONTROLLER.processCommand("user create -u " + username.getText() + " -p " + password.getText()
-                        + " -n " + nickname.getText());
+                CONTROLLER.controlCreateUserCommand(username.getText() , password.getText() , nickname.getText());
                 username.clear();
                 password.clear();
                 nickname.clear();

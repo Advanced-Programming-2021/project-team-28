@@ -1,5 +1,6 @@
 package org.controller;
 
+import org.MainClient;
 import org.model.*;
 import org.view.LoginMenuView;
 
@@ -12,6 +13,7 @@ import java.util.regex.Pattern;
 
 public class LoginMenuController {
     LoginMenuView loginMenuView;
+
 
     public LoginMenuController (LoginMenuView view){
         this.loginMenuView = view;
@@ -59,6 +61,9 @@ public class LoginMenuController {
     }
 
     private void controlLoginUserCommand(String username, String password) throws Exception {
+
+
+
         if(User.isUsernameAvailable(username) || !User.getUserByUsername(username).getPassword().equals(password)){
             loginMenuView.usernameAndPasswordDidNotMatch();
         } else {
@@ -66,7 +71,12 @@ public class LoginMenuController {
         }
     }
 
-    private void controlCreateUserCommand(String username, String password, String nickname) {
+    public void controlCreateUserCommand(String username, String password, String nickname) {
+        try {
+            String result = sendAndReceive("user create -u " + username + " -p " + password + " -n " + nickname);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         if(!User.isUsernameAvailable(username)){
             loginMenuView.usernameExists(username);
         } else if(!User.isNicknameAvailable(nickname)){
@@ -75,6 +85,13 @@ public class LoginMenuController {
             new User(username, password, nickname);
             loginMenuView.userCreated();
         }
+    }
+
+    private String sendAndReceive(String command) throws IOException {
+        MainClient.getDataOutputStream().writeUTF(command);
+        MainClient.getDataOutputStream().flush();
+        String result = MainClient.getDataInputStream().readUTF();
+        return result;
     }
 
     private Matcher[] getCommandMatchers(String command) {

@@ -47,6 +47,10 @@ public class MainServer {
     }
 
     private static String process(String input) {
-        return String.valueOf(Integer.parseInt(input) * 2);
+        if(input.startsWith("user create")){
+
+        }
     }
+
+
 }

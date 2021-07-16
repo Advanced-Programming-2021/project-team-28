@@ -28,17 +28,18 @@ public class MainClient {
 
     public static void main(String[] args) throws Exception {
         initializeNetwork();
-        while(true){
-            Scanner scanner = new Scanner(System.in);
-            String string = scanner.nextLine();
-            dataOutputStream.writeUTF(string);
-            dataOutputStream.flush();
-            String result = dataInputStream.readUTF();
-            System.out.println(result);
-        }
+        new LoginMenuView().run();
+//        while(true){
+//            Scanner scanner = new Scanner(System.in);
+//            String string = scanner.nextLine();
+//            dataOutputStream.writeUTF(string);
+//            dataOutputStream.flush();
+//            String result = dataInputStream.readUTF();
+//            System.out.println(result);
+//        }
 
 //        restoreDatabase();
-//        new LoginMenuView().run();
+
     }
 
     private static void restoreDatabase() throws Exception {
@@ -72,5 +73,17 @@ public class MainClient {
                 writer.close();
             }
 
+    }
+
+    public static Socket getSocket() {
+        return socket;
+    }
+
+    public static DataInputStream getDataInputStream() {
+        return dataInputStream;
+    }
+
+    public static DataOutputStream getDataOutputStream() {
+        return dataOutputStream;
     }
 }
