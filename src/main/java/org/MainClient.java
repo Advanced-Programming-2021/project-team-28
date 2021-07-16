@@ -5,16 +5,34 @@ import javafx.scene.media.MediaPlayer;
 import org.model.*;
 import org.view.LoginMenuView;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.net.Socket;
 import java.util.ArrayList;
 
 public class MainClient {
 
+    private static Socket socket;
+    private static DataInputStream dataInputStream;
+    private static DataOutputStream dataOutputStream;
+
+    public static void initializeNetwork() {
+        try {
+            socket = new Socket("localhost", 7677);
+            dataInputStream = new DataInputStream(socket.getInputStream());
+            dataOutputStream = new DataOutputStream(socket.getOutputStream());
+        } catch (IOException x) {
+            x.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) throws Exception {
-        restoreDatabase();
-        new LoginMenuView().run();
+        initializeNetwork();
+        dataOutputStream.writeUTF("2");
+        dataOutputStream.flush();
+        String result = dataInputStream.readUTF();
+        System.out.println("4");
+//        restoreDatabase();
+//        new LoginMenuView().run();
     }
 
     private static void restoreDatabase() throws Exception {

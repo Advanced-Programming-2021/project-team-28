@@ -19,14 +19,14 @@ public class MainServer {
             serverSocket = new ServerSocket(7677);
             while(true){
                 Socket socket = serverSocket.accept();
-                startNewThread(serverSocket, socket);
+                startNewThread(socket);
             }
         } catch(Exception e){
             e.printStackTrace();
         }
     }
 
-    private static void startNewThread(ServerSocket serverSocket, Socket socket) {
+    private static void startNewThread(Socket socket) {
         new Thread(() -> {
             try {
                 DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
@@ -47,6 +47,6 @@ public class MainServer {
     }
 
     private static String process(String input) {
-        return null;
+        return String.valueOf(Integer.parseInt(input) * 2);
     }
 }
