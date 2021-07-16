@@ -1,61 +1,95 @@
-package server;
+package server.controller;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
+import org.MainClient;
+import org.model.*;
+import org.view.LoginMenuView;
+
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MainServer {
+public class LoginMenuController {
+    LoginMenuView loginMenuView;
 
-    private ServerSocket serverSocket;
 
-    public static void main(String[] args){
-        MainServer server = new MainServer();
-        server.initializeNetwork();
+    public LoginMenuController (LoginMenuView view){
+        this.loginMenuView = view;
     }
 
-    public void initializeNetwork() {
-        try {
-            serverSocket = new ServerSocket(7877);
-            while(true){
-                Socket socket = serverSocket.accept();
-                startNewThread(socket);
-            }
-        } catch(Exception e){
-            e.printStackTrace();
+    public void run() throws Exception {
+
+        this.loginMenuView.run();
+        CreateNewCard.serialize();
+        MonsterCard.serialize();
+        SpellCard.serialize();
+        TrapCard.serialize();
+        Deck.serialize();
+        User.serialize();
+    }
+
+    public MenuEnum processCommand(String command) throws Exception {
+//        String username = "username";
+//        String password = "password";
+//        String nickname = "nickname";
+//        Matcher[] commandMatchers = getCommandMatchers(command);
+//        if (commandMatchers[0].find()) {
+//            return MenuEnum.BACK;
+//        } else if (commandMatchers[1].find()) {
+//            loginMenuView.showCurrentMenu();
+//            return MenuEnum.CONTINUE;
+//        } else if (commandMatchers[18].find()){
+//            loginMenuView.pleaseLoginFirst();
+//            return MenuEnum.CONTINUE;
+//        }
+//        for (int i=2 ; i<14; i++){
+//            if(commandMatchers[i].find()){
+//                controlCreateUserCommand(commandMatchers[i].group(username), commandMatchers[i].group(password), commandMatchers[i].group(nickname));
+//                return MenuEnum.CONTINUE;
+//            }
+//        }
+//        for (int i=14; i<18; i++){
+//            if(commandMatchers[i].find()){
+//                controlLoginUserCommand(commandMatchers[i].group(username), commandMatchers[i].group(password));
+//                return MenuEnum.CONTINUE;
+//            }
+//        }
+//        loginMenuView.invalidCommand();
+        return MenuEnum.CONTINUE;
+    }
+
+    private void controlLoginUserCommand(String username, String password) throws Exception {
+        if(User.isUsernameAvailable(username) || !User.getUserByUsername(username).getPassword().equals(password)){
+            loginMenuView.usernameAndPasswordDidNotMatch();
+        } else {
+            new MainMenuController(User.getUserByUsername(username)).run();
         }
     }
 
-    private static void startNewThread(Socket socket) {
-        new Thread(() -> {
-            try {
-                DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-                DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
-                while (true) {
-                    String input = dataInputStream.readUTF();
-                    String result = process(input);
-                    if (result.equals("")) break;
-                    dataOutputStream.writeUTF(result);
-                    dataOutputStream.flush();
-                }
-                dataInputStream.close();
-                socket.close();
-            } catch (Exception e){
-                e.printStackTrace();
-            }
-        }).start();
+    public void controlCreateUserCommand(String username, String password, String nickname) {
+        try {
+            String result = sendAndReceive("user create -u " + username + " -p " + password + " -n " + nickname);
+            System.out.println(result);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(!User.isUsernameAvailable(username)){
+            loginMenuView.usernameExists(username);
+        } else if(!User.isNicknameAvailable(nickname)) {
+            loginMenuView.nicknameExists(nickname);
+        } else {
+            new User(username, password, nickname);
+            loginMenuView.userCreated();
+        }
     }
 
-    private static String process(String input) {
-        Matcher[] matchers = getCommandMatchers(input);
-        if(matchers[2].find()) {
-            return matchers[2].group("username") + " " + matchers[2].group("password") + " " + matchers[2].group("nickname");
-        } return "nashod";
+    private String sendAndReceive(String command) throws IOException {
+        MainClient.getDataOutputStream().writeUTF(command);
+        MainClient.getDataOutputStream().flush();
+        String result = MainClient.getDataInputStream().readUTF();
+        return result;
     }
 
-    private static Matcher[] getCommandMatchers(String command) {
+    private Matcher[] getCommandMatchers(String command) {
         Pattern patternForExit = Pattern.compile("^menu exit$");
         Pattern patternForShowCurrentMenu = Pattern.compile("^menu show-current$");
         Pattern patternForCreateUser1 = Pattern.compile("^user create -u (?<username>.+?) -p (?<password>.+?) -n (?<nickname>.+?)$");
@@ -98,4 +132,12 @@ public class MainServer {
         return commandMatchers;
     }
 
+    public void saveDatabase() {
+        CreateNewCard.serialize();
+        MonsterCard.serialize();
+        SpellCard.serialize();
+        TrapCard.serialize();
+        Deck.serialize();
+        User.serialize();
+    }
 }

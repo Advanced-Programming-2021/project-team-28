@@ -130,21 +130,21 @@ public class LoginMenuView extends Application {
         registerButton.setOnMouseExited(mouseEvent -> registerButton.setEffect(null));
         exit.setOnMouseEntered(mouseEvent -> exit.setEffect(new Lighting()));
         exit.setOnMouseExited(mouseEvent -> exit.setEffect(null));
-        loginButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+        loginButton.setOnMouseEntered(new EventHandler<>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("/sound/gga.mp3").toExternalForm()));
                 player.play();
             }
         });
-        registerButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+        registerButton.setOnMouseEntered(new EventHandler<>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("/sound/gga.mp3").toExternalForm()));
                 player.play();
             }
         });
-        exit.setOnMouseEntered(new EventHandler<MouseEvent>() {
+        exit.setOnMouseEntered(new EventHandler<>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("/sound/gga.mp3").toExternalForm()));

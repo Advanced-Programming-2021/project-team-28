@@ -31,39 +31,36 @@ public class LoginMenuController {
     }
 
     public MenuEnum processCommand(String command) throws Exception {
-        String username = "username";
-        String password = "password";
-        String nickname = "nickname";
-        Matcher[] commandMatchers = getCommandMatchers(command);
-        if (commandMatchers[0].find()) {
-            return MenuEnum.BACK;
-        } else if (commandMatchers[1].find()) {
-            loginMenuView.showCurrentMenu();
-            return MenuEnum.CONTINUE;
-        } else if (commandMatchers[18].find()){
-            loginMenuView.pleaseLoginFirst();
-            return MenuEnum.CONTINUE;
-        }
-        for (int i=2 ; i<14; i++){
-            if(commandMatchers[i].find()){
-                controlCreateUserCommand(commandMatchers[i].group(username), commandMatchers[i].group(password), commandMatchers[i].group(nickname));
-                return MenuEnum.CONTINUE;
-            }
-        }
-        for (int i=14; i<18; i++){
-            if(commandMatchers[i].find()){
-                controlLoginUserCommand(commandMatchers[i].group(username), commandMatchers[i].group(password));
-                return MenuEnum.CONTINUE;
-            }
-        }
-        loginMenuView.invalidCommand();
+//        String username = "username";
+//        String password = "password";
+//        String nickname = "nickname";
+//        Matcher[] commandMatchers = getCommandMatchers(command);
+//        if (commandMatchers[0].find()) {
+//            return MenuEnum.BACK;
+//        } else if (commandMatchers[1].find()) {
+//            loginMenuView.showCurrentMenu();
+//            return MenuEnum.CONTINUE;
+//        } else if (commandMatchers[18].find()){
+//            loginMenuView.pleaseLoginFirst();
+//            return MenuEnum.CONTINUE;
+//        }
+//        for (int i=2 ; i<14; i++){
+//            if(commandMatchers[i].find()){
+//                controlCreateUserCommand(commandMatchers[i].group(username), commandMatchers[i].group(password), commandMatchers[i].group(nickname));
+//                return MenuEnum.CONTINUE;
+//            }
+//        }
+//        for (int i=14; i<18; i++){
+//            if(commandMatchers[i].find()){
+//                controlLoginUserCommand(commandMatchers[i].group(username), commandMatchers[i].group(password));
+//                return MenuEnum.CONTINUE;
+//            }
+//        }
+//        loginMenuView.invalidCommand();
         return MenuEnum.CONTINUE;
     }
 
     private void controlLoginUserCommand(String username, String password) throws Exception {
-
-
-
         if(User.isUsernameAvailable(username) || !User.getUserByUsername(username).getPassword().equals(password)){
             loginMenuView.usernameAndPasswordDidNotMatch();
         } else {
@@ -74,12 +71,13 @@ public class LoginMenuController {
     public void controlCreateUserCommand(String username, String password, String nickname) {
         try {
             String result = sendAndReceive("user create -u " + username + " -p " + password + " -n " + nickname);
+            System.out.println(result);
         } catch (IOException e) {
             e.printStackTrace();
         }
         if(!User.isUsernameAvailable(username)){
             loginMenuView.usernameExists(username);
-        } else if(!User.isNicknameAvailable(nickname)){
+        } else if(!User.isNicknameAvailable(nickname)) {
             loginMenuView.nicknameExists(nickname);
         } else {
             new User(username, password, nickname);
