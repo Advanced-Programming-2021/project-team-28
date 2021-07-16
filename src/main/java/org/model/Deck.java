@@ -46,7 +46,7 @@ public class Deck {
             deckToStringBuilder.append("Side deck:\n");
             deckToStringBuilder.append(Card.cardsArrayListToString(allCardsInSideDeck));
         } else {
-            deckToStringBuilder.append("Main deck:\n");
+            deckToStringBuilder.append("MainServer deck:\n");
             deckToStringBuilder.append(Card.cardsArrayListToString(allCardsInMainDeck));
         }
         return deckToStringBuilder.toString();

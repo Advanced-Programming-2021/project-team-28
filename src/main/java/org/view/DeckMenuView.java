@@ -124,7 +124,7 @@ public class DeckMenuView extends Application {
     }
 
     public void mainOrSideDeckIsFull(boolean isSideDeckFull) {
-        String mainOrSide = isSideDeckFull ? "Side" : "Main";
+        String mainOrSide = isSideDeckFull ? "Side" : "MainServer";
         errorText.setText("Error, " + mainOrSide + " deck is full");
     }
 
@@ -137,7 +137,7 @@ public class DeckMenuView extends Application {
     }
 
     public void cardDoesNotExistInSideOrMainDeck(String cardName, boolean isInSideDeck) {
-        String mainOrSide = isInSideDeck ? "Side" : "Main";
+        String mainOrSide = isInSideDeck ? "Side" : "MainServer";
         System.out.println("card with name " + cardName + " does not exist in " + mainOrSide + " deck");
     }
 

@@ -10,7 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Main {
+public class MainClient {
 
     public static void main(String[] args) throws Exception {
         restoreDatabase();

@@ -61,7 +61,7 @@ public class MainMenuView extends Application {
 
 
     public void showMenu() {
-        System.out.println("Main Menu");
+        System.out.println("MainServer Menu");
     }
 
     public void showError(String error) {

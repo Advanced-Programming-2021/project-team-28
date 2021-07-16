@@ -140,7 +140,7 @@ public class PhaseView {
 
     public void printPhaseName (){
         if(controller.getPhase() instanceof MainPhase){
-            System.out.println("phase: Main Phase " + ((MainPhase) controller.getPhase()).getWhatMainPhase());
+            System.out.println("phase: MainServer Phase " + ((MainPhase) controller.getPhase()).getWhatMainPhase());
         } else if(controller.getPhase() instanceof BattlePhase){
             System.out.println("phase: Battle Phase");
         }
