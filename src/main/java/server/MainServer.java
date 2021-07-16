@@ -16,7 +16,7 @@ public class MainServer {
 
     public void initializeNetwork() {
         try {
-            serverSocket = new ServerSocket(7677);
+            serverSocket = new ServerSocket(7877);
             while(true){
                 Socket socket = serverSocket.accept();
                 startNewThread(socket);

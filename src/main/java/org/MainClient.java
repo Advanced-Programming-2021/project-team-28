@@ -8,6 +8,7 @@ import org.view.LoginMenuView;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class MainClient {
 
@@ -17,7 +18,7 @@ public class MainClient {
 
     public static void initializeNetwork() {
         try {
-            socket = new Socket("localhost", 7677);
+            socket = new Socket("localhost", 7877);
             dataInputStream = new DataInputStream(socket.getInputStream());
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
         } catch (IOException x) {
@@ -27,10 +28,15 @@ public class MainClient {
 
     public static void main(String[] args) throws Exception {
         initializeNetwork();
-        dataOutputStream.writeUTF("2");
-        dataOutputStream.flush();
-        String result = dataInputStream.readUTF();
-        System.out.println("4");
+        while(true){
+            Scanner scanner = new Scanner(System.in);
+            String string = scanner.nextLine();
+            dataOutputStream.writeUTF(string);
+            dataOutputStream.flush();
+            String result = dataInputStream.readUTF();
+            System.out.println(result);
+        }
+
 //        restoreDatabase();
 //        new LoginMenuView().run();
     }
