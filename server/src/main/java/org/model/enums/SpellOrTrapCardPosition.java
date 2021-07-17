@@ -1,4 +1,4 @@
-package model.enums;
+package org.model.enums;
 
 public enum SpellOrTrapCardPosition {
     OCCUPIED("\tO"),

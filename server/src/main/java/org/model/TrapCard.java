@@ -1,13 +1,13 @@
-package model;
+package org.model;
 
 
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
-import model.enums.SpellOrTrapCardPosition;
-import model.enums.TrapEffect;
-import model.enums.TrapIcon;
+import org.model.enums.SpellOrTrapCardPosition;
+import org.model.enums.TrapEffect;
+import org.model.enums.TrapIcon;
 
 import java.io.FileWriter;
 import java.io.IOException;

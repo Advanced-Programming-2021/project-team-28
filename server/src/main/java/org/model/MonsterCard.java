@@ -1,11 +1,11 @@
-package model;
+package org.model;
 
 
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
-import model.enums.*;
+import org.model.enums.*;
 
 import java.io.FileWriter;
 import java.io.IOException;

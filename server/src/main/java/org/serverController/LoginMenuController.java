@@ -1,17 +1,21 @@
-package serverController;
+package org.serverController;
 
 
-import model.*;
+import org.MainServer;
+import org.model.*;
+
+import java.util.UUID;
 
 public class LoginMenuController {
 
 
-    public Object[] controlLoginUserCommand(String username, String password) throws Exception {
-        if (User.isUsernameAvailable(username) || !User.getUserByUsername(username).getPassword().equals(password)) {
-//            loginMenuView.usernameAndPasswordDidNotMatch();
-        } else {
-//            new MainMenuController(User.getUserByUsername(username)).run();
+    public Object controlLoginUserCommand(String username, String password) {
+        String result = "error";
+        if (!(User.isUsernameAvailable(username) || !User.getUserByUsername(username).getPassword().equals(password))) {
+            result = UUID.randomUUID().toString();
+            MainServer.getTokens().put(result, username);
         }
+        return result;
     }
 
 

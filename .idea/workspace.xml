@@ -4,9 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6e2b2ce-4ca9-4617-8f8b-40311e2222f4" name="Default Changelist" comment="gaame sevvom">
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/MainServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/MainServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/serverController/LoginMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/serverController/LoginMenuController.java" afterDir="false" />
+    <list default="true" id="f6e2b2ce-4ca9-4617-8f8b-40311e2222f4" name="Default Changelist" comment="gaame panjom">
+      <change afterPath="$PROJECT_DIR$/server/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/controller/LoginMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/controller/LoginMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/view/LoginMenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/view/LoginMenuView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/MainServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/MainServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/Deck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/MonsterCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/MonsterCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/Scoreboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/Scoreboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/SpellCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/SpellCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/TrapCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/TrapCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/Utilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/Utilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/enums/Attribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/enums/Attribute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/enums/MiniGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/enums/MiniGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/enums/MonsterCardPosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/enums/MonsterCardPosition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/enums/MonsterPower.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/enums/MonsterPower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/enums/MonsterType.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/enums/MonsterType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/enums/NumberOfRounds.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/enums/NumberOfRounds.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/enums/PhaseName.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/enums/PhaseName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/enums/RecentActionsInGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/enums/RecentActionsInGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/enums/SpellEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/enums/SpellEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/enums/SpellIcon.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/enums/SpellIcon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/enums/SpellOrTrapCardPosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/enums/SpellOrTrapCardPosition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/enums/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/enums/Status.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/enums/TrapEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/enums/TrapEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/enums/TrapIcon.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/enums/TrapIcon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/enums/Turn.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/enums/Turn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/serverController/LoginMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/serverController/LoginMenuController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +45,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1vRGFY2XK8yZIedXqtYrN9QPQns" />
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -41,17 +72,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainClient" />
@@ -67,7 +87,8 @@
       <option name="presentableId" value="Default" />
       <updated>1626517385009</updated>
       <workItem from="1626517386920" duration="17000" />
-      <workItem from="1626525212726" duration="4646000" />
+      <workItem from="1626525212726" duration="4714000" />
+      <workItem from="1626547209625" duration="2768000" />
     </task>
     <task id="LOCAL-00001" summary="gaame avval">
       <created>1626533469040</created>
@@ -90,7 +111,14 @@
       <option name="project" value="LOCAL" />
       <updated>1626533589644</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="gaame panjom">
+      <created>1626539352419</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1626539352419</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -106,11 +134,13 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="gaame avval" />
     <MESSAGE value="gaame dovvom" />
     <MESSAGE value="gaame sevvom" />
-    <option name="LAST_COMMIT_MESSAGE" value="gaame sevvom" />
+    <MESSAGE value="gaame panjom" />
+    <option name="LAST_COMMIT_MESSAGE" value="gaame panjom" />
   </component>
 </project>

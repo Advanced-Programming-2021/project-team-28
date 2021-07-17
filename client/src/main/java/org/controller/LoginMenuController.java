@@ -4,10 +4,8 @@ import org.MainClient;
 import org.model.*;
 import org.view.LoginMenuView;
 
+import javax.swing.*;
 import java.io.IOException;
-import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class LoginMenuController {
     LoginMenuView loginMenuView;
@@ -28,18 +26,26 @@ public class LoginMenuController {
         User.serialize();
     }
 
-    private void controlLoginUserCommand(String username, String password) throws Exception {
-        if (User.isUsernameAvailable(username) || !User.getUserByUsername(username).getPassword().equals(password)) {
-            loginMenuView.usernameAndPasswordDidNotMatch();
-        } else {
-            new MainMenuController(User.getUserByUsername(username)).run();
+    public void controlLoginUserCommand(String username, String password) throws Exception {
+        try {
+            String result = (String) sendAndReceive("user login -u " + username + " -p " + password);
+            if(!result.equals("error")) {
+                MainClient.setToken(result);
+                User user = (User) sendAndReceive("get user " + username);
+                new MainMenuController(user).run();
+            } else {
+                loginMenuView.usernameAndPasswordDidNotMatch();
+            }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Server error");
+            e.printStackTrace();
         }
     }
 
     public void controlCreateUserCommand(String username, String password, String nickname) {
         try {
             String result = (String) sendAndReceive("user create -u " + username + " -p " + password + " -n " + nickname);
-            switch (Objects.requireNonNull(result)) {
+            switch (result) {
                 case "usernameExists":
                     loginMenuView.usernameExists(username);
                     break;

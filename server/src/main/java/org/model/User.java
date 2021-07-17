@@ -1,13 +1,10 @@
-package model;
+package org.model;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -15,7 +12,7 @@ import java.util.Collections;
 import java.util.Random;
 
 
-public class User {
+public class User implements Serializable {
     @Expose
     private String username;
     @Expose

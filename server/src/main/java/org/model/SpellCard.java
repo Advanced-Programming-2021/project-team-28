@@ -1,12 +1,12 @@
-package model;
+package org.model;
 
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
-import model.enums.SpellEffect;
-import model.enums.SpellIcon;
-import model.enums.SpellOrTrapCardPosition;
+import org.model.enums.SpellEffect;
+import org.model.enums.SpellIcon;
+import org.model.enums.SpellOrTrapCardPosition;
 
 import java.io.FileWriter;
 import java.io.IOException;

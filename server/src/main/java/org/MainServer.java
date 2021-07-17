@@ -1,17 +1,21 @@
-import model.MonsterCard;
-import model.SpellCard;
-import model.TrapCard;
-import model.User;
-import serverController.LoginMenuController;
+package org;
+
+import org.model.MonsterCard;
+import org.model.SpellCard;
+import org.model.TrapCard;
+import org.model.User;
+import org.serverController.LoginMenuController;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainServer {
+    private static HashMap<String, String> tokens = new HashMap<>();
     private static final LoginMenuController LOGIN_MENU_CONTROLLER = new LoginMenuController();
 
     private ServerSocket serverSocket;
@@ -24,6 +28,10 @@ public class MainServer {
             e.printStackTrace();
         }
         server.initializeNetwork();
+    }
+
+    public static HashMap<String, String> getTokens() {
+        return tokens;
     }
 
     private static void restoreDatabase() throws Exception {
@@ -79,7 +87,7 @@ public class MainServer {
                 while (true) {
                     String input = dataInputStream.readUTF();
                     Object result = process(input);
-                    if (result.equals("")) break;
+                    if(result == null) break;
                     objectOutputStream.writeObject(result);
                     objectOutputStream.flush();
                 }
@@ -92,12 +100,14 @@ public class MainServer {
         }).start();
     }
 
-    private static Object process(String input) {
+    private static Object process(String input) throws Exception {
         Matcher[] matchers = getCommandMatchers(input);
         if (matchers[0].find()) {
            return LOGIN_MENU_CONTROLLER.controlCreateUserCommand(matchers[0].group("username"), matchers[0].group("password"), matchers[0].group("nickname"));
         } else if (matchers[1].find()) {
-            return LOGIN_MENU_CONTROLLER.controlLoginUserCommand(matchers[1].group("username"), matchers[1].group("password"))
+            return LOGIN_MENU_CONTROLLER.controlLoginUserCommand(matchers[1].group("username"), matchers[1].group("password"));
+        } else if (matchers[2].find()) {
+            return User.getUserByUsername(matchers[2].group("username"));
         }
         return "invalid";
     }
@@ -106,9 +116,11 @@ public class MainServer {
 
         Pattern patternForCreateUser1 = Pattern.compile("^user create -u (?<username>.+?) -p (?<password>.+?) -n (?<nickname>.+?)$");
         Pattern patternForLoginUser1 = Pattern.compile("^user login -u (?<username>.+?) -p (?<password>.+?)$");
-        Matcher[] commandMatchers = new Matcher[19];
+        Pattern patternForGetUser = Pattern.compile("^get user (?<username>.+?)$");
+        Matcher[] commandMatchers = new Matcher[3];
         commandMatchers[0] = patternForCreateUser1.matcher(command);
         commandMatchers[1] = patternForLoginUser1.matcher(command);
+        commandMatchers[2] = patternForGetUser.matcher(command);
         return commandMatchers;
     }
 

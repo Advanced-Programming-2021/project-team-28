@@ -1,4 +1,4 @@
-package model;
+package org.model;
 
 
 
@@ -48,7 +48,7 @@ public class Deck {
             deckToStringBuilder.append("Side deck:\n");
             deckToStringBuilder.append(Card.cardsArrayListToString(allCardsInSideDeck));
         } else {
-            deckToStringBuilder.append("MainServer deck:\n");
+            deckToStringBuilder.append("org.MainServer deck:\n");
             deckToStringBuilder.append(Card.cardsArrayListToString(allCardsInMainDeck));
         }
         return deckToStringBuilder.toString();

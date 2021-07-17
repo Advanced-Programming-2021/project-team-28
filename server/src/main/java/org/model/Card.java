@@ -1,12 +1,10 @@
-package model;
+package org.model;
 
 
 import com.google.gson.annotations.Expose;
-import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 
 public abstract class Card {
