@@ -1,14 +1,12 @@
 package org;
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import org.model.*;
 import org.view.LoginMenuView;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class MainClient {
 
