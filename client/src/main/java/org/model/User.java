@@ -16,6 +16,7 @@ import java.util.Random;
 
 
 public class User {
+
     @Expose
     private String username;
     @Expose

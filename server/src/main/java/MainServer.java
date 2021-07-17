@@ -1,7 +1,12 @@
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import model.MonsterCard;
+import model.SpellCard;
+import model.TrapCard;
+import model.User;
+
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,7 +16,44 @@ public class MainServer {
 
     public static void main(String[] args){
         MainServer server = new MainServer();
+        try {
+            restoreDatabase();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         server.initializeNetwork();
+    }
+
+    private static void restoreDatabase() throws Exception {
+        createResourceFileIfNeeded();
+//        CreateNewCard.deserialize();
+//        AllCardsInitiator.fillAllCards();
+//        AllCardsInitiator.setPrices();
+        MonsterCard.deserialize();
+        SpellCard.deserialize();
+        TrapCard.deserialize();
+        User.deserialize();
+    }
+
+    private static void createResourceFileIfNeeded() throws IOException {
+        ArrayList<File> files= new ArrayList<>();
+        files.add(new File("src/UserOutput.json"));
+        files.add(new File("src/MonsterCardsOutput.json"));
+        files.add(new File("src/SpellCardsOutput.json"));
+        files.add(new File("src/TrapCardsOutput.json"));
+        files.add(new File("src/DecksOutput.json"));
+//        files.add(new File("src/NewMonsterOutput.json"));
+//        files.add(new File("src/NewTrapOutput.json"));
+//        files.add(new File("src/NewSpellOutput.json"));
+
+        for (File file : files)
+            if(!file.exists()){
+                file.createNewFile();
+                FileWriter writer = new FileWriter(file);
+                writer.write("[]");
+                writer.close();
+            }
+
     }
 
     public void initializeNetwork() {
