@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6e2b2ce-4ca9-4617-8f8b-40311e2222f4" name="Default Changelist" comment="">
+    <list default="true" id="f6e2b2ce-4ca9-4617-8f8b-40311e2222f4" name="Default Changelist" comment="gaame sevvom">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/MainClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/MainClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/org/controller/LoginMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/controller/LoginMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/view/LoginMenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/view/LoginMenuView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/test/java/AllTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/test/java/AllTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/MainServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/MainServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/serverController/LoginMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/serverController/LoginMenuController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +32,7 @@
     <property name="aspect.path.notification.shown" value="true" />
   </component>
   <component name="RunManager">
-    <configuration name="MainClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="MainClient" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.MainClient" />
       <module name="project" />
       <extension name="coverage">
@@ -69,8 +71,30 @@
       <option name="presentableId" value="Default" />
       <updated>1626517385009</updated>
       <workItem from="1626517386920" duration="17000" />
-      <workItem from="1626525212726" duration="2065000" />
+      <workItem from="1626525212726" duration="3114000" />
     </task>
+    <task id="LOCAL-00001" summary="gaame avval">
+      <created>1626533469040</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1626533469040</updated>
+    </task>
+    <task id="LOCAL-00002" summary="gaame dovvom">
+      <created>1626533538068</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1626533538068</updated>
+    </task>
+    <task id="LOCAL-00003" summary="gaame sevvom">
+      <created>1626533589644</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1626533589644</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -86,5 +110,11 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="gaame avval" />
+    <MESSAGE value="gaame dovvom" />
+    <MESSAGE value="gaame sevvom" />
+    <option name="LAST_COMMIT_MESSAGE" value="gaame sevvom" />
   </component>
 </project>

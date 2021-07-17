@@ -2,6 +2,7 @@ import model.MonsterCard;
 import model.SpellCard;
 import model.TrapCard;
 import model.User;
+import serverController.LoginMenuController;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -11,6 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainServer {
+    private static final LoginMenuController LOGIN_MENU_CONTROLLER = new LoginMenuController();
 
     private ServerSocket serverSocket;
 
@@ -93,11 +95,9 @@ public class MainServer {
     private static Object process(String input) {
         Matcher[] matchers = getCommandMatchers(input);
         if (matchers[0].find()) {
-
-
-            return matchers[0].group("username") + " " + matchers[0].group("password") + " " + matchers[0].group("nickname");
+           return LOGIN_MENU_CONTROLLER.controlCreateUserCommand(matchers[0].group("username"), matchers[0].group("password"), matchers[0].group("nickname"));
         }
-        return "nashod";
+        return "invalid";
     }
 
     private static Matcher[] getCommandMatchers(String command) {

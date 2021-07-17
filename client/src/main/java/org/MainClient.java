@@ -46,17 +46,7 @@ public class MainClient {
     public static void main(String[] args) throws Exception {
         initializeNetwork();
         new LoginMenuView().run();
-//        while(true){
-//            Scanner scanner = new Scanner(System.in);
-//            String string = scanner.nextLine();
-//            dataOutputStream.writeUTF(string);
-//            dataOutputStream.flush();
-//            String result = dataInputStream.readUTF();
-//            System.out.println(result);
-//        }
-
 //        restoreDatabase();
-
     }
 
     private static void restoreDatabase() throws Exception {

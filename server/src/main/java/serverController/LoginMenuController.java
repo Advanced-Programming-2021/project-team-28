@@ -23,17 +23,16 @@ public class LoginMenuController {
     }
 
     //TODO
-    public String controlCreateUserCommand(String username, String password, String nickname) {
-
+    public synchronized String controlCreateUserCommand(String username, String password, String nickname) {
         if (!User.isUsernameAvailable(username)) {
             return "usernameExists";
         } else if (!User.isNicknameAvailable(nickname)) {
             return "nicknameExists";
         } else {
             new User(username, password, nickname);
+            System.out.println("User created successfully");
             return "userCreated";
         }
-
     }
 
 

@@ -39,9 +39,6 @@ public class LoginMenuController {
     public void controlCreateUserCommand(String username, String password, String nickname) {
         try {
             String result = (String) sendAndReceive("user create -u " + username + " -p " + password + " -n " + nickname);
-            System.out.println(result);
-
-
             switch (Objects.requireNonNull(result)) {
                 case "usernameExists":
                     loginMenuView.usernameExists(username);
@@ -49,8 +46,7 @@ public class LoginMenuController {
                 case "nicknameExists":
                     loginMenuView.nicknameExists(nickname);
                     break;
-                case "userCreated":
-                    new User(username, password, nickname);
+                default:
                     loginMenuView.userCreated();
 
             }

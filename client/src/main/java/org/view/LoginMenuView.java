@@ -174,7 +174,7 @@ public class LoginMenuView extends Application {
             if (passwordForLogin.getText().equals("") || usernameForLogin.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Please enter username and password first.");
             } else {
-                CONTROLLER.processCommand("user login -u " + usernameForLogin.getText() + " -p " + passwordForLogin.getText());
+                //CONTROLLER.processCommand("user login -u " + usernameForLogin.getText() + " -p " + passwordForLogin.getText());
                 usernameForLogin.clear();
                 passwordForLogin.clear();
             }
