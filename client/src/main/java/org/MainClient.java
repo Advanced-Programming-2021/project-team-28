@@ -9,6 +9,15 @@ import java.util.ArrayList;
 
 
 public class MainClient {
+    private static String token;
+
+    public static String getToken() {
+        return token;
+    }
+
+    public static void setToken(String token) {
+        MainClient.token = token;
+    }
 
     private static Socket socket;
     private static DataInputStream dataInputStream;
@@ -42,25 +51,14 @@ public class MainClient {
 
     private static void restoreDatabase() throws Exception {
         createResourceFileIfNeeded();
-        CreateNewCard.deserialize();
+        //think about it later:
         AllCardsInitiator.fillAllCards();
         AllCardsInitiator.setPrices();
-        MonsterCard.deserialize();
-        SpellCard.deserialize();
-        TrapCard.deserialize();
-        User.deserialize();
+
     }
 
     private static void createResourceFileIfNeeded() throws IOException {
         ArrayList<File> files= new ArrayList<>();
-        files.add(new File("src/UserOutput.json"));
-        files.add(new File("src/MonsterCardsOutput.json"));
-        files.add(new File("src/SpellCardsOutput.json"));
-        files.add(new File("src/TrapCardsOutput.json"));
-        files.add(new File("src/DecksOutput.json"));
-        files.add(new File("src/NewMonsterOutput.json"));
-        files.add(new File("src/NewTrapOutput.json"));
-        files.add(new File("src/NewSpellOutput.json"));
         File cardsFolder = new File("src/ExportedCards");
         cardsFolder.mkdir();
         for (File file : files)
