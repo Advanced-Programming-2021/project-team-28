@@ -4,10 +4,7 @@ import org.MainClient;
 import org.model.*;
 import org.view.LoginMenuView;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,7 +12,7 @@ public class LoginMenuController {
     LoginMenuView loginMenuView;
 
 
-    public LoginMenuController (LoginMenuView view){
+    public LoginMenuController(LoginMenuView view) {
         this.loginMenuView = view;
     }
 
@@ -61,7 +58,7 @@ public class LoginMenuController {
     }
 
     private void controlLoginUserCommand(String username, String password) throws Exception {
-        if(User.isUsernameAvailable(username) || !User.getUserByUsername(username).getPassword().equals(password)){
+        if (User.isUsernameAvailable(username) || !User.getUserByUsername(username).getPassword().equals(password)) {
             loginMenuView.usernameAndPasswordDidNotMatch();
         } else {
             new MainMenuController(User.getUserByUsername(username)).run();
@@ -70,25 +67,33 @@ public class LoginMenuController {
 
     public void controlCreateUserCommand(String username, String password, String nickname) {
         try {
-            String result = sendAndReceive("user create -u " + username + " -p " + password + " -n " + nickname);
+            String profilePictureAddress; //= random
+            String result = (String) sendAndReceive("user create -u " + username + " -p " + password + " -n " + nickname);
             System.out.println(result);
+
+
+            switch (result) {
+                case "usernameExists":
+                    loginMenuView.usernameExists(username);
+                    break;
+                case "nicknameExists":
+                    loginMenuView.nicknameExists(nickname);
+                    break;
+                case "userCreated":
+                    new User(username, password, nickname);
+                    loginMenuView.userCreated();
+
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if(!User.isUsernameAvailable(username)){
-            loginMenuView.usernameExists(username);
-        } else if(!User.isNicknameAvailable(nickname)) {
-            loginMenuView.nicknameExists(nickname);
-        } else {
-            new User(username, password, nickname);
-            loginMenuView.userCreated();
-        }
+
     }
 
-    private String sendAndReceive(String command) throws IOException {
-        MainClient.getDataOutputStream().writeUTF(command);
-        MainClient.getDataOutputStream().flush();
-        String result = MainClient.getDataInputStream().readUTF();
+    private Object sendAndReceive(String command) throws IOException {
+        MainClient.getObjectOutputStream().writeUTF(command);
+        MainClient.getObjectOutputStream().flush();
+        Object result = MainClient.getDataInputStream().readUTF();
         return result;
     }
 

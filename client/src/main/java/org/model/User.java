@@ -17,31 +17,24 @@ import java.util.Random;
 
 public class User {
 
-    @Expose
     private String username;
-    @Expose
     private String password;
-    @Expose
     private String nickname;
-    @Expose
     private int score;
-    @Expose
     private int balance = 100000;
-    @Expose
     private String profilePicturePath;
-    @Expose
     private ArrayList<String> decksName = new ArrayList<>();
     private ArrayList<Deck> decks = new ArrayList<>();
-    @Expose
+
     private String activeDeckName;
     private Deck activeDeck;
-    @Expose
+
     private ArrayList<String> allCardsName = new ArrayList<>();
     private ArrayList<Card> allCards = new ArrayList<>();
 
-    @Expose
+
     private static ArrayList<User> users = new ArrayList<>();
-    @Expose
+
     private boolean hasChangedProfilePicture = false;
 
     public User(String username, String password, String nickname) {
@@ -49,7 +42,7 @@ public class User {
         setPassword(password);
         setNickname(nickname);
         setProfilePicturePath(getRandomProfilePicturePath());
-        users.add(this);
+
     }
 
 

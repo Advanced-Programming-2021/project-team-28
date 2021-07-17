@@ -10,6 +10,15 @@ import java.util.ArrayList;
 
 public class MainClient {
     private static String token;
+    private static User user;
+
+    public static User getUser() {
+        return user;
+    }
+
+    public static void setUser(User user) {
+        MainClient.user = user;
+    }
 
     public static String getToken() {
         return token;
@@ -21,13 +30,13 @@ public class MainClient {
 
     private static Socket socket;
     private static DataInputStream dataInputStream;
-    private static DataOutputStream dataOutputStream;
+    private static ObjectOutputStream objectOutputStream;
 
     public static void initializeNetwork() {
         try {
             socket = new Socket("localhost", 7877);
             dataInputStream = new DataInputStream(socket.getInputStream());
-            dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
         } catch (IOException x) {
             x.printStackTrace();
         }
@@ -79,7 +88,7 @@ public class MainClient {
         return dataInputStream;
     }
 
-    public static DataOutputStream getDataOutputStream() {
-        return dataOutputStream;
+    public static ObjectOutputStream getObjectOutputStream() {
+        return objectOutputStream;
     }
 }
