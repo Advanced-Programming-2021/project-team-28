@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f6e2b2ce-4ca9-4617-8f8b-40311e2222f4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/MainServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/AllCardsInitiator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/BattlePhase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/Card.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/CardAndImage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/CreateNewCard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/Deck.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/DrawPhase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/MainPhase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/MonsterCard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/MonsterPowers.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/MonstersDescriptions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/Phase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/Round.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/Scoreboard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/SpellCard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/SpellEffects.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/SpellsDescription.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/TrapCard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/TrapEffectMethods.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/TrapsDescription.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/Utilities.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/Attribute.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/MiniGame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/MonsterCardPosition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/MonsterPower.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/MonsterType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/NumberOfRounds.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/PhaseName.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/RecentActionsInGame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/SpellEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/SpellIcon.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/SpellOrTrapCardPosition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/Status.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/TrapEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/TrapIcon.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/Turn.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1vRGFY2XK8yZIedXqtYrN9QPQns" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f6e2b2ce-4ca9-4617-8f8b-40311e2222f4" name="Default Changelist" comment="" />
+      <created>1626517385009</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1626517385009</updated>
+      <workItem from="1626517386920" duration="17000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
