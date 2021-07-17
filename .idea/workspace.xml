@@ -5,10 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6e2b2ce-4ca9-4617-8f8b-40311e2222f4" name="Default Changelist" comment="gaame sevvom">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/controller/LoginMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/controller/LoginMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/view/LoginMenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/view/LoginMenuView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/test/java/AllTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/test/java/AllTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/MainServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/MainServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/serverController/LoginMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/serverController/LoginMenuController.java" afterDir="false" />
     </list>
@@ -71,7 +67,7 @@
       <option name="presentableId" value="Default" />
       <updated>1626517385009</updated>
       <workItem from="1626517386920" duration="17000" />
-      <workItem from="1626525212726" duration="3114000" />
+      <workItem from="1626525212726" duration="4646000" />
     </task>
     <task id="LOCAL-00001" summary="gaame avval">
       <created>1626533469040</created>

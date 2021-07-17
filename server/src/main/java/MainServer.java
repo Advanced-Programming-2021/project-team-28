@@ -96,6 +96,8 @@ public class MainServer {
         Matcher[] matchers = getCommandMatchers(input);
         if (matchers[0].find()) {
            return LOGIN_MENU_CONTROLLER.controlCreateUserCommand(matchers[0].group("username"), matchers[0].group("password"), matchers[0].group("nickname"));
+        } else if (matchers[1].find()) {
+            return LOGIN_MENU_CONTROLLER.controlLoginUserCommand(matchers[1].group("username"), matchers[1].group("password"))
         }
         return "invalid";
     }
