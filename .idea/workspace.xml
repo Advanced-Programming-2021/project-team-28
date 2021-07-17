@@ -5,45 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6e2b2ce-4ca9-4617-8f8b-40311e2222f4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/MainServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/AllCardsInitiator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/BattlePhase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/Card.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/CardAndImage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/CreateNewCard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/Deck.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/DrawPhase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/MainPhase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/MonsterCard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/MonsterPowers.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/MonstersDescriptions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/Phase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/Round.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/Scoreboard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/SpellCard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/SpellEffects.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/SpellsDescription.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/TrapCard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/TrapEffectMethods.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/TrapsDescription.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/Utilities.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/Attribute.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/MiniGame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/MonsterCardPosition.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/MonsterPower.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/MonsterType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/NumberOfRounds.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/PhaseName.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/RecentActionsInGame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/SpellEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/SpellIcon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/SpellOrTrapCardPosition.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/Status.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/TrapEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/TrapIcon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/model/enums/Turn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/MainClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/MainClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/controller/LoginMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/controller/LoginMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/.idea/misc.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +29,37 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
   </component>
+  <component name="RunManager">
+    <configuration name="MainClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.MainClient" />
+      <module name="project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MainClient" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -73,10 +69,22 @@
       <option name="presentableId" value="Default" />
       <updated>1626517385009</updated>
       <workItem from="1626517386920" duration="17000" />
+      <workItem from="1626525212726" duration="2065000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

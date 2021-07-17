@@ -6,6 +6,7 @@ import org.view.LoginMenuView;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.OptionalDouble;
 
 
 public class MainClient {
@@ -29,14 +30,14 @@ public class MainClient {
     }
 
     private static Socket socket;
-    private static DataInputStream dataInputStream;
-    private static ObjectOutputStream objectOutputStream;
+    private static ObjectInputStream objectInputStream;
+    private static DataOutputStream dataOutputStream;
 
     public static void initializeNetwork() {
         try {
             socket = new Socket("localhost", 7877);
-            dataInputStream = new DataInputStream(socket.getInputStream());
-            objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            objectInputStream = new ObjectInputStream(socket.getInputStream());
+            dataOutputStream = new DataOutputStream(socket.getOutputStream());
         } catch (IOException x) {
             x.printStackTrace();
         }
@@ -84,11 +85,11 @@ public class MainClient {
         return socket;
     }
 
-    public static DataInputStream getDataInputStream() {
-        return dataInputStream;
+    public static ObjectInputStream getObjectInputStream() {
+        return objectInputStream;
     }
 
-    public static ObjectOutputStream getObjectOutputStream() {
-        return objectOutputStream;
+    public static DataOutputStream getDataOutputStream() {
+        return dataOutputStream;
     }
 }

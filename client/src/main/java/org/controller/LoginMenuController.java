@@ -91,10 +91,14 @@ public class LoginMenuController {
     }
 
     private Object sendAndReceive(String command) throws IOException {
-        MainClient.getObjectOutputStream().writeUTF(command);
-        MainClient.getObjectOutputStream().flush();
-        Object result = MainClient.getDataInputStream().readUTF();
-        return result;
+        MainClient.getDataOutputStream().writeUTF(command);
+        MainClient.getDataOutputStream().flush();
+        try {
+            return MainClient.getObjectInputStream().readObject();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private Matcher[] getCommandMatchers(String command) {
