@@ -16,12 +16,13 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.MainClient;
 import org.controller.LoginMenuController;
 import org.model.AllCardsInitiator;
 import org.model.Card;
 
 import javax.swing.*;
-
+import java.io.IOException;
 
 
 public class LoginMenuView extends Application {
@@ -184,7 +185,11 @@ public class LoginMenuView extends Application {
     }
 
     public void exitGame() {
-        CONTROLLER.saveDatabase();
+        try {
+            MainClient.getSocket().close();
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
         System.exit(0);
     }
 

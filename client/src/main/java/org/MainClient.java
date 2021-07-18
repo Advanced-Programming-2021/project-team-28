@@ -12,6 +12,9 @@ import java.util.OptionalDouble;
 public class MainClient {
     private static String token;
     private static User user;
+    private static Socket socket;
+    private static ObjectInputStream objectInputStream;
+    private static DataOutputStream dataOutputStream;
 
     public static User getUser() {
         return user;
@@ -29,9 +32,6 @@ public class MainClient {
         MainClient.token = token;
     }
 
-    private static Socket socket;
-    private static ObjectInputStream objectInputStream;
-    private static DataOutputStream dataOutputStream;
 
     public static void initializeNetwork() {
         try {

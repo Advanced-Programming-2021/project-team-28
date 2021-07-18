@@ -39,7 +39,6 @@ public class User implements Serializable {
         setPassword(password);
         setNickname(nickname);
         setProfilePicturePath(getRandomProfilePicturePath());
-
     }
 
 
