@@ -89,6 +89,7 @@ public class MainServer {
                     String input = dataInputStream.readUTF();
                     Object result = process(input);
                     if(result == null) break;
+                    objectOutputStream.reset();
                     objectOutputStream.writeObject(result);
                     objectOutputStream.flush();
                 }

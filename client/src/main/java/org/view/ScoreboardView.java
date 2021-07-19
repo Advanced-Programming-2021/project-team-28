@@ -164,9 +164,6 @@ public class ScoreboardView extends Application {
 
     public void refresh(){
         setUpScoreboard();
-        for (Label label : labels) {
-            label.setText("ay baba");
-        }
-        System.out.println("hmmmm");
+
     }
 }
