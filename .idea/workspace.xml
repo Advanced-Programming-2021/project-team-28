@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6e2b2ce-4ca9-4617-8f8b-40311e2222f4" name="Default Changelist" comment="gaame shishom">
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/org/serverController/MainMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/controller/LoginMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/controller/LoginMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/controller/MainMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/controller/ScoreboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/controller/ScoreboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/view/MainMenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/view/MainMenuView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/org/MainServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/MainServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +72,8 @@
       <workItem from="1626621394042" duration="322000" />
       <workItem from="1626704211124" duration="664000" />
       <workItem from="1626710873776" duration="46000" />
+      <workItem from="1626717886632" duration="2003000" />
+      <workItem from="1626732672264" duration="2385000" />
     </task>
     <task id="LOCAL-00001" summary="gaame avval">
       <created>1626533469040</created>

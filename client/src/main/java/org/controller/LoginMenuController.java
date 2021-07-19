@@ -31,7 +31,7 @@ public class LoginMenuController {
             String result = (String) sendAndReceive("user login -u " + username + " -p " + password);
             if(!result.equals("error")) {
                 MainClient.setToken(result);
-                User user = (User) sendAndReceive("get user " + username);
+                User user = (User) sendAndReceive("get user " + MainClient.getToken());
                 new MainMenuController(user).run();
             } else {
                 loginMenuView.usernameAndPasswordDidNotMatch();

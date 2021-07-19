@@ -1,10 +1,13 @@
 package org.controller;
 
+import org.MainClient;
 import org.model.enums.NumberOfRounds;
 import org.model.User;
 import org.model.enums.Turn;
+import org.view.LoginMenuView;
 import org.view.MainMenuView;
 
+import javax.swing.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,7 +55,7 @@ public class MainMenuController {
                 if (duelCommandMatchers[i].find()) {
                     if (validateMatch(duelCommandMatchers[i]) != NumberOfRounds.OTHERS) {
                         new MiniGameController(user, User.getUserByUsername(duelCommandMatchers[i].group("secondPlayer")), validateMatch(duelCommandMatchers[i])).run();
-                        }
+                    }
                     return;
                 }
             }
@@ -67,6 +70,21 @@ public class MainMenuController {
         }
     }
 
+    public void controlLogoutCommand() {
+        try {
+            System.out.println(MainClient.getToken());
+            String result = (String) LoginMenuController.sendAndReceive("user logout " + MainClient.getToken());
+            if (result.equals("success")) {
+                MainClient.setToken(null);
+                new LoginMenuView().start(LoginMenuView.getPrimaryStage());
+            } else {
+                JOptionPane.showMessageDialog(null, "Authentication error");
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
 
     private static Matcher[] getDuelCommandMatchers(String command) {
         Pattern pattern0 = Pattern.compile("^duel --new --second-player (?<secondPlayer>.+) --rounds (?<numberOfRounds>\\d+)$");

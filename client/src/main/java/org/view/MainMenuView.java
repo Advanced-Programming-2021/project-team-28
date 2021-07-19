@@ -115,13 +115,7 @@ public class MainMenuView extends Application {
     }
 
     public void logout() {
-
-        LoginMenuView loginMenuView = new LoginMenuView();
-        try {
-            loginMenuView.start(primaryStage);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        controller.controlLogoutCommand();
     }
 
     public void newDuel() {

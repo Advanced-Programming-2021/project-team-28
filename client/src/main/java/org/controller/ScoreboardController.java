@@ -49,7 +49,7 @@ public class ScoreboardController {
 
     public ArrayList<User> getSortedUsers() {
         try {
-            return  (ArrayList<User>)LoginMenuController.sendAndReceive("get sorted users " + MainClient.getToken());
+            return  (ArrayList<User>) LoginMenuController.sendAndReceive("get sorted users " + MainClient.getToken());
         } catch (IOException e) {
             e.printStackTrace();
         }
