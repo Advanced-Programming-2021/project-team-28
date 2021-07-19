@@ -1,10 +1,12 @@
 package org.controller;
 
+import org.MainClient;
 import org.model.Scoreboard;
 import org.model.User;
 import org.model.Utilities;
 import org.view.ScoreboardView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -46,14 +48,12 @@ public class ScoreboardController {
     }
 
     public ArrayList<User> getSortedUsers() {
-        ArrayList<User> sortedUsers = User.getUsers();
-        sortedUsers.sort((o1, o2) -> {
-            int result = Integer.compare( o2.getScore() , o1.getScore());
-            if(result != 0) return result;
-            else return Utilities.compareAlphabetical(o1.getUsername(), o2.getUsername());
-        });
-        return sortedUsers;
-
+        try {
+            return  (ArrayList<User>)LoginMenuController.sendAndReceive("get sorted users " + MainClient.getToken());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public User getUser() {

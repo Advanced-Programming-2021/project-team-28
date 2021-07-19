@@ -62,7 +62,7 @@ public class LoginMenuController {
 
     }
 
-    private Object sendAndReceive(String command) throws IOException {
+    public static Object sendAndReceive(String command) throws IOException {
         MainClient.getDataOutputStream().writeUTF(command);
         MainClient.getDataOutputStream().flush();
         try {

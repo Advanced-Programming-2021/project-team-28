@@ -96,5 +96,11 @@
          <font>
             <Font size="19.0" />
          </font></Button>
+      <Button fx:id="refresh" layoutX="400.0" layoutY="658.0" mnemonicParsing="false" onAction="#refresh" prefHeight="48.0" prefWidth="76.0" text="REFRESH">
+         <styleClass>
+            <String fx:value="wiezdemin" />
+            <String fx:value="button3" />
+         </styleClass>
+      </Button>
    </children>
 </AnchorPane>

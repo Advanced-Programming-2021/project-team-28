@@ -63,7 +63,8 @@ public class ScoreboardView extends Application {
     private Label player20;
     @FXML
     public Button back;
-
+    @FXML
+    public Button refresh;
     @FXML
     private ArrayList<Label> labels;
 
@@ -75,6 +76,7 @@ public class ScoreboardView extends Application {
         Scene scene = new Scene(loader.load());
         fillLabels();
         ShopView.setMusic(back);
+        ShopView.setMusic(refresh);
         setUpScoreboard();
         stage.setScene(scene);
         stage.show();
@@ -158,5 +160,13 @@ public class ScoreboardView extends Application {
         try {
             new MainMenuController(controller.getUser()).run();
         }catch (Exception e){}
+    }
+
+    public void refresh(){
+        setUpScoreboard();
+        for (Label label : labels) {
+            label.setText("ay baba");
+        }
+        System.out.println("hmmmm");
     }
 }
