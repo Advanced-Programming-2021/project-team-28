@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f6e2b2ce-4ca9-4617-8f8b-40311e2222f4" name="Default Changelist" comment="gaame shishom">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/MainClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/MainClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/view/LoginMenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/view/LoginMenuView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/.idea/misc.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +30,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/server" />
   </component>
   <component name="RunManager">
     <configuration name="MainClient" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
@@ -65,6 +65,8 @@
       <workItem from="1626547209625" duration="2825000" />
       <workItem from="1626595557000" duration="371000" />
       <workItem from="1626621394042" duration="322000" />
+      <workItem from="1626704211124" duration="664000" />
+      <workItem from="1626710873776" duration="46000" />
     </task>
     <task id="LOCAL-00001" summary="gaame avval">
       <created>1626533469040</created>

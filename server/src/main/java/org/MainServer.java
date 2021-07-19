@@ -5,6 +5,7 @@ import org.model.SpellCard;
 import org.model.TrapCard;
 import org.model.User;
 import org.serverController.LoginMenuController;
+import org.serverController.ScoreBoardController;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -17,7 +18,7 @@ import java.util.regex.Pattern;
 public class MainServer {
     private static HashMap<String, String> tokens = new HashMap<>();
     private static final LoginMenuController LOGIN_MENU_CONTROLLER = new LoginMenuController();
-
+    private static final ScoreBoardController SCORE_BOARD_CONTROLLER = new ScoreBoardController();
     private ServerSocket serverSocket;
 
     public static void main(String[] args) {
@@ -68,7 +69,7 @@ public class MainServer {
 
     public void initializeNetwork() {
         try {
-            serverSocket = new ServerSocket(7877);
+            serverSocket = new ServerSocket(1444);
             while (true) {
                 Socket socket = serverSocket.accept(); //stop here while there is no client to connect
                 startNewThread(socket);
@@ -109,6 +110,10 @@ public class MainServer {
         } else if (matchers[2].find()) {
             return User.getUserByUsername(matchers[2].group("username"));
         }
+        else if(matchers[3].find()){
+            return SCORE_BOARD_CONTROLLER.returnSortedUsers();
+        }
+
         return "invalid";
     }
 
@@ -117,10 +122,12 @@ public class MainServer {
         Pattern patternForCreateUser1 = Pattern.compile("^user create -u (?<username>.+?) -p (?<password>.+?) -n (?<nickname>.+?)$");
         Pattern patternForLoginUser1 = Pattern.compile("^user login -u (?<username>.+?) -p (?<password>.+?)$");
         Pattern patternForGetUser = Pattern.compile("^get user (?<username>.+?)$");
-        Matcher[] commandMatchers = new Matcher[3];
+        Pattern patternForSortedUsers = Pattern.compile("^get sorted users (.+)$");
+        Matcher[] commandMatchers = new Matcher[15];
         commandMatchers[0] = patternForCreateUser1.matcher(command);
         commandMatchers[1] = patternForLoginUser1.matcher(command);
         commandMatchers[2] = patternForGetUser.matcher(command);
+        commandMatchers[3] = patternForSortedUsers.matcher(command);
         return commandMatchers;
     }
 
