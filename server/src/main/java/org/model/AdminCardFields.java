@@ -1,6 +1,8 @@
 package org.model;
 
-public class AdminCardFields {
+import java.io.Serializable;
+
+public class AdminCardFields implements Serializable {
     private int amount = 50;
     private boolean isCardAvailable = true;
 

@@ -3,13 +3,26 @@ package org.serverController;
 import org.model.*;
 import org.model.enums.*;
 
+import java.util.HashMap;
 import java.util.UUID;
 
-public class ShopContoller {
+public class ShopMenuController {
 
+    private static final HashMap<String, AdminCardFields> CARDS_ADMIN_FIELDS = new HashMap<>();
     private User user;
-    public synchronized void sellCard(String cardName, User user){
+
+
+    public static HashMap<String, AdminCardFields> getCardsAdminFields() {
+        return CARDS_ADMIN_FIELDS;
+    }
+
+    public synchronized String sellCard(String cardName, User user){
         this.user = user;
+        if(ShopMenuController.getCardsAdminFields().get(cardName).getAmount() == 0){
+            return "Error, Card has been sold out";
+        } else if (!ShopMenuController.getCardsAdminFields().get(cardName).isCardAvailable()) {
+            return "Error, This Card is unable to buy now";
+        }
         String cardNumber = UUID.randomUUID().toString();
         if(cardName.equals("Command Knight")){
             if(receiveMoneyFromCustomer(2100)) {
@@ -545,14 +558,12 @@ public class ShopContoller {
                 TrapCard card = new TrapCard(user.getUsername() , cardName, cardNumber, TrapsDescription.callOfTheHaunted , TrapIcon.CONTINUOUS , TrapEffect.CALL_OF_THE_HAUNTED);
                 user.addToCards(card);
             }
-        } else {
-            //view.cardNotFound();
         }
+        return "Successful, Card bought successfully";
     }
 
     public boolean checkUserMoney(int price) {
         if (user.getBalance() < price) {
-            //view.notEnoughMoney();
             return false;
         } else return true;
     }

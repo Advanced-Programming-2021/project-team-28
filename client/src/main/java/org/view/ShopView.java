@@ -23,6 +23,7 @@ import org.controller.MainMenuController;
 import org.controller.ShopController;
 import org.model.*;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -157,7 +158,7 @@ public class ShopView extends Application {
             if (targetCard == null) {
                 resultOfPurchase.setText("Please select a card first");
             } else {
-                controller.sellCard(selectedCardName);
+                controller.buyCard(selectedCardName);
                 money.setText("Your current balance is : " + controller.getUser().getBalance());
                 ownedNumber.setText("You have : " + controller.getUser().numOfCardsWithThisName(selectedCardName) + " card of this type");
                 if (Card.getPrices().get(selectedCardName) > controller.getUser().getBalance()) {
@@ -295,4 +296,7 @@ public class ShopView extends Application {
         createNewCardController.run();
     }
 
+    public void showError(String error) {
+        JOptionPane.showMessageDialog(null, error);
+    }
 }

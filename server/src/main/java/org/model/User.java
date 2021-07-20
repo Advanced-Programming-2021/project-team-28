@@ -3,6 +3,7 @@ package org.model;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
+import org.serverController.ShopMenuController;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -85,6 +86,8 @@ public class User implements Serializable {
     }
 
     public void addToCards(Card card) {
+        int amount = ShopMenuController.getCardsAdminFields().get(card.getName()).getAmount();
+        ShopMenuController.getCardsAdminFields().get(card.getName()).setAmount(amount - 1);
         allCards.add(card);
         allCardsName.add(card.getName());
     }

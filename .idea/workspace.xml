@@ -5,11 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6e2b2ce-4ca9-4617-8f8b-40311e2222f4" name="Default Changelist" comment="Shop 1">
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/org/model/AdminCardFields.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/org/model/CardAndImage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/controller/ShopController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/model/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/model/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/model/MonsterCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/model/MonsterCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/model/SpellCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/model/SpellCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/model/TrapCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/model/TrapCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/view/ShopView.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/view/ShopView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/org/MainServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/MainServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/org/model/AdminCardFields.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/AdminCardFields.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/org/model/AllCardsInitiator.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/AllCardsInitiator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/org/model/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/org/model/MonsterCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/MonsterCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/org/model/SpellCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/SpellCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/org/model/TrapCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/TrapCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/org/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/org/serverController/ShopContoller.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/serverController/ShopMenuController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +84,8 @@
       <workItem from="1626717886632" duration="2003000" />
       <workItem from="1626732672264" duration="2679000" />
       <workItem from="1626788587572" duration="3840000" />
-      <workItem from="1626795228400" duration="747000" />
+      <workItem from="1626795228400" duration="1311000" />
+      <workItem from="1626802289754" duration="2666000" />
     </task>
     <task id="LOCAL-00001" summary="gaame avval">
       <created>1626533469040</created>

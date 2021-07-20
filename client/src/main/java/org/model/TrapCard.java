@@ -7,15 +7,12 @@ import org.model.enums.SpellOrTrapCardPosition;
 import org.model.enums.TrapEffect;
 import org.model.enums.TrapIcon;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class TrapCard extends Card implements Cloneable {
+public class TrapCard extends Card implements Cloneable, Serializable {
 
     @Expose
     private TrapIcon icon;

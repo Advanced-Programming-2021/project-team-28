@@ -4,6 +4,7 @@ import org.model.*;
 import org.serverController.LoginMenuController;
 import org.serverController.MainMenuController;
 import org.serverController.ScoreBoardController;
+import org.serverController.ShopMenuController;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -11,7 +12,6 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,6 +21,7 @@ public class MainServer {
     private static final LoginMenuController LOGIN_MENU_CONTROLLER = new LoginMenuController();
     private static final ScoreBoardController SCORE_BOARD_CONTROLLER = new ScoreBoardController();
     private static final MainMenuController MAIN_MENU_CONTROLLER = new MainMenuController();
+    private static final ShopMenuController SHOP_MENU_CONTROLLER = new ShopMenuController();
     private ServerSocket serverSocket;
 
     public static void main(String[] args) {
@@ -130,6 +131,10 @@ public class MainServer {
             }
         } else if(matchers[4].find()) {
             return MAIN_MENU_CONTROLLER.logout(matchers[4].group("token"));
+        } else if(matchers[5].find()) {
+            if(TOKENS.containsKey(matchers[5].group("token"))) {
+                return SHOP_MENU_CONTROLLER.sellCard(matchers[5].group("cardName"), getUserByToken(matchers[5].group("token")));
+            }
         }
         return "invalid";
     }
@@ -141,12 +146,14 @@ public class MainServer {
         Pattern patternForGetUser = Pattern.compile("^get user (?<token>.+?)$");
         Pattern patternForSortedUsers = Pattern.compile("^get sorted users (?<token>.+)$");
         Pattern patternForLogout = Pattern.compile("^user logout (?<token>.+?)$");
+        Pattern patternForBuyCard = Pattern.compile("^shop buy --token (?<token>.+?) --card (?<cardName>.+?)$");
         Matcher[] commandMatchers = new Matcher[15];
         commandMatchers[0] = patternForCreateUser1.matcher(command);
         commandMatchers[1] = patternForLoginUser1.matcher(command);
         commandMatchers[2] = patternForGetUser.matcher(command);
         commandMatchers[3] = patternForSortedUsers.matcher(command);
         commandMatchers[4] = patternForLogout.matcher(command);
+        commandMatchers[5] = patternForBuyCard.matcher(command);
         return commandMatchers;
     }
 

@@ -7,15 +7,12 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 import org.model.enums.*;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class MonsterCard extends Card {
+public class MonsterCard extends Card implements Serializable {
     @Expose
     public static ArrayList<MonsterCard> allMonsterCards = new ArrayList<>();
     @Expose

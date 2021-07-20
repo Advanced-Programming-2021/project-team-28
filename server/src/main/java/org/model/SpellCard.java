@@ -8,15 +8,12 @@ import org.model.enums.SpellEffect;
 import org.model.enums.SpellIcon;
 import org.model.enums.SpellOrTrapCardPosition;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class SpellCard extends Card{
+public class SpellCard extends Card implements Serializable {
 
     @Expose
     private SpellEffect effect;

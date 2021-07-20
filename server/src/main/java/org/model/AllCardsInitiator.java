@@ -1,6 +1,7 @@
 package org.model;
 
 import org.model.enums.*;
+import org.serverController.ShopMenuController;
 
 import java.util.HashMap;
 
@@ -225,7 +226,7 @@ public class AllCardsInitiator {
 
     public static void setCardAmountsAndAvailability() {
         for (Card card : Card.getAllCards()) {
-            Card.getCardsAdminFields().put(card.getName(), new AdminCardFields());
+            ShopMenuController.getCardsAdminFields().put(card.getName(), new AdminCardFields());
         }
     }
 }
