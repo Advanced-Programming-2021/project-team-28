@@ -1,6 +1,6 @@
 package org.model;
 
-public class SpellsDescriptions {
+public class SpellsDescription {
 
     public static String monsterReborn = "Target 1 monster in either GY; Special Summon it.";
     public static String terrafoming = "Add 1 Field Spell from your Deck to your hand.";

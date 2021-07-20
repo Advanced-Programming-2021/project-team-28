@@ -31,14 +31,9 @@ public abstract class Card {
 
     protected int classID;
 
-//    private static ArrayList<CardAndImage> cardsAndImages = new ArrayList<>();
-    private static HashMap<String, Integer> prices = new HashMap<>();
-    private static ArrayList<Card> allCards = new ArrayList<>();
-
-//    public static ArrayList<CardAndImage> getCardsAndImages() {
-//        cardsAndImages.sort((o1, o2) -> Utilities.compareAlphabetical(o1.getCardName(), o2.getCardName()));
-//        return cardsAndImages;
-//    }
+    private static final ArrayList<Card> ALL_CARDS = new ArrayList<>();
+    private static final HashMap<String, Integer> PRICES = new HashMap<>();
+    private static final HashMap<String, AdminCardFields> CARDS_ADMIN_FIELDS = new HashMap<>();
 
     public Card(String ownerUsername, String name, String number, String description) {
         setOwnerUsername(ownerUsername);
@@ -51,39 +46,13 @@ public abstract class Card {
 
     }
 
-//    public static Image getCardImageByName(String  cardName){
-//        for (CardAndImage cardAndImage : cardsAndImages) {
-//            if(cardAndImage.getCardName().equals(cardName)){
-//                return cardAndImage.getImage();
-//            }
-//        }
-//        try {
-//            Card card = Card.getCardByName(allCards, cardName);
-//            if(card instanceof MonsterCard){
-//                return new Image(Card.class.getResource("/cards/Monsters/newMonster.jpg").toExternalForm());
-//            } else if (card instanceof SpellCard){
-//                return new Image(Card.class.getResource("/cards/SpellTrap/newSpell.jpg").toExternalForm());
-//            } else {
-//                return new Image(Card.class.getResource("/cards/SpellTrap/newTrap.jpg").toExternalForm());
-//            }
-//        } catch (Exception e){
-//            e.printStackTrace();
-//            return null;
-//        }
-//
-//    }
-
-//    public static String getCardNameByImage(Image image){
-//        for (CardAndImage cardAndImage : cardsAndImages) {
-//            if(cardAndImage.getImage().equals(image)){
-//                return cardAndImage.getCardName();
-//            }
-//        }
-//        return null;
-//    }
 
     public static HashMap<String, Integer> getPrices() {
-        return prices;
+        return PRICES;
+    }
+
+    public static HashMap<String, AdminCardFields> getCardsAdminFields() {
+        return CARDS_ADMIN_FIELDS;
     }
 
     public abstract Object clone() throws CloneNotSupportedException;
@@ -146,11 +115,11 @@ public abstract class Card {
     }
 
     public static ArrayList<Card> getAllCards() {
-        return allCards;
+        return ALL_CARDS;
     }
 
     public static void addToAllCards(Card card) {
-        Card.allCards.add(card);
+        Card.ALL_CARDS.add(card);
     }
 
     public static boolean isThisCardNameValid(String cardName) {

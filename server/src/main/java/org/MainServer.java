@@ -42,6 +42,7 @@ public class MainServer {
 //        CreateNewCard.deserialize();
         AllCardsInitiator.fillAllCards();
         AllCardsInitiator.setPrices();
+        AllCardsInitiator.setCardAmountsAndAvailability();
         MonsterCard.deserialize();
         SpellCard.deserialize();
         TrapCard.deserialize();

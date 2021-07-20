@@ -5,7 +5,7 @@ import org.model.enums.*;
 import java.util.HashMap;
 
 public class AllCardsInitiator {
-    public static HashMap<String, Integer> prices = Card.getPrices();
+    private static HashMap<String, Integer> prices = Card.getPrices();
 
     public static void fillAllCards() {
         Card.addToAllCards(new MonsterCard(MonsterType.WARRIOR, null, "Command Knight", "", MonstersDescriptions.commandKnight, 1000, 1000,
@@ -104,39 +104,39 @@ public class AllCardsInitiator {
                 MonsterPower.THE_TRICKY, 5, Attribute.WIND));
         Card.addToAllCards(new MonsterCard(MonsterType.SEA_SERPENT, null, "Spiral Serpent", "", MonstersDescriptions.spiralSerpent, 2900, 2900,
                 MonsterPower.NONE, 8, Attribute.WATER));
-        Card.addToAllCards(new SpellCard(null, "Monster Reborn", "", SpellsDescriptions.monsterReborn, SpellIcon.NORMAL, SpellEffect.MONSTER_REBORN));
-        Card.addToAllCards(new SpellCard(null, "Terraforming", "", SpellsDescriptions.terrafoming, SpellIcon.NORMAL, SpellEffect.TERRAFORMING));
-        Card.addToAllCards(new SpellCard(null, "Pot of Greed", "", SpellsDescriptions.potOfGreed, SpellIcon.NORMAL, SpellEffect.POT_OF_GREED));
-        Card.addToAllCards(new SpellCard(null, "Raigeki", "", SpellsDescriptions.raigeki, SpellIcon.NORMAL, SpellEffect.RAIGEKI));
-        Card.addToAllCards(new SpellCard(null, "change of Heart", "", SpellsDescriptions.changeOfHearts, SpellIcon.NORMAL, SpellEffect.CHANGEOFHEART));
-        Card.addToAllCards(new SpellCard(null, "Sword of Revealing Light", "", SpellsDescriptions.swordOfRevealingLight, SpellIcon.NORMAL, SpellEffect.SWORDS_OF_REVEALING_LIGHT));
-        Card.addToAllCards(new SpellCard(null, "Harpie's Feather Duster", "", SpellsDescriptions.harpies, SpellIcon.NORMAL, SpellEffect.HARPIES_FEATHER_DUSTER));
-        Card.addToAllCards(new SpellCard(null, "Dark Hole", "", SpellsDescriptions.darkHole, SpellIcon.NORMAL, SpellEffect.DARK_HOLE));
-        Card.addToAllCards(new SpellCard(null, "Supply Squad", "", SpellsDescriptions.supplySquad, SpellIcon.CONTINUOUS, SpellEffect.SUPPLY_SQUAD));
-        Card.addToAllCards(new SpellCard(null, "Spell Absorption", "", SpellsDescriptions.spellAbsorption, SpellIcon.CONTINUOUS, SpellEffect.SPELL_ABSORPTION));
-        Card.addToAllCards(new SpellCard(null, "Messenger of Peace", "", SpellsDescriptions.messengerOfPeace, SpellIcon.CONTINUOUS, SpellEffect.MESSENGER_OF_PEACE));
-        Card.addToAllCards(new SpellCard(null, "Twin Twister", "", SpellsDescriptions.twinTwister, SpellIcon.QUICK_PLAY, SpellEffect.TWIN_TWISTERS));
-        Card.addToAllCards(new SpellCard(null, "Mystical Space Typhoon", "", SpellsDescriptions.mysticalSpaceTyphoon, SpellIcon.QUICK_PLAY, SpellEffect.MYSTICAL_SPACE_TYPHOON));
-        Card.addToAllCards(new SpellCard(null, "Ring of Defence", "", SpellsDescriptions.ringOfDefence, SpellIcon.QUICK_PLAY, SpellEffect.RING_OF_DEFENCE));
-        Card.addToAllCards(new SpellCard(null, "Yami", "", SpellsDescriptions.yami, SpellIcon.FIELD, SpellEffect.YAMI));
-        Card.addToAllCards(new SpellCard(null, "Forest", "", SpellsDescriptions.forest, SpellIcon.FIELD, SpellEffect.FOREST));
-        Card.addToAllCards(new SpellCard(null, "Closed Forest", "", SpellsDescriptions.closedForest, SpellIcon.FIELD, SpellEffect.CLOSED_FOREST));
-        Card.addToAllCards(new SpellCard(null, "Umiiruka", "", SpellsDescriptions.umiiruka, SpellIcon.FIELD, SpellEffect.UMIIRUKA));
-        Card.addToAllCards(new SpellCard(null, "Sword of Dark Destruction", "", SpellsDescriptions.swordOfDestruction, SpellIcon.EQUIP, SpellEffect.SWORD_OF_DARK_DESTRUCTION));
-        Card.addToAllCards(new SpellCard(null, "Black Pendant", "", SpellsDescriptions.blackPendant, SpellIcon.EQUIP, SpellEffect.BLACK_PENDANT));
-        Card.addToAllCards(new SpellCard(null, "United We Stand", "", SpellsDescriptions.unitedWeStand, SpellIcon.EQUIP, SpellEffect.UNITED_WE_STAND));
-        Card.addToAllCards(new SpellCard(null, "Magnum Shield", "", SpellsDescriptions.magnumShield, SpellIcon.EQUIP, SpellEffect.MAGNUM_SHIELD));
-        Card.addToAllCards(new SpellCard(null, "Advanced Ritual Art", "", SpellsDescriptions.advancedRitualArt, SpellIcon.RITUAL, SpellEffect.ADVANCED_RITUAL_ART));
-        Card.addToAllCards(new TrapCard(null, "Trap Hole", "", TrapsDescriptions.trapHole, TrapIcon.NORMAL, TrapEffect.TRAP_HOLE));
-        Card.addToAllCards(new TrapCard(null, "Mirror Force", "", TrapsDescriptions.mirrorForce, TrapIcon.NORMAL, TrapEffect.MIRROR_FORCE));
-        Card.addToAllCards(new TrapCard(null, "Magic Cylinder", "", TrapsDescriptions.magicCylinder, TrapIcon.NORMAL, TrapEffect.MAGIC_CYLINDER));
-        Card.addToAllCards(new TrapCard(null, "Mind Crush", "", TrapsDescriptions.mindCrush, TrapIcon.NORMAL, TrapEffect.MIND_CRUSH));
-        Card.addToAllCards(new TrapCard(null, "Torrential Tribute", "", TrapsDescriptions.torrentialTribute, TrapIcon.NORMAL, TrapEffect.TORRENTIAL_TRIBUTE));
-        Card.addToAllCards(new TrapCard(null, "Time Seal", "", TrapsDescriptions.timeSeal, TrapIcon.NORMAL, TrapEffect.TIME_SEAL));
-        Card.addToAllCards(new TrapCard(null, "Negate Attack", "", TrapsDescriptions.negateAttack, TrapIcon.COUNTER, TrapEffect.NEGATE_ATTACK));
-        Card.addToAllCards(new TrapCard(null, "Solemn Warning", "", TrapsDescriptions.solemnWarning, TrapIcon.COUNTER, TrapEffect.SOLEMN_WARNING));
-        Card.addToAllCards(new TrapCard(null, "Magic Jammer", "", TrapsDescriptions.magicJammer, TrapIcon.COUNTER, TrapEffect.MAGIC_JAMMER));
-        Card.addToAllCards(new TrapCard(null, "Call of The Haunted", "", TrapsDescriptions.callOfTheHaunted, TrapIcon.CONTINUOUS, TrapEffect.CALL_OF_THE_HAUNTED));
+        Card.addToAllCards(new SpellCard(null, "Monster Reborn", "", SpellsDescription.monsterReborn, SpellIcon.NORMAL, SpellEffect.MONSTER_REBORN));
+        Card.addToAllCards(new SpellCard(null, "Terraforming", "", SpellsDescription.terrafoming, SpellIcon.NORMAL, SpellEffect.TERRAFORMING));
+        Card.addToAllCards(new SpellCard(null, "Pot of Greed", "", SpellsDescription.potOfGreed, SpellIcon.NORMAL, SpellEffect.POT_OF_GREED));
+        Card.addToAllCards(new SpellCard(null, "Raigeki", "", SpellsDescription.raigeki, SpellIcon.NORMAL, SpellEffect.RAIGEKI));
+        Card.addToAllCards(new SpellCard(null, "change of Heart", "", SpellsDescription.changeOfHearts, SpellIcon.NORMAL, SpellEffect.CHANGEOFHEART));
+        Card.addToAllCards(new SpellCard(null, "Sword of Revealing Light", "", SpellsDescription.swordOfRevealingLight, SpellIcon.NORMAL, SpellEffect.SWORDS_OF_REVEALING_LIGHT));
+        Card.addToAllCards(new SpellCard(null, "Harpie's Feather Duster", "", SpellsDescription.harpies, SpellIcon.NORMAL, SpellEffect.HARPIES_FEATHER_DUSTER));
+        Card.addToAllCards(new SpellCard(null, "Dark Hole", "", SpellsDescription.darkHole, SpellIcon.NORMAL, SpellEffect.DARK_HOLE));
+        Card.addToAllCards(new SpellCard(null, "Supply Squad", "", SpellsDescription.supplySquad, SpellIcon.CONTINUOUS, SpellEffect.SUPPLY_SQUAD));
+        Card.addToAllCards(new SpellCard(null, "Spell Absorption", "", SpellsDescription.spellAbsorption, SpellIcon.CONTINUOUS, SpellEffect.SPELL_ABSORPTION));
+        Card.addToAllCards(new SpellCard(null, "Messenger of Peace", "", SpellsDescription.messengerOfPeace, SpellIcon.CONTINUOUS, SpellEffect.MESSENGER_OF_PEACE));
+        Card.addToAllCards(new SpellCard(null, "Twin Twister", "", SpellsDescription.twinTwister, SpellIcon.QUICK_PLAY, SpellEffect.TWIN_TWISTERS));
+        Card.addToAllCards(new SpellCard(null, "Mystical Space Typhoon", "", SpellsDescription.mysticalSpaceTyphoon, SpellIcon.QUICK_PLAY, SpellEffect.MYSTICAL_SPACE_TYPHOON));
+        Card.addToAllCards(new SpellCard(null, "Ring of Defence", "", SpellsDescription.ringOfDefence, SpellIcon.QUICK_PLAY, SpellEffect.RING_OF_DEFENCE));
+        Card.addToAllCards(new SpellCard(null, "Yami", "", SpellsDescription.yami, SpellIcon.FIELD, SpellEffect.YAMI));
+        Card.addToAllCards(new SpellCard(null, "Forest", "", SpellsDescription.forest, SpellIcon.FIELD, SpellEffect.FOREST));
+        Card.addToAllCards(new SpellCard(null, "Closed Forest", "", SpellsDescription.closedForest, SpellIcon.FIELD, SpellEffect.CLOSED_FOREST));
+        Card.addToAllCards(new SpellCard(null, "Umiiruka", "", SpellsDescription.umiiruka, SpellIcon.FIELD, SpellEffect.UMIIRUKA));
+        Card.addToAllCards(new SpellCard(null, "Sword of Dark Destruction", "", SpellsDescription.swordOfDestruction, SpellIcon.EQUIP, SpellEffect.SWORD_OF_DARK_DESTRUCTION));
+        Card.addToAllCards(new SpellCard(null, "Black Pendant", "", SpellsDescription.blackPendant, SpellIcon.EQUIP, SpellEffect.BLACK_PENDANT));
+        Card.addToAllCards(new SpellCard(null, "United We Stand", "", SpellsDescription.unitedWeStand, SpellIcon.EQUIP, SpellEffect.UNITED_WE_STAND));
+        Card.addToAllCards(new SpellCard(null, "Magnum Shield", "", SpellsDescription.magnumShield, SpellIcon.EQUIP, SpellEffect.MAGNUM_SHIELD));
+        Card.addToAllCards(new SpellCard(null, "Advanced Ritual Art", "", SpellsDescription.advancedRitualArt, SpellIcon.RITUAL, SpellEffect.ADVANCED_RITUAL_ART));
+        Card.addToAllCards(new TrapCard(null, "Trap Hole", "", TrapsDescription.trapHole, TrapIcon.NORMAL, TrapEffect.TRAP_HOLE));
+        Card.addToAllCards(new TrapCard(null, "Mirror Force", "", TrapsDescription.mirrorForce, TrapIcon.NORMAL, TrapEffect.MIRROR_FORCE));
+        Card.addToAllCards(new TrapCard(null, "Magic Cylinder", "", TrapsDescription.magicCylinder, TrapIcon.NORMAL, TrapEffect.MAGIC_CYLINDER));
+        Card.addToAllCards(new TrapCard(null, "Mind Crush", "", TrapsDescription.mindCrush, TrapIcon.NORMAL, TrapEffect.MIND_CRUSH));
+        Card.addToAllCards(new TrapCard(null, "Torrential Tribute", "", TrapsDescription.torrentialTribute, TrapIcon.NORMAL, TrapEffect.TORRENTIAL_TRIBUTE));
+        Card.addToAllCards(new TrapCard(null, "Time Seal", "", TrapsDescription.timeSeal, TrapIcon.NORMAL, TrapEffect.TIME_SEAL));
+        Card.addToAllCards(new TrapCard(null, "Negate Attack", "", TrapsDescription.negateAttack, TrapIcon.COUNTER, TrapEffect.NEGATE_ATTACK));
+        Card.addToAllCards(new TrapCard(null, "Solemn Warning", "", TrapsDescription.solemnWarning, TrapIcon.COUNTER, TrapEffect.SOLEMN_WARNING));
+        Card.addToAllCards(new TrapCard(null, "Magic Jammer", "", TrapsDescription.magicJammer, TrapIcon.COUNTER, TrapEffect.MAGIC_JAMMER));
+        Card.addToAllCards(new TrapCard(null, "Call of The Haunted", "", TrapsDescription.callOfTheHaunted, TrapIcon.CONTINUOUS, TrapEffect.CALL_OF_THE_HAUNTED));
     }
 
     public static void setPrices() {
@@ -223,5 +223,10 @@ public class AllCardsInitiator {
         prices.put("Call of The Haunted", 3500);
     }
 
+    public static void setCardAmountsAndAvailability() {
+        for (Card card : Card.getAllCards()) {
+            Card.getCardsAdminFields().put(card.getName(), new AdminCardFields());
+        }
+    }
 }
 

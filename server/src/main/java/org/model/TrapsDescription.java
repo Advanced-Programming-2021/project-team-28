@@ -1,6 +1,6 @@
 package org.model;
 
-public class TrapsDescriptions {
+public class TrapsDescription {
     public static String trapHole = "When your opponent Normal or Flip Summons 1 monster with 1000 or more ATK: Target that monster; destroy that target.";
     public static String mirrorForce = "When an opponent's monster declares an attack: Destroy all your opponent's Attack Position monsters.";
     public static String magicCylinder = "When an opponent's monster declares an attack: Target the attacking monster; negate the attack, and if you do, inflict damage to your opponent equal to its ATK.";
