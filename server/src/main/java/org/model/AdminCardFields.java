@@ -3,7 +3,7 @@ package org.model;
 import java.io.Serializable;
 
 public class AdminCardFields implements Serializable {
-    private int amount = 50;
+    private int amount = 1;
     private boolean isCardAvailable = true;
 
     public int getAmount() {

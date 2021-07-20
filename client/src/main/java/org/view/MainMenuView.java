@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import org.controller.DeckMenuController;
 import org.controller.ImportExportController;
 import org.controller.MainMenuController;
+import org.model.Admin;
 
 import javax.swing.JOptionPane;
 import java.util.Scanner;
@@ -84,6 +85,13 @@ public class MainMenuView extends Application {
         stage.setScene(scene);
         stage.show();
         setNumberOfRoundBoxes();
+        setAdminModeIfNeeded();
+    }
+
+    private void setAdminModeIfNeeded() {
+        if(controller.getUser() instanceof Admin) {
+            shop.setText("Shop / Admin Panel");
+        }
     }
 
     private void setNumberOfRoundBoxes() {

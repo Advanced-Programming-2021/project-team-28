@@ -39,6 +39,7 @@ public class MainServer {
     }
 
     private static void restoreDatabase() throws Exception {
+        User.getUsers().add(Admin.getInstance());
         createResourceFileIfNeeded();
 //        CreateNewCard.deserialize();
         AllCardsInitiator.fillAllCards();

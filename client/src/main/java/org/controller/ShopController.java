@@ -1,12 +1,10 @@
 package org.controller;
 
 import org.MainClient;
-import org.model.enums.*;
 import org.model.*;
 import org.view.ShopView;
 
 import java.io.IOException;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -80,7 +78,6 @@ public class ShopController {
             String result = (String) LoginMenuController.sendAndReceive("shop buy --token " + MainClient.getToken() + " --card " + cardName);
             if(result.startsWith("Success")) {
                 user = (User) LoginMenuController.sendAndReceive("get user " + MainClient.getToken());
-                System.out.println("salamp");
             } else {
                 view.showError(result);
             }
