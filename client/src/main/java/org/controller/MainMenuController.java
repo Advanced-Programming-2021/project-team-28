@@ -45,7 +45,7 @@ public class MainMenuController {
         } else if (command.equals("menu enter Profile")) {
             new ProfileMenuController(user).run();
         } else if (command.equals("menu enter Shop")) {
-            new ShopController(user).run();
+            controlMenuEnterShopCommand();
         } else if (command.equals("menu enter Import/Export")) {
             new ImportExportController(user).run();
         } else if (command.equals("menu enter Scoreboard")) {
@@ -67,6 +67,16 @@ public class MainMenuController {
                 }
             }
             view.showError("invalid command");
+        }
+    }
+
+    private void controlMenuEnterShopCommand() {
+        try {
+            User updatedUser = (User) LoginMenuController.sendAndReceive("get user " + MainClient.getToken());
+            new ShopController(updatedUser).run();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Authentication error");
+            e.printStackTrace();
         }
     }
 

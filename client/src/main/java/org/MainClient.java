@@ -44,9 +44,9 @@ public class MainClient {
     }
 
     public static void main(String[] args) throws Exception {
+        restoreDatabase();
         initializeNetwork();
         new LoginMenuView().run();
-//        restoreDatabase();
     }
 
     private static void restoreDatabase() throws Exception {

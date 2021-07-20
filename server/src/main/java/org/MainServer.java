@@ -1,9 +1,6 @@
 package org;
 
-import org.model.MonsterCard;
-import org.model.SpellCard;
-import org.model.TrapCard;
-import org.model.User;
+import org.model.*;
 import org.serverController.LoginMenuController;
 import org.serverController.MainMenuController;
 import org.serverController.ScoreBoardController;
@@ -43,8 +40,8 @@ public class MainServer {
     private static void restoreDatabase() throws Exception {
         createResourceFileIfNeeded();
 //        CreateNewCard.deserialize();
-//        AllCardsInitiator.fillAllCards();
-//        AllCardsInitiator.setPrices();
+        AllCardsInitiator.fillAllCards();
+        AllCardsInitiator.setPrices();
         MonsterCard.deserialize();
         SpellCard.deserialize();
         TrapCard.deserialize();
@@ -119,7 +116,12 @@ public class MainServer {
         } else if (matchers[1].find()) {
             return LOGIN_MENU_CONTROLLER.controlLoginUserCommand(matchers[1].group("username"), matchers[1].group("password"));
         } else if (matchers[2].find()) {
-            return getUserByToken(matchers[2].group("token"));
+            User user = getUserByToken(matchers[2].group("token"));
+            if(user == null) {
+                return "";
+            } else {
+                return user;
+            }
         }
         else if(matchers[3].find()){
             if(TOKENS.containsKey(matchers[3].group("token"))) {

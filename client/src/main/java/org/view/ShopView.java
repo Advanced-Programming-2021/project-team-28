@@ -88,21 +88,9 @@ public class ShopView extends Application {
                 rectangle.setWidth(168.4);
                 rectangle.setHeight(245.6);
                 rectangle.setFill(new ImagePattern(cardAndImage.getImage()));
-                rectangle.setOnMouseEntered(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
-                        rectangle.setEffect(new DropShadow());
-                    }
-                });
-
-                rectangle.setOnMouseExited(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
-                        rectangle.setEffect(null);
-                    }
-                });
-
-                rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                rectangle.setOnMouseEntered(mouseEvent -> rectangle.setEffect(new DropShadow()));
+                rectangle.setOnMouseExited(mouseEvent -> rectangle.setEffect(null));
+                rectangle.setOnMouseClicked(new EventHandler<>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
                         cardImage.setImage(cardAndImage.getImage());
@@ -114,15 +102,15 @@ public class ShopView extends Application {
                         } else buyButton.setDisable(false);
 
                         try {
-                            description.setText("Name: " + cardAndImage.getCardName() + "\nDescription :\n" + Card.getCardByName(Card.getAllCards() , cardAndImage.getCardName()).getDescription());
+                            description.setText("Name: " + cardAndImage.getCardName() + "\nDescription :\n" + Card.getCardByName(Card.getAllCards(), cardAndImage.getCardName()).getDescription());
                         } catch (CloneNotSupportedException e) {
                             e.printStackTrace();
                         }
-                        if(cardAndImage.getCardName().equals("The Angry Cobbler")){
+                        if (cardAndImage.getCardName().equals("The Angry Cobbler")) {
                             MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("/sound/angryy.mp3").toExternalForm()));
                             player.play();
                         }
-                        if(cardAndImage.getCardName().equals("Abbas Boua'zar")){
+                        if (cardAndImage.getCardName().equals("Abbas Boua'zar")) {
                             MediaPlayer player = new MediaPlayer(new Media(getClass().getResource(abbasInitiator()).toExternalForm()));
                             player.setAutoPlay(true);
                             player.play();
