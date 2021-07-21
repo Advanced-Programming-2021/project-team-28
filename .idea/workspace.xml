@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6e2b2ce-4ca9-4617-8f8b-40311e2222f4" name="Default Changelist" comment="Shop 5.1">
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/org/model/MyObjectOutputStream.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/controller/ChatBoxController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/controller/ChatBoxController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/view/ChatBoxView.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/view/ChatBoxView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/org/MainServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/MainServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/org/serverController/ChatBoxController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/serverController/ChatBoxController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/.idea/vcs.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +35,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/server" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/client" />
   </component>
   <component name="RunManager">
     <configuration name="MainClient" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
@@ -87,6 +81,7 @@
       <workItem from="1626812924370" duration="7573000" />
       <workItem from="1626873330959" duration="1392000" />
       <workItem from="1626879675560" duration="1583000" />
+      <workItem from="1626882561317" duration="343000" />
     </task>
     <task id="LOCAL-00001" summary="gaame avval">
       <created>1626533469040</created>
