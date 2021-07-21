@@ -1,6 +1,7 @@
 package org.serverController;
 
 import org.MainServer;
+import org.model.MyObjectOutputStream;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -74,8 +75,8 @@ public class ChatBoxController {
         for (Socket socket : chatBoxSockets){
             try {
 
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-                objectOutputStream.reset();
+                MyObjectOutputStream objectOutputStream = new MyObjectOutputStream(socket.getOutputStream());
+//                objectOutputStream.reset();
                 objectOutputStream.writeObject(MainServer.getMessages());
                 objectOutputStream.flush();
 //                objectOutputStream.close();

@@ -70,5 +70,6 @@ public class ChatBoxView extends Application {
             chats.append(messages.get(i));
             chats.append("\n");
         }
+        chat.setText(chats.toString());
     }
 }

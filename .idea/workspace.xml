@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6e2b2ce-4ca9-4617-8f8b-40311e2222f4" name="Default Changelist" comment="Shop 4">
+    <list default="true" id="f6e2b2ce-4ca9-4617-8f8b-40311e2222f4" name="Default Changelist" comment="Shop 5.1">
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/org/model/MyObjectOutputStream.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/view/ShopView.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/view/ShopView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/mainclass/FXML/shopMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/mainclass/FXML/shopMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/controller/ChatBoxController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/controller/ChatBoxController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/org/view/ChatBoxView.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/org/view/ChatBoxView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/org/MainServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/MainServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/org/serverController/ShopMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/serverController/ShopMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/org/serverController/ChatBoxController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/serverController/ChatBoxController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,17 +57,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainClient" />
@@ -93,7 +84,9 @@
       <workItem from="1626795228400" duration="1311000" />
       <workItem from="1626802289754" duration="2666000" />
       <workItem from="1626805568591" duration="564000" />
-      <workItem from="1626812924370" duration="6964000" />
+      <workItem from="1626812924370" duration="7573000" />
+      <workItem from="1626873330959" duration="1392000" />
+      <workItem from="1626879675560" duration="1583000" />
     </task>
     <task id="LOCAL-00001" summary="gaame avval">
       <created>1626533469040</created>
@@ -158,7 +151,21 @@
       <option name="project" value="LOCAL" />
       <updated>1626814649274</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Shop 5">
+      <created>1626829055321</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1626829055321</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Shop 5.1">
+      <created>1626829100824</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1626829100824</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,6 +193,8 @@
     <MESSAGE value="Shop 1" />
     <MESSAGE value="Shop 3" />
     <MESSAGE value="Shop 4" />
-    <option name="LAST_COMMIT_MESSAGE" value="Shop 4" />
+    <MESSAGE value="Shop 5" />
+    <MESSAGE value="Shop 5.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Shop 5.1" />
   </component>
 </project>

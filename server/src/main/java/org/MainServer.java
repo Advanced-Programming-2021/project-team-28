@@ -176,7 +176,7 @@ public class MainServer {
             if (TOKENS.containsKey(token)) {
                 String message = matchers[10].group("message");
                 ChatBoxController.addMessage(getUserByToken(token).getUsername() + ": " + message);
-                new ChatBoxController().refresh();
+                ChatBoxController.refresh();
                 return "Successful";
             } else {
                 return "Authentication error";
@@ -184,7 +184,7 @@ public class MainServer {
         } else if (matchers[11].find()) {
             if (TOKENS.containsKey(matchers[11].group("token"))) {
                 System.out.println("shenakhtam");
-                new ChatBoxController().refresh();
+                ChatBoxController.refresh();
                 return "Successful";
             } else {
                 return "Authentication error";
