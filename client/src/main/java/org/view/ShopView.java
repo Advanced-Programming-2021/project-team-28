@@ -138,6 +138,7 @@ public class ShopView extends Application {
                 amountForAdmin.setText(details);
                 adminButtonBar.getButtons().clear();
                 Button changeAmountButton = new Button("Change amount");
+                changeAmountButton.setPrefWidth(600);
                 changeAmountButton.setOnMouseClicked(mouseEvent1 -> {
                     String result = JOptionPane.showInputDialog("Enter amount: ");
                     try {
@@ -159,6 +160,7 @@ public class ShopView extends Application {
                 adminButtonBar.getButtons().add(changeAmountButton);
                 if(details.endsWith("Available")) {
                     Button makeUnavailable = new Button("Make unavailable");
+                    makeUnavailable.setPrefWidth(400);
                     makeUnavailable.setOnMouseClicked(mouseEvent1 -> {
                         try {
                             LoginMenuController.sendAndReceive("set card unavailable --token " + MainClient.getToken() + " --card " + cardName);
@@ -170,6 +172,7 @@ public class ShopView extends Application {
                     adminButtonBar.getButtons().add(makeUnavailable);
                 } else if (details.endsWith("Unavailable")) {
                     Button makeAvailable = new Button("Make available");
+                    makeAvailable.setPrefWidth(400);
                     makeAvailable.setOnMouseClicked(mouseEvent1 -> {
                         try {
                             LoginMenuController.sendAndReceive("set card available --token " + MainClient.getToken() + " --card " + cardName);

@@ -36,11 +36,6 @@ public class ChatBoxController {
         try {
             socket = new Socket("localhost", 8888);
             objectInputStream = new ObjectInputStream(socket.getInputStream());
-//            try {
-//                objectInputStream.reset();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
             newThread(objectInputStream);
 
         } catch (IOException x) {
@@ -62,26 +57,19 @@ public class ChatBoxController {
     }
 
     public void newThread(ObjectInputStream objectInputStream){
-//        try {
-//            objectInputStream.reset();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         new Thread(() -> {
             while (true) {
                 try {
                     ArrayList<String> messages = (ArrayList<String>) objectInputStream.readObject();
                     if(messages != null) {
-                        for (String message : messages) {
-                            System.out.println(message);
-                        }
                         view.showChat(messages);
                     }
-                    //objectInputStream.reset();
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
+                } catch (NegativeArraySizeException e) {
+                    System.out.println("");
                 }
 
             }
