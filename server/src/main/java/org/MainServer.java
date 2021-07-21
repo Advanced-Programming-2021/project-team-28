@@ -1,10 +1,7 @@
 package org;
 
 import org.model.*;
-import org.serverController.LoginMenuController;
-import org.serverController.MainMenuController;
-import org.serverController.ScoreBoardController;
-import org.serverController.ShopMenuController;
+import org.serverController.*;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -21,6 +18,7 @@ public class MainServer {
     private static final LoginMenuController LOGIN_MENU_CONTROLLER = new LoginMenuController();
     private static final ScoreBoardController SCORE_BOARD_CONTROLLER = new ScoreBoardController();
     private static final MainMenuController MAIN_MENU_CONTROLLER = new MainMenuController();
+    public static ArrayList<String> messages = new ArrayList<>();
     private ServerSocket serverSocket;
 
     public static void main(String[] args) {
@@ -74,6 +72,10 @@ public class MainServer {
     public void initializeNetwork() {
         try {
             serverSocket = new ServerSocket(1444);
+            new Thread(()->{
+                new ChatBoxController().initializeNetwork();
+            }).start();
+
             while (true) {
                 Socket socket = serverSocket.accept(); //stop here while there is no client to connect
                 CLIENTS.add(socket);
@@ -86,6 +88,7 @@ public class MainServer {
     }
 
     private static void startNewThread(Socket socket) {
+
         new Thread(() -> {
             try {
                 DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
@@ -93,11 +96,14 @@ public class MainServer {
 
                 while (true) {
                     String input = dataInputStream.readUTF();
+
+
                     Object result = process(input);
                     if (result == null) break;
                     objectOutputStream.reset();
                     objectOutputStream.writeObject(result);
                     objectOutputStream.flush();
+
                 }
                 dataInputStream.close();
                 objectOutputStream.close();
@@ -165,6 +171,31 @@ public class MainServer {
             } else {
                 return "Authentication error";
             }
+        } else if (matchers[10].find()) {
+            String token = matchers[10].group("token");
+            if (TOKENS.containsKey(token)) {
+                String message = matchers[10].group("message");
+                ChatBoxController.addMessage(getUserByToken(token).getUsername() + ": " + message);
+                new ChatBoxController().refresh();
+                return "Successful";
+            } else {
+                return "Authentication error";
+            }
+        } else if (matchers[11].find()) {
+            if (TOKENS.containsKey(matchers[11].group("token"))) {
+                System.out.println("shenakhtam");
+                new ChatBoxController().refresh();
+                return "Successful";
+            } else {
+                return "Authentication error";
+            }
+        } else if (matchers[12].find()) {
+            if (TOKENS.containsKey(matchers[12].group("token"))) {
+
+                return "Successful";
+            } else {
+                return "Authentication error";
+            }
         }
         return "invalid";
     }
@@ -181,6 +212,9 @@ public class MainServer {
         Pattern patternForSetCardAmount = Pattern.compile("^set card amount --token (?<token>.+?) --card (?<cardName>.+?) --amount (?<amount>\\d+)$");
         Pattern patternForMakeCardAvailable = Pattern.compile("^set card available --token (?<token>.+?) --card (?<cardName>.+?)$");
         Pattern patternForMakeCardUnavailable = Pattern.compile("^set card unavailable --token (?<token>.+?) --card (?<cardName>.+?)$");
+        Pattern patternForSendNewMessage = Pattern.compile("^new message --token (?<token>.+?) --message (?<message>.+?)$");
+        Pattern patternForEnterChatBox = Pattern.compile("^enter chatBox --token (?<token>.+?)$");
+        Pattern patternForExitChatBox = Pattern.compile("^exit chatBox --token (?<token>.+?)$");
         Matcher[] commandMatchers = new Matcher[15];
         commandMatchers[0] = patternForCreateUser1.matcher(command);
         commandMatchers[1] = patternForLoginUser1.matcher(command);
@@ -192,6 +226,9 @@ public class MainServer {
         commandMatchers[7] = patternForSetCardAmount.matcher(command);
         commandMatchers[8] = patternForMakeCardAvailable.matcher(command);
         commandMatchers[9] = patternForMakeCardUnavailable.matcher(command);
+        commandMatchers[10] = patternForSendNewMessage.matcher(command);
+        commandMatchers[11] = patternForEnterChatBox.matcher(command);
+        commandMatchers[12] = patternForExitChatBox.matcher(command);
         return commandMatchers;
     }
 
@@ -201,5 +238,9 @@ public class MainServer {
             System.out.println("User was null");
         }
         return user;
+    }
+
+    public static ArrayList<String> getMessages() {
+        return messages;
     }
 }
