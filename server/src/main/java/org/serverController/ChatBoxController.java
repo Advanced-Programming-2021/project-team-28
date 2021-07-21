@@ -31,7 +31,7 @@ public class ChatBoxController {
             while (true) {
                 Socket socket = chatServerSocket.accept();
                 objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-                objectOutputStream.reset();
+//                objectOutputStream.reset();
                 System.out.println("sth");
                 chatBoxSockets.add(socket);
 //                startRefreshThread(socket);
@@ -44,41 +44,42 @@ public class ChatBoxController {
         }
     }
 
-    public void startRefreshThread(Socket socket) {
-
-        new Thread(() -> {
-            try {
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-                while (true) {
-                    objectOutputStream.reset();
-                    objectOutputStream.writeObject(MainServer.getMessages());
-                    System.out.println("ferestaadam bemola");
-                    objectOutputStream.flush();
-                }
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }).start();
-
-    }
+//    public void startRefreshThread(Socket socket) {
+//
+//        new Thread(() -> {
+//            try {
+//                ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+//                while (true) {
+//                    objectOutputStream.reset();
+//                    objectOutputStream.writeObject(MainServer.getMessages());
+//                    System.out.println("ferestaadam bemola");
+//                    objectOutputStream.flush();
+//                }
+//
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//
+//        }).start();
+//
+//    }
 
     public static void addMessage(String message) {
         MainServer.getMessages().add(message);
         System.out.println(message);
     }
 
-    public void refresh(){
+    public static void  refresh(){
         for (Socket socket : chatBoxSockets){
             try {
-                objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
                 objectOutputStream.reset();
                 objectOutputStream.writeObject(MainServer.getMessages());
                 objectOutputStream.flush();
-                objectOutputStream.close();
-            } catch (IOException e) {
+//                objectOutputStream.close();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
