@@ -82,7 +82,6 @@ public class MainMenuController {
 
     public void controlLogoutCommand() {
         try {
-            System.out.println(MainClient.getToken());
             String result = (String) LoginMenuController.sendAndReceive("user logout " + MainClient.getToken());
             if (result.equals("success")) {
                 MainClient.setToken(null);
