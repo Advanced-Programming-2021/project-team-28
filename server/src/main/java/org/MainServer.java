@@ -21,7 +21,6 @@ public class MainServer {
     private static final LoginMenuController LOGIN_MENU_CONTROLLER = new LoginMenuController();
     private static final ScoreBoardController SCORE_BOARD_CONTROLLER = new ScoreBoardController();
     private static final MainMenuController MAIN_MENU_CONTROLLER = new MainMenuController();
-    private static final ShopMenuController SHOP_MENU_CONTROLLER = new ShopMenuController();
     private ServerSocket serverSocket;
 
     public static void main(String[] args) {
@@ -95,7 +94,7 @@ public class MainServer {
                 while (true) {
                     String input = dataInputStream.readUTF();
                     Object result = process(input);
-                    if(result == null) break;
+                    if (result == null) break;
                     objectOutputStream.reset();
                     objectOutputStream.writeObject(result);
                     objectOutputStream.flush();
@@ -103,7 +102,7 @@ public class MainServer {
                 dataInputStream.close();
                 objectOutputStream.close();
                 socket.close();
-            } catch (SocketException | EOFException e){
+            } catch (SocketException | EOFException e) {
                 System.out.println("Client disconnected");
                 CLIENTS.remove(socket);
             } catch (Exception e) {
@@ -115,26 +114,56 @@ public class MainServer {
     private static Object process(String input) {
         Matcher[] matchers = getCommandMatchers(input);
         if (matchers[0].find()) {
-           return LOGIN_MENU_CONTROLLER.controlCreateUserCommand(matchers[0].group("username"), matchers[0].group("password"), matchers[0].group("nickname"));
+            return LOGIN_MENU_CONTROLLER.controlCreateUserCommand(matchers[0].group("username"), matchers[0].group("password"), matchers[0].group("nickname"));
         } else if (matchers[1].find()) {
             return LOGIN_MENU_CONTROLLER.controlLoginUserCommand(matchers[1].group("username"), matchers[1].group("password"));
         } else if (matchers[2].find()) {
             User user = getUserByToken(matchers[2].group("token"));
-            if(user == null) {
+            if (user == null) {
                 return "";
             } else {
                 return user;
             }
-        }
-        else if(matchers[3].find()){
-            if(TOKENS.containsKey(matchers[3].group("token"))) {
+        } else if (matchers[3].find()) {
+            if (TOKENS.containsKey(matchers[3].group("token"))) {
                 return SCORE_BOARD_CONTROLLER.returnSortedUsers();
+            } else {
+                return "Authentication error";
             }
-        } else if(matchers[4].find()) {
+        } else if (matchers[4].find()) {
             return MAIN_MENU_CONTROLLER.logout(matchers[4].group("token"));
-        } else if(matchers[5].find()) {
-            if(TOKENS.containsKey(matchers[5].group("token"))) {
-                return SHOP_MENU_CONTROLLER.sellCard(matchers[5].group("cardName"), getUserByToken(matchers[5].group("token")));
+        } else if (matchers[5].find()) {
+            if (TOKENS.containsKey(matchers[5].group("token"))) {
+                return ShopMenuController.sellCard(matchers[5].group("cardName"), getUserByToken(matchers[5].group("token")));
+            } else {
+                return "Authentication error";
+            }
+        } else if (matchers[6].find()) {
+            if (TOKENS.containsKey(matchers[6].group("token")) && getUserByToken(matchers[6].group("token")) instanceof Admin) {
+                return ShopMenuController.cardDetailsToString(matchers[6].group("cardName"));
+            } else {
+                return "Authentication error";
+            }
+        } else if (matchers[7].find()) {
+            if (TOKENS.containsKey(matchers[7].group("token")) && getUserByToken(matchers[7].group("token")) instanceof Admin) {
+                ShopMenuController.getCardsAdminFields().get(matchers[7].group("cardName")).setAmount(Integer.parseInt(matchers[7].group("amount")));
+                return "Successful";
+            } else {
+                return "Authentication error";
+            }
+        } else if (matchers[8].find()) {
+            if (TOKENS.containsKey(matchers[8].group("token")) && getUserByToken(matchers[8].group("token")) instanceof Admin) {
+                ShopMenuController.getCardsAdminFields().get(matchers[8].group("cardName")).setCardAvailable(true);
+                return "Successful";
+            } else {
+                return "Authentication error";
+            }
+        } else if (matchers[9].find()) {
+            if (TOKENS.containsKey(matchers[9].group("token")) && getUserByToken(matchers[9].group("token")) instanceof Admin) {
+                ShopMenuController.getCardsAdminFields().get(matchers[9].group("cardName")).setCardAvailable(false);
+                return "Successful";
+            } else {
+                return "Authentication error";
             }
         }
         return "invalid";
@@ -148,6 +177,10 @@ public class MainServer {
         Pattern patternForSortedUsers = Pattern.compile("^get sorted users (?<token>.+)$");
         Pattern patternForLogout = Pattern.compile("^user logout (?<token>.+?)$");
         Pattern patternForBuyCard = Pattern.compile("^shop buy --token (?<token>.+?) --card (?<cardName>.+?)$");
+        Pattern patternForGetCardDetails = Pattern.compile("^get card details --token (?<token>.+?) --card (?<cardName>.+?)$");
+        Pattern patternForSetCardAmount = Pattern.compile("^set card amount --token (?<token>.+?) --card (?<cardName>.+?) --amount (?<amount>\\d+)$");
+        Pattern patternForMakeCardAvailable = Pattern.compile("^set card available --token (?<token>.+?) --card (?<cardName>.+?)$");
+        Pattern patternForMakeCardUnavailable = Pattern.compile("^set card unavailable --token (?<token>.+?) --card (?<cardName>.+?)$");
         Matcher[] commandMatchers = new Matcher[15];
         commandMatchers[0] = patternForCreateUser1.matcher(command);
         commandMatchers[1] = patternForLoginUser1.matcher(command);
@@ -155,12 +188,16 @@ public class MainServer {
         commandMatchers[3] = patternForSortedUsers.matcher(command);
         commandMatchers[4] = patternForLogout.matcher(command);
         commandMatchers[5] = patternForBuyCard.matcher(command);
+        commandMatchers[6] = patternForGetCardDetails.matcher(command);
+        commandMatchers[7] = patternForSetCardAmount.matcher(command);
+        commandMatchers[8] = patternForMakeCardAvailable.matcher(command);
+        commandMatchers[9] = patternForMakeCardUnavailable.matcher(command);
         return commandMatchers;
     }
 
     public static User getUserByToken(String token) {
         User user = User.getUserByUsername(TOKENS.get(token));
-        if(user == null){
+        if (user == null) {
             System.out.println("User was null");
         }
         return user;

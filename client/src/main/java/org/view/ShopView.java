@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
@@ -18,14 +19,16 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.MainClient;
 import org.controller.CreateNewCardController;
+import org.controller.LoginMenuController;
 import org.controller.MainMenuController;
 import org.controller.ShopController;
 import org.model.*;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ShopView extends Application {
 
@@ -51,7 +54,11 @@ public class ShopView extends Application {
     private Button createCard;
     @FXML
     private Text description;
-    Scanner scanner = ScannerInstance.getInstance().getScanner();
+    @FXML
+    private Text amountForAdmin;
+    @FXML
+    private ButtonBar adminButtonBar;
+
     ShopController controller;
     String selectedCardName;
 
@@ -94,6 +101,7 @@ public class ShopView extends Application {
                 rectangle.setOnMouseClicked(new EventHandler<>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
+                        showCardDetailsForAdmin(cardAndImage.getCardName());
                         cardImage.setImage(cardAndImage.getImage());
                         ownedNumber.setText("You have : " + controller.getUser().numOfCardsWithThisName(cardAndImage.getCardName()) + " card of this type");
                         selectedCardName = cardAndImage.getCardName();
@@ -119,6 +127,61 @@ public class ShopView extends Application {
                     }
                 });
                 vBox.getChildren().add(rectangle);
+            }
+        }
+    }
+
+    private void showCardDetailsForAdmin(String cardName) {
+        if(controller.getUser() instanceof Admin){
+            try {
+                String details = (String) LoginMenuController.sendAndReceive("get card details --token " + MainClient.getToken() + " --card " + cardName);
+                amountForAdmin.setText(details);
+                adminButtonBar.getButtons().clear();
+                Button changeAmountButton = new Button("Change amount");
+                changeAmountButton.setOnMouseClicked(mouseEvent1 -> {
+                    String result = JOptionPane.showInputDialog("Enter amount: ");
+                    try {
+                        int newAmount = Integer.parseInt(result);
+                        if(newAmount < 0){
+                            JOptionPane.showMessageDialog(null, "Invalid input");
+                        } else {
+                            try {
+                                LoginMenuController.sendAndReceive("set card amount --token " + MainClient.getToken() + " --card " + cardName + " --amount " + newAmount);
+                            } catch (IOException exception) {
+                                exception.printStackTrace();
+                            }
+                            showCardDetailsForAdmin(cardName);
+                        }
+                    } catch(NumberFormatException e){
+                        JOptionPane.showMessageDialog(null, "Invalid input");
+                    }
+                });
+                adminButtonBar.getButtons().add(changeAmountButton);
+                if(details.endsWith("Available")) {
+                    Button makeUnavailable = new Button("Make unavailable");
+                    makeUnavailable.setOnMouseClicked(mouseEvent1 -> {
+                        try {
+                            LoginMenuController.sendAndReceive("set card unavailable --token " + MainClient.getToken() + " --card " + cardName);
+                        } catch (IOException exception) {
+                            exception.printStackTrace();
+                        }
+                        showCardDetailsForAdmin(cardName);
+                    });
+                    adminButtonBar.getButtons().add(makeUnavailable);
+                } else if (details.endsWith("Unavailable")) {
+                    Button makeAvailable = new Button("Make available");
+                    makeAvailable.setOnMouseClicked(mouseEvent1 -> {
+                        try {
+                            LoginMenuController.sendAndReceive("set card available --token " + MainClient.getToken() + " --card " + cardName);
+                        } catch (IOException exception) {
+                            exception.printStackTrace();
+                        }
+                        showCardDetailsForAdmin(cardName);
+                    });
+                    adminButtonBar.getButtons().add(makeAvailable);
+                }
+            } catch (IOException exception) {
+                exception.printStackTrace();
             }
         }
     }
@@ -159,6 +222,7 @@ public class ShopView extends Application {
                 resultOfPurchase.setText("Please select a card first");
             } else {
                 controller.buyCard(selectedCardName);
+                showCardDetailsForAdmin(selectedCardName);
                 money.setText("Your current balance is : " + controller.getUser().getBalance());
                 ownedNumber.setText("You have : " + controller.getUser().numOfCardsWithThisName(selectedCardName) + " card of this type");
                 if (Card.getPrices().get(selectedCardName) > controller.getUser().getBalance()) {
