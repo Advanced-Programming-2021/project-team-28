@@ -574,8 +574,9 @@ public class ShopMenuController {
     }
 
     public static String cardDetailsToString(String cardName) {
+        int amount = getCardsAdminFields().get(cardName).getAmount();
         return "Amount: " +
-                getCardsAdminFields().get(cardName).getAmount() +
+                (Math.max(amount, 0)) +
                 "\n" +
                 (getCardsAdminFields().get(cardName).isCardAvailable() ? "Available" : "Unavailable");
     }

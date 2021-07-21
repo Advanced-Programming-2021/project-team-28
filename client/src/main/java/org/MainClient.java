@@ -35,7 +35,7 @@ public class MainClient {
 
     public static void initializeNetwork() {
         try {
-            socket = new Socket("localhost", 1444);
+            socket = new Socket("0.tcp.ngrok.io", 14570);
             objectInputStream = new ObjectInputStream(socket.getInputStream());
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
         } catch (IOException x) {

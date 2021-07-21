@@ -99,7 +99,7 @@ public class MainServer {
 
 
                     Object result = process(input);
-                    if (result == null) break;
+                    if (result == "KS") break;
                     objectOutputStream.reset();
                     objectOutputStream.writeObject(result);
                     objectOutputStream.flush();

@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6e2b2ce-4ca9-4617-8f8b-40311e2222f4" name="Default Changelist" comment="Shop 5.1">
-      <change beforePath="$PROJECT_DIR$/client/src/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="f6e2b2ce-4ca9-4617-8f8b-40311e2222f4" name="Default Changelist" comment="Woo">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/org/MainServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/MainServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/org/serverController/ShopMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/serverController/ShopMenuController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,6 +192,7 @@
     <MESSAGE value="Shop 4" />
     <MESSAGE value="Shop 5" />
     <MESSAGE value="Shop 5.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Shop 5.1" />
+    <MESSAGE value="Woo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Woo" />
   </component>
 </project>
