@@ -14,6 +14,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.controller.ChatBoxController;
 import org.controller.DeckMenuController;
 import org.controller.ImportExportController;
 import org.controller.MainMenuController;
@@ -180,5 +181,11 @@ public class MainMenuView extends Application {
 
     public void setUserText() {
         userText.setText("User Logged In: " + "\n" +controller.getUser().getUsername() + "\n\nKnown as: " + "\n" + controller.getUser().getNickname());
+    }
+    public void chatRoom(){
+        new ChatBoxController(controller.getUser());
+    }
+    public static Stage getPrimaryStage(){
+        return primaryStage;
     }
 }

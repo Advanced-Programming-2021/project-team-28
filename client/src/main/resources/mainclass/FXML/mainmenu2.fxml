@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import java.net.URL?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="720" prefWidth="1280" styleClass="anchor" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="720" prefWidth="1280" styleClass="anchor" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <Text fill="#d7dcff" layoutX="72.0" layoutY="74.0" text="MAIN MENU" textAlignment="CENTER" wrappingWidth="378.19921875">
         <font>
             <Font name="Eras Medium ITC" size="51.0" />
@@ -88,6 +85,7 @@
       </styleClass></TextField>
    <CheckBox fx:id="oneRound" layoutX="774.0" layoutY="179.0" mnemonicParsing="false" styleClass="wiezdemin" text="1 round" textFill="WHITE" />
    <CheckBox fx:id="threeRound" layoutX="699.0" layoutY="179.0" mnemonicParsing="false" styleClass="wiezdemin" text="3 round" textFill="WHITE" />
+   <Button layoutX="1154.0" layoutY="659.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="97.0" text="chatRoom" onMouseClicked="#chatRoom" />
     <stylesheets>
         <URL value="@../menuStyles.css" />
     </stylesheets>
