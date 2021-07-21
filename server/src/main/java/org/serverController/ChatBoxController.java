@@ -13,6 +13,7 @@ public class ChatBoxController {
     private ServerSocket chatServerSocket;
     public static ArrayList<Socket> chatBoxSockets = new ArrayList<>();
     public static HashMap<String, Socket> tokensAndSockets = new HashMap<>();
+    public ObjectOutputStream objectOutputStream;
 
     public ServerSocket getChatServerSocket() {
         return chatServerSocket;
@@ -29,6 +30,8 @@ public class ChatBoxController {
             chatServerSocket = new ServerSocket(8888);
             while (true) {
                 Socket socket = chatServerSocket.accept();
+                objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+                objectOutputStream.reset();
                 System.out.println("sth");
                 chatBoxSockets.add(socket);
 //                startRefreshThread(socket);
@@ -47,6 +50,7 @@ public class ChatBoxController {
             try {
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
                 while (true) {
+                    objectOutputStream.reset();
                     objectOutputStream.writeObject(MainServer.getMessages());
                     System.out.println("ferestaadam bemola");
                     objectOutputStream.flush();
@@ -69,7 +73,7 @@ public class ChatBoxController {
     public void refresh(){
         for (Socket socket : chatBoxSockets){
             try {
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+                objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
                 objectOutputStream.reset();
                 objectOutputStream.writeObject(MainServer.getMessages());
                 objectOutputStream.flush();

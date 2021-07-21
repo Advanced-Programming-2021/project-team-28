@@ -13,16 +13,18 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class ChatBoxController {
-    private Socket socket;
+    private  Socket socket;
+
     private User user;
     private ChatBoxView view;
     private ObjectInputStream objectInputStream;
 
     public ChatBoxController(User user) {
         this.user = user;
+        initializeNetwork();
         view = new ChatBoxView(this);
         view.run();
-        initializeNetwork();
+
         try {
             LoginMenuController.sendAndReceive("enter chatBox --token " + MainClient.getToken());
         } catch (IOException e) {
@@ -34,21 +36,13 @@ public class ChatBoxController {
         try {
             socket = new Socket("localhost", 8888);
             objectInputStream = new ObjectInputStream(socket.getInputStream());
+            try {
+                objectInputStream.reset();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            newThread(objectInputStream);
 
-            new Thread(() -> {
-                while (true) {
-                    try {
-                        view.showChat((ArrayList<String>) objectInputStream.readObject());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-
-
-            }).start();
         } catch (IOException x) {
             x.printStackTrace();
         }
@@ -65,6 +59,30 @@ public class ChatBoxController {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "SERVER ERROR");
         }
+    }
+
+    public void newThread(ObjectInputStream objectInputStream){
+        try {
+            objectInputStream.reset();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        new Thread(() -> {
+            while (true) {
+                try {
+
+                    view.showChat((ArrayList<String>) objectInputStream.readObject());
+                    objectInputStream.reset();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+
+        }).start();
     }
 
 
