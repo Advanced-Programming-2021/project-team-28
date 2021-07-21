@@ -55,7 +55,7 @@ public class ChatBoxView extends Application {
     }
 
     public void send() {
-        if (message.getText() == null || message.getText() == ""){
+        if (message.getText() == null || message.getText().equals("")){
             JOptionPane.showMessageDialog(null, "please write sth first!");
         } else {
             controller.sendMessage(message.getText());
